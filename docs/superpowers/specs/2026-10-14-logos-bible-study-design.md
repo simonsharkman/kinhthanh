@@ -117,7 +117,11 @@ logos-bible-multiverse/
   - "Những hình ảnh ẩn dụ nào xuất hiện trong phân đoạn này và ý nghĩa Cựu Ước là gì?"
   - "Làm thế nào để áp dụng câu Kinh Thánh này vào đời sống thực tế hôm nay?"
 
-### Phân Hệ 6: Blog Cá Nhân, Nhánh Cộng Đồng & Berea Guardian Agent
+### Phân Hệ 6: Blog Cá Nhân, Nhánh Cộng Đồng, Banner Quản Trị & Berea Guardian Agent
+- **Banner Tùy Chỉnh Cho Quản Trị Viên (Admin Dynamic Announcement / Hero Banner)**:
+  - Chỉ Admin mới có quyền cấu hình nội dung banner (câu gốc tuần, thông báo sự kiện, lịch học, kêu gọi hành động CTA).
+  - Tùy chỉnh màu sắc, hiệu ứng (Golden Glow, Regal Crimson, Deep Navy), nút bật/tắt (Show/Hide) tức thì.
+  - Khách và học viên chỉ được nhìn thấy banner, không thể sửa đổi hay tắt cấu hình gốc của Admin.
 - **Khu vực Blog của Chủ Trang (Author's Master Journal)**:
   - Chỉ Admin mới có quyền tạo mới, chỉnh sửa, ghim bài hoặc xóa bài viết.
   - Trình soạn thảo Markdown/HTML hỗ trợ chèn thẻ câu Kinh Thánh tương tác, hình ảnh và video.
