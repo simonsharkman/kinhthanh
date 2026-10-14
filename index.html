@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logos MultiVerse — Nền Tảng Đối Chiếu & Nghiên Cứu Kinh Thánh Chuyên Sâu</title>
+  <meta name="description" content="Trang web học và đối chiếu đa bản dịch Kinh Thánh (BTT 1925, BDM 2002, KJV, ESV, Interlinear), giải nghĩa hình ảnh ẩn dụ, bối cảnh lịch sử, thể loại văn chương, video The Bible Project, trợ lý AI và cộng đồng Berea.">
+
+  <!-- Google Fonts: Cinzel (Royal Headings), Merriweather (Scripture), Outfit (Clean Modern UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Free Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- 1. Quản Trị Viên: Banner Tùy Chỉnh (Admin Customizable Announcement Banner) -->
+  <aside id="admin-banner-container" aria-label="Thông báo quản trị">
+    <div id="admin-banner-bar" class="admin-banner theme-gold">
+      <div class="banner-content">
+        <span class="banner-badge"><i class="fa-solid fa-scroll"></i> CÂU GỐC TUẦN</span>
+        <span id="banner-text">"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)</span>
+        <a id="banner-action-link" href="#" class="banner-action-btn">Khám Phá Đối Chiếu</a>
+      </div>
+      <button id="admin-banner-edit-trigger" class="banner-admin-edit-btn" title="Cấu hình Banner (Dành cho Quản Trị Viên)">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 2. Header Hoàng Gia (Main Navigation Header) -->
+  <header id="main-header">
+    <div class="header-brand" id="brand-home-btn" title="Về trang chủ">
+      <span class="brand-symbol"><i class="fa-solid fa-cross"></i></span>
+      <div class="brand-text">
+        <h1>LOGOS MULTIVERSE</h1>
+        <div class="brand-tagline">Hệ Thống Đối Chiếu Kinh Thánh & Giải Nghĩa Thần Học</div>
+      </div>
+    </div>
+
+    <!-- Thanh Điều Hướng Nhanh (Book, Chapter & Translation Selectors) -->
+    <div class="header-controls">
+      <!-- Nút Chọn Sách / Chương -->
+      <button id="book-nav-trigger" class="selector-pill" title="Chọn Sách và Chương">
+        <i class="fa-solid fa-book-bible"></i>
+        <span id="current-passage-label">Giăng 1</span>
+        <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+      </button>
+
+      <!-- Nút Quản Lý Bản Dịch Song Song -->
+      <button id="translations-modal-trigger" class="selector-pill" title="Chọn các bản dịch để đối chiếu">
+        <i class="fa-solid fa-columns"></i>
+        <span id="active-versions-count">4 Bản Dịch</span>
+        <i class="fa-solid fa-sliders" style="font-size: 0.75rem;"></i>
+      </button>
+
+      <!-- Omni-Search Bar -->
+      <div class="omni-search-wrapper">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="omni-search-input" placeholder="Tìm câu, ẩn dụ, từ khóa (VD: Giang 3:16, Chiên con, Men)..." autocomplete="off">
+        <div id="search-dropdown" class="search-dropdown hidden"></div>
+      </div>
+
+      <!-- Navigation Tabs (Kinh Thánh, Blog, Nhánh Cộng Đồng, Media) -->
+      <nav class="nav-links">
+        <button class="nav-btn active" data-view="bible"><i class="fa-solid fa-book-open"></i> Đọc & Đối Chiếu</button>
+        <button class="nav-btn" data-view="blog"><i class="fa-solid fa-feather-pointed"></i> Blog Chuyên Sâu</button>
+        <button class="nav-btn" data-view="community"><i class="fa-solid fa-users"></i> Nhánh Cộng Đồng</button>
+        <button class="nav-btn" data-view="media"><i class="fa-solid fa-photo-film"></i> Media & Video</button>
+      </nav>
+
+      <!-- Chế độ Theme (Dark / Parchment) -->
+      <button id="theme-toggle-btn" class="selector-pill" title="Chuyển chế độ Giấy Cổ (Parchment) / Than Đá (Dark)">
+        <i class="fa-solid fa-scroll"></i>
+      </button>
+
+      <!-- Nút Đăng Nhập / Phân Quyền Quản Trị -->
+      <button id="role-auth-btn" class="selector-pill" title="Chế độ Quản trị / Khách">
+        <i class="fa-solid fa-user-shield"></i>
+        <span id="role-label">Khách</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3. Thanh Lọc 8 Thể Loại Văn Chương Kinh Thánh (Genre Filter Bar) -->
+  <section id="genre-filter-bar" aria-label="Lọc theo thể loại văn chương">
+    <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600; margin-right: 0.5rem;">THỂ LOẠI:</span>
+    <button class="genre-pill active" data-genre="all">Tất Cả (66 Sách)</button>
+    <button class="genre-pill" data-genre="torah" style="--genre-color: var(--genre-torah);"><i class="fa-solid fa-scale-balanced"></i> Luật Pháp</button>
+    <button class="genre-pill" data-genre="history" style="--genre-color: var(--genre-history);"><i class="fa-solid fa-shield-halved"></i> Lịch Sử</button>
+    <button class="genre-pill" data-genre="poetry" style="--genre-color: var(--genre-poetry);"><i class="fa-solid fa-music"></i> Thơ Ca & Khôn Ngoan</button>
+    <button class="genre-pill" data-genre="prophecy" style="--genre-color: var(--genre-prophecy);"><i class="fa-solid fa-eye"></i> Tiên Tri</button>
+    <button class="genre-pill" data-genre="gospels" style="--genre-color: var(--genre-gospels);"><i class="fa-solid fa-heart"></i> Phúc Âm</button>
+    <button class="genre-pill" data-genre="acts" style="--genre-color: var(--genre-acts);"><i class="fa-solid fa-fire"></i> Lịch Sử Hội Thánh</button>
+    <button class="genre-pill" data-genre="epistles" style="--genre-color: var(--genre-epistles);"><i class="fa-solid fa-envelope-open-text"></i> Thư Tín</button>
+    <button class="genre-pill" data-genre="apocalyptic" style="--genre-color: var(--genre-apocalyptic);"><i class="fa-solid fa-cloud-bolt"></i> Khải Huyền</button>
+  </section>
+
+  <!-- 4. Thân Ứng Dụng Chính (App Body Workspace) -->
+  <main id="app-body">
+    <!-- View 1: Focus Reader (Không gian đọc tĩnh & đối chiếu) -->
+    <div id="focus-reader" class="view-panel active">
+      <div id="reader-chapter-container">
+        <!-- Nội dung chương và câu sẽ được render động bởi bible-engine.js -->
+      </div>
+    </div>
+
+    <!-- View 2: Blog Chuyên Sâu Của Tác Giả -->
+    <div id="blog-view" class="view-panel hidden">
+      <div class="blog-container">
+        <!-- Render bởi blog-community.js -->
+      </div>
+    </div>
+
+    <!-- View 3: Nhánh Cộng Đồng & Diễn Đàn Học Viên (Berea Circle) -->
+    <div id="community-view" class="view-panel hidden">
+      <div class="community-container">
+        <!-- Render bởi blog-community.js kèm Berea Guardian -->
+      </div>
+    </div>
+
+    <!-- View 4: Media Gallery & The Bible Project Video Hub -->
+    <div id="media-view" class="view-panel hidden">
+      <div class="media-container">
+        <!-- Render bởi media-engine.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- 5. Bảng Điều Tra Chuyên Sâu Trượt Ra Cạnh Phải (Drawer Inspector) -->
+  <aside id="drawer-inspector" aria-label="Bảng giải nghĩa và đối chiếu chi tiết">
+    <div class="drawer-header">
+      <div class="drawer-header-info">
+        <h3 id="drawer-verse-title" class="drawer-title">Đối Chiếu: Giăng 1:1</h3>
+        <span id="drawer-verse-genre" class="drawer-badge">Phúc Âm</span>
+      </div>
+      <button id="drawer-close-btn" class="drawer-close-btn" title="Đóng bảng giải nghĩa">&times;</button>
+    </div>
+
+    <!-- 4 Tab Nghiệp Vụ Chuyên Sâu -->
+    <div class="drawer-tabs">
+      <button class="drawer-tab-btn active" data-tab="parallel"><i class="fa-solid fa-columns"></i> Đối Chiếu</button>
+      <button class="drawer-tab-btn" data-tab="metaphors"><i class="fa-solid fa-dove"></i> Ẩn Dụ & Biểu Tượng</button>
+      <button class="drawer-tab-btn" data-tab="crossref"><i class="fa-solid fa-link"></i> KT Giải Thích KT</button>
+      <button class="drawer-tab-btn" data-tab="context"><i class="fa-solid fa-landmark"></i> Bối Cảnh & Thể Loại</button>
+      <button class="drawer-tab-btn" data-tab="ai"><i class="fa-solid fa-robot"></i> Trợ Lý AI</button>
+    </div>
+
+    <!-- Nội dung 5 Tab -->
+    <div id="drawer-body" class="drawer-body">
+      <!-- Render động bởi hermeneutics-engine, bible-engine, crossref-engine, ai-assistant -->
+    </div>
+  </aside>
+
+  <!-- Modal 1: Bộ Chọn Sách & Chương Kinh Thánh -->
+  <div id="book-picker-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-book-bible"></i> 66 SÁCH KINH THÁNH</h3>
+        <button class="modal-close-btn" data-modal="book-picker-modal">&times;</button>
+      </div>
+      <div class="testament-tabs">
+        <button class="testament-tab active" data-testament="OT">Cựu Ước (39 Sách)</button>
+        <button class="testament-tab" data-testament="NT">Tân Ước (27 Sách)</button>
+      </div>
+      <div id="books-grid" class="books-grid"></div>
+      <div id="chapters-grid" class="chapters-grid hidden"></div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Bộ Quản Lý Bản Dịch Song Song (Version Selector) -->
+  <div id="version-selector-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-sliders"></i> CHỌN BẢN DỊCH ĐỐI CHIẾU</h3>
+        <button class="modal-close-btn" data-modal="version-selector-modal">&times;</button>
+      </div>
+      <p class="modal-desc">Chọn các bản dịch bạn muốn đối chiếu song song cùng lúc:</p>
+      <div id="versions-checkbox-list" class="versions-list"></div>
+      <div class="modal-footer">
+        <button id="save-versions-btn" class="btn-primary">Áp Dụng Đối Chiếu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Quản Trị Viên Cấu Hình Banner Tùy Chỉnh -->
+  <div id="admin-banner-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-bullhorn"></i> CẤU HÌNH BANNER QUẢN TRỊ VIÊN</h3>
+        <button class="modal-close-btn" data-modal="admin-banner-modal">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <div class="form-group">
+          <label>Nhãn Huy Hiệu (Badge):</label>
+          <input type="text" id="admin-banner-badge-input" value="CÂU GỐC TUẦN">
+        </div>
+        <div class="form-group">
+          <label>Nội Dung Banner (Thông báo / Câu Kinh Thánh):</label>
+          <textarea id="admin-banner-text-input" rows="3">"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)</textarea>
+        </div>
+        <div class="form-group">
+          <label>Chữ trên nút hành động (CTA Button):</label>
+          <input type="text" id="admin-banner-btn-text-input" value="Khám Phá Đối Chiếu">
+        </div>
+        <div class="form-group">
+          <label>Tông Màu Banner:</label>
+          <select id="admin-banner-theme-select">
+            <option value="theme-gold">Ánh Vàng Hoàng Gia (Royal Gold)</option>
+            <option value="theme-crimson">Đỏ Ruby Sâu Lắng (Regal Crimson)</option>
+            <option value="theme-navy">Xanh Biển Huyền Bí (Deep Navy)</option>
+          </select>
+        </div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="admin-banner-visible-checkbox" checked>
+          <label for="admin-banner-visible-checkbox">Hiển thị Banner này trên đầu trang</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="save-admin-banner-btn" class="btn-primary">Lưu & Xuất Bản Banner</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Xác Thực Quản Trị Viên (Admin Authentication Gate) -->
+  <div id="admin-auth-modal" class="modal-overlay hidden">
+    <div class="modal-card" style="max-width: 420px;">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-lock"></i> XÁC THỰC QUẢN TRỊ</h3>
+        <button class="modal-close-btn" data-modal="admin-auth-modal">&times;</button>
+      </div>
+      <p class="modal-desc">Nhập mã bí mật để kích hoạt quyền Quản trị viên (sửa Banner, viết Blog chính thức):</p>
+      <input type="password" id="admin-secret-key-input" placeholder="Nhập khóa bí mật..." style="width: 100%; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+      <div class="modal-footer">
+        <button id="submit-admin-auth-btn" class="btn-primary" style="width: 100%;">Xác Thực</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: ES6 Modules Architecture -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

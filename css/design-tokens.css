@@ -1,0 +1,100 @@
+/* ==========================================================================
+   LOGOS MULTIVERSE - DESIGN TOKENS
+   Royal Theological Dark & Parchment Ivory Palettes
+   ========================================================================== */
+
+:root {
+  /* Royal Obsidian Dark Theme (Default) */
+  --bg-primary: #0a0d14;
+  --bg-surface: #121824;
+  --bg-card: #182234;
+  --bg-card-hover: #1f2b42;
+  --bg-overlay: rgba(10, 13, 20, 0.85);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-verse-num: #d4af37;
+
+  /* Royal Antique Gold Accent */
+  --accent-gold: #d4af37;
+  --accent-gold-light: #f3e5ab;
+  --accent-gold-dark: #aa820a;
+  --accent-gold-glow: rgba(212, 175, 55, 0.25);
+  --accent-gold-border: rgba(212, 175, 55, 0.4);
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --glass-bg: rgba(18, 24, 36, 0.75);
+  --glass-border: rgba(212, 175, 55, 0.2);
+
+  /* 8 Biblical Genres */
+  --genre-torah: #d97706;        /* Luật pháp - Hổ phách */
+  --genre-history: #b45309;      /* Lịch sử - Đỏ đồng */
+  --genre-poetry: #0891b2;       /* Thơ ca & Khôn ngoan - Ngọc lam */
+  --genre-prophecy: #7c3aed;     /* Tiên tri - Tím hoàng gia */
+  --genre-gospels: #e11d48;      /* Tin Lành / Phúc âm - Ruby */
+  --genre-acts: #059669;         /* Công vụ / Lịch sử HT - Lục bảo */
+  --genre-epistles: #2563eb;     /* Thư tín - Lam Cobalt */
+  --genre-apocalyptic: #f59e0b;  /* Khải huyền - Vàng kim rực rỡ */
+
+  /* UI Feedback */
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-danger: #ef4444;
+  --status-info: #3b82f6;
+
+  /* Typography */
+  --font-brand: 'Cinzel', 'Playfair Display', serif;
+  --font-bible: 'Merriweather', 'Lora', Georgia, serif;
+  --font-ui: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-hebrew-greek: 'SBL BibLit', 'Cardo', serif;
+
+  /* Font Scaling & Line Heights */
+  --bible-font-size: 1.18rem;
+  --bible-line-height: 1.9;
+  --bible-letter-spacing: 0.01em;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.25);
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Parchment Ivory Theme (Day / Classical Study) */
+[data-theme="parchment"] {
+  --theme-parchment: true;
+  --bg-primary: #fcf8ee;
+  --bg-surface: #f4ecd8;
+  --bg-card: #ebe0c5;
+  --bg-card-hover: #e2d4b4;
+  --bg-overlay: rgba(252, 248, 238, 0.88);
+
+  --text-primary: #272118;
+  --text-secondary: #574c3d;
+  --text-muted: #827563;
+  --text-verse-num: #966708;
+
+  --accent-gold: #966708;
+  --accent-gold-light: #b8860b;
+  --accent-gold-dark: #634303;
+  --accent-gold-glow: rgba(150, 103, 8, 0.2);
+  --accent-gold-border: rgba(150, 103, 8, 0.35);
+
+  --border-subtle: rgba(87, 76, 61, 0.12);
+  --border-medium: rgba(87, 76, 61, 0.25);
+  --glass-bg: rgba(244, 236, 216, 0.85);
+  --glass-border: rgba(150, 103, 8, 0.25);
+
+  --shadow-sm: 0 2px 4px rgba(60, 45, 20, 0.08);
+  --shadow-md: 0 4px 12px rgba(60, 45, 20, 0.12);
+  --shadow-lg: 0 10px 30px rgba(60, 45, 20, 0.18);
+  --shadow-gold: 0 0 20px rgba(150, 103, 8, 0.18);
+}
