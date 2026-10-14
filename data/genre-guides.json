@@ -1,0 +1,180 @@
+{
+  "torah": {
+    "name_vi": "Luật Pháp (Torah / Pentateuch)",
+    "color": "#d97706",
+    "icon": "fa-scale-balanced",
+    "books": [
+      "GEN",
+      "EXO",
+      "LEV",
+      "NUM",
+      "DEU"
+    ],
+    "core_definition": "Năm sách đầu tiên của Kinh Thánh do Môi-se chép, chứa đựng sự sáng tạo, khởi đầu nhân loại, các giao ước nền tảng và luật pháp thánh khiết tại núi Si-na-i.",
+    "hermeneutical_principles": [
+      "Phân biệt 3 loại luật: Luật đạo đức (10 điều răn - giá trị vĩnh cửu), Luật nghi lễ (của lễ, đền tạm - hình bóng ứng nghiệm trong Đấng Christ), và Luật dân sự (áp dụng riêng cho chế độ thần quyền Y-sơ-ra-ên cổ đại).",
+      "Tìm kiếm tâm tánh thánh khiết của Đức Chúa Trời đằng sau mỗi điều luật.",
+      "Xem luật pháp là 'thầy giáo dẫn dắt chúng ta đến cùng Đấng Christ' (Ga-la-ti 3:24) để thấy sự bất toàn của con người và nhu cầu cần được xưng công bình bởi đức tin."
+    ],
+    "common_pitfalls": "Cố gắng áp dụng nghĩa đen nguyên xi các điều luật nghi lễ hoặc chế tài dân sự cổ đại vào Hội Thánh ngày nay; hoặc rơi vào chủ nghĩa luật pháp (Legalism) tìm kiếm sự cứu rỗi qua việc làm xác thịt."
+  },
+  "history": {
+    "name_vi": "Lịch Sử (Historical Books)",
+    "color": "#b45309",
+    "icon": "fa-shield-halved",
+    "books": [
+      "JOS",
+      "JDG",
+      "RUT",
+      "1SA",
+      "2SA",
+      "1KI",
+      "2KI",
+      "1CH",
+      "2CH",
+      "EZR",
+      "NEH",
+      "EST"
+    ],
+    "core_definition": "Ghi lại những biến cố có thật trong lịch sử tuyển dân Y-sơ-ra-ên từ khi bước vào Đất Hứa đến cuộc lưu đày và hồi hương tái thiết Giê-ru-sa-lem.",
+    "hermeneutical_principles": [
+      "Phân biệt rõ: Lời kể miêu tả (Descriptive - thuật lại những gì đã diễn ra trong thực tế) KHÔNG ĐỒNG NGHĨA với Lời răn dạy quy định (Prescriptive - mệnh lệnh Chúa bảo chúng ta phải noi theo).",
+      "Lịch sử Kinh Thánh là Thần Học trong Lịch Sử (Heilsgeschichte - Lịch sử cứu chuộc): Trọng tâm là sự tể trị thành tín của Chúa chứ không phải sự hoàn hảo của các nhân vật.",
+      "Nhận diện quy luật gieo và gặt trong đời sống đạo đức tâm linh."
+    ],
+    "common_pitfalls": "Lấy mọi hành động của nhân vật (như Đa-vít phạm tội tà dâm giết người, Sam-sôn thù hận, Sa-lô-môn lấy nhiều vợ) làm khuôn mẫu hành xử cho tín hữu ngày nay."
+  },
+  "poetry": {
+    "name_vi": "Thơ Ca & Khôn Ngoan (Poetry & Wisdom Literature)",
+    "color": "#0891b2",
+    "icon": "fa-music",
+    "books": [
+      "JOB",
+      "PSA",
+      "PRO",
+      "ECC",
+      "SNG"
+    ],
+    "core_definition": "Văn chương nghệ thuật diễn tả cảm xúc tâm linh chân thực trước nghịch cảnh, thánh ca ngợi khen và nguyên tắc khôn ngoan xử thế hằng ngày.",
+    "hermeneutical_principles": [
+      "Nắm vững nghệ thuật Song hành Hê-bơ-rơ (Hebrew Parallelism): Song hành đồng nghĩa (câu sau lặp ý câu trước), Song hành đối lập (câu sau tương phản câu trước), và Song hành tổng hợp (câu sau phát triển ý câu trước).",
+      "Giải thích các hình ảnh ẩn dụ cảm xúc thay vì gán ghép nghĩa đen khoa học cứng nhắc.",
+      "Châm ngôn là các nguyên tắc định hướng khôn ngoan chung cho cuộc sống, không phải là lời hứa pháp lý đảm bảo 100% trong mọi trường hợp cá biệt bất chấp nghịch cảnh."
+    ],
+    "common_pitfalls": "Diễn giải các câu thơ ca than khóc (Imprecatory Psalms) hoặc lời thở dài bế tắc của Gióp như là các tín điều thần học chính quy có tính giáo điều tuyệt đối."
+  },
+  "prophecy": {
+    "name_vi": "Tiên Tri (Prophets - Major & Minor)",
+    "color": "#7c3aed",
+    "icon": "fa-eye",
+    "books": [
+      "ISA",
+      "JER",
+      "LAM",
+      "EZK",
+      "DAN",
+      "HOS",
+      "JOL",
+      "AMO",
+      "OBA",
+      "JON",
+      "MIC",
+      "NAH",
+      "HAB",
+      "ZEP",
+      "HAG",
+      "ZEC",
+      "MAL"
+    ],
+    "core_definition": "Tiếng nói của người phát ngôn thay cho Chúa, kêu gọi tuyển dân ăn năn quay về với giao ước, cảnh báo phán xét và dự báo về Đấng Mê-si-a cùng Nước Trời.",
+    "hermeneutical_principles": [
+      "Hiểu bối cảnh lịch sử nguyên thủy của người nghe đương thời (Forth-telling) trước khi tìm kiếm sự ứng nghiệm tương lai xa (Fore-telling).",
+      "Hiệu ứng Tầm nhìn Núi non (Mountain Peaks of Prophecy): Tiên tri nhìn thấy 2 đỉnh núi (sự giáng sinh thứ nhất và sự tái lâm của Chúa) nằm cạnh nhau nhưng không thấy thung lũng thời đại Hội Thánh nằm ở giữa.",
+      "Theo dõi sự ứng nghiệm trọn vẹn trong Đấng Christ và Hội Thánh."
+    ],
+    "common_pitfalls": "Đọc sách tiên tri như sách bói toán dự đoán tin tức thời sự hiện đại hoặc bỏ qua bối cảnh khủng hoảng đạo đức của Y-sơ-ra-ên và Giu-đa thời bấy giờ."
+  },
+  "gospels": {
+    "name_vi": "Phúc Âm / Tin Lành (The Four Gospels)",
+    "color": "#e11d48",
+    "icon": "fa-heart",
+    "books": [
+      "MAT",
+      "MRK",
+      "LUK",
+      "JHN"
+    ],
+    "core_definition": "Bốn bức chân dung thần học sống động về cuộc đời, lời dạy, chức vụ mầu nhiệm, sự chết chuộc tội và sự sống lại vinh hiển của Đức Chúa Giê-xu Christ.",
+    "hermeneutical_principles": [
+      "Nhận diện 4 góc nhìn đặc thù: Ma-thi-ơ (Đấng Vua Do Thái), Mác (Đấng Tôi Tớ Chịu Khổ), Lu-ca (Con Người Trọn Vẹn Cứu Vớt Kẻ Khốn Cùng), Giăng (Con Đức Chúa Trời Hằng Sống).",
+      "Phân tích Dụ ngôn (Parables): Nắm bắt trọng tâm thông điệp chính về Nước Đức Chúa Trời, tránh suy diễn ẩn dụ hóa thái quá từng chi tiết phụ.",
+      "Đặt lời giảng dạy của Chúa Giê-xu trong bối cảnh văn hóa Do Thái giáo thế kỷ thứ nhất."
+    ],
+    "common_pitfalls": "Đồng nhất hóa gượng ép 4 sách làm mất đi sắc thái độc đáo của từng tác giả; hoặc hiểu thông điệp Nước Trời chỉ là một cuộc cách mạng chính trị - xã hội trần tục."
+  },
+  "acts": {
+    "name_vi": "Lịch Sử Hội Thánh (Church History / Acts)",
+    "color": "#059669",
+    "icon": "fa-fire",
+    "books": [
+      "ACT"
+    ],
+    "core_definition": "Hành trình truyền bá Tin Lành đầy quyền năng của Đức Thánh Linh qua các sứ đồ từ Giê-ru-sa-lem, xứ Giu-đê, xứ Sa-ma-ri cho đến tận cùng trái đất.",
+    "hermeneutical_principles": [
+      "Nhận định thời kỳ quá độ (Transitional Period) từ chế độ Cựu Ước sang Giao Ước Mới và sự hình thành cơ cấu Hội Thánh ban đầu.",
+      "Cẩn trọng phân định những biến cố lịch sử đặc thù của thời kỳ nền tảng sứ đồ với những nguyên tắc trường tồn cho mọi thời đại.",
+      "Theo dõi mối liên hệ hữu cơ giữa công tác quyền năng của Đức Thánh Linh và Lời Hằng Sống của Đức Chúa Trời."
+    ],
+    "common_pitfalls": "Bắt buộc mọi tín hữu hôm nay phải trải qua đúng từng trải nghiệm hiện tượng bên ngoài như bốc thăm chọn sứ đồ hay việc bán hết nhà cửa chia tiền trong những tuần đầu tại Giê-ru-sa-lem."
+  },
+  "epistles": {
+    "name_vi": "Thư Tín (Pauline & General Epistles)",
+    "color": "#2563eb",
+    "icon": "fa-envelope-open-text",
+    "books": [
+      "ROM",
+      "1CO",
+      "2CO",
+      "GAL",
+      "EPH",
+      "PHP",
+      "COL",
+      "1TH",
+      "2TH",
+      "1TI",
+      "2TI",
+      "TIT",
+      "PHM",
+      "HEB",
+      "JAS",
+      "1PE",
+      "2PE",
+      "1JN",
+      "2JN",
+      "3JN",
+      "JUD"
+    ],
+    "core_definition": "Các lá thư mục vụ được soi dẫn thánh gửi cho các Hội Thánh và cá nhân để giải thích sâu sắc về thần học ân điển và nếp sống môn đồ hóa giữa thế gian.",
+    "hermeneutical_principles": [
+      "Tìm hiểu hoàn cảnh bức thư (Occasional Nature): Vấn đề nan đề cụ thể nào mà bức thư nhắm đến giải quyết? (chia rẽ, tà giáo, hôn nhân, bắt bớ).",
+      "Theo dõi lập luận văn lý (Logical Flow): Phân tích liên từ (bởi vì, cho nên, thế thì), phân biệt phần Thần Học Căn Bản (Indicatives) và phần Mệnh Lệnh Thực Hành (Imperatives).",
+      "Chuyển dịch các nguyên tắc đời đời sang bối cảnh văn hóa hiện đại."
+    ],
+    "common_pitfalls": "Cắt xén một câu ra khỏi chuỗi lập luận logic của đoạn văn (Proof-texting) để phục vụ cho quan điểm cá nhân thiên lệch."
+  },
+  "apocalyptic": {
+    "name_vi": "Khải Huyền & Khải Thị Cánh Chung (Apocalyptic Literature)",
+    "color": "#f59e0b",
+    "icon": "fa-cloud-bolt",
+    "books": [
+      "REV"
+    ],
+    "core_definition": "Thể loại văn chương khải thị đặc biệt dùng ngôn ngữ biểu tượng vũ trụ, thị kiến kỳ vĩ để hé mở thực tại thiên thượng và chiến thắng tối hậu của Đấng Christ trên mọi thế lực ma quỷ.",
+    "hermeneutical_principles": [
+      "Kinh Thánh giải nghĩa Kinh Thánh: Hơn 70% hình ảnh trong Khải Huyền bắt nguồn trực tiếp từ Cựu Ước (Đa-ni-ên, Ê-xê-chi-ên, Xa-cha-ri, Xuất hành).",
+      "Mục đích chính của Khải Huyền là an ủi, khích lệ sự trung kiên của thánh đồ đang chịu bắt bớ chứ không phải gây hoang mang, sợ hãi.",
+      "Đọc toàn diện bức tranh lớn: Chiên Con đắc thắng, kẻ ác bị trừng phạt, nước mắt được lau khô, sự chết bị tiêu diệt và Chúa ngự giữa dân Ngài đời đời."
+    ],
+    "common_pitfalls": "Cố gắng giải mã theo nghĩa đen hình học (ví dụ: máy bay trực thăng là cào cào) hoặc dùng thời sự thế giới hiện đại áp đặt vào các biểu tượng thần học cổ đại."
+  }
+}

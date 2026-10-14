@@ -1,0 +1,106 @@
+{
+  "maps": [
+    {
+      "id": "ancient_near_east",
+      "title_vi": "Bản Đồ Cận Đông Cổ Đại & Xuất Ai Cập",
+      "description": "Bản đồ vệ tinh hành trình tuyển dân Y-sơ-ra-ên rời khỏi Ai Cập, qua Biển Đỏ đến núi Si-na-i và Đất Hứa Ca-na-an.",
+      "image_url": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+      "period": "Thời kỳ Môi-se (~1446 TCN)",
+      "related_books": [
+        "GEN",
+        "EXO",
+        "NUM",
+        "DEU",
+        "JOS"
+      ]
+    },
+    {
+      "id": "paul_missionary_journeys",
+      "title_vi": "3 Chuyến Hành Trình Truyền Giáo Của Sứ Đồ Phao-lô",
+      "description": "Bản đồ đế chế La Mã thế kỷ thứ nhất mô tả mạng lưới thành phố: An-ti-ốt, Phi-líp, Tê-sa-lô-ni-ca, Cô-rinh-tô, Ê-phê-sô và Rô-ma.",
+      "image_url": "https://images.unsplash.com/photo-1524654458049-e36be0721fa2?auto=format&fit=crop&w=1200&q=80",
+      "period": "Thế kỷ thứ nhất (~46-67 SC)",
+      "related_books": [
+        "ACT",
+        "ROM",
+        "1CO",
+        "2CO",
+        "GAL",
+        "EPH",
+        "PHP",
+        "COL"
+      ]
+    },
+    {
+      "id": "jerusalem_temple_mount",
+      "title_vi": "Mô Hình Đền Thờ Giê-ru-sa-lem Thời Chúa Giê-xu",
+      "description": "Tái hiện Đền Thờ Hê-rốt vĩ đại với Sân Dân Ngoại, Nơi Thánh, Nơi Rất Thánh và Bức Màn Đền Thờ bị xé đôi khi Chúa chịu đóng đinh.",
+      "image_url": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80",
+      "period": "Thời Chúa Giê-xu (~30 SC)",
+      "related_books": [
+        "MAT",
+        "MRK",
+        "LUK",
+        "JHN",
+        "ACT",
+        "HEB"
+      ]
+    }
+  ],
+  "archaeology": [
+    {
+      "id": "dead_sea_scrolls",
+      "title_vi": "Cuộn Da Biển Chết (Dead Sea Scrolls - Qumran)",
+      "description": "Phát hiện khảo cổ học vĩ đại nhất thế kỷ 20 tại hang động Qumran xác nhận tính chính xác phi thường của các bản chép tay Kinh Thánh Cựu Ước hơn 2000 năm tuổi.",
+      "image_url": "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=1200&q=80",
+      "artifacts_site": "Qumran, Biển Chết",
+      "dating": "Thế kỷ 3 TCN - Thế kỷ 1 SC"
+    },
+    {
+      "id": "pilate_stone",
+      "title_vi": "Phiến Đá Bôn-xơ Phi-lát (The Pilate Stone)",
+      "description": "Bia đá La Mã tìm thấy tại thành Cê-xa-rê khắc tên 'Pontius Pilatus, Quan Tổng trấn xứ Giu-đê', chứng thực lịch sử nhân vật xét xử Chúa Giê-xu.",
+      "image_url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",
+      "artifacts_site": "Cê-xa-rê Maritima",
+      "dating": "Khoảng năm 26-36 SC"
+    }
+  ],
+  "bible_project_videos": [
+    {
+      "id": "bp_john",
+      "book_id": "JHN",
+      "title_vi": "Dự Án Kinh Thánh: Khảo Sát Phúc Âm Giăng (Phần 1 & 2)",
+      "description": "Video hoạt hình phân tích cấu trúc Phúc Âm Giăng: Ngôi Lời nhập thể, 7 Dấu lạ quyền năng, và sự bày tỏ Chiên Con của Đức Chúa Trời.",
+      "youtube_id": "G-2e9mMf7E8",
+      "duration": "8:57",
+      "language": "Tiếng Việt / Phụ đề chuẩn"
+    },
+    {
+      "id": "bp_genesis",
+      "book_id": "GEN",
+      "title_vi": "Dự Án Kinh Thánh: Khảo Sát Sáng Thế Ký",
+      "description": "Phân tích nguồn gốc sáng tạo, sự sa ngã, giao ước Áp-ra-ham và kế hoạch cứu chuộc nhân loại qua dòng dõi người nữ.",
+      "youtube_id": "KOUV7mW49co",
+      "duration": "8:15",
+      "language": "Tiếng Việt / Phụ đề chuẩn"
+    },
+    {
+      "id": "bp_covenant",
+      "theme_id": "covenants",
+      "title_vi": "Chủ Đề Thần Học: Các Giao Ước Trong Kinh Thánh (Covenants)",
+      "description": "Tìm hiểu sợi chỉ đỏ xuyên suốt từ Giao ước Nô-ê, Áp-ra-ham, Si-na-i, Đa-vít cho đến Giao Ước Mới trong huyết Chúa Giê-xu.",
+      "youtube_id": "7_CGP-12AE0",
+      "duration": "5:32",
+      "language": "Tiếng Việt / Phụ đề chuẩn"
+    },
+    {
+      "id": "bp_messiah",
+      "theme_id": "messiah",
+      "title_vi": "Chủ Đề Thần Học: Đấng Mê-si-a (The Messiah)",
+      "description": "Tại sao dân Y-sơ-ra-ên lại trông chờ một vị Vua được xức dầu? Lời tiên tri trong Cựu Ước đã được Chúa Giê-xu ứng nghiệm cách bất ngờ thế nào?",
+      "youtube_id": "3dEh25pduQ8",
+      "duration": "5:47",
+      "language": "Tiếng Việt / Phụ đề chuẩn"
+    }
+  ]
+}

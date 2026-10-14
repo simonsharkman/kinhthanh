@@ -1,0 +1,150 @@
+{
+  "JHN.1": {
+    "ref": "Giăng 1",
+    "book_id": "JHN",
+    "chapter_num": 1,
+    "title_vi": "Ngôi Lời Trở Nên Xác Thịt & Lời Chứng Về Chiên Con",
+    "verses": [
+      {
+        "verse_num": 1,
+        "text_primary": "Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời.",
+        "metaphor_id": null,
+        "translations": {
+          "BTT": "Ban đầu có Đạo, Đạo ở cùng Đức Chúa Trời, và Đạo là Đức Chúa Trời.",
+          "BDM": "Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời.",
+          "BPT": "Trước khi vũ trụ được dựng nên, Ngôi Lời đã có sẵn rồi. Ngôi Lời ở cùng Thượng Đế và Ngôi Lời chính là Thượng Đế.",
+          "BD2011": "Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời.",
+          "BHD": "Từ ban đầu đã có Ngôi Lời. Ngôi Lời hằng ở với Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời.",
+          "CGKPV": "Lúc khởi đầu đã có Ngôi Lời. Ngôi Lời vẫn hướng về Thiên Chúa, và Ngôi Lời là Thiên Chúa.",
+          "KJV": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+          "ESV": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+          "NIV": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+          "INTERLINEAR": "Ἐν (G1722 - Trong) ἀρχῇ (G746 - ban đầu) ἦν (G2258 - đã có) ὁ (G3588) Λόγος (G3056 - Ngôi Lời), καὶ (G2532 - và) ὁ (G3588) Λόγος (G3056 - Ngôi Lời) ἦν (G2258 - ở) πρὸς (G4314 - cùng) τὸν (G3588) Θεόν (G2316 - Đức Chúa Trời), καὶ (G2532 - và) Θεὸς (G2316 - Đức Chúa Trời) ἦν (G2258 - là) ὁ (G3588) Λόγος (G3056 - Ngôi Lời)."
+        },
+        "cross_refs": [
+          "Sáng thế ký 1:1",
+          "1 Giăng 1:1-2",
+          "Khải huyền 19:13",
+          "Châm ngôn 8:22-30",
+          "Cô-lô-se 1:15-17"
+        ]
+      },
+      {
+        "verse_num": 2,
+        "text_primary": "Ngay từ ban đầu, Ngài đã ở cùng Đức Chúa Trời.",
+        "metaphor_id": null,
+        "translations": {
+          "BTT": "Ban đầu Ngài ở cùng Đức Chúa Trời.",
+          "BDM": "Ngay từ ban đầu, Ngài đã ở cùng Đức Chúa Trời.",
+          "BPT": "Ngài đã ở cùng Thượng Đế từ lúc ban đầu.",
+          "BD2011": "Ban đầu Ngài ở cùng Đức Chúa Trời.",
+          "BHD": "Ngài hằng ở với Đức Chúa Trời từ thuở ban đầu.",
+          "CGKPV": "Lúc khởi đầu, Người vẫn hướng về Thiên Chúa.",
+          "KJV": "The same was in the beginning with God.",
+          "ESV": "He was in the beginning with God.",
+          "NIV": "He was with God in the beginning.",
+          "INTERLINEAR": "οὗτος (G3778 - Đấng này) ἦν (G2258 - đã ở) ἐν (G1722 - trong) ἀρχῇ (G746 - ban đầu) πρὸς (G4314 - cùng) τὸν (G3588) Θεόν (G2316 - Đức Chúa Trời)."
+        },
+        "cross_refs": [
+          "Giăng 17:5",
+          "Giăng 17:24",
+          "Châm ngôn 8:30"
+        ]
+      },
+      {
+        "verse_num": 3,
+        "text_primary": "Muôn vật đều do Ngài tạo dựng, không một vật nào đã được tạo dựng mà không qua Ngài.",
+        "metaphor_id": null,
+        "translations": {
+          "BTT": "Muôn vật bởi Ngài làm nên, chẳng vật chi đã làm nên mà không bởi Ngài.",
+          "BDM": "Muôn vật đều do Ngài tạo dựng, không một vật nào đã được tạo dựng mà không qua Ngài.",
+          "BPT": "Vạn vật đều do Ngài tạo dựng. Không vật gì được tạo dựng mà không nhờ Ngài.",
+          "BD2011": "Muôn vật đều do Ngài tạo nên; chẳng vật nào đã được tạo nên mà không nhờ Ngài.",
+          "BHD": "Vũ trụ vạn vật đều do Ngài tạo dựng, không một vật gì hiện hữu mà không qua Ngài.",
+          "CGKPV": "Vạn vật nhờ Người mà có, và không có Người, thì chẳng có gì đã được tạo thành.",
+          "KJV": "All things were made by him; and without him was not any thing made that was made.",
+          "ESV": "All things were made through him, and without him was not any thing made that was made.",
+          "NIV": "Through him all things were made; without him nothing was made that has been made.",
+          "INTERLINEAR": "πάντα (G3956 - Muôn vật) δι’ (G1223 - bởi) αὐτοῦ (G846 - Ngài) ἐγένετο (G1096 - được tạo nên), καὶ (G2532 - và) χωρὶς (G5565 - không có) αὐτοῦ (G846 - Ngài) ἐγένετο (G1096 - đã làm nên) οὐδὲ (G3761 - chẳng có) ἕν (G1520 - một điều gì) ὃ (G3739) γέγονεν (G1096 - đã được dựng)."
+        },
+        "cross_refs": [
+          "Cô-lô-se 1:16",
+          "Hê-bơ-rơ 1:2",
+          "Thi thiên 33:6",
+          "1 Cô-rinh-tô 8:6"
+        ]
+      },
+      {
+        "verse_num": 4,
+        "text_primary": "Trong Ngài có sự sống, và sự sống là ánh sáng cho loài người.",
+        "metaphor_id": "salt_and_light",
+        "translations": {
+          "BTT": "Trong Ngài có sự sống, sự sống là sự sáng của loài người.",
+          "BDM": "Trong Ngài có sự sống, và sự sống là ánh sáng cho loài người.",
+          "BPT": "Sự sống ở trong Ngài và sự sống nầy đem ánh sáng đến cho nhân loại.",
+          "BD2011": "Trong Ngài có sự sống, và sự sống là ánh sáng của loài người.",
+          "BHD": "Trong Ngài có sự sống, và sự sống ấy là ánh sáng cho nhân loại.",
+          "CGKPV": "Ở nơi Người là sự sống, và sự sống là ánh sáng cho nhân loại.",
+          "KJV": "In him was life; and the life was the light of men.",
+          "ESV": "In him was life, and the life was the light of men.",
+          "NIV": "In him was life, and that life was the light of all mankind.",
+          "INTERLINEAR": "ἐν (G1722 - Trong) αὐτῷ (G846 - Ngài) ζωὴ (G2222 - sự sống) ἦν (G2258 - có), καὶ (G2532 - và) ἡ (G3588) ζωὴ (G2222 - sự sống) ἦν (G2258 - là) τὸ (G3588) φῶς (G5457 - ánh sáng) τῶν (G3588) ἀνθρώπων (G444 - của loài người)."
+        },
+        "cross_refs": [
+          "Giăng 5:26",
+          "Giăng 8:12",
+          "Giăng 11:25",
+          "1 Giăng 5:11"
+        ]
+      },
+      {
+        "verse_num": 14,
+        "text_primary": "Ngôi Lời đã trở nên xác thịt, sống giữa chúng ta, tràn đầy ân điển và chân lý. Chúng ta đã chiêm ngưỡng vinh quang Ngài, vinh quang của Con Một đến từ nơi Cha.",
+        "metaphor_id": null,
+        "translations": {
+          "BTT": "Ngôi Lời đã trở nên xác thịt, ở giữa chúng ta, đầy ơn và lẽ thật; chúng ta đã ngắm xem sự vinh hiển của Ngài, thật như vinh hiển của Con một sanh bởi Cha.",
+          "BDM": "Ngôi Lời đã trở nên xác thịt, sống giữa chúng ta, tràn đầy ân điển và chân lý. Chúng ta đã chiêm ngưỡng vinh quang Ngài, vinh quang của Con Một đến từ nơi Cha.",
+          "BPT": "Ngôi Lời đã trở nên một con người và sống giữa chúng tôi. Chúng tôi thấy sự vinh hiển Ngài, là vinh hiển của Con Một đến từ Cha, đầy ân phúc và chân lý.",
+          "BD2011": "Ngôi Lời đã trở nên xác thịt và cư ngụ giữa chúng ta. Chúng ta đã chiêm ngưỡng vinh hiển của Ngài, vinh hiển của Con Một đến từ Đức Chúa Cha, đầy dẫy ân sủng và chân lý.",
+          "BHD": "Ngôi Lời đã làm người, cư ngụ giữa chúng ta, đầy dẫy ơn phúc và chân lý. Chúng tôi đã thấy hào quang rực rỡ của Ngài, vinh quang của Con Độc Nhất của Đức Chúa Trời.",
+          "CGKPV": "Ngôi Lời đã trở nên người phàm và cư ngụ giữa chúng ta. Chúng tôi đã được ngắm nhìn vinh quang của Người, vinh quang mà Chúa Cha ban cho Người, là Con Một đầy tràn ân sủng và sự thật.",
+          "KJV": "And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth.",
+          "ESV": "And the Word became flesh and dwelt among us, and we have seen his glory, glory as of the only Son from the Father, full of grace and truth.",
+          "NIV": "The Word became flesh and made his dwelling among us. We have seen his glory, the glory of the one and only Son, who came from the Father, full of grace and truth.",
+          "INTERLINEAR": "Καὶ (G2532 - Và) ὁ (G3588) Λόγος (G3056 - Ngôi Lời) σὰρξ (G4561 - xác thịt) ἐγένετο (G1096 - trở nên) καὶ (G2532 - và) ἐσκήνωσεν (G4637 - cắm trại / cư ngụ) ἐν (G1722 - giữa) ἡμῖν (G2254 - chúng ta), καὶ (G2532) ἐθεασάμεθα (G2300 - chiêm ngưỡng) τὴν (G3588) δόξαν (G1391 - vinh quang) αὐτοῦ (G846)..."
+        },
+        "cross_refs": [
+          "Phi-líp 2:6-8",
+          "1 Ti-mô-thê 3:16",
+          "Hê-bơ-rơ 2:14",
+          "Ê-sai 40:5",
+          "Xuất Ê-díp-tô Ký 25:8"
+        ]
+      },
+      {
+        "verse_num": 29,
+        "text_primary": "Hôm sau, Giăng thấy Đức Chúa Giê-xu đến với mình thì nói: 'Kìa, Chiên Con của Đức Chúa Trời, Đấng cất đi tội lỗi của thế gian!'",
+        "metaphor_id": "lamb_of_god",
+        "translations": {
+          "BTT": "Qua ngày sau, Giăng thấy Đức Chúa Jêsus đến cùng mình, thì nói rằng: Kìa, Chiên con của Đức Chúa Trời, là Đấng cất tội lỗi thế gian đi!",
+          "BDM": "Hôm sau, Giăng thấy Đức Chúa Giê-xu đến với mình thì nói: 'Kìa, Chiên Con của Đức Chúa Trời, Đấng cất đi tội lỗi của thế gian!'",
+          "BPT": "Hôm sau, Giăng thấy Chúa Giê-xu đang đi về phía mình liền nói: 'Kìa, Chiên Con của Thượng Đế, Đấng cất bỏ tội lỗi trần gian!'",
+          "BD2011": "Ngày hôm sau Giăng thấy Đức Chúa Jesus đến với mình thì nói, 'Kìa, Chiên Con của Đức Chúa Trời, Đấng cất tội lỗi của thế gian đi!'",
+          "BHD": "Hôm sau, Giăng thấy Đức Chúa Giê-xu đến với mình, liền nói: 'Kìa, Chiên Con của Đức Chúa Trời, Đấng xóa bỏ tội lỗi trần gian!'",
+          "CGKPV": "Hôm sau, ông Gio-an thấy Đức Giê-su tiến về phía mình, liền nói: 'Đây là Chiên Thiên Chúa, đây Đấng xoá bỏ tội trần gian.'",
+          "KJV": "The next day John seeth Jesus coming unto him, and saith, Behold the Lamb of God, which taketh away the sin of the world.",
+          "ESV": "The next day he saw Jesus coming toward him, and said, 'Behold, the Lamb of God, who takes away the sin of the world!'",
+          "NIV": "The next day John saw Jesus coming toward him and said, 'Look, the Lamb of God, who takes away the sin of the world!'",
+          "INTERLINEAR": "Τῇ (G3588) ἐπαύριον (G1887 - Hôm sau) βλέπει (G991 - thấy) τὸν (G3588) Ἰησοῦν (G2424 - Đức Chúa Giê-xu)... ἴδε (G2396 - Kìa) ὁ (G3588) ἀμνὸς (G286 - Chiên Con) τοῦ (G3588) Θεοῦ (G2316 - của Đức Chúa Trời) ὁ (G3588) αἴρων (G142 - Đấng cất đi) τὴν (G3588) ἁμαρτίαν (G266 - tội lỗi) τοῦ (G3588) κόσμου (G2889 - của thế gian)."
+        },
+        "cross_refs": [
+          "Xuất Ê-díp-tô Ký 12:3",
+          "Ê-sai 53:7",
+          "1 Phi-e-rơ 1:19",
+          "Khải huyền 5:6",
+          "Hê-bơ-rơ 9:28"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "master_blogs": [
+    {
+      "id": "art_logos_incarnation",
+      "title_vi": "Ngôi Lời Nhập Thể: Mầu Nhiệm 'Logos' Giữa Triết Học Hy Lạp Và Chân Lý Do Thái",
+      "author": "Chủ Trang Nghiên Cứu",
+      "date": "14/10/2026",
+      "category": "Thần Học Phúc Âm",
+      "summary": "Tại sao Sứ đồ Giăng lại dùng từ 'Logos' để mở đầu Phúc Âm? Khám phá cách Lời Hằng Sống vượt lên trên quan niệm trừu tượng của triết gia Hê-ra-clit để trở thành Đấng Cứu Thế bằng xương bằng thịt sống giữa nhân loại.",
+      "content": "Trong bối cảnh văn hóa thế kỷ thứ nhất, khi người Hy Lạp nghe từ 'Logos', họ nghĩ đến quy luật lý trí tối cao điều khiển vũ trụ. Nhưng khi người Do Thái nghe 'Lời' (Dabar Yahweh), họ nhớ đến Lời Chúa phán sinh ra muôn loài trong Sáng thế ký 1 và phán qua các tiên tri.\n\nSứ đồ Giăng đã kết hợp hai dòng chảy tư tưởng đó bằng một tuyên ngôn làm rung chuyển thế giới: 'Ngôi Lời đã trở nên xác thịt, ở giữa chúng ta' (Giăng 1:14). Từ 'ở giữa' trong nguyên văn Hy Lạp (eskēnōsen) nghĩa đen là 'cắm trại' hay 'dựng Đền Tạm'. Như vinh quang Shekinah của Chúa từng ngự trong Đền Tạm giữa hoang mạc, nay chính Chúa Giê-xu là Đền Tạm sống động của Đức Chúa Trời giữa con người!",
+      "tags": [
+        "Ngôi Lời",
+        "Giăng 1",
+        "Nhập Thể",
+        "Thần Học"
+      ]
+    },
+    {
+      "id": "art_typology_lamb",
+      "title_vi": "Hành Trình Chiên Con: Sợi Chỉ Đỏ Cứu Chuộc Từ Bết-lê-hem Đến Khải Huyền",
+      "author": "Chủ Trang Nghiên Cứu",
+      "date": "10/10/2026",
+      "category": "Hình Bóng & Ẩn Dụ",
+      "summary": "Khảo sát nguyên tắc Kinh Thánh giải nghĩa Kinh Thánh: Làm thế nào từ một con chiên đực trong Lễ Vượt Qua tại Ai Cập lại dẫn thẳng đến Chiên Con Đắc Thắng trên Ngai Vinh Hiển trong Khải Huyền?",
+      "content": "Khái niệm 'Kinh Thánh tự giải nghĩa Kinh Thánh' (Scriptura Sacra sui ipsius interpres) được minh chứng rõ ràng nhất qua hình ảnh Chiên Con. Cựu Ước đặt câu hỏi lớn: 'Chiên con đâu có đặng làm của lễ thiêu?' (Sáng 22:7). Tân Ước cất lên câu trả lời vang dội: 'Kìa, Chiên Con của Đức Chúa Trời!' (Giăng 1:29).\n\nKhông có huyết Chiên Lễ Vượt Qua bôi trên cửa, người Do Thái không thể thoát khỏi sứ giả hủy diệt. Tương tự, nếu không nhờ huyết Chiên Con vô tội hiến tế trên thập tự giá, không ai có thể đứng vững trước sự phán xét công bình của Thiên Chúa.",
+      "tags": [
+        "Chiên Con",
+        "Ẩn Dụ",
+        "Lễ Vượt Qua",
+        "Cứu Chuộc"
+      ]
+    }
+  ],
+  "community_branches": [
+    {
+      "id": "branch_devotion",
+      "title_vi": "Nhánh 1: Suy Ngẫm & Ứng Dụng Đời Sống",
+      "description": "Nơi học viên chia sẻ những bài học thực tế, lời chứng và sự biến đổi đời sống khi áp dụng Lời Chúa mỗi ngày.",
+      "posts_count": 12
+    },
+    {
+      "id": "branch_original_languages",
+      "title_vi": "Nhánh 2: Nghiên Cứu Nguyên Ngữ & Thể Loại Văn Chương",
+      "description": "Thảo luận về ngữ pháp Hê-bơ-rơ, Hy Lạp, mã số Strong's, cấu trúc thi ca song hành và bối cảnh Cận Đông cổ đại.",
+      "posts_count": 8
+    },
+    {
+      "id": "branch_typology_symbols",
+      "title_vi": "Nhánh 3: Giải Mã Hình Ảnh Ẩn Dụ & Tiên Tri",
+      "description": "Cùng nhau đối chiếu các câu Kinh Thánh để làm sáng tỏ ý nghĩa của các biểu tượng trong Cựu Ước và Khải Huyền.",
+      "posts_count": 15
+    }
+  ],
+  "community_posts": [
+    {
+      "id": "post_01",
+      "branch_id": "branch_devotion",
+      "author": "Học Viên Tín Thác",
+      "date": "13/10/2026",
+      "title": "Cảm nhận về việc 'Cứ ở trong Cây Nho' giữa áp lực cuộc sống",
+      "content": "Đọc Giăng 15 sáng nay tôi nhận ra mình thường cố gắng 'tự ép mình sinh quả' bằng nỗ lực xác thịt thay vì chỉ đơn giản là gắn chặt vào Cây Nho Thật qua việc tương giao cầu nguyện và suy ngẫm Lời Ngài.",
+      "replies_count": 3
+    }
+  ]
+}
