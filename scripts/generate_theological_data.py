@@ -268,7 +268,7 @@ genres_dict = {
     },
     "gospels": {
         "name_vi": "Phúc Âm / Tin Lành (The Four Gospels)",
-        "color": "#e11d48",
+        "color": "#ea7a8f",
         "icon": "fa-heart",
         "books": ["MAT", "MRK", "LUK", "JHN"],
         "core_definition": "Bốn bức chân dung thần học sống động về cuộc đời, lời dạy, chức vụ mầu nhiệm, sự chết chuộc tội và sự sống lại vinh hiển của Đức Chúa Giê-xu Christ.",
@@ -277,7 +277,7 @@ genres_dict = {
             "Phân tích Dụ ngôn (Parables): Nắm bắt trọng tâm thông điệp chính về Nước Đức Chúa Trời, tránh suy diễn ẩn dụ hóa thái quá từng chi tiết phụ.",
             "Đặt lời giảng dạy của Chúa Giê-xu trong bối cảnh văn hóa Do Thái giáo thế kỷ thứ nhất."
         ],
-        "common_pitfalls": "Đồng nhất hóa gượng ép 4 sách làm mất đi sắc thái độc đáo của từng tác giả; hoặc hiểu thông điệp Nước Trời chỉ là một cuộc cách mạng chính trị - xã hội trần tục."
+        "common_pitfalls": "Đồng nhất hóa gượng ép 4 sách làm mất đi sắc thái độc đáo của từng trước giả (Đức Chúa Trời là Tác Giả Tối Thượng soi dẫn); hoặc hiểu thông điệp Nước Trời chỉ là một cuộc cách mạng chính trị - xã hội trần tục."
     },
     "acts": {
         "name_vi": "Lịch Sử Hội Thánh (Church History / Acts)",

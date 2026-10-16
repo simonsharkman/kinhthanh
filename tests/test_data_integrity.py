@@ -64,3 +64,29 @@ def test_default_passages_parallel_translations():
     assert "ESV" in trans
     assert "INTERLINEAR" in trans
     assert "G3056" in trans["INTERLINEAR"]  # Logos Strong's number!
+
+def test_full_bible_database_integrity():
+    assert os.path.exists("data/bibles/index.json"), "Bible index missing"
+    with open("data/bibles/index.json", "r", encoding="utf-8") as f:
+        idx = json.load(f)
+    assert len(idx) == 66, f"Expected 66 books in index, found {len(idx)}"
+
+    # Check Revelation has authentic text from Bible.com (VIE1925 / BTT)
+    assert os.path.exists("data/bibles/REV.json")
+    with open("data/bibles/REV.json", "r", encoding="utf-8") as f:
+        rev = json.load(f)
+    assert rev["chapters_count"] == 22
+    assert "1" in rev["chapters"]
+    rev_1_1 = rev["chapters"]["1"][0]
+    assert "Sự mặc thị" in rev_1_1["text_primary"]
+    assert "Jêsus Christ" in rev_1_1["text_primary"]
+
+    # Check Genesis has authentic text
+    assert os.path.exists("data/bibles/GEN.json")
+    with open("data/bibles/GEN.json", "r", encoding="utf-8") as f:
+        gen = json.load(f)
+    assert gen["chapters_count"] == 50
+    assert "1" in gen["chapters"]
+    gen_1_1 = gen["chapters"]["1"][0]
+    assert "Ban đầu Đức Chúa Trời dựng nên trời đất" in gen_1_1["text_primary"]
+

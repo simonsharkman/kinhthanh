@@ -22,3 +22,24 @@ def test_ai_chat_css_styles():
     assert ".ai-chat-container" in content
     assert ".ai-message" in content
     assert ".suggested-prompt-chip" in content
+    assert ".floating-ai-fab" in content
+    assert ".floating-ai-widget" in content
+
+def test_ai_assistant_web_search_and_theology_contract():
+    with open("js/ai-assistant.js", "r", encoding="utf-8") as f:
+        content = f.read()
+
+    assert "searchOnlineWeb" in content
+    assert "setWebSearchEnabled" in content
+    assert "generateChapterMasterclass" in content
+    assert "Trước giả" in content
+    assert "Tác Giả Tối Thượng" in content
+
+def test_html_floating_ai_elements():
+    with open("index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert "id=\"floating-ai-fab\"" in html
+    assert "id=\"floating-ai-widget\"" in html
+    assert "id=\"floating-ai-messages\"" in html
+    assert "id=\"floating-ai-input\"" in html

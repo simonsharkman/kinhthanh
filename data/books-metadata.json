@@ -9,7 +9,9 @@
     "author": "Môi-se",
     "date_written": "Khoảng 1446-1406 TCN",
     "theme": "Khởi đầu của vũ trụ, loài người, sự sa ngã, giao ước Áp-ra-ham và tuyển dân Y-sơ-ra-ên.",
-    "historical_context": "Cận Đông cổ đại, Lưỡng Hà, xứ Ca-na-an và Ai Cập."
+    "historical_context": "Cận Đông cổ đại, Lưỡng Hà, xứ Ca-na-an và Ai Cập.",
+    "httlvn_slug": "sa",
+    "httlvn_name": "Sáng-thế Ký"
   },
   {
     "id": "EXO",
@@ -21,7 +23,9 @@
     "author": "Môi-se",
     "date_written": "Khoảng 1446-1406 TCN",
     "theme": "Sự giải phóng khỏi ách nô lệ Ai Cập, Lễ Vượt Qua, luật pháp tại Si-na-i và Đền Tạm.",
-    "historical_context": "Sa mạc Si-na-i và Ai Cập."
+    "historical_context": "Sa mạc Si-na-i và Ai Cập.",
+    "httlvn_slug": "xu",
+    "httlvn_name": "Xuất Ê-díp-tô Ký"
   },
   {
     "id": "LEV",
@@ -33,7 +37,9 @@
     "author": "Môi-se",
     "date_written": "Khoảng 1445 TCN",
     "theme": "Sự thánh khiết của Đức Chúa Trời, hệ thống của lễ chuộc tội và chức tế lễ.",
-    "historical_context": "Trại quân Y-sơ-ra-ên dưới chân núi Si-na-i."
+    "historical_context": "Trại quân Y-sơ-ra-ên dưới chân núi Si-na-i.",
+    "httlvn_slug": "le",
+    "httlvn_name": "Lê-vi Ký"
   },
   {
     "id": "NUM",
@@ -45,7 +51,9 @@
     "author": "Môi-se",
     "date_written": "Khoảng 1406 TCN",
     "theme": "Cuộc hành trình 40 năm trong hoang mạc, sự bất trung của tuyển dân và lòng thành tín của Chúa.",
-    "historical_context": "Đồng vắng Pha-ran đến đồng bằng Mô-áp."
+    "historical_context": "Đồng vắng Pha-ran đến đồng bằng Mô-áp.",
+    "httlvn_slug": "dan",
+    "httlvn_name": "Dân-số Ký"
   },
   {
     "id": "DEU",
@@ -57,7 +65,9 @@
     "author": "Môi-se",
     "date_written": "Khoảng 1406 TCN",
     "theme": "Lời dặn dò cuối cùng của Môi-se, tái lập giao ước trước khi vào Đất Hứa.",
-    "historical_context": "Đồng bằng Mô-áp, bên bờ sông Giô-đanh."
+    "historical_context": "Đồng bằng Mô-áp, bên bờ sông Giô-đanh.",
+    "httlvn_slug": "phu",
+    "httlvn_name": "Phục-truyền Luật-lệ Ký"
   },
   {
     "id": "JOS",
@@ -69,7 +79,9 @@
     "author": "Giô-suê",
     "date_written": "Khoảng 1400-1370 TCN",
     "theme": "Chinh phục xứ Ca-na-an và phân chia sản nghiệp cho 12 chi phái.",
-    "historical_context": "Xứ Ca-na-an."
+    "historical_context": "Xứ Ca-na-an.",
+    "httlvn_slug": "gios",
+    "httlvn_name": "Giô-suê"
   },
   {
     "id": "JDG",
@@ -81,7 +93,9 @@
     "author": "Sa-mu-ên",
     "date_written": "Khoảng 1050-1000 TCN",
     "theme": "Vòng luẩn quẩn: Sa ngã - Bị hà hiếp - Kêu cầu - Chúa dấy Quan xét giải cứu.",
-    "historical_context": "Xứ Y-sơ-ra-ên thời kỳ liên minh chi phái."
+    "historical_context": "Xứ Y-sơ-ra-ên thời kỳ liên minh chi phái.",
+    "httlvn_slug": "cac",
+    "httlvn_name": "Các Quan Xét"
   },
   {
     "id": "RUT",
@@ -93,7 +107,9 @@
     "author": "Sa-mu-ên",
     "date_written": "Khoảng 1000 TCN",
     "theme": "Lòng trung kiên của người nữ Mô-áp, hình bóng Đấng Chuộc Sản Nghiệp (Bô-ô) hướng đến Đấng Christ.",
-    "historical_context": "Bết-lê-hem xứ Giu-đa."
+    "historical_context": "Bết-lê-hem xứ Giu-đa.",
+    "httlvn_slug": "ru",
+    "httlvn_name": "Ru-tơ"
   },
   {
     "id": "1SA",
@@ -105,7 +121,9 @@
     "author": "Sa-mu-ên / Ga-đơ / Na-than",
     "date_written": "Khoảng 930 TCN",
     "theme": "Chuyển giao từ thời Quan xét sang Vương quyền: Hê-li, Sa-mu-ên, Sau-lơ và Đa-vít.",
-    "historical_context": "Vương quốc Y-sơ-ra-ên thống nhất."
+    "historical_context": "Vương quốc Y-sơ-ra-ên thống nhất.",
+    "httlvn_slug": "1sa",
+    "httlvn_name": "I Sa-mu-ên"
   },
   {
     "id": "2SA",
@@ -117,7 +135,9 @@
     "author": "Ga-đơ / Na-than",
     "date_written": "Khoảng 930 TCN",
     "theme": "Triều đại vua Đa-vít, Giao ước Đa-vít về vương vị đời đời của Đấng Mê-si-a.",
-    "historical_context": "Giê-ru-sa-lem."
+    "historical_context": "Giê-ru-sa-lem.",
+    "httlvn_slug": "2sa",
+    "httlvn_name": "II Sa-mu-ên"
   },
   {
     "id": "1KI",
@@ -129,7 +149,9 @@
     "author": "Giê-rê-mi",
     "date_written": "Khoảng 560-538 TCN",
     "theme": "Thời hoàng kim của Sa-lô-môn, xây Đền Thờ, và vương quốc bị chia đôi (Bắc/Nam).",
-    "historical_context": "Y-sơ-ra-ên và Giu-đa."
+    "historical_context": "Y-sơ-ra-ên và Giu-đa.",
+    "httlvn_slug": "1vua",
+    "httlvn_name": "I Các Vua"
   },
   {
     "id": "2KI",
@@ -141,7 +163,9 @@
     "author": "Giê-rê-mi",
     "date_written": "Khoảng 560-538 TCN",
     "theme": "Sự suy vong của hai vương quốc, chức vụ tiên tri Ê-li và Ê-li-sê, kết cục lưu đày.",
-    "historical_context": "Samari bị A-si-ri chiếm, Giê-ru-sa-lem bị Ba-by-lôn tàn phá."
+    "historical_context": "Samari bị A-si-ri chiếm, Giê-ru-sa-lem bị Ba-by-lôn tàn phá.",
+    "httlvn_slug": "2vua",
+    "httlvn_name": "II Các Vua"
   },
   {
     "id": "1CH",
@@ -153,7 +177,9 @@
     "author": "Ê-xơ-ra",
     "date_written": "Khoảng 450-430 TCN",
     "theme": "Gia phả thánh đồ và sự chuẩn bị xây cất Đền Thờ dưới thời vua Đa-vít.",
-    "historical_context": "Thời kỳ hậu lưu đày."
+    "historical_context": "Thời kỳ hậu lưu đày.",
+    "httlvn_slug": "1su",
+    "httlvn_name": "I Sử-ký"
   },
   {
     "id": "2CH",
@@ -165,7 +191,9 @@
     "author": "Ê-xơ-ra",
     "date_written": "Khoảng 450-430 TCN",
     "theme": "Lịch sử triều đại Giu-đa tập trung vào sự thờ phượng tại Đền Thờ và các cuộc phục hưng.",
-    "historical_context": "Vương quốc Giu-đa."
+    "historical_context": "Vương quốc Giu-đa.",
+    "httlvn_slug": "2su",
+    "httlvn_name": "II Sử-ký"
   },
   {
     "id": "EZR",
@@ -177,7 +205,9 @@
     "author": "Ê-xơ-ra",
     "date_written": "Khoảng 450 TCN",
     "theme": "Tuyển dân hồi hương, tái thiết Đền Thờ thứ hai và phục hưng luật pháp.",
-    "historical_context": "Giê-ru-sa-lem thời Đế chế Ba Tư."
+    "historical_context": "Giê-ru-sa-lem thời Đế chế Ba Tư.",
+    "httlvn_slug": "exo",
+    "httlvn_name": "E-xơ-ra"
   },
   {
     "id": "NEH",
@@ -189,7 +219,9 @@
     "author": "Nê-hê-mi",
     "date_written": "Khoảng 430 TCN",
     "theme": "Tái thiết tường thành Giê-ru-sa-lem trong 52 ngày và cải cách xã hội tâm linh.",
-    "historical_context": "Giê-ru-sa-lem."
+    "historical_context": "Giê-ru-sa-lem.",
+    "httlvn_slug": "ne",
+    "httlvn_name": "Nê-hê-mi"
   },
   {
     "id": "EST",
@@ -201,7 +233,9 @@
     "author": "Mạc-đô-chê",
     "date_written": "Khoảng 460 TCN",
     "theme": "Bàn tay quan phòng vô hình của Chúa bảo vệ dân tộc Do Thái khỏi họa diệt chủng.",
-    "historical_context": "Cung điện Su-sơ, Đế quốc Ba Tư."
+    "historical_context": "Cung điện Su-sơ, Đế quốc Ba Tư.",
+    "httlvn_slug": "et",
+    "httlvn_name": "Ê-xơ-tê"
   },
   {
     "id": "JOB",
@@ -213,7 +247,9 @@
     "author": "Không rõ (có thể Môi-se / Ê-li-hu)",
     "date_written": "Thời các tổ phụ (~2000 TCN)",
     "theme": "Nỗi đau khổ của người công bình, sự tể trị tối cao và sự khôn ngoan của Đức Chúa Trời.",
-    "historical_context": "Xứ U-xơ."
+    "historical_context": "Xứ U-xơ.",
+    "httlvn_slug": "giop",
+    "httlvn_name": "Gióp"
   },
   {
     "id": "PSA",
@@ -225,7 +261,9 @@
     "author": "Đa-vít, A-sáp, con cháu Cô-rê, Môi-se, Sa-lô-môn",
     "date_written": "1410-430 TCN",
     "theme": "Thánh ca ngợi khen, than khóc, cầu nguyện và tiên tri về Đấng Mê-si-a.",
-    "historical_context": "Đền Thờ và đời sống tâm linh Y-sơ-ra-ên."
+    "historical_context": "Đền Thờ và đời sống tâm linh Y-sơ-ra-ên.",
+    "httlvn_slug": "thi",
+    "httlvn_name": "Thi-thiên"
   },
   {
     "id": "PRO",
@@ -237,7 +275,9 @@
     "author": "Sa-lô-môn, A-gu-rơ, Lê-mu-ên",
     "date_written": "Khoảng 970-700 TCN",
     "theme": "Kính sợ Đức Giê-hô-va là khởi đầu sự khôn ngoan; nguyên tắc sống đạo thực tiễn.",
-    "historical_context": "Triều đình Giê-ru-sa-lem."
+    "historical_context": "Triều đình Giê-ru-sa-lem.",
+    "httlvn_slug": "ch",
+    "httlvn_name": "Châm-ngôn"
   },
   {
     "id": "ECC",
@@ -249,7 +289,9 @@
     "author": "Sa-lô-môn",
     "date_written": "Khoảng 935 TCN",
     "theme": "Hư không của mọi sự dưới mặt trời khi thiếu vắng Đức Chúa Trời.",
-    "historical_context": "Giê-ru-sa-lem."
+    "historical_context": "Giê-ru-sa-lem.",
+    "httlvn_slug": "tr",
+    "httlvn_name": "Truyền-đạo"
   },
   {
     "id": "SNG",
@@ -261,7 +303,9 @@
     "author": "Sa-lô-môn",
     "date_written": "Khoảng 965 TCN",
     "theme": "Tình yêu hôn nhân thánh khiết, hình bóng tình yêu giữa Đấng Christ và Hội Thánh.",
-    "historical_context": "Giê-ru-sa-lem."
+    "historical_context": "Giê-ru-sa-lem.",
+    "httlvn_slug": "nha",
+    "httlvn_name": "Nhã-ca"
   },
   {
     "id": "ISA",
@@ -273,7 +317,9 @@
     "author": "Ê-sai",
     "date_written": "Khoảng 740-680 TCN",
     "theme": "Phúc âm của Cựu Ước: Sự thánh khiết của Chúa, Đấng Chịu Khổ (Ê-sai 53) và Trời Mới Đất Mới.",
-    "historical_context": "Vương quốc Giu-đa trước hiểm họa A-si-ri."
+    "historical_context": "Vương quốc Giu-đa trước hiểm họa A-si-ri.",
+    "httlvn_slug": "es",
+    "httlvn_name": "Ê-sai"
   },
   {
     "id": "JER",
@@ -285,7 +331,9 @@
     "author": "Giê-rê-mi",
     "date_written": "Khoảng 627-580 TCN",
     "theme": "Tiên tri than khóc cảnh báo thành thánh sụp đổ và lời hứa về Giao Ước Mới trong lòng.",
-    "historical_context": "Giu-đa và Ba-by-lôn."
+    "historical_context": "Giu-đa và Ba-by-lôn.",
+    "httlvn_slug": "gie",
+    "httlvn_name": "Giê-rê-mi"
   },
   {
     "id": "LAM",
@@ -297,7 +345,9 @@
     "author": "Giê-rê-mi",
     "date_written": "Khoảng 586 TCN",
     "theme": "Nỗi đau tột cùng khi thành Giê-ru-sa-lem bị tàn phá và lời xưng nhận lòng nhân từ vô biên của Chúa.",
-    "historical_context": "Đống đổ nát Giê-ru-sa-lem."
+    "historical_context": "Đống đổ nát Giê-ru-sa-lem.",
+    "httlvn_slug": "ca",
+    "httlvn_name": "Ca-thương"
   },
   {
     "id": "EZK",
@@ -309,7 +359,9 @@
     "author": "Ê-xê-chi-ên",
     "date_written": "Khoảng 593-571 TCN",
     "theme": "Sự vinh hiển của Chúa rời khỏi và trở lại Đền Thờ; thung lũng xương khô sống lại.",
-    "historical_context": "Bên dòng sông Kê-ba, Ba-by-lôn."
+    "historical_context": "Bên dòng sông Kê-ba, Ba-by-lôn.",
+    "httlvn_slug": "exe",
+    "httlvn_name": "Ê-xê-chi-ên"
   },
   {
     "id": "DAN",
@@ -321,7 +373,9 @@
     "author": "Đa-ni-ên",
     "date_written": "Khoảng 605-530 TCN",
     "theme": "Sự tể trị của Chúa trên các đế chế nhân loại, thị kiến về Con Người và cánh chung.",
-    "historical_context": "Cung đình Ba-by-lôn và Ba Tư."
+    "historical_context": "Cung đình Ba-by-lôn và Ba Tư.",
+    "httlvn_slug": "da",
+    "httlvn_name": "Đa-ni-ên"
   },
   {
     "id": "HOS",
@@ -333,7 +387,9 @@
     "author": "Ô-sê",
     "date_written": "Khoảng 750-715 TCN",
     "theme": "Tình yêu bền vững kiên trì của Chúa chuộc lại người vợ bất trung.",
-    "historical_context": "Vương quốc phía Bắc Y-sơ-ra-ên."
+    "historical_context": "Vương quốc phía Bắc Y-sơ-ra-ên.",
+    "httlvn_slug": "os",
+    "httlvn_name": "Ô-sê"
   },
   {
     "id": "JOL",
@@ -345,7 +401,9 @@
     "author": "Giô-ên",
     "date_written": "Khoảng 835 TCN",
     "theme": "Họa châu chấu, Ngày của Đức Giê-hô-va và lời hứa đổ Thánh Linh trên mọi xác thịt.",
-    "historical_context": "Giu-đa."
+    "historical_context": "Giu-đa.",
+    "httlvn_slug": "gio",
+    "httlvn_name": "Giô-ên"
   },
   {
     "id": "AMO",
@@ -357,7 +415,9 @@
     "author": "A-mốt",
     "date_written": "Khoảng 760 TCN",
     "theme": "Tiếng gầm của sư tử: Đòi hỏi sự công chính xã hội và phán xét sự thờ hình tượng.",
-    "historical_context": "Bê-tên xứ Bắc Y-sơ-ra-ên."
+    "historical_context": "Bê-tên xứ Bắc Y-sơ-ra-ên.",
+    "httlvn_slug": "am",
+    "httlvn_name": "A-mốt"
   },
   {
     "id": "OBA",
@@ -369,7 +429,9 @@
     "author": "Áp-đia",
     "date_written": "Khoảng 840 TCN",
     "theme": "Sự kiêu ngạo và sụp đổ của Ê-đôm vì ngược đãi người anh em Gia-cốp.",
-    "historical_context": "Ê-đôm."
+    "historical_context": "Ê-đôm.",
+    "httlvn_slug": "ap",
+    "httlvn_name": "Áp-đia"
   },
   {
     "id": "JON",
@@ -381,7 +443,9 @@
     "author": "Giô-na",
     "date_written": "Khoảng 760 TCN",
     "theme": "Lòng thương xót của Chúa vượt ra khỏi biên giới dân tộc đến thành Ni-ni-ve; dấu lạ Giô-na.",
-    "historical_context": "Ni-ni-ve và biển Địa Trung Hải."
+    "historical_context": "Ni-ni-ve và biển Địa Trung Hải.",
+    "httlvn_slug": "gion",
+    "httlvn_name": "Giô-na"
   },
   {
     "id": "MIC",
@@ -393,7 +457,9 @@
     "author": "Mi-chê",
     "date_written": "Khoảng 735-700 TCN",
     "theme": "Phán xét kẻ áp bức và lời tiên tri về Đấng Cai Trị sinh ra tại Bết-lê-hem.",
-    "historical_context": "Giu-đa."
+    "historical_context": "Giu-đa.",
+    "httlvn_slug": "mi",
+    "httlvn_name": "Mi-chê"
   },
   {
     "id": "NAH",
@@ -405,7 +471,9 @@
     "author": "Na-hum",
     "date_written": "Khoảng 663-612 TCN",
     "theme": "Sự phán xét công minh trên thủ đô bạo tàn Ni-ni-ve của Đế chế A-si-ri.",
-    "historical_context": "A-si-ri."
+    "historical_context": "A-si-ri.",
+    "httlvn_slug": "na",
+    "httlvn_name": "Na-hum"
   },
   {
     "id": "HAB",
@@ -417,7 +485,9 @@
     "author": "Ha-ba-cúc",
     "date_written": "Khoảng 605 TCN",
     "theme": "Đối thoại giữa tiên tri và Chúa: Người công bình sẽ sống bởi đức tin.",
-    "historical_context": "Giu-đa."
+    "historical_context": "Giu-đa.",
+    "httlvn_slug": "ha",
+    "httlvn_name": "Ha-ba-cúc"
   },
   {
     "id": "ZEP",
@@ -429,7 +499,9 @@
     "author": "Xô-phô-ni",
     "date_written": "Khoảng 630 TCN",
     "theme": "Ngày phán xét vĩ đại và niềm vui hoan ca của dân sót thánh khiết.",
-    "historical_context": "Giu-đa."
+    "historical_context": "Giu-đa.",
+    "httlvn_slug": "so",
+    "httlvn_name": "Sô-phô-ni"
   },
   {
     "id": "HAG",
@@ -441,7 +513,9 @@
     "author": "A-ghê",
     "date_written": "Khoảng 520 TCN",
     "theme": "Thúc giục dân sự ưu tiên xây lại nhà của Chúa thay vì chỉ lo sửa sang nhà mình.",
-    "historical_context": "Giê-ru-sa-lem hậu lưu đày."
+    "historical_context": "Giê-ru-sa-lem hậu lưu đày.",
+    "httlvn_slug": "ag",
+    "httlvn_name": "A-ghê"
   },
   {
     "id": "ZEC",
@@ -453,7 +527,9 @@
     "author": "Xa-cha-ri",
     "date_written": "Khoảng 520-480 TCN",
     "theme": "Thị kiến Đấng Mê-si-a cưỡi lừa con, bị đâm thủng và mở dòng suối tẩy uế tội lỗi.",
-    "historical_context": "Giê-ru-sa-lem."
+    "historical_context": "Giê-ru-sa-lem.",
+    "httlvn_slug": "xa",
+    "httlvn_name": "Xa-cha-ri"
   },
   {
     "id": "MAL",
@@ -465,7 +541,9 @@
     "author": "Ma-la-chi",
     "date_written": "Khoảng 430 TCN",
     "theme": "Lời cảnh tỉnh sự nguội lạnh tâm linh và lời hứa Mặt Trời Công Chính sẽ mọc lên.",
-    "historical_context": "Giê-ru-sa-lem trước 400 năm im lặng."
+    "historical_context": "Giê-ru-sa-lem trước 400 năm im lặng.",
+    "httlvn_slug": "ma",
+    "httlvn_name": "Ma-la-chi"
   },
   {
     "id": "MAT",
@@ -477,7 +555,9 @@
     "author": "Ma-thi-ơ",
     "date_written": "Khoảng 60-65 SC",
     "theme": "Đức Chúa Giê-xu là Vua Đấng Mê-si-a ứng nghiệm toàn bộ lời tiên tri Cựu Ước.",
-    "historical_context": "Xứ Do Thái thời Đế chế La Mã."
+    "historical_context": "Xứ Do Thái thời Đế chế La Mã.",
+    "httlvn_slug": "mat",
+    "httlvn_name": "Ma-thi-ơ"
   },
   {
     "id": "MRK",
@@ -489,7 +569,9 @@
     "author": "Giăng Mác",
     "date_written": "Khoảng 55-65 SC",
     "theme": "Chúa Giê-xu là Đấng Tôi Tớ Chịu Khổ hành động quyền năng cứu chuộc muôn dân.",
-    "historical_context": "Rô-ma."
+    "historical_context": "Rô-ma.",
+    "httlvn_slug": "mac",
+    "httlvn_name": "Mác"
   },
   {
     "id": "LUK",
@@ -501,7 +583,9 @@
     "author": "Lu-ca",
     "date_written": "Khoảng 60-62 SC",
     "theme": "Chúa Giê-xu là Con Người trọn vẹn, Đấng Cứu Thế đầy lòng thương xót kẻ hư mất.",
-    "historical_context": "Hy Lạp và La Mã."
+    "historical_context": "Hy Lạp và La Mã.",
+    "httlvn_slug": "lu",
+    "httlvn_name": "Lu-ca"
   },
   {
     "id": "JHN",
@@ -513,7 +597,9 @@
     "author": "Sứ đồ Giăng",
     "date_written": "Khoảng 85-95 SC",
     "theme": "Ngôi Lời trở nên xác thịt: Đức Chúa Giê-xu là Con Độc Sanh của Đức Chúa Trời, ban sự sống đời đời.",
-    "historical_context": "Ê-phê-sô."
+    "historical_context": "Ê-phê-sô.",
+    "httlvn_slug": "gi",
+    "httlvn_name": "Giăng"
   },
   {
     "id": "ACT",
@@ -525,7 +611,9 @@
     "author": "Lu-ca",
     "date_written": "Khoảng 62-64 SC",
     "theme": "Lịch sử Hội Thánh ban đầu: Đức Thánh Linh giáng lâm và Phúc Âm lan truyền từ Giê-ru-sa-lem đến Rô-ma.",
-    "historical_context": "Khắp Địa Trung Hải và La Mã."
+    "historical_context": "Khắp Địa Trung Hải và La Mã.",
+    "httlvn_slug": "cong",
+    "httlvn_name": "Công-vụ các Sứ-đồ"
   },
   {
     "id": "ROM",
@@ -537,7 +625,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 57 SC",
     "theme": "Đại cương thần học: Sự xưng công bình bởi đức tin, quyền năng Phúc Âm và sự thánh hóa trong Thánh Linh.",
-    "historical_context": "Cô-rinh-tô gửi Hội Thánh Rô-ma."
+    "historical_context": "Cô-rinh-tô gửi Hội Thánh Rô-ma.",
+    "httlvn_slug": "ro",
+    "httlvn_name": "Rô-ma"
   },
   {
     "id": "1CO",
@@ -549,7 +639,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 55 SC",
     "theme": "Giải quyết chia rẽ, luân lý hôn nhân, các ân tứ Thánh Linh và sự sống lại vinh hiển.",
-    "historical_context": "Ê-phê-sô gửi Cô-rinh-tô."
+    "historical_context": "Ê-phê-sô gửi Cô-rinh-tô.",
+    "httlvn_slug": "1co",
+    "httlvn_name": "I Cô-rinh-tô"
   },
   {
     "id": "2CO",
@@ -561,7 +653,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 56 SC",
     "theme": "Chức vụ giao ước mới, quyền năng trong sự yếu đuối và chức vụ hòa giải.",
-    "historical_context": "Ma-xê-đoan gửi Cô-rinh-tô."
+    "historical_context": "Ma-xê-đoan gửi Cô-rinh-tô.",
+    "httlvn_slug": "2co",
+    "httlvn_name": "II Cô-rinh-tô"
   },
   {
     "id": "GAL",
@@ -573,7 +667,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 48-49 SC",
     "theme": "Bản Tuyên ngôn Tự do Cơ Đốc: Xưng công bình chỉ nhờ đức tin, không bởi luật pháp nghi lễ.",
-    "historical_context": "Gửi các Hội Thánh vùng Ga-la-ti."
+    "historical_context": "Gửi các Hội Thánh vùng Ga-la-ti.",
+    "httlvn_slug": "ga",
+    "httlvn_name": "Ga-la-ti"
   },
   {
     "id": "EPH",
@@ -585,7 +681,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 60-62 SC",
     "theme": "Mầu nhiệm Hội Thánh là Thân Thể Đấng Christ và vũ khí khí giới thiêng liêng.",
-    "historical_context": "Phao-lô viết trong tù tại Rô-ma."
+    "historical_context": "Phao-lô viết trong tù tại Rô-ma.",
+    "httlvn_slug": "eph",
+    "httlvn_name": "Ê-phê-sô"
   },
   {
     "id": "PHP",
@@ -597,7 +695,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 61 SC",
     "theme": "Thư tín của niềm vui: Tâm tình Đấng Christ khiêm nhường và đắc thắng.",
-    "historical_context": "Nhà tù Rô-ma gửi Hội Thánh Phi-líp."
+    "historical_context": "Nhà tù Rô-ma gửi Hội Thánh Phi-líp.",
+    "httlvn_slug": "phi",
+    "httlvn_name": "Phi-líp"
   },
   {
     "id": "COL",
@@ -609,7 +709,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 60-62 SC",
     "theme": "Sự tối thượng và toàn hảo của Đấng Christ trên mọi uy quyền tạo vật.",
-    "historical_context": "Nhà tù Rô-ma gửi Cô-lô-se."
+    "historical_context": "Nhà tù Rô-ma gửi Cô-lô-se.",
+    "httlvn_slug": "co",
+    "httlvn_name": "Cô-lô-se"
   },
   {
     "id": "1TH",
@@ -621,7 +723,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 51 SC",
     "theme": "Sự tái lâm của Đấng Christ và nếp sống thánh khiết trông cậy ngày Chúa đến.",
-    "historical_context": "Cô-rinh-tô gửi Tê-sa-lô-ni-ca."
+    "historical_context": "Cô-rinh-tô gửi Tê-sa-lô-ni-ca.",
+    "httlvn_slug": "1te",
+    "httlvn_name": "I Tê-sa-lô-ni-ca"
   },
   {
     "id": "2TH",
@@ -633,7 +737,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 51-52 SC",
     "theme": "Sự xuất hiện của kẻ gian ác và sự can đảm vững vàng trước ngày Chúa trở lại.",
-    "historical_context": "Cô-rinh-tô gửi Tê-sa-lô-ni-ca."
+    "historical_context": "Cô-rinh-tô gửi Tê-sa-lô-ni-ca.",
+    "httlvn_slug": "2te",
+    "httlvn_name": "II Tê-sa-lô-ni-ca"
   },
   {
     "id": "1TI",
@@ -645,7 +751,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 63-65 SC",
     "theme": "Trật tự tổ chức Hội Thánh, tiêu chuẩn người lãnh đạo và bảo vệ giáo lý thuần chính.",
-    "historical_context": "Ma-xê-đoan gửi Ti-mô-thê tại Ê-phê-sô."
+    "historical_context": "Ma-xê-đoan gửi Ti-mô-thê tại Ê-phê-sô.",
+    "httlvn_slug": "1ti",
+    "httlvn_name": "I Ti-mô-thê"
   },
   {
     "id": "2TI",
@@ -657,7 +765,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 66-67 SC",
     "theme": "Lời di huấn tâm huyết trước lúc tử đạo: Giữ vững đức tin và truyền khẩu Lời Hằng Sống.",
-    "historical_context": "Hầm ngục Mamertine, Rô-ma."
+    "historical_context": "Hầm ngục Mamertine, Rô-ma.",
+    "httlvn_slug": "2ti",
+    "httlvn_name": "II Ti-mô-thê"
   },
   {
     "id": "TIT",
@@ -669,7 +779,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 63-65 SC",
     "theme": "Thiết lập lãnh đạo và nếp sống lành mạnh làm vinh hiển đạo Chúa giữa xã hội bại hoại.",
-    "historical_context": "Gửi Tít tại đảo Cơ-rết."
+    "historical_context": "Gửi Tít tại đảo Cơ-rết.",
+    "httlvn_slug": "tit",
+    "httlvn_name": "Tít"
   },
   {
     "id": "PHM",
@@ -681,7 +793,9 @@
     "author": "Phao-lô",
     "date_written": "Khoảng 60-62 SC",
     "theme": "Quyền năng tha thứ và tình anh em trong Đấng Christ giữa chủ và nô lệ Ô-nê-sim.",
-    "historical_context": "Nhà tù Rô-ma."
+    "historical_context": "Nhà tù Rô-ma.",
+    "httlvn_slug": "phil",
+    "httlvn_name": "Phi-lê-môn"
   },
   {
     "id": "HEB",
@@ -693,7 +807,9 @@
     "author": "Không rõ (Phao-lô / Ba-na-ba / A-bô-lô)",
     "date_written": "Khoảng 65-68 SC",
     "theme": "Đấng Christ cao trọng hơn thiên sứ, Môi-se, và chức tế lễ A-rôn; Giao Ước Mới tối thượng.",
-    "historical_context": "Gửi tín hữu Hê-bơ-rơ chịu bách hại."
+    "historical_context": "Gửi tín hữu Hê-bơ-rơ chịu bách hại.",
+    "httlvn_slug": "he",
+    "httlvn_name": "Hê-bơ-rơ"
   },
   {
     "id": "JAS",
@@ -705,7 +821,9 @@
     "author": "Gia-cơ (em Chúa Giê-xu)",
     "date_written": "Khoảng 45-48 SC",
     "theme": "Đức tin sống động qua việc làm thực tế, kiềm giữ lưỡi và yêu thương kẻ khốn khó.",
-    "historical_context": "Giê-ru-sa-lem gửi 12 chi phái tản lạc."
+    "historical_context": "Giê-ru-sa-lem gửi 12 chi phái tản lạc.",
+    "httlvn_slug": "gia",
+    "httlvn_name": "Gia-cơ"
   },
   {
     "id": "1PE",
@@ -717,7 +835,9 @@
     "author": "Sứ đồ Phi-e-rơ",
     "date_written": "Khoảng 63-64 SC",
     "theme": "Hy vọng sống giữa cơn thử thách bắt bớ và nếp sống người tha hương thánh khiết.",
-    "historical_context": "Rô-ma gửi tín hữu vùng Tiểu Á."
+    "historical_context": "Rô-ma gửi tín hữu vùng Tiểu Á.",
+    "httlvn_slug": "1phi",
+    "httlvn_name": "I Phi-e-rơ"
   },
   {
     "id": "2PE",
@@ -729,7 +849,9 @@
     "author": "Sứ đồ Phi-e-rơ",
     "date_written": "Khoảng 66-67 SC",
     "theme": "Cảnh giác giáo sư giả, tăng trưởng trong ân điển và ngày Chúa quang lâm biến hóa trời đất.",
-    "historical_context": "Rô-ma trước lúc Phi-e-rơ tử vì đạo."
+    "historical_context": "Rô-ma trước lúc Phi-e-rơ tử vì đạo.",
+    "httlvn_slug": "2phi",
+    "httlvn_name": "II Phi-e-rơ"
   },
   {
     "id": "1JN",
@@ -741,7 +863,9 @@
     "author": "Sứ đồ Giăng",
     "date_written": "Khoảng 85-95 SC",
     "theme": "Thông công với Đức Chúa Trời là Sự Sáng và Tình Yêu; sự bảo đảm ơn cứu rỗi.",
-    "historical_context": "Ê-phê-sô."
+    "historical_context": "Ê-phê-sô.",
+    "httlvn_slug": "1gi",
+    "httlvn_name": "I Giăng"
   },
   {
     "id": "2JN",
@@ -753,7 +877,9 @@
     "author": "Sứ đồ Giăng",
     "date_written": "Khoảng 85-95 SC",
     "theme": "Bước đi trong lẽ thật và tình yêu thương, từ chối đón tiếp kẻ truyền tà giáo.",
-    "historical_context": "Ê-phê-sô."
+    "historical_context": "Ê-phê-sô.",
+    "httlvn_slug": "2gi",
+    "httlvn_name": "II Giăng"
   },
   {
     "id": "3JN",
@@ -765,7 +891,9 @@
     "author": "Sứ đồ Giăng",
     "date_written": "Khoảng 85-95 SC",
     "theme": "Lòng hiếu khách đối với những người đi truyền giáo và cảnh báo thói hống hách.",
-    "historical_context": "Ê-phê-sô gửi Gai-út."
+    "historical_context": "Ê-phê-sô gửi Gai-út.",
+    "httlvn_slug": "3gi",
+    "httlvn_name": "III Giăng"
   },
   {
     "id": "JUD",
@@ -777,7 +905,9 @@
     "author": "Giu-đe (em Chúa Giê-xu)",
     "date_written": "Khoảng 65-70 SC",
     "theme": "Chiến đấu vì đạo thánh đã truyền một lần đủ cả cho các thánh đồ.",
-    "historical_context": "Xứ Do Thái."
+    "historical_context": "Xứ Do Thái.",
+    "httlvn_slug": "giu",
+    "httlvn_name": "Giu-đe"
   },
   {
     "id": "REV",
@@ -789,6 +919,8 @@
     "author": "Sứ đồ Giăng",
     "date_written": "Khoảng 95 SC",
     "theme": "Sự đắc thắng tối hậu của Chiên Con, phán xét chung thẩm, Trời Mới Đất Mới và Giê-ru-sa-lem Mới.",
-    "historical_context": "Đảo Bát-mô nơi Giăng bị lưu đày."
+    "historical_context": "Đảo Bát-mô nơi Giăng bị lưu đày.",
+    "httlvn_slug": "kh",
+    "httlvn_name": "Khải-huyền"
   }
 ]

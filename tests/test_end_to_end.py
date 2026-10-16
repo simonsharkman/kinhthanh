@@ -36,3 +36,43 @@ def test_html_all_modals_connected():
 
     # Script module must be app.js
     assert "src=\"js/app.js\"" in html
+
+def test_genre_bookshelf_integration():
+    with open("index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert "id=\"genre-bookshelf\"" in html
+    assert "class=\"genre-bookshelf hidden\"" in html
+
+    with open("js/app.js", "r", encoding="utf-8") as f:
+        js = f.read()
+
+    assert "renderGenreBookshelf" in js
+    assert "selectShelfBook" in js
+    assert "openPassageFromShelf" in js
+    assert "shelf-chapters-tray" in js
+    assert "shelf-book-card" in js
+
+    with open("css/components.css", "r", encoding="utf-8") as f:
+        css = f.read()
+
+    assert ".genre-bookshelf" in css
+    assert ".shelf-book-card" in css
+    assert ".shelf-chapters-tray" in css
+    assert ".tray-chapter-btn" in css
+
+def test_testament_tabs_in_book_picker():
+    with open("index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert "data-testament=\"OT\"" in html
+    assert "data-testament=\"NT\"" in html
+
+    with open("js/app.js", "r", encoding="utf-8") as f:
+        js = f.read()
+
+    assert "populateBookPicker(testament" in js
+    assert "b.testament === testament" in js
+    assert "testament-tab" in js
+
+

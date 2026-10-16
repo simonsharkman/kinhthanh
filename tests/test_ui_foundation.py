@@ -40,3 +40,18 @@ def test_index_html_semantic_structure():
     assert "id=\"drawer-inspector\"" in content
     assert "id=\"genre-filter-bar\"" in content
     assert "id=\"version-selector-modal\"" in content
+
+def test_drawer_side_by_side_split_view():
+    with open("css/layout.css", "r", encoding="utf-8") as f:
+        layout_css = f.read()
+
+    assert "body.drawer-open" in layout_css
+    assert "margin-right: var(--drawer-width)" in layout_css
+    assert "body.drawer-open #focus-reader" in layout_css or "#app-body.drawer-open #focus-reader" in layout_css
+
+    with open("js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    assert "toggleDrawer" in app_js
+    assert "drawer-open" in app_js
+    assert "scrollIntoView" in app_js

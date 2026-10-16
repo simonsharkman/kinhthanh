@@ -6,10 +6,10 @@
   <title>Logos MultiVerse — Nền Tảng Đối Chiếu & Nghiên Cứu Kinh Thánh Chuyên Sâu</title>
   <meta name="description" content="Trang web học và đối chiếu đa bản dịch Kinh Thánh (BTT 1925, BDM 2002, KJV, ESV, Interlinear), giải nghĩa hình ảnh ẩn dụ, bối cảnh lịch sử, thể loại văn chương, video The Bible Project, trợ lý AI và cộng đồng Berea.">
 
-  <!-- Google Fonts: Cinzel (Royal Headings), Merriweather (Scripture), Outfit (Clean Modern UI) -->
+  <!-- Google Fonts: Noto Serif (HTTLVN Standard), Playfair Display (Royal Vietnamese Headings), Merriweather (Scripture), Outfit (Clean Modern UI) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome Free Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -92,8 +92,8 @@
 
   <!-- 3. Thanh Lọc 8 Thể Loại Văn Chương Kinh Thánh (Genre Filter Bar) -->
   <section id="genre-filter-bar" aria-label="Lọc theo thể loại văn chương">
-    <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600; margin-right: 0.5rem;">THỂ LOẠI:</span>
-    <button class="genre-pill active" data-genre="all">Tất Cả (66 Sách)</button>
+    <span class="genre-filter-label"><i class="fa-solid fa-layer-group"></i> THỂ LOẠI:</span>
+    <button class="genre-pill active" data-genre="all"><i class="fa-solid fa-book-bible"></i> Tất Cả (66 Sách)</button>
     <button class="genre-pill" data-genre="torah" style="--genre-color: var(--genre-torah);"><i class="fa-solid fa-scale-balanced"></i> Luật Pháp</button>
     <button class="genre-pill" data-genre="history" style="--genre-color: var(--genre-history);"><i class="fa-solid fa-shield-halved"></i> Lịch Sử</button>
     <button class="genre-pill" data-genre="poetry" style="--genre-color: var(--genre-poetry);"><i class="fa-solid fa-music"></i> Thơ Ca & Khôn Ngoan</button>
@@ -102,6 +102,11 @@
     <button class="genre-pill" data-genre="acts" style="--genre-color: var(--genre-acts);"><i class="fa-solid fa-fire"></i> Lịch Sử Hội Thánh</button>
     <button class="genre-pill" data-genre="epistles" style="--genre-color: var(--genre-epistles);"><i class="fa-solid fa-envelope-open-text"></i> Thư Tín</button>
     <button class="genre-pill" data-genre="apocalyptic" style="--genre-color: var(--genre-apocalyptic);"><i class="fa-solid fa-cloud-bolt"></i> Khải Huyền</button>
+  </section>
+
+  <!-- 3.1 Kệ Sách Động Theo Thể Loại (Genre Bookshelf & Chapter Navigator) -->
+  <section id="genre-bookshelf" class="genre-bookshelf hidden" aria-label="Danh mục sách theo thể loại đã chọn">
+    <!-- Render động bởi app.js: Header thể loại + Danh sách các sách tương ứng + Khay chọn chương -->
   </section>
 
   <!-- 4. Thân Ứng Dụng Chính (App Body Workspace) -->
@@ -145,6 +150,19 @@
       <button id="drawer-close-btn" class="drawer-close-btn" title="Đóng bảng giải nghĩa">&times;</button>
     </div>
 
+    <!-- Thanh Chọn Nhanh Các Bản Dịch Đối Chiếu Trực Tiếp Trong Bảng Khảo Cứu -->
+    <div class="drawer-version-bar" id="drawer-version-bar">
+      <div class="drawer-version-bar-header">
+        <span class="drawer-version-bar-title"><i class="fa-solid fa-columns"></i> Bản dịch đối chiếu:</span>
+        <button id="drawer-manage-versions-btn" class="drawer-version-manage-btn" title="Thêm hoặc đổi bản dịch đối chiếu">
+          <i class="fa-solid fa-sliders"></i> Tùy chọn
+        </button>
+      </div>
+      <div class="drawer-version-chips" id="drawer-version-chips">
+        <!-- Render động các chip bản dịch đang chọn -->
+      </div>
+    </div>
+
     <!-- 4 Tab Nghiệp Vụ Chuyên Sâu -->
     <div class="drawer-tabs">
       <button class="drawer-tab-btn active" data-tab="parallel"><i class="fa-solid fa-columns"></i> Đối Chiếu</button>
@@ -176,17 +194,132 @@
     </div>
   </div>
 
-  <!-- Modal 2: Bộ Quản Lý Bản Dịch Song Song (Version Selector) -->
+  <!-- Modal 2: Bộ Quản Lý Bản Dịch Song Song & Sắc Tộc (Version Selector MultiVerse) -->
   <div id="version-selector-modal" class="modal-overlay hidden">
-    <div class="modal-card">
+    <div class="modal-card modal-large">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-sliders"></i> CHỌN BẢN DỊCH ĐỐI CHIẾU</h3>
+        <div class="modal-title-wrap">
+          <h3><i class="fa-solid fa-sliders"></i> CHỌN BẢN DỊCH ĐỐI CHIẾU</h3>
+        </div>
         <button class="modal-close-btn" data-modal="version-selector-modal">&times;</button>
       </div>
-      <p class="modal-desc">Chọn các bản dịch bạn muốn đối chiếu song song cùng lúc:</p>
-      <div id="versions-checkbox-list" class="versions-list"></div>
+      <p class="modal-desc">
+        Chọn các bản dịch để đối chiếu song song. Hỗ trợ toàn bộ bản dịch tiếng Việt, các tiếng sắc tộc (Ê-đê, Gia-rai, Bru, H'Mông, M'Nông, Dao) và bản dịch kinh điển quốc tế:
+      </p>
+
+      <!-- Thanh Tab Phân Loại Bản Dịch -->
+      <div class="version-tabs">
+        <button class="version-tab-btn active" data-vtab="vi"><i class="fa-solid fa-flag"></i> Tiếng Việt (6)</button>
+        <button class="version-tab-btn" data-vtab="ethnic"><i class="fa-solid fa-mountain"></i> Sắc Tộc Việt Nam (7)</button>
+        <button class="version-tab-btn" data-vtab="intl"><i class="fa-solid fa-globe"></i> Quốc Tế & Nguyên Ngữ (7)</button>
+      </div>
+
+      <!-- Thanh Thao Tác Nhanh -->
+      <div class="version-quick-actions">
+        <button id="quick-select-vi-btn" class="quick-pill"><i class="fa-solid fa-check-double"></i> Chọn 3 Bản Việt Chuẩn</button>
+        <button id="quick-select-ethnic-btn" class="quick-pill"><i class="fa-solid fa-feather"></i> Thêm Tiếng Sắc Tộc</button>
+        <button id="quick-select-all-btn" class="quick-pill"><i class="fa-solid fa-list-check"></i> Chọn Tất Cả</button>
+        <button id="quick-clear-btn" class="quick-pill"><i class="fa-solid fa-xmark"></i> Bỏ Chọn</button>
+      </div>
+
+      <!-- Danh Sách Checkbox Từng Bản Dịch -->
+      <div id="versions-checkbox-list" class="versions-list">
+        <!-- Render động bởi app.js -->
+      </div>
+
       <div class="modal-footer">
-        <button id="save-versions-btn" class="btn-primary">Áp Dụng Đối Chiếu</button>
+        <span id="selected-versions-summary" class="selected-summary">Đang chọn: 4 bản dịch</span>
+        <button id="save-versions-btn" class="btn-primary"><i class="fa-solid fa-check"></i> Áp Dụng Đối Chiếu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2.1: Bộ Máy Tìm Kiếm Chuyên Sâu Chuẩn HTTLVN (HTTLVN Search Hub) -->
+  <div id="httlvn-search-modal" class="modal-overlay hidden">
+    <div class="modal-card modal-large httlvn-search-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3><i class="fa-solid fa-magnifying-glass-location"></i> TÌM KIẾM KINH THÁNH CHUYÊN SÂU</h3>
+        </div>
+        <button class="modal-close-btn" data-modal="httlvn-search-modal">&times;</button>
+      </div>
+
+      <!-- Hướng Dẫn & Thanh Nhập Liệu Tìm Kiếm -->
+      <div class="httlvn-search-controls">
+        <div class="httlvn-input-row">
+          <div class="input-with-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="httlvn-search-query" class="httlvn-search-input" placeholder="Nhập từ khóa, câu Kinh Thánh hoặc cú pháp tìm kiếm (VD: 'yêu thương', Giăng 3:16)...">
+          </div>
+          <button id="httlvn-search-submit-btn" class="btn-primary httlvn-submit-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Tìm Kiếm
+          </button>
+        </div>
+
+        <div class="httlvn-search-hint">
+          <i class="fa-solid fa-circle-info"></i> Mẹo tìm kiếm: Thêm dấu nháy kép để tìm <b>tuyệt đối chính xác</b> cụm từ. Ví dụ: <code>"Đức Chúa Trời"</code> hoặc <code>Ngài "yêu thương"</code>.
+        </div>
+
+        <!-- Bộ Lọc Nâng Cao (Bản Dịch & Phạm Vi Sách) -->
+        <div class="httlvn-filters-row">
+          <div class="filter-item">
+            <label><i class="fa-solid fa-sliders"></i> Bản Dịch:</label>
+            <select id="httlvn-filter-version" class="httlvn-select">
+              <optgroup label="Tiếng Việt">
+                <option value="VI1934" selected>Bản Truyền Thống 1925 (VI1934)</option>
+                <option value="RVV11">Bản Truyền Thống Hiệu Đính 2010 (RVV11)</option>
+                <option value="NVB">Bản Dịch Mới (NVB)</option>
+                <option value="BD2011">Bản Dịch 2011 (BD2011)</option>
+                <option value="BPT">Bản Phổ Thông (BPT)</option>
+                <option value="BDY">Bản Diễn Ý (BDY)</option>
+              </optgroup>
+              <optgroup label="Tiếng Sắc Tộc">
+                <option value="RRB">Tiếng Ê-đê (RRB - Klei Aê Diê Blŭ)</option>
+                <option value="JBSV">Tiếng Gia-rai (JBSV - Hră Ơi Adai Pơhiăp)</option>
+                <option value="BRU">Tiếng Bru - Vân Kiều (BRU - Parnai Yiang Sursĩ)</option>
+                <option value="HMOWSV">Tiếng H'Mông Trắng (HMOWSV - Vajtswv Txojlus)</option>
+                <option value="HMOBSV">Tiếng H'Mông Xanh (HMOBSV - Vaajtswv Txujlug)</option>
+                <option value="BBSV">Tiếng M'Nông (BBSV - Nau Brah Ndu Ngơi)</option>
+              </optgroup>
+              <optgroup label="Quốc Tế">
+                <option value="NKJV">New King James Version (NKJV)</option>
+                <option value="NIV">New International Version (NIV)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="filter-item">
+            <label><i class="fa-solid fa-book-bookmark"></i> Phạm Vi:</label>
+            <select id="httlvn-filter-scope" class="httlvn-select">
+              <option value="all" selected>Toàn Bộ Kinh Thánh (66 Sách)</option>
+              <option value="OT">Cựu Ước (39 Sách: Sáng-thế Ký → Ma-la-chi)</option>
+              <option value="NT">Tân Ước (27 Sách: Ma-thi-ơ → Khải-huyền)</option>
+              <option value="torah">Năm Sách Luật Pháp Môi-se</option>
+              <option value="gospels">Bốn Sách Phúc Âm</option>
+              <option value="epistles">Các Thư Tín Sứ Đồ</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thống Kê & Bộ Lọc Nhanh Kết Quả -->
+      <div id="httlvn-search-stats" class="httlvn-stats-bar hidden">
+        <span id="httlvn-stats-text" class="stats-text">
+          <!-- Với từ khóa: "..." đã tìm thấy N kết quả trong thời gian X ms -->
+        </span>
+        <div class="httlvn-stats-tabs">
+          <button class="stats-tab active" data-filter="all">Tất Cả (<span id="stats-count-all">0</span>)</button>
+          <button class="stats-tab" data-filter="OT">Cựu Ước (<span id="stats-count-ot">0</span>)</button>
+          <button class="stats-tab" data-filter="NT">Tân Ước (<span id="stats-count-nt">0</span>)</button>
+        </div>
+      </div>
+
+      <!-- Container Danh Sách Kết Quả -->
+      <div id="httlvn-search-results" class="httlvn-results-list">
+        <div class="search-empty-state">
+          <i class="fa-solid fa-book-open-reader"></i>
+          <p>Nhập từ khóa và nhấn <b>Tìm Kiếm</b> để tra cứu toàn văn theo chuẩn Hội Thánh Tin Lành Việt Nam.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -241,6 +374,88 @@
       <input type="password" id="admin-secret-key-input" placeholder="Nhập khóa bí mật..." style="width: 100%; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
       <div class="modal-footer">
         <button id="submit-admin-auth-btn" class="btn-primary" style="width: 100%;">Xác Thực</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Xem Nhanh Phân Đoạn Trọng Tâm & Đối Chiếu (Passage Preview Dialog) -->
+  <div id="passage-preview-modal" class="modal-overlay hidden" aria-label="Hộp thoại đọc phân đoạn trọng tâm">
+    <div class="modal-card passage-preview-card animate-scale-up">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="preview-badge" id="preview-passage-genre">PHÂN ĐOẠN TRỌNG TÂM</span>
+          <h3 id="preview-passage-title"><i class="fa-solid fa-scroll"></i> Phân Đoạn Kinh Thánh</h3>
+        </div>
+        <button class="modal-close-btn" data-modal="passage-preview-modal">&times;</button>
+      </div>
+
+      <div class="passage-preview-body" id="preview-passage-body">
+        <!-- Render các câu kinh thánh của phân đoạn -->
+      </div>
+
+      <div class="modal-footer passage-preview-footer">
+        <button id="preview-goto-chapter-btn" class="btn-secondary">
+          <i class="fa-solid fa-book-open"></i> Mở Đọc Cả Chương
+        </button>
+        <button id="preview-close-btn" class="btn-primary">
+          <i class="fa-solid fa-xmark"></i> Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Floating AI Copilot Widget & FAB Pop-up (Hiển thị nổi ở bất kỳ đâu) -->
+  <button id="floating-ai-fab" class="floating-ai-fab" title="Trợ Lý Thần Học Berea AI (Nhấp để mở cửa sổ chat)">
+    <div class="fab-pulse-ring"></div>
+    <div class="fab-icon-box">
+      <i class="fa-solid fa-robot"></i>
+    </div>
+    <span class="fab-label">AI Berea</span>
+  </button>
+
+  <div id="floating-ai-widget" class="floating-ai-widget hidden" aria-label="Cửa sổ Trợ Lý Thần Học Berea AI">
+    <div class="floating-ai-header">
+      <div class="floating-ai-header-left">
+        <div class="fab-avatar"><i class="fa-solid fa-robot"></i></div>
+        <div class="fab-header-text">
+          <h4 class="floating-ai-title">Trợ Lý Thần Học Berea AI</h4>
+          <span class="floating-ai-status">
+            <span class="status-indicator-dot online"></span>
+            <span id="floating-ai-status-label">Trực tuyến • Không gian mạng</span>
+          </span>
+        </div>
+      </div>
+      <div class="floating-ai-controls">
+        <button id="floating-web-toggle-btn" class="fab-ctrl-btn active" title="Bật/Tắt tra cứu trực tuyến trên mạng">
+          <i class="fa-solid fa-globe"></i> <span class="ctrl-btn-text">Web: BẬT</span>
+        </button>
+        <button id="floating-dock-btn" class="fab-ctrl-btn" title="Mở rộng sang bảng điều khiển bên phải (Drawer)">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+        <button id="floating-ai-close-btn" class="fab-ctrl-btn close" title="Đóng cửa sổ">&times;</button>
+      </div>
+    </div>
+
+    <!-- Khay Gợi Ý Nhanh Bối Cảnh Phân Đoạn -->
+    <div class="floating-ai-chips-bar" id="floating-ai-chips-bar">
+      <!-- Render động theo sách/đoạn đang mở -->
+    </div>
+
+    <!-- Luồng Tin Nhắn Hội Thoại -->
+    <div id="floating-ai-messages" class="floating-ai-messages">
+      <!-- Render tin nhắn của người dùng và trợ lý AI -->
+    </div>
+
+    <!-- Khung Nhập Liệu & Thao Tác -->
+    <div class="floating-ai-input-area">
+      <div class="floating-ai-input-box-wrapper">
+        <textarea id="floating-ai-input" rows="1" placeholder="Hỏi bối cảnh, từ gốc, trước giả, sự kiện mạng..."></textarea>
+        <button id="floating-ai-send-btn" class="fab-send-btn" title="Gửi câu hỏi">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+      <div class="floating-ai-footer-note">
+        <span>✨ Tra cứu thần học & dữ liệu không gian mạng • Đức Chúa Trời là Tác Giả Tối Thượng</span>
       </div>
     </div>
   </div>

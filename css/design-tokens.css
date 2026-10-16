@@ -34,7 +34,7 @@
   --genre-history: #b45309;      /* Lịch sử - Đỏ đồng */
   --genre-poetry: #0891b2;       /* Thơ ca & Khôn ngoan - Ngọc lam */
   --genre-prophecy: #7c3aed;     /* Tiên tri - Tím hoàng gia */
-  --genre-gospels: #e11d48;      /* Tin Lành / Phúc âm - Ruby */
+  --genre-gospels: #ea7a8f;      /* Tin Lành / Phúc âm - Hồng Thạch Anh dịu mắt (Rose Gold) */
   --genre-acts: #059669;         /* Công vụ / Lịch sử HT - Lục bảo */
   --genre-epistles: #2563eb;     /* Thư tín - Lam Cobalt */
   --genre-apocalyptic: #f59e0b;  /* Khải huyền - Vàng kim rực rỡ */
@@ -45,9 +45,9 @@
   --status-danger: #ef4444;
   --status-info: #3b82f6;
 
-  /* Typography */
-  --font-brand: 'Cinzel', 'Playfair Display', serif;
-  --font-bible: 'Merriweather', 'Lora', Georgia, serif;
+  /* Typography & HTTLVN Authentic Scripture Fonts */
+  --font-brand: 'Playfair Display', 'Merriweather', Georgia, serif;
+  --font-bible: 'Noto Serif', 'Playfair Display', 'Merriweather', Georgia, serif;
   --font-ui: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-hebrew-greek: 'SBL BibLit', 'Cardo', serif;
 
@@ -98,3 +98,37 @@
   --shadow-lg: 0 10px 30px rgba(60, 45, 20, 0.18);
   --shadow-gold: 0 0 20px rgba(150, 103, 8, 0.18);
 }
+
+/* ==========================================================================
+   HTTLVN AUTHENTIC GLYPHICONS FONT INTEGRATION
+   Source: https://kinhthanh.httlvn.org/fonts/glyphicons-halflings-regular.woff2
+   ========================================================================== */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('https://kinhthanh.httlvn.org/fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+       url('https://kinhthanh.httlvn.org/fonts/glyphicons-halflings-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-search:before { content: "\e003"; }
+.glyphicon-book:before { content: "\e043"; }
+.glyphicon-volume-down:before { content: "\e037"; }
+.glyphicon-volume-up:before { content: "\e038"; }
+.glyphicon-ok:before { content: "\e013"; }
+.glyphicon-remove:before { content: "\e014"; }
+.glyphicon-chevron-left:before { content: "\e079"; }
+.glyphicon-chevron-right:before { content: "\e080"; }

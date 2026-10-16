@@ -1,0 +1,464 @@
+{
+  "GEN": {
+    "name_vi": "Sáng thế ký",
+    "name_en": "Genesis",
+    "chapters_count": 50,
+    "genre": "torah",
+    "file": "data/bibles/GEN.json"
+  },
+  "EXO": {
+    "name_vi": "Xuất Ê-díp-tô ký",
+    "name_en": "Exodus",
+    "chapters_count": 40,
+    "genre": "torah",
+    "file": "data/bibles/EXO.json"
+  },
+  "LEV": {
+    "name_vi": "Lê-vi ký",
+    "name_en": "Leviticus",
+    "chapters_count": 27,
+    "genre": "torah",
+    "file": "data/bibles/LEV.json"
+  },
+  "NUM": {
+    "name_vi": "Dân số ký",
+    "name_en": "Numbers",
+    "chapters_count": 36,
+    "genre": "torah",
+    "file": "data/bibles/NUM.json"
+  },
+  "DEU": {
+    "name_vi": "Phục truyền luật lệ ký",
+    "name_en": "Deuteronomy",
+    "chapters_count": 34,
+    "genre": "torah",
+    "file": "data/bibles/DEU.json"
+  },
+  "JOS": {
+    "name_vi": "Giô-suê",
+    "name_en": "Joshua",
+    "chapters_count": 24,
+    "genre": "history",
+    "file": "data/bibles/JOS.json"
+  },
+  "JDG": {
+    "name_vi": "Các Quan xét",
+    "name_en": "Judges",
+    "chapters_count": 21,
+    "genre": "history",
+    "file": "data/bibles/JDG.json"
+  },
+  "RUT": {
+    "name_vi": "Ru-tơ",
+    "name_en": "Ruth",
+    "chapters_count": 4,
+    "genre": "history",
+    "file": "data/bibles/RUT.json"
+  },
+  "1SA": {
+    "name_vi": "1 Sa-mu-ên",
+    "name_en": "1 Samuel",
+    "chapters_count": 31,
+    "genre": "history",
+    "file": "data/bibles/1SA.json"
+  },
+  "2SA": {
+    "name_vi": "2 Sa-mu-ên",
+    "name_en": "2 Samuel",
+    "chapters_count": 24,
+    "genre": "history",
+    "file": "data/bibles/2SA.json"
+  },
+  "1KI": {
+    "name_vi": "1 Các Vua",
+    "name_en": "1 Kings",
+    "chapters_count": 22,
+    "genre": "history",
+    "file": "data/bibles/1KI.json"
+  },
+  "2KI": {
+    "name_vi": "2 Các Vua",
+    "name_en": "2 Kings",
+    "chapters_count": 25,
+    "genre": "history",
+    "file": "data/bibles/2KI.json"
+  },
+  "1CH": {
+    "name_vi": "1 Sử ký",
+    "name_en": "1 Chronicles",
+    "chapters_count": 29,
+    "genre": "history",
+    "file": "data/bibles/1CH.json"
+  },
+  "2CH": {
+    "name_vi": "2 Sử ký",
+    "name_en": "2 Chronicles",
+    "chapters_count": 36,
+    "genre": "history",
+    "file": "data/bibles/2CH.json"
+  },
+  "EZR": {
+    "name_vi": "Ê-xơ-ra",
+    "name_en": "Ezra",
+    "chapters_count": 10,
+    "genre": "history",
+    "file": "data/bibles/EZR.json"
+  },
+  "NEH": {
+    "name_vi": "Nê-hê-mi",
+    "name_en": "Nehemiah",
+    "chapters_count": 13,
+    "genre": "history",
+    "file": "data/bibles/NEH.json"
+  },
+  "EST": {
+    "name_vi": "Ê-xơ-tê",
+    "name_en": "Esther",
+    "chapters_count": 10,
+    "genre": "history",
+    "file": "data/bibles/EST.json"
+  },
+  "JOB": {
+    "name_vi": "Gióp",
+    "name_en": "Job",
+    "chapters_count": 42,
+    "genre": "poetry",
+    "file": "data/bibles/JOB.json"
+  },
+  "PSA": {
+    "name_vi": "Thi thiên",
+    "name_en": "Psalms",
+    "chapters_count": 150,
+    "genre": "poetry",
+    "file": "data/bibles/PSA.json"
+  },
+  "PRO": {
+    "name_vi": "Châm ngôn",
+    "name_en": "Proverbs",
+    "chapters_count": 31,
+    "genre": "poetry",
+    "file": "data/bibles/PRO.json"
+  },
+  "ECC": {
+    "name_vi": "Truyền đạo",
+    "name_en": "Ecclesiastes",
+    "chapters_count": 12,
+    "genre": "poetry",
+    "file": "data/bibles/ECC.json"
+  },
+  "SNG": {
+    "name_vi": "Nhã ca",
+    "name_en": "Song of Songs",
+    "chapters_count": 8,
+    "genre": "poetry",
+    "file": "data/bibles/SNG.json"
+  },
+  "ISA": {
+    "name_vi": "Ê-sai",
+    "name_en": "Isaiah",
+    "chapters_count": 66,
+    "genre": "prophecy",
+    "file": "data/bibles/ISA.json"
+  },
+  "JER": {
+    "name_vi": "Giê-rê-mi",
+    "name_en": "Jeremiah",
+    "chapters_count": 52,
+    "genre": "prophecy",
+    "file": "data/bibles/JER.json"
+  },
+  "LAM": {
+    "name_vi": "Ca thương",
+    "name_en": "Lamentations",
+    "chapters_count": 5,
+    "genre": "poetry",
+    "file": "data/bibles/LAM.json"
+  },
+  "EZK": {
+    "name_vi": "Ê-xê-chi-ên",
+    "name_en": "Ezekiel",
+    "chapters_count": 48,
+    "genre": "prophecy",
+    "file": "data/bibles/EZK.json"
+  },
+  "DAN": {
+    "name_vi": "Đa-ni-ên",
+    "name_en": "Daniel",
+    "chapters_count": 12,
+    "genre": "prophecy",
+    "file": "data/bibles/DAN.json"
+  },
+  "HOS": {
+    "name_vi": "Ô-sê",
+    "name_en": "Hosea",
+    "chapters_count": 14,
+    "genre": "prophecy",
+    "file": "data/bibles/HOS.json"
+  },
+  "JOL": {
+    "name_vi": "Giô-ên",
+    "name_en": "Joel",
+    "chapters_count": 3,
+    "genre": "prophecy",
+    "file": "data/bibles/JOL.json"
+  },
+  "AMO": {
+    "name_vi": "A-mốt",
+    "name_en": "Amos",
+    "chapters_count": 9,
+    "genre": "prophecy",
+    "file": "data/bibles/AMO.json"
+  },
+  "OBA": {
+    "name_vi": "Áp-đia",
+    "name_en": "Obadiah",
+    "chapters_count": 1,
+    "genre": "prophecy",
+    "file": "data/bibles/OBA.json"
+  },
+  "JON": {
+    "name_vi": "Giô-na",
+    "name_en": "Jonah",
+    "chapters_count": 4,
+    "genre": "prophecy",
+    "file": "data/bibles/JON.json"
+  },
+  "MIC": {
+    "name_vi": "Mi-chê",
+    "name_en": "Micah",
+    "chapters_count": 7,
+    "genre": "prophecy",
+    "file": "data/bibles/MIC.json"
+  },
+  "NAH": {
+    "name_vi": "Na-hum",
+    "name_en": "Nahum",
+    "chapters_count": 3,
+    "genre": "prophecy",
+    "file": "data/bibles/NAH.json"
+  },
+  "HAB": {
+    "name_vi": "Ha-ba-cúc",
+    "name_en": "Habakkuk",
+    "chapters_count": 3,
+    "genre": "prophecy",
+    "file": "data/bibles/HAB.json"
+  },
+  "ZEP": {
+    "name_vi": "Xô-phô-ni",
+    "name_en": "Zephaniah",
+    "chapters_count": 3,
+    "genre": "prophecy",
+    "file": "data/bibles/ZEP.json"
+  },
+  "HAG": {
+    "name_vi": "A-ghê",
+    "name_en": "Haggai",
+    "chapters_count": 2,
+    "genre": "prophecy",
+    "file": "data/bibles/HAG.json"
+  },
+  "ZEC": {
+    "name_vi": "Xa-cha-ri",
+    "name_en": "Zechariah",
+    "chapters_count": 14,
+    "genre": "prophecy",
+    "file": "data/bibles/ZEC.json"
+  },
+  "MAL": {
+    "name_vi": "Ma-la-chi",
+    "name_en": "Malachi",
+    "chapters_count": 4,
+    "genre": "prophecy",
+    "file": "data/bibles/MAL.json"
+  },
+  "MAT": {
+    "name_vi": "Ma-thi-ơ",
+    "name_en": "Matthew",
+    "chapters_count": 28,
+    "genre": "gospels",
+    "file": "data/bibles/MAT.json"
+  },
+  "MRK": {
+    "name_vi": "Mác",
+    "name_en": "Mark",
+    "chapters_count": 16,
+    "genre": "gospels",
+    "file": "data/bibles/MRK.json"
+  },
+  "LUK": {
+    "name_vi": "Lu-ca",
+    "name_en": "Luke",
+    "chapters_count": 24,
+    "genre": "gospels",
+    "file": "data/bibles/LUK.json"
+  },
+  "JHN": {
+    "name_vi": "Giăng",
+    "name_en": "John",
+    "chapters_count": 21,
+    "genre": "gospels",
+    "file": "data/bibles/JHN.json"
+  },
+  "ACT": {
+    "name_vi": "Công vụ các Sứ đồ",
+    "name_en": "Acts",
+    "chapters_count": 28,
+    "genre": "acts",
+    "file": "data/bibles/ACT.json"
+  },
+  "ROM": {
+    "name_vi": "Rô-ma",
+    "name_en": "Romans",
+    "chapters_count": 16,
+    "genre": "epistles",
+    "file": "data/bibles/ROM.json"
+  },
+  "1CO": {
+    "name_vi": "1 Cô-rinh-tô",
+    "name_en": "1 Corinthians",
+    "chapters_count": 16,
+    "genre": "epistles",
+    "file": "data/bibles/1CO.json"
+  },
+  "2CO": {
+    "name_vi": "2 Cô-rinh-tô",
+    "name_en": "2 Corinthians",
+    "chapters_count": 13,
+    "genre": "epistles",
+    "file": "data/bibles/2CO.json"
+  },
+  "GAL": {
+    "name_vi": "Ga-la-ti",
+    "name_en": "Galatians",
+    "chapters_count": 6,
+    "genre": "epistles",
+    "file": "data/bibles/GAL.json"
+  },
+  "EPH": {
+    "name_vi": "Ê-phê-sô",
+    "name_en": "Ephesians",
+    "chapters_count": 6,
+    "genre": "epistles",
+    "file": "data/bibles/EPH.json"
+  },
+  "PHP": {
+    "name_vi": "Phi-líp",
+    "name_en": "Philippians",
+    "chapters_count": 4,
+    "genre": "epistles",
+    "file": "data/bibles/PHP.json"
+  },
+  "COL": {
+    "name_vi": "Cô-lô-se",
+    "name_en": "Colossians",
+    "chapters_count": 4,
+    "genre": "epistles",
+    "file": "data/bibles/COL.json"
+  },
+  "1TH": {
+    "name_vi": "1 Tê-sa-lô-ni-ca",
+    "name_en": "1 Thessalonians",
+    "chapters_count": 5,
+    "genre": "epistles",
+    "file": "data/bibles/1TH.json"
+  },
+  "2TH": {
+    "name_vi": "2 Tê-sa-lô-ni-ca",
+    "name_en": "2 Thessalonians",
+    "chapters_count": 3,
+    "genre": "epistles",
+    "file": "data/bibles/2TH.json"
+  },
+  "1TI": {
+    "name_vi": "1 Ti-mô-thê",
+    "name_en": "1 Timothy",
+    "chapters_count": 6,
+    "genre": "epistles",
+    "file": "data/bibles/1TI.json"
+  },
+  "2TI": {
+    "name_vi": "2 Ti-mô-thê",
+    "name_en": "2 Timothy",
+    "chapters_count": 4,
+    "genre": "epistles",
+    "file": "data/bibles/2TI.json"
+  },
+  "TIT": {
+    "name_vi": "Tít",
+    "name_en": "Titus",
+    "chapters_count": 3,
+    "genre": "epistles",
+    "file": "data/bibles/TIT.json"
+  },
+  "PHM": {
+    "name_vi": "Phi-lê-môn",
+    "name_en": "Philemon",
+    "chapters_count": 1,
+    "genre": "epistles",
+    "file": "data/bibles/PHM.json"
+  },
+  "HEB": {
+    "name_vi": "Hê-bơ-rơ",
+    "name_en": "Hebrews",
+    "chapters_count": 13,
+    "genre": "epistles",
+    "file": "data/bibles/HEB.json"
+  },
+  "JAS": {
+    "name_vi": "Gia-cơ",
+    "name_en": "James",
+    "chapters_count": 5,
+    "genre": "epistles",
+    "file": "data/bibles/JAS.json"
+  },
+  "1PE": {
+    "name_vi": "1 Phi-e-rơ",
+    "name_en": "1 Peter",
+    "chapters_count": 5,
+    "genre": "epistles",
+    "file": "data/bibles/1PE.json"
+  },
+  "2PE": {
+    "name_vi": "2 Phi-e-rơ",
+    "name_en": "2 Peter",
+    "chapters_count": 3,
+    "genre": "epistles",
+    "file": "data/bibles/2PE.json"
+  },
+  "1JN": {
+    "name_vi": "1 Giăng",
+    "name_en": "1 John",
+    "chapters_count": 5,
+    "genre": "epistles",
+    "file": "data/bibles/1JN.json"
+  },
+  "2JN": {
+    "name_vi": "2 Giăng",
+    "name_en": "2 John",
+    "chapters_count": 1,
+    "genre": "epistles",
+    "file": "data/bibles/2JN.json"
+  },
+  "3JN": {
+    "name_vi": "3 Giăng",
+    "name_en": "3 John",
+    "chapters_count": 1,
+    "genre": "epistles",
+    "file": "data/bibles/3JN.json"
+  },
+  "JUD": {
+    "name_vi": "Giu-đe",
+    "name_en": "Jude",
+    "chapters_count": 1,
+    "genre": "epistles",
+    "file": "data/bibles/JUD.json"
+  },
+  "REV": {
+    "name_vi": "Khải huyền",
+    "name_en": "Revelation",
+    "chapters_count": 22,
+    "genre": "apocalyptic",
+    "file": "data/bibles/REV.json"
+  }
+}

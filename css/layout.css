@@ -25,6 +25,7 @@ body {
   width: 100%;
   z-index: 1000;
   display: block;
+  transition: margin-right var(--transition-smooth);
 }
 
 .admin-banner {
@@ -120,6 +121,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
+  transition: margin-right var(--transition-smooth);
 }
 
 .header-brand {
@@ -178,36 +180,91 @@ body {
   background: var(--bg-card);
 }
 
-/* Genre Filter Bar */
+/* Genre Filter Bar - Enhanced & Prominent */
 #genre-filter-bar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 2rem;
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--border-subtle);
+  gap: 0.65rem;
+  padding: 0.85rem 2rem;
+  background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(13, 18, 28, 0.98) 100%);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: thin;
+  z-index: 850;
+  transition: all var(--transition-fast), margin-right var(--transition-smooth);
+}
+
+.genre-filter-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
 }
 
 .genre-pill {
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.52rem 1.15rem;
+  border-radius: 24px;
+  font-size: 0.92rem;
   font-weight: 600;
-  border: 1px solid transparent;
+  border: 1.5px solid var(--border-medium);
   cursor: pointer;
-  opacity: 0.75;
   transition: all var(--transition-fast);
   background: var(--bg-card);
-  color: var(--text-secondary);
+  color: var(--text-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
 }
 
-.genre-pill.active, .genre-pill:hover {
-  opacity: 1;
-  transform: translateY(-1px);
-  color: #fff;
+.genre-pill i {
+  font-size: 0.95rem;
+  color: var(--genre-color, var(--accent-gold));
+  transition: transform var(--transition-fast);
+}
+
+.genre-pill:hover {
+  border-color: var(--genre-color, var(--accent-gold));
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px var(--genre-color, var(--accent-gold-glow));
+}
+
+.genre-pill:hover i {
+  transform: scale(1.15);
+}
+
+.genre-pill.active {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
+  color: #0a0d14 !important;
+  border-color: var(--accent-gold-light);
+  box-shadow: 0 0 16px var(--accent-gold-glow), 0 3px 8px rgba(0, 0, 0, 0.4);
+  font-weight: 700;
+}
+
+.genre-pill.active i {
+  color: #0a0d14 !important;
+}
+
+/* Specific Active State when filtered by genre */
+.genre-pill.genre-selected {
+  background: var(--genre-color) !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  box-shadow: 0 0 16px var(--genre-color) !important;
+}
+
+.genre-pill.genre-selected i {
+  color: #fff !important;
 }
 
 /* 3. Main Workspace Area */
@@ -216,6 +273,7 @@ body {
   flex: 1;
   position: relative;
   overflow: hidden;
+  transition: margin-right var(--transition-smooth);
 }
 
 /* Focus Reader Canvas */
@@ -294,12 +352,16 @@ body {
   background: var(--accent-gold-glow);
 }
 
-/* 4. Drawer Inspector Slide-Over */
+/* 4. Drawer Inspector Slide-Over & Split-Screen Workspace */
+:root {
+  --drawer-width: clamp(400px, 38vw, 540px);
+}
+
 #drawer-inspector {
   position: fixed;
   top: 0;
-  right: -620px;
-  width: 580px;
+  right: calc(-1 * var(--drawer-width) - 40px);
+  width: var(--drawer-width);
   max-width: 95vw;
   height: 100vh;
   background: var(--bg-surface);
@@ -341,19 +403,27 @@ body {
 
 .drawer-tabs {
   display: flex;
-  background: var(--bg-primary);
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--bg-surface);
   border-bottom: 1px solid var(--border-subtle);
-  overflow-x: auto;
+  overflow-x: hidden; /* Tuyệt đối không trượt ngang */
 }
 
 .drawer-tab-btn {
-  flex: 1;
-  padding: 0.85rem 0.5rem;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
+  flex: 1 1 calc(33.333% - 6px);
+  min-width: 105px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0.55rem 0.65rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
   color: var(--text-secondary);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
@@ -361,10 +431,18 @@ body {
   transition: all var(--transition-fast);
 }
 
-.drawer-tab-btn.active {
+.drawer-tab-btn:hover {
+  background: rgba(212, 175, 55, 0.12);
   color: var(--accent-gold);
-  border-bottom-color: var(--accent-gold);
-  background: var(--bg-surface);
+  border-color: rgba(212, 175, 55, 0.35);
+}
+
+.drawer-tab-btn.active {
+  color: #121212;
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
 }
 
 .drawer-body {
@@ -373,12 +451,48 @@ body {
   padding: 1.5rem;
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
+/* Side-by-Side Split View: Đảm bảo khi mở đối chiếu KHÔNG BAO GIỜ che mất nội dung Kinh Thánh */
+@media (min-width: 992px) {
+  body.drawer-open #admin-banner-container,
+  body.drawer-open #main-header,
+  body.drawer-open #genre-filter-bar,
+  body.drawer-open #genre-bookshelf,
+  body.drawer-open #app-body,
+  #app-body.drawer-open {
+    margin-right: var(--drawer-width);
+  }
+
+  body.drawer-open #admin-banner-container {
+    width: auto;
+  }
+
+  body.drawer-open #focus-reader,
+  #app-body.drawer-open #focus-reader {
+    max-width: 100%;
+    padding: 2rem 2.8rem;
+    transition: padding var(--transition-smooth);
+  }
+
+  body.drawer-open .floating-ai-fab {
+    right: calc(var(--drawer-width) + 1.5rem) !important;
+    transition: right var(--transition-smooth);
+  }
+
+  body.drawer-open .floating-ai-widget {
+    right: calc(var(--drawer-width) + 1.5rem) !important;
+    transition: right var(--transition-smooth);
+  }
+}
+
+/* Responsive adjustments for mobile overlay */
+@media (max-width: 991px) {
   #focus-reader {
     padding: 1.5rem;
   }
   #drawer-inspector {
     width: 100vw;
+  }
+  body.drawer-open {
+    overflow: hidden;
   }
 }

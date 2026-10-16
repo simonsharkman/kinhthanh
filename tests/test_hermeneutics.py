@@ -23,3 +23,17 @@ def test_crossref_engine_contract():
     assert "getCrossReferences" in content
     assert "renderCrossReferenceHTML" in content
     assert "fetchVersePreview" in content or "quickPeek" in content
+
+def test_dynamic_typology_detection():
+    with open("js/hermeneutics-engine.js", "r", encoding="utf-8") as f:
+        content = f.read()
+
+    assert "detectPassageMetaphors" in content
+    assert "renderTypologyTabHTML" in content
+    assert "METAPHOR_SIGNATURES" in content
+    assert "lamb_of_god" in content
+    assert "true_vine" in content
+    assert "bread_of_life" in content
+    assert "salt_and_light" in content
+    assert "living_water" in content
+

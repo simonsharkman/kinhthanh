@@ -1,0 +1,332 @@
+{
+  "GEN": {
+    "slug": "sa",
+    "httlvn_name": "Sáng-thế Ký",
+    "our_name": "Sáng thế ký"
+  },
+  "EXO": {
+    "slug": "xu",
+    "httlvn_name": "Xuất Ê-díp-tô Ký",
+    "our_name": "Xuất Ê-díp-tô ký"
+  },
+  "LEV": {
+    "slug": "le",
+    "httlvn_name": "Lê-vi Ký",
+    "our_name": "Lê-vi ký"
+  },
+  "NUM": {
+    "slug": "dan",
+    "httlvn_name": "Dân-số Ký",
+    "our_name": "Dân số ký"
+  },
+  "DEU": {
+    "slug": "phu",
+    "httlvn_name": "Phục-truyền Luật-lệ Ký",
+    "our_name": "Phục truyền luật lệ ký"
+  },
+  "JOS": {
+    "slug": "gios",
+    "httlvn_name": "Giô-suê",
+    "our_name": "Giô-suê"
+  },
+  "JDG": {
+    "slug": "cac",
+    "httlvn_name": "Các Quan Xét",
+    "our_name": "Các Quan xét"
+  },
+  "RUT": {
+    "slug": "ru",
+    "httlvn_name": "Ru-tơ",
+    "our_name": "Ru-tơ"
+  },
+  "1SA": {
+    "slug": "1sa",
+    "httlvn_name": "I Sa-mu-ên",
+    "our_name": "1 Sa-mu-ên"
+  },
+  "2SA": {
+    "slug": "2sa",
+    "httlvn_name": "II Sa-mu-ên",
+    "our_name": "2 Sa-mu-ên"
+  },
+  "1KI": {
+    "slug": "1vua",
+    "httlvn_name": "I Các Vua",
+    "our_name": "1 Các Vua"
+  },
+  "2KI": {
+    "slug": "2vua",
+    "httlvn_name": "II Các Vua",
+    "our_name": "2 Các Vua"
+  },
+  "1CH": {
+    "slug": "1su",
+    "httlvn_name": "I Sử-ký",
+    "our_name": "1 Sử ký"
+  },
+  "2CH": {
+    "slug": "2su",
+    "httlvn_name": "II Sử-ký",
+    "our_name": "2 Sử ký"
+  },
+  "EZR": {
+    "slug": "exo",
+    "httlvn_name": "E-xơ-ra",
+    "our_name": "Ê-xơ-ra"
+  },
+  "NEH": {
+    "slug": "ne",
+    "httlvn_name": "Nê-hê-mi",
+    "our_name": "Nê-hê-mi"
+  },
+  "EST": {
+    "slug": "et",
+    "httlvn_name": "Ê-xơ-tê",
+    "our_name": "Ê-xơ-tê"
+  },
+  "JOB": {
+    "slug": "giop",
+    "httlvn_name": "Gióp",
+    "our_name": "Gióp"
+  },
+  "PSA": {
+    "slug": "thi",
+    "httlvn_name": "Thi-thiên",
+    "our_name": "Thi thiên"
+  },
+  "PRO": {
+    "slug": "ch",
+    "httlvn_name": "Châm-ngôn",
+    "our_name": "Châm ngôn"
+  },
+  "ECC": {
+    "slug": "tr",
+    "httlvn_name": "Truyền-đạo",
+    "our_name": "Truyền đạo"
+  },
+  "SNG": {
+    "slug": "nha",
+    "httlvn_name": "Nhã-ca",
+    "our_name": "Nhã ca"
+  },
+  "ISA": {
+    "slug": "es",
+    "httlvn_name": "Ê-sai",
+    "our_name": "Ê-sai"
+  },
+  "JER": {
+    "slug": "gie",
+    "httlvn_name": "Giê-rê-mi",
+    "our_name": "Giê-rê-mi"
+  },
+  "LAM": {
+    "slug": "ca",
+    "httlvn_name": "Ca-thương",
+    "our_name": "Ca thương"
+  },
+  "EZK": {
+    "slug": "exe",
+    "httlvn_name": "Ê-xê-chi-ên",
+    "our_name": "Ê-xê-chi-ên"
+  },
+  "DAN": {
+    "slug": "da",
+    "httlvn_name": "Đa-ni-ên",
+    "our_name": "Đa-ni-ên"
+  },
+  "HOS": {
+    "slug": "os",
+    "httlvn_name": "Ô-sê",
+    "our_name": "Ô-sê"
+  },
+  "JOL": {
+    "slug": "gio",
+    "httlvn_name": "Giô-ên",
+    "our_name": "Giô-ên"
+  },
+  "AMO": {
+    "slug": "am",
+    "httlvn_name": "A-mốt",
+    "our_name": "A-mốt"
+  },
+  "OBA": {
+    "slug": "ap",
+    "httlvn_name": "Áp-đia",
+    "our_name": "Áp-đia"
+  },
+  "JON": {
+    "slug": "gion",
+    "httlvn_name": "Giô-na",
+    "our_name": "Giô-na"
+  },
+  "MIC": {
+    "slug": "mi",
+    "httlvn_name": "Mi-chê",
+    "our_name": "Mi-chê"
+  },
+  "NAH": {
+    "slug": "na",
+    "httlvn_name": "Na-hum",
+    "our_name": "Na-hum"
+  },
+  "HAB": {
+    "slug": "ha",
+    "httlvn_name": "Ha-ba-cúc",
+    "our_name": "Ha-ba-cúc"
+  },
+  "ZEP": {
+    "slug": "so",
+    "httlvn_name": "Sô-phô-ni",
+    "our_name": "Xô-phô-ni"
+  },
+  "HAG": {
+    "slug": "ag",
+    "httlvn_name": "A-ghê",
+    "our_name": "A-ghê"
+  },
+  "ZEC": {
+    "slug": "xa",
+    "httlvn_name": "Xa-cha-ri",
+    "our_name": "Xa-cha-ri"
+  },
+  "MAL": {
+    "slug": "ma",
+    "httlvn_name": "Ma-la-chi",
+    "our_name": "Ma-la-chi"
+  },
+  "MAT": {
+    "slug": "mat",
+    "httlvn_name": "Ma-thi-ơ",
+    "our_name": "Ma-thi-ơ"
+  },
+  "MRK": {
+    "slug": "mac",
+    "httlvn_name": "Mác",
+    "our_name": "Mác"
+  },
+  "LUK": {
+    "slug": "lu",
+    "httlvn_name": "Lu-ca",
+    "our_name": "Lu-ca"
+  },
+  "JHN": {
+    "slug": "gi",
+    "httlvn_name": "Giăng",
+    "our_name": "Giăng"
+  },
+  "ACT": {
+    "slug": "cong",
+    "httlvn_name": "Công-vụ các Sứ-đồ",
+    "our_name": "Công vụ các Sứ đồ"
+  },
+  "ROM": {
+    "slug": "ro",
+    "httlvn_name": "Rô-ma",
+    "our_name": "Rô-ma"
+  },
+  "1CO": {
+    "slug": "1co",
+    "httlvn_name": "I Cô-rinh-tô",
+    "our_name": "1 Cô-rinh-tô"
+  },
+  "2CO": {
+    "slug": "2co",
+    "httlvn_name": "II Cô-rinh-tô",
+    "our_name": "2 Cô-rinh-tô"
+  },
+  "GAL": {
+    "slug": "ga",
+    "httlvn_name": "Ga-la-ti",
+    "our_name": "Ga-la-ti"
+  },
+  "EPH": {
+    "slug": "eph",
+    "httlvn_name": "Ê-phê-sô",
+    "our_name": "Ê-phê-sô"
+  },
+  "PHP": {
+    "slug": "phi",
+    "httlvn_name": "Phi-líp",
+    "our_name": "Phi-líp"
+  },
+  "COL": {
+    "slug": "co",
+    "httlvn_name": "Cô-lô-se",
+    "our_name": "Cô-lô-se"
+  },
+  "1TH": {
+    "slug": "1te",
+    "httlvn_name": "I Tê-sa-lô-ni-ca",
+    "our_name": "1 Tê-sa-lô-ni-ca"
+  },
+  "2TH": {
+    "slug": "2te",
+    "httlvn_name": "II Tê-sa-lô-ni-ca",
+    "our_name": "2 Tê-sa-lô-ni-ca"
+  },
+  "1TI": {
+    "slug": "1ti",
+    "httlvn_name": "I Ti-mô-thê",
+    "our_name": "1 Ti-mô-thê"
+  },
+  "2TI": {
+    "slug": "2ti",
+    "httlvn_name": "II Ti-mô-thê",
+    "our_name": "2 Ti-mô-thê"
+  },
+  "TIT": {
+    "slug": "tit",
+    "httlvn_name": "Tít",
+    "our_name": "Tít"
+  },
+  "PHM": {
+    "slug": "phil",
+    "httlvn_name": "Phi-lê-môn",
+    "our_name": "Phi-lê-môn"
+  },
+  "HEB": {
+    "slug": "he",
+    "httlvn_name": "Hê-bơ-rơ",
+    "our_name": "Hê-bơ-rơ"
+  },
+  "JAS": {
+    "slug": "gia",
+    "httlvn_name": "Gia-cơ",
+    "our_name": "Gia-cơ"
+  },
+  "1PE": {
+    "slug": "1phi",
+    "httlvn_name": "I Phi-e-rơ",
+    "our_name": "1 Phi-e-rơ"
+  },
+  "2PE": {
+    "slug": "2phi",
+    "httlvn_name": "II Phi-e-rơ",
+    "our_name": "2 Phi-e-rơ"
+  },
+  "1JN": {
+    "slug": "1gi",
+    "httlvn_name": "I Giăng",
+    "our_name": "1 Giăng"
+  },
+  "2JN": {
+    "slug": "2gi",
+    "httlvn_name": "II Giăng",
+    "our_name": "2 Giăng"
+  },
+  "3JN": {
+    "slug": "3gi",
+    "httlvn_name": "III Giăng",
+    "our_name": "3 Giăng"
+  },
+  "JUD": {
+    "slug": "giu",
+    "httlvn_name": "Giu-đe",
+    "our_name": "Giu-đe"
+  },
+  "REV": {
+    "slug": "kh",
+    "httlvn_name": "Khải-huyền",
+    "our_name": "Khải huyền"
+  }
+}
