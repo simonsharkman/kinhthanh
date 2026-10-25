@@ -154,7 +154,7 @@ def test_no_mismatched_es6_module_import_urls():
           console.error('Missing 35 câu đối chiếu badge');
           process.exit(3);
         }
-        if (!htmlVi.includes('Sáng Thế Ký 1:1') || !htmlVi.includes('Ban đầu Đức Chúa Trời dựng nên trời đất')) {
+        if (!htmlVi.includes('Sáng thế ký 1:1') || !htmlVi.includes('Ban đầu Đức Chúa Trời dựng nên trời đất')) {
           console.error('Missing Vietnamese BTT cross-reference text');
           process.exit(4);
         }
