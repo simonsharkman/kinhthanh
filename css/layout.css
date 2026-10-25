@@ -871,21 +871,9 @@ body {
     overflow: hidden !important;
   }
 
+  /* Ẩn logo và biểu tượng Thánh Giá trên header điện thoại theo yêu cầu anh Jimmy (giải phóng không gian cho các nút đọc) */
   .header-brand {
-    gap: 0.3rem !important;
-    flex-shrink: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-  }
-
-  .brand-gif-cross {
-    width: 30px !important;
-    height: 30px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .brand-symbol i {
-    font-size: 1.1rem !important;
+    display: none !important;
   }
 
   .brand-text h1,
