@@ -214,8 +214,13 @@ def test_portal_utility_modal_and_audio_player_html_elements():
     assert 'id="portal-playlist-body"' in html
     assert 'id="btn-clear-playlist"' in html
 
-    # Audio Player Bar
+    # Audio Player Bar & Studio Media Stream
     assert 'id="portal-audio-player-bar"' in html
+    assert 'id="portal-audio-media-element"' in html
+    assert 'id="audio-timeline-wrap"' in html
+    assert 'id="audio-seek-slider"' in html
+    assert 'id="audio-current-time"' in html
+    assert 'id="audio-duration-time"' in html
     assert 'id="audio-player-title"' in html
     assert 'id="audio-player-subtitle"' in html
     assert 'id="audio-btn-play-pause"' in html
@@ -280,3 +285,10 @@ def test_portal_data_repository_integrity():
     assert "Nô-ê" in data_js
     assert "Môi-se" in data_js
     assert "Đa-vít" in data_js
+
+    # Studio Audio MP3 Canonical Mapping
+    assert "export const BIBLE_BOOK_ORDER_MAP =" in data_js
+    assert "export function getChapterAudioUrl(" in data_js
+    assert "'GEN': 1" in data_js
+    assert "'MAT': 40" in data_js
+    assert "'REV': 66" in data_js

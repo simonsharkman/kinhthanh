@@ -474,3 +474,34 @@ export const BIBLE_DICT_DATA = [
     refs: 'Giăng 14:16-26, 16:7-14; Công-vụ 1:8'
   }
 ];
+
+// Bản đồ thứ tự 66 Sách Kinh Thánh (Canonical 1-66 Order)
+export const BIBLE_BOOK_ORDER_MAP = {
+  'GEN': 1, 'EXO': 2, 'LEV': 3, 'NUM': 4, 'DEU': 5,
+  'JOS': 6, 'JDG': 7, 'RUT': 8, '1SA': 9, '2SA': 10,
+  '1KI': 11, '2KI': 12, '1CH': 13, '2CH': 14, 'EZR': 15,
+  'NEH': 16, 'EST': 17, 'JOB': 18, 'PSA': 19, 'PRO': 20,
+  'ECC': 21, 'SNG': 22, 'ISA': 23, 'JER': 24, 'LAM': 25,
+  'EZK': 26, 'DAN': 27, 'HOS': 28, 'JOL': 29, 'AMO': 30,
+  'OBA': 31, 'JON': 32, 'MIC': 33, 'NAH': 34, 'HAB': 35,
+  'ZEP': 36, 'HAG': 37, 'ZEC': 38, 'MAL': 39,
+  'MAT': 40, 'MRK': 41, 'LUK': 42, 'JHN': 43, 'ACT': 44,
+  'ROM': 45, '1CO': 46, '2CO': 47, 'GAL': 48, 'EPH': 49,
+  'PHP': 50, 'COL': 51, '1TH': 52, '2TH': 53, '1TI': 54,
+  '2TI': 55, 'TIT': 56, 'PHM': 57, 'HEB': 58, 'JAS': 59,
+  '1PE': 60, '2PE': 61, '1JN': 62, '2JN': 63, '3JN': 64,
+  'JUD': 65, 'REV': 66
+};
+
+/**
+ * Trả về URL MP3 phòng thu chất lượng cao (Studio Human Voice Narration)
+ * Bản Truyền Thống Tiếng Việt từ CDN chính thức
+ */
+export function getChapterAudioUrl(bookId, chapterNum) {
+  const cleanId = String(bookId || '').toUpperCase().trim();
+  const bookNum = BIBLE_BOOK_ORDER_MAP[cleanId];
+  if (!bookNum) return null;
+  const ch = parseInt(chapterNum, 10) || 1;
+  return `https://www.wordproaudio.net/bibles/app/audio/19/${bookNum}/${ch}.mp3`;
+}
+

@@ -6114,12 +6114,10 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1050;
-  background: rgba(20, 24, 18, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  z-index: 2000;
+  background: #11140f !important;
   border-top: 2px solid var(--accent-gold);
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.9);
   padding: 0.65rem 1.25rem;
   animation: slideUpAudio 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -6170,6 +6168,58 @@
 .audio-subtitle {
   font-size: 0.78rem;
   color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.audio-badge-studio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #111;
+  background: linear-gradient(135deg, #f1c40f, #d4af37);
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.audio-timeline-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1 1 240px;
+  max-width: 400px;
+}
+
+.audio-time-label {
+  font-size: 0.76rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--text-muted);
+  min-width: 36px;
+  text-align: center;
+}
+
+.audio-seek-slider {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.22);
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--accent-gold);
+}
+
+.audio-seek-slider::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.9);
 }
 
 .audio-controls {
@@ -6308,11 +6358,61 @@
 
 @media (max-width: 991px) {
   .portal-audio-player-bar {
-    bottom: 56px; /* Above mobile bottom navigation */
-    padding: 0.5rem 0.75rem;
+    bottom: 0 !important;
+    padding: 0.5rem 0.65rem;
+    z-index: 2100;
   }
-  .audio-info { min-width: 140px; }
-  .audio-subtitle { display: none; }
+  .audio-player-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+  }
+  .audio-info {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    gap: 0.45rem;
+  }
+  .audio-meta {
+    overflow: hidden;
+  }
+  .audio-title {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+  .audio-subtitle {
+    display: none;
+  }
+  .audio-timeline-wrap {
+    order: 10;
+    width: 100%;
+    flex: 1 1 100%;
+    max-width: 100%;
+    gap: 0.4rem;
+    margin-top: 0.15rem;
+  }
+  .audio-controls {
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+  .audio-ctrl-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.78rem;
+  }
+  .audio-btn-play {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+  .audio-speed-select {
+    padding: 0.25rem 0.35rem;
+    font-size: 0.72rem;
+  }
   .utility-verses-grid, .survey-books-grid, .stories-grid {
     grid-template-columns: 1fr;
   }

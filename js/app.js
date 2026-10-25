@@ -12,7 +12,7 @@ import { mediaEngine } from './media-engine.js';
 import { aiAssistant } from './ai-assistant.js';
 import { blogSystem } from './blog-community.js';
 import { bereaGuardian } from './berea-guardian.js';
-import { FAV_VERSES_DATA, BIBLE_QUIZ_DATA, RESPONSIVE_READINGS_DATA, BIBLE_STORIES_DATA, BIBLE_DICT_DATA } from './portal-data.js';
+import { FAV_VERSES_DATA, BIBLE_QUIZ_DATA, RESPONSIVE_READINGS_DATA, BIBLE_STORIES_DATA, BIBLE_DICT_DATA, BIBLE_BOOK_ORDER_MAP, getChapterAudioUrl } from './portal-data.js';
 
 class LogosApp {
   constructor() {
@@ -1882,6 +1882,55 @@ class LogosApp {
     const bar = document.getElementById('portal-audio-player-bar');
     if (!bar) return;
 
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (audioEl) {
+      audioEl.addEventListener('timeupdate', () => {
+        if (audioEl.duration && !this.audioState.isSeeking) {
+          const pct = (audioEl.currentTime / audioEl.duration) * 100;
+          const slider = document.getElementById('audio-seek-slider');
+          if (slider) slider.value = pct;
+          const curTimeEl = document.getElementById('audio-current-time');
+          if (curTimeEl) curTimeEl.textContent = this.formatAudioTime(audioEl.currentTime);
+        }
+      });
+
+      audioEl.addEventListener('loadedmetadata', () => {
+        const durEl = document.getElementById('audio-duration-time');
+        if (durEl && audioEl.duration) {
+          durEl.textContent = this.formatAudioTime(audioEl.duration);
+        }
+      });
+
+      audioEl.addEventListener('ended', () => {
+        this.audioState.isPlaying = false;
+        this.audioState.isPaused = false;
+        this.updatePlayPauseBtnIcon(false);
+        this.showToast(`Đã nghe xong ${this.audioState.currentBook || ''} đoạn ${this.audioState.currentChapter || ''}.`, 'success');
+      });
+
+      audioEl.addEventListener('error', (e) => {
+        console.warn('Audio stream error, checking fallback:', e);
+      });
+    }
+
+    const slider = document.getElementById('audio-seek-slider');
+    if (slider && audioEl) {
+      slider.addEventListener('input', () => {
+        this.audioState.isSeeking = true;
+        if (audioEl.duration) {
+          const curTime = (slider.value / 100) * audioEl.duration;
+          const curTimeEl = document.getElementById('audio-current-time');
+          if (curTimeEl) curTimeEl.textContent = this.formatAudioTime(curTime);
+        }
+      });
+      slider.addEventListener('change', () => {
+        if (audioEl.duration) {
+          audioEl.currentTime = (slider.value / 100) * audioEl.duration;
+        }
+        this.audioState.isSeeking = false;
+      });
+    }
+
     document.getElementById('audio-btn-play-pause')?.addEventListener('click', () => {
       this.togglePlayPauseAudio();
     });
@@ -1916,39 +1965,46 @@ class LogosApp {
 
     const bookObj = bibleEngine.getBookById(bookId);
     const bookNameVi = bookObj?.name_vi || bookId;
-
-    this.showToast(`Đang chuẩn bị âm thanh ${bookNameVi} đoạn ${chapterNum}...`, 'info');
+    const ch = parseInt(chapterNum, 10) || 1;
 
     // Chuyển tới phân đoạn trên reader
-    this.navigateToPassage(bookId, chapterNum, startVerse, { stayInPortal: true });
-
-    // Tải dữ liệu chương
-    const passage = await bibleEngine.loadPassage(bookId, chapterNum);
-    const verses = passage?.verses || [];
-    if (!verses.length) {
-      this.showToast(`Không thể tải dữ liệu âm thanh cho ${bookNameVi} ${chapterNum}.`, 'warning');
-      return;
-    }
-
-    this.audioState.isPlaying = true;
-    this.audioState.isPaused = false;
-    this.audioState.currentBook = bookId;
-    this.audioState.currentChapter = chapterNum;
-    this.audioState.verses = verses;
-
-    let targetIdx = verses.findIndex(v => v.verse_num === parseInt(startVerse, 10));
-    if (targetIdx === -1) targetIdx = 0;
-    this.audioState.currentVerseIndex = targetIdx;
+    this.navigateToPassage(bookId, ch, startVerse, { stayInPortal: true });
 
     // Hiển thị thanh audio bar
     const bar = document.getElementById('portal-audio-player-bar');
     if (bar) bar.classList.remove('hidden');
 
     const titleEl = document.getElementById('audio-player-title');
-    if (titleEl) titleEl.textContent = `${bookNameVi} đoạn ${chapterNum}`;
+    if (titleEl) titleEl.textContent = `${bookNameVi} đoạn ${ch}`;
 
-    this.updatePlayPauseBtnIcon(true);
-    this.speakCurrentVerse();
+    const subEl = document.getElementById('audio-player-subtitle');
+    if (subEl) subEl.innerHTML = `<span class="audio-badge-studio"><i class="fa-solid fa-microphone"></i> Studio HD</span> Lời Chúa Bản Truyền Thống`;
+
+    this.audioState.isPlaying = true;
+    this.audioState.isPaused = false;
+    this.audioState.currentBook = bookId;
+    this.audioState.currentChapter = ch;
+
+    const audioEl = document.getElementById('portal-audio-media-element');
+    const mp3Url = getChapterAudioUrl(bookId, ch);
+
+    if (audioEl && mp3Url) {
+      if (audioEl.src !== mp3Url) {
+        audioEl.src = mp3Url;
+        audioEl.playbackRate = this.audioState.speed || 1.0;
+        audioEl.load();
+      }
+      this.updatePlayPauseBtnIcon(true);
+      this.showToast(`Đang phát âm thanh phòng thu: ${bookNameVi} đoạn ${ch}`, 'info');
+      audioEl.play().catch(err => {
+        console.warn('Audio auto-play prevented:', err);
+        this.updatePlayPauseBtnIcon(false);
+        this.showToast(`Nhấp nút Phát (▶) để nghe ${bookNameVi} đoạn ${ch}`, 'info');
+      });
+    } else {
+      // Fallback
+      this.speakCurrentVerse();
+    }
   }
 
   speakCurrentVerse() {
@@ -2026,11 +2082,12 @@ class LogosApp {
   }
 
   togglePlayPauseAudio() {
-    if (!this.audioState.isPlaying) {
-      this.playChapterAudio(state.currentBook, state.currentChapter);
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (!audioEl || !audioEl.src) {
+      this.playChapterAudio(state.currentBook || 'GEN', state.currentChapter || 1);
       return;
     }
-    if (this.audioState.isPaused) {
+    if (audioEl.paused) {
       this.resumeChapterAudio();
     } else {
       this.pauseChapterAudio();
@@ -2039,6 +2096,8 @@ class LogosApp {
 
   pauseChapterAudio() {
     this.audioState.isPaused = true;
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (audioEl) audioEl.pause();
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.pause();
     }
@@ -2048,7 +2107,10 @@ class LogosApp {
 
   resumeChapterAudio() {
     this.audioState.isPaused = false;
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (audioEl && audioEl.src) {
+      audioEl.play().catch(e => console.warn('Resume play error:', e));
+    } else if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.resume();
     }
     this.updatePlayPauseBtnIcon(true);
@@ -2058,9 +2120,18 @@ class LogosApp {
   stopChapterAudio() {
     this.audioState.isPlaying = false;
     this.audioState.isPaused = false;
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (audioEl) {
+      audioEl.pause();
+      audioEl.currentTime = 0;
+    }
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
+    const slider = document.getElementById('audio-seek-slider');
+    if (slider) slider.value = 0;
+    const curTimeEl = document.getElementById('audio-current-time');
+    if (curTimeEl) curTimeEl.textContent = '00:00';
     document.querySelectorAll('.verse-reading-active').forEach(el => el.classList.remove('verse-reading-active'));
     this.updatePlayPauseBtnIcon(false);
   }
@@ -2071,29 +2142,50 @@ class LogosApp {
   }
 
   nextVerseAudio() {
-    if (!this.audioState.verses.length) return;
-    if (this.audioState.currentVerseIndex < this.audioState.verses.length - 1) {
-      this.audioState.currentVerseIndex++;
-      this.speakCurrentVerse();
-    } else {
-      this.showToast('Đã đến câu cuối của đoạn.', 'info');
+    // Tua tới 15 giây trên luồng phát Studio
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (audioEl && audioEl.duration) {
+      audioEl.currentTime = Math.min(audioEl.duration, audioEl.currentTime + 15);
+      this.showToast('Đã tua tới 15 giây', 'info');
+    } else if (this.audioState.verses && this.audioState.verses.length) {
+      if (this.audioState.currentVerseIndex < this.audioState.verses.length - 1) {
+        this.audioState.currentVerseIndex++;
+        this.speakCurrentVerse();
+      }
     }
   }
 
   prevVerseAudio() {
-    if (!this.audioState.verses.length) return;
-    if (this.audioState.currentVerseIndex > 0) {
-      this.audioState.currentVerseIndex--;
-      this.speakCurrentVerse();
+    // Tua lùi 15 giây trên luồng phát Studio
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (audioEl) {
+      audioEl.currentTime = Math.max(0, audioEl.currentTime - 15);
+      this.showToast('Đã tua lùi 15 giây', 'info');
+    } else if (this.audioState.verses && this.audioState.verses.length) {
+      if (this.audioState.currentVerseIndex > 0) {
+        this.audioState.currentVerseIndex--;
+        this.speakCurrentVerse();
+      }
     }
   }
 
   changeAudioSpeed(speed) {
     this.audioState.speed = speed;
-    if (this.audioState.isPlaying && !this.audioState.isPaused) {
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (audioEl) {
+      audioEl.playbackRate = speed;
+    }
+    if (this.audioState.isPlaying && !this.audioState.isPaused && !audioEl?.src) {
       this.speakCurrentVerse();
     }
-    this.showToast(`Đã đổi tốc độ đọc: ${speed}x`, 'info');
+    this.showToast(`Đã đổi tốc độ phát: ${speed}x`, 'info');
+  }
+
+  formatAudioTime(seconds) {
+    if (isNaN(seconds) || seconds < 0) return '00:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   }
 
   updatePlayPauseBtnIcon(isPlaying) {

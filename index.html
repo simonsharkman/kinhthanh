@@ -1693,25 +1693,37 @@
 
   <!-- Thanh Phát Âm Thanh Thánh Kinh Cố Định (Docked Audio Player Bar) -->
   <div id="portal-audio-player-bar" class="portal-audio-player-bar hidden">
+    <!-- Thẻ HTML5 Audio cho luồng phát âm thanh phòng thu MP3 Studio HD -->
+    <audio id="portal-audio-media-element" preload="metadata"></audio>
     <div class="audio-player-inner">
       <div class="audio-info">
         <i class="fa-solid fa-volume-high audio-pulse-icon"></i>
         <div class="audio-meta">
           <span class="audio-title" id="audio-player-title">Sáng-thế Ký 1</span>
-          <span class="audio-subtitle" id="audio-player-subtitle">Đang đọc câu 1 / 31 (Giọng Tiếng Việt chuẩn)</span>
+          <span class="audio-subtitle" id="audio-player-subtitle"><span class="audio-badge-studio"><i class="fa-solid fa-microphone"></i> Studio HD</span> Lời Chúa Bản Truyền Thống</span>
         </div>
       </div>
+
+      <!-- Thanh trượt dòng thời gian (Seek Bar) & Bộ đếm phút:giây -->
+      <div class="audio-timeline-wrap" id="audio-timeline-wrap">
+        <span class="audio-time-label" id="audio-current-time">00:00</span>
+        <input type="range" class="audio-seek-slider" id="audio-seek-slider" min="0" max="100" value="0" step="0.2" title="Tua thời gian">
+        <span class="audio-time-label" id="audio-duration-time">--:--</span>
+      </div>
+
       <div class="audio-controls">
-        <button type="button" class="audio-ctrl-btn" id="audio-btn-prev-verse" title="Câu trước"><i class="fa-solid fa-backward-step"></i></button>
-        <button type="button" class="audio-ctrl-btn audio-btn-play" id="audio-btn-play-pause" title="Tạm dừng / Tiếp tục"><i class="fa-solid fa-pause"></i></button>
-        <button type="button" class="audio-ctrl-btn" id="audio-btn-next-verse" title="Câu kế tiếp"><i class="fa-solid fa-forward-step"></i></button>
+        <button type="button" class="audio-ctrl-btn" id="audio-btn-prev-verse" title="Tua lùi 15 giây"><i class="fa-solid fa-rotate-left"></i></button>
+        <button type="button" class="audio-ctrl-btn audio-btn-play" id="audio-btn-play-pause" title="Phát / Tạm dừng"><i class="fa-solid fa-play"></i></button>
+        <button type="button" class="audio-ctrl-btn" id="audio-btn-next-verse" title="Tua tới 15 giây"><i class="fa-solid fa-rotate-right"></i></button>
         <button type="button" class="audio-ctrl-btn audio-btn-stop" id="audio-btn-stop" title="Dừng đọc"><i class="fa-solid fa-stop"></i></button>
       </div>
+
       <div class="audio-settings">
-        <select id="audio-speed-select" class="audio-speed-select" title="Tốc độ đọc">
+        <select id="audio-speed-select" class="audio-speed-select" title="Tốc độ phát">
           <option value="0.8">0.8x</option>
           <option value="1.0" selected>1.0x</option>
           <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
         </select>
         <button type="button" class="audio-close-btn" id="audio-btn-close" title="Đóng thanh phát"><i class="fa-solid fa-xmark"></i></button>
       </div>
