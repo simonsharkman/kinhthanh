@@ -142,3 +142,36 @@ def test_portal_as_primary_site_foundation():
     assert "switchPortalTab" in app_js
     assert "portal-passage-tab-label" in app_js
     assert "portal-reader-chapter-container" in app_js
+
+
+def test_nav_tabs_moved_to_subnav_and_clean_header():
+    """Kiểm tra logo V và slogan dài được bỏ, các tab điều hướng được chuyển xuống thanh subnav cố định"""
+    with open("E:/kinhthanh/index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # 1. Circle V icon removed from header
+    assert '<span class="portal-logo-v">V</span>' not in html
+
+    # 2. Brand sub-title removed from brand-title in main-header
+    assert 'Kinh Thánh</h1>' in html
+
+    # 3. Navigation links are located in site-subnav-bar
+    subnav_start = html.find('id="site-subnav-bar"')
+    assert subnav_start != -1
+    subnav_section = html[subnav_start:subnav_start + 1400]
+
+    assert 'data-view="portal"' in subnav_section
+    assert 'data-view="bible"' in subnav_section
+    assert 'data-view="tsk"' in subnav_section
+    assert 'data-view="blog"' in subnav_section
+    assert 'data-view="community"' in subnav_section
+    assert 'data-view="media"' in subnav_section
+    assert 'data-view="donate"' in subnav_section
+    assert 'id="site-subnav-search"' in subnav_section
+
+    # 4. Dummy crossed-out buttons are removed from subnav
+    assert 'id="site-subnav-playlist"' not in html
+    assert 'id="site-subnav-newest"' not in html
+    assert 'id="site-subnav-recent"' not in html
+    assert 'id="site-subnav-popular"' not in html
+    assert 'id="site-subnav-thanksgiving"' not in html

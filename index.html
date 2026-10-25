@@ -46,12 +46,11 @@
   <!-- 2. Header Hoàng Gia (Main Navigation Header) -->
   <header id="main-header">
     <div class="header-brand" id="brand-home-btn" title="Về trang chủ Cổng Tĩnh Nguyện">
-      <span class="portal-logo-v">V</span>
       <span class="brand-symbol">
         <img src="data/cross_holy_gold.gif" alt="Thánh Giá Logos" class="brand-gif-cross">
       </span>
       <div class="brand-text">
-        <h1 class="brand-title">Kinh Thánh <span class="brand-sub">Chuyên Mục Tĩnh Nguyện & Dưỡng Linh • Logos MultiVerse</span></h1>
+        <h1 class="brand-title">Kinh Thánh</h1>
       </div>
     </div>
 
@@ -91,17 +90,6 @@
         <div id="search-dropdown" class="search-dropdown hidden"></div>
       </div>
 
-      <!-- Navigation Tabs (Cổng Tĩnh Nguyện, Đọc Kinh Thánh, KT Đối Chiếu BibleHub TSK, Blog, Nhánh Cộng Đồng, Media, Dâng Hiến Xây Dựng Website) -->
-      <nav class="nav-links">
-        <button class="nav-btn active" data-view="portal" title="Cổng Thông Tin & Dưỡng Linh Thánh Kinh (kinhthanh.net)"><i class="fa-solid fa-house-chimney-window"></i> Cổng Tĩnh Nguyện</button>
-        <button class="nav-btn" data-view="bible" title="Đọc Kinh Thánh & so sánh các bản dịch"><i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh</button>
-        <button class="nav-btn" data-view="tsk" title="Kinh Thánh Đối Chiếu (BibleHub TSK - Bản Tiếng Việt & Tiếng Anh)"><i class="fa-solid fa-book-atlas"></i> KT Đối Chiếu</button>
-        <button class="nav-btn" data-view="blog"><i class="fa-solid fa-feather-pointed"></i> Blog Chuyên Sâu</button>
-        <button class="nav-btn" data-view="community"><i class="fa-solid fa-users"></i> Nhánh Cộng Đồng</button>
-        <button class="nav-btn" data-view="media"><i class="fa-solid fa-photo-film"></i> Media & Video</button>
-        <button class="nav-btn nav-btn-donate" data-view="donate" title="Dâng hiến xây dựng Website & Tiếp nhận góp ý"><i class="fa-solid fa-hand-holding-heart"></i> Dâng hiến xây dựng Website</button>
-      </nav>
-
       <!-- Nút Đổi Màu Sắc & Giao Diện Trang (7 Bộ Màu Tuyệt Đẹp) -->
       <button id="theme-toggle-btn" class="selector-pill theme-selector-pill" title="Đổi màu sắc & giao diện trang">
         <i class="fa-solid fa-palette" style="color: var(--accent-gold);"></i>
@@ -128,15 +116,17 @@
     </div>
   </header>
 
-  <!-- 2.5 Thanh Menu Phụ Truyền Thống (Portal Sub-nav Bar Cố Định) -->
-  <nav id="site-subnav-bar" class="portal-subnav-bar" aria-label="Menu phụ Cổng Kinh Thánh">
-    <button class="portal-subnav-btn" id="site-subnav-search"><i class="fa-solid fa-bars"></i> ≡ Tìm</button>
-    <button class="portal-subnav-btn" id="site-subnav-playlist"><i class="fa-solid fa-list-ul"></i> Playlist</button>
-    <button class="portal-subnav-btn" id="site-subnav-newest"><i class="fa-solid fa-clock"></i> Mới Đăng</button>
-    <button class="portal-subnav-btn" id="site-subnav-recent"><i class="fa-solid fa-eye"></i> Mới Xem</button>
-    <button class="portal-subnav-btn" id="site-subnav-popular"><i class="fa-solid fa-fire"></i> Xem Nhiều</button>
-    <button class="portal-subnav-btn" id="site-subnav-thanksgiving"><i class="fa-solid fa-wheat-awn"></i> Mùa Tạ Ơn</button>
-    <button class="portal-subnav-btn" id="site-subnav-classic-theme" style="margin-left: auto;"><i class="fa-solid fa-palette"></i> Màu Cổ Điển</button>
+  <!-- 2.5 Thanh Menu Điều Hướng Chính & Tra Cứu (Site Subnav Navigation Bar) -->
+  <nav id="site-subnav-bar" class="portal-subnav-bar nav-links" aria-label="Menu điều hướng Cổng Kinh Thánh">
+    <button class="portal-subnav-btn" id="site-subnav-search" title="Mở hộp thoại tìm kiếm toàn diện"><i class="fa-solid fa-bars"></i> ≡ Tìm</button>
+    <button class="portal-subnav-btn nav-btn active" data-view="portal" title="Cổng Thông Tin & Dưỡng Linh Thánh Kinh"><i class="fa-solid fa-house-chimney-window"></i> Cổng Tĩnh Nguyện</button>
+    <button class="portal-subnav-btn nav-btn" data-view="bible" title="Đọc Kinh Thánh & so sánh các bản dịch"><i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh</button>
+    <button class="portal-subnav-btn nav-btn" data-view="tsk" title="Kinh Thánh Đối Chiếu (BibleHub TSK - Bản Tiếng Việt & Tiếng Anh)"><i class="fa-solid fa-book-atlas"></i> KT Đối Chiếu</button>
+    <button class="portal-subnav-btn nav-btn" data-view="blog" title="Blog chuyên sâu tác giả"><i class="fa-solid fa-feather-pointed"></i> Blog Chuyên Sâu</button>
+    <button class="portal-subnav-btn nav-btn" data-view="community" title="Nhánh cộng đồng học viên Berea"><i class="fa-solid fa-users"></i> Nhánh Cộng Đồng</button>
+    <button class="portal-subnav-btn nav-btn" data-view="media" title="Media & Video The Bible Project"><i class="fa-solid fa-photo-film"></i> Media & Video</button>
+    <button class="portal-subnav-btn nav-btn nav-btn-donate" data-view="donate" title="Dâng hiến xây dựng Website & Tiếp nhận góp ý"><i class="fa-solid fa-hand-holding-heart"></i> Dâng hiến xây dựng Website</button>
+    <button class="portal-subnav-btn" id="site-subnav-classic-theme" style="margin-left: auto;" title="Đổi màu cổ điển Tin Lành"><i class="fa-solid fa-palette"></i> Màu Cổ Điển</button>
   </nav>
 
   <!-- 3. Thanh Lọc 8 Thể Loại Văn Chương Kinh Thánh (Genre Filter Bar) -->
@@ -166,10 +156,9 @@
         <!-- 1. Thanh Tiêu Đề Cổng Thông Tin -->
         <div class="portal-brand-bar">
           <div class="portal-brand-title">
-            <span class="portal-logo-v">V</span>
             <div class="portal-brand-text">
-              <h2>Kinh Thánh</h2>
-              <span>Chuyên Mục Tĩnh Nguyện & Dưỡng Linh Hội Thánh</span>
+              <h2>Chuyên Mục Tĩnh Nguyện & Dưỡng Linh</h2>
+              <span>Bồi linh mỗi ngày qua Lời Chúa • Lịch đọc & nhu cầu đời sống</span>
             </div>
           </div>
           <div class="portal-brand-actions">
@@ -183,16 +172,6 @@
               <i class="fa-solid fa-palette"></i> Màu Cổ Điển
             </button>
           </div>
-        </div>
-
-        <!-- 2. Thanh Menu Sub-bar -->
-        <div class="portal-subnav-bar">
-          <button class="portal-subnav-btn" id="portal-nav-search"><i class="fa-solid fa-bars"></i> ≡ Tìm</button>
-          <button class="portal-subnav-btn" id="portal-nav-playlist"><i class="fa-solid fa-list-ul"></i> Playlist</button>
-          <button class="portal-subnav-btn" id="portal-nav-newest"><i class="fa-solid fa-clock"></i> Mới Đăng</button>
-          <button class="portal-subnav-btn" id="portal-nav-recent"><i class="fa-solid fa-eye"></i> Mới Xem</button>
-          <button class="portal-subnav-btn" id="portal-nav-popular"><i class="fa-solid fa-fire"></i> Xem Nhiều</button>
-          <button class="portal-subnav-btn" id="portal-nav-thanksgiving"><i class="fa-solid fa-wheat-awn"></i> Mùa Tạ Ơn</button>
         </div>
 
         <!-- 3. Lưới 2 Cột Chuẩn Mực -->

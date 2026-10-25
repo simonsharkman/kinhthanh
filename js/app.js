@@ -1811,6 +1811,15 @@ class LogosApp {
       this.askAIAboutTopic('Các phân đoạn Kinh Thánh ngợi khen và cảm tạ ơn Chúa trong Mùa Tạ Ơn');
     });
 
+    // Site Subnav Actions
+    document.getElementById('site-subnav-search')?.addEventListener('click', () => {
+      this.openHTTLVNSearchModal();
+    });
+
+    document.getElementById('site-subnav-classic-theme')?.addEventListener('click', () => {
+      state.setTheme('classic-httlvn');
+    });
+
     // Chuyển tab giữa Tĩnh Nguyện & Dưỡng Linh và Đọc Bản Văn Kinh Thánh
     document.getElementById('portal-tab-devotion-btn')?.addEventListener('click', () => {
       this.switchPortalTab('devotion');
