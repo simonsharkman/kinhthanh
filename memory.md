@@ -221,3 +221,17 @@
   3. Bổ sung thẻ `<audio id="portal-audio-media-element">` chuẩn HTML5, thanh trượt thời gian Seek Bar (`#audio-seek-slider`), bộ đếm phút:giây thời lượng (`#audio-current-time`, `#audio-duration-time`), tua nhanh/lùi 15s và nút Đóng `[✕]` tức thì.
   4. Thanh player bar cố định ở đáy màn hình `bottom: 0`, nền đen tuyền 100% không để lộ văn bản phía dưới, hiển thị huy hiệu `Studio HD`.
   5. Bảo đảm 128/128 unit test Pytest pass 100%.
+
+### 13. Tái Cấu Trúc Giao Diện Di Động: Menu Trượt Slide-out Drawer, Hamburger Lên Header & Lưới Thao Tác Nhanh (25/10/2026)
+- **Yêu cầu & Hình ảnh tham chiếu**:
+  1. Hình 1: Di chuyển nút Hamburger `☰` từ hàng subnav thứ 2 lên góc trên cùng bên trái của Header; xóa bỏ nút `📢 Banner` trên thanh header điện thoại; xóa thanh subnav 2 tầng gây chật chội.
+  2. Hình 2: Triển khai theo mẫu ứng dụng di động gồm 3 màn hình:
+     - Màn hình 1 (Dashboard Action Cards): Lưới thẻ bo tròn lớn, màu sắc sinh động 2 cột trên Cổng Tĩnh Nguyện.
+     - Màn hình 2 (Slide-out Off-canvas Drawer): Menu trượt mượt mà từ bên trái ra khi bấm `☰`.
+     - Màn hình 3 (Clean Reader): Giao diện đọc tinh gọn, không bị che khuất hay rối mắt.
+- **Giải pháp kỹ thuật đã triển khai**:
+  - Thêm nút `#mobile-drawer-toggle` vào mép trái `#main-header`, ẩn trên desktop, hiện trên mobile.
+  - Ẩn `#header-admin-banner-btn` và `#site-subnav-bar` trên mobile (`max-width: 991px`).
+  - Nâng cấp `#mobile-menu-modal` thành `.mobile-drawer-sheet` (slide từ trái `translateX(-100%)` sang `0`, header Thánh Giá vàng, greeting độc giả, các mục phân nhóm rõ ràng).
+  - Thêm `.portal-mobile-dashboard` với 8 thẻ thao tác 2 cột bo tròn 14px (Đọc, Đối Chiếu, Câu Gốc, Đố Kinh Thánh, Đối Đáp, Lược Khảo, Truyện Tích, Từ Điển).
+  - Bảo đảm 128/128 bài test Pytest PASS 100%.
