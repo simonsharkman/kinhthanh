@@ -150,8 +150,8 @@ def test_no_mismatched_es6_module_import_urls():
           console.error('Missing 66 books in select dropdown');
           process.exit(2);
         }
-        if (!htmlVi.includes('19 câu đối chiếu')) {
-          console.error('Missing 19 câu đối chiếu badge');
+        if (!htmlVi.includes('35 câu đối chiếu')) {
+          console.error('Missing 35 câu đối chiếu badge');
           process.exit(3);
         }
         if (!htmlVi.includes('Sáng Thế Ký 1:1') || !htmlVi.includes('Ban đầu Đức Chúa Trời dựng nên trời đất')) {
