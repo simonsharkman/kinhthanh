@@ -192,3 +192,11 @@
   3. Tối ưu độ thoáng: line-height chuẩn `1.8 - 1.95`, letter-spacing `0.012em`, bổ sung `optimizeLegibility`, `-webkit-font-smoothing: antialiased;` chống nhòe răng cưa trên mọi màn hình.
   4. Mở khóa toàn diện cỡ chữ di động: dùng `var(--bible-font-size, 1.15rem) !important;` giúp độc giả tự do phóng to chữ (17px - 25px) trên điện thoại mà không bị bó hẹp.
   5. Đạt 128/128 bài test Pytest PASS 100%.
+
+### 16. Tinh Chỉnh Header Menu Trượt Di Động Theo Phản Hồi Hình Ảnh (25/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"bỏ chỗ tôi gạch. cho hình thập tự to hơn chút"* (kèm ảnh `media_1792941935551_10a84408.png`).
+- **Thực hiện**:
+  1. Xóa dòng chữ phụ bị gạch đỏ: `<span>Bản Truyền Thống 1925</span>` trong `.drawer-brand-text`.
+  2. Phóng to hình ảnh Thánh Giá vàng `.drawer-cross-gif` từ 28px lên 44px kèm hiệu ứng tỏa sáng ánh kim (`drop-shadow`). Phóng to `.brand-gif-cross` trên thanh header điện thoại lên 30px.
+  3. Nâng cỡ chữ tiêu đề `<h3>Logos Thánh Kinh</h3>` lên 1.22rem cân đối hoàn hảo với biểu tượng Thánh Giá.
+  4. Đạt 128/128 bài test Pytest PASS 100%.
