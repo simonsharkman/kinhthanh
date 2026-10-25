@@ -223,3 +223,9 @@
 - **Nguyên nhân**: Trong tệp `index.html` dòng 126, nút mở bộ máy tìm kiếm toàn diện (`#site-subnav-search`) trước đó bị lỗi gõ nhầm thẻ `<i class="fa-solid fa-bars"></i> ≡ Tìm`. Do đó trình duyệt vừa hiển thị icon 3 gạch `fa-bars` (`☰`), vừa hiển thị ký tự 3 gạch `≡` và chữ `Tìm`.
 - **Khắc phục**: Thay thế hoàn toàn bằng nút chuẩn: `<i class="fa-solid fa-magnifying-glass"></i> Tìm Kiếm`, mở trực tiếp hộp thoại tra cứu chuẩn Hội Thánh Tin Lành Việt Nam (HTTLVN Search Hub).
 - **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
+
+### 20. Loại Bỏ Nút "Màu Cổ Điển" Thừa Thãi Trên Thanh Subnav (25/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"tôi thấy cái này bị thừa"* (kèm ảnh `media_1792943481825_b7596a98.png` chỉ mũi tên đỏ vào nút `🎨 Màu Cổ Điển` ở mép phải thanh subnav).
+- **Phân tích UX**: Trên thanh Header chính đã có sẵn nút đổi giao diện (`#header-theme-toggle-btn`) mở đầy đủ 6 bộ màu (bao gồm cả Cổ Điển Tin Lành). Việc đặt thêm một nút riêng `Màu Cổ Điển` trên thanh subnav gây dư thừa và phân mảnh điều khiển.
+- **Thực hiện**: Xóa bỏ hoàn toàn nút `#site-subnav-classic-theme` khỏi `index.html` và `js/app.js`.
+- **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
