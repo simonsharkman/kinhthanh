@@ -6551,22 +6551,25 @@
   }
 
   .drawer-cross-gif {
-    width: 28px;
-    height: 28px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(229, 193, 88, 0.65));
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
   }
 
   .drawer-brand-text h3 {
-    font-size: 1.05rem;
+    font-size: 1.22rem;
     font-weight: 800;
     color: var(--accent-gold);
     margin: 0;
     line-height: 1.2;
+    letter-spacing: 0.02em;
   }
 
   .drawer-brand-text span {
-    font-size: 0.74rem;
-    color: var(--text-muted);
+    display: none;
   }
 
   .mobile-drawer-close {
