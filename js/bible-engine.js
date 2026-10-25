@@ -275,20 +275,30 @@ export class BibleEngine {
 
   // Render HTML for Focus Reader Canvas with configurable Primary Reading Version
   renderChapterHTML(passageData, activeVersions = ['BTT', 'BDM'], primaryVersion = 'BTT') {
-    const book = this.getBookById(passageData.book_id) || { genre: 'torah', name_vi: passageData.book_id };
+    const book = this.getBookById(passageData.book_id) || { genre: 'torah', name_vi: passageData.book_id, chapters_count: 1 };
     const genreColor = `var(--genre-${book.genre}, var(--accent-gold))`;
     const transObj = ALL_TRANSLATIONS.find(t => t.id === primaryVersion || t.code === primaryVersion);
     const transName = transObj ? transObj.name : primaryVersion;
     const transId = transObj ? transObj.id : primaryVersion;
+    const chNum = parseInt(passageData.chapter_num, 10) || 1;
+    const maxCh = book.chapters_count || 1;
 
     let html = `
       <div class="chapter-header">
-        <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
-          ${book.name_vi.toUpperCase()} • ĐOẠN ${passageData.chapter_num} • ${transId}
-        </span>
+        <div class="chapter-header-top-row">
+          <button type="button" class="chapter-step-btn prev-ch" data-chapter-step="-1" ${chNum <= 1 ? 'disabled' : ''} title="Chuyển về đoạn trước">
+            <i class="fa-solid fa-chevron-left"></i> <span>Đoạn trước</span>
+          </button>
+          <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
+            ${book.name_vi.toUpperCase()} • ĐOẠN ${chNum}/${maxCh} • ${transId}
+          </span>
+          <button type="button" class="chapter-step-btn next-ch" data-chapter-step="1" ${chNum >= maxCh ? 'disabled' : ''} title="Chuyển sang đoạn tiếp theo">
+            <span>Đoạn tiếp</span> <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
         <h2 class="chapter-title">${passageData.title_vi || passageData.ref}</h2>
         <p class="chapter-subtitle">
-          Bản đọc: <span class="active-reading-version-tag" style="color: var(--accent-gold); font-weight: 600;">${transName}</span>. Nhấp vào từng câu để mở bảng đối chiếu và giải nghĩa chuyên sâu.
+          Bản đọc: <span class="active-reading-version-tag" style="color: var(--accent-gold); font-weight: 600;">${transName}</span> • Chạm vào câu bất kỳ để đối chiếu song song (${activeVersions.length} bản dịch).
         </p>
       </div>
       <div class="chapter-verses-list">
@@ -321,7 +331,18 @@ export class BibleEngine {
       `;
     });
 
-    html += `</div>`;
+    html += `
+      </div>
+      <div class="chapter-footer-nav">
+        <button type="button" class="chapter-step-btn prev-ch" data-chapter-step="-1" ${chNum <= 1 ? 'disabled' : ''}>
+          <i class="fa-solid fa-arrow-left"></i> Đoạn ${chNum > 1 ? chNum - 1 : 1}
+        </button>
+        <span class="chapter-footer- indicator">${book.name_vi} • Đoạn ${chNum} / ${maxCh}</span>
+        <button type="button" class="chapter-step-btn next-ch" data-chapter-step="1" ${chNum >= maxCh ? 'disabled' : ''}>
+          Đoạn ${chNum < maxCh ? chNum + 1 : maxCh} <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    `;
     return html;
   }
 

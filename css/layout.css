@@ -107,19 +107,24 @@ body {
   color: var(--accent-gold);
 }
 
-/* 2. Top Navigation Bar */
+/* 2. Top Navigation Bar (Sleek Glassmorphism & Breathable Hierarchy) */
 #main-header {
-  height: var(--header-height);
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--border-subtle);
-  padding: 0 1.25rem;
+  min-height: 60px;
+  height: auto;
+  background: var(--glass-bg, var(--bg-surface));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(229, 193, 88, 0.22);
+  padding: 0.45rem 1.25rem;
   position: sticky;
   top: 0;
   z-index: 900;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
   transition: margin-right var(--transition-smooth);
 }
 
@@ -169,10 +174,11 @@ body {
 }
 
 .brand-text .brand-sub {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-gold);
   letter-spacing: 0.1em;
+  opacity: 0.9;
 }
 
 .brand-tagline {
@@ -183,41 +189,50 @@ body {
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  flex-wrap: wrap;
+  gap: 0.42rem;
   flex: 1;
   justify-content: flex-end;
 }
 
 .selector-pill {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  padding: 0.38rem 0.65rem;
-  border-radius: 8px;
+  gap: 0.38rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  padding: 0.4rem 0.72rem;
+  border-radius: 999px;
   cursor: pointer;
   color: var(--text-primary);
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
   transition: all var(--transition-fast);
 }
 
 .selector-pill:hover {
-  border-color: var(--accent-gold-border);
-  background: var(--bg-card);
+  border-color: var(--accent-gold);
+  background: var(--bg-card-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 193, 88, 0.2);
 }
 
-/* Genre Filter Bar - Enhanced & Prominent */
+#book-nav-trigger,
+#primary-version-trigger {
+  border-color: rgba(229, 193, 88, 0.45);
+  background: linear-gradient(135deg, rgba(229, 193, 88, 0.15) 0%, var(--bg-card) 100%);
+}
+
+/* Genre Filter Bar - Clean, Balanced & Elegant */
 #genre-filter-bar {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.85rem 2rem;
-  background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(13, 18, 28, 0.98) 100%);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  gap: 0.5rem;
+  padding: 0.55rem 1.5rem;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: thin;
@@ -226,37 +241,36 @@ body {
 }
 
 .genre-filter-label {
-  font-size: 0.88rem;
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-gold);
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  margin-right: 0.5rem;
+  gap: 0.4rem;
+  margin-right: 0.35rem;
   flex-shrink: 0;
 }
 
 .genre-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.52rem 1.15rem;
-  border-radius: 24px;
-  font-size: 0.92rem;
+  gap: 0.45rem;
+  padding: 0.38rem 0.92rem;
+  border-radius: 999px;
+  font-size: 0.83rem;
   font-weight: 600;
-  border: 1.5px solid var(--border-medium);
+  border: 1px solid var(--border-subtle);
   cursor: pointer;
   transition: all var(--transition-fast);
   background: var(--bg-card);
-  color: var(--text-primary);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  color: var(--text-secondary);
   flex-shrink: 0;
 }
 
 .genre-pill i {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--genre-color, var(--accent-gold));
   transition: transform var(--transition-fast);
 }
@@ -264,19 +278,19 @@ body {
 .genre-pill:hover {
   border-color: var(--genre-color, var(--accent-gold));
   background: var(--bg-card-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px var(--genre-color, var(--accent-gold-glow));
+  color: var(--text-primary);
+  transform: translateY(-1px);
 }
 
 .genre-pill:hover i {
-  transform: scale(1.15);
+  transform: scale(1.12);
 }
 
 .genre-pill.active {
   background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
   color: #0a0d14 !important;
   border-color: var(--accent-gold-light);
-  box-shadow: 0 0 16px var(--accent-gold-glow), 0 3px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 12px var(--accent-gold-glow);
   font-weight: 700;
 }
 
@@ -289,7 +303,7 @@ body {
   background: var(--genre-color) !important;
   color: #fff !important;
   border-color: #fff !important;
-  box-shadow: 0 0 16px var(--genre-color) !important;
+  box-shadow: 0 0 14px var(--genre-color) !important;
 }
 
 .genre-pill.genre-selected i {
@@ -305,10 +319,10 @@ body {
   transition: margin-right var(--transition-smooth);
 }
 
-/* Focus Reader Canvas */
+/* Focus Reader Canvas — Sanctuary Illuminated Study Sheet */
 #focus-reader {
   flex: 1;
-  padding: 3rem 4rem;
+  padding: 2rem 3rem 3.5rem;
   max-width: 960px;
   margin: 0 auto;
   transition: padding var(--transition-smooth);
@@ -316,58 +330,152 @@ body {
 
 .chapter-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.75rem;
+  padding: 1.35rem 1.5rem;
+  background: linear-gradient(135deg, rgba(229, 193, 88, 0.1) 0%, var(--bg-surface) 100%);
+  border: 1px solid rgba(229, 193, 88, 0.28);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.chapter-header-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.chapter-step-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.36rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(229, 193, 88, 0.42);
+  background: rgba(229, 193, 88, 0.12);
+  color: var(--accent-gold);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.chapter-step-btn:hover:not(:disabled) {
+  background: var(--accent-gold);
+  color: #0a0d14;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-gold-glow);
+}
+
+.chapter-step-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .chapter-badge {
   display: inline-block;
-  padding: 0.25rem 0.85rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  padding: 0.28rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .chapter-title {
   font-family: var(--font-brand);
-  font-size: 2.4rem;
-  color: var(--accent-gold-light);
-  margin-bottom: 0.4rem;
+  font-size: 2.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
 }
 
 .chapter-subtitle {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 0.92rem;
 }
 
-/* Scripture verses */
+/* Scripture verses — Easy-to-scan cards with Golden Number Badges */
+.chapter-verses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
 .verse-item {
   position: relative;
-  margin-bottom: 1.25rem;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  border-left: 3px solid transparent;
+  margin-bottom: 0;
+  padding: 0.85rem 1.15rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3.5px solid rgba(229, 193, 88, 0.35);
+  border-radius: 12px;
   font-family: var(--font-bible);
   font-size: var(--bible-font-size);
   line-height: var(--bible-line-height);
   cursor: pointer;
   transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .verse-item:hover {
-  background: rgba(255, 255, 255, 0.02);
-  border-left-color: rgba(212, 175, 55, 0.3);
+  background: var(--bg-card);
+  border-color: rgba(229, 193, 88, 0.45);
+  border-left-color: var(--accent-gold);
+  transform: translateX(2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.verse-item.verse-highlight-active {
+  background: linear-gradient(90deg, rgba(229, 193, 88, 0.16) 0%, var(--bg-card) 100%);
+  border-color: var(--accent-gold);
+  border-left: 4px solid var(--accent-gold);
+  box-shadow: 0 4px 18px rgba(229, 193, 88, 0.2);
 }
 
 .verse-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 0.4rem;
+  border-radius: 7px;
+  background: rgba(229, 193, 88, 0.15);
+  border: 1px solid rgba(229, 193, 88, 0.42);
   font-family: var(--font-ui);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  margin-right: 0.65rem;
+  vertical-align: middle;
+}
+
+.verse-item.verse-highlight-active .verse-number {
+  background: var(--accent-gold);
+  color: #0a0d14;
+  border-color: var(--accent-gold-light);
+}
+
+.chapter-footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.chapter-footer-nav span {
+  font-size: 0.86rem;
   font-weight: 700;
-  color: var(--text-verse-num);
-  margin-right: 0.5rem;
-  vertical-align: super;
+  color: var(--text-secondary);
 }
 
 .metaphor-trigger {
@@ -671,20 +779,21 @@ body {
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.45) !important;
   }
 
-  /* Ẩn các nút desktop không cần thiết khỏi thanh header trên mobile, nhưng giữ lại nút Tab KT Đối Chiếu duy nhất */
+  /* Ẩn các nút desktop không cần thiết khỏi thanh header trên mobile, nhưng giữ lại nút Tab KT Đối Chiếu và nút Dâng Hiến */
   #translations-modal-trigger,
   #header-ai-trigger-btn,
   .omni-search-wrapper,
   #top-nav-ai-btn,
   #admin-analytics-btn,
   #role-auth-btn,
-  .nav-links .nav-btn:not([data-view="tsk"]) {
+  .nav-links .nav-btn:not([data-view="tsk"]):not([data-view="donate"]) {
     display: none !important;
   }
 
   .nav-links {
     display: inline-flex !important;
     align-items: center !important;
+    gap: 0.22rem !important;
     margin: 0 !important;
   }
 
@@ -708,6 +817,31 @@ body {
     background: var(--accent-gold) !important;
     color: #0a0d14 !important;
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.45) !important;
+  }
+
+  .nav-links .nav-btn[data-view="donate"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: 0 !important;
+    background: rgba(212, 175, 55, 0.16) !important;
+    color: var(--accent-gold) !important;
+    border: 1px solid var(--accent-gold) !important;
+    flex-shrink: 0 !important;
+  }
+
+  .nav-links .nav-btn[data-view="donate"] i {
+    font-size: 0.76rem !important;
+    margin: 0 !important;
+  }
+
+  .nav-links .nav-btn[data-view="donate"].active {
+    background: var(--accent-gold) !important;
+    color: #0a0d14 !important;
   }
 
   /* Nút đổi màu sắc & cỡ chữ trên Mobile Header: Gọn gàng và tinh tế */

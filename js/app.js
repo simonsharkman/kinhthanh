@@ -3,15 +3,15 @@
    Integrates Parallel Bible Engine, Hermeneutics, Media, AI & Community
    ========================================================================== */
 
-import { state, ALL_TRANSLATIONS, THEMES_LIST, FONT_SIZES } from './state.js?v=4.2.0';
-import { storage } from './storage.js?v=4.2.0';
-import { bibleEngine } from './bible-engine.js?v=4.2.0';
-import { hermeneuticsEngine } from './hermeneutics-engine.js?v=4.2.0';
-import { crossRefEngine } from './crossref-engine.js?v=4.2.0';
-import { mediaEngine } from './media-engine.js?v=4.2.0';
-import { aiAssistant } from './ai-assistant.js?v=4.2.0';
-import { blogSystem } from './blog-community.js?v=4.2.0';
-import { bereaGuardian } from './berea-guardian.js?v=4.2.0';
+import { state, ALL_TRANSLATIONS, THEMES_LIST, FONT_SIZES } from './state.js?v=4.3.0';
+import { storage } from './storage.js?v=4.3.0';
+import { bibleEngine } from './bible-engine.js?v=4.3.0';
+import { hermeneuticsEngine } from './hermeneutics-engine.js?v=4.3.0';
+import { crossRefEngine } from './crossref-engine.js?v=4.3.0';
+import { mediaEngine } from './media-engine.js?v=4.3.0';
+import { aiAssistant } from './ai-assistant.js?v=4.3.0';
+import { blogSystem } from './blog-community.js?v=4.3.0';
+import { bereaGuardian } from './berea-guardian.js?v=4.3.0';
 
 class LogosApp {
   constructor() {
@@ -347,6 +347,20 @@ class LogosApp {
         const parentVerse = el.closest('.verse-item') || el.closest('.verse-compare-card');
         state.selectVerse(parentVerse?.dataset?.verse || 1, true);
         this.renderDrawerContent();
+      });
+    });
+
+    // Gắn sự kiện chuyển nhanh Đoạn trước / Đoạn tiếp ngay trên đầu & cuối chương đọc
+    readerContainer.querySelectorAll('.chapter-step-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const step = parseInt(btn.dataset.chapterStep, 10) || 0;
+        const book = bibleEngine.getBookById(state.currentBook);
+        const maxCh = book?.chapters_count || 1;
+        const targetCh = state.currentChapter + step;
+        if (targetCh >= 1 && targetCh <= maxCh) {
+          state.setPassage(state.currentBook, targetCh, 1);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       });
     });
   }

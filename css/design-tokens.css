@@ -4,30 +4,30 @@
    ========================================================================== */
 
 :root {
-  /* Royal Obsidian Dark Theme (Default) */
-  --bg-primary: #0a0d14;
-  --bg-surface: #121824;
-  --bg-card: #182234;
-  --bg-card-hover: #1f2b42;
-  --bg-overlay: rgba(10, 13, 20, 0.85);
+  /* Royal Sanctuary Dark Theme (Default - Warm, Eye-Friendly & High Contrast) */
+  --bg-primary: #0c1018;
+  --bg-surface: #131a27;
+  --bg-card: #192335;
+  --bg-card-hover: #212e45;
+  --bg-overlay: rgba(12, 16, 24, 0.88);
 
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-verse-num: #d4af37;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #8b9bb4;
+  --text-verse-num: #e5c158;
 
   /* Royal Antique Gold Accent */
-  --accent-gold: #d4af37;
-  --accent-gold-light: #f3e5ab;
-  --accent-gold-dark: #aa820a;
-  --accent-gold-glow: rgba(212, 175, 55, 0.25);
-  --accent-gold-border: rgba(212, 175, 55, 0.4);
+  --accent-gold: #e5c158;
+  --accent-gold-light: #fae49c;
+  --accent-gold-dark: #b88c1b;
+  --accent-gold-glow: rgba(229, 193, 88, 0.25);
+  --accent-gold-border: rgba(229, 193, 88, 0.42);
 
   /* Borders & Dividers */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.16);
-  --glass-bg: rgba(18, 24, 36, 0.75);
-  --glass-border: rgba(212, 175, 55, 0.2);
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-medium: rgba(255, 255, 255, 0.18);
+  --glass-bg: rgba(19, 26, 39, 0.82);
+  --glass-border: rgba(229, 193, 88, 0.25);
 
   /* 8 Biblical Genres */
   --genre-torah: #d97706;        /* Luật pháp - Hổ phách */
@@ -47,14 +47,16 @@
 
   /* Typography & HTTLVN Authentic Scripture Fonts */
   --font-brand: 'Playfair Display', 'Merriweather', Georgia, serif;
+  --font-heading: 'Playfair Display', 'Merriweather', Georgia, serif;
   --font-bible: 'Noto Serif', 'Playfair Display', 'Merriweather', Georgia, serif;
+  --font-scripture: 'Noto Serif', 'Merriweather', Georgia, serif;
   --font-ui: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-hebrew-greek: 'SBL BibLit', 'Cardo', serif;
 
   /* Font Scaling & Line Heights */
-  --bible-font-size: 1.18rem;
-  --bible-line-height: 1.9;
-  --bible-letter-spacing: 0.01em;
+  --bible-font-size: 1.2rem;
+  --bible-line-height: 1.95;
+  --bible-letter-spacing: 0.012em;
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
