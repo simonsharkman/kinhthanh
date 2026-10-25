@@ -138,81 +138,14 @@
 - Đã tối ưu layout mobile 50/50, ẩn các thành phần thừa và thanh bottom dock gọn gàng.
 
 ### 9. Nâng Cấp Giao Diện Header Toàn Diện Theo Phản Hồi Hình Ảnh (19/10/2026)
-- **Yêu cầu của anh Jimmy**:
-  1. Cho cây thập tự thành ảnh GIF động phát sáng.
-  2. Thu gọn khối logo và tên thương hiệu (bỏ bớt chữ dài dòng) để tiết kiệm không gian.
-  3. Mở rộng thanh tìm kiếm nổi bật, cho phép tìm kiếm địa chỉ Kinh Thánh, câu Kinh Thánh kèm gợi ý thông minh.
-  4. Thu nhỏ nút Thống Kê và hiển thị trực tiếp số lượng người xem.
-  5. Thu nhỏ nút Khách / Quản trị viên.
-- **Giải pháp triển khai**:
-  1. **Thánh Giá GIF Hoàng Gia Động (`data/cross_holy_gold.gif`)**:
-     - Tạo script Python Pillow `scripts/generate_cross_gif.py` render 20 khung hình 64x64px, ánh sáng vàng kim chuyển động mượt mà với luồng sáng quét chéo và ngôi sao lấp lánh ở tâm chữ thập.
-     - Sử dụng nền trong suốt chuẩn GIF (transparency key) hoạt động hài hòa trên cả 6 bảng màu (Dark, Parchment, Sepia, Light, Midnight, Sage).
-  2. **Thu gọn Logo & Brand Name**:
-     - Rút gọn tiêu đề trên 1 dòng duy nhất: `LOGOS MULTIVERSE`.
-     - Ẩn khẩu hiệu dài dòng `.brand-tagline`, giải phóng hơn 180px chiều ngang.
-  3. **Mở Rộng Thanh Tìm Kiếm & Gợi Ý Thông Minh (Omni-Search)**:
-     - Mở rộng thanh input (`min-width: 240px`, `max-width: 380px`, `flex: 1 1 280px`).
-     - Tự động hiển thị thẻ Gợi Ý Địa Chỉ & Phân Đoạn Phổ Biến (Giăng 3:16, Thi Thiên 23, Rô-ma 8:28, Sáng Thế Ký 1:1, v.v.) ngay khi nhấp chuột vào ô tìm kiếm.
-     - Nâng cấp thuật toán `searchScripture` trong `bible-engine.js`: Nhận diện linh hoạt mọi biến thể tọa độ ("Giăng 3:16", "Giăng đoạn 3 câu 16", "Giăng 3 16", "JHN 3 16") và tên sách đơn lẻ ("Giăng", "Rô-ma", "Khải Huyền").
-     - Hỗ trợ nhấn `Enter` để nhảy ngay đến phân đoạn/câu tìm kiếm hoặc mở tra cứu toàn văn HTTLVN.
-  4. **Nút Thống Kê Thu Nhỏ & Hiển Thị Lượt Đọc**:
-     - Thu gọn kích thước nút `#admin-analytics-btn` và hiển thị trực tiếp số lượt truy cập (`1.8k xem`) từ `storage.getAnalytics()`.
-     - Mở bảng Dashboard chi tiết khi nhấp vào.
-  5. **Nút Khách Thu Nhỏ**:
-     - Tinh chỉnh padding và font-size của `#role-auth-btn` gọn gàng, vừa vặn.
-  6. **Kiểm thử tự động**: Xây dựng `test_header_improvements.py`, đạt 96/96 pytest pass 100% trên cả 2 workspace.
-
-
-### 10. Phục Hồi Chuẩn Xác Giao Diện Máy Tính, Trình Bày Interlinear Scripture4All & Chia Đôi Màn Hình Di Động (19/10/2026)
-- **Yêu cầu của anh Jimmy**:
-  1. Giao diện máy tính: Giữ lại giao diện đã duyệt, không để thanh chọn bản dịch đẩy hỏng đối chiếu.
-  2. Giao diện điện thoại: Chia đôi màn hình trên là bản gốc/bản đọc chính, dưới là bản đối chiếu; ẩn các mục tab để tăng diện tích hiển thị; đặt nút chọn bản dịch ở chỗ khác.
-  3. Giữ kiểu trình bày Scripture4All: Chữ gốc, Phiên âm, Mã Strong's, Ngữ pháp, Nghĩa đen tiếng Anh in hoa màu Cyan/Teal (`#0891b2`), Nghĩa tiếng Việt màu Xanh lá (`#16a34a`), không dùng ô khối đóng khung.
-- **Giải pháp triển khai**:
-  1. **Khôi Phục Giao Diện Máy Tính Đã Duyệt**:
-     - Ẩn hoàn toàn `#drawer-version-bar` inline khỏi tầm nhìn (`display: none !important;`), khôi phục giao diện bảng khảo cứu thoáng đãng, không bị đẩy thụt xuống dưới.
-  2. **Giao Diện Di Động Chia Đôi Màn Hình (Top/Bottom Split View)**:
-     - Nửa trên (`#app-body`): Hiển thị bản đọc chính trọn vẹn chương để người dùng cuộn và chạm vào câu muốn xem.
-     - Nửa dưới (`#drawer-inspector`): Cố định ở dưới đáy chiếm 56vh (có thể vuốt kéo lên 82vh) hiển thị trực tiếp danh sách đối chiếu đa bản dịch cho câu đang chọn.
-     - Ẩn toàn bộ 4 tab (`.drawer-tabs { display: none !important; }`) trên điện thoại để dành toàn bộ chiều cao cho văn bản đối chiếu.
-     - Nút "Chọn Bản Dịch" được đưa lên góc trên Drawer Header (`#drawer-manage-versions-btn`) và tích hợp trực tiếp vào thanh tiêu đề thẻ đối chiếu (`#parallel-add-versions-btn`).
-  3. **Chuẩn Hóa Scripture4All Interlinear (6 Tầng Màu Sắc)**:
-     - Tầng 1: Chữ gốc Hy Lạp / Hê-bơ-rơ (WLC niqqud / ScrTR hoa).
-     - Tầng 2: Phiên âm (`.s4a-translit`).
-     - Tầng 3: Mã Strong's (`.s4a-strong`).
-     - Tầng 4: Ngữ pháp (`.s4a-pos`).
-     - Tầng 5: **Nghĩa đen Tiếng Anh In Hoa Màu Cyan/Teal (`#0891b2`)** (Dark mode: `#38bdf8`) đúng như mũi tên đỏ.
-     - Tầng 6: **Nghĩa Tiếng Việt Màu Xanh Lá (`#16a34a`)** (Dark mode: `#4ade80`).
-  4. **Kiểm Thử & Xuất Bản**:
-     - 102/102 Pytest suites pass 100%.
-     - Đã đồng bộ sang Antigravity Scratch và đóng gói `E:\KINHTHANH WEB.zip`.
-
-
-### 11. Cổng Tĩnh Nguyện & Dưỡng Linh Cổ Điển Làm Nền Chính & Vận Hành Toàn Bộ Tính Năng (25/10/2026)
-- **Yêu cầu & Ngữ cảnh**:
-  1. Người dùng yêu cầu lấy giao diện Cổng Tĩnh Nguyện & Dưỡng Linh làm nền chính cho toàn trang web.
-  2. Bỏ các mục gạch chéo trên thanh menu, chuyển sang thanh subnav cố định màu xanh ô-liu.
-  3. Kiểm tra và kích hoạt toàn bộ các chức năng chưa hoạt động trong Box ĐỌC, NGHE, TÌM và TIỂU MỤC.
-- **Giải pháp & Thành quả kỹ thuật**:
-  1. **Nhúng Sẵn 66 Sách Tĩnh Cho Toàn Bộ Dropdown**:
-     - Cả 4 thẻ `<select>` (`#portal-read-book-select`, `#portal-listen-book-select`, `#portal-search-from-book`, `#portal-search-to-book`) được nhúng trực tiếp 66 `<option>` từ Sáng-thế Ký đến Khải-huyền ngay trong HTML tĩnh, loại bỏ hoàn toàn hiện tượng dropdown trắng.
-  2. **Modal Tiện Ích Cổng Tĩnh Nguyện (`#portal-utility-modal`)**:
-     - **Câu Gốc Yêu Thích**: Tuyển tập 36 câu Kinh Thánh nền tảng (Bình An, Cứu Rỗi, Sức Mạnh, Thành Tín) kèm nút Đọc đoạn, Nghe âm thanh và Sao chép.
-     - **Đố Kinh Thánh**: 10 câu trắc nghiệm tương tác chấm điểm tức thì, giải nghĩa chi tiết và địa chỉ Kinh Thánh dẫn chứng.
-     - **Kinh Thánh Đối Đáp**: 8 bài đọc phụng vụ chuẩn HTTLVN (Chủ sự / Hội chúng).
-     - **Thánh Kinh Lược Khảo**: Khảo quát toàn diện 66 sách (tác giả, niên đại, chủ đề, số chương).
-     - **Truyện Tích Thánh Kinh**: 8 thiên truyện đức tin lớn (Sáng Tạo, Nô-ê, Áp-ra-ham, Giô-sép, Biển Đỏ, Đa-vít, Đa-ni-ên, Giáng Sinh).
-     - **Thánh Kinh Từ Điển**: Tra cứu nhanh 40+ nhân vật, địa danh và thuật ngữ thần học.
-  3. **Thanh Phát Âm Thanh Docked & Danh Sách Nghe (Playlist)**:
-     - Xây dựng `#portal-audio-player-bar` cố định dưới đáy màn hình, sử dụng Web Speech API tiếng Việt (`vi-VN`) đọc từng câu mượt mà, tự động highlight câu đang đọc (`.verse-reading-active`) và cuộn màn hình.
-     - Nút `+Playlist` lưu phân đoạn vào `localStorage` và Modal `#portal-playlist-modal` quản lý phát lại.
-  4. **Hệ Thống Toast Thông Báo (`#app-toast-container`)**:
-     - Thay thế các hộp thoại alert gián đoạn bằng toast thông báo êm dịu, hiện đại.
-  5. **Kiểm thử tự động**:
-     - Bộ test tăng lên 128/128 tests Pytest đạt 100% PASS (2.74s).
-     - Đồng bộ toàn diện sang Antigravity Scratch.
-
+- **Thực hiện**: Đổi cây thập tự thành GIF động phát sáng (`cross_holy_gold.gif`), thu gọn thanh subnav hai tầng, chuyển các nút điều khiển quan trọng lên Header và thanh đọc nhanh `#reader-quick-bar`.
+- **Hiệu quả**: Loại bỏ 140px thanh điều hướng cồng kềnh trên mobile, giải phóng không gian đọc Kinh Thánh.
+### 10. Phục Hồi Chuẩn Xác Giao Diện Máy Tính & Interlinear Scripture4All (19/10/2026)
+- **Thực hiện**: Phục hồi bố cục desktop 3 cột hoàng gia, tích hợp bảng liên dòng Interlinear Hy Lạp/Do Thái theo phong cách Scripture4All kèm từ điển Strong's Concordance.
+- **Di động**: Triển khai cơ chế chia đôi màn hình 50/50 (`body.mobile-split-active`) khi mở đối chiếu bản dịch.
+### 11. Cổng Tĩnh Nguyện & Dưỡng Linh Cổ Điển Làm Nền Chính (25/10/2026)
+- **Thực hiện**: Thiết lập Cổng Tĩnh Nguyện (`#devotional-portal-view`) làm trang chủ mặc định với bìa nâu da bò cổ điển trang nhã theo mẫu anh Jimmy cung cấp.
+- **Vận hành**: Kết nối hoàn chỉnh 100% các nút chức năng: Nghe Audio (Studio MP3), Đọc Cả Đoạn, Chia Sẻ Ảnh Câu Gốc, Sao Chép và 6 thẻ Khám Phá Thánh Kinh.
 ### 12. Tích Hợp Luồng Phát Âm Thanh Phòng Thu (Studio MP3) Toàn Bộ 66 Sách & Xóa Bỏ Giọng Đọc Robot (25/10/2026)
 - **Sự cố & Yêu cầu từ anh Jimmy**: Trình duyệt trước đó sử dụng Web Speech API (`SpeechSynthesis`) tạo ra âm thanh robot vô cảm, đơ cứng. Anh phản ánh: *"cái âm thanh này là bạn làm à ? nếu đã làm cho đọc thì phải là âm thanh chất lượng"*.
 - **Giải pháp dứt khoát**:
@@ -246,3 +179,16 @@
   4. `js/berea-guardian.js`: Xóa mọi thông báo kiểm duyệt hiển thị chữ "Agent Berea", thay bằng "Hệ Thống Kiểm Duyệt Đạo Đức Thánh Kinh".
   5. `js/storage.js`: Đổi tác giả mặc định thành "Độc giả Thánh Kinh".
   6. Bảo đảm 128/128 bài test Pytest PASS 100%.
+
+### 15. Tối Ưu Hóa Typography & Font Chữ Đọc Kinh Thánh Chuẩn HTTLVN (25/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"hãy kiểm tra lại font chữ hiển thị đã đẹp và dễ dang cho người đọc chưa?"*
+- **Rà soát & Phát hiện**:
+  1. Font stack cũ chứa `Playfair Display` lẫn vào thân văn bản câu Kinh Thánh khiến nét thanh đậm tương phản gắt gây mỏi mắt khi đọc lâu.
+  2. Thiếu font sans-serif tối ưu dấu tiếng Việt (`Be Vietnam Pro`) cho các nút bấm và nhãn UI.
+  3. Lỗi khoá font trên di động: media query `<= 640px` và `body.drawer-open` bị gán cứng `font-size: 0.98rem !important; line-height: 1.6 !important;`, vô hiệu hóa tùy chọn phóng to chữ của người đọc.
+- **Giải pháp hoàn thiện**:
+  1. Tách bạch font stack: `--font-bible` và `--font-scripture` thuần Serif trang nghiêm (`Noto Serif`, `Merriweather`, `Charter`, Georgia); giữ `Playfair Display` riêng cho tiêu đề chương và nhãn thương hiệu (`--font-brand`, `--font-heading`).
+  2. Bổ sung `Be Vietnam Pro` (weights 400-700) vào Google Fonts CDN và `--font-ui`, cho chữ giao diện sắc nét, tròn trịa, không lỗi dấu.
+  3. Tối ưu độ thoáng: line-height chuẩn `1.8 - 1.95`, letter-spacing `0.012em`, bổ sung `optimizeLegibility`, `-webkit-font-smoothing: antialiased;` chống nhòe răng cưa trên mọi màn hình.
+  4. Mở khóa toàn diện cỡ chữ di động: dùng `var(--bible-font-size, 1.15rem) !important;` giúp độc giả tự do phóng to chữ (17px - 25px) trên điện thoại mà không bị bó hẹp.
+  5. Đạt 128/128 bài test Pytest PASS 100%.
