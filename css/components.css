@@ -5698,8 +5698,9 @@
     gap: 0.85rem;
   }
 
+  /* Ẩn thanh Chuyên Mục Tĩnh Nguyện & Dưỡng Linh trên điện thoại theo yêu cầu anh Jimmy */
   .portal-brand-bar {
-    padding: 0.65rem 0.85rem;
+    display: none !important;
   }
 
   .portal-brand-text h2 {
