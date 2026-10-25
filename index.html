@@ -26,16 +26,19 @@
 </head>
 <body>
 
-  <!-- 1. Quản Trị Viên: Banner Tùy Chỉnh (Admin Customizable Announcement Banner) -->
+  <!-- 1. Quản Trị Viên: Banner Tùy Chỉnh (Admin Customizable Announcement, Scripture Verse or Ad Banner) -->
   <aside id="admin-banner-container" aria-label="Thông báo quản trị">
-    <div id="admin-banner-bar" class="admin-banner theme-gold">
+    <div id="admin-banner-bar" class="admin-banner theme-gold banner-mode-verse">
       <div class="banner-content">
-        <span class="banner-badge"><i class="fa-solid fa-scroll"></i> CÂU GỐC TUẦN</span>
-        <span id="banner-text">"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)</span>
+        <span class="banner-badge" id="banner-badge"><i class="fa-solid fa-scroll"></i> CÂU GỐC TUẦN</span>
+        <div id="banner-media-container" class="banner-ad-media hidden"></div>
+        <div class="banner-text-wrap" id="banner-text-wrap">
+          <span id="banner-text">"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)</span>
+        </div>
         <a id="banner-action-link" href="#" class="banner-action-btn">Khám Phá Đối Chiếu</a>
       </div>
       <button id="admin-banner-edit-trigger" class="banner-admin-edit-btn" title="Cấu hình Banner (Dành cho Quản Trị Viên)">
-        <i class="fa-solid fa-gear"></i>
+        <i class="fa-solid fa-gear"></i> <span>Cấu hình</span>
       </button>
     </div>
   </aside>
@@ -87,8 +90,9 @@
         <div id="search-dropdown" class="search-dropdown hidden"></div>
       </div>
 
-      <!-- Navigation Tabs (Đọc Kinh Thánh, KT Đối Chiếu BibleHub TSK, Blog, Nhánh Cộng Đồng, Media, Dâng Hiến Xây Dựng Website) -->
+      <!-- Navigation Tabs (Cổng Tĩnh Nguyện, Đọc Kinh Thánh, KT Đối Chiếu BibleHub TSK, Blog, Nhánh Cộng Đồng, Media, Dâng Hiến Xây Dựng Website) -->
       <nav class="nav-links">
+        <button class="nav-btn" data-view="portal" title="Cổng Thông Tin & Dưỡng Linh Thánh Kinh (Giao diện Truyền Thống kinhthanh.net)"><i class="fa-solid fa-house-chimney-window"></i> Cổng Tĩnh Nguyện</button>
         <button class="nav-btn active" data-view="bible" title="Đọc Kinh Thánh & so sánh các bản dịch"><i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh</button>
         <button class="nav-btn" data-view="tsk" title="Kinh Thánh Đối Chiếu (BibleHub TSK - Bản Tiếng Việt & Tiếng Anh)"><i class="fa-solid fa-book-atlas"></i> KT Đối Chiếu</button>
         <button class="nav-btn" data-view="blog"><i class="fa-solid fa-feather-pointed"></i> Blog Chuyên Sâu</button>
@@ -97,13 +101,19 @@
         <button class="nav-btn nav-btn-donate" data-view="donate" title="Dâng hiến xây dựng Website & Tiếp nhận góp ý"><i class="fa-solid fa-hand-holding-heart"></i> Dâng hiến xây dựng Website</button>
       </nav>
 
-      <!-- Nút Đổi Màu Sắc & Giao Diện Trang (6 Bộ Màu Tuyệt Đẹp) -->
+      <!-- Nút Đổi Màu Sắc & Giao Diện Trang (7 Bộ Màu Tuyệt Đẹp) -->
       <button id="theme-toggle-btn" class="selector-pill theme-selector-pill" title="Đổi màu sắc & giao diện trang">
         <i class="fa-solid fa-palette" style="color: var(--accent-gold);"></i>
         <span id="current-theme-label">Dạ Kim</span>
       </button>
 
-      <!-- Nút Thống Kê & Số Lượng Độc Giả (Thu nhỏ & Hiển thị số lượt xem) -->
+      <!-- Nút Cấu Hình Banner Quản Trị Viên (Dành cho Admin) -->
+      <button id="header-admin-banner-btn" class="selector-pill admin-banner-pill" title="Cấu hình Banner Quảng Cáo / Câu Gốc / Thông Báo (Quản Trị)">
+        <i class="fa-solid fa-bullhorn" style="color: var(--accent-gold);"></i>
+        <span>Banner</span>
+      </button>
+
+      <!-- Nút Thống Kê & Số Lượng Độc GiẢ (Thu nhỏ & Hiển thị số lượt xem) -->
       <button id="admin-analytics-btn" class="selector-pill analytics-pill" title="Thống Kê Độc Giả (Nhấp để xem chi tiết)">
         <i class="fa-solid fa-chart-line" style="color: var(--accent-gold);"></i>
         <span id="analytics-label">1.8k xem</span>
@@ -138,6 +148,342 @@
 
   <!-- 4. Thân Ứng Dụng Chính (App Body Workspace) -->
   <main id="app-body">
+    <!-- View 0: Cổng Thông Tin & Dưỡng Linh Thánh Kinh Truyền Thống (kinhthanh.net / Tin Lành Classic Portal) -->
+    <div id="portal-view" class="view-panel hidden">
+      <div class="portal-container">
+        <!-- 1. Thanh Tiêu Đề Cổng Thông Tin -->
+        <div class="portal-brand-bar">
+          <div class="portal-brand-title">
+            <span class="portal-logo-v">V</span>
+            <div class="portal-brand-text">
+              <h2>Kinh Thánh</h2>
+              <span>Chuyên Mục Tĩnh Nguyện & Dưỡng Linh Hội Thánh</span>
+            </div>
+          </div>
+          <div class="portal-brand-actions">
+            <button class="portal-action-pill" id="portal-btn-switch-focus" title="Mở Màn Hình Đọc Kinh Thánh">
+              <i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh
+            </button>
+            <button class="portal-action-pill" id="portal-btn-switch-tsk" title="Mở KT Đối Chiếu BibleHub">
+              <i class="fa-solid fa-book-atlas"></i> KT Đối Chiếu
+            </button>
+            <button class="portal-action-pill" id="portal-btn-switch-theme" title="Kích hoạt bộ màu Cổ Điển Tin Lành">
+              <i class="fa-solid fa-palette"></i> Màu Cổ Điển
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Thanh Menu Sub-bar -->
+        <div class="portal-subnav-bar">
+          <button class="portal-subnav-btn" id="portal-nav-search"><i class="fa-solid fa-bars"></i> ≡ Tìm</button>
+          <button class="portal-subnav-btn" id="portal-nav-playlist"><i class="fa-solid fa-list-ul"></i> Playlist</button>
+          <button class="portal-subnav-btn" id="portal-nav-newest"><i class="fa-solid fa-clock"></i> Mới Đăng</button>
+          <button class="portal-subnav-btn" id="portal-nav-recent"><i class="fa-solid fa-eye"></i> Mới Xem</button>
+          <button class="portal-subnav-btn" id="portal-nav-popular"><i class="fa-solid fa-fire"></i> Xem Nhiều</button>
+          <button class="portal-subnav-btn" id="portal-nav-thanksgiving"><i class="fa-solid fa-wheat-awn"></i> Mùa Tạ Ơn</button>
+        </div>
+
+        <!-- 3. Lưới 2 Cột Chuẩn Mực -->
+        <div class="portal-grid-layout">
+          <!-- Cột Trái (260px): Sidebar Tiện Ích Đọc, Nghe, Tìm, Tham Khảo -->
+          <aside class="portal-sidebar">
+            <!-- Box 1: TIỂU MỤC -->
+            <div class="portal-card">
+              <div class="portal-card-header header-red">TIỂU MỤC</div>
+              <div class="portal-card-body">
+                <ul class="portal-subitems-list">
+                  <li>
+                    <a class="portal-subitem-link" id="portal-item-fav-verses"><span class="portal-arrow">»</span> Câu Gốc Yêu Thích</a>
+                    <span class="portal-badge-new">mới</span>
+                  </li>
+                  <li>
+                    <a class="portal-subitem-link" id="portal-item-quiz"><span class="portal-arrow">»</span> Đố Kinh Thánh</a>
+                  </li>
+                  <li>
+                    <a class="portal-subitem-link" id="portal-item-responsive"><span class="portal-arrow">»</span> Kinh Thánh Đối Đáp</a>
+                  </li>
+                  <li>
+                    <a class="portal-subitem-link" id="portal-item-schedule"><span class="portal-arrow">»</span> Lịch Đọc Kinh Thánh</a>
+                  </li>
+                  <li>
+                    <a class="portal-subitem-link" id="portal-item-survey"><span class="portal-arrow">»</span> Thánh Kinh Lược Khảo</a>
+                  </li>
+                  <li>
+                    <a class="portal-subitem-link" id="portal-item-stories"><span class="portal-arrow">»</span> Truyện Tích Thánh Kinh</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Box 2: ĐỌC -->
+            <div class="portal-card">
+              <div class="portal-card-header header-blue">ĐỌC</div>
+              <div class="portal-card-body">
+                <div class="portal-form-group">
+                  <select class="portal-select" id="portal-read-book-select">
+                    <!-- Render các sách Kinh Thánh -->
+                  </select>
+                </div>
+                <div class="portal-form-group">
+                  <input type="text" class="portal-input" id="portal-read-coord-input" placeholder="12:1-12:3" value="12:1-12:3">
+                </div>
+                <div class="portal-form-group">
+                  <select class="portal-select" id="portal-read-version-select">
+                    <option value="BTT" selected>Bản Truyền Thống</option>
+                    <option value="BDM">Bản Dịch Mới</option>
+                    <option value="BTHD">Bản Hiệu Đính</option>
+                    <option value="KJV">King James Version</option>
+                    <option value="EDE">Tiếng Ê-đê</option>
+                  </select>
+                </div>
+                <div class="portal-btn-row">
+                  <button type="button" class="portal-btn btn-blue" id="portal-read-submit-btn">Tìm Câu</button>
+                  <button type="button" class="portal-btn" id="portal-read-toc-btn">Mục Lục</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Box 3: NGHE -->
+            <div class="portal-card">
+              <div class="portal-card-header header-green">NGHE</div>
+              <div class="portal-card-body">
+                <div class="portal-form-group">
+                  <select class="portal-select" id="portal-listen-book-select">
+                    <!-- Render các sách Kinh Thánh -->
+                  </select>
+                </div>
+                <div class="portal-row-inputs">
+                  <input type="number" class="portal-input" id="portal-listen-from-ch" value="1" min="1" max="150" style="width: 50%;">
+                  <span>-</span>
+                  <input type="number" class="portal-input" id="portal-listen-to-ch" value="50" min="1" max="150" style="width: 50%;">
+                </div>
+                <div class="portal-btn-row">
+                  <button type="button" class="portal-btn btn-green" id="portal-listen-btn">Nghe</button>
+                  <button type="button" class="portal-btn" id="portal-listen-playlist-btn">+Playlist</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Box 4: TÌM -->
+            <div class="portal-card">
+              <div class="portal-card-header header-orange">TÌM</div>
+              <div class="portal-card-body">
+                <div class="portal-form-group">
+                  <input type="text" class="portal-input" id="portal-search-query-input" value="yêu thương;thành tín" placeholder="Nhập từ khóa...">
+                </div>
+                <div class="portal-form-group">
+                  <select class="portal-select" id="portal-search-from-book">
+                    <!-- Render Sáng-thế Ký -> Khải-huyền -->
+                  </select>
+                </div>
+                <div class="portal-form-group">
+                  <select class="portal-select" id="portal-search-to-book">
+                    <!-- Render Khải-huyền -->
+                  </select>
+                </div>
+                <div class="portal-form-group">
+                  <select class="portal-select" id="portal-search-version-select">
+                    <option value="BTT" selected>Bản Truyền Thống</option>
+                    <option value="BDM">Bản Dịch Mới</option>
+                    <option value="BTHD">Bản Hiệu Đính</option>
+                  </select>
+                </div>
+                <div class="portal-btn-row">
+                  <button type="button" class="portal-btn btn-orange" id="portal-search-submit-btn">Tìm Chữ</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Box 5: TÀI LIỆU THAM KHẢO -->
+            <div class="portal-card">
+              <div class="portal-card-header header-black">TÀI LIỆU THAM KHẢO</div>
+              <div class="portal-card-body">
+                <select class="portal-select" id="portal-ref-docs-select">
+                  <option value="GEN">1. Sáng-thế Ký</option>
+                  <option value="EXO">2. Xuất Ê-díp-tô Ký</option>
+                  <option value="dict">3. Thánh Kinh Từ Điển</option>
+                  <option value="maps">4. Bản Đồ Thánh Kinh</option>
+                  <option value="strong">5. Từ Điển Strong's Hy Lạp/Hê-bơ-rơ</option>
+                </select>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Cột Phải: Nội Dung Chính (TĨNH NGUYỆN & DƯỠNG LINH) -->
+          <main class="portal-main">
+            <!-- Box A: TĨNH NGUYỆN -->
+            <div class="portal-card">
+              <div class="portal-card-header header-terracotta">TĨNH NGUYỆN</div>
+              <div class="portal-card-body">
+                <!-- 1. Câu Gốc -->
+                <div class="devotion-block">
+                  <div class="devotion-block-title">
+                    <i class="fa-solid fa-scroll"></i> Câu Gốc
+                  </div>
+                  <div class="devotion-verse-box">
+                    <strong>3:19</strong> Đức Giê-hô-va là Chúa, là sức mạnh của tôi, Ngài làm cho chân tôi giống như chân con hươu, Khiến tôi đi trên các nơi cao của mình. (Phó cho quan phường nhạc, khảy đàn mà hát bài nầy). 
+                    <a class="devotion-ref-tag" data-book="HAB" data-ch="3" data-v="19" title="Nhấp để mở đọc và đối chiếu">Ha-ba-cúc 3:19</a>
+                  </div>
+                </div>
+
+                <!-- 2. Lịch Đọc Kinh Thánh -->
+                <div class="devotion-block">
+                  <div class="devotion-block-title">
+                    <i class="fa-solid fa-calendar-check"></i> Lịch Đọc Kinh Thánh
+                  </div>
+                  <ol class="devotion-reading-list">
+                    <li>
+                      <span class="devotion-plan-title">Cựu Ước & Tân Ước:</span><br>
+                      <a class="devotion-passage-link" data-book="JER" data-ch="20">Giê-rê-mi 20</a>. 
+                      <a class="devotion-passage-link" data-book="JER" data-ch="35">Giê-rê-mi 35-36</a>. 
+                      <a class="devotion-passage-link" data-book="COL" data-ch="4">Cô-lô-se 4</a>. 
+                      <button type="button" class="devotion-audio-chip" data-book="JER" data-ch="20">NGHE</button>
+                    </li>
+                    <li>
+                      <span class="devotion-plan-title">Sáng-thế Ký - Khải-huyền:</span><br>
+                      <a class="devotion-passage-link" data-book="MRK" data-ch="14" data-v="12">Mác 14:12-15:47</a>. 
+                      <button type="button" class="devotion-audio-chip" data-book="MRK" data-ch="14">NGHE</button>
+                    </li>
+                    <li>
+                      <span class="devotion-plan-title">Đọc Tân Ước Trong Ba Tháng:</span><br>
+                      <a class="devotion-passage-link" data-book="LUK" data-ch="21">Lu-ca 21-22</a>. 
+                      <button type="button" class="devotion-audio-chip" data-book="LUK" data-ch="21">NGHE</button>
+                    </li>
+                    <li>
+                      <span class="devotion-plan-title">Đọc Trong Ba Năm:</span><br>
+                      <a class="devotion-passage-link" data-book="JOB" data-ch="22">Gióp 22</a>. 
+                      <button type="button" class="devotion-audio-chip" data-book="JOB" data-ch="22">NGHE</button>
+                    </li>
+                  </ol>
+                </div>
+
+                <!-- 3. Sống Với Thánh Kinh -->
+                <div class="devotion-block" style="margin-bottom: 0;">
+                  <div class="devotion-block-title">
+                    <i class="fa-solid fa-heart"></i> Sống Với Thánh Kinh
+                  </div>
+                  <ul class="portal-subitems-list">
+                    <li>
+                      <a class="portal-subitem-link" id="portal-devotion-daily-article" data-book="PRO" data-ch="22" data-v="22">
+                        <span class="portal-arrow">○</span> <strong>Áp Bức Người Cùng Khốn</strong> <em>(Châm Ngôn 22:22-23)</em>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Box B: DƯỠNG LINH THEO TÂM TRẠNG & NHU CẦU ĐỜI SỐNG -->
+            <div class="portal-card">
+              <div class="portal-card-header header-olive">DƯỠNG LINH</div>
+              <div class="portal-card-body" style="padding: 0;">
+                <table class="spiritual-guide-table" id="portal-spiritual-table">
+                  <tbody>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cảm thấy buồn rầu</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="JHN" data-ch="14">Giăng 14</a>, 
+                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="46">Thi-thiên 46</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cảm thấy Đức Chúa Trời dường như ở xa</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="139">Thi-thiên 139</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần can đảm</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="JOS" data-ch="1" data-v="1">Giô-suê 1:1-9</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần đảm bảo</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="ROM" data-ch="8">Rô-ma 8</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần biết ý muốn của Đức Chúa Trời cho cuộc đời bạn</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="PRO" data-ch="3" data-v="1">Châm-ngôn 3:1-6</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần những chỉ dẫn trong đời sống</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="MAT" data-ch="5">Ma-thi-ơ 5-7</a>, 
+                        <a class="spiritual-ref-pill" data-book="ROM" data-ch="12">Rô-ma 12</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần những luật lệ hướng dẫn</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="EXO" data-ch="20" data-v="1">Xuất Ê-díp-tô Ký 20:1-17</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần tâm trí được yên tịnh</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="JHN" data-ch="14" data-v="27">Giăng 14:27</a>, 
+                        <a class="spiritual-ref-pill" data-book="PHP" data-ch="4" data-v="6">Phi-líp 4:6-8</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần yên nghỉ và bình an</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="MAT" data-ch="11" data-v="25">Ma-thi-ơ 11:25-30</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cô đơn hay sợ hãi</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="23">Thi-thiên 23</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Đau yếu</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="41">Thi-thiên 41</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Đời sống kết quả</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="JHN" data-ch="15">Giăng 15</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Bị cám dỗ hay dao động</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="1CO" data-ch="10" data-v="13">1 Cô-rinh-tô 10:13</a>, 
+                        <a class="spiritual-ref-pill" data-book="HEB" data-ch="2" data-v="18">Hê-bơ-rơ 2:18</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần được tha thứ và làm mới lại</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="1JN" data-ch="1" data-v="9">1 Giăng 1:9</a>, 
+                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="51">Thi-thiên 51</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Lo âu về tương lai bất định</td>
+                      <td class="spiritual-passages-cell">
+                        <a class="spiritual-ref-pill" data-book="JER" data-ch="29" data-v="11">Giê-rê-mi 29:11</a>, 
+                        <a class="spiritual-ref-pill" data-book="MAT" data-ch="6" data-v="25">Ma-thi-ơ 6:25-34</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
     <!-- View 1: Focus Reader (Không gian đọc tĩnh & đối chiếu) -->
     <div id="focus-reader" class="view-panel active">
       <div id="reader-chapter-container">
@@ -381,41 +727,90 @@
     </div>
   </div>
 
-  <!-- Modal 3: Quản Trị Viên Cấu Hình Banner Tùy Chỉnh -->
+  <!-- Modal 3: Quản Trị Viên Cấu Hình Banner Tùy Chỉnh (Câu Gốc / Thông Báo / Quảng Cáo) -->
   <div id="admin-banner-modal" class="modal-overlay hidden">
-    <div class="modal-card">
+    <div class="modal-card" style="max-width: 580px;">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-bullhorn"></i> CẤU HÌNH BANNER QUẢN TRỊ VIÊN</h3>
+        <h3><i class="fa-solid fa-bullhorn" style="color: var(--accent-gold);"></i> CẤU HÌNH BANNER MÁY TÍNH</h3>
         <button class="modal-close-btn" data-modal="admin-banner-modal">&times;</button>
       </div>
       <div class="admin-modal-body">
-        <div class="form-group">
-          <label>Nhãn Huy Hiệu (Badge):</label>
-          <input type="text" id="admin-banner-badge-input" value="CÂU GỐC TUẦN">
-        </div>
-        <div class="form-group">
-          <label>Nội Dung Banner (Thông báo / Câu Kinh Thánh):</label>
-          <textarea id="admin-banner-text-input" rows="3">"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)</textarea>
-        </div>
-        <div class="form-group">
-          <label>Chữ trên nút hành động (CTA Button):</label>
-          <input type="text" id="admin-banner-btn-text-input" value="Khám Phá Đối Chiếu">
-        </div>
-        <div class="form-group">
-          <label>Tông Màu Banner:</label>
-          <select id="admin-banner-theme-select">
-            <option value="theme-gold">Ánh Vàng Hoàng Gia (Royal Gold)</option>
-            <option value="theme-crimson">Đỏ Ruby Sâu Lắng (Regal Crimson)</option>
-            <option value="theme-navy">Xanh Biển Huyền Bí (Deep Navy)</option>
+        <!-- Chế độ chạy Banner: 3 Lựa chọn -->
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="font-weight: 700; font-size: 0.85rem; color: var(--accent-gold); display: block; margin-bottom: 0.35rem;">
+            <i class="fa-solid fa-layer-group"></i> Chọn Loại Nội Dung Chạy Trên Banner:
+          </label>
+          <select id="admin-banner-type-select" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-weight: 700;">
+            <option value="verse">📜 Câu Gốc Kinh Thánh Tuần (Tra Cứu & Đối Chiếu)</option>
+            <option value="announcement">📢 Thông Báo Mục Vụ / Tin Tức Hội Thánh</option>
+            <option value="ad">💼 Banner Quảng Cáo / Tài Trợ Duy Trì Website</option>
           </select>
         </div>
-        <div class="form-group checkbox-group">
-          <input type="checkbox" id="admin-banner-visible-checkbox" checked>
-          <label for="admin-banner-visible-checkbox">Hiển thị Banner này trên đầu trang</label>
+
+        <!-- Mẫu Nhanh 1-Chạm -->
+        <div style="display: flex; gap: 0.4rem; margin-bottom: 0.85rem; flex-wrap: wrap;">
+          <button type="button" class="btn-secondary" id="btn-banner-preset-verse" style="font-size: 0.74rem; padding: 0.25rem 0.55rem;">📜 Mẫu Câu Gốc</button>
+          <button type="button" class="btn-secondary" id="btn-banner-preset-announcement" style="font-size: 0.74rem; padding: 0.25rem 0.55rem;">📢 Mẫu Thông Báo</button>
+          <button type="button" class="btn-secondary" id="btn-banner-preset-ad" style="font-size: 0.74rem; padding: 0.25rem 0.55rem;">💼 Mẫu Quảng Cáo</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Nhãn Huy Hiệu (Badge):</label>
+            <input type="text" id="admin-banner-badge-input" value="CÂU GỐC TUẦN" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          </div>
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Tông Màu Banner:</label>
+            <select id="admin-banner-theme-select" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <option value="theme-gold">Ánh Vàng Hoàng Gia (Royal Gold)</option>
+              <option value="theme-crimson">Đỏ Ruby Sâu Lắng (Regal Crimson)</option>
+              <option value="theme-navy">Xanh Biển Huyền Bí (Deep Navy)</option>
+              <option value="theme-emerald">Xanh Lục Bảo Tĩnh Lặng (Emerald)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Nội Dung Hiển Thị (Lời Chúa / Tin tức / Lời mời tài trợ):</label>
+          <textarea id="admin-banner-text-input" rows="3" style="width: 100%; padding: 0.6rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.5;">"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)</textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Chữ Trên Nút Bấm (CTA):</label>
+            <input type="text" id="admin-banner-btn-text-input" value="Khám Phá Đối Chiếu" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          </div>
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Đường Dẫn Đích (Link URL hoặc #bible):</label>
+            <input type="text" id="admin-banner-url-input" value="#bible" placeholder="#bible hoặc https://..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          </div>
+        </div>
+
+        <div class="form-group" id="admin-banner-img-group" style="margin-bottom: 0.85rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);"><i class="fa-solid fa-image"></i> Hình Ảnh Banner Quảng Cáo (Tùy chọn):</label>
+          <input type="url" id="admin-banner-img-input" placeholder="https://... đường dẫn ảnh quảng cáo/logo nhà tài trợ" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 0.65rem 0.85rem; border-radius: 6px; margin-bottom: 0.85rem; display: flex; flex-direction: column; gap: 0.45rem;">
+          <div class="form-group checkbox-group" style="display: flex; align-items: center; gap: 0.5rem;">
+            <input type="checkbox" id="admin-banner-marquee-checkbox">
+            <label for="admin-banner-marquee-checkbox" style="font-size: 0.84rem; cursor: pointer;">Chạy chữ ngang liên tục (Marquee Ticker) cho thông báo</label>
+          </div>
+          <div class="form-group checkbox-group" style="display: flex; align-items: center; gap: 0.5rem;">
+            <input type="checkbox" id="admin-banner-adsense-checkbox">
+            <label for="admin-banner-adsense-checkbox" style="font-size: 0.84rem; cursor: pointer;">Tích hợp đơn vị quảng cáo Google AdSense trong Banner</label>
+          </div>
+          <div class="form-group checkbox-group" style="display: flex; align-items: center; gap: 0.5rem;">
+            <input type="checkbox" id="admin-banner-visible-checkbox" checked>
+            <label for="admin-banner-visible-checkbox" style="font-size: 0.84rem; font-weight: 700; color: var(--accent-gold); cursor: pointer;">Bật hiển thị Banner này trên giao diện máy tính</label>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button id="save-admin-banner-btn" class="btn-primary">Lưu & Xuất Bản Banner</button>
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-banner-modal">Hủy</button>
+        <button id="save-admin-banner-btn" class="btn-primary" style="font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem;">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Lưu & Xuất Bản Banner
+        </button>
       </div>
     </div>
   </div>
@@ -869,6 +1264,10 @@
       <div class="mobile-menu-body">
         <div class="mobile-menu-section-title">CHUYỂN KHÔNG GIAN</div>
         <div class="mobile-menu-grid">
+          <button class="mobile-menu-btn" data-nav="portal">
+            <i class="fa-solid fa-house-chimney-window" style="color: #8bc34a;"></i>
+            <span>Cổng Tĩnh Nguyện</span>
+          </button>
           <button class="mobile-menu-btn" data-nav="bible">
             <i class="fa-solid fa-book-open"></i>
             <span>Đọc Kinh Thánh</span>

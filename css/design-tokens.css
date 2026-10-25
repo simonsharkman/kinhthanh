@@ -221,6 +221,36 @@
   --shadow-gold: 0 0 20px rgba(16, 185, 129, 0.25);
 }
 
+/* 7. Classic HTTLVN Portal Theme (kinhthanh.net / Tin Lành Cổ Điển) */
+[data-theme="classic-httlvn"] {
+  --bg-primary: #fdfbf7;
+  --bg-surface: #f7f3ea;
+  --bg-card: #f0ebe0;
+  --bg-card-hover: #e5ded0;
+  --bg-overlay: rgba(253, 251, 247, 0.92);
+
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-verse-num: #556b2f;
+
+  --accent-gold: #556b2f; /* Olive Moss Green */
+  --accent-gold-light: #6b8e23;
+  --accent-gold-dark: #3b4b20;
+  --accent-gold-glow: rgba(85, 107, 47, 0.22);
+  --accent-gold-border: rgba(85, 107, 47, 0.4);
+
+  --border-subtle: rgba(85, 107, 47, 0.15);
+  --border-medium: rgba(85, 107, 47, 0.3);
+  --glass-bg: rgba(247, 243, 234, 0.92);
+  --glass-border: rgba(85, 107, 47, 0.3);
+
+  --shadow-sm: 0 2px 4px rgba(31, 41, 55, 0.06);
+  --shadow-md: 0 4px 12px rgba(31, 41, 55, 0.1);
+  --shadow-lg: 0 10px 30px rgba(31, 41, 55, 0.14);
+  --shadow-gold: 0 0 20px rgba(85, 107, 47, 0.2);
+}
+
 /* ==========================================================================
    DYNAMIC TYPOGRAPHY & FONT SIZE SCALING
    ========================================================================== */

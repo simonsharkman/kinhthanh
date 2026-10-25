@@ -5123,6 +5123,480 @@
   color: var(--text-primary);
 }
 
+/* ==========================================================================
+   HTTLVN CLASSIC PORTAL & DEVOTION (Giao diện Cổng Thông Tin & Dưỡng Linh)
+   Phong cách truyền thống kinhthanh.net / Tin Lành Việt Nam
+   ========================================================================== */
+#portal-view {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 3.5rem;
+  font-family: 'Noto Serif', Merriweather, Georgia, serif;
+}
+
+.portal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 1. Portal Brand Bar */
+.portal-brand-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, #4b5e28 0%, #36441c 100%);
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.portal-brand-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.portal-logo-v {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fdfbf7;
+  color: #4b5e28;
+  font-family: var(--font-brand, Georgia);
+  font-size: 1.5rem;
+  font-weight: 900;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.portal-brand-text h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #f7e07b;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.portal-brand-text span {
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  letter-spacing: 0.04em;
+}
+
+.portal-brand-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.portal-action-pill {
+  padding: 0.28rem 0.75rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.portal-action-pill:hover {
+  background: #f7e07b;
+  color: #000;
+}
+
+/* 2. Portal Sub-menu Bar */
+.portal-subnav-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.65rem;
+  background: #39481b;
+  border-bottom: 2px solid #283313;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.portal-subnav-btn {
+  background: transparent;
+  border: none;
+  color: #e6eed6;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.portal-subnav-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #f7e07b;
+}
+
+/* 3. Portal Main 2-Column Grid */
+.portal-grid-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Cards & Sections */
+.portal-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1.15rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.portal-card-header {
+  padding: 0.4rem 0.75rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #fff;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.portal-card-header.header-red {
+  background: #b71c1c;
+}
+
+.portal-card-header.header-blue {
+  background: #0d47a1;
+}
+
+.portal-card-header.header-green {
+  background: #558b2f;
+}
+
+.portal-card-header.header-orange {
+  background: #f57c00;
+}
+
+.portal-card-header.header-black {
+  background: #1e293b;
+}
+
+.portal-card-header.header-terracotta {
+  background: #c05621;
+}
+
+.portal-card-header.header-olive {
+  background: #4b5e28;
+}
+
+.portal-card-body {
+  padding: 0.75rem 0.85rem;
+  font-size: 0.88rem;
+}
+
+/* Tiểu mục list */
+.portal-subitems-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.portal-subitems-list li {
+  padding: 0.45rem 0.2rem;
+  border-bottom: 1px dashed var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.portal-subitems-list li:last-child {
+  border-bottom: none;
+}
+
+.portal-subitem-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.portal-subitem-link:hover {
+  color: #b71c1c;
+  text-decoration: underline;
+}
+
+.portal-subitem-link .portal-arrow {
+  color: #b71c1c;
+  font-weight: 800;
+}
+
+.portal-badge-new {
+  background: #b71c1c;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+  font-style: italic;
+  text-transform: lowercase;
+}
+
+/* Form Controls in Portal */
+.portal-form-group {
+  margin-bottom: 0.55rem;
+}
+
+.portal-select,
+.portal-input {
+  width: 100%;
+  padding: 0.4rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-medium);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.84rem;
+}
+
+.portal-row-inputs {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.portal-btn-row {
+  display: flex;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+}
+
+.portal-btn {
+  flex: 1;
+  padding: 0.38rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--border-medium);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: all var(--transition-fast);
+}
+
+.portal-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+}
+
+.portal-btn.btn-blue {
+  background: #0d47a1;
+  color: #fff;
+  border-color: #0d47a1;
+}
+
+.portal-btn.btn-blue:hover {
+  background: #1565c0;
+}
+
+.portal-btn.btn-green {
+  background: #558b2f;
+  color: #fff;
+  border-color: #558b2f;
+}
+
+.portal-btn.btn-green:hover {
+  background: #689f38;
+}
+
+.portal-btn.btn-orange {
+  background: #f57c00;
+  color: #fff;
+  border-color: #f57c00;
+}
+
+.portal-btn.btn-orange:hover {
+  background: #fb8c00;
+}
+
+/* Devotion Section (Tĩnh Nguyện) */
+.devotion-block {
+  margin-bottom: 1.15rem;
+}
+
+.devotion-block-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #c05621;
+  margin-bottom: 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.25rem;
+}
+
+.devotion-verse-box {
+  background: rgba(192, 86, 33, 0.06);
+  border-left: 3.5px solid #c05621;
+  padding: 0.85rem 1rem;
+  border-radius: 4px;
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.devotion-ref-tag {
+  color: #c05621;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.devotion-reading-list {
+  list-style: decimal;
+  padding-left: 1.35rem;
+  margin: 0.5rem 0 0;
+  line-height: 1.8;
+}
+
+.devotion-reading-list li {
+  margin-bottom: 0.4rem;
+}
+
+.devotion-plan-title {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.devotion-passage-link {
+  color: #0d47a1;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 0.4rem;
+}
+
+.devotion-passage-link:hover {
+  color: #b71c1c;
+}
+
+.devotion-audio-chip {
+  background: #558b2f;
+  color: #fff;
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-style: italic;
+}
+
+.devotion-audio-chip:hover {
+  background: #689f38;
+}
+
+/* Spiritual Guide Table (Dưỡng Linh theo Tâm Trạng & Nhu Cầu) */
+.spiritual-guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.spiritual-guide-table tr {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background var(--transition-fast);
+}
+
+.spiritual-guide-table tr:hover {
+  background: rgba(85, 107, 47, 0.08);
+}
+
+.spiritual-guide-table td {
+  padding: 0.55rem 0.65rem;
+  vertical-align: middle;
+}
+
+.spiritual-need-cell {
+  font-weight: 600;
+  color: var(--text-primary);
+  width: 58%;
+}
+
+.spiritual-need-cell i {
+  color: #558b2f;
+  margin-right: 0.35rem;
+  font-size: 0.8rem;
+}
+
+.spiritual-passages-cell {
+  text-align: right;
+  width: 42%;
+}
+
+.spiritual-ref-pill {
+  display: inline-block;
+  color: #0d47a1;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.spiritual-ref-pill:hover {
+  background: #0d47a1;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 991px) {
+  #portal-view {
+    padding: 0.75rem 0.65rem 5.5rem;
+  }
+
+  .portal-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .portal-brand-bar {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .portal-brand-text h2 {
+    font-size: 1.25rem;
+  }
+
+  .spiritual-guide-table td {
+    padding: 0.45rem 0.4rem;
+    font-size: 0.85rem;
+  }
+}
+
 @media (max-width: 991px) {
   #donate-view {
     padding: 0.85rem 0.75rem 5.5rem;

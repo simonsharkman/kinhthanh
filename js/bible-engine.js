@@ -284,22 +284,24 @@ export class BibleEngine {
     const maxCh = book.chapters_count || 1;
 
     let html = `
-      <div class="chapter-header">
+      <div class="chapter-header sticky-chapter-nav">
         <div class="chapter-header-top-row">
           <button type="button" class="chapter-step-btn prev-ch" data-chapter-step="-1" ${chNum <= 1 ? 'disabled' : ''} title="Chuyển về đoạn trước">
             <i class="fa-solid fa-chevron-left"></i> <span>Đoạn trước</span>
           </button>
-          <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
-            ${book.name_vi.toUpperCase()} • ĐOẠN ${chNum}/${maxCh} • ${transId}
-          </span>
+          <div class="chapter-center-info">
+            <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
+              ${book.name_vi.toUpperCase()} • ĐOẠN ${chNum}/${maxCh} • ${transId}
+            </span>
+            <h2 class="chapter-title">${passageData.title_vi || passageData.ref}</h2>
+            <p class="chapter-subtitle">
+              Bản đọc: <span class="active-reading-version-tag" style="color: var(--accent-gold); font-weight: 600;">${transName}</span>
+            </p>
+          </div>
           <button type="button" class="chapter-step-btn next-ch" data-chapter-step="1" ${chNum >= maxCh ? 'disabled' : ''} title="Chuyển sang đoạn tiếp theo">
             <span>Đoạn tiếp</span> <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
-        <h2 class="chapter-title">${passageData.title_vi || passageData.ref}</h2>
-        <p class="chapter-subtitle">
-          Bản đọc: <span class="active-reading-version-tag" style="color: var(--accent-gold); font-weight: 600;">${transName}</span> • Chạm vào câu bất kỳ để đối chiếu song song (${activeVersions.length} bản dịch).
-        </p>
       </div>
       <div class="chapter-verses-list">
     `;

@@ -63,7 +63,7 @@ export class LogosStorage {
     }
   }
 
-  // Admin Banner Storage
+  // Admin Banner Storage (Supports Verse, Announcement & Ad Banner with Image, URL & Marquee)
   saveAdminBanner(config) {
     this.savePreference('admin_banner', config);
   }
@@ -71,11 +71,16 @@ export class LogosStorage {
   getAdminBanner() {
     return this.getPreference('admin_banner', {
       visible: true,
+      type: 'verse', // 'verse', 'announcement', 'ad'
       badge: 'CÂU GỐC TUẦN',
       text: '"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)',
       btnText: 'Khám Phá Đối Chiếu',
       theme: 'theme-gold',
-      targetRef: 'JHN.1.1'
+      targetRef: 'JHN.1.1',
+      targetUrl: '#bible',
+      imageUrl: '',
+      marquee: false,
+      useAdSense: false
     });
   }
 

@@ -67,8 +67,13 @@ class LogosApp {
     // 6. Khởi tạo Google AdSense (Cho phép Google hiển thị quảng cáo duy trì Website)
     this.initGoogleAdSense();
 
-    // Nếu URL có #tsk / ?view=tsk hoặc #donate / ?view=donate thì tự động mở ngay Tab tương ứng
-    if (typeof window !== 'undefined' && (window.location.hash === '#tsk' || window.location.search.includes('view=tsk'))) {
+    // 7. Khởi tạo Cổng Thông Tin & Dưỡng Linh Cổ Điển Tin Lành
+    this.initPortalView();
+
+    // Nếu URL có #portal / ?view=portal, #tsk / ?view=tsk hoặc #donate / ?view=donate thì tự động mở ngay Tab tương ứng
+    if (typeof window !== 'undefined' && (window.location.hash === '#portal' || window.location.search.includes('view=portal'))) {
+      state.setActiveView('portal');
+    } else if (typeof window !== 'undefined' && (window.location.hash === '#tsk' || window.location.search.includes('view=tsk'))) {
       state.setActiveView('tsk');
     } else if (typeof window !== 'undefined' && (window.location.hash === '#donate' || window.location.search.includes('view=donate'))) {
       state.setActiveView('donate');
@@ -210,6 +215,12 @@ class LogosApp {
     if (genreBar) genreBar.classList.toggle('hidden', viewName !== 'bible');
     if (genreShelf && viewName !== 'bible') genreShelf.classList.add('hidden');
 
+    if (viewName === 'portal') {
+      if (state.isDrawerOpen) {
+        state.setDrawerOpen(false);
+      }
+      this.renderPortalView();
+    }
     if (viewName === 'tsk') {
       if (state.isDrawerOpen) {
         state.setDrawerOpen(false);
@@ -226,10 +237,14 @@ class LogosApp {
       this.renderDonateView();
     }
 
-    // Cập nhật trạng thái nút Đọc, KT Đối Chiếu & Dâng Hiến trên mobile bottom nav và header
+    // Cập nhật trạng thái nút Đọc, KT Đối Chiếu, Cổng Tĩnh Nguyện & Dâng Hiến trên mobile bottom nav và header
     const mobileReadBtn = document.getElementById('btn-mobile-read');
     if (mobileReadBtn) {
       mobileReadBtn.classList.toggle('active', viewName === 'bible');
+    }
+    const mobilePortalBtn = document.getElementById('btn-mobile-portal');
+    if (mobilePortalBtn) {
+      mobilePortalBtn.classList.toggle('active', viewName === 'portal');
     }
     const mobileTskBtn = document.getElementById('btn-mobile-tsk');
     if (mobileTskBtn) {
@@ -1588,31 +1603,258 @@ class LogosApp {
     });
   }
 
-  // 5. Admin Banner UI & Customization Modal
+  // 4.9 Cổng Thông Tin & Dưỡng Linh Thánh Kinh (kinhthanh.net / Tin Lành Classic Portal)
+  initPortalView() {
+    const readBookSel = document.getElementById('portal-read-book-select');
+    const listenBookSel = document.getElementById('portal-listen-book-select');
+    const searchFromBook = document.getElementById('portal-search-from-book');
+    const searchToBook = document.getElementById('portal-search-to-book');
+
+    const populateSelect = (selectEl, defaultId = 'GEN') => {
+      if (!selectEl) return;
+      selectEl.innerHTML = bibleEngine.books.map(b => `
+        <option value="${b.id}" ${b.id === defaultId ? 'selected' : ''}>${b.name_vi} (${b.id})</option>
+      `).join('');
+    };
+
+    populateSelect(readBookSel, 'GEN');
+    populateSelect(listenBookSel, 'GEN');
+    populateSelect(searchFromBook, 'GEN');
+    populateSelect(searchToBook, 'REV');
+
+    // Chuyển màn hình đọc chính
+    document.getElementById('portal-btn-switch-focus')?.addEventListener('click', () => {
+      state.setActiveView('bible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Chuyển sang KT Đối Chiếu
+    document.getElementById('portal-btn-switch-tsk')?.addEventListener('click', () => {
+      state.setActiveView('tsk');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Kích hoạt bộ màu Cổ Điển Tin Lành
+    document.getElementById('portal-btn-switch-theme')?.addEventListener('click', () => {
+      state.setTheme('classic-httlvn');
+      alert('Đã chuyển sang giao diện màu Cổ Điển Tin Lành (kinhthanh.net)!');
+    });
+
+    // ĐỌC: Nút Tìm Câu
+    document.getElementById('portal-read-submit-btn')?.addEventListener('click', () => {
+      const bookId = readBookSel?.value || 'GEN';
+      const coordStr = (document.getElementById('portal-read-coord-input')?.value || '1:1').trim();
+      const versionId = document.getElementById('portal-read-version-select')?.value || 'BTT';
+
+      let ch = 1;
+      let v = 1;
+      if (coordStr.includes(':')) {
+        const parts = coordStr.split(':');
+        ch = parseInt(parts[0], 10) || 1;
+        const vPart = parts[1].split('-')[0];
+        v = parseInt(vPart, 10) || 1;
+      } else {
+        ch = parseInt(coordStr, 10) || 1;
+      }
+
+      state.setPrimaryVersion(versionId);
+      this.navigateToPassage(bookId, ch, v);
+    });
+
+    // ĐỌC: Nút Mục Lục
+    document.getElementById('portal-read-toc-btn')?.addEventListener('click', () => {
+      this.populateBookPicker();
+      document.getElementById('book-picker-modal')?.classList.remove('hidden');
+    });
+
+    // NGHE: Nút Nghe
+    document.getElementById('portal-listen-btn')?.addEventListener('click', () => {
+      const bookId = listenBookSel?.value || 'GEN';
+      const fromCh = parseInt(document.getElementById('portal-listen-from-ch')?.value || '1', 10);
+      this.navigateToPassage(bookId, fromCh, 1);
+    });
+
+    // NGHE: Nút +Playlist
+    document.getElementById('portal-listen-playlist-btn')?.addEventListener('click', () => {
+      const bookId = listenBookSel?.value || 'GEN';
+      const bookObj = bibleEngine.getBookById(bookId);
+      alert(`Đã thêm phân đoạn ${bookObj?.name_vi || bookId} vào Danh Sách Nghe (Playlist)!`);
+    });
+
+    // TÌM: Nút Tìm Chữ
+    document.getElementById('portal-search-submit-btn')?.addEventListener('click', () => {
+      const query = (document.getElementById('portal-search-query-input')?.value || '').trim();
+      if (query) {
+        this.openHTTLVNSearchModal(query);
+      } else {
+        alert('Vui lòng nhập từ khóa cần tìm kiếm.');
+      }
+    });
+
+    // TÀI LIỆU THAM KHẢO select
+    document.getElementById('portal-ref-docs-select')?.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (val === 'dict') {
+        this.askAIAboutTopic('Thánh Kinh Từ Điển: Ý nghĩa và xuất xứ các địa danh, nhân vật Kinh Thánh');
+      } else if (val === 'maps') {
+        state.setActiveView('media');
+      } else if (val === 'strong') {
+        state.setActiveVersions(['BTT', 'INTERLINEAR']);
+        state.setDrawerTab('parallel');
+        state.setActiveView('bible');
+      } else {
+        this.navigateToPassage(val, 1, 1);
+      }
+    });
+
+    // Gắn sự kiện click cho toàn bộ địa chỉ Kinh Thánh trong Cổng Tĩnh Nguyện
+    document.querySelectorAll('#portal-view [data-book]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const bookId = el.dataset.book;
+        const ch = parseInt(el.dataset.ch, 10) || 1;
+        const v = parseInt(el.dataset.v, 10) || 1;
+        this.navigateToPassage(bookId, ch, v);
+      });
+    });
+
+    // Gắn sự kiện cho các nút âm thanh NGHE trong phần lịch đọc
+    document.querySelectorAll('#portal-view .devotion-audio-chip').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const bookId = btn.dataset.book;
+        const ch = parseInt(btn.dataset.ch, 10) || 1;
+        this.navigateToPassage(bookId, ch, 1);
+      });
+    });
+
+    // Tiện ích Tiểu Mục (Đố Kinh Thánh, Lược Khảo, Đối Đáp, Truyện Tích)
+    document.getElementById('portal-item-fav-verses')?.addEventListener('click', () => {
+      this.askAIAboutTopic('Tuyển tập 50 câu Kinh Thánh gốc quen thuộc được yêu thích nhất có địa chỉ chi tiết');
+    });
+
+    document.getElementById('portal-item-quiz')?.addEventListener('click', () => {
+      this.askAIAboutTopic('Đố Kinh Thánh: Cho tôi 3 câu đố đố vui Kinh Thánh có đáp án kèm câu gốc trích dẫn');
+    });
+
+    document.getElementById('portal-item-responsive')?.addEventListener('click', () => {
+      this.askAIAboutTopic('Các bài đọc Kinh Thánh Đối Đáp phụng vụ của Hội Thánh Tin Lành Việt Nam');
+    });
+
+    document.getElementById('portal-item-schedule')?.addEventListener('click', () => {
+      const el = document.querySelector('.devotion-reading-list');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    document.getElementById('portal-item-survey')?.addEventListener('click', () => {
+      this.askAIAboutTopic('Thánh Kinh Lược Khảo: Khái quát ngắn gọn bố cục, bối cảnh và ý nghĩa của 66 sách Kinh Thánh');
+    });
+
+    document.getElementById('portal-item-stories')?.addEventListener('click', () => {
+      this.askAIAboutTopic('Truyện tích Thánh Kinh: Những câu chuyện đức tin cảm động nhất trong Kinh Thánh');
+    });
+
+    // Menu phụ
+    document.getElementById('portal-nav-search')?.addEventListener('click', () => {
+      this.openHTTLVNSearchModal();
+    });
+
+    document.getElementById('portal-nav-playlist')?.addEventListener('click', () => {
+      alert('Danh sách Playlist nghe audio Lời Chúa đang được phát theo thứ tự các đoạn.');
+    });
+
+    document.getElementById('portal-nav-newest')?.addEventListener('click', () => {
+      state.setActiveView('blog');
+    });
+
+    document.getElementById('portal-nav-recent')?.addEventListener('click', () => {
+      this.openAdminAnalyticsModal();
+    });
+
+    document.getElementById('portal-nav-popular')?.addEventListener('click', () => {
+      this.openAdminAnalyticsModal();
+    });
+
+    document.getElementById('portal-nav-thanksgiving')?.addEventListener('click', () => {
+      this.askAIAboutTopic('Các phân đoạn Kinh Thánh ngợi khen và cảm tạ ơn Chúa trong Mùa Tạ Ơn');
+    });
+  }
+
+  renderPortalView() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 5. Admin Banner UI & Customization Modal (Supports Verse, Announcement & Ad Banner with Image, URL & Marquee)
   updateAdminBannerUI(banner) {
     const bannerContainer = document.getElementById('admin-banner-container');
     const bannerBar = document.getElementById('admin-banner-bar');
+    const bannerBadge = document.getElementById('banner-badge');
     const bannerText = document.getElementById('banner-text');
+    const bannerTextWrap = document.getElementById('banner-text-wrap');
+    const bannerMedia = document.getElementById('banner-media-container');
     const actionLink = document.getElementById('banner-action-link');
 
-    if (!banner.visible) {
+    if (!banner || !banner.visible) {
       if (bannerContainer) bannerContainer.style.display = 'none';
       return;
     }
 
     if (bannerContainer) bannerContainer.style.display = 'block';
+
+    const type = banner.type || 'verse';
+    const modeClass = type === 'ad' ? 'banner-mode-ad' : (type === 'announcement' ? 'banner-mode-announcement' : 'banner-mode-verse');
+
     if (bannerBar) {
-      bannerBar.className = `admin-banner ${banner.theme || 'theme-gold'}`;
+      bannerBar.className = `admin-banner ${banner.theme || 'theme-gold'} ${modeClass}`;
     }
+
+    if (bannerBadge) {
+      let icon = 'fa-scroll';
+      if (type === 'ad') icon = 'fa-rectangle-ad';
+      else if (type === 'announcement') icon = 'fa-bullhorn';
+      bannerBadge.innerHTML = `<i class="fa-solid ${icon}"></i> ${banner.badge || (type === 'ad' ? 'TÀI TRỢ' : (type === 'announcement' ? 'THÔNG BÁO' : 'CÂU GỐC'))}`;
+    }
+
+    if (bannerMedia) {
+      if (type === 'ad' && banner.imageUrl) {
+        bannerMedia.innerHTML = `<img src="${banner.imageUrl}" alt="Nhà tài trợ">`;
+        bannerMedia.classList.remove('hidden');
+      } else {
+        bannerMedia.innerHTML = '';
+        bannerMedia.classList.add('hidden');
+      }
+    }
+
+    if (bannerTextWrap) {
+      bannerTextWrap.classList.toggle('is-marquee', Boolean(banner.marquee));
+    }
+
     if (bannerText) {
       bannerText.innerHTML = banner.text;
     }
+
     if (actionLink) {
       actionLink.textContent = banner.btnText || 'Khám Phá';
       actionLink.onclick = (e) => {
+        const url = banner.targetUrl || banner.targetRef || '#bible';
+        if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+          window.open(url, '_blank', 'noopener,noreferrer');
+          return;
+        }
         e.preventDefault();
-        state.setPassage('JHN', 1, 1);
-        state.setActiveView('bible');
+        if (url === '#portal' || url === 'portal') {
+          state.setActiveView('portal');
+        } else if (url === '#donate' || url === 'donate') {
+          state.setActiveView('donate');
+        } else if (url === '#tsk' || url === 'tsk') {
+          state.setActiveView('tsk');
+        } else if (url.includes('.')) {
+          const parts = url.split('.');
+          state.setPassage(parts[0], parseInt(parts[1], 10) || 1, parseInt(parts[2], 10) || 1);
+          state.setActiveView('bible');
+        } else {
+          state.setActiveView('bible');
+        }
       };
     }
   }
@@ -1626,29 +1868,70 @@ class LogosApp {
     const modal = document.getElementById('admin-banner-modal');
     if (!modal) return;
 
-    const b = state.adminBannerConfig;
-    document.getElementById('admin-banner-badge-input').value = b.badge;
-    document.getElementById('admin-banner-text-input').value = b.text.replace(/<[^>]*>/g, '');
-    document.getElementById('admin-banner-btn-text-input').value = b.btnText;
-    document.getElementById('admin-banner-theme-select').value = b.theme;
-    document.getElementById('admin-banner-visible-checkbox').checked = b.visible;
+    const b = state.adminBannerConfig || {};
+    const typeSelect = document.getElementById('admin-banner-type-select');
+    if (typeSelect) typeSelect.value = b.type || 'verse';
+
+    const badgeInput = document.getElementById('admin-banner-badge-input');
+    if (badgeInput) badgeInput.value = b.badge || 'CÂU GỐC TUẦN';
+
+    const textInput = document.getElementById('admin-banner-text-input');
+    if (textInput) textInput.value = (b.text || '').replace(/<[^>]*>/g, '');
+
+    const btnInput = document.getElementById('admin-banner-btn-text-input');
+    if (btnInput) btnInput.value = b.btnText || 'Khám Phá Đối Chiếu';
+
+    const themeSelect = document.getElementById('admin-banner-theme-select');
+    if (themeSelect) themeSelect.value = b.theme || 'theme-gold';
+
+    const urlInput = document.getElementById('admin-banner-url-input');
+    if (urlInput) urlInput.value = b.targetUrl || b.targetRef || '#bible';
+
+    const imgInput = document.getElementById('admin-banner-img-input');
+    if (imgInput) imgInput.value = b.imageUrl || '';
+
+    const marqueeCheckbox = document.getElementById('admin-banner-marquee-checkbox');
+    if (marqueeCheckbox) marqueeCheckbox.checked = Boolean(b.marquee);
+
+    const adsenseCheckbox = document.getElementById('admin-banner-adsense-checkbox');
+    if (adsenseCheckbox) adsenseCheckbox.checked = Boolean(b.useAdSense);
+
+    const visibleCheckbox = document.getElementById('admin-banner-visible-checkbox');
+    if (visibleCheckbox) visibleCheckbox.checked = b.visible ?? true;
 
     modal.classList.remove('hidden');
   }
 
   saveAdminBannerFromModal() {
     try {
+      const type = document.getElementById('admin-banner-type-select')?.value || 'verse';
+      const badge = document.getElementById('admin-banner-badge-input')?.value.trim() || 'THÔNG BÁO';
+      const text = document.getElementById('admin-banner-text-input')?.value.trim() || '';
+      const btnText = document.getElementById('admin-banner-btn-text-input')?.value.trim() || 'Xem Thêm';
+      const theme = document.getElementById('admin-banner-theme-select')?.value || 'theme-gold';
+      const targetUrl = document.getElementById('admin-banner-url-input')?.value.trim() || '#bible';
+      const imageUrl = document.getElementById('admin-banner-img-input')?.value.trim() || '';
+      const marquee = document.getElementById('admin-banner-marquee-checkbox')?.checked ?? false;
+      const useAdSense = document.getElementById('admin-banner-adsense-checkbox')?.checked ?? false;
+      const visible = document.getElementById('admin-banner-visible-checkbox')?.checked ?? true;
+
       const updated = {
-        badge: document.getElementById('admin-banner-badge-input').value,
-        text: document.getElementById('admin-banner-text-input').value,
-        btnText: document.getElementById('admin-banner-btn-text-input').value,
-        theme: document.getElementById('admin-banner-theme-select').value,
-        visible: document.getElementById('admin-banner-visible-checkbox').checked
+        type,
+        badge,
+        text,
+        btnText,
+        theme,
+        targetUrl,
+        targetRef: targetUrl,
+        imageUrl,
+        marquee,
+        useAdSense,
+        visible
       };
 
       state.updateAdminBanner(updated);
       document.getElementById('admin-banner-modal').classList.add('hidden');
-      alert('Đã cập nhật Banner Quản Trị Viên thành công!');
+      alert('Đã cập nhật và xuất bản Banner thành công!');
     } catch (e) {
       alert(`Lỗi: ${e.message}`);
     }
@@ -2819,13 +3102,83 @@ class LogosApp {
       this.saveAdminCommunityPostFromModal();
     });
 
-    // Admin Banner Edit Trigger
+    // Admin Banner Edit Trigger (From banner bar & main header)
     document.getElementById('admin-banner-edit-trigger')?.addEventListener('click', () => {
+      this.openAdminBannerModal();
+    });
+
+    document.getElementById('header-admin-banner-btn')?.addEventListener('click', () => {
       this.openAdminBannerModal();
     });
 
     document.getElementById('save-admin-banner-btn')?.addEventListener('click', () => {
       this.saveAdminBannerFromModal();
+    });
+
+    // Preset buttons in Admin Banner Modal
+    document.getElementById('btn-banner-preset-verse')?.addEventListener('click', () => {
+      const typeSelect = document.getElementById('admin-banner-type-select');
+      const badgeInput = document.getElementById('admin-banner-badge-input');
+      const textInput = document.getElementById('admin-banner-text-input');
+      const btnInput = document.getElementById('admin-banner-btn-text-input');
+      const themeSelect = document.getElementById('admin-banner-theme-select');
+      const urlInput = document.getElementById('admin-banner-url-input');
+      const marqueeCheck = document.getElementById('admin-banner-marquee-checkbox');
+
+      if (typeSelect) typeSelect.value = 'verse';
+      if (badgeInput) badgeInput.value = 'CÂU GỐC TUẦN';
+      if (textInput) textInput.value = '"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)';
+      if (btnInput) btnInput.value = 'Khám Phá Đối Chiếu';
+      if (themeSelect) themeSelect.value = 'theme-gold';
+      if (urlInput) urlInput.value = 'JHN.1.1';
+      if (marqueeCheck) marqueeCheck.checked = false;
+    });
+
+    document.getElementById('btn-banner-preset-announcement')?.addEventListener('click', () => {
+      const typeSelect = document.getElementById('admin-banner-type-select');
+      const badgeInput = document.getElementById('admin-banner-badge-input');
+      const textInput = document.getElementById('admin-banner-text-input');
+      const btnInput = document.getElementById('admin-banner-btn-text-input');
+      const themeSelect = document.getElementById('admin-banner-theme-select');
+      const urlInput = document.getElementById('admin-banner-url-input');
+      const marqueeCheck = document.getElementById('admin-banner-marquee-checkbox');
+
+      if (typeSelect) typeSelect.value = 'announcement';
+      if (badgeInput) badgeInput.value = 'THÔNG BÁO';
+      if (textInput) textInput.value = '🔔 Chương trình Đọc Kinh Thánh Trọn Năm 2026 & Bồi Linh Hội Thánh đang diễn ra. Chúc quý con cái Chúa được tươi mới trong Lời Ngài!';
+      if (btnInput) btnInput.value = 'Vào Cổng Tĩnh Nguyện';
+      if (themeSelect) themeSelect.value = 'theme-crimson';
+      if (urlInput) urlInput.value = '#portal';
+      if (marqueeCheck) marqueeCheck.checked = true;
+    });
+
+    document.getElementById('btn-banner-preset-ad')?.addEventListener('click', () => {
+      const typeSelect = document.getElementById('admin-banner-type-select');
+      const badgeInput = document.getElementById('admin-banner-badge-input');
+      const textInput = document.getElementById('admin-banner-text-input');
+      const btnInput = document.getElementById('admin-banner-btn-text-input');
+      const themeSelect = document.getElementById('admin-banner-theme-select');
+      const urlInput = document.getElementById('admin-banner-url-input');
+      const marqueeCheck = document.getElementById('admin-banner-marquee-checkbox');
+
+      if (typeSelect) typeSelect.value = 'ad';
+      if (badgeInput) badgeInput.value = 'TÀI TRỢ';
+      if (textInput) textInput.value = 'Đồng hành dâng hiến cùng Logos MultiVerse duy trì máy chủ & phát triển bản dịch sắc tộc (VCB: 9368045059 - Y Simon Ktul).';
+      if (btnInput) btnInput.value = 'Dâng Hiến Ngay';
+      if (themeSelect) themeSelect.value = 'theme-navy';
+      if (urlInput) urlInput.value = '#donate';
+      if (marqueeCheck) marqueeCheck.checked = false;
+    });
+
+    document.getElementById('admin-banner-type-select')?.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (val === 'verse') {
+        document.getElementById('btn-banner-preset-verse')?.click();
+      } else if (val === 'announcement') {
+        document.getElementById('btn-banner-preset-announcement')?.click();
+      } else if (val === 'ad') {
+        document.getElementById('btn-banner-preset-ad')?.click();
+      }
     });
 
     // Admin Article Studio Events
