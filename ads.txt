@@ -1,0 +1,4 @@
+# Google AdSense Authorized Digital Sellers (ads.txt)
+# Website: Logos Bible MultiVerse | Chủ quản & Liên hệ: Y Simon Ktul (0368045059 - VCB 9368045059)
+# Thay ma pub-9368045059000000 bang ma Publisher ID cua ban khi Google AdSense cap ma chinh thuc
+google.com, pub-9368045059000000, DIRECT, f08c47fec0942fa0

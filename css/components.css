@@ -4497,3 +4497,607 @@
     line-height: 1.52;
   }
 }
+
+/* ==========================================================================
+   16. MỤC "DÂNG HIẾN XÂY DỰNG WEBSITE" & GOOGLE ADSENSE (STEWARDSHIP & ADS)
+   ========================================================================== */
+.nav-btn.nav-btn-donate {
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.16), rgba(212, 175, 55, 0.05));
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.nav-btn.nav-btn-donate:hover,
+.nav-btn.nav-btn-donate.active {
+  background: linear-gradient(135deg, #d4af37, #b58d22);
+  color: #090b10;
+  border-color: #f3d266;
+  box-shadow: 0 3px 12px rgba(212, 175, 55, 0.35);
+}
+
+#donate-view {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+.donate-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.donate-hero-card {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(18, 22, 34, 0.95) 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.donate-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: var(--accent-gold);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.32rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.donate-hero-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.65rem;
+}
+
+.donate-hero-verse {
+  font-family: var(--font-scripture);
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  max-width: 780px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+.donate-hero-verse span {
+  display: block;
+  margin-top: 0.35rem;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent-gold);
+  font-size: 0.88rem;
+}
+
+.donate-main-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.donate-story-card,
+.donate-bank-card,
+.donate-feedback-section,
+.donate-adsense-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.donate-bank-card {
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, var(--bg-card) 100%);
+}
+
+.donate-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.donate-card-header i {
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+}
+
+.donate-card-header h3 {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.donate-story-content p {
+  font-size: 0.96rem;
+  line-height: 1.72;
+  color: var(--text-secondary);
+  margin: 0 0 0.95rem;
+}
+
+.donate-utility-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.donate-utility-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 10px;
+  padding: 0.75rem 0.95rem;
+  font-size: 0.91rem;
+  line-height: 1.58;
+  color: var(--text-secondary);
+}
+
+.donate-utility-list li i {
+  color: var(--accent-gold);
+  font-size: 1.05rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.donate-utility-list li strong {
+  color: var(--text-primary);
+}
+
+.donate-blessing-note {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px dashed rgba(212, 175, 55, 0.45);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+/* Khung thông tin tài khoản VCB 9368045059 - Y Simon Ktul */
+.bank-details-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.bank-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+
+.bank-row.highlight-account-row {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+}
+
+.bank-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bank-label i {
+  color: var(--accent-gold);
+}
+
+.bank-value-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.bank-name-badge {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #4ade80;
+}
+
+.bank-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.bank-value-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.bank-account-number {
+  font-family: var(--font-ui);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--accent-gold);
+}
+
+.bank-recipient-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.bank-phone-number {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.bank-transfer-memo {
+  font-size: 0.88rem;
+  font-family: monospace;
+  color: var(--text-secondary);
+}
+
+.copy-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  background: rgba(212, 175, 55, 0.14);
+  color: var(--accent-gold);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.copy-pill-btn:hover,
+.copy-pill-btn.copied {
+  background: var(--accent-gold);
+  color: #090b10;
+}
+
+.contact-quick-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.contact-action-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.32rem 0.68rem;
+  border-radius: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.contact-action-pill.call-pill {
+  background: rgba(34, 197, 94, 0.16);
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: #4ade80;
+}
+
+.contact-action-pill.zalo-pill {
+  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid rgba(59, 130, 246, 0.55);
+  color: #60a5fa;
+}
+
+.donate-qr-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.qr-box-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  margin-bottom: 0.75rem;
+}
+
+.qr-image-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.donate-vietqr-img {
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 3px solid #fff;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.qr-offline-fallback {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1.25rem;
+  border: 1px dashed var(--accent-gold);
+  border-radius: 10px;
+  color: var(--text-primary);
+}
+
+.qr-caption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Form Tiếp Nhận Góp Ý */
+.feedback-intro-text,
+.adsense-explain-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+
+.website-feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.feedback-form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+.feedback-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+
+.feedback-field label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.feedback-field label i {
+  color: var(--accent-gold);
+  margin-right: 0.25rem;
+}
+
+.feedback-field input[type="text"],
+.feedback-field select,
+.feedback-field textarea {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+}
+
+.feedback-field input[type="text"]:focus,
+.feedback-field select:focus,
+.feedback-field textarea:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+}
+
+.feedback-submit-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.feedback-zalo-direct-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.05rem;
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.16);
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  color: #60a5fa;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.feedback-list-title {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.85rem;
+}
+
+.feedback-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 0.85rem;
+}
+
+.feedback-item-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+
+.feedback-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.feedback-author-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.feedback-author-info strong {
+  font-size: 0.86rem;
+  color: var(--text-primary);
+}
+
+.feedback-cat-badge {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.feedback-date {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.feedback-item-msg {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Google AdSense Slot Card */
+.adsense-slot-card {
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+}
+
+.adsense-slot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.adsense-badge {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.adsense-donate-shortcut-btn {
+  background: rgba(212, 175, 55, 0.14);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: var(--accent-gold);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.adsense-status-pill {
+  font-size: 0.74rem;
+  color: #4ade80;
+  font-weight: 700;
+}
+
+.adsense-config-details {
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+.adsense-config-details summary {
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.adsense-config-body {
+  margin-top: 0.85rem;
+}
+
+.adsense-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+@media (max-width: 991px) {
+  #donate-view {
+    padding: 0.85rem 0.75rem 5.5rem;
+  }
+
+  .donate-hero-card {
+    padding: 1.15rem 1rem;
+  }
+
+  .donate-hero-title {
+    font-size: 1.4rem;
+  }
+
+  .donate-main-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .feedback-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .bank-account-number {
+    font-size: 1.25rem;
+  }
+}

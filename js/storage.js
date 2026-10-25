@@ -244,6 +244,68 @@ export class LogosStorage {
     }
   }
 
+  // Website Feedbacks & Reader Suggestions (Tiếp nhận góp ý xây dựng Website)
+  getWebsiteFeedbacks() {
+    const defaultFeedbacks = [
+      {
+        id: 'fb_default_1',
+        author: 'Tín hữu Hội Thánh Tin Lành Buôn Ma Thuột',
+        contact: 'Ẩn danh',
+        category: 'Lời tâm tình & Cầu nguyện',
+        message: 'Cảm tạ Chúa vì trang web có cả bản dịch tiếng Ê-đê, Gia-rai, KTHD và mục Kinh Thánh Đối Chiếu TSK rất chi tiết. Xin Chúa ban ơn và tiếp trợ cho anh Y Simon Ktul duy trì trang web phục vụ Hội Thánh!',
+        created_at: '2026-10-25'
+      },
+      {
+        id: 'fb_default_2',
+        author: 'Độc giả Berea',
+        contact: 'Ẩn danh',
+        category: 'Góp ý tính năng & Giao diện',
+        message: 'Giao diện chia đôi 50/50 trên điện thoại để đối chiếu nhiều bản dịch cùng lúc rất tiện lợi khi học Kinh Thánh nhóm nhỏ.',
+        created_at: '2026-10-25'
+      }
+    ];
+    return this.getPreference('website_feedbacks', defaultFeedbacks);
+  }
+
+  saveWebsiteFeedback(feedback) {
+    const list = this.getWebsiteFeedbacks();
+    const item = {
+      id: `fb_${Date.now()}`,
+      author: (feedback.author || 'Độc giả yêu mến Lời Chúa').trim(),
+      contact: (feedback.contact || '').trim(),
+      category: feedback.category || 'Góp ý xây dựng Website',
+      message: (feedback.message || '').trim(),
+      created_at: new Date().toISOString().split('T')[0]
+    };
+    list.unshift(item);
+    this.savePreference('website_feedbacks', list);
+    return item;
+  }
+
+  deleteWebsiteFeedback(id) {
+    const list = this.getWebsiteFeedbacks().filter(item => item.id !== id);
+    this.savePreference('website_feedbacks', list);
+    return list;
+  }
+
+  // Google AdSense Configuration (Cho phép Google hiển thị quảng cáo duy trì Website)
+  getAdSenseConfig() {
+    return this.getPreference('google_adsense_config', {
+      enabled: true,
+      publisherId: 'ca-pub-9368045059000000',
+      slotReaderBottom: '9368045059',
+      slotDonatePage: '3680450590',
+      autoAds: true
+    });
+  }
+
+  saveAdSenseConfig(config) {
+    const current = this.getAdSenseConfig();
+    const updated = { ...current, ...config };
+    this.savePreference('google_adsense_config', updated);
+    return updated;
+  }
+
   // Passage Offline Caching via IndexedDB
   async cachePassage(passageKey, data) {
     if (!this.db) {

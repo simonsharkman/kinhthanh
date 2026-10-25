@@ -3,15 +3,15 @@
    Integrates Parallel Bible Engine, Hermeneutics, Media, AI & Community
    ========================================================================== */
 
-import { state, ALL_TRANSLATIONS, THEMES_LIST, FONT_SIZES } from './state.js?v=4.1.0';
-import { storage } from './storage.js?v=4.1.0';
-import { bibleEngine } from './bible-engine.js?v=4.1.0';
-import { hermeneuticsEngine } from './hermeneutics-engine.js?v=4.1.0';
-import { crossRefEngine } from './crossref-engine.js?v=4.1.0';
-import { mediaEngine } from './media-engine.js?v=4.1.0';
-import { aiAssistant } from './ai-assistant.js?v=4.1.0';
-import { blogSystem } from './blog-community.js?v=4.1.0';
-import { bereaGuardian } from './berea-guardian.js?v=4.1.0';
+import { state, ALL_TRANSLATIONS, THEMES_LIST, FONT_SIZES } from './state.js?v=4.2.0';
+import { storage } from './storage.js?v=4.2.0';
+import { bibleEngine } from './bible-engine.js?v=4.2.0';
+import { hermeneuticsEngine } from './hermeneutics-engine.js?v=4.2.0';
+import { crossRefEngine } from './crossref-engine.js?v=4.2.0';
+import { mediaEngine } from './media-engine.js?v=4.2.0';
+import { aiAssistant } from './ai-assistant.js?v=4.2.0';
+import { blogSystem } from './blog-community.js?v=4.2.0';
+import { bereaGuardian } from './berea-guardian.js?v=4.2.0';
 
 class LogosApp {
   constructor() {
@@ -64,9 +64,14 @@ class LogosApp {
     this.updateHeaderVisitorCount();
     storage.recordPassageVisit(state.currentBook, state.currentChapter);
 
-    // Nếu URL có #tsk hoặc ?view=tsk thì tự động mở ngay Tab Riêng "KT Đối Chiếu"
+    // 6. Khởi tạo Google AdSense (Cho phép Google hiển thị quảng cáo duy trì Website)
+    this.initGoogleAdSense();
+
+    // Nếu URL có #tsk / ?view=tsk hoặc #donate / ?view=donate thì tự động mở ngay Tab tương ứng
     if (typeof window !== 'undefined' && (window.location.hash === '#tsk' || window.location.search.includes('view=tsk'))) {
       state.setActiveView('tsk');
+    } else if (typeof window !== 'undefined' && (window.location.hash === '#donate' || window.location.search.includes('view=donate'))) {
+      state.setActiveView('donate');
     } else if (typeof window !== 'undefined' && window.innerWidth >= 992) {
       // Trên máy tính (>= 992px): Mặc định mở ngay Bảng Đối Chiếu (Drawer Inspector) cho Câu 1
       state.setReadingMode('standard');
@@ -162,6 +167,7 @@ class LogosApp {
         this.updateRoleUI(data.role);
         if (state.activeView === 'blog') this.renderBlogView();
         if (state.activeView === 'community') this.renderCommunityView();
+        if (state.activeView === 'donate') this.renderDonateView();
         break;
       case 'BANNER_CHANGED':
         this.updateAdminBannerUI(data.banner);
@@ -198,7 +204,7 @@ class LogosApp {
       targetPanel.classList.add('active');
     }
 
-    // Ẩn thanh lọc thể loại khi mở Tab riêng (như KT Đối Chiếu) để hiển thị toàn màn hình
+    // Ẩn thanh lọc thể loại khi mở Tab riêng (như KT Đối Chiếu, Dâng Hiến) để hiển thị toàn màn hình
     const genreBar = document.getElementById('genre-filter-bar');
     const genreShelf = document.getElementById('genre-bookshelf');
     if (genreBar) genreBar.classList.toggle('hidden', viewName !== 'bible');
@@ -213,8 +219,14 @@ class LogosApp {
     if (viewName === 'blog') this.renderBlogView();
     if (viewName === 'community') this.renderCommunityView();
     if (viewName === 'media') this.renderMediaView();
+    if (viewName === 'donate') {
+      if (state.isDrawerOpen) {
+        state.setDrawerOpen(false);
+      }
+      this.renderDonateView();
+    }
 
-    // Cập nhật trạng thái nút Đọc & KT Đối Chiếu trên mobile bottom nav và header
+    // Cập nhật trạng thái nút Đọc, KT Đối Chiếu & Dâng Hiến trên mobile bottom nav và header
     const mobileReadBtn = document.getElementById('btn-mobile-read');
     if (mobileReadBtn) {
       mobileReadBtn.classList.toggle('active', viewName === 'bible');
@@ -222,6 +234,10 @@ class LogosApp {
     const mobileTskBtn = document.getElementById('btn-mobile-tsk');
     if (mobileTskBtn) {
       mobileTskBtn.classList.toggle('active', viewName === 'tsk');
+    }
+    const mobileDonateBtn = document.getElementById('btn-mobile-donate');
+    if (mobileDonateBtn) {
+      mobileDonateBtn.classList.toggle('active', viewName === 'donate');
     }
     const headerTskBtn = document.getElementById('mobile-header-tsk-btn');
     if (headerTskBtn) {
@@ -1139,6 +1155,422 @@ class LogosApp {
         const ref = btn.dataset.ref;
         if (ref) this.openPassagePreviewDialog(ref);
       });
+    });
+  }
+
+  // 4.6 Google AdSense Engine & Mục "Dâng Hiến Xây Dựng Website" (VCB 9368045059 - Y Simon Ktul - LH 0368045059)
+  initGoogleAdSense() {
+    const adConfig = storage.getAdSenseConfig();
+    const pubId = adConfig.publisherId || 'ca-pub-9368045059000000';
+
+    // Cập nhật thẻ meta và script Google AdSense trên <head>
+    const metaTag = document.getElementById('google-adsense-meta');
+    if (metaTag) metaTag.setAttribute('content', pubId);
+
+    const scriptTag = document.getElementById('google-adsense-script');
+    if (scriptTag && !scriptTag.src.includes(pubId)) {
+      scriptTag.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(pubId)}`;
+    }
+
+    // Ẩn/hiện khung quảng cáo cuối chương đọc theo cấu hình
+    const readerAdFooter = document.getElementById('reader-adsense-footer');
+    if (readerAdFooter) {
+      readerAdFooter.classList.toggle('hidden', !adConfig.enabled);
+      const ins = readerAdFooter.querySelector('ins.adsbygoogle');
+      if (ins) {
+        ins.setAttribute('data-ad-client', pubId);
+        ins.setAttribute('data-ad-slot', adConfig.slotReaderBottom || '9368045059');
+      }
+      readerAdFooter.querySelector('[data-open-donate="true"]')?.addEventListener('click', () => {
+        state.setActiveView('donate');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    this.triggerAdSensePush();
+  }
+
+  triggerAdSensePush() {
+    try {
+      const adConfig = storage.getAdSenseConfig();
+      if (!adConfig.enabled || typeof window === 'undefined') return;
+      window.adsbygoogle = window.adsbygoogle || [];
+      document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])').forEach(() => {
+        try {
+          window.adsbygoogle.push({});
+        } catch (err) {
+          // Bỏ qua lỗi khi chạy local hoặc chưa có quảng cáo phân phối
+        }
+      });
+    } catch (e) {}
+  }
+
+  renderDonateView() {
+    const container = document.getElementById('donate-container') || document.querySelector('#donate-view .donate-container');
+    if (!container) return;
+
+    const feedbacks = storage.getWebsiteFeedbacks();
+    const adConfig = storage.getAdSenseConfig();
+    const isAdmin = state.currentUserRole === 'admin';
+    const qrUrl = 'https://img.vietqr.io/image/VCB-9368045059-compact2.png?accountName=Y%20SIMON%20KTUL&addInfo=Dang%20hien%20xay%20dung%20Web%20Kinh%20Thanh';
+
+    container.innerHTML = `
+      <div class="donate-page-wrapper">
+        <!-- Hero Banner: Lời Tâm Tình Dâng Hiến Xây Dựng Website -->
+        <section class="donate-hero-card">
+          <div class="donate-hero-badge">
+            <i class="fa-solid fa-hand-holding-heart"></i> MỤC VỤ LỜI CHÚA TRỰC TUYẾN • DÂNG HIẾN & ĐỒNG HÀNH
+          </div>
+          <h2 class="donate-hero-title">Dâng Hiến Xây Dựng Website</h2>
+          <p class="donate-hero-verse">
+            “Mỗi người hãy theo lòng mình đã định mà dâng, không phải phàn nàn hay vì ép uổng; vì Đức Chúa Trời yêu kẻ dâng của cách vui lòng.”
+            <span>— 2 Cô-rinh-tô 9:7 (BTT 1925)</span>
+          </p>
+        </section>
+
+        <!-- Lưới 2 Cột: Cột Trái = Đôi Lời Tâm Tình & Công Dụng Web | Cột Phải = Thông Tin Tài Khoản VCB & Mã QR -->
+        <div class="donate-main-grid">
+          <!-- Cột 1: Đôi Lời Tâm Tình (Dựa vào công dụng thực tế của Website) -->
+          <article class="donate-story-card">
+            <div class="donate-card-header">
+              <i class="fa-solid fa-feather-pointed"></i>
+              <h3>Đôi Lời Tâm Tình Cùng Quý Con Dân Chúa & Độc Giả</h3>
+            </div>
+            <div class="donate-story-content">
+              <p>
+                Quý tôi con Chúa và độc giả thân mến trong tình yêu của Đấng Christ,
+              </p>
+              <p>
+                Trang web <strong>Logos MultiVerse — Nền Tảng Đối Chiếu & Nghiên Cứu Kinh Thánh</strong> được hình thành từ tấm lòng khao khát đem Lời Hằng Sống của Đức Chúa Trời đến gần hơn với mọi tín hữu Việt Nam và các buôn làng sắc tộc hoàn toàn <strong>miễn phí</strong>, mọi lúc, mọi nơi trên cả điện thoại lẫn máy tính.
+              </p>
+              <p>
+                Nhờ ơn Chúa ban, hiện nay trang web đang phục vụ cộng đồng với những công dụng thiết thực cho sự học và suy ngẫm Lời Chúa mỗi ngày:
+              </p>
+              <ul class="donate-utility-list">
+                <li>
+                  <i class="fa-solid fa-book-open-reader"></i>
+                  <div>
+                    <strong>Đối chiếu đa bản dịch Kinh Thánh (50/50 trực quan):</strong> So sánh tức thì giữa <em>Bản Truyền Thống 1925 (BTT)</em>, <em>Bản Dịch Mới (BDM)</em>, <em>Kinh Thánh Hiện Đại (KTHD)</em>, <em>Bản Công Giáo (CGKPV)</em> và các bản dịch quốc tế <em>KJV, ESV</em>.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-mountain-sun"></i>
+                  <div>
+                    <strong>Gìn giữ & lan tỏa Kinh Thánh tiếng các dân tộc anh em:</strong> Tích hợp bản dịch Kinh Thánh tiếng <em>Ê-đê, Gia-rai, Ba-na, K'Ho, H'Mông, M'Nông...</em> giúp đồng bào sắc tộc đọc và tra cứu Lời Chúa ngay bằng tiếng mẹ đẻ của mình.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-book-atlas"></i>
+                  <div>
+                    <strong>Kho Kinh Thánh Đối Chiếu (BibleHub TSK) song ngữ Việt – Anh:</strong> Hơn 31.102 câu Kinh Thánh kèm mạng lưới tham chiếu chéo giúp học viên dùng chính Kinh Thánh để giải thích Kinh Thánh một cách trung tín.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-language"></i>
+                  <div>
+                    <strong>Khảo cứu nguyên ngữ & Giải nghĩa chuyên sâu:</strong> Tra cứu từ nguyên <em>Hê-bơ-rơ / Hy Lạp (Interlinear Strong's)</em>, giải nghĩa hình ảnh ẩn dụ, bối cảnh lịch sử và 8 thể loại văn chương Kinh Thánh.
+                  </div>
+                </li>
+              </ul>
+              <p>
+                Để duy trì tên miền, hệ thống máy chủ lưu trữ dữ liệu tốc độ cao, cũng như tiếp tục số hóa, cập nhật thêm nhiều bản dịch và tài liệu giải kinh chuẩn mực phục vụ Hội Thánh chung, chúng tôi rất trân trọng và biết ơn mọi sự cầu thay, góp ý và dự phần <strong>dâng hiến tự nguyện</strong> của quý vị.
+              </p>
+              <p class="donate-blessing-note">
+                Mỗi lời cầu nguyện, mỗi ý kiến đóng góp và mỗi phần dâng hiến dù nhỏ hay lớn đều là nguồn khích lệ quý báu để mục vụ tiếp tục vững bước. Nguyện xin Đức Chúa Trời ban phước dư dật trên đời sống, gia đình và chức vụ của quý vị!
+              </p>
+            </div>
+          </article>
+
+          <!-- Cột 2: Thông Tin Tài Khoản Dâng Hiến (VCB 9368045059 - Y Simon Ktul - LH 0368045059) -->
+          <aside class="donate-bank-card">
+            <div class="donate-card-header">
+              <i class="fa-solid fa-building-columns"></i>
+              <h3>Thông Tin Dâng Hiến & Liên Hệ Trực Tiếp</h3>
+            </div>
+
+            <!-- Khung chi tiết Ngân hàng VCB -->
+            <div class="bank-details-box">
+              <div class="bank-row">
+                <span class="bank-label"><i class="fa-solid fa-landmark"></i> Ngân hàng:</span>
+                <div class="bank-value-wrap">
+                  <strong class="bank-name-badge">VCB — Vietcombank</strong>
+                  <span class="bank-sub">Ngân hàng TMCP Ngoại thương Việt Nam</span>
+                </div>
+              </div>
+
+              <div class="bank-row highlight-account-row">
+                <span class="bank-label"><i class="fa-solid fa-credit-card"></i> Số tài khoản:</span>
+                <div class="bank-value-inline">
+                  <strong class="bank-account-number" id="donate-stk-text">9368045059</strong>
+                  <button type="button" class="copy-pill-btn" data-copy="9368045059" title="Sao chép số tài khoản VCB">
+                    <i class="fa-regular fa-copy"></i> Sao chép STK
+                  </button>
+                </div>
+              </div>
+
+              <div class="bank-row">
+                <span class="bank-label"><i class="fa-solid fa-user-check"></i> Người nhận:</span>
+                <div class="bank-value-inline">
+                  <strong class="bank-recipient-name">Y Simon Ktul</strong>
+                  <button type="button" class="copy-pill-btn" data-copy="Y Simon Ktul" title="Sao chép tên người nhận">
+                    <i class="fa-regular fa-copy"></i> Sao chép
+                  </button>
+                </div>
+              </div>
+
+              <div class="bank-row">
+                <span class="bank-label"><i class="fa-solid fa-phone-volume"></i> Liên hệ (LH):</span>
+                <div class="bank-value-inline">
+                  <strong class="bank-phone-number">0368045059</strong>
+                  <div class="contact-quick-actions">
+                    <a href="tel:0368045059" class="contact-action-pill call-pill" title="Gọi điện trực tiếp cho Y Simon Ktul">
+                      <i class="fa-solid fa-phone"></i> Gọi ngay
+                    </a>
+                    <a href="https://zalo.me/0368045059" target="_blank" rel="noopener noreferrer" class="contact-action-pill zalo-pill" title="Nhắn Zalo cho Y Simon Ktul (0368045059)">
+                      <i class="fa-solid fa-comment-dots"></i> Zalo
+                    </a>
+                    <button type="button" class="copy-pill-btn" data-copy="0368045059" title="Sao chép số điện thoại">
+                      <i class="fa-regular fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bank-row">
+                <span class="bank-label"><i class="fa-solid fa-pen"></i> Nội dung gợi ý:</span>
+                <div class="bank-value-inline">
+                  <span class="bank-transfer-memo">Dang hien xay dung Web Kinh Thanh</span>
+                  <button type="button" class="copy-pill-btn" data-copy="Dang hien xay dung Web Kinh Thanh">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mã QR VietQR tự động của Vietcombank 9368045059 - Y Simon Ktul -->
+            <div class="donate-qr-box">
+              <div class="qr-box-title">
+                <i class="fa-solid fa-qrcode"></i> Quét Mã VietQR Chuyển Khoản Nhanh 24/7
+              </div>
+              <div class="qr-image-frame">
+                <img src="${qrUrl}" alt="VietQR VCB 9368045059 - Y Simon Ktul" class="donate-vietqr-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="qr-offline-fallback" style="display: none;">
+                  <i class="fa-solid fa-building-columns"></i>
+                  <strong>VCB: 9368045059</strong>
+                  <span>Người nhận: Y Simon Ktul</span>
+                  <span>LH: 0368045059</span>
+                </div>
+              </div>
+              <p class="qr-caption">
+                Mở ứng dụng Ngân hàng bất kỳ và quét mã QR để tự động điền Số tài khoản <strong>9368045059 (VCB)</strong> — <strong>Y Simon Ktul</strong>.
+              </p>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Hộp Tiếp Nhận Góp Ý & Tâm Tình Độc Giả -->
+        <section class="donate-feedback-section">
+          <div class="donate-card-header">
+            <i class="fa-solid fa-comments"></i>
+            <h3>Tiếp Nhận Góp Ý & Đóng Góp Xây Dựng Website</h3>
+          </div>
+          <p class="feedback-intro-text">
+            Mọi ý kiến đóng góp về bản dịch, tính năng đối chiếu, báo lỗi hiển thị hoặc đề xuất bổ sung Kinh Thánh tiếng dân tộc đều được anh <strong>Y Simon Ktul (LH: 0368045059)</strong> trân trọng lắng nghe và ghi nhận:
+          </p>
+
+          <form id="website-feedback-form" class="website-feedback-form">
+            <div class="feedback-form-row">
+              <div class="feedback-field">
+                <label for="fb-author-input"><i class="fa-solid fa-user"></i> Họ tên / Quý danh của bạn</label>
+                <input type="text" id="fb-author-input" placeholder="Ví dụ: Anh/Chị Nguyễn Văn A (hoặc để trống)" maxlength="80">
+              </div>
+              <div class="feedback-field">
+                <label for="fb-contact-input"><i class="fa-solid fa-address-book"></i> Số điện thoại / Email liên hệ (Tuỳ chọn)</label>
+                <input type="text" id="fb-contact-input" placeholder="Để chúng tôi phản hồi khi cần..." maxlength="80">
+              </div>
+              <div class="feedback-field">
+                <label for="fb-category-select"><i class="fa-solid fa-tag"></i> Chủ đề góp ý</label>
+                <select id="fb-category-select">
+                  <option value="Góp ý tính năng & Giao diện">Góp ý tính năng & Giao diện</option>
+                  <option value="Báo lỗi Bản dịch / Câu đối chiếu">Báo lỗi Bản dịch / Câu đối chiếu</option>
+                  <option value="Đề xuất thêm Kinh Thánh tiếng dân tộc">Đề xuất thêm Kinh Thánh tiếng dân tộc</option>
+                  <option value="Lời tâm tình & Cầu nguyện">Lời tâm tình & Cầu nguyện</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="feedback-field">
+              <label for="fb-message-input"><i class="fa-solid fa-pen-to-square"></i> Nội dung góp ý / Lời tâm tình *</label>
+              <textarea id="fb-message-input" rows="4" required placeholder="Nhập ý kiến đóng góp, phát hiện lỗi câu Kinh Thánh hoặc lời tâm tình của bạn tại đây..."></textarea>
+            </div>
+
+            <div class="feedback-submit-bar">
+              <button type="submit" class="btn-primary feedback-submit-btn">
+                <i class="fa-solid fa-paper-plane"></i> Gửi Góp Ý Lên Hệ Thống
+              </button>
+              <a href="https://zalo.me/0368045059" target="_blank" rel="noopener noreferrer" class="feedback-zalo-direct-btn">
+                <i class="fa-solid fa-comment-dots"></i> Nhắn Trực Tiếp Zalo (0368045059 - Y Simon Ktul)
+              </a>
+            </div>
+          </form>
+
+          <!-- Danh sách Góp ý & Lời tâm tình đã tiếp nhận -->
+          <div class="feedback-list-wrap">
+            <h4 class="feedback-list-title">
+              <i class="fa-solid fa-heart" style="color: var(--accent-gold);"></i> Các Ý Kiến Đóng Góp & Lời Tâm Tình Gần Đây (${feedbacks.length})
+            </h4>
+            <div class="feedback-items-grid" id="feedback-items-grid">
+              ${feedbacks.map(item => `
+                <div class="feedback-item-card" data-fb-id="${item.id}">
+                  <div class="feedback-item-top">
+                    <div class="feedback-author-info">
+                      <strong><i class="fa-solid fa-user-circle"></i> ${item.author}</strong>
+                      <span class="feedback-cat-badge">${item.category}</span>
+                    </div>
+                    <div class="feedback-meta-right">
+                      <span class="feedback-date">${item.created_at}</span>
+                      ${isAdmin ? `<button type="button" class="feedback-del-btn" data-del-fb="${item.id}" title="Xoá góp ý này">&times;</button>` : ''}
+                    </div>
+                  </div>
+                  <p class="feedback-item-msg">${item.message}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- Khu vực Quảng Cáo Google AdSense & Cài Đặt Cho Phép Google Hiển Thị Quảng Cáo Duy Trì Web -->
+        <section class="donate-adsense-section">
+          <div class="donate-card-header">
+            <i class="fa-solid fa-rectangle-ad"></i>
+            <h3>Quảng Cáo Google AdSense — Đồng Hành Duy Trì Máy Chủ</h3>
+          </div>
+          <p class="adsense-explain-text">
+            Bên cạnh sự dâng hiến tự nguyện, Website cho phép <strong>Google AdSense</strong> hiển thị quảng cáo văn minh ở cuối trang để tạo thêm nguồn thu nhập nhỏ duy trì tên miền và máy chủ dữ liệu Kinh Thánh miễn phí cho mọi người.
+          </p>
+
+          <!-- Khung hiển thị Google AdSense trực tiếp -->
+          <div class="adsense-slot-card donate-adsense-box ${adConfig.enabled ? '' : 'hidden'}">
+            <div class="adsense-slot-header">
+              <span class="adsense-badge"><i class="fa-brands fa-google"></i> Google AdSense (${adConfig.publisherId})</span>
+              <span class="adsense-status-pill"><i class="fa-solid fa-circle-check"></i> Đang cho phép hiển thị quảng cáo</span>
+            </div>
+            <div class="adsense-unit-wrap">
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-client="${adConfig.publisherId}"
+                   data-ad-slot="${adConfig.slotDonatePage || '3680450590'}"
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
+            </div>
+          </div>
+
+          <!-- Bảng cấu hình nhanh mã Google AdSense cho Chủ Website (Y Simon Ktul) -->
+          <details class="adsense-config-details">
+            <summary>
+              <i class="fa-solid fa-sliders"></i> Cấu Hình Mã Google AdSense Của Chủ Website (Y Simon Ktul)
+            </summary>
+            <div class="adsense-config-body">
+              <div class="feedback-form-row">
+                <div class="feedback-field">
+                  <label for="adsense-pub-id-input">Google AdSense Publisher ID (Mã nhà xuất bản):</label>
+                  <input type="text" id="adsense-pub-id-input" value="${adConfig.publisherId}" placeholder="ca-pub-XXXXXXXXXXXXXXXX">
+                </div>
+                <div class="feedback-field">
+                  <label for="adsense-slot-input">Mã vùng quảng cáo (Ad Slot ID):</label>
+                  <input type="text" id="adsense-slot-input" value="${adConfig.slotReaderBottom || '9368045059'}" placeholder="Ví dụ: 9368045059">
+                </div>
+                <div class="feedback-field" style="justify-content: flex-end;">
+                  <label class="adsense-toggle-label">
+                    <input type="checkbox" id="adsense-enabled-checkbox" ${adConfig.enabled ? 'checked' : ''}>
+                    <span>Cho phép Google hiển thị quảng cáo trên Website</span>
+                  </label>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem;">
+                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                  <i class="fa-solid fa-circle-info" style="color: var(--accent-gold);"></i> Đã tích hợp sẵn thẻ <code>&lt;script async src="...adsbygoogle.js"&gt;</code> và tệp <code>/ads.txt</code> ở thư mục gốc.
+                </span>
+                <button type="button" id="save-adsense-config-btn" class="btn-primary">
+                  <i class="fa-solid fa-floppy-disk"></i> Lưu Cấu Hình Quảng Cáo Google
+                </button>
+              </div>
+            </div>
+          </details>
+        </section>
+      </div>
+    `;
+
+    this.bindDonateViewEvents(container);
+    this.triggerAdSensePush();
+  }
+
+  bindDonateViewEvents(container) {
+    if (!container) return;
+
+    // 1. Nút sao chép nhanh Số tài khoản VCB (9368045059), Tên người nhận (Y Simon Ktul), SĐT (0368045059)
+    container.querySelectorAll('.copy-pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const textToCopy = btn.dataset.copy || '';
+        if (!textToCopy) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textToCopy);
+        }
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = `<i class="fa-solid fa-check"></i> Đã chép`;
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.classList.remove('copied');
+        }, 1800);
+      });
+    });
+
+    // 2. Gửi Form Tiếp Nhận Góp Ý
+    const form = container.querySelector('#website-feedback-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const author = container.querySelector('#fb-author-input')?.value || '';
+      const contact = container.querySelector('#fb-contact-input')?.value || '';
+      const category = container.querySelector('#fb-category-select')?.value || 'Góp ý xây dựng Website';
+      const message = container.querySelector('#fb-message-input')?.value || '';
+
+      if (!message.trim()) {
+        alert('Vui lòng nhập nội dung góp ý hoặc lời tâm tình của bạn!');
+        return;
+      }
+
+      storage.saveWebsiteFeedback({ author, contact, category, message });
+      this.renderDonateView();
+      alert('Cảm ơn bạn đã gửi góp ý xây dựng Website! Ý kiến của bạn đã được ghi nhận.');
+    });
+
+    // 3. Xoá góp ý (dành cho Quản trị viên)
+    container.querySelectorAll('.feedback-del-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.delFb;
+        if (id) {
+          storage.deleteWebsiteFeedback(id);
+          this.renderDonateView();
+        }
+      });
+    });
+
+    // 4. Lưu cấu hình Google AdSense
+    container.querySelector('#save-adsense-config-btn')?.addEventListener('click', () => {
+      const pubInput = container.querySelector('#adsense-pub-id-input')?.value.trim() || 'ca-pub-9368045059000000';
+      const slotInput = container.querySelector('#adsense-slot-input')?.value.trim() || '9368045059';
+      const enabled = container.querySelector('#adsense-enabled-checkbox')?.checked ?? true;
+
+      storage.saveAdSenseConfig({
+        publisherId: pubInput,
+        slotReaderBottom: slotInput,
+        slotDonatePage: slotInput,
+        enabled
+      });
+      this.initGoogleAdSense();
+      this.renderDonateView();
+      alert('Đã lưu cấu hình hiển thị quảng cáo Google AdSense thành công!');
     });
   }
 
@@ -3513,6 +3945,7 @@ class LogosApp {
     const btnTsk = document.getElementById('btn-mobile-tsk');
     const btnBooks = document.getElementById('btn-mobile-books');
     const btnSearch = document.getElementById('btn-mobile-search');
+    const btnDonate = document.getElementById('btn-mobile-donate');
     const btnMenu = document.getElementById('btn-mobile-menu');
     const drawer = document.getElementById('drawer-inspector');
     const dragHandle = document.getElementById('bottom-sheet-drag-handle');
@@ -3532,6 +3965,11 @@ class LogosApp {
 
     btnTsk?.addEventListener('click', () => {
       state.setActiveView('tsk');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    btnDonate?.addEventListener('click', () => {
+      state.setActiveView('donate');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
@@ -3639,7 +4077,7 @@ class LogosApp {
         btn.addEventListener('click', () => {
           const targetNav = btn.dataset.nav;
           mobileMenuModal.classList.add('hidden');
-          if (targetNav === 'bible' || targetNav === 'tsk' || targetNav === 'blog' || targetNav === 'community' || targetNav === 'media') {
+          if (targetNav === 'bible' || targetNav === 'tsk' || targetNav === 'blog' || targetNav === 'community' || targetNav === 'media' || targetNav === 'donate') {
             state.setActiveView(targetNav);
           } else if (targetNav === 'versions') {
             this.populateVersionSelector('vi');

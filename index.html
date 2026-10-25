@@ -14,11 +14,15 @@
   <!-- FontAwesome Free Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+  <!-- Google AdSense Integration (Cho phép Google hiển thị quảng cáo duy trì Website) -->
+  <meta name="google-adsense-account" id="google-adsense-meta" content="ca-pub-9368045059000000">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9368045059000000" crossorigin="anonymous" id="google-adsense-script"></script>
+
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/design-tokens.css?v=4.1.0">
-  <link rel="stylesheet" href="css/animations.css?v=4.1.0">
-  <link rel="stylesheet" href="css/layout.css?v=4.1.0">
-  <link rel="stylesheet" href="css/components.css?v=4.1.0">
+  <link rel="stylesheet" href="css/design-tokens.css?v=4.2.0">
+  <link rel="stylesheet" href="css/animations.css?v=4.2.0">
+  <link rel="stylesheet" href="css/layout.css?v=4.2.0">
+  <link rel="stylesheet" href="css/components.css?v=4.2.0">
 </head>
 <body>
 
@@ -83,13 +87,14 @@
         <div id="search-dropdown" class="search-dropdown hidden"></div>
       </div>
 
-      <!-- Navigation Tabs (Đọc Kinh Thánh, KT Đối Chiếu BibleHub TSK, Blog, Nhánh Cộng Đồng, Media) -->
+      <!-- Navigation Tabs (Đọc Kinh Thánh, KT Đối Chiếu BibleHub TSK, Blog, Nhánh Cộng Đồng, Media, Dâng Hiến Xây Dựng Website) -->
       <nav class="nav-links">
         <button class="nav-btn active" data-view="bible" title="Đọc Kinh Thánh & so sánh các bản dịch"><i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh</button>
         <button class="nav-btn" data-view="tsk" title="Kinh Thánh Đối Chiếu (BibleHub TSK - Bản Tiếng Việt & Tiếng Anh)"><i class="fa-solid fa-book-atlas"></i> KT Đối Chiếu</button>
         <button class="nav-btn" data-view="blog"><i class="fa-solid fa-feather-pointed"></i> Blog Chuyên Sâu</button>
         <button class="nav-btn" data-view="community"><i class="fa-solid fa-users"></i> Nhánh Cộng Đồng</button>
         <button class="nav-btn" data-view="media"><i class="fa-solid fa-photo-film"></i> Media & Video</button>
+        <button class="nav-btn nav-btn-donate" data-view="donate" title="Dâng hiến xây dựng Website & Tiếp nhận góp ý"><i class="fa-solid fa-hand-holding-heart"></i> Dâng hiến xây dựng Website</button>
       </nav>
 
       <!-- Nút Đổi Màu Sắc & Giao Diện Trang (6 Bộ Màu Tuyệt Đẹp) -->
@@ -138,6 +143,23 @@
       <div id="reader-chapter-container">
         <!-- Nội dung chương và câu sẽ được render động bởi bible-engine.js -->
       </div>
+      <!-- Khu vực Google AdSense cuối chương đọc (Tinh tế, không che Lời Chúa, hỗ trợ chi phí duy trì máy chủ) -->
+      <div id="reader-adsense-footer" class="adsense-slot-card">
+        <div class="adsense-slot-header">
+          <span class="adsense-badge"><i class="fa-solid fa-rectangle-ad"></i> Quảng cáo Google AdSense — Hỗ trợ duy trì máy chủ miễn phí</span>
+          <button type="button" class="adsense-donate-shortcut-btn" data-open-donate="true">
+            <i class="fa-solid fa-hand-holding-heart"></i> Dâng hiến xây dựng Website
+          </button>
+        </div>
+        <div class="adsense-unit-wrap">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-9368045059000000"
+               data-ad-slot="9368045059"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
+      </div>
     </div>
 
     <!-- View 1.5: Tab Riêng Biệt "KT Đối Chiếu" (BibleHub Treasury of Scripture Knowledge - English & Vietnamese BTT) -->
@@ -165,6 +187,13 @@
     <div id="media-view" class="view-panel hidden">
       <div class="media-container">
         <!-- Render bởi media-engine.js -->
+      </div>
+    </div>
+
+    <!-- View 5: Dâng Hiến Xây Dựng Website & Tiếp Nhận Góp Ý (Stewardship, Feedback & Google AdSense) -->
+    <div id="donate-view" class="view-panel hidden">
+      <div class="donate-container" id="donate-container">
+        <!-- Render động bởi app.js: Lời tâm tình, VCB 9368045059 - Y Simon Ktul, LH 0368045059, Tiếp nhận góp ý & Google AdSense -->
       </div>
     </div>
   </main>
@@ -860,6 +889,10 @@
             <i class="fa-solid fa-photo-film"></i>
             <span>Media & Video</span>
           </button>
+          <button class="mobile-menu-btn mobile-menu-btn-donate" data-nav="donate">
+            <i class="fa-solid fa-hand-holding-heart" style="color: var(--accent-gold);"></i>
+            <span>Dâng Hiến & Góp Ý</span>
+          </button>
           <button class="mobile-menu-btn" data-nav="versions">
             <i class="fa-solid fa-sliders"></i>
             <span>Chọn Bản Dịch</span>
@@ -920,6 +953,10 @@
       <i class="fa-solid fa-magnifying-glass"></i>
       <span>Tìm Kiếm</span>
     </button>
+    <button class="mobile-nav-item" id="btn-mobile-donate" data-action="donate" title="Dâng hiến xây dựng Website & Tiếp nhận góp ý">
+      <i class="fa-solid fa-hand-holding-heart"></i>
+      <span>Dâng Hiến</span>
+    </button>
     <button class="mobile-nav-item" id="btn-mobile-menu" data-action="menu" title="Mở menu khám phá">
       <i class="fa-solid fa-bars"></i>
       <span>Khám Phá</span>
@@ -927,6 +964,6 @@
   </nav>
 
   <!-- Scripts: ES6 Modules Architecture -->
-  <script type="module" src="js/app.js?v=4.1.0"></script>
+  <script type="module" src="js/app.js?v=4.2.0"></script>
 </body>
 </html>
