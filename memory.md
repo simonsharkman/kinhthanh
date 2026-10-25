@@ -226,3 +226,28 @@
   4. **Kiểm Thử & Xuất Bản**:
      - 102/102 Pytest suites pass 100%.
      - Đã đồng bộ sang Antigravity Scratch và đóng gói `E:\KINHTHANH WEB.zip`.
+
+
+### 11. Cổng Tĩnh Nguyện & Dưỡng Linh Cổ Điển Làm Nền Chính & Vận Hành Toàn Bộ Tính Năng (25/10/2026)
+- **Yêu cầu & Ngữ cảnh**:
+  1. Người dùng yêu cầu lấy giao diện Cổng Tĩnh Nguyện & Dưỡng Linh làm nền chính cho toàn trang web.
+  2. Bỏ các mục gạch chéo trên thanh menu, chuyển sang thanh subnav cố định màu xanh ô-liu.
+  3. Kiểm tra và kích hoạt toàn bộ các chức năng chưa hoạt động trong Box ĐỌC, NGHE, TÌM và TIỂU MỤC.
+- **Giải pháp & Thành quả kỹ thuật**:
+  1. **Nhúng Sẵn 66 Sách Tĩnh Cho Toàn Bộ Dropdown**:
+     - Cả 4 thẻ `<select>` (`#portal-read-book-select`, `#portal-listen-book-select`, `#portal-search-from-book`, `#portal-search-to-book`) được nhúng trực tiếp 66 `<option>` từ Sáng-thế Ký đến Khải-huyền ngay trong HTML tĩnh, loại bỏ hoàn toàn hiện tượng dropdown trắng.
+  2. **Modal Tiện Ích Cổng Tĩnh Nguyện (`#portal-utility-modal`)**:
+     - **Câu Gốc Yêu Thích**: Tuyển tập 36 câu Kinh Thánh nền tảng (Bình An, Cứu Rỗi, Sức Mạnh, Thành Tín) kèm nút Đọc đoạn, Nghe âm thanh và Sao chép.
+     - **Đố Kinh Thánh**: 10 câu trắc nghiệm tương tác chấm điểm tức thì, giải nghĩa chi tiết và địa chỉ Kinh Thánh dẫn chứng.
+     - **Kinh Thánh Đối Đáp**: 8 bài đọc phụng vụ chuẩn HTTLVN (Chủ sự / Hội chúng).
+     - **Thánh Kinh Lược Khảo**: Khảo quát toàn diện 66 sách (tác giả, niên đại, chủ đề, số chương).
+     - **Truyện Tích Thánh Kinh**: 8 thiên truyện đức tin lớn (Sáng Tạo, Nô-ê, Áp-ra-ham, Giô-sép, Biển Đỏ, Đa-vít, Đa-ni-ên, Giáng Sinh).
+     - **Thánh Kinh Từ Điển**: Tra cứu nhanh 40+ nhân vật, địa danh và thuật ngữ thần học.
+  3. **Thanh Phát Âm Thanh Docked & Danh Sách Nghe (Playlist)**:
+     - Xây dựng `#portal-audio-player-bar` cố định dưới đáy màn hình, sử dụng Web Speech API tiếng Việt (`vi-VN`) đọc từng câu mượt mà, tự động highlight câu đang đọc (`.verse-reading-active`) và cuộn màn hình.
+     - Nút `+Playlist` lưu phân đoạn vào `localStorage` và Modal `#portal-playlist-modal` quản lý phát lại.
+  4. **Hệ Thống Toast Thông Báo (`#app-toast-container`)**:
+     - Thay thế các hộp thoại alert gián đoạn bằng toast thông báo êm dịu, hiện đại.
+  5. **Kiểm thử tự động**:
+     - Bộ test tăng lên 128/128 tests Pytest đạt 100% PASS (2.74s).
+     - Đồng bộ toàn diện sang Antigravity Scratch.
