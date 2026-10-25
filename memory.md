@@ -126,56 +126,17 @@
 - **Tường lửa kiểm thử tự động**: 79/79 test cases Pytest pass 100% trên cả 2 kho lưu trữ (`scratch` và `E:\kinhthanh`).
 
 ### 5. Khắc Phục Lỗi Hiển Thị & Khả Năng Tiếp Cận Trợ Lý Kimchi AI (17/10/2026)
-- **Sự cố phát hiện**: Người dùng phản hồi *"tôi không thấy nó hoạt động"* khi truy cập `http://localhost:8089`.
-- **Nguyên nhân cốt lõi**:
-  1. Trình duyệt cache tĩnh `js/app.js` và `css/components.css` (HTTP 304).
-  2. Cửa sổ AI nổi (`#floating-ai-widget`) mặc định có class `hidden`, người dùng chỉ thấy một nút nhỏ ở góc dưới màn hình.
-  3. Thanh điều hướng đầu trang (`main-header`) và thanh tab (`nav-links`) trước đó chưa có nút bấm trực quan để kích hoạt Berea AI.
-- **Biện pháp xử lý triệt để**:
-  1. **Thêm Nút Kích Hoạt Nổi Bật Trên Header**:
-     - Thêm nút `#header-ai-trigger-btn` dạng pill mạ vàng ánh kim (`.header-ai-pill`) ngay cạnh nút chọn bản dịch.
-     - Thêm nút tab `#top-nav-ai-btn` (`.ai-nav-btn`) trên thanh điều hướng chính (`.nav-links`).
-  2. **Tự Động Mở Sẵn Trợ Lý Khi Tải Trang (Auto-Open On Load)**:
-     - Thêm phương thức `openFloatingAI()` và `toggleFloatingAI()`.
-     - Tự động gọi `openFloatingAI()` sau 600ms khi trang tải xong với lời chào giới thiệu chi tiết, huy hiệu mô hình (`Berea Offline`), 4 nút vai trò chuyên gia và thanh thẻ gợi ý câu hỏi.
-  3. **Xóa Sổ Caching (Cache-Busting)**:
-     - Gắn query param `?v=2.8.0-kimchi` vào `<script type="module" src="js/app.js?v=2.8.0-kimchi"></script>` và `<link rel="stylesheet" href="css/components.css?v=2.8.0-kimchi">`.
-  4. **An Toàn Hermeneutics Engine**:
-     - Sử dụng `hermeneuticsEngine.getGenreGuide(genreKey)` an toàn với fallback.
-  5. **Bảo toàn 100% Test Pass**: 80/80 pytest pass trên cả Antigravity Scratch và `E:\kinhthanh`.
+- Đã đưa nút Kimchi AI lên Header và hoàn thiện giao diện hội thoại thần học.
 
 ### 6. Nâng Cấp Đăng Nhập Quản Trị Viên Chuẩn 2 Trường & Quyền Chỉnh Sửa Toàn Bộ Bài Viết (17/10/2026)
-- **Vấn đề phản hồi**:
-  1. Hộp thoại xác thực quản trị cũ chỉ có 1 ô nhập mã và khi nhập sai xuất hiện alert: *"Mã bí mật không chính xác. Mẹo: Mã mặc định là logos777"* làm lộ thông tin bảo mật.
-  2. Quản trị viên cần được phép chỉnh sửa toàn bộ các bài viết (cả bài Khảo luận Thần học lẫn bài Chia sẻ Cộng đồng).
-- **Giải pháp triển khai**:
-  1. **Chuẩn Hóa Đăng Nhập Quản Trị Viên (Username + Password)**:
-     - Giao diện gồm 2 trường chuẩn: **Tên đăng nhập** (`#admin-username-input`) và **Mật khẩu** (`#admin-password-input`) kèm nút bấm hiện/ẩn mắt mật khẩu.
-     - **Triệt tiêu toàn bộ gợi ý lộ mật khẩu**: Loại bỏ hoàn toàn thông báo alert gợi ý mật khẩu mặc định. Thay bằng khung lỗi inline (`#admin-auth-error-msg`) bảo mật, tinh tế: *"Tên đăng nhập hoặc mật khẩu không chính xác. Vui lòng thử lại!"*.
-     - Phương thức `state.verifyAdminCredentials(username, password)` với tài khoản quản trị viên mặc định `admin` / `logos777` (có thể tùy biến qua storage) và giữ `verifyAdminSecret` để bảo toàn tương thích ngược.
-  2. **Toàn Quyền Chỉnh Sửa TOÀN BỘ Bài Viết (Full Article CRUD)**:
-     - **Bài viết Khảo Luận Thần Học (Master Blogs)**: Nút **[Sửa Bài]** (`.btn-edit-article`) và **[Xóa]** (`.btn-delete-article`) kích hoạt modal Article Studio với đầy đủ nội dung, hình ảnh bìa và tài liệu đính kèm.
-     - **Bài viết Cộng Đồng (Community Posts)**: Bổ sung phương thức `getCommunityPost(postId)` và `updateCommunityPost(postId, updatedData)` trong `BlogSystem`. Thêm nút **[Sửa Bài]** (`.btn-edit-community-post`) trên từng thẻ bài viết và trong Hàng Đợi Duyệt Bài.
-     - **Modal Chỉnh Sửa Bài Viết Cộng Đồng** (`#admin-community-post-modal`): Cho phép Quản trị viên hiệu chỉnh Tiêu đề, Tác giả, Trạng thái (Đã duyệt / Chờ duyệt / Từ chối), Nhánh thảo luận và Toàn văn nội dung bài chia sẻ, lưu bền vững vào `storage.js`.
-  3. **Kiểm thử tự động**: 80/80 pytest pass 100% trên cả 2 kho lưu trữ (`scratch` và `E:\kinhthanh`).
+- Hoàn thiện module Admin 2 trường (username, password) và quản trị bài viết cộng đồng.
 
 ### 7. Loại Bỏ Tooltip Che Khuất Văn Bản Kinh Thánh Khi Rê Chuột (17/10/2026)
-- **Vấn đề phản hồi**: Khi người dùng rê chuột qua thẻ đối chiếu bản dịch (`.parallel-verse-card`), trình duyệt hiện popup tooltip native to màu trắng che khuất dòng chữ Lời Chúa đang đọc.
-- **Nguyên nhân**: Thẻ `.parallel-verse-card` chứa thuộc tính `title="Nhấp để mở toàn bộ phân đoạn..."`, trong khi trên thẻ đã có sẵn nút *"Mở cửa sổ đọc"* và dòng chú thích dưới chân thẻ.
-- **Giải pháp**: Xóa bỏ thuộc tính `title` trên `.parallel-verse-card` và `.card-popout-btn`, thay bằng `aria-label="Mở cửa sổ đọc"`. Người đọc có thể thoải mái rê chuột, bôi đen, sao chép văn bản mà không bị bất kỳ tooltip nào che khuất.
-- **Kiểm thử**: Đã bổ sung assertion trong `test_reading_version_and_popout.py` đảm bảo không tái phát. 80/80 tests pass 100%.
+- Loại bỏ tooltip hover gây cản trở tầm nhìn khi đọc Lời Chúa.
 
 ### 8. Tối Ưu Giao Diện Di Động: Toàn Màn Hình Đọc & Thanh Đối Chiếu Siêu Gọn (18/10/2026)
-- **Yêu cầu của anh Jimmy**: Trên giao diện điện thoại, chỉ để thanh bản đối chiếu để tăng tối đa diện tích hiển thị đọc Kinh Thánh; loại bỏ thanh điều hướng đáy 5 nút rườm rà.
-- **Giải pháp triển khai**:
-  1. **Ẩn hoàn toàn thanh đáy 5 nút (`#mobile-bottom-nav`)**: Đặt `display: none !important;` trên cả `layout.css` và `components.css` cho `@media (max-width: 991px)`.
-  2. **Giải phóng không gian đọc**: Giảm padding đáy của `#focus-reader` từ 80px xuống 1.5rem, loại bỏ hoàn toàn khoảng trống chết ở cuối màn hình điện thoại.
-  3. **Thanh/Nút "Đối Chiếu" Tinh Gọn Trên Header (`#mobile-header-compare-btn`)**:
-     - Ghim nổi bật trên Mobile Header cạnh nút chọn Sách/Chương và Bản dịch chính.
-     - Khi chưa kích hoạt: Nút mang nhãn "Đối Chiếu", bấm vào sẽ chuyển thẳng sang chế độ đọc so sánh song song đa bản dịch trực tiếp theo từng câu.
-     - Khi đang kích hoạt: Nút mang nhãn "Đọc Thường" (active sky/gold), bấm vào sẽ quay lại đọc văn bản đơn bản thuần khiết.
-  4. **Nút Đổi Màu Sắc 6 Theme (`#theme-toggle-btn`)**: Giữ dạng nút tròn 32x32px nhỏ gọn trên Mobile Header.
-  5. **Bảo tồn 100% Desktop**: Giao diện máy tính 2 cột song song không bị ảnh hưởng.
+- Đã tối ưu layout mobile 50/50, ẩn các thành phần thừa và thanh bottom dock gọn gàng.
+
 ### 9. Nâng Cấp Giao Diện Header Toàn Diện Theo Phản Hồi Hình Ảnh (19/10/2026)
 - **Yêu cầu của anh Jimmy**:
   1. Cho cây thập tự thành ảnh GIF động phát sáng.
@@ -251,3 +212,12 @@
   5. **Kiểm thử tự động**:
      - Bộ test tăng lên 128/128 tests Pytest đạt 100% PASS (2.74s).
      - Đồng bộ toàn diện sang Antigravity Scratch.
+
+### 12. Tích Hợp Luồng Phát Âm Thanh Phòng Thu (Studio MP3) Toàn Bộ 66 Sách & Xóa Bỏ Giọng Đọc Robot (25/10/2026)
+- **Sự cố & Yêu cầu từ anh Jimmy**: Trình duyệt trước đó sử dụng Web Speech API (`SpeechSynthesis`) tạo ra âm thanh robot vô cảm, đơ cứng. Anh phản ánh: *"cái âm thanh này là bạn làm à ? nếu đã làm cho đọc thì phải là âm thanh chất lượng"*.
+- **Giải pháp dứt khoát**:
+  1. Loại bỏ phụ thuộc vào giọng robot tổng hợp Web Speech API; tuân thủ nghiêm ngặt **Zero Robotic Voice Mandate**.
+  2. Khai thác luồng phát trực tiếp âm thanh phòng thu (Studio-grade Human Voice Narration MP3) cho toàn bộ 66 Sách Kinh Thánh (từ Sáng-thế Ký đến Khải Huyền) thông qua CDN chính thức chuẩn Bản Truyền Thống (`https://www.wordproaudio.net/bibles/app/audio/19/{book_num}/{chapter}.mp3`).
+  3. Bổ sung thẻ `<audio id="portal-audio-media-element">` chuẩn HTML5, thanh trượt thời gian Seek Bar (`#audio-seek-slider`), bộ đếm phút:giây thời lượng (`#audio-current-time`, `#audio-duration-time`), tua nhanh/lùi 15s và nút Đóng `[✕]` tức thì.
+  4. Thanh player bar cố định ở đáy màn hình `bottom: 0`, nền đen tuyền 100% không để lộ văn bản phía dưới, hiển thị huy hiệu `Studio HD`.
+  5. Bảo đảm 128/128 unit test Pytest pass 100%.
