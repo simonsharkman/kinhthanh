@@ -207,3 +207,13 @@
 - **Thực hiện**: Đặt `.header-brand { display: none !important; }` trên mobile (`max-width: 991px`).
 - **Hiệu quả**: Giải phóng toàn bộ diện tích hàng đầu: nút Hamburger `☰` nằm gọn bên mép trái, dãy nút chọn Bản dịch, chọn Sách/Chương, chế độ Đọc và Màu sắc trải rộng thông thoáng, không còn bị chèn ép.
 - **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
+
+### 18. Tinh Gọn Thanh Audio Di Động (48px) & Tích Hợp Nút Nhảy Chương (25/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"giao diện chạy âm thanh nhỏ thôi. cho phép nhảy chương thay vì trượt"* (kèm ảnh `media_1792942228659_be44d9a8.png`).
+- **Phân tích UX**: Thanh phát audio trước đó xếp chồng 3 hàng cao > 130px, chiếm gần 1/4 màn hình điện thoại; độc giả phải kéo thanh trượt (seek slider) hoặc cuộn trang để tìm nút chuyển chương.
+- **Thực hiện hoàn thiện**:
+  1. Thu gọn chiều cao cố định xuống chỉ **48px** trên di động, xếp trọn vẹn trong **1 hàng duy nhất**: Tên đoạn đọc (trái) - Cụm nút phát (giữa) - Tốc độ & Đóng (phải).
+  2. Tích hợp nút **Đoạn Trước (`⏮`)** và **Đoạn Tiếp (`⏭`)** ngay trên thanh phát: bấm là lập tức chuyển chương và phát audio đoạn mới, không cần kéo trượt.
+  3. Tự động chuyển và phát đoạn tiếp theo khi nghe hết chương hiện tại (`ended` event).
+  4. Thanh tiến trình thu gọn thành đường chỉ 2.5px siêu mảnh trên đỉnh mép thanh phát, không tốn diện tích hiển thị.
+- **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
