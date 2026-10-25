@@ -3,15 +3,15 @@
    Integrates Parallel Bible Engine, Hermeneutics, Media, AI & Community
    ========================================================================== */
 
-import { state, ALL_TRANSLATIONS, THEMES_LIST, FONT_SIZES } from './state.js?v=4.3.0';
-import { storage } from './storage.js?v=4.3.0';
-import { bibleEngine } from './bible-engine.js?v=4.3.0';
-import { hermeneuticsEngine } from './hermeneutics-engine.js?v=4.3.0';
-import { crossRefEngine } from './crossref-engine.js?v=4.3.0';
-import { mediaEngine } from './media-engine.js?v=4.3.0';
-import { aiAssistant } from './ai-assistant.js?v=4.3.0';
-import { blogSystem } from './blog-community.js?v=4.3.0';
-import { bereaGuardian } from './berea-guardian.js?v=4.3.0';
+import { state, ALL_TRANSLATIONS, THEMES_LIST, FONT_SIZES } from './state.js';
+import { storage } from './storage.js';
+import { bibleEngine } from './bible-engine.js';
+import { hermeneuticsEngine } from './hermeneutics-engine.js';
+import { crossRefEngine } from './crossref-engine.js';
+import { mediaEngine } from './media-engine.js';
+import { aiAssistant } from './ai-assistant.js';
+import { blogSystem } from './blog-community.js';
+import { bereaGuardian } from './berea-guardian.js';
 
 class LogosApp {
   constructor() {

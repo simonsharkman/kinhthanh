@@ -107,3 +107,65 @@ def test_biblehub_live_html_parser():
     assert len(parsed["jump_next"]) == 2
     assert len(parsed["parallel_en"]) == 1
     assert parsed["parallel_en"][0]["version"] == "NASB"
+
+
+def test_no_mismatched_es6_module_import_urls():
+    """Đảm bảo mọi câu lệnh import nội bộ trong js/*.js dùng đường dẫn chuẩn không lệch query ?v= gây tách rời singleton bibleEngine"""
+    import glob
+    import re
+    import subprocess
+
+    for fp in glob.glob("js/*.js"):
+        with open(fp, "r", encoding="utf-8") as f:
+            code = f.read()
+        matches = re.findall(r"import\s+.*?from\s+['\"](\./[^'\"]+)['\"]", code)
+        for m in matches:
+            assert "?v=" not in m, f"File {fp} có import chứa ?v= ({m}) gây tách singleton ES6 module!"
+
+    # Kiểm tra chạy thực tế bằng Node: crossRefEngine.renderTSKHubHTML hiển thị đúng Giăng 1:1, 19 câu đối chiếu và Tiếng Việt BTT 1925
+    res = subprocess.run([
+        "node", "-e", """
+        import fs from 'fs';
+        import { bibleEngine } from './js/bible-engine.js';
+        import { crossRefEngine } from './js/crossref-engine.js';
+
+        bibleEngine.books = JSON.parse(fs.readFileSync('./data/books-metadata.json', 'utf8'));
+        bibleEngine.tskBookCache['JHN'] = JSON.parse(fs.readFileSync('./data/tsk/JHN.json', 'utf8'));
+        const jhnData = JSON.parse(fs.readFileSync('./data/bibles/JHN.json', 'utf8'));
+        const ch1 = jhnData.chapters['1'];
+
+        const htmlVi = crossRefEngine.renderTSKHubHTML({
+          bookId: 'JHN',
+          chapterNum: 1,
+          verseNum: 1,
+          lang: 'vi',
+          passageData: ch1
+        });
+
+        if (!htmlVi.includes('KINH THÁNH ĐỐI CHIẾU — GIĂNG 1:1')) {
+          console.error('Missing GIĂNG 1:1 title');
+          process.exit(1);
+        }
+        if (!htmlVi.includes('Giăng (John)')) {
+          console.error('Missing 66 books in select dropdown');
+          process.exit(2);
+        }
+        if (!htmlVi.includes('19 câu đối chiếu')) {
+          console.error('Missing 19 câu đối chiếu badge');
+          process.exit(3);
+        }
+        if (!htmlVi.includes('Sáng Thế Ký 1:1') || !htmlVi.includes('Ban đầu Đức Chúa Trời dựng nên trời đất')) {
+          console.error('Missing Vietnamese BTT cross-reference text');
+          process.exit(4);
+        }
+        if (htmlVi.includes('Ngôi Lời,)')) {
+          console.error('Found stray parenthesis Ngôi Lời,)');
+          process.exit(5);
+        }
+        console.log('TSK_VI_RENDER_OK');
+        """
+    ], capture_output=True, text=True, encoding="utf-8")
+
+    assert res.returncode == 0, f"Node test failed: {res.stderr}"
+    assert "TSK_VI_RENDER_OK" in res.stdout
+

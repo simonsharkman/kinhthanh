@@ -6,7 +6,7 @@
    2. English (Original BibleHub Treasury of Scripture Knowledge)
    ========================================================================== */
 
-import { bibleEngine } from './bible-engine.js?v=3.7.0';
+import { bibleEngine } from './bible-engine.js';
 
 export class CrossRefEngine {
   constructor() {
@@ -352,7 +352,7 @@ export class CrossRefEngine {
               ${isVi ? 'Kho Tàng Kinh Thánh Đối Chiếu (Theo Bản Truyền Thống 1925)' : 'Treasury of Scripture Knowledge (Cross-References)'}
             </h3>
             <span class="tsk-count-badge">
-              ${localGroups.reduce((acc, g) => acc + (g.refs ? g.refs.length : 0), 0)} ${isVi ? 'câu đối chiếu' : 'cross-references'}
+              ${((Array.isArray(localGroups) && localGroups.length > 0 ? localGroups : (liveData?.groups_live || [])).reduce((acc, g) => acc + (g.refs ? g.refs.length : 0), 0))} ${isVi ? 'câu đối chiếu' : 'cross-references'}
             </span>
           </div>
           <div class="tsk-leftbox-body">
@@ -465,6 +465,46 @@ export class CrossRefEngine {
     return html;
   }
 
+  translateOutlineToVi(textEn) {
+    if (!textEn) return '';
+    const exactMap = {
+      'The divinity, humanity, office, and incarnation of Jesus Christ.': 'Thần tính, nhân tính, chức vụ và sự nhập thể của Đức Chúa Jêsus Christ.',
+      'The testimony of John.': 'Lời làm chứng của Giăng Báp-tít.',
+      'The calling of Simon and Andrew, Philip and Nathanael': 'Sự kêu gọi Si-môn, Anh-rê, Phi-líp và Na-tha-na-ên.',
+      'The calling of Simon and Andrew, Philip and Nathanael.': 'Sự kêu gọi Si-môn, Anh-rê, Phi-líp và Na-tha-na-ên.'
+    };
+    if (exactMap[textEn.trim()]) return exactMap[textEn.trim()];
+
+    return textEn
+      .replace(/\bThe divinity, humanity, office, and incarnation of Jesus Christ\b/gi, 'Thần tính, nhân tính, chức vụ và sự nhập thể của Đức Chúa Jêsus Christ')
+      .replace(/\bThe testimony of John\b/gi, 'Lời làm chứng của Giăng')
+      .replace(/\bThe calling of\b/gi, 'Sự kêu gọi')
+      .replace(/\bJesus Christ\b/gi, 'Đức Chúa Jêsus Christ')
+      .replace(/\bGod\b/g, 'Đức Chúa Trời');
+  }
+
+  translateJumpWordToVi(wordEn) {
+    if (!wordEn) return '';
+    const dict = {
+      'Beginning': 'Ban đầu',
+      'First': 'Đầu tiên',
+      'Relation': 'Mối tương giao',
+      'Word': 'Ngôi Lời',
+      'God': 'Đức Chúa Trời',
+      'Life': 'Sự sống',
+      'Light': 'Sự sáng',
+      'Darkness': 'Sự tối tăm',
+      'World': 'Thế gian',
+      'Flesh': 'Xác thịt',
+      'Glory': 'Sự vinh hiển',
+      'Grace': 'Ân điển',
+      'Truth': 'Lẽ thật',
+      'Witness': 'Làm chứng',
+      'Believe': 'Tin nhận'
+    };
+    return dict[wordEn.trim()] || wordEn;
+  }
+
   // Render Bố Cục Chương (#centbox: Chapter Outline & Jump to Previous / Next)
   renderOutlineAndJumpsHTML(bookId, chapterNum, verseNum, isVi, liveData, passageData) {
     let html = '';
@@ -472,12 +512,13 @@ export class CrossRefEngine {
     if (liveData && Array.isArray(liveData.outline) && liveData.outline.length > 0) {
       html += `<div class="tsk-outline-list">`;
       liveData.outline.forEach(item => {
+        const desc = isVi ? this.translateOutlineToVi(item.text_en) : item.text_en;
         html += `
           <div class="tsk-outline-row">
             <button type="button" class="tsk-outline-vbtn" data-tsk-vpill="${item.verse}">
               ${isVi ? `Câu ${item.verse}` : `v.${item.verse}`}
             </button>
-            <span class="tsk-outline-desc">${item.text_en}</span>
+            <span class="tsk-outline-desc">${desc}</span>
           </div>
         `;
       });
@@ -498,13 +539,18 @@ export class CrossRefEngine {
       if (liveData.jump_prev && liveData.jump_prev.length > 0) {
         html += `
           <div class="tsk-jump-box">
-            <div class="tsk-jump-label"><i class="fa-solid fa-backward-step"></i> ${isVi ? 'Chủ đề câu trước (Jump to Previous):' : 'Jump to Previous:'}</div>
+            <div class="tsk-jump-label"><i class="fa-solid fa-backward-step"></i> ${isVi ? 'Chủ đề câu trước:' : 'Jump to Previous:'}</div>
             <div class="tsk-jump-chips">
-              ${liveData.jump_prev.map(j => `
-                <button type="button" class="tsk-jump-chip" data-tsk-jump-book="${j.b}" data-tsk-jump-ch="${j.c}" data-tsk-jump-v="${j.v}">
-                  &larr; ${j.word} (${j.b} ${j.c}:${j.v})
-                </button>
-              `).join('')}
+              ${liveData.jump_prev.map(j => {
+                const bObj = bibleEngine?.getBookById(j.b);
+                const bLabel = isVi ? (bObj?.name_vi || j.b) : (bObj?.name_en || j.b);
+                const wLabel = isVi ? this.translateJumpWordToVi(j.word) : j.word;
+                return `
+                  <button type="button" class="tsk-jump-chip" data-tsk-jump-book="${j.b}" data-tsk-jump-ch="${j.c}" data-tsk-jump-v="${j.v}">
+                    &larr; ${wLabel} (${bLabel} ${j.c}:${j.v})
+                  </button>
+                `;
+              }).join('')}
             </div>
           </div>
         `;
@@ -512,13 +558,18 @@ export class CrossRefEngine {
       if (liveData.jump_next && liveData.jump_next.length > 0) {
         html += `
           <div class="tsk-jump-box">
-            <div class="tsk-jump-label"><i class="fa-solid fa-forward-step"></i> ${isVi ? 'Chủ đề câu tiếp (Jump to Next):' : 'Jump to Next:'}</div>
+            <div class="tsk-jump-label"><i class="fa-solid fa-forward-step"></i> ${isVi ? 'Chủ đề câu tiếp:' : 'Jump to Next:'}</div>
             <div class="tsk-jump-chips">
-              ${liveData.jump_next.map(j => `
-                <button type="button" class="tsk-jump-chip" data-tsk-jump-book="${j.b}" data-tsk-jump-ch="${j.c}" data-tsk-jump-v="${j.v}">
-                  ${j.word} (${j.b} ${j.c}:${j.v}) &rarr;
-                </button>
-              `).join('')}
+              ${liveData.jump_next.map(j => {
+                const bObj = bibleEngine?.getBookById(j.b);
+                const bLabel = isVi ? (bObj?.name_vi || j.b) : (bObj?.name_en || j.b);
+                const wLabel = isVi ? this.translateJumpWordToVi(j.word) : j.word;
+                return `
+                  <button type="button" class="tsk-jump-chip" data-tsk-jump-book="${j.b}" data-tsk-jump-ch="${j.c}" data-tsk-jump-v="${j.v}">
+                    ${wLabel} (${bLabel} ${j.c}:${j.v}) &rarr;
+                  </button>
+                `;
+              }).join('')}
             </div>
           </div>
         `;

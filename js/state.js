@@ -3,7 +3,7 @@
    Observer Pattern with Event Dispatching
    ========================================================================== */
 
-import { storage } from './storage.js?v=3.7.0';
+import { storage } from './storage.js';
 
 export const ALL_TRANSLATIONS = [
   // 1. Nhóm Bản Dịch Tiếng Việt (HTTLVN, Bible.com & Phổ Biến)
