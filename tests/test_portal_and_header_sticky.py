@@ -175,3 +175,108 @@ def test_nav_tabs_moved_to_subnav_and_clean_header():
     assert 'id="site-subnav-recent"' not in html
     assert 'id="site-subnav-popular"' not in html
     assert 'id="site-subnav-thanksgiving"' not in html
+
+
+
+def test_portal_all_66_book_select_options_in_html():
+    """Kiểm tra toàn bộ 4 dropdown sách trong Cổng Tĩnh Nguyện đều có sẵn 66 sách từ HTML tĩnh"""
+    with open("E:/kinhthanh/index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # 1. Read book select
+    assert 'id="portal-read-book-select"' in html
+    assert '<option value="GEN" selected>Sáng-thế Ký (GEN)</option>' in html
+    assert '<option value="REV">Khải-huyền (REV)</option>' in html
+
+    # 2. Listen book select
+    assert 'id="portal-listen-book-select"' in html
+
+    # 3. Search book range selects
+    assert 'id="portal-search-from-book"' in html
+    assert 'id="portal-search-to-book"' in html
+    assert '<option value="REV" selected>Khải-huyền (REV)</option>' in html
+
+
+def test_portal_utility_modal_and_audio_player_html_elements():
+    """Kiểm tra các thành phần modal tiện ích và thanh audio player cố định trong HTML"""
+    with open("E:/kinhthanh/index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Utility Modal
+    assert 'id="portal-utility-modal"' in html
+    assert 'id="portal-utility-title"' in html
+    assert 'id="portal-utility-subtitle"' in html
+    assert 'id="portal-utility-tabs"' in html
+    assert 'id="portal-utility-body"' in html
+
+    # Playlist Modal
+    assert 'id="portal-playlist-modal"' in html
+    assert 'id="portal-playlist-body"' in html
+    assert 'id="btn-clear-playlist"' in html
+
+    # Audio Player Bar
+    assert 'id="portal-audio-player-bar"' in html
+    assert 'id="audio-player-title"' in html
+    assert 'id="audio-player-subtitle"' in html
+    assert 'id="audio-btn-play-pause"' in html
+    assert 'id="audio-btn-stop"' in html
+    assert 'id="audio-btn-next-verse"' in html
+    assert 'id="audio-btn-prev-verse"' in html
+    assert 'id="audio-speed-select"' in html
+
+    # Toast Container
+    assert 'id="app-toast-container"' in html
+
+
+def test_portal_utility_and_audio_js_orchestration():
+    """Kiểm tra mã nguồn JavaScript điều khiển âm thanh và các tiện ích Cổng Tĩnh Nguyện"""
+    with open("E:/kinhthanh/js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    # Audio controller
+    assert "initAudioPlayerControls" in app_js
+    assert "playChapterAudio" in app_js
+    assert "speakCurrentVerse" in app_js
+    assert "stopChapterAudio" in app_js
+    assert "pauseChapterAudio" in app_js
+    assert "resumeChapterAudio" in app_js
+    assert "addToPlaylist" in app_js
+    assert "openPlaylistModal" in app_js
+    assert "showToast" in app_js
+
+    # Utility modal controller
+    assert "openPortalUtilityModal" in app_js
+    assert "renderUtilityFavVerses" in app_js
+    assert "renderUtilityQuiz" in app_js
+    assert "renderUtilityResponsive" in app_js
+    assert "renderUtilitySurvey" in app_js
+    assert "renderUtilityStories" in app_js
+    assert "renderUtilityDict" in app_js
+
+    # Data imports
+    assert "FAV_VERSES_DATA" in app_js
+    assert "BIBLE_QUIZ_DATA" in app_js
+    assert "RESPONSIVE_READINGS_DATA" in app_js
+    assert "BIBLE_STORIES_DATA" in app_js
+    assert "BIBLE_DICT_DATA" in app_js
+
+
+def test_portal_data_repository_integrity():
+    """Kiểm tra độ toàn vẹn của kho dữ liệu tiện ích portal-data.js"""
+    with open("E:/kinhthanh/js/portal-data.js", "r", encoding="utf-8") as f:
+        data_js = f.read()
+
+    assert "export const FAV_VERSES_DATA =" in data_js
+    assert "export const BIBLE_QUIZ_DATA =" in data_js
+    assert "export const RESPONSIVE_READINGS_DATA =" in data_js
+    assert "export const BIBLE_STORIES_DATA =" in data_js
+    assert "export const BIBLE_DICT_DATA =" in data_js
+
+    # Key scriptures in data
+    assert "Giăng 3:16" in data_js
+    assert "Phi-líp 4:6-7" in data_js
+    assert "Thi-thiên 23:1-3" in data_js
+    assert "Ha-ba-cúc 3:19" in data_js
+    assert "Nô-ê" in data_js
+    assert "Môi-se" in data_js
+    assert "Đa-vít" in data_js

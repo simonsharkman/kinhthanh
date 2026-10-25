@@ -5738,3 +5738,582 @@
     font-size: 1.25rem;
   }
 }
+
+
+/* ==========================================================================
+   PORTAL UTILITY MODAL & AUDIO PLAYER SYSTEM (HTTLVN CLASSIC)
+   ========================================================================== */
+.portal-utility-card {
+  max-width: 920px;
+  width: 95%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.portal-utility-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.portal-utility-tab-btn {
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.portal-utility-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.portal-utility-tab-btn.active {
+  background: var(--accent-gold);
+  color: #111;
+  border-color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.portal-utility-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Verses Grid */
+.utility-verses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 1rem;
+}
+
+.utility-verse-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 8px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.utility-verse-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  border-color: var(--accent-gold);
+}
+
+.utility-verse-text {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.utility-verse-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.utility-ref-badge {
+  font-weight: 800;
+  color: var(--accent-gold);
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.utility-verse-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.utility-action-btn {
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+}
+
+.utility-action-btn:hover {
+  background: var(--accent-gold);
+  color: #111;
+  border-color: var(--accent-gold);
+}
+
+/* Quiz UI */
+.quiz-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.quiz-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.quiz-score-pill {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.88rem;
+}
+
+.quiz-question-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.quiz-question-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.quiz-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--accent-gold);
+}
+
+.quiz-option-btn.correct {
+  background: rgba(46, 125, 50, 0.25) !important;
+  border-color: #4caf50 !important;
+  color: #81c784 !important;
+  font-weight: 700;
+}
+
+.quiz-option-btn.wrong {
+  background: rgba(198, 40, 40, 0.25) !important;
+  border-color: #ef5350 !important;
+  color: #e57373 !important;
+}
+
+.quiz-explanation-box {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--accent-gold);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* Liturgical Responsive Reading */
+.responsive-reading-item {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+
+.responsive-verse-line {
+  margin-bottom: 0.85rem;
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+.responsive-leader {
+  color: var(--text-primary);
+}
+
+.responsive-leader strong {
+  color: #3b82f6;
+  font-weight: 800;
+}
+
+.responsive-congregation {
+  color: var(--accent-gold);
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent-gold);
+  margin-top: 0.35rem;
+}
+
+.responsive-congregation strong {
+  font-weight: 800;
+}
+
+/* Book Survey Grid */
+.survey-books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+
+.survey-book-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.survey-book-card:hover {
+  border-color: var(--accent-gold);
+}
+
+.survey-book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.survey-book-title {
+  font-weight: 800;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.survey-book-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.survey-book-theme {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Faith Stories */
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1rem;
+}
+
+.story-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.story-card:hover {
+  border-color: var(--accent-gold);
+}
+
+.story-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.story-card-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.story-card-takeaway {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.6rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  border-left: 2px solid #2e7d32;
+  color: #a5d6a7;
+}
+
+/* Dictionary */
+.dict-search-bar {
+  margin-bottom: 1.25rem;
+}
+
+.dict-entry-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.dict-word-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  margin-bottom: 0.35rem;
+}
+
+.dict-word-def {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+/* Docked Audio Player Bar */
+.portal-audio-player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  background: rgba(20, 24, 18, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 2px solid var(--accent-gold);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
+  padding: 0.65rem 1.25rem;
+  animation: slideUpAudio 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpAudio {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.audio-player-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.audio-info {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 220px;
+}
+
+.audio-pulse-icon {
+  font-size: 1.35rem;
+  color: var(--accent-gold);
+  animation: audioPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes audioPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 12px var(--accent-gold); }
+}
+
+.audio-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.audio-title {
+  font-weight: 800;
+  font-size: 0.96rem;
+  color: var(--text-primary);
+}
+
+.audio-subtitle {
+  font-size: 0.78rem;
+  color: var(--accent-gold);
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.audio-ctrl-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.88rem;
+  transition: all 0.15s ease;
+}
+
+.audio-ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.audio-btn-play {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-gold);
+  color: #111;
+  border-color: var(--accent-gold);
+  font-size: 1.05rem;
+}
+
+.audio-btn-play:hover {
+  background: #f1c40f;
+  color: #000;
+  transform: scale(1.05);
+}
+
+.audio-btn-stop:hover {
+  background: #c62828;
+  color: #fff;
+  border-color: #c62828;
+}
+
+.audio-settings {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.audio-speed-select {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.audio-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 4px;
+}
+
+.audio-close-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Reading Verse Active Highlight */
+.verse-reading-active {
+  background: rgba(212, 175, 55, 0.18) !important;
+  border-left: 3px solid var(--accent-gold) !important;
+  padding-left: 0.5rem !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.3) !important;
+  transition: all 0.25s ease;
+}
+
+/* App Toast Notifications */
+.app-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.app-toast {
+  pointer-events: auto;
+  background: rgba(28, 33, 24, 0.96);
+  border: 1px solid var(--accent-gold);
+  color: var(--text-primary);
+  padding: 0.75rem 1.15rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  animation: slideInToast 0.25s ease, fadeOutToast 0.3s ease 2.7s forwards;
+  max-width: 360px;
+}
+
+.app-toast.toast-success i { color: #4caf50; }
+.app-toast.toast-info i { color: var(--accent-gold); }
+.app-toast.toast-warning i { color: #ff9800; }
+.app-toast.toast-danger i { color: #f44336; }
+
+@keyframes slideInToast {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOutToast {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+@media (max-width: 991px) {
+  .portal-audio-player-bar {
+    bottom: 56px; /* Above mobile bottom navigation */
+    padding: 0.5rem 0.75rem;
+  }
+  .audio-info { min-width: 140px; }
+  .audio-subtitle { display: none; }
+  .utility-verses-grid, .survey-books-grid, .stories-grid {
+    grid-template-columns: 1fr;
+  }
+}
