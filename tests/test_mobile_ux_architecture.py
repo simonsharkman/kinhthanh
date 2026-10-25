@@ -19,7 +19,7 @@ def test_mobile_markup_in_index_html():
     assert 'id="btn-mobile-search"' in html
     assert 'id="btn-mobile-menu"' in html
 
-    # 3. Menu khám phá di động (Mobile Menu Modal)
+    # 3. Menu khám phá di động (Mobile Menu Modal & Slide-out Drawer)
     assert 'id="mobile-menu-modal"' in html
     assert 'mobile-menu-grid' in html
     assert 'data-nav="bible"' in html
@@ -28,6 +28,15 @@ def test_mobile_markup_in_index_html():
     assert 'data-nav="media"' in html
     assert 'id="mobile-menu-books-shortcut-btn"' in html
     assert 'data-nav="versions"' in html
+
+    # 4. Mobile Drawer Toggle trên Header & Dashboard Actions Card (Screen 1 & 2 Mẫu Mới)
+    assert 'id="mobile-drawer-toggle"' in html
+    assert 'class="portal-mobile-dashboard"' in html
+    assert 'mobile-dash-card card-green' in html
+    assert 'mobile-dash-card card-blue' in html
+    assert 'mobile-dash-card card-gold' in html
+    assert 'mobile-drawer-sheet' in html
+    assert 'mobile-drawer-row' in html
 
 
 def test_mobile_responsive_css_architecture():

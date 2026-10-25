@@ -5391,18 +5391,40 @@ class LogosApp {
       }
     });
 
-    // Nút 5: Menu Khám Phá
-    btnMenu?.addEventListener('click', () => {
+    // Nút 5: Menu Khám Phá (Bottom Nav) & Nút Drawer Toggle trên Header Mới
+    const openMobileDrawer = () => {
       if (mobileMenuModal) {
-        // Cập nhật trạng thái Quản trị viên trên menu
         const statusText = document.getElementById('mobile-admin-status-text');
         if (statusText) {
           statusText.textContent = state.currentUserRole === 'admin' 
             ? 'Quản Trị Viên (Đang Đăng Nhập)' 
             : 'Đăng Nhập Quản Trị';
         }
+        const roleBadge = document.getElementById('mobile-drawer-role-badge');
+        if (roleBadge) {
+          roleBadge.textContent = state.currentUserRole === 'admin' ? 'Quản Trị Viên' : 'Độc Giả Thánh Kinh';
+        }
         mobileMenuModal.classList.remove('hidden');
       }
+    };
+
+    btnMenu?.addEventListener('click', openMobileDrawer);
+    document.getElementById('mobile-drawer-toggle')?.addEventListener('click', openMobileDrawer);
+
+    // Xử lý các Thẻ Thao Tác Nhanh trên Mobile Dashboard (Screen 1 Mẫu Mới)
+    document.querySelectorAll('.portal-mobile-dashboard .mobile-dash-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const action = card.dataset.action;
+        if (action === 'read') {
+          state.setActiveView('bible');
+          state.setReadingMode('standard');
+        } else if (action === 'compare') {
+          state.setActiveView('bible');
+          state.setReadingMode('parallel');
+        } else if (['fav-verses', 'quiz', 'responsive', 'survey', 'stories', 'dictionary'].includes(action)) {
+          this.openPortalUtilityModal(action);
+        }
+      });
     });
 
     // Thanh Kéo Bottom Sheet (Drag Handle Gestures & Tap)
@@ -5432,17 +5454,27 @@ class LogosApp {
       }, { passive: true });
     }
 
-    // Xử lý các nút trong Menu Khám Phá Mobile
+    // Xử lý các nút trong Menu Khám Phá & Menu Trượt Mobile
     if (mobileMenuModal) {
-      mobileMenuModal.querySelectorAll('.mobile-menu-btn').forEach(btn => {
+      mobileMenuModal.querySelectorAll('.mobile-menu-btn, .mobile-drawer-row').forEach(btn => {
         btn.addEventListener('click', () => {
-          const targetNav = btn.dataset.nav;
           mobileMenuModal.classList.add('hidden');
-          if (targetNav === 'bible' || targetNav === 'tsk' || targetNav === 'blog' || targetNav === 'community' || targetNav === 'media' || targetNav === 'donate') {
+          const targetNav = btn.dataset.nav;
+          const utility = btn.dataset.utility;
+
+          if (utility) {
+            this.openPortalUtilityModal(utility);
+            return;
+          }
+
+          if (targetNav === 'portal' || targetNav === 'bible' || targetNav === 'tsk' || targetNav === 'blog' || targetNav === 'community' || targetNav === 'media' || targetNav === 'donate') {
             state.setActiveView(targetNav);
           } else if (targetNav === 'versions') {
             this.populateVersionSelector('vi');
             document.getElementById('version-selector-modal')?.classList.remove('hidden');
+          } else if (targetNav === 'search') {
+            document.getElementById('search-modal')?.classList.remove('hidden');
+            document.getElementById('search-input')?.focus();
           }
         });
       });

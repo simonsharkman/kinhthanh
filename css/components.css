@@ -6417,3 +6417,252 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   MOBILE APP UX: DASHBOARD ACTION CARDS & SLIDE-OUT DRAWER (MẪU DI ĐỘNG)
+   ========================================================================== */
+.portal-mobile-dashboard {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  /* 1. Lưới Thẻ Thao Tác Nhanh (Mobile Action Cards - Screen 1) */
+  .portal-mobile-dashboard {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.65rem !important;
+    margin: 0.6rem 0 1.15rem !important;
+  }
+
+  .mobile-dash-card {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 0.7rem;
+    border-radius: 14px;
+    background: #181d15;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-dash-card:active {
+    transform: scale(0.96);
+    border-color: var(--accent-gold);
+    box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+  }
+
+  .dash-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+  }
+
+  .mobile-dash-card.card-green .dash-icon-box { background: rgba(76, 175, 80, 0.2); color: #4caf50; }
+  .mobile-dash-card.card-blue .dash-icon-box { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+  .mobile-dash-card.card-gold .dash-icon-box { background: rgba(212, 175, 55, 0.2); color: var(--accent-gold); }
+  .mobile-dash-card.card-purple .dash-icon-box { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+  .mobile-dash-card.card-teal .dash-icon-box { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }
+  .mobile-dash-card.card-indigo .dash-icon-box { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+  .mobile-dash-card.card-rose .dash-icon-box { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+  .mobile-dash-card.card-cyan .dash-icon-box { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
+
+  .dash-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .dash-info h4 {
+    margin: 0;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dash-info span {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* 2. Menu Trượt Sang Trái Chuẩn Mẫu (Slide-out Off-canvas Drawer - Screen 2) */
+  #mobile-menu-modal.modal-overlay {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+
+  .mobile-drawer-sheet {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 82vw !important;
+    max-width: 320px !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100vh !important;
+    border-radius: 0 20px 20px 0 !important;
+    background: #11140f !important;
+    border: none !important;
+    border-right: 1.5px solid var(--accent-gold) !important;
+    box-shadow: 12px 0 35px rgba(0, 0, 0, 0.85) !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    animation: slideDrawerFromLeft 0.26s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  @keyframes slideDrawerFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+
+  .mobile-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.15rem;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.16), rgba(18, 22, 16, 0.95));
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+  }
+
+  .mobile-drawer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .drawer-cross-gif {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .drawer-brand-text h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .drawer-brand-text span {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+  }
+
+  .mobile-drawer-close {
+    font-size: 1.45rem;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    transition: color 0.15s ease;
+  }
+
+  .mobile-drawer-close:hover {
+    color: #fff;
+  }
+
+  .mobile-menu-body {
+    padding: 0.85rem 1rem 2rem !important;
+    overflow-y: auto !important;
+    flex: 1 1 auto !important;
+  }
+
+  .drawer-user-card {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.85rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .drawer-user-card i {
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+  }
+
+  .drawer-user-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .drawer-user-info .user-name {
+    font-weight: 700;
+    font-size: 0.86rem;
+    color: var(--text-primary);
+  }
+
+  .drawer-user-info .user-role-badge {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .mobile-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .mobile-drawer-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+    width: 100%;
+  }
+
+  .mobile-drawer-row:active {
+    background: rgba(212, 175, 55, 0.14);
+    border-color: var(--accent-gold);
+  }
+
+  .mobile-drawer-row i {
+    font-size: 1.05rem;
+    width: 20px;
+    text-align: center;
+  }
+
+  .mobile-drawer-row .row-badge {
+    margin-left: auto;
+    font-size: 0.68rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+  }
+}

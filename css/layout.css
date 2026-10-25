@@ -795,9 +795,16 @@ body {
    MOBILE RESPONSIVE UX ARCHITECTURE (Max-width: 991px)
    Chế độ đối chiếu Split-Screen 50/50 (Chia đều Trên & Dưới) & Tối giản mục thừa
    ========================================================================== */
+/* Nút Hamburger Mở Menu Trượt Di Động */
+.mobile-drawer-toggle-btn {
+  display: none;
+}
+
 @media (max-width: 991px) {
-  /* Ẩn toàn bộ mục thừa: banner thông báo, thanh thể loại, kệ sách, thanh đáy, AI nổi */
+  /* Ẩn toàn bộ mục thừa: banner thông báo, nút banner header, subnav 2 tầng, thanh thể loại, kệ sách, thanh đáy, AI nổi */
   #admin-banner-container,
+  #header-admin-banner-btn,
+  #site-subnav-bar,
   #genre-filter-bar,
   #genre-bookshelf,
   #mobile-bottom-nav,
@@ -806,6 +813,28 @@ body {
   #floating-ai-fab,
   .floating-ai-widget {
     display: none !important;
+  }
+
+  .mobile-drawer-toggle-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--accent-gold);
+    font-size: 1.05rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-right: 0.25rem;
+    transition: all 0.15s ease;
+  }
+
+  .mobile-drawer-toggle-btn:active {
+    transform: scale(0.92);
+    background: rgba(212, 175, 55, 0.2);
   }
 
   #main-header {

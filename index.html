@@ -45,6 +45,11 @@
 
   <!-- 2. Header Hoàng Gia (Main Navigation Header) -->
   <header id="main-header">
+    <!-- Nút Menu Trượt Di Động (Hamburger Slide-out Drawer Toggle) -->
+    <button id="mobile-drawer-toggle" class="mobile-drawer-toggle-btn" title="Mở danh mục điều hướng">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
     <div class="header-brand" id="brand-home-btn" title="Về trang chủ Cổng Tĩnh Nguyện">
       <span class="brand-symbol">
         <img src="data/cross_holy_gold.gif" alt="Thánh Giá Logos" class="brand-gif-cross">
@@ -171,6 +176,66 @@
             <button class="portal-action-pill" id="portal-btn-switch-theme" title="Kích hoạt bộ màu Cổ Điển Tin Lành">
               <i class="fa-solid fa-palette"></i> Màu Cổ Điển
             </button>
+          </div>
+        </div>
+
+        <!-- 2. Lưới Thao Tác Nhanh Di Động (Mobile Dashboard Quick Action Cards) -->
+        <div class="portal-mobile-dashboard" id="portal-mobile-dashboard">
+          <div class="mobile-dash-card card-green" data-action="read" title="Đọc Kinh Thánh">
+            <div class="dash-icon-box"><i class="fa-solid fa-book-open"></i></div>
+            <div class="dash-info">
+              <h4>Đọc Lời Chúa</h4>
+              <span>Bản Truyền Thống</span>
+            </div>
+          </div>
+          <div class="mobile-dash-card card-blue" data-action="compare" title="Đối Chiếu Đa Bản Dịch">
+            <div class="dash-icon-box"><i class="fa-solid fa-columns"></i></div>
+            <div class="dash-info">
+              <h4>Đối Chiếu</h4>
+              <span>BTT, KTHD, KJV</span>
+            </div>
+          </div>
+          <div class="mobile-dash-card card-gold" data-action="fav-verses" title="Câu Gốc Dưỡng Linh">
+            <div class="dash-icon-box"><i class="fa-solid fa-star"></i></div>
+            <div class="dash-info">
+              <h4>Câu Gốc</h4>
+              <span>36 câu dưỡng linh</span>
+            </div>
+          </div>
+          <div class="mobile-dash-card card-purple" data-action="quiz" title="Đố Kinh Thánh">
+            <div class="dash-icon-box"><i class="fa-solid fa-circle-question"></i></div>
+            <div class="dash-info">
+              <h4>Đố Kinh Thánh</h4>
+              <span>Trắc nghiệm 10 câu</span>
+            </div>
+          </div>
+          <div class="mobile-dash-card card-teal" data-action="responsive" title="Kinh Thánh Đối Đáp">
+            <div class="dash-icon-box"><i class="fa-solid fa-scroll"></i></div>
+            <div class="dash-info">
+              <h4>Đối Đáp Phụng Vụ</h4>
+              <span>Bài đọc hội chúng</span>
+            </div>
+          </div>
+          <div class="mobile-dash-card card-indigo" data-action="survey" title="Thánh Kinh Lược Khảo">
+            <div class="dash-icon-box"><i class="fa-solid fa-layer-group"></i></div>
+            <div class="dash-info">
+              <h4>Lược Khảo 66 Sách</h4>
+              <span>Tác giả & chủ đề</span>
+            </div>
+          </div>
+          <div class="mobile-dash-card card-rose" data-action="stories" title="Truyện Tích Đức Tin">
+            <div class="dash-icon-box"><i class="fa-solid fa-book-bookmark"></i></div>
+            <div class="dash-info">
+              <h4>Truyện Tích</h4>
+              <span>Gương mẫu đức tin</span>
+            </div>
+          </div>
+          <div class="mobile-dash-card card-cyan" data-action="dictionary" title="Thánh Kinh Từ Điển">
+            <div class="dash-icon-box"><i class="fa-solid fa-spell-check"></i></div>
+            <div class="dash-info">
+              <h4>Từ Điển Kinh Thánh</h4>
+              <span>Tra nghĩa thuật ngữ</span>
+            </div>
           </div>
         </div>
 
@@ -1535,57 +1600,112 @@
     </div>
   </div>
 
-  <!-- Modal 10: Menu Khám Phá Nhanh Trên Điện Thoại (Mobile Explorer Drawer) -->
+  <!-- Modal 10: Menu Khám Phá Nhanh Trên Điện Thoại (Mobile Explorer Slide-out Drawer) -->
   <div id="mobile-menu-modal" class="modal-overlay hidden">
-    <div class="modal-card mobile-menu-card">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <h3><i class="fa-solid fa-compass" style="color: var(--accent-gold);"></i> MENU KHÁM PHÁ</h3>
+    <div class="modal-card mobile-menu-card mobile-drawer-sheet">
+      <!-- Drawer Header (Banner Mẫu Trượt Chuẩn) -->
+      <div class="mobile-drawer-header">
+        <div class="mobile-drawer-brand">
+          <img src="data/cross_holy_gold.gif" alt="Thánh Giá" class="drawer-cross-gif">
+          <div class="drawer-brand-text">
+            <h3>Logos Thánh Kinh</h3>
+            <span>Bản Truyền Thống 1925</span>
+          </div>
         </div>
-        <button class="modal-close-btn" data-modal="mobile-menu-modal">&times;</button>
+        <button class="modal-close-btn mobile-drawer-close" data-modal="mobile-menu-modal" title="Đóng Menu">&times;</button>
       </div>
+
+      <!-- Drawer Body với Danh Sách Menu Đa Dạng Chuẩn Mẫu -->
       <div class="mobile-menu-body">
-        <div class="mobile-menu-section-title">CHUYỂN KHÔNG GIAN</div>
+        <!-- Chào Độc Giả / Trạng Thái -->
+        <div class="drawer-user-card">
+          <i class="fa-solid fa-circle-user"></i>
+          <div class="drawer-user-info">
+            <span class="user-name">Độc giả Thánh Kinh</span>
+            <span class="user-role-badge" id="mobile-drawer-role-badge">Khách viếng thăm</span>
+          </div>
+        </div>
+
+        <div class="mobile-menu-section-title"><i class="fa-solid fa-compass"></i> KHÔNG GIAN CHÍNH</div>
         <div class="mobile-menu-grid">
           <button class="mobile-menu-btn" data-nav="portal">
             <i class="fa-solid fa-house-chimney-window" style="color: #8bc34a;"></i>
             <span>Cổng Tĩnh Nguyện</span>
           </button>
           <button class="mobile-menu-btn" data-nav="bible">
-            <i class="fa-solid fa-book-open"></i>
+            <i class="fa-solid fa-book-open" style="color: #38bdf8;"></i>
             <span>Đọc Kinh Thánh</span>
           </button>
           <button class="mobile-menu-btn" data-nav="tsk">
-            <i class="fa-solid fa-book-atlas"></i>
+            <i class="fa-solid fa-book-atlas" style="color: var(--accent-gold);"></i>
             <span>KT Đối Chiếu</span>
           </button>
-          <button class="mobile-menu-btn" data-nav="blog">
-            <i class="fa-solid fa-feather-pointed"></i>
-            <span>Blog Chuyên Sâu</span>
-          </button>
-          <button class="mobile-menu-btn" data-nav="community">
-            <i class="fa-solid fa-users"></i>
-            <span>Nhánh Cộng Đồng</span>
-          </button>
-          <button class="mobile-menu-btn" data-nav="media">
-            <i class="fa-solid fa-photo-film"></i>
-            <span>Media & Video</span>
-          </button>
-          <button class="mobile-menu-btn mobile-menu-btn-donate" data-nav="donate">
-            <i class="fa-solid fa-hand-holding-heart" style="color: var(--accent-gold);"></i>
-            <span>Dâng Hiến & Góp Ý</span>
-          </button>
           <button class="mobile-menu-btn" data-nav="versions">
-            <i class="fa-solid fa-sliders"></i>
+            <i class="fa-solid fa-sliders" style="color: #a78bfa;"></i>
             <span>Chọn Bản Dịch</span>
           </button>
           <button class="mobile-menu-btn" id="mobile-menu-books-shortcut-btn">
-            <i class="fa-solid fa-book-bible"></i>
+            <i class="fa-solid fa-book-bible" style="color: #fb923c;"></i>
             <span>66 Sách</span>
+          </button>
+          <button class="mobile-menu-btn" data-nav="search">
+            <i class="fa-solid fa-magnifying-glass" style="color: #2dd4bf;"></i>
+            <span>Tra Cứu Nhanh</span>
           </button>
         </div>
 
-        <div class="mobile-menu-section-title">TIỆN ÍCH & CÀI ĐẶT</div>
+        <div class="mobile-menu-section-title"><i class="fa-solid fa-heart"></i> TIỆN ÍCH DƯỠNG LINH</div>
+        <div class="mobile-drawer-list">
+          <button class="mobile-drawer-row" data-utility="fav-verses">
+            <i class="fa-solid fa-star" style="color: #f59e0b;"></i>
+            <span>Câu Gốc Yêu Thích</span>
+            <span class="row-badge">36 câu</span>
+          </button>
+          <button class="mobile-drawer-row" data-utility="quiz">
+            <i class="fa-solid fa-circle-question" style="color: #6366f1;"></i>
+            <span>Đố Kinh Thánh Có Thưởng</span>
+            <span class="row-badge">10 câu</span>
+          </button>
+          <button class="mobile-drawer-row" data-utility="responsive">
+            <i class="fa-solid fa-scroll" style="color: #14b8a6;"></i>
+            <span>Kinh Thánh Đối Đáp Phụng Vụ</span>
+            <span class="row-badge">HTTLVN</span>
+          </button>
+          <button class="mobile-drawer-row" data-utility="survey">
+            <i class="fa-solid fa-layer-group" style="color: #3b82f6;"></i>
+            <span>Thánh Kinh Lược Khảo 66 Sách</span>
+          </button>
+          <button class="mobile-drawer-row" data-utility="stories">
+            <i class="fa-solid fa-book-bookmark" style="color: #ec4899;"></i>
+            <span>Truyện Tích Đức Tin Thánh Kinh</span>
+          </button>
+          <button class="mobile-drawer-row" data-utility="dictionary">
+            <i class="fa-solid fa-spell-check" style="color: #06b6d4;"></i>
+            <span>Thánh Kinh Từ Điển Thuật Ngữ</span>
+          </button>
+        </div>
+
+        <div class="mobile-menu-section-title"><i class="fa-solid fa-users"></i> CỘNG ĐỒNG & KẾT NỐI</div>
+        <div class="mobile-drawer-list">
+          <button class="mobile-drawer-row" data-nav="blog">
+            <i class="fa-solid fa-feather-pointed" style="color: #f43f5e;"></i>
+            <span>Blog Chuyên Sâu Tác Giả</span>
+          </button>
+          <button class="mobile-drawer-row" data-nav="community">
+            <i class="fa-solid fa-users" style="color: #10b981;"></i>
+            <span>Nhánh Cộng Đồng Berea</span>
+          </button>
+          <button class="mobile-drawer-row" data-nav="media">
+            <i class="fa-solid fa-photo-film" style="color: #8b5cf6;"></i>
+            <span>Media & Video The Bible Project</span>
+          </button>
+          <button class="mobile-drawer-row mobile-menu-btn-donate" data-nav="donate">
+            <i class="fa-solid fa-hand-holding-heart" style="color: var(--accent-gold);"></i>
+            <span>Dâng Hiến Xây Dựng & Góp Ý</span>
+          </button>
+        </div>
+
+        <div class="mobile-menu-section-title"><i class="fa-solid fa-gear"></i> CÀI ĐẶT & HỆ THỐNG</div>
         <div class="mobile-menu-list">
           <button class="mobile-menu-row" id="mobile-menu-theme-btn">
             <div class="row-info">
