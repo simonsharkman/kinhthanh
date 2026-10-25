@@ -34,8 +34,8 @@ def test_html_all_modals_connected():
     assert "id=\"admin-banner-modal\"" in html
     assert "id=\"admin-auth-modal\"" in html
 
-    # Script module must be app.js
-    assert "src=\"js/app.js\"" in html
+    # Script module must be app.js (allows optional cache-buster ?v=...)
+    assert "src=\"js/app.js" in html
 
 def test_genre_bookshelf_integration():
     with open("index.html", "r", encoding="utf-8") as f:

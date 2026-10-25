@@ -1,0 +1,1204 @@
+{
+  "book_id": "ISA",
+  "chapter": 53,
+  "testament": "OT",
+  "language": "Hebrew",
+  "source": "Scripture4All Online Interlinear (WLC / ScrTR)",
+  "scripture4all_pdf_url": "https://www.scripture4all.org/OnlineInterlinear/OTpdf/isa53.pdf",
+  "total_verses": 12,
+  "verses": {
+    "1": [
+      {
+        "orig": "מִי",
+        "translit": "mi",
+        "strong": "H4325",
+        "gloss": "who ?",
+        "meaning_vi": "Nước (waters of)"
+      },
+      {
+        "orig": "הֶאֱמִין",
+        "translit": "eamin",
+        "strong": "",
+        "gloss": "he-believes",
+        "meaning_vi": "he-believes"
+      },
+      {
+        "orig": "לִשְׁמֻעָתֵנוּ",
+        "translit": "l·shmoth·nu",
+        "strong": "",
+        "gloss": "to·report-of·us",
+        "meaning_vi": "to·report-of·us"
+      },
+      {
+        "orig": "וּזְרוֹעַ",
+        "translit": "u·zruo",
+        "strong": "",
+        "gloss": "and·arm-of",
+        "meaning_vi": "and·arm-of"
+      },
+      {
+        "orig": "יְהוָה",
+        "translit": "ieue",
+        "strong": "H3068",
+        "gloss": "Yahweh",
+        "meaning_vi": "ĐỨC GIÊ-HÔ-VA (Yahweh)"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "מִי",
+        "translit": "mi",
+        "strong": "H4325",
+        "gloss": "whom ?",
+        "meaning_vi": "Nước (waters of)"
+      },
+      {
+        "orig": "נִגְלָתָה",
+        "translit": "nglthe",
+        "strong": "",
+        "gloss": "she-is-revealed",
+        "meaning_vi": "she-is-revealed"
+      }
+    ],
+    "2": [
+      {
+        "orig": "וַיַּעַל",
+        "translit": "u·iol",
+        "strong": "",
+        "gloss": "and·he-is-com ing-up",
+        "meaning_vi": "and·he-is-com ing-up"
+      },
+      {
+        "orig": "כַּיּוֹנֵק",
+        "translit": "k·iunq",
+        "strong": "",
+        "gloss": "as· the ·layer-plant",
+        "meaning_vi": "as· the ·layer-plant"
+      },
+      {
+        "orig": "לְפָנָיו",
+        "translit": "l·phni·u",
+        "strong": "",
+        "gloss": "to·faces-of·him",
+        "meaning_vi": "to·faces-of·him"
+      },
+      {
+        "orig": "וְכַשֹּׁרֶשׁ",
+        "translit": "u·k·shrsh",
+        "strong": "",
+        "gloss": "and·as· the ·root",
+        "meaning_vi": "and·as· the ·root"
+      },
+      {
+        "orig": "מֵאֶרֶץ",
+        "translit": "m·artz",
+        "strong": "",
+        "gloss": "from·earth-of",
+        "meaning_vi": "from·earth-of"
+      },
+      {
+        "orig": "צִיָּה",
+        "translit": "tzie",
+        "strong": "",
+        "gloss": "arid",
+        "meaning_vi": "arid"
+      },
+      {
+        "orig": "לֹא",
+        "translit": "la",
+        "strong": "H3808",
+        "gloss": "not",
+        "meaning_vi": "Chẳng / Không (not)"
+      },
+      {
+        "orig": "תֹאַר",
+        "translit": "thar",
+        "strong": "",
+        "gloss": "shape",
+        "meaning_vi": "shape"
+      },
+      {
+        "orig": "לוֹ",
+        "translit": "l·u",
+        "strong": "",
+        "gloss": "to·him",
+        "meaning_vi": "to·him"
+      },
+      {
+        "orig": "וְלֹא",
+        "translit": "u·la",
+        "strong": "",
+        "gloss": "and·not",
+        "meaning_vi": "and·not"
+      },
+      {
+        "orig": "הָדָר",
+        "translit": "edr",
+        "strong": "",
+        "gloss": "honor",
+        "meaning_vi": "honor"
+      },
+      {
+        "orig": "וְנִרְאֵהוּ",
+        "translit": "u·nra·eu",
+        "strong": "",
+        "gloss": "and·we-shall-see·him",
+        "meaning_vi": "and·we-shall-see·him"
+      },
+      {
+        "orig": "וְלֹא",
+        "translit": "u·la",
+        "strong": "",
+        "gloss": "and·not",
+        "meaning_vi": "and·not"
+      },
+      {
+        "orig": "מַרְאֶה",
+        "translit": "mrae",
+        "strong": "",
+        "gloss": "appearance",
+        "meaning_vi": "appearance"
+      },
+      {
+        "orig": "וְנֶחְמְדֵהוּ",
+        "translit": "u·nchmd·eu",
+        "strong": "",
+        "gloss": "and·we-shall-covet·him",
+        "meaning_vi": "and·we-shall-covet·him"
+      }
+    ],
+    "3": [
+      {
+        "orig": "נִבְזֶה",
+        "translit": "nbze",
+        "strong": "",
+        "gloss": "one-being-despised",
+        "meaning_vi": "one-being-despised"
+      },
+      {
+        "orig": "וַחֲדַל",
+        "translit": "u·chdl",
+        "strong": "",
+        "gloss": "and·shunned-of",
+        "meaning_vi": "and·shunned-of"
+      },
+      {
+        "orig": "אִישִׁים",
+        "translit": "aishim",
+        "strong": "",
+        "gloss": "men",
+        "meaning_vi": "men"
+      },
+      {
+        "orig": "אִישׁ",
+        "translit": "aish",
+        "strong": "",
+        "gloss": "man-of",
+        "meaning_vi": "man-of"
+      },
+      {
+        "orig": "מַכְאֹבוֹת",
+        "translit": "mkabuth",
+        "strong": "",
+        "gloss": "pains",
+        "meaning_vi": "pains"
+      },
+      {
+        "orig": "וִידוּעַ",
+        "translit": "u·iduo",
+        "strong": "",
+        "gloss": "and·one-being-known-of",
+        "meaning_vi": "and·one-being-known-of"
+      },
+      {
+        "orig": "חֹלִי",
+        "translit": "chli",
+        "strong": "",
+        "gloss": "illness",
+        "meaning_vi": "illness"
+      },
+      {
+        "orig": "וּכְמַסְתֵּר",
+        "translit": "u·k·msthr",
+        "strong": "",
+        "gloss": "and·as·concealment-of",
+        "meaning_vi": "and·as·concealment-of"
+      },
+      {
+        "orig": "פָּנִים",
+        "translit": "phnim",
+        "strong": "",
+        "gloss": "faces",
+        "meaning_vi": "faces"
+      },
+      {
+        "orig": "מִמֶּנּוּ",
+        "translit": "mm·nu",
+        "strong": "",
+        "gloss": "from·him",
+        "meaning_vi": "from·him"
+      },
+      {
+        "orig": "נִבְזֶה",
+        "translit": "nbze",
+        "strong": "",
+        "gloss": "one-being-despised",
+        "meaning_vi": "one-being-despised"
+      },
+      {
+        "orig": "וְלֹא",
+        "translit": "u·la",
+        "strong": "",
+        "gloss": "and·not",
+        "meaning_vi": "and·not"
+      },
+      {
+        "orig": "חֲשַׁבְנֻהוּ",
+        "translit": "chshbn·eu",
+        "strong": "",
+        "gloss": "we-accounted·him",
+        "meaning_vi": "we-accounted·him"
+      }
+    ],
+    "4": [
+      {
+        "orig": "אָכֵן",
+        "translit": "akn",
+        "strong": "",
+        "gloss": "surely",
+        "meaning_vi": "surely"
+      },
+      {
+        "orig": "חֳלָיֵנוּ",
+        "translit": "chli·nu",
+        "strong": "",
+        "gloss": "illnesses-of·us",
+        "meaning_vi": "illnesses-of·us"
+      },
+      {
+        "orig": "הוּא",
+        "translit": "eua",
+        "strong": "",
+        "gloss": "he",
+        "meaning_vi": "he"
+      },
+      {
+        "orig": "נָשָׂא",
+        "translit": "nsha",
+        "strong": "",
+        "gloss": "he-bore",
+        "meaning_vi": "he-bore"
+      },
+      {
+        "orig": "וּמַכְאֹבֵינוּ",
+        "translit": "u·mkabi·nu",
+        "strong": "",
+        "gloss": "and·pains-of·us",
+        "meaning_vi": "and·pains-of·us"
+      },
+      {
+        "orig": "סְבָלָם",
+        "translit": "sbl·m",
+        "strong": "",
+        "gloss": "he-was -burdened·them",
+        "meaning_vi": "he-was -burdened·them"
+      },
+      {
+        "orig": "וַאֲנַחְנוּ",
+        "translit": "u·anchnu",
+        "strong": "",
+        "gloss": "and·we",
+        "meaning_vi": "and·we"
+      },
+      {
+        "orig": "חֲשַׁבְנֻהוּ",
+        "translit": "chshbn·eu",
+        "strong": "",
+        "gloss": "we-accounted·him",
+        "meaning_vi": "we-accounted·him"
+      },
+      {
+        "orig": "נָגוּעַ",
+        "translit": "nguo",
+        "strong": "",
+        "gloss": "one-being-touched",
+        "meaning_vi": "one-being-touched"
+      },
+      {
+        "orig": "מֻכֵּה",
+        "translit": "mke",
+        "strong": "",
+        "gloss": "one-being-csmitten-of",
+        "meaning_vi": "one-being-csmitten-of"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "וּמְעֻנֶּה",
+        "translit": "u·mone",
+        "strong": "",
+        "gloss": "and·one-being-mhumbled",
+        "meaning_vi": "and·one-being-mhumbled"
+      }
+    ],
+    "5": [
+      {
+        "orig": "וְהוּא",
+        "translit": "u·eua",
+        "strong": "",
+        "gloss": "and·he",
+        "meaning_vi": "and·he"
+      },
+      {
+        "orig": "מְחֹלָל",
+        "translit": "mchll",
+        "strong": "",
+        "gloss": "being-mwounded",
+        "meaning_vi": "being-mwounded"
+      },
+      {
+        "orig": "מִפְּשָׁעֵנוּ",
+        "translit": "m·phsho·nu",
+        "strong": "",
+        "gloss": "from·transgression-of·us",
+        "meaning_vi": "from·transgression-of·us"
+      },
+      {
+        "orig": "מְדֻכָּא",
+        "translit": "mdka",
+        "strong": "",
+        "gloss": "being-mcrushed",
+        "meaning_vi": "being-mcrushed"
+      },
+      {
+        "orig": "מֵעֲוֹנֹתֵינוּ",
+        "translit": "m·ounthi·nu",
+        "strong": "",
+        "gloss": "from·depravities-of·us",
+        "meaning_vi": "from·depravities-of·us"
+      },
+      {
+        "orig": "מוּסַר",
+        "translit": "musr",
+        "strong": "",
+        "gloss": "discipline-of",
+        "meaning_vi": "discipline-of"
+      },
+      {
+        "orig": "שְׁלוֹמֵנוּ",
+        "translit": "shlum·nu",
+        "strong": "",
+        "gloss": "well-being-of·us",
+        "meaning_vi": "well-being-of·us"
+      },
+      {
+        "orig": "עָלָיו",
+        "translit": "oli·u",
+        "strong": "",
+        "gloss": "on·him",
+        "meaning_vi": "on·him"
+      },
+      {
+        "orig": "וּבַחֲבֻרָתוֹ",
+        "translit": "u·b·chbrth·u",
+        "strong": "",
+        "gloss": "and·in·welt-of·him",
+        "meaning_vi": "and·in·welt-of·him"
+      },
+      {
+        "orig": "נִרְפָּא",
+        "translit": "nrpha",
+        "strong": "",
+        "gloss": "he-is-healed",
+        "meaning_vi": "he-is-healed"
+      },
+      {
+        "orig": "לָנוּ",
+        "translit": "l·nu",
+        "strong": "",
+        "gloss": "to·us",
+        "meaning_vi": "to·us"
+      }
+    ],
+    "6": [
+      {
+        "orig": "כֻּלָּנוּ",
+        "translit": "kl·nu",
+        "strong": "",
+        "gloss": "all-of·us",
+        "meaning_vi": "all-of·us"
+      },
+      {
+        "orig": "כַּצֹּאן",
+        "translit": "k·tzan",
+        "strong": "",
+        "gloss": "as· the ·flock",
+        "meaning_vi": "as· the ·flock"
+      },
+      {
+        "orig": "תָּעִינוּ",
+        "translit": "thoinu",
+        "strong": "",
+        "gloss": "we-strayed",
+        "meaning_vi": "we-strayed"
+      },
+      {
+        "orig": "אִישׁ",
+        "translit": "aish",
+        "strong": "",
+        "gloss": "man",
+        "meaning_vi": "man"
+      },
+      {
+        "orig": "לְדַרְכּוֹ",
+        "translit": "l·drk·u",
+        "strong": "",
+        "gloss": "to·way-of·him",
+        "meaning_vi": "to·way-of·him"
+      },
+      {
+        "orig": "פָּנִינוּ",
+        "translit": "phninu",
+        "strong": "",
+        "gloss": "we-faced-about",
+        "meaning_vi": "we-faced-about"
+      },
+      {
+        "orig": "וַיהוָה",
+        "translit": "u·ieue",
+        "strong": "",
+        "gloss": "and·Yahweh",
+        "meaning_vi": "and·Yahweh"
+      },
+      {
+        "orig": "הִפְגִּיעַ",
+        "translit": "ephgio",
+        "strong": "",
+        "gloss": "he-cintercedes",
+        "meaning_vi": "he-cintercedes"
+      },
+      {
+        "orig": "בּוֹ",
+        "translit": "b·u",
+        "strong": "",
+        "gloss": "in·him",
+        "meaning_vi": "in·him"
+      },
+      {
+        "orig": "אֵת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "עֲוֹן",
+        "translit": "oun",
+        "strong": "",
+        "gloss": "depravity-of",
+        "meaning_vi": "depravity-of"
+      },
+      {
+        "orig": "כֻּלָּנוּ",
+        "translit": "kl·nu",
+        "strong": "",
+        "gloss": "all-of·us",
+        "meaning_vi": "all-of·us"
+      }
+    ],
+    "7": [
+      {
+        "orig": "נִגַּשׂ",
+        "translit": "ngsh",
+        "strong": "",
+        "gloss": "he-is-hard-pressed",
+        "meaning_vi": "he-is-hard-pressed"
+      },
+      {
+        "orig": "וְהוּא",
+        "translit": "u·eua",
+        "strong": "",
+        "gloss": "and·he",
+        "meaning_vi": "and·he"
+      },
+      {
+        "orig": "נַעֲנֶה",
+        "translit": "none",
+        "strong": "",
+        "gloss": "one-being-humbled",
+        "meaning_vi": "one-being-humbled"
+      },
+      {
+        "orig": "וְלֹא",
+        "translit": "u·la",
+        "strong": "",
+        "gloss": "and·not",
+        "meaning_vi": "and·not"
+      },
+      {
+        "orig": "יִפְתַּח",
+        "translit": "iphthch",
+        "strong": "",
+        "gloss": "he-is-opening",
+        "meaning_vi": "he-is-opening"
+      },
+      {
+        "orig": "פִּיו",
+        "translit": "phi·u",
+        "strong": "",
+        "gloss": "mouth-of·him",
+        "meaning_vi": "mouth-of·him"
+      },
+      {
+        "orig": "כַּשֶּׂה",
+        "translit": "k·she",
+        "strong": "",
+        "gloss": "as· the ·flockling",
+        "meaning_vi": "as· the ·flockling"
+      },
+      {
+        "orig": "לַטֶּבַח",
+        "translit": "l·tbch",
+        "strong": "",
+        "gloss": "to· the ·slaughter",
+        "meaning_vi": "to· the ·slaughter"
+      },
+      {
+        "orig": "יוּבָל",
+        "translit": "iubl",
+        "strong": "",
+        "gloss": "he-is-being-cfetched",
+        "meaning_vi": "he-is-being-cfetched"
+      },
+      {
+        "orig": "וּכְרָחֵל",
+        "translit": "u·k·rchl",
+        "strong": "",
+        "gloss": "and·as·ewe",
+        "meaning_vi": "and·as·ewe"
+      },
+      {
+        "orig": "לִפְנֵי",
+        "translit": "l·phni",
+        "strong": "",
+        "gloss": "to·faces-of",
+        "meaning_vi": "to·faces-of"
+      },
+      {
+        "orig": "גֹזְזֶיהָ",
+        "translit": "gzzi·e",
+        "strong": "",
+        "gloss": "ones-shearing-of·her",
+        "meaning_vi": "ones-shearing-of·her"
+      },
+      {
+        "orig": "נֶאֱלָמָה",
+        "translit": "nalme",
+        "strong": "",
+        "gloss": "she-is-nmute",
+        "meaning_vi": "she-is-nmute"
+      },
+      {
+        "orig": "וְלֹא",
+        "translit": "u·la",
+        "strong": "",
+        "gloss": "and·not",
+        "meaning_vi": "and·not"
+      },
+      {
+        "orig": "יִפְתַּח",
+        "translit": "iphthch",
+        "strong": "",
+        "gloss": "he-is-opening",
+        "meaning_vi": "he-is-opening"
+      },
+      {
+        "orig": "פִּיו",
+        "translit": "phi·u",
+        "strong": "",
+        "gloss": "mouth-of·him",
+        "meaning_vi": "mouth-of·him"
+      }
+    ],
+    "8": [
+      {
+        "orig": "מֵעֹצֶר",
+        "translit": "m·otzr",
+        "strong": "",
+        "gloss": "from·restraint",
+        "meaning_vi": "from·restraint"
+      },
+      {
+        "orig": "וּמִמִּשְׁפָּט",
+        "translit": "u·m·mshpht",
+        "strong": "",
+        "gloss": "and·from·judgment",
+        "meaning_vi": "and·from·judgment"
+      },
+      {
+        "orig": "לֻקָּח",
+        "translit": "lqch",
+        "strong": "",
+        "gloss": "he-is-taken",
+        "meaning_vi": "he-is-taken"
+      },
+      {
+        "orig": "וְאֶת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "וֹדּוֹר",
+        "translit": "dur·u",
+        "strong": "",
+        "gloss": "generation-of·him",
+        "meaning_vi": "generation-of·him"
+      },
+      {
+        "orig": "מִי",
+        "translit": "mi",
+        "strong": "H4325",
+        "gloss": "who ?",
+        "meaning_vi": "Nước (waters of)"
+      },
+      {
+        "orig": "חֵחַ יְשׂוֹ",
+        "translit": "ishuchch",
+        "strong": "",
+        "gloss": "he-shall-meditate",
+        "meaning_vi": "he-shall-meditate"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "נִגְזַר",
+        "translit": "ngzr",
+        "strong": "",
+        "gloss": "he-is-severed",
+        "meaning_vi": "he-is-severed"
+      },
+      {
+        "orig": "מֵאֶרֶץ",
+        "translit": "m·artz",
+        "strong": "",
+        "gloss": "from·land-of",
+        "meaning_vi": "from·land-of"
+      },
+      {
+        "orig": "חַיִּים",
+        "translit": "chiim",
+        "strong": "",
+        "gloss": "living-ones",
+        "meaning_vi": "living-ones"
+      },
+      {
+        "orig": "מִפֶּשַׁע",
+        "translit": "m·phsho",
+        "strong": "",
+        "gloss": "from·transgression-of",
+        "meaning_vi": "from·transgression-of"
+      },
+      {
+        "orig": "עַמִּי",
+        "translit": "om·i",
+        "strong": "",
+        "gloss": "people-of·me",
+        "meaning_vi": "people-of·me"
+      },
+      {
+        "orig": "נֶגַע",
+        "translit": "ngo",
+        "strong": "",
+        "gloss": "contagion",
+        "meaning_vi": "contagion"
+      },
+      {
+        "orig": "לָמוֹ",
+        "translit": "lmu",
+        "strong": "",
+        "gloss": "to·him",
+        "meaning_vi": "to·him"
+      }
+    ],
+    "9": [
+      {
+        "orig": "וַיִּתֵּן",
+        "translit": "u·ithn",
+        "strong": "",
+        "gloss": "and·he-is-giving",
+        "meaning_vi": "and·he-is-giving"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "with",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "רְשָׁעִים",
+        "translit": "rshoim",
+        "strong": "",
+        "gloss": "wicked-ones",
+        "meaning_vi": "wicked-ones"
+      },
+      {
+        "orig": "קִבְרוֹ",
+        "translit": "qbr·u",
+        "strong": "",
+        "gloss": "tomb-of·him",
+        "meaning_vi": "tomb-of·him"
+      },
+      {
+        "orig": "וְאֶת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and· with",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "עָשִׁיר",
+        "translit": "oshir",
+        "strong": "",
+        "gloss": "rich-one",
+        "meaning_vi": "rich-one"
+      },
+      {
+        "orig": "בְּמֹתָיו",
+        "translit": "b·mthi·u",
+        "strong": "",
+        "gloss": "in·deaths-of·him",
+        "meaning_vi": "in·deaths-of·him"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "לֹא",
+        "translit": "la",
+        "strong": "H3808",
+        "gloss": "not",
+        "meaning_vi": "Chẳng / Không (not)"
+      },
+      {
+        "orig": "חָמָס",
+        "translit": "chms",
+        "strong": "",
+        "gloss": "wrong",
+        "meaning_vi": "wrong"
+      },
+      {
+        "orig": "עָשָׂה",
+        "translit": "oshe",
+        "strong": "",
+        "gloss": "he-did",
+        "meaning_vi": "he-did"
+      },
+      {
+        "orig": "וְלֹא",
+        "translit": "u·la",
+        "strong": "",
+        "gloss": "and·not",
+        "meaning_vi": "and·not"
+      },
+      {
+        "orig": "מִרְמָה",
+        "translit": "mrme",
+        "strong": "",
+        "gloss": "deceit",
+        "meaning_vi": "deceit"
+      },
+      {
+        "orig": "בְּפִיו",
+        "translit": "b·phi·u",
+        "strong": "",
+        "gloss": "in·mouth-of·him",
+        "meaning_vi": "in·mouth-of·him"
+      }
+    ],
+    "10": [
+      {
+        "orig": "וַיהוָה",
+        "translit": "u·ieue",
+        "strong": "",
+        "gloss": "and·Yahweh",
+        "meaning_vi": "and·Yahweh"
+      },
+      {
+        "orig": "חָפֵץ",
+        "translit": "chphtz",
+        "strong": "",
+        "gloss": "he-desires",
+        "meaning_vi": "he-desires"
+      },
+      {
+        "orig": "דַּכְּאוֹ",
+        "translit": "dka·u",
+        "strong": "",
+        "gloss": "to-mcrush-of·him",
+        "meaning_vi": "to-mcrush-of·him"
+      },
+      {
+        "orig": "הֶחֱלִי",
+        "translit": "echli",
+        "strong": "",
+        "gloss": "he-causes-to -be-wounded",
+        "meaning_vi": "he-causes-to -be-wounded"
+      },
+      {
+        "orig": "אִם",
+        "translit": "am",
+        "strong": "",
+        "gloss": "if",
+        "meaning_vi": "if"
+      },
+      {
+        "orig": "תָּשִׂים",
+        "translit": "thshim",
+        "strong": "",
+        "gloss": "she-is-placing",
+        "meaning_vi": "she-is-placing"
+      },
+      {
+        "orig": "אָשָׁם",
+        "translit": "ashm",
+        "strong": "",
+        "gloss": "guilt-offering",
+        "meaning_vi": "guilt-offering"
+      },
+      {
+        "orig": "נַפְשׁוֹ",
+        "translit": "nphsh·u",
+        "strong": "",
+        "gloss": "soul-of·him",
+        "meaning_vi": "soul-of·him"
+      },
+      {
+        "orig": "יִרְאֶה",
+        "translit": "irae",
+        "strong": "",
+        "gloss": "he-shall-see",
+        "meaning_vi": "he-shall-see"
+      },
+      {
+        "orig": "זֶרַע",
+        "translit": "zro",
+        "strong": "",
+        "gloss": "seed",
+        "meaning_vi": "seed"
+      },
+      {
+        "orig": "יַאֲרִיְך",
+        "translit": "iarik",
+        "strong": "",
+        "gloss": "he-shall-lengthen",
+        "meaning_vi": "he-shall-lengthen"
+      },
+      {
+        "orig": "יָמִים",
+        "translit": "imim",
+        "strong": "",
+        "gloss": "days",
+        "meaning_vi": "days"
+      },
+      {
+        "orig": "וְחֵפֶץ",
+        "translit": "u·chphtz",
+        "strong": "",
+        "gloss": "and·desire-of",
+        "meaning_vi": "and·desire-of"
+      },
+      {
+        "orig": "יְהוָה",
+        "translit": "ieue",
+        "strong": "H3068",
+        "gloss": "Yahweh",
+        "meaning_vi": "ĐỨC GIÊ-HÔ-VA (Yahweh)"
+      },
+      {
+        "orig": "בְּיָדוֹ",
+        "translit": "b·id·u",
+        "strong": "",
+        "gloss": "in·hand-of·him",
+        "meaning_vi": "in·hand-of·him"
+      },
+      {
+        "orig": "יִצְלָח",
+        "translit": "itzlch",
+        "strong": "",
+        "gloss": "he-shall-prosper",
+        "meaning_vi": "he-shall-prosper"
+      }
+    ],
+    "11": [
+      {
+        "orig": "מֵעֲמַל",
+        "translit": "m·oml",
+        "strong": "",
+        "gloss": "from·toil-of",
+        "meaning_vi": "from·toil-of"
+      },
+      {
+        "orig": "נַפְשׁוֹ",
+        "translit": "nphsh·u",
+        "strong": "",
+        "gloss": "soul-of·him",
+        "meaning_vi": "soul-of·him"
+      },
+      {
+        "orig": "יִרְאֶה",
+        "translit": "irae",
+        "strong": "",
+        "gloss": "he-shall-see",
+        "meaning_vi": "he-shall-see"
+      },
+      {
+        "orig": "יִשְׂבָּע",
+        "translit": "ishbo",
+        "strong": "",
+        "gloss": "he-shall-be -satisfi ed",
+        "meaning_vi": "he-shall-be -satisfi ed"
+      },
+      {
+        "orig": "בְּדַעְתּוֹ",
+        "translit": "b·doth·u",
+        "strong": "",
+        "gloss": "in·knowledge-of·him",
+        "meaning_vi": "in·knowledge-of·him"
+      },
+      {
+        "orig": "יַצְדִּיק",
+        "translit": "itzdiq",
+        "strong": "",
+        "gloss": "he-shall-cjustify",
+        "meaning_vi": "he-shall-cjustify"
+      },
+      {
+        "orig": "צַדִּיק",
+        "translit": "tzdiq",
+        "strong": "",
+        "gloss": "righteous",
+        "meaning_vi": "righteous"
+      },
+      {
+        "orig": "עַבְדִּי",
+        "translit": "obd·i",
+        "strong": "",
+        "gloss": "servant-of·me",
+        "meaning_vi": "servant-of·me"
+      },
+      {
+        "orig": "לָרַבִּים",
+        "translit": "l·rbim",
+        "strong": "",
+        "gloss": "to· the ·many-ones",
+        "meaning_vi": "to· the ·many-ones"
+      },
+      {
+        "orig": "וַעֲוֹנֹתָם",
+        "translit": "u·ounth·m",
+        "strong": "",
+        "gloss": "and·depravities-of·them",
+        "meaning_vi": "and·depravities-of·them"
+      },
+      {
+        "orig": "הוּא",
+        "translit": "eua",
+        "strong": "",
+        "gloss": "he",
+        "meaning_vi": "he"
+      },
+      {
+        "orig": "יִסְבֹּל",
+        "translit": "isbl",
+        "strong": "",
+        "gloss": "he-shall-be -burden ed",
+        "meaning_vi": "he-shall-be -burden ed"
+      }
+    ],
+    "12": [
+      {
+        "orig": "לָכֵן",
+        "translit": "lkn",
+        "strong": "",
+        "gloss": "therefore",
+        "meaning_vi": "therefore"
+      },
+      {
+        "orig": "אֲחַלֶּק",
+        "translit": "achlq",
+        "strong": "",
+        "gloss": "I-shall-mapportion",
+        "meaning_vi": "I-shall-mapportion"
+      },
+      {
+        "orig": "לוֹ",
+        "translit": "l·u",
+        "strong": "",
+        "gloss": "to·him",
+        "meaning_vi": "to·him"
+      },
+      {
+        "orig": "בָרַבִּים",
+        "translit": "b·rbim",
+        "strong": "",
+        "gloss": "in· the ·many-ones",
+        "meaning_vi": "in· the ·many-ones"
+      },
+      {
+        "orig": "וְאֶת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and· with",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "עֲצוּמִים",
+        "translit": "otzumim",
+        "strong": "",
+        "gloss": "staunch-ones",
+        "meaning_vi": "staunch-ones"
+      },
+      {
+        "orig": "יְחַלֵּק",
+        "translit": "ichlq",
+        "strong": "",
+        "gloss": "he-shall-mapportion",
+        "meaning_vi": "he-shall-mapportion"
+      },
+      {
+        "orig": "שָׁלָל",
+        "translit": "shll",
+        "strong": "",
+        "gloss": "loot",
+        "meaning_vi": "loot"
+      },
+      {
+        "orig": "תַּחַת",
+        "translit": "thchth",
+        "strong": "",
+        "gloss": "inasmuch-as",
+        "meaning_vi": "inasmuch-as"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "הֶעֱרָה",
+        "translit": "eore",
+        "strong": "",
+        "gloss": "he-cempties",
+        "meaning_vi": "he-cempties"
+      },
+      {
+        "orig": "לַמָּוֶת",
+        "translit": "l·muth",
+        "strong": "",
+        "gloss": "to· the ·death",
+        "meaning_vi": "to· the ·death"
+      },
+      {
+        "orig": "נַפְשׁוֹ",
+        "translit": "nphsh·u",
+        "strong": "",
+        "gloss": "soul-of·him",
+        "meaning_vi": "soul-of·him"
+      },
+      {
+        "orig": "וְאֶת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and· with",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "פֹּשְׁעִים",
+        "translit": "phshoim",
+        "strong": "",
+        "gloss": "ones-transgressing",
+        "meaning_vi": "ones-transgressing"
+      },
+      {
+        "orig": "נִמְנָה",
+        "translit": "nmne",
+        "strong": "",
+        "gloss": "he-is-counted",
+        "meaning_vi": "he-is-counted"
+      },
+      {
+        "orig": "וְהוּא",
+        "translit": "u·eua",
+        "strong": "",
+        "gloss": "and·he",
+        "meaning_vi": "and·he"
+      },
+      {
+        "orig": "חֵטְא",
+        "translit": "chta",
+        "strong": "",
+        "gloss": "sin-of",
+        "meaning_vi": "sin-of"
+      },
+      {
+        "orig": "רַבִּים",
+        "translit": "rbim",
+        "strong": "",
+        "gloss": "many-ones",
+        "meaning_vi": "many-ones"
+      },
+      {
+        "orig": "נָשָׂא",
+        "translit": "nsha",
+        "strong": "",
+        "gloss": "he-bears",
+        "meaning_vi": "he-bears"
+      },
+      {
+        "orig": "וְלַפֹּשְׁעִים",
+        "translit": "u·l·phshoim",
+        "strong": "",
+        "gloss": "and·for· the ·ones-transgressing",
+        "meaning_vi": "and·for· the ·ones-transgressing"
+      },
+      {
+        "orig": "יַפְגִּיעַ",
+        "translit": "iphgio",
+        "strong": "",
+        "gloss": "he-is-cmak ing-intercession",
+        "meaning_vi": "he-is-cmak ing-intercession"
+      },
+      {
+        "orig": "ס",
+        "translit": "s",
+        "strong": "H1254",
+        "gloss": "Isaiah 53  -  Isaiah 54",
+        "meaning_vi": "Sáng tạo / Dựng nên"
+      }
+    ]
+  }
+}

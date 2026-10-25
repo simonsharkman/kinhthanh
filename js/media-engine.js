@@ -148,7 +148,13 @@ export class MediaEngine {
           <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
             Truy cập tức thì các thư viện nguyên bản Hy Lạp / Hê-bơ-rơ và bình giải học thuật hàng đầu thế giới:
           </p>
-          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="https://www.scripture4all.org/OnlineInterlinear/Hebrew_Index.htm" target="_blank" rel="noopener noreferrer" class="btn-primary" style="text-decoration: none; background: #6366f1; color: #fff; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-scroll"></i> Scripture4All Interlinear (Cựu Ước Hê-bơ-rơ WLC)
+            </a>
+            <a href="https://www.scripture4all.org/OnlineInterlinear/Greek_Index.htm" target="_blank" rel="noopener noreferrer" class="btn-primary" style="text-decoration: none; background: #4f46e5; color: #fff; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-scroll"></i> Scripture4All Interlinear (Tân Ước Hy Lạp ScrTR)
+            </a>
             <a href="https://biblehub.com/interlinear/john/1-1.htm" target="_blank" rel="noopener noreferrer" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> BibleHub Interlinear & Lexicon
             </a>

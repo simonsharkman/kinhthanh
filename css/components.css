@@ -7,27 +7,32 @@
   position: relative;
   display: flex;
   align-items: center;
-  flex: 1;
-  max-width: 480px;
+  flex: 1 1 280px;
+  min-width: 240px;
+  max-width: 380px;
+  transition: all var(--transition-fast);
 }
 
 .search-icon {
   position: absolute;
-  left: 1rem;
-  color: var(--text-muted);
+  left: 0.85rem;
+  color: var(--accent-gold);
   pointer-events: none;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
+  z-index: 2;
+  opacity: 0.85;
 }
 
 #omni-search-input {
   width: 100%;
-  padding: 0.5rem 1rem 0.5rem 2.4rem;
-  background: var(--bg-surface);
+  height: 36px;
+  padding: 0.4rem 1rem 0.4rem 2.25rem;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-medium);
-  border-radius: 20px;
+  border-radius: 18px;
   color: var(--text-primary);
   font-family: var(--font-ui);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   transition: all var(--transition-fast);
 }
 
@@ -240,21 +245,22 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
 }
 
 .nav-btn {
   background: transparent;
   border: 1px solid transparent;
   color: var(--text-secondary);
-  padding: 0.45rem 0.85rem;
+  padding: 0.35rem 0.65rem;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
+  white-space: nowrap;
   transition: all var(--transition-fast);
 }
 
@@ -344,9 +350,234 @@
 
 .interlinear-text {
   font-family: var(--font-hebrew-greek), serif;
-  font-size: 1.12rem;
+  font-size: 1.05rem;
   color: #38bdf8;
-  line-height: 2;
+  line-height: 1.8;
+}
+
+/* ========================================================
+   SCRIPTURE4ALL INTERLINEAR OFFICIAL STANDARD (HÌNH 1)
+   Exact word-by-word stacked column presentation matching
+   Scripture4All.org Online Interlinear (Hebrew WLC & Greek ScrTR)
+   ======================================================== */
+.s4a-interlinear-wrapper,
+.interlinear-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.85rem 0.65rem;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.08));
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 0.25rem;
+}
+
+.s4a-interlinear-header,
+.interlinear-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border-subtle, rgba(0, 0, 0, 0.1));
+}
+
+.s4a-source-badge,
+.interlinear-header-bar .source-tag {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0284c7;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-s4a-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  background: #0284c7;
+  color: #fff !important;
+  text-decoration: none !important;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-s4a-link:hover {
+  background: #0369a1;
+  transform: translateY(-1px);
+}
+
+.s4a-interlinear-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.s4a-interlinear-content.rtl-flow,
+.interlinear-container.rtl-direction,
+.interlinear-container.rtl-direction .interlinear-words-grid {
+  direction: rtl;
+}
+
+.s4a-interlinear-content.ltr-flow,
+.interlinear-container.ltr-direction,
+.interlinear-container.ltr-direction .interlinear-words-grid {
+  direction: ltr;
+}
+
+.s4a-verse-tag {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-muted, #64748b);
+  padding-top: 0.15rem;
+  min-width: 36px;
+  user-select: none;
+}
+
+.s4a-words-stream,
+.interlinear-words-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.35rem 1.15rem;
+  flex: 1;
+}
+
+/* Từng Cột Chữ (Vertical Stacked Column) - Chuẩn Hình 1 */
+.s4a-word-col,
+.interlinear-word-tile {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.3;
+  direction: ltr; /* Chữ La-tinh luôn viết từ trái sang phải trong từng cột */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-width: 52px;
+}
+
+.s4a-interlinear-content.rtl-flow .s4a-word-col,
+.interlinear-container.rtl-direction .interlinear-word-tile {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* Dòng 1: Chữ Gốc (Greek / Hebrew) */
+.s4a-orig,
+.tile-orig {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary, #111827);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.s4a-orig.hebrew-text,
+.tile-orig.orig-hebrew {
+  font-family: "SBL Hebrew", "Ezra SIL", "Times New Roman", serif;
+  font-size: 1.4rem;
+  direction: rtl;
+  color: var(--text-primary, #111827);
+}
+
+.s4a-orig.greek-text,
+.tile-orig.orig-greek {
+  font-family: "SBL Greek", "Palatino Linotype", "Times New Roman", serif;
+  text-transform: uppercase;
+}
+
+/* Dòng 2: Phiên Âm (Transliteration) */
+.s4a-translit,
+.tile-translit {
+  font-size: 0.82rem;
+  color: var(--text-secondary, #374151);
+  font-family: var(--font-ui, sans-serif);
+  margin-bottom: 2px;
+  font-style: normal !important;
+}
+
+/* Dòng 3: Mã Strong's */
+.s4a-strong,
+.tile-strong {
+  font-size: 0.72rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #6b7280;
+  background: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 1px;
+}
+
+/* Dòng 4: Phân Tích Ngữ Pháp (Parsing) */
+.s4a-pos {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-bottom: 2px;
+}
+
+/* Dòng 5: Nghĩa Đen (Literal Gloss) - MÀU XANH CYAN/TEAL ĐÚNG NHƯ MŨI TÊN ĐỎ HÌNH 1 */
+.s4a-gloss,
+.tile-gloss {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #0891b2 !important; /* CYAN / TEAL */
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  letter-spacing: 0.2px;
+}
+
+/* Dòng 6: Nghĩa Phụ / Tiếng Việt - MÀU XANH LÁ ĐÚNG NHƯ HÌNH 1 */
+.s4a-subgloss {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #16a34a !important; /* GREEN */
+}
+
+/* Theme Dark Overrides */
+[data-theme="dark"] .s4a-interlinear-wrapper,
+[data-theme="dark"] .interlinear-container {
+  background: var(--bg-surface, #1e293b);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .s4a-orig,
+[data-theme="dark"] .tile-orig {
+  color: #f8fafc;
+}
+[data-theme="dark"] .s4a-orig.hebrew-text,
+[data-theme="dark"] .tile-orig.orig-hebrew {
+  color: #fbbf24;
+}
+[data-theme="dark"] .s4a-orig.greek-text,
+[data-theme="dark"] .tile-orig.orig-greek {
+  color: #f1f5f9;
+}
+[data-theme="dark"] .s4a-translit,
+[data-theme="dark"] .tile-translit {
+  color: #cbd5e1;
+}
+[data-theme="dark"] .s4a-strong,
+[data-theme="dark"] .tile-strong {
+  color: #94a3b8;
+}
+[data-theme="dark"] .s4a-pos {
+  color: #64748b;
+}
+[data-theme="dark"] .s4a-gloss,
+[data-theme="dark"] .tile-gloss {
+  color: #38bdf8 !important; /* Bright Cyan */
+}
+[data-theme="dark"] .s4a-subgloss {
+  color: #4ade80 !important; /* Bright Green */
 }
 
 .strongs-badge {
@@ -1172,6 +1403,63 @@
   border-color: #ea7a8f;
 }
 
+/* Model Badge */
+.floating-ai-model-badge {
+  font-size: 0.68rem;
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold-border);
+  padding: 0.1rem 0.45rem;
+  border-radius: 10px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Agentic Roles Selector Bar (Kimchi-Style) */
+.floating-ai-role-bar {
+  display: flex;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.35rem 0.75rem;
+  gap: 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.floating-ai-role-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.fab-role-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.fab-role-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.fab-role-btn.active {
+  background: rgba(212, 175, 55, 0.16);
+  border-color: var(--accent-gold-border);
+  color: var(--accent-gold);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+}
+
 /* Quick Chips Bar */
 .floating-ai-chips-bar {
   padding: 0.5rem 0.8rem;
@@ -1333,6 +1621,87 @@
   color: var(--text-muted);
   text-align: center;
   margin-top: 0.35rem;
+}
+
+/* Kimchi Telemetry Bar & Deep Research Metrics */
+.kimchi-telemetry-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+  margin-bottom: 0.65rem;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.kimchi-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.kimchi-chip.model-chip {
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid var(--accent-gold-border);
+  color: var(--accent-gold);
+}
+
+.kimchi-chip.info-chip {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+}
+
+.kimchi-chip.trans-chip {
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: #34d399;
+}
+
+.kimchi-chip.tsk-chip {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #c084fc;
+}
+
+.kimchi-chip.token-chip {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+}
+
+.kimchi-chip.speed-chip {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.kimchi-chip.deep-mode {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(236, 72, 153, 0.25));
+  border: 1px solid #ec4899;
+  color: #f472b6;
+  font-weight: 700;
+  animation: pulseDeep 2s infinite ease-in-out;
+}
+
+@keyframes pulseDeep {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; box-shadow: 0 0 6px rgba(236, 72, 153, 0.4); }
+}
+
+.fab-ctrl-btn.deep-research-btn.active {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: #a855f7;
+  color: #c084fc;
 }
 
 @media (max-width: 640px) {
@@ -2081,7 +2450,2050 @@
   gap: 0.4rem;
 }
 
+/* ==========================================================================
+   ADMIN CAPABILITIES: ARTICLE STUDIO, MEDIA & DOCS, MODERATION & ANALYTICS
+   ========================================================================== */
 
+/* Header Admin Analytics Button (Thu nhỏ & Hiển thị số lượng độc giả) */
+#admin-analytics-btn {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--accent-gold-border);
+  color: var(--accent-gold-light);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.35rem 0.65rem !important;
+  font-size: 0.78rem !important;
+  gap: 0.35rem !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  transition: all var(--transition-fast);
+}
 
+#admin-analytics-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+  box-shadow: 0 0 12px var(--accent-gold-glow);
+  transform: translateY(-1px);
+}
 
+#admin-analytics-btn:hover i {
+  color: #000 !important;
+}
 
+/* Nút Khách / Quản trị viên (Thu nhỏ) */
+#role-auth-btn {
+  padding: 0.35rem 0.65rem !important;
+  font-size: 0.78rem !important;
+  gap: 0.35rem !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+}
+
+/* Sample Image Selector Buttons */
+.btn-sample-img {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-sample-img:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold-light);
+  background: var(--bg-card);
+}
+
+/* Document & Attachment Boxes */
+.article-documents-box {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Moderation & Status Badges */
+.badge-pending {
+  background: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.4);
+}
+
+.badge-approved {
+  background: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.4);
+}
+
+.badge-rejected {
+  background: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.4);
+}
+
+/* ==========================================================================
+   PRIMARY READING VERSION SELECTOR & MODAL
+   ========================================================================== */
+.primary-version-pill {
+  border-color: rgba(212, 175, 55, 0.4) !important;
+  background: rgba(212, 175, 55, 0.08) !important;
+  font-weight: 600 !important;
+}
+
+.primary-version-pill:hover {
+  border-color: var(--accent-gold) !important;
+  background: rgba(212, 175, 55, 0.18) !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+}
+
+.primary-version-modal-card {
+  max-width: 720px;
+  width: 94%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.primary-version-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.primary-version-category-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.primary-version-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 0.65rem;
+}
+
+.primary-version-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.primary-version-item:hover {
+  border-color: var(--accent-gold-border);
+  background: var(--bg-card);
+  transform: translateY(-1px);
+}
+
+.primary-version-item.active {
+  border-color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.12);
+}
+
+.primary-version-item .pvi-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.primary-version-item .pvi-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.primary-version-item.active .pvi-name {
+  color: var(--accent-gold-light);
+}
+
+.primary-version-item .pvi-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.primary-version-item .pvi-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-gold);
+  white-space: nowrap;
+}
+
+.primary-version-item.active .pvi-badge {
+  background: var(--accent-gold);
+  color: #000;
+}
+
+/* ==========================================================================
+   PARALLEL COMPARISON CARDS WITH INDEPENDENT POPOUT WINDOW TRIGGER
+   ========================================================================== */
+.parallel-verse-card.clickable-popout-card {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.parallel-verse-card.clickable-popout-card:hover {
+  border-color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.04);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.card-popout-btn {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--accent-gold-border);
+  color: var(--accent-gold-light);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.card-popout-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+  border-color: var(--accent-gold);
+}
+
+.parallel-card-footer-hint {
+  margin-top: 0.65rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-style: italic;
+}
+
+.parallel-verse-card.clickable-popout-card:hover .parallel-card-footer-hint {
+  color: var(--accent-gold-light);
+}
+
+/* ==========================================================================
+   INDEPENDENT POPOUT READING WINDOW MODAL
+   ========================================================================== */
+.popout-reader-card {
+  max-width: 820px;
+  width: 95%;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-gold-border);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+  border-radius: 14px;
+}
+
+.popout-reader-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.popout-reader-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.popout-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.popout-tool-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.popout-tool-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+  border-color: var(--accent-gold);
+}
+
+.popout-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.popout-ref-tag {
+  font-family: var(--font-brand);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-gold-light);
+  letter-spacing: 0.05em;
+}
+
+.popout-reader-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+  max-height: 60vh;
+}
+
+.popout-verse-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.popout-verse-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.popout-verse-item.verse-focus-target {
+  background: rgba(212, 175, 55, 0.14);
+  border-left-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.18);
+}
+
+.popout-vnum {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  min-width: 26px;
+  font-family: var(--font-ui);
+}
+
+.popout-vtext {
+  font-family: var(--font-bible);
+  font-size: 1.1rem;
+  line-height: 1.85;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.popout-reader-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.popout-hint-text {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ==========================================================================
+   BEREA KIMCHI-GRADE AI HEADER & NAV PROMINENCE
+   ========================================================================== */
+.header-ai-pill {
+  background: rgba(212, 175, 55, 0.12) !important;
+  border: 1.5px solid var(--accent-gold) !important;
+  color: var(--accent-gold) !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all var(--transition-fast);
+}
+
+.header-ai-pill:hover {
+  background: rgba(212, 175, 55, 0.25) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+}
+
+.header-ai-pill i {
+  color: var(--accent-gold);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.nav-btn.ai-nav-btn {
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  color: var(--accent-gold) !important;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-btn.ai-nav-btn:hover {
+  background: rgba(212, 175, 55, 0.15) !important;
+  border-color: var(--accent-gold) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+/* ==========================================================================
+   12. MOBILE BOTTOM NAVIGATION & THUMB-ZONE CONTROLS
+   ========================================================================== */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 58px;
+  background: rgba(13, 17, 23, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid var(--border-subtle);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.45);
+  z-index: 1150;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 0.5rem;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+@media (max-width: 991px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+.mobile-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 4px 0;
+  border-radius: 8px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-item i {
+  font-size: 1.15rem;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.mobile-nav-item:active {
+  transform: scale(0.92);
+}
+
+.mobile-nav-item.active {
+  color: var(--accent-gold);
+}
+
+.mobile-nav-item.active i {
+  color: var(--accent-gold);
+  filter: drop-shadow(0 0 6px var(--accent-gold-glow));
+  transform: translateY(-2px);
+}
+
+/* Mobile Menu Card */
+.mobile-menu-card {
+  max-width: 480px !important;
+  width: 94vw !important;
+  border-radius: 16px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--accent-gold-border) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7) !important;
+  overflow: hidden;
+}
+
+.mobile-menu-body {
+  padding: 1.25rem;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.mobile-menu-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.mobile-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.mobile-menu-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.mobile-menu-btn i {
+  font-size: 1.25rem;
+  color: var(--accent-gold);
+}
+
+.mobile-menu-btn:hover,
+.mobile-menu-btn:active {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+}
+
+.mobile-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mobile-menu-row .row-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mobile-menu-row i {
+  color: var(--accent-gold);
+}
+
+.mobile-menu-row:hover,
+.mobile-menu-row:active {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--accent-gold-border);
+}
+
+/* ==========================================================================
+   13. DIRECT PARALLEL COMPARISON CARDS (CHẾ ĐỘ ĐỐI CHIẾU SONG SONG TRỰC TIẾP)
+   ========================================================================== */
+.parallel-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.verse-compare-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.verse-compare-card:hover {
+  border-color: var(--accent-gold-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.verse-compare-card.active {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.compare-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.55rem;
+  margin-bottom: 0.55rem;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.compare-verse-num {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.compare-quick-drawer-btn {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--accent-gold-border);
+  color: var(--accent-gold);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all var(--transition-fast);
+}
+
+.compare-quick-drawer-btn:hover {
+  background: var(--accent-gold);
+  color: #0a0d14;
+}
+
+.compare-translations-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.compare-trans-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  line-height: 1.65;
+  font-size: 0.98rem;
+}
+
+.compare-trans-pill {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  min-width: 42px;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+.compare-trans-pill.trans-btt {
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--accent-gold);
+  border-color: var(--accent-gold-border);
+}
+
+.compare-trans-pill.trans-bd2011 {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.compare-trans-pill.trans-kjv,
+.compare-trans-pill.trans-esv {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.compare-trans-pill.trans-ede,
+.compare-trans-pill.trans-jarai,
+.compare-trans-pill.trans-bru {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.compare-trans-text {
+  font-family: var(--font-bible);
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.parallel-header-chips {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.parallel-chip-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.parallel-version-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold-border);
+}
+
+/* ==========================================================================
+   THEME PALETTE & TYPOGRAPHY STUDIO MODAL
+   ========================================================================== */
+.theme-modal-card {
+  max-width: 760px;
+  width: 95%;
+}
+
+.theme-modal-body {
+  padding: 1rem 0;
+  overflow-y: auto;
+  max-height: 68vh;
+}
+
+.theme-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.85rem;
+}
+
+.theme-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-medium);
+  border-radius: 12px;
+  padding: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-card:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.theme-card.active {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 16px var(--accent-gold-glow);
+  background: var(--bg-card-hover);
+}
+
+.theme-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.theme-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-active-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--accent-gold-border);
+  padding: 2px 7px;
+  border-radius: 12px;
+  display: none;
+}
+
+.theme-card.active .theme-active-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.theme-swatches-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.theme-swatch-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.theme-preview-strip {
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: var(--font-bible);
+  line-height: 1.4;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.theme-desc {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* Font Size Selector */
+.font-size-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+}
+
+.font-size-btn {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.font-size-btn:hover {
+  border-color: var(--accent-gold);
+}
+
+.font-size-btn.active {
+  border-color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--accent-gold);
+  font-weight: 700;
+  box-shadow: 0 0 12px var(--accent-gold-glow);
+}
+
+.font-preview-char {
+  font-family: var(--font-bible);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.font-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.font-size-btn.active .font-label {
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+/* Live Preview Box */
+.theme-live-preview-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 8px;
+  padding: 0.95rem 1.25rem;
+  margin-top: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.preview-verse-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.preview-verse-text {
+  font-family: var(--font-bible);
+  font-size: var(--bible-font-size);
+  line-height: var(--bible-line-height);
+  color: var(--text-primary);
+}
+
+.theme-modal-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ==========================================================================
+   15. BIBLEHUB TSK & KINH THÁNH ĐỐI CHIẾU (BẢN TRUYỀN THỐNG 1925)
+   ========================================================================== */
+.tsk-parallel-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-family: var(--font-ui);
+}
+
+.tsk-block-Subheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.tsk-edition-tag {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tsk-external-link {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all var(--transition-fast);
+}
+
+.tsk-external-link:hover {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold-border);
+}
+
+.tsk-phrase-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.45rem 0.6rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid var(--accent-gold);
+  border-radius: 0 6px 6px 0;
+}
+
+.tsk-phrase-heading {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-gold-light, var(--accent-gold));
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.tsk-anchor-vi {
+  color: var(--accent-gold);
+}
+
+.tsk-anchor-en {
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.tsk-verse-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.06);
+}
+
+.tsk-verse-row:last-child {
+  border-bottom: none;
+}
+
+.tsk-ref-link {
+  align-self: flex-start;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--accent-gold-border);
+  color: var(--accent-gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.14rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all var(--transition-fast);
+}
+
+.tsk-ref-link:hover,
+.tsk-ref-link:active {
+  background: var(--accent-gold);
+  color: #000;
+}
+
+.tsk-verse-quote {
+  font-family: var(--font-bible);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.tsk-more-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+}
+
+.tsk-more-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.tsk-ref-chip {
+  font-size: 0.71rem !important;
+  padding: 0.1rem 0.42rem !important;
+  background: var(--bg-surface) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.tsk-ref-chip:hover {
+  background: var(--accent-gold) !important;
+  color: #000 !important;
+}
+
+.tsk-lang-toggle-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.22rem 0.55rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tsk-lang-toggle-btn.active {
+  background: var(--accent-gold);
+  color: #000;
+  border-color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   16. DEDICATED TAB: "KT ĐỐI CHIẾU" (#tsk-view - https://biblehub.com/tsk/)
+   Supports 2 Full Selectable Editions:
+   1. Vietnamese (Bản Truyền Thống 1925 - BTT)
+   2. English (Original BibleHub Treasury of Scripture Knowledge)
+   ========================================================================== */
+#tsk-view {
+  width: 100%;
+  min-height: calc(100vh - 120px);
+}
+
+.tsk-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 3.5rem 1.5rem;
+}
+
+.tsk-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+/* Hero Banner & 2-Edition Language Selector */
+.tsk-hero-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-gold-border);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 12px;
+  padding: 1.1rem 1.35rem;
+  box-shadow: var(--shadow-md);
+}
+
+.tsk-hero-left {
+  flex: 1;
+  min-width: 280px;
+}
+
+.tsk-breadcrumbs {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  letter-spacing: 0.03em;
+  margin-bottom: 0.3rem;
+}
+
+.tsk-hero-title {
+  font-family: var(--font-brand);
+  font-size: 1.32rem;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tsk-hero-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* 2 Editions Toggle Buttons (Vietnamese BTT 1925 vs English BibleHub TSK) */
+.tsk-edition-selector {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.tsk-edition-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-medium);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.tsk-edition-btn i {
+  font-size: 1.15rem;
+  color: var(--accent-gold);
+}
+
+.tsk-edition-btn .ed-main {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tsk-edition-btn .ed-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.tsk-edition-btn:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-1px);
+}
+
+.tsk-edition-btn.active {
+  background: rgba(212, 175, 55, 0.16);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 14px var(--accent-gold-glow);
+}
+
+.tsk-edition-btn.active .ed-main {
+  color: var(--accent-gold);
+}
+
+/* Navigation Toolbar (66 Books Index, Book/Chapter/Verse Selectors, Prev/Next) */
+.tsk-nav-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 0.9rem 1.15rem;
+}
+
+.tsk-nav-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.tsk-nav-selectors,
+.tsk-nav-extra-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tsk-dir-btn,
+.tsk-scope-btn,
+.tsk-biblehub-origin-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.42rem 0.75rem;
+  border-radius: 7px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.tsk-dir-btn:hover,
+.tsk-scope-btn:hover,
+.tsk-biblehub-origin-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.tsk-dir-btn.active,
+.tsk-scope-btn.active {
+  background: var(--accent-gold);
+  color: #000;
+  border-color: var(--accent-gold);
+}
+
+.tsk-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 0.4rem 0.65rem;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+/* Prominent Left & Right Split Verse Navigation Bar */
+.tsk-prev-next-split-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--accent-gold-border);
+}
+
+.tsk-arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 210px;
+  padding: 0.65rem 1.15rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(212, 175, 55, 0.08) 100%);
+  border: 2px solid var(--accent-gold);
+  border-radius: 10px;
+  color: var(--accent-gold-light, #f3e5ab);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 12px rgba(212, 175, 55, 0.22);
+  transition: all var(--transition-fast);
+}
+
+.tsk-arrow-btn.tsk-arrow-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.tsk-arrow-btn.tsk-arrow-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.tsk-arrow-btn .arrow-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  color: #0a0d14;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.tsk-arrow-btn .arrow-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.tsk-arrow-btn .arrow-main {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+}
+
+.tsk-arrow-btn .arrow-sub {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tsk-arrow-btn:hover {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #b8860b 100%);
+  border-color: #fff;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+}
+
+.tsk-arrow-btn:hover .arrow-main,
+.tsk-arrow-btn:hover .arrow-sub {
+  color: #0a0d14;
+}
+
+.tsk-arrow-btn:hover .arrow-icon {
+  background: #0a0d14;
+  color: var(--accent-gold);
+}
+
+.tsk-coord-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.tsk-coord-pill {
+  font-family: var(--font-brand);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  padding: 0.5rem 1.25rem;
+  background: rgba(212, 175, 55, 0.14);
+  border: 1.5px solid var(--accent-gold);
+  border-radius: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 0 14px var(--accent-gold-glow);
+}
+
+/* 66 Books Directory Panel (Index of /tsk/) */
+.tsk-directory-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--accent-gold-border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.tsk-dir-section h4 {
+  font-size: 0.86rem;
+  color: var(--accent-gold);
+  margin: 0 0 0.6rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tsk-dir-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.4rem;
+}
+
+.tsk-dir-book-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.38rem 0.65rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tsk-dir-book-chip .dir-bname {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tsk-dir-book-chip .dir-bslug {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.tsk-dir-book-chip:hover,
+.tsk-dir-book-chip.active {
+  background: rgba(212, 175, 55, 0.16);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* Verse Number Pills Bar */
+.tsk-verse-pills-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.tsk-verse-pills-bar .vbar-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-right: 0.25rem;
+}
+
+.tsk-verse-pills-bar .vbar-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.tsk-vnum-pill {
+  min-width: 28px;
+  height: 26px;
+  padding: 0 0.4rem;
+  border-radius: 5px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tsk-vnum-pill:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.tsk-vnum-pill.active {
+  background: var(--accent-gold);
+  color: #000;
+  border-color: var(--accent-gold);
+  font-weight: 700;
+}
+
+/* Main Verse Banner (#topver) */
+.tsk-topver-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--accent-gold-border);
+  border-top: 3px solid var(--accent-gold);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.tsk-topver-banner .topver-coord {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+}
+
+.tsk-topver-banner .topver-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tsk-topver-banner .topver-text {
+  font-family: var(--font-bible);
+  font-size: 1.18rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.tsk-topver-banner .topver-subtext {
+  margin-top: 0.45rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed var(--border-subtle);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* 2-Column Layout (#leftbox + #centbox & #combox) */
+.tsk-main-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.85fr) minmax(300px, 1fr);
+  gap: 1.15rem;
+  align-items: start;
+}
+
+.tsk-col-leftbox,
+.tsk-side-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.tsk-col-sidebox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.tsk-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.8rem 1.1rem;
+  background: rgba(212, 175, 55, 0.08);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tsk-section-header h3 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.tsk-count-badge {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold-border);
+}
+
+.tsk-leftbox-body {
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* TSK Phrase Heading Block (.hdg) & Cross-Reference Verses (.tskverse) */
+.tsk-hdg-block {
+  border-left: 3px solid var(--accent-gold);
+  background: rgba(255, 255, 255, 0.015);
+  border-radius: 0 8px 8px 0;
+  padding: 0.65rem 0.9rem;
+}
+
+.tsk-hdg-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.55rem;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.tsk-hdg-main {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.tsk-hdg-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.tsk-verses-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.tsk-verse-entry {
+  padding: 0.5rem 0.65rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 7px;
+  transition: border-color var(--transition-fast);
+}
+
+.tsk-verse-entry:hover {
+  border-color: var(--accent-gold-border);
+}
+
+.tsk-verse-entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.tsk-verse-anchor-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #38bdf8;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+}
+
+.tsk-verse-anchor-link:hover {
+  color: var(--accent-gold);
+  text-decoration: underline;
+}
+
+.tsk-peek-modal-btn {
+  font-size: 0.7rem !important;
+  padding: 0.1rem 0.45rem !important;
+}
+
+.tsk-verse-entry-text {
+  font-family: var(--font-bible);
+  font-size: 0.96rem;
+  line-height: 1.58;
+  color: var(--text-primary);
+}
+
+/* Sidebox: Chapter Outline (#centbox) & Jump Links */
+.tsk-outline-body,
+.tsk-parallel-side-body {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.tsk-outline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.tsk-outline-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.tsk-outline-vbtn,
+.tsk-focus-single-btn {
+  background: rgba(212, 175, 55, 0.14);
+  border: 1px solid var(--accent-gold-border);
+  color: var(--accent-gold);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tsk-outline-vbtn:hover,
+.tsk-focus-single-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+}
+
+.tsk-outline-desc {
+  color: var(--text-secondary);
+}
+
+.tsk-jump-box {
+  padding-top: 0.55rem;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.tsk-jump-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.tsk-jump-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tsk-jump-chip {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  color: #38bdf8;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.22rem 0.55rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tsk-jump-chip:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* Sidebox: Parallel Verses (#combox) */
+.tsk-combox-item {
+  padding: 0.5rem 0.65rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 2px solid var(--accent-gold);
+  border-radius: 6px;
+}
+
+.tsk-combox-vname {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 0.2rem;
+}
+
+.tsk-combox-vtext {
+  font-family: var(--font-bible);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.tsk-full-chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.tsk-chapter-verse-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 991px) {
+  .tsk-container {
+    padding: 0.55rem 0.55rem 2.5rem 0.55rem;
+  }
+
+  .tsk-page-wrapper {
+    gap: 0.65rem;
+  }
+
+  /* Ẩn các dòng phụ rườm rà trên điện thoại để tập trung vào 2 bản ngôn ngữ & nội dung đối chiếu */
+  .tsk-breadcrumbs,
+  .tsk-hero-subtitle,
+  .tsk-biblehub-origin-btn,
+  .tsk-edition-btn .ed-sub {
+    display: none !important;
+  }
+
+  .tsk-hero-bar {
+    padding: 0.65rem 0.75rem;
+    gap: 0.5rem;
+    border-radius: 10px;
+  }
+
+  .tsk-hero-left {
+    min-width: 100%;
+  }
+
+  .tsk-hero-title {
+    font-size: 0.96rem;
+    margin: 0;
+  }
+
+  /* 2 Bản English & Vietnamese chia đều 50/50 ngang hàng trên điện thoại */
+  .tsk-edition-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+    width: 100%;
+  }
+
+  .tsk-edition-btn {
+    padding: 0.48rem 0.55rem;
+    gap: 0.4rem;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  .tsk-edition-btn i {
+    font-size: 0.92rem;
+  }
+
+  .tsk-edition-btn .ed-main {
+    font-size: 0.78rem;
+    line-height: 1.2;
+  }
+
+  /* Thanh điều hướng gọn gàng & 2 nút Câu Trước / Câu Tiếp tách 2 bên nổi bật trên điện thoại */
+  .tsk-nav-toolbar {
+    padding: 0.6rem 0.65rem;
+    gap: 0.6rem;
+    border-radius: 10px;
+  }
+
+  .tsk-nav-top-row {
+    gap: 0.4rem;
+  }
+
+  .tsk-nav-selectors {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.4fr 0.9fr 0.9fr;
+    gap: 0.35rem;
+  }
+
+  #tsk-toggle-directory-btn {
+    grid-column: 1 / -1;
+    justify-content: center;
+    padding: 0.38rem 0.6rem;
+    font-size: 0.76rem;
+  }
+
+  .tsk-select {
+    width: 100%;
+    padding: 0.36rem 0.4rem;
+    font-size: 0.78rem;
+  }
+
+  .tsk-nav-extra-actions {
+    width: 100%;
+  }
+
+  #tsk-scope-toggle-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.36rem 0.6rem;
+    font-size: 0.76rem;
+  }
+
+  /* 2 Nút CÂU TRƯỚC (Trái) & CÂU TIẾP (Phải) tách 2 bên và nổi bật rực rỡ trên màn hình điện thoại */
+  .tsk-prev-next-split-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.38rem;
+    width: 100%;
+    padding-top: 0.55rem;
+  }
+
+  .tsk-arrow-btn {
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+    padding: 0.48rem 0.55rem !important;
+    gap: 0.38rem !important;
+    border-width: 1.5px !important;
+    border-radius: 9px !important;
+  }
+
+  .tsk-arrow-btn .arrow-icon {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.72rem !important;
+  }
+
+  .tsk-arrow-btn .arrow-main {
+    font-size: 0.74rem !important;
+    white-space: nowrap !important;
+  }
+
+  .tsk-arrow-btn .arrow-sub {
+    font-size: 0.66rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 92px;
+  }
+
+  .tsk-coord-center {
+    flex: 0 0 auto !important;
+  }
+
+  .tsk-coord-pill {
+    font-size: 0.76rem !important;
+    padding: 0.35rem 0.6rem !important;
+    white-space: nowrap !important;
+  }
+
+  .tsk-coord-pill i {
+    display: none;
+  }
+
+  /* Thanh số câu cuộn ngang 1 dòng gọn gàng trên điện thoại */
+  .tsk-verse-pills-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.42rem 0.6rem;
+    gap: 0.35rem;
+  }
+
+  .tsk-verse-pills-bar .vbar-label {
+    white-space: nowrap;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+  }
+
+  .tsk-verse-pills-bar .vbar-pills {
+    flex-wrap: nowrap;
+    gap: 0.28rem;
+  }
+
+  .tsk-vnum-pill {
+    flex-shrink: 0;
+  }
+
+  /* Banner câu gốc & Danh sách câu đối chiếu gọn sắc nét trên điện thoại */
+  .tsk-topver-banner {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .tsk-topver-banner .topver-text {
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .tsk-main-columns {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .tsk-section-header {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .tsk-section-header h3 {
+    font-size: 0.84rem;
+  }
+
+  .tsk-leftbox-body {
+    padding: 0.65rem 0.7rem;
+    gap: 0.75rem;
+  }
+
+  .tsk-hdg-block {
+    padding: 0.5rem 0.65rem;
+  }
+
+  .tsk-verse-entry {
+    padding: 0.45rem 0.55rem;
+  }
+
+  .tsk-verse-entry-text {
+    font-size: 0.92rem;
+    line-height: 1.52;
+  }
+}

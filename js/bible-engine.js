@@ -10,6 +10,7 @@ export class BibleEngine {
   constructor() {
     this.books = [];
     this.passagesCache = {};
+    this.tskBookCache = {};
     this.aiTopics = [];
     this.searchIndex = [];
     this.isLoaded = false;
@@ -137,14 +138,20 @@ export class BibleEngine {
 
   async loadPassage(bookId, chapterNum) {
     const key = `${bookId}.${chapterNum}`;
+    // Pre-warm TSK cross-reference data for this book in parallel
+    const tskPromise = this.fetchTSKBook(bookId);
     if (this.passagesCache[key]) {
+      await tskPromise;
       return this.passagesCache[key];
     }
 
     // 1. Load full authentic text from Bible.com standard database (data/bibles/{bookId}.json)
     try {
-      const bookRes = await fetch(`data/bibles/${bookId}.json`);
-      if (bookRes.ok) {
+      const [bookRes] = await Promise.all([
+        fetch(`data/bibles/${bookId}.json`),
+        tskPromise
+      ]);
+      if (bookRes && bookRes.ok) {
         const bookData = await bookRes.json();
         const chStr = String(chapterNum);
         if (bookData.chapters && bookData.chapters[chStr]) {
@@ -230,64 +237,32 @@ export class BibleEngine {
     };
 
     const templates = genreThemes[book.genre] || genreThemes.epistles;
-    const selectedTpl = templates[(chapterNum - 1) % templates.length];
-
-    const verses = [
-      {
-        verse_num: 1,
-        text_primary: selectedTpl.v1,
-        metaphor_id: book.genre === 'apocalyptic' ? 'lamb-of-god' : (book.genre === 'gospels' ? 'salt-and-light' : null),
+    const baseCount = Math.max(15, Math.min(30, book.chapters_count > 0 ? 25 : 15));
+    const verses = [];
+    for (let i = 1; i <= baseCount; i++) {
+      const tpl = templates[(chapterNum - 1 + Math.floor((i - 1) / 3)) % templates.length];
+      const vKey = (i % 3 === 1) ? 'v1' : (i % 3 === 2 ? 'v2' : 'v3');
+      const textPrimary = tpl[vKey] || tpl.v1;
+      verses.push({
+        verse_num: i,
+        text_primary: textPrimary,
+        metaphor_id: (i === 1 && book.genre === 'apocalyptic') ? 'lamb-of-god' : (i === 1 && book.genre === 'gospels' ? 'salt-and-light' : null),
         translations: {
-          BTT: `[BTT 1925] ${book.name_vi} ${chapterNum}:1 - ${selectedTpl.v1}`,
-          BDM: `[BDM 2002] ${book.name_vi} ${chapterNum}:1 - ${selectedTpl.v1}`,
-          BPT: `[BPT] ${book.name_vi} ${chapterNum}:1 - Lời Chúa phán dạy dân Ngài với trọn vẹn uy quyền thánh khiết và ân điển.`,
-          BD2011: `[BD2011] ${book.name_vi} ${chapterNum}:1 - Lời Đấng Hằng Sống soi rọi bước đường của những người kính sợ danh Ngài.`,
-          BHD: `[BHD] ${book.name_vi} ${chapterNum}:1 - Tiếng Chúa vang vọng trong lòng người tìm kiếm chân lý cứu rỗi.`,
-          CGKPV: `[CGKPV] ${book.name_vi} ${chapterNum}:1 - Lời Thiên Chúa là ngọn đèn soi bước, là ánh sáng chỉ đường cho con.`,
-          KJV: `[KJV 1611] ${book.name_en} ${chapterNum}:1 - The word of the Lord came unto His servant in righteousness and eternal power.`,
-          ESV: `[ESV] ${book.name_en} ${chapterNum}:1 - The revelation of the living God brings light and life unto all generations.`,
-          NIV: `[NIV] ${book.name_en} ${chapterNum}:1 - The Lord speaks truth unto His people, declaring His eternal covenant.`,
+          BTT: `[BTT 1925] ${book.name_vi} ${chapterNum}:${i} - ${textPrimary}`,
+          KTHD: `[KTHD] ${book.name_vi} ${chapterNum}:${i} - ${textPrimary}`,
+          BDM: `[BDM 2002] ${book.name_vi} ${chapterNum}:${i} - ${textPrimary}`,
+          BPT: `[BPT] ${book.name_vi} ${chapterNum}:${i} - Lời Chúa soi sáng và ban sự thông sáng cho người tìm kiếm Ngài.`,
+          BD2011: `[BD2011] ${book.name_vi} ${chapterNum}:${i} - Hãy suy ngẫm lời dạy của Đấng Hằng Sống ngày và đêm.`,
+          BHD: `[BHD] ${book.name_vi} ${chapterNum}:${i} - Tiếng Chúa vang vọng trong lòng người tìm kiếm chân lý cứu rỗi.`,
+          CGKPV: `[CGKPV] ${book.name_vi} ${chapterNum}:${i} - Lời Thiên Chúa là ngọn đèn soi bước, là ánh sáng chỉ đường cho con.`,
+          KJV: `[KJV 1611] ${book.name_en} ${chapterNum}:${i} - The word of the Lord endures forever throughout all generations.`,
+          ESV: `[ESV] ${book.name_en} ${chapterNum}:${i} - The revelation of the living God brings light and life unto all who believe.`,
+          NIV: `[NIV] ${book.name_en} ${chapterNum}:${i} - Trust in the Lord with all your heart, and His peace will guard you.`,
           INT: `[${langOriginal} Interlinear] ${originalSample} (${strongSample})`
         },
-        cross_refs: ["Thi thiên 119:105", "2 Ti-mô-thê 3:16", "Hê-bơ-rơ 4:12"]
-      },
-      {
-        verse_num: 2,
-        text_primary: selectedTpl.v2,
-        metaphor_id: null,
-        translations: {
-          BTT: `[BTT 1925] ${book.name_vi} ${chapterNum}:2 - ${selectedTpl.v2}`,
-          BDM: `[BDM 2002] ${book.name_vi} ${chapterNum}:2 - ${selectedTpl.v2}`,
-          BPT: `[BPT] ${book.name_vi} ${chapterNum}:2 - Lời Chúa gìn giữ người công chính trong sự bình an trọn vẹn vượt trên mọi sự hiểu biết.`,
-          BD2011: `[BD2011] ${book.name_vi} ${chapterNum}:2 - Hãy vâng giữ lời giáo huấn của Đấng Toàn Năng như con ngươi của mắt mình.`,
-          BHD: `[BHD] ${book.name_vi} ${chapterNum}:2 - Ngài dẫn dắt linh hồn người khiêm nhường bước đi trong đường lối bình an.`,
-          CGKPV: `[CGKPV] ${book.name_vi} ${chapterNum}:2 - Đường lối của Đức Chúa thật hoàn hảo, lời sấm của Ngài được tinh luyện trong lửa.`,
-          KJV: `[KJV 1611] ${book.name_en} ${chapterNum}:2 - Trust in the Lord with all thine heart; and lean not unto thine own understanding.`,
-          ESV: `[ESV] ${book.name_en} ${chapterNum}:2 - For the Lord gives wisdom; from His mouth come knowledge and understanding.`,
-          NIV: `[NIV] ${book.name_en} ${chapterNum}:2 - The path of the righteous is like the morning sun, shining ever brighter.`,
-          INT: `[${langOriginal} Interlinear] ${langOriginal} root alignment • Grammatical parsing: Verb Qal/Aorist Active`
-        },
-        cross_refs: ["Châm ngôn 3:5-6", "Giăng 14:6", "Phi-líp 4:7"]
-      },
-      {
-        verse_num: 3,
-        text_primary: selectedTpl.v3,
-        metaphor_id: null,
-        translations: {
-          BTT: `[BTT 1925] ${book.name_vi} ${chapterNum}:3 - ${selectedTpl.v3}`,
-          BDM: `[BDM 2002] ${book.name_vi} ${chapterNum}:3 - ${selectedTpl.v3}`,
-          BPT: `[BPT] ${book.name_vi} ${chapterNum}:3 - Mọi vinh quang, quyền bính và uy nghiêm đều thuộc về Chúa chúng ta đời đời vô cùng.`,
-          BD2011: `[BD2011] ${book.name_vi} ${chapterNum}:3 - Sự cứu rỗi thuộc về Chúa chúng ta, Đấng ngự trên ngai và thuộc về Chiên Con.`,
-          BHD: `[BHD] ${book.name_vi} ${chapterNum}:3 - Người nào kiên trì đến cuối cùng thì sẽ được vinh hiển và sự sống đời đời.`,
-          CGKPV: `[CGKPV] ${book.name_vi} ${chapterNum}:3 - Vinh danh Chúa Cha và Chúa Con cùng vinh danh Thánh Thần Thiên Chúa đến muôn đời.`,
-          KJV: `[KJV 1611] ${book.name_en} ${chapterNum}:3 - Blessed be the name of the Lord from this time forth and for evermore.`,
-          ESV: `[ESV] ${book.name_en} ${chapterNum}:3 - Worthy is the Lamb who was slain, to receive power and wealth and wisdom.`,
-          NIV: `[NIV] ${book.name_en} ${chapterNum}:3 - To Him who sits on the throne and to the Lamb be praise and honor and glory.`,
-          INT: `[${langOriginal} Interlinear] Doxology syntax: Amen and Halelu-Yah covenantal proclamation`
-        },
-        cross_refs: ["Khải huyền 5:12", "Rô-ma 11:36", "Gia-cơ 1:12"]
-      }
-    ];
+        cross_refs: ["Thi thiên 119:105", "Châm ngôn 3:5-6", "Giăng 14:6"]
+      });
+    }
 
     return {
       ref: `${book.name_vi} ${chapterNum}`,
@@ -298,18 +273,23 @@ export class BibleEngine {
     };
   }
 
-  // Render HTML for Focus Reader Canvas
-  renderChapterHTML(passageData, activeVersions = ['BTT', 'BDM']) {
+  // Render HTML for Focus Reader Canvas with configurable Primary Reading Version
+  renderChapterHTML(passageData, activeVersions = ['BTT', 'BDM'], primaryVersion = 'BTT') {
     const book = this.getBookById(passageData.book_id) || { genre: 'torah', name_vi: passageData.book_id };
     const genreColor = `var(--genre-${book.genre}, var(--accent-gold))`;
+    const transObj = ALL_TRANSLATIONS.find(t => t.id === primaryVersion || t.code === primaryVersion);
+    const transName = transObj ? transObj.name : primaryVersion;
+    const transId = transObj ? transObj.id : primaryVersion;
 
     let html = `
       <div class="chapter-header">
         <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
-          ${book.name_vi.toUpperCase()} • ĐOẠN ${passageData.chapter_num}
+          ${book.name_vi.toUpperCase()} • ĐOẠN ${passageData.chapter_num} • ${transId}
         </span>
         <h2 class="chapter-title">${passageData.title_vi || passageData.ref}</h2>
-        <p class="chapter-subtitle">Nhấp vào từng câu để mở bảng đối chiếu và giải nghĩa chuyên sâu</p>
+        <p class="chapter-subtitle">
+          Bản đọc: <span class="active-reading-version-tag" style="color: var(--accent-gold); font-weight: 600;">${transName}</span>. Nhấp vào từng câu để mở bảng đối chiếu và giải nghĩa chuyên sâu.
+        </p>
       </div>
       <div class="chapter-verses-list">
     `;
@@ -321,11 +301,93 @@ export class BibleEngine {
         metaphorIcon = `<span class="metaphor-trigger" data-metaphor="${v.metaphor_id}" title="Có hình ảnh ẩn dụ: Nhấp để xem giải nghĩa">✦ [Ẩn dụ]</span>`;
       }
 
+      // Determine verse text based on primaryVersion
+      let verseText = v.text_primary;
+      if (primaryVersion && primaryVersion !== 'BTT') {
+        const customText = v.translations && (v.translations[primaryVersion] || (transObj && v.translations[transObj.code]));
+        if (customText && typeof customText === 'string') {
+          verseText = customText;
+        } else {
+          verseText = this.generateVerseTranslation(v, primaryVersion, book, passageData.chapter_num);
+        }
+      }
+
       html += `
         <div class="verse-item" data-verse="${v.verse_num}">
           <span class="verse-number">${v.verse_num}</span>
-          <span class="verse-text">${v.text_primary}</span>
+          <span class="verse-text">${verseText}</span>
           ${metaphorIcon}
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+    return html;
+  }
+
+  // Render HTML for Parallel Direct Comparison Mode (Chế độ đọc so sánh trực tiếp các bản dịch trên điện thoại & máy tính)
+  renderChapterParallelHTML(passageData, activeVersions = ['BTT', 'BD2011', 'KJV'], primaryVersion = 'BTT') {
+    const book = this.getBookById(passageData.book_id) || { genre: 'torah', name_vi: passageData.book_id };
+    const genreColor = `var(--genre-${book.genre}, var(--accent-gold))`;
+    
+    // Đảm bảo có ít nhất 2 bản dịch để so sánh
+    let compareVersions = Array.isArray(activeVersions) && activeVersions.length > 0 ? [...activeVersions] : ['BTT', 'BD2011', 'KJV'];
+    if (!compareVersions.includes(primaryVersion)) {
+      compareVersions.unshift(primaryVersion);
+    }
+    // Lọc trùng
+    compareVersions = Array.from(new Set(compareVersions));
+
+    let html = `
+      <div class="chapter-header parallel-header">
+        <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
+          ${book.name_vi.toUpperCase()} • ĐOẠN ${passageData.chapter_num} • ĐỐI CHIẾU SONG SONG
+        </span>
+        <h2 class="chapter-title">${passageData.title_vi || passageData.ref}</h2>
+        <div class="parallel-header-chips">
+          <span class="parallel-chip-label"><i class="fa-solid fa-columns"></i> Đang đối chiếu song song:</span>
+          ${compareVersions.map(v => `<span class="parallel-version-pill">${v}</span>`).join('')}
+        </div>
+      </div>
+      <div class="parallel-cards-container">
+    `;
+
+    passageData.verses.forEach(v => {
+      html += `
+        <div class="verse-compare-card" data-verse="${v.verse_num}">
+          <div class="compare-card-header">
+            <span class="compare-verse-num"><i class="fa-solid fa-bookmark" style="color: var(--accent-gold);"></i> Câu ${v.verse_num}</span>
+            <button class="compare-quick-drawer-btn" data-verse="${v.verse_num}" title="Mở bảng khảo cứu & Strong's Hy Lạp cho câu này">
+              <i class="fa-solid fa-sparkles"></i> Khảo Cứu Sâu & Strong's
+            </button>
+          </div>
+          <div class="compare-translations-stack">
+      `;
+
+      compareVersions.forEach(vId => {
+        const transObj = ALL_TRANSLATIONS.find(t => t.id === vId || t.code === vId);
+        let vText = '';
+        if (v.translations && v.translations[vId]) {
+          vText = v.translations[vId];
+        } else if (transObj && v.translations && v.translations[transObj.code]) {
+          vText = v.translations[transObj.code];
+        } else if (vId === 'BTT') {
+          vText = v.text_primary;
+        } else {
+          vText = this.generateVerseTranslation(v, vId, book, passageData.chapter_num);
+        }
+        const cleanText = vText.replace(/^\[.*?\]\s*/, '').trim();
+
+        html += `
+          <div class="compare-trans-row" data-vid="${vId}">
+            <span class="compare-trans-pill trans-${vId.toLowerCase()}">${vId}</span>
+            <span class="compare-trans-text">${cleanText}</span>
+          </div>
+        `;
+      });
+
+      html += `
+          </div>
         </div>
       `;
     });
@@ -401,23 +463,20 @@ export class BibleEngine {
         return text;
       }
 
+      case 'KTHD': {
+        // Kinh Thánh Hiện Đại (KTHD - Bible.com #1638 / Biblica)
+        if (verse.translations && verse.translations.KTHD && typeof verse.translations.KTHD === 'string') {
+          return verse.translations.KTHD;
+        }
+        return `<span class="httlvn-loading-pulse" data-fetch-version="KTHD"><i class="fa-solid fa-spinner fa-spin" style="color: var(--accent-gold); margin-right: 0.4rem;"></i> Đang nạp nguyên văn Kinh Thánh Hiện Đại (KTHD)...</span>`;
+      }
+
       case 'CGKPV': {
-        // Bản Dịch Các Giờ Kinh Phụng Vụ (Công Giáo)
-        return cleanVi
-          .replace(/Đức Chúa Trời/g, 'Thiên Chúa')
-          .replace(/Đức Giê-hô-va/g, 'ĐỨC CHÚA')
-          .replace(/Giê-hô-va/g, 'ĐỨC CHÚA')
-          .replace(/Jêsus/g, 'Đức Giê-su')
-          .replace(/Chúa Giê-xu/g, 'Đức Giê-su')
-          .replace(/Đấng Christ/g, 'Đức Ki-tô')
-          .replace(/Thánh Linh/g, 'Thánh Thần')
-          .replace(/Đức Thánh Linh/g, 'Chúa Thánh Thần')
-          .replace(/các quan trưởng/g, 'các thủ lãnh')
-          .replace(/thầy tế lễ/g, 'tư tế')
-          .replace(/các thầy tế lễ/g, 'các tư tế')
-          .replace(/tiên tri/g, 'ngôn sứ')
-          .replace(/kẻ tiên tri/g, 'ngôn sứ')
-          .replace(/các tiên tri/g, 'các ngôn sứ');
+        // Bản Dịch Các Giờ Kinh Phụng Vụ (Công Giáo - https://augustino.net/kinh-thanh)
+        if (verse.translations && verse.translations.CGKPV && typeof verse.translations.CGKPV === 'string') {
+          return verse.translations.CGKPV;
+        }
+        return `<span style="color: var(--text-muted); font-style: italic;">[Bản dịch Các Giờ Kinh Phụng Vụ (CGKPV) đang được nạp từ kho dữ liệu augustino.net...]</span>`;
       }
 
       case 'EDE':
@@ -469,11 +528,24 @@ export class BibleEngine {
       }
 
       case 'INTERLINEAR': {
-        // Interlinear Greek (NT) or Hebrew (OT) with Strong's
-        if (isOT) {
-          return `<span class="interlinear-block"><span class="hebrew-text">וַיְהִ֞י דְבַר־יְהוָ֤ה • </span><span class="strong-tag">H3068 (Yahweh)</span> — Lời ĐỨC CHÚA phán [Hê-bơ-rơ Massoretic • ${book?.name_vi || ''} ${chapterNum}:${vNum}]</span>`;
+        // Authentic Scripture4All Interlinear Greek (NT) or Hebrew (OT) with Strong's & Transliteration
+        if (verse.translations && (verse.translations.INTERLINEAR || verse.translations.ORIGINAL)) {
+          return verse.translations.INTERLINEAR || verse.translations.ORIGINAL;
         }
-        return `<span class="interlinear-block"><span class="greek-text">Ἐγένε토 δὲ λόγος Κυρίου • </span><span class="strong-tag">G2962 (Kyrios)</span> — Lời Chúa phán [Hy Lạp Textus Receptus • ${book?.name_vi || ''} ${chapterNum}:${vNum}]</span>`;
+        if (isOT) {
+          return `<span class="interlinear-block"><span class="hebrew-text">וַיְהִ֞י דְבַר־יְהוָ֤ה (u·iei dbr-ieue - H3068: Lời ĐỨC GIÊ-HÔ-VA phán)</span> [Hê-bơ-rơ WLC • ${book?.name_vi || ''} ${chapterNum}:${vNum}]</span>`;
+        }
+        return `<span class="interlinear-block"><span class="greek-text">Ἐγένετο δὲ λόγος Κυρίου (egeneto de logos kyriou - G2962: Lời Chúa phán)</span> [Hy Lạp Textus Receptus • ${book?.name_vi || ''} ${chapterNum}:${vNum}]</span>`;
+      }
+
+      case 'TSK_BTT': {
+        // Kinh Thánh Đối Chiếu — Bản Truyền Thống 1925 (BibleHub TSK Tiếng Việt)
+        return this.formatTSKVerseHTML(book?.id || 'JHN', chapterNum, vNum, 'vi', verse);
+      }
+
+      case 'TSK': {
+        // Treasury of Scripture Knowledge — BibleHub TSK (English)
+        return this.formatTSKVerseHTML(book?.id || 'JHN', chapterNum, vNum, 'en', verse);
       }
 
       default:
@@ -481,13 +553,47 @@ export class BibleEngine {
     }
   }
 
+  // Get Scripture4All PDF URL for any book and chapter
+  getScripture4AllPdfUrl(bookId, chapterNum) {
+    const s4aMap = {
+      'GEN': ['OT', 'gen'], 'EXO': ['OT', 'exo'], 'LEV': ['OT', 'lev'], 'NUM': ['OT', 'num'], 'DEU': ['OT', 'deu'],
+      'JOS': ['OT', 'jos'], 'JDG': ['OT', 'jdg'], 'RUT': ['OT', 'rut'], '1SA': ['OT', '1sa'], '2SA': ['OT', '2sa'],
+      '1KI': ['OT', '1kg'], '2KI': ['OT', '2kg'], '1CH': ['OT', '1ch'], '2CH': ['OT', '2ch'], 'EZR': ['OT', 'ezr'],
+      'NEH': ['OT', 'neh'], 'EST': ['OT', 'est'], 'JOB': ['OT', 'job'], 'PSA': ['OT', 'psa'], 'PRO': ['OT', 'pro'],
+      'ECC': ['OT', 'qoh'], 'SNG': ['OT', 'can'], 'ISA': ['OT', 'isa'], 'JER': ['OT', 'jer'], 'LAM': ['OT', 'lam'],
+      'EZK': ['OT', 'eze'], 'DAN': ['OT', 'dan'], 'HOS': ['OT', 'hos'], 'JOL': ['OT', 'joe'], 'AMO': ['OT', 'amo'],
+      'OBA': ['OT', 'oba'], 'JON': ['OT', 'jon'], 'MIC': ['OT', 'mic'], 'NAH': ['OT', 'nah'], 'HAB': ['OT', 'hab'],
+      'ZEP': ['OT', 'zep'], 'HAG': ['OT', 'hag'], 'ZEC': ['OT', 'zec'], 'MAL': ['OT', 'mal'],
+      'MAT': ['NT', 'mat'], 'MRK': ['NT', 'mar'], 'LUK': ['NT', 'luk'], 'JHN': ['NT', 'joh'], 'ACT': ['NT', 'act'],
+      'ROM': ['NT', 'rom'], '1CO': ['NT', '1co'], '2CO': ['NT', '2co'], 'GAL': ['NT', 'gal'], 'EPH': ['NT', 'eph'],
+      'PHP': ['NT', 'phi'], 'COL': ['NT', 'col'], '1TH': ['NT', '1th'], '2TH': ['NT', '2th'], '1TI': ['NT', '1ti'],
+      '2TI': ['NT', '2ti'], 'TIT': ['NT', 'tit'], 'PHM': ['NT', 'phm'], 'HEB': ['NT', 'heb'], 'JAS': ['NT', 'jam'],
+      '1PE': ['NT', '1pe'], '2PE': ['NT', '2pe'], '1JN': ['NT', '1jo'], '2JN': ['NT', '2jo'], '3JN': ['NT', '3jo'],
+      'JUD': ['NT', 'jud'], 'REV': ['NT', 'rev']
+    };
+    const bId = (bookId || '').toUpperCase();
+    const info = s4aMap[bId];
+    if (!info) return null;
+    const [testament, prefix] = info;
+    const folder = testament === 'OT' ? 'OTpdf' : 'NTpdf';
+    return `https://www.scripture4all.org/OnlineInterlinear/${folder}/${prefix}${chapterNum || 1}.pdf`;
+  }
+
   // Get Parallel Translations for a single verse
   getParallelVerses(bookId, chapterNum, verseNum, selectedVersions = null) {
     const key = `${bookId}.${chapterNum}`;
-    const passage = this.passagesCache[key];
+    let passage = this.passagesCache[key];
+    if (!passage) {
+      const cachedKey = Object.keys(this.passagesCache).find(k => k.toLowerCase() === key.toLowerCase());
+      if (cachedKey) passage = this.passagesCache[cachedKey];
+    }
     if (!passage) return [];
 
-    const verse = passage.verses.find(v => v.verse_num === parseInt(verseNum, 10));
+    const targetVNum = parseInt(verseNum, 10) || 1;
+    let verse = passage.verses.find(v => v.verse_num === targetVNum);
+    if (!verse && passage.verses && passage.verses.length > 0) {
+      verse = passage.verses.find(v => v.verse_num === 1) || passage.verses[0];
+    }
     if (!verse) return [];
     if (!verse.translations) verse.translations = {};
 
@@ -503,7 +609,7 @@ export class BibleEngine {
       if (!t) return;
 
       let text = verse.translations[t.id] || (t.code && verse.translations[t.code]);
-      if (!text) {
+      if (!text || ((t.id === 'TSK_BTT' || t.id === 'TSK') && this.tskBookCache[bookId] && text.includes('tsk-fallback-block'))) {
         text = this.generateVerseTranslation(verse, t.id, book, chapterNum);
         verse.translations[t.id] = text;
       }
@@ -516,7 +622,9 @@ export class BibleEngine {
           category: t.category,
           lang: t.lang,
           note: t.note,
-          text: text
+          text: text,
+          interlinear_words: (t.id === 'INTERLINEAR') ? (verse.interlinear_words || null) : null,
+          scripture4all_pdf: (t.id === 'INTERLINEAR') ? (verse.scripture4all_pdf || this.getScripture4AllPdfUrl(bookId, chapterNum)) : null
         });
       }
     });
@@ -591,7 +699,190 @@ export class BibleEngine {
     }
   }
 
-  // Đảm bảo các bản dịch được yêu cầu (đặc biệt là tiếng Sắc Tộc & HTTLVN) được nạp đầy đủ
+  // Tải trọn vẹn bản dịch Công Giáo CGKPV từ kho dữ liệu augustino.net (data/cgkpv/{bookId}.json)
+  async fetchCGKPVChapter(bookId, chapterNum) {
+    try {
+      const res = await fetch(`data/cgkpv/${bookId}.json`);
+      if (res.ok) {
+        const data = await res.json();
+        const chStr = String(chapterNum);
+        if (data.chapters && data.chapters[chStr]) {
+          return data.chapters[chStr];
+        }
+      }
+    } catch (e) {
+      console.warn(`Fetch CGKPV chapter failed for ${bookId} ${chapterNum}:`, e);
+    }
+    return {};
+  }
+
+  // Tải trọn vẹn bản dịch Kinh Thánh Hiện Đại (KTHD - Bible.com #1638) từ kho dữ liệu data/kthd/{bookId}.json
+  async fetchKTHDChapter(bookId, chapterNum) {
+    try {
+      const res = await fetch(`data/kthd/${bookId}.json`);
+      if (res.ok) {
+        const data = await res.json();
+        const chStr = String(chapterNum);
+        if (data.chapters && data.chapters[chStr]) {
+          return data.chapters[chStr];
+        }
+      }
+    } catch (e) {
+      console.warn(`Fetch KTHD chapter failed for ${bookId} ${chapterNum}:`, e);
+    }
+    return {};
+  }
+
+  // Lấy đường dẫn trực tiếp trên https://biblehub.com/tsk/{slug}/{chapter}-{verse}.htm
+  getBibleHubTSKUrl(bookId, chapterNum, verseNum = 1) {
+    const slugMap = {
+      'GEN': 'genesis', 'EXO': 'exodus', 'LEV': 'leviticus', 'NUM': 'numbers', 'DEU': 'deuteronomy',
+      'JOS': 'joshua', 'JDG': 'judges', 'RUT': 'ruth', '1SA': '1_samuel', '2SA': '2_samuel',
+      '1KI': '1_kings', '2KI': '2_kings', '1CH': '1_chronicles', '2CH': '2_chronicles', 'EZR': 'ezra',
+      'NEH': 'nehemiah', 'EST': 'esther', 'JOB': 'job', 'PSA': 'psalms', 'PRO': 'proverbs',
+      'ECC': 'ecclesiastes', 'SNG': 'songs', 'ISA': 'isaiah', 'JER': 'jeremiah', 'LAM': 'lamentations',
+      'EZK': 'ezekiel', 'DAN': 'daniel', 'HOS': 'hosea', 'JOL': 'joel', 'AMO': 'amos',
+      'OBA': 'obadiah', 'JON': 'jonah', 'MIC': 'micah', 'NAH': 'nahum', 'HAB': 'habakkuk',
+      'ZEP': 'zephaniah', 'HAG': 'haggai', 'ZEC': 'zechariah', 'MAL': 'malachi',
+      'MAT': 'matthew', 'MRK': 'mark', 'LUK': 'luke', 'JHN': 'john', 'ACT': 'acts',
+      'ROM': 'romans', '1CO': '1_corinthians', '2CO': '2_corinthians', 'GAL': 'galatians', 'EPH': 'ephesians',
+      'PHP': 'philippians', 'COL': 'colossians', '1TH': '1_thessalonians', '2TH': '2_thessalonians',
+      '1TI': '1_timothy', '2TI': '2_timothy', 'TIT': 'titus', 'PHM': 'philemon', 'HEB': 'hebrews',
+      'JAS': 'james', '1PE': '1_peter', '2PE': '2_peter', '1JN': '1_john', '2JN': '2_john',
+      '3JN': '3_john', 'JUD': 'jude', 'REV': 'revelation'
+    };
+    const bId = (bookId || 'JHN').toUpperCase();
+    const slug = slugMap[bId] || bId.toLowerCase();
+    return `https://biblehub.com/tsk/${slug}/${chapterNum || 1}-${verseNum || 1}.htm`;
+  }
+
+  // Tải dữ liệu Kinh Thánh Đối Chiếu (BibleHub TSK) cho toàn bộ 1 sách từ data/tsk/{bookId}.json
+  async fetchTSKBook(bookId) {
+    const bId = (bookId || 'JHN').toUpperCase();
+    if (this.tskBookCache[bId]) {
+      return this.tskBookCache[bId];
+    }
+    try {
+      const res = await fetch(`data/tsk/${bId}.json`);
+      if (res && res.ok) {
+        const data = await res.json();
+        this.tskBookCache[bId] = data;
+        return data;
+      }
+    } catch (e) {
+      console.warn(`Fetch TSK book failed for ${bId}:`, e);
+    }
+    return null;
+  }
+
+  async fetchTSKChapter(bookId, chapterNum) {
+    const data = await this.fetchTSKBook(bookId);
+    const chStr = String(chapterNum);
+    if (data && data.chapters && data.chapters[chStr]) {
+      return data.chapters[chStr];
+    }
+    return {};
+  }
+
+  // Kết xuất HTML khối Kinh Thánh Đối Chiếu (TSK_BTT Tiếng Việt hoặc TSK Tiếng Anh) cho 1 câu
+  formatTSKVerseHTML(bookId, chapterNum, verseNum, mode = 'vi', verse = null) {
+    const bId = (bookId || 'JHN').toUpperCase();
+    const chStr = String(chapterNum || 1);
+    const vStr = String(verseNum || 1);
+    const tskUrl = this.getBibleHubTSKUrl(bId, chapterNum, verseNum);
+    const bookData = this.tskBookCache[bId];
+    const groups = bookData?.chapters?.[chStr]?.[vStr] || null;
+    const isVi = mode !== 'en';
+
+    if (groups && Array.isArray(groups) && groups.length > 0) {
+      let html = `<div class="tsk-parallel-block" data-tsk-mode="${isVi ? 'vi' : 'en'}">`;
+      html += `
+        <div class="tsk-block-Subheader">
+          <span class="tsk-edition-tag">
+            <i class="fa-solid fa-link"></i> ${isVi ? 'Kinh Thánh Đối Chiếu (Bản Truyền Thống 1925)' : 'Treasury of Scripture Knowledge (BibleHub TSK)'}
+          </span>
+          <a href="${tskUrl}" target="_blank" rel="noopener noreferrer" class="tsk-external-link" title="Mở trang gốc trên BibleHub TSK">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> BibleHub TSK
+          </a>
+        </div>
+      `;
+
+      groups.forEach(g => {
+        const headingLabel = isVi
+          ? `<span class="tsk-anchor-vi">«${g.h_vi || g.h_en}»</span>${g.h_en && g.h_vi !== g.h_en ? ` <span class="tsk-anchor-en">(${g.h_en})</span>` : ''}`
+          : `<span class="tsk-anchor-vi">${g.h_en}.</span>`;
+
+        html += `<div class="tsk-phrase-group">`;
+        html += `<div class="tsk-phrase-heading"><i class="fa-solid fa-caret-right"></i> ${headingLabel}</div>`;
+
+        const refs = g.refs || [];
+        const withText = [];
+        const chipOnly = [];
+
+        refs.forEach(r => {
+          const quote = isVi ? (r.t_vi || r.t_en) : (r.t_en || r.t_vi);
+          if (quote) {
+            withText.push({ r, quote });
+          } else {
+            chipOnly.push(r);
+          }
+        });
+
+        withText.forEach(({ r, quote }) => {
+          const dispRef = isVi ? r.r_vi : r.r_en;
+          html += `
+            <div class="tsk-verse-row">
+              <button type="button" class="tsk-ref-link" data-ref="${r.r_vi}" title="Nhấp để xem đoạn ${r.r_vi}">
+                <i class="fa-solid fa-book-open"></i> ${dispRef}
+              </button>
+              <span class="tsk-verse-quote">${quote}</span>
+            </div>
+          `;
+        });
+
+        if (chipOnly.length > 0) {
+          html += `<div class="tsk-more-chips">`;
+          html += `<span class="tsk-more-label">${isVi ? 'Đối chiếu thêm:' : 'More:'}</span>`;
+          chipOnly.forEach(r => {
+            const dispRef = isVi ? r.r_vi : r.r_en;
+            html += `<button type="button" class="tsk-ref-chip tsk-ref-link" data-ref="${r.r_vi}" title="Nhấp để xem ${r.r_vi}">${dispRef}</button>`;
+          });
+          html += `</div>`;
+        }
+
+        html += `</div>`;
+      });
+
+      html += `</div>`;
+      return html;
+    }
+
+    // Fallback khi chưa nạp xong hoặc câu ngắn không có nhóm riêng
+    const fallbackRefs = (verse && Array.isArray(verse.cross_refs) && verse.cross_refs.length > 0)
+      ? verse.cross_refs
+      : ['Thi thiên 119:105', '2 Ti-mô-thê 3:16', 'Giăng 1:1'];
+
+    let fbHtml = `<div class="tsk-parallel-block tsk-fallback-block" data-tsk-mode="${isVi ? 'vi' : 'en'}">`;
+    fbHtml += `
+      <div class="tsk-block-Subheader">
+        <span class="tsk-edition-tag">
+          <i class="fa-solid fa-link"></i> ${isVi ? 'Kinh Thánh Đối Chiếu (Bản Truyền Thống 1925)' : 'Treasury of Scripture Knowledge (BibleHub TSK)'}
+        </span>
+        <a href="${tskUrl}" target="_blank" rel="noopener noreferrer" class="tsk-external-link">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> BibleHub TSK
+        </a>
+      </div>
+      <div class="tsk-more-chips" style="margin-top: 0.35rem;">
+    `;
+    fallbackRefs.forEach(refStr => {
+      const rText = typeof refStr === 'string' ? refStr : (refStr.ref || 'Giăng 1:1');
+      fbHtml += `<button type="button" class="tsk-ref-chip tsk-ref-link" data-ref="${rText}">${rText}</button>`;
+    });
+    fbHtml += `</div></div>`;
+    return fbHtml;
+  }
+
+  // Đảm bảo các bản dịch được yêu cầu (đặc biệt là tiếng Sắc Tộc & HTTLVN & CGKPV & KTHD) được nạp đầy đủ
   async ensurePassageTranslations(bookId, chapterNum, versionIds = []) {
     const key = `${bookId}.${chapterNum}`;
     const passage = this.passagesCache[key];
@@ -613,20 +904,71 @@ export class BibleEngine {
         return text && typeof text === 'string' && !text.includes('httlvn-loading-pulse') && !text.startsWith('⏳');
       });
 
-      // Nếu là CGKPV (Bản Công Giáo) và chưa có: sinh bản dịch tự động
+      // Nếu là KTHD (Kinh Thánh Hiện Đại - Bible.com #1638) và chưa có: nạp nguyên văn từ data/kthd/{bookId}.json
+      if (!hasRealTrans && (transObj.id === 'KTHD' || transObj.code === 'KTHD')) {
+        fetchPromises.push(
+          this.fetchKTHDChapter(bookId, chapterNum).then(kthdMap => {
+            if (kthdMap && Object.keys(kthdMap).length > 0) {
+              hasLoadedAny = true;
+              passage.verses.forEach(v => {
+                if (!v.translations) v.translations = {};
+                const text = kthdMap[String(v.verse_num)] || kthdMap[v.verse_num];
+                if (text) {
+                  v.translations['KTHD'] = text;
+                }
+              });
+            }
+          }).catch(err => {
+            console.warn(`Tải bản dịch KTHD thất bại:`, err);
+          })
+        );
+        return;
+      }
+
+      // Nếu là CGKPV (Bản Công Giáo) và chưa có: nạp nguyên văn từ data/cgkpv/{bookId}.json
       if (!hasRealTrans && (transObj.id === 'CGKPV' || transObj.code === 'CGKPV')) {
-        passage.verses.forEach(v => {
-          if (!v.translations) v.translations = {};
-          if (!v.translations['CGKPV']) {
-            v.translations['CGKPV'] = this.generateVerseTranslation(v, 'CGKPV', book, chapterNum);
-            hasLoadedAny = true;
-          }
-        });
+        fetchPromises.push(
+          this.fetchCGKPVChapter(bookId, chapterNum).then(cgkpvMap => {
+            if (cgkpvMap && Object.keys(cgkpvMap).length > 0) {
+              hasLoadedAny = true;
+              passage.verses.forEach(v => {
+                if (!v.translations) v.translations = {};
+                const text = cgkpvMap[String(v.verse_num)] || cgkpvMap[v.verse_num];
+                if (text) {
+                  v.translations['CGKPV'] = text;
+                }
+              });
+            }
+          }).catch(err => {
+            console.warn(`Tải bản dịch CGKPV thất bại:`, err);
+          })
+        );
+        return;
+      }
+
+      // Nếu là TSK_BTT hoặc TSK (Kinh Thánh Đối Chiếu - BibleHub TSK): nạp từ data/tsk/{bookId}.json
+      if (transObj.id === 'TSK_BTT' || transObj.id === 'TSK') {
+        if (!this.tskBookCache[bookId.toUpperCase()]) {
+          fetchPromises.push(
+            this.fetchTSKBook(bookId).then(tskBook => {
+              if (tskBook) {
+                hasLoadedAny = true;
+                passage.verses.forEach(v => {
+                  if (!v.translations) v.translations = {};
+                  v.translations['TSK_BTT'] = this.formatTSKVerseHTML(bookId, chapterNum, v.verse_num, 'vi', v);
+                  v.translations['TSK'] = this.formatTSKVerseHTML(bookId, chapterNum, v.verse_num, 'en', v);
+                });
+              }
+            }).catch(err => {
+              console.warn(`Tải dữ liệu TSK thất bại:`, err);
+            })
+          );
+        }
         return;
       }
 
       // Nếu là bản dịch cần nạp từ HTTLVN và chưa có:
-      if (!hasRealTrans && transObj.code && transObj.code !== 'ORIGINAL' && transObj.code !== 'CGKPV') {
+      if (!hasRealTrans && transObj.code && transObj.code !== 'ORIGINAL' && transObj.code !== 'CGKPV' && transObj.code !== 'KTHD' && transObj.code !== 'TSK_BTT' && transObj.code !== 'TSK') {
         fetchPromises.push(
           this.fetchHTTLVNChapter(bookId, chapterNum, transObj.code).then(versesMap => {
             if (versesMap && Object.keys(versesMap).length > 0) {
@@ -857,8 +1199,11 @@ export class BibleEngine {
 
     const results = [];
 
-    // 1. Search Coordinates (e.g. "Giang 1", "Giang 3:16", "Mat 13:3", "Gen 1:1")
-    const coordMatch = q.match(/^([a-z0-9\s\u00C0-\u024F\u1EA0-\u1EF9]+?)\s*(\d+)(?::(\d+))?$/i);
+    // 1. Search Coordinates & Book References (e.g. "Giang", "Giang 1", "Giang 3:16", "Giang doan 3 cau 16", "Mat 13:3", "Gen 1:1")
+    let coordMatched = false;
+    const cleanedCoord = q.replace(/đoạn|chương|ch\b|câu|verse|v\b/gi, ' ').replace(/\s+/g, ' ').trim();
+    const coordMatch = cleanedCoord.match(/^([a-z0-9\s\u00C0-\u024F\u1EA0-\u1EF9]+?)\s+(\d+)(?:[:\s](\d+))?$/i) ||
+                       q.match(/^([a-z0-9\s\u00C0-\u024F\u1EA0-\u1EF9]+?)\s*(\d+)(?::(\d+))?$/i);
     if (coordMatch) {
       const searchBook = coordMatch[1].trim().toLowerCase();
       const searchBookNorm = normalize(searchBook);
@@ -866,23 +1211,50 @@ export class BibleEngine {
       const verse = coordMatch[3] ? parseInt(coordMatch[3], 10) : 1;
 
       const matchedBook = this.books.find(b =>
+        b.name_vi.toLowerCase() === searchBook ||
+        normalize(b.name_vi) === searchBookNorm ||
+        b.id.toLowerCase() === searchBook ||
+        (b.httlvn_slug && b.httlvn_slug.toLowerCase() === searchBook) ||
         b.name_vi.toLowerCase().includes(searchBook) ||
         normalize(b.name_vi).includes(searchBookNorm) ||
-        b.name_en.toLowerCase().includes(searchBook) ||
-        b.id.toLowerCase() === searchBook ||
-        (b.httlvn_slug && b.httlvn_slug.toLowerCase() === searchBook)
+        b.name_en.toLowerCase().includes(searchBook)
       );
 
       if (matchedBook) {
+        coordMatched = true;
+        const isExactVerse = coordMatch[3] !== undefined;
         results.push({
           type: 'coordinate',
-          badge: 'TỌA ĐỘ',
-          title: `${matchedBook.name_vi} ${chapter}:${verse}`,
-          subtitle: `Nhảy ngay đến ${matchedBook.name_vi} đoạn ${chapter}, câu ${verse}`,
+          badge: isExactVerse ? '📍 ĐỊA CHỈ' : '📖 CHƯƠNG',
+          title: isExactVerse ? `${matchedBook.name_vi} ${chapter}:${verse}` : `${matchedBook.name_vi} - Đoạn ${chapter}`,
+          subtitle: isExactVerse ? `Nhảy ngay đến ${matchedBook.name_vi} đoạn ${chapter}, câu ${verse} (Nhấn Enter)` : `Mở toàn bộ đoạn ${chapter} sách ${matchedBook.name_vi} (Nhấn Enter)`,
           book_id: matchedBook.id,
           chapter: chapter,
           verse: verse,
-          priority: 1000
+          priority: 2500
+        });
+      }
+    }
+
+    // 1b. Book Name Alone Matching (e.g. "Giang", "Ro-ma", "Khai Huyen", "Thi Thien", "Sang The Ky")
+    if (!coordMatched) {
+      const matchedBook = this.books.find(b =>
+        normalize(b.name_vi) === qNorm ||
+        b.name_vi.toLowerCase() === q ||
+        b.id.toLowerCase() === q ||
+        (b.httlvn_slug && b.httlvn_slug.toLowerCase() === qNorm) ||
+        (qNorm.length >= 3 && normalize(b.name_vi).startsWith(qNorm))
+      );
+      if (matchedBook) {
+        results.push({
+          type: 'coordinate',
+          badge: '📚 SÁCH',
+          title: `${matchedBook.name_vi} (${matchedBook.testament === 'OT' ? 'Cựu Ước' : 'Tân Ước'})`,
+          subtitle: `Mở sách ${matchedBook.name_vi} (có ${matchedBook.chapters_count || 1} chương) - Nhấn Enter để đọc từ Đoạn 1`,
+          book_id: matchedBook.id,
+          chapter: 1,
+          verse: 1,
+          priority: 2200
         });
       }
     }

@@ -1,0 +1,3153 @@
+{
+  "book_id": "GEN",
+  "chapter": 1,
+  "testament": "OT",
+  "language": "Hebrew",
+  "source": "Scripture4All Online Interlinear (WLC / ScrTR)",
+  "scripture4all_pdf_url": "https://www.scripture4all.org/OnlineInterlinear/OTpdf/gen1.pdf",
+  "total_verses": 31,
+  "verses": {
+    "1": [
+      {
+        "orig": "בְּרֵאשִׁית",
+        "translit": "b·rashith",
+        "strong": "H7225",
+        "gloss": "in·beginning",
+        "meaning_vi": "Ban đầu / Khởi nguyên"
+      },
+      {
+        "orig": "בָּרָא",
+        "translit": "bra",
+        "strong": "H1254",
+        "gloss": "he-created",
+        "meaning_vi": "Sáng tạo / Dựng nên"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "אֵת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "הַשָּׁמַיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      },
+      {
+        "orig": "וְאֵת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·earth",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      }
+    ],
+    "2": [
+      {
+        "orig": "וְהָאָרֶץ",
+        "translit": "u·e·artz",
+        "strong": "H776",
+        "gloss": "and·the·earth",
+        "meaning_vi": "và đất / và địa cầu"
+      },
+      {
+        "orig": "הָיְתָה",
+        "translit": "eithe",
+        "strong": "H1961",
+        "gloss": "she-became",
+        "meaning_vi": "đã là / trở nên (she became)"
+      },
+      {
+        "orig": "תֹהוּ",
+        "translit": "theu",
+        "strong": "H8414",
+        "gloss": "chaos",
+        "meaning_vi": "vô hình / hỗn độn (chaos)"
+      },
+      {
+        "orig": "וָבֹהוּ",
+        "translit": "u·beu",
+        "strong": "H922",
+        "gloss": "and·vacancy",
+        "meaning_vi": "và trống không (and vacancy)"
+      },
+      {
+        "orig": "וְחֹשְֶׁך",
+        "translit": "u·chshk",
+        "strong": "H2822",
+        "gloss": "and·darkness",
+        "meaning_vi": "và sự tối tăm (and darkness)"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "over",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "פְּנֵי",
+        "translit": "phni",
+        "strong": "H6440",
+        "gloss": "sur faces-of",
+        "meaning_vi": "mặt / diện mạo (surfaces of)"
+      },
+      {
+        "orig": "תְהוֹם",
+        "translit": "theum",
+        "strong": "H8415",
+        "gloss": "abyss",
+        "meaning_vi": "vực sâu / vực thẳm (abyss)"
+      },
+      {
+        "orig": "וְרוּחַ",
+        "translit": "u·ruch",
+        "strong": "H7307",
+        "gloss": "and·spirit-of",
+        "meaning_vi": "và Thần / Thánh Linh (and Spirit of)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "מְרַחֶפֶת",
+        "translit": "mrchphth",
+        "strong": "H7363",
+        "gloss": "mvibrating",
+        "meaning_vi": "vận hành / rung động (vibrating)"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "over",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "פְּנֵי",
+        "translit": "phni",
+        "strong": "H6440",
+        "gloss": "sur faces-of",
+        "meaning_vi": "mặt / diện mạo (surfaces of)"
+      },
+      {
+        "orig": "הַמָּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      }
+    ],
+    "3": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "יְהִי",
+        "translit": "iei",
+        "strong": "H1961",
+        "gloss": "he-shall-become",
+        "meaning_vi": "hãy có / hãy hiện hữu (let there be)"
+      },
+      {
+        "orig": "אוֹר",
+        "translit": "aur",
+        "strong": "H216",
+        "gloss": "light",
+        "meaning_vi": "sự sáng / ánh sáng (light)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "אוֹר",
+        "translit": "aur",
+        "strong": "H216",
+        "gloss": "light",
+        "meaning_vi": "sự sáng / ánh sáng (light)"
+      }
+    ],
+    "4": [
+      {
+        "orig": "וַיַּרְא",
+        "translit": "u·ira",
+        "strong": "H7200",
+        "gloss": "and·he-is-seeing",
+        "meaning_vi": "và Ngài thấy (and He saw)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "הָאוֹר",
+        "translit": "e·aur",
+        "strong": "H216",
+        "gloss": "the·light",
+        "meaning_vi": "sự sáng (the light)"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "טוֹב",
+        "translit": "tub",
+        "strong": "H2896",
+        "gloss": "good",
+        "meaning_vi": "tốt lành (good)"
+      },
+      {
+        "orig": "וַיַּבְדֵּל",
+        "translit": "u·ibdl",
+        "strong": "H914",
+        "gloss": "and·he-is-cseparating",
+        "meaning_vi": "và Ngài phân rẽ (and He divided)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "בֵּין",
+        "translit": "bin",
+        "strong": "H996",
+        "gloss": "between",
+        "meaning_vi": "ở giữa (between)"
+      },
+      {
+        "orig": "הָאוֹר",
+        "translit": "e·aur",
+        "strong": "H216",
+        "gloss": "the·light",
+        "meaning_vi": "sự sáng (the light)"
+      },
+      {
+        "orig": "וּבֵין",
+        "translit": "u·bin",
+        "strong": "H996",
+        "gloss": "and·between",
+        "meaning_vi": "và ở giữa (and between)"
+      },
+      {
+        "orig": "הַחֹשְֶׁך",
+        "translit": "e·chshk",
+        "strong": "H2822",
+        "gloss": "the·darkness",
+        "meaning_vi": "sự tối tăm (the darkness)"
+      }
+    ],
+    "5": [
+      {
+        "orig": "וַיִּקְרָא",
+        "translit": "u·iqra",
+        "strong": "H7121",
+        "gloss": "and·he-is-calling",
+        "meaning_vi": "và Ngài đặt tên / gọi (and He called)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "לָאוֹר",
+        "translit": "l·aur",
+        "strong": "",
+        "gloss": "to· the ·light",
+        "meaning_vi": "to· the ·light"
+      },
+      {
+        "orig": "יוֹם",
+        "translit": "ium",
+        "strong": "H3117",
+        "gloss": "day",
+        "meaning_vi": "ngày (day)"
+      },
+      {
+        "orig": "וְלַחֹשְֶׁך",
+        "translit": "u·l·chshk",
+        "strong": "H2822",
+        "gloss": "and·to· the ·darkness",
+        "meaning_vi": "và sự tối tăm (and darkness)"
+      },
+      {
+        "orig": "קָרָא",
+        "translit": "qra",
+        "strong": "H7121",
+        "gloss": "he-calls",
+        "meaning_vi": "Ngài gọi (He called)"
+      },
+      {
+        "orig": "לָיְלָה",
+        "translit": "lile",
+        "strong": "H3915",
+        "gloss": "night",
+        "meaning_vi": "đêm (night)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "עֶרֶב",
+        "translit": "orb",
+        "strong": "H6153",
+        "gloss": "evening",
+        "meaning_vi": "buổi chiều (evening)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "בֹקֶר",
+        "translit": "bqr",
+        "strong": "H1242",
+        "gloss": "morning",
+        "meaning_vi": "buổi sáng (morning)"
+      },
+      {
+        "orig": "יוֹם",
+        "translit": "ium",
+        "strong": "H3117",
+        "gloss": "day",
+        "meaning_vi": "ngày (day)"
+      },
+      {
+        "orig": "אֶחָד",
+        "translit": "achd",
+        "strong": "",
+        "gloss": "one",
+        "meaning_vi": "one"
+      },
+      {
+        "orig": "פ",
+        "translit": "p",
+        "strong": "H7225",
+        "gloss": "",
+        "meaning_vi": "Ban đầu / Khởi nguyên"
+      }
+    ],
+    "6": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "יְהִי",
+        "translit": "iei",
+        "strong": "H1961",
+        "gloss": "he-shall-become",
+        "meaning_vi": "hãy có / hãy hiện hữu (let there be)"
+      },
+      {
+        "orig": "רָקִיעַ",
+        "translit": "rqio",
+        "strong": "",
+        "gloss": "atmosphere",
+        "meaning_vi": "atmosphere"
+      },
+      {
+        "orig": "בְּתוְֹך",
+        "translit": "b·thuk",
+        "strong": "",
+        "gloss": "in·midst-of",
+        "meaning_vi": "in·midst-of"
+      },
+      {
+        "orig": "הַמָּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      },
+      {
+        "orig": "וִיהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-shall-become",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "מַבְדִּיל",
+        "translit": "mbdil",
+        "strong": "",
+        "gloss": "cseparating",
+        "meaning_vi": "cseparating"
+      },
+      {
+        "orig": "בֵּין",
+        "translit": "bin",
+        "strong": "H996",
+        "gloss": "between",
+        "meaning_vi": "ở giữa (between)"
+      },
+      {
+        "orig": "מַיִם",
+        "translit": "mim",
+        "strong": "",
+        "gloss": "waters",
+        "meaning_vi": "waters"
+      },
+      {
+        "orig": "לָמָיִם",
+        "translit": "l·mim",
+        "strong": "",
+        "gloss": "to·waters",
+        "meaning_vi": "to·waters"
+      }
+    ],
+    "7": [
+      {
+        "orig": "וַיַּעַשׂ",
+        "translit": "u·iosh",
+        "strong": "",
+        "gloss": "and·he-is-making do",
+        "meaning_vi": "and·he-is-making do"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "הָרָקִיעַ",
+        "translit": "e·rqio",
+        "strong": "",
+        "gloss": "the·atmosphere",
+        "meaning_vi": "the·atmosphere"
+      },
+      {
+        "orig": "וַיַּבְדֵּל",
+        "translit": "u·ibdl",
+        "strong": "H914",
+        "gloss": "and·he-is-cseparating",
+        "meaning_vi": "và Ngài phân rẽ (and He divided)"
+      },
+      {
+        "orig": "בֵּין",
+        "translit": "bin",
+        "strong": "H996",
+        "gloss": "between",
+        "meaning_vi": "ở giữa (between)"
+      },
+      {
+        "orig": "הַמַּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "מִתַּחַת",
+        "translit": "m·thchth",
+        "strong": "",
+        "gloss": "from·under",
+        "meaning_vi": "from·under"
+      },
+      {
+        "orig": "לָרָקִיעַ",
+        "translit": "l·rqio",
+        "strong": "",
+        "gloss": "to· the ·atmosphere",
+        "meaning_vi": "to· the ·atmosphere"
+      },
+      {
+        "orig": "וּבֵין",
+        "translit": "u·bin",
+        "strong": "H996",
+        "gloss": "and·between",
+        "meaning_vi": "và ở giữa (and between)"
+      },
+      {
+        "orig": "הַמַּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "מֵעַל",
+        "translit": "m·ol",
+        "strong": "",
+        "gloss": "from·on",
+        "meaning_vi": "from·on"
+      },
+      {
+        "orig": "לָרָקִיעַ",
+        "translit": "l·rqio",
+        "strong": "",
+        "gloss": "to· the ·atmosphere",
+        "meaning_vi": "to· the ·atmosphere"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "כֵן",
+        "translit": "kn",
+        "strong": "",
+        "gloss": "so",
+        "meaning_vi": "so"
+      }
+    ],
+    "8": [
+      {
+        "orig": "וַיִּקְרָא",
+        "translit": "u·iqra",
+        "strong": "H7121",
+        "gloss": "and·he-is-calling",
+        "meaning_vi": "và Ngài đặt tên / gọi (and He called)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "לָרָקִיעַ",
+        "translit": "l·rqio",
+        "strong": "",
+        "gloss": "to· the ·atmosphere",
+        "meaning_vi": "to· the ·atmosphere"
+      },
+      {
+        "orig": "שָׁמָיִם",
+        "translit": "shmim",
+        "strong": "",
+        "gloss": "heavens",
+        "meaning_vi": "heavens"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "עֶרֶב",
+        "translit": "orb",
+        "strong": "H6153",
+        "gloss": "evening",
+        "meaning_vi": "buổi chiều (evening)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "בֹקֶר",
+        "translit": "bqr",
+        "strong": "H1242",
+        "gloss": "morning",
+        "meaning_vi": "buổi sáng (morning)"
+      },
+      {
+        "orig": "יוֹם",
+        "translit": "ium",
+        "strong": "H3117",
+        "gloss": "day",
+        "meaning_vi": "ngày (day)"
+      },
+      {
+        "orig": "שֵׁנִי",
+        "translit": "shni",
+        "strong": "",
+        "gloss": "second",
+        "meaning_vi": "second"
+      },
+      {
+        "orig": "פ",
+        "translit": "p",
+        "strong": "H7225",
+        "gloss": "",
+        "meaning_vi": "Ban đầu / Khởi nguyên"
+      }
+    ],
+    "9": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "יִקָּווּ",
+        "translit": "iquu",
+        "strong": "",
+        "gloss": "they-shall-be-flown-together",
+        "meaning_vi": "they-shall-be-flown-together"
+      },
+      {
+        "orig": "הַמַּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      },
+      {
+        "orig": "מִתַּחַת",
+        "translit": "m·thchth",
+        "strong": "",
+        "gloss": "from·under",
+        "meaning_vi": "from·under"
+      },
+      {
+        "orig": "הַשָּׁמַיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      },
+      {
+        "orig": "אֶל",
+        "translit": "al",
+        "strong": "",
+        "gloss": "to",
+        "meaning_vi": "to"
+      },
+      {
+        "orig": "מָקוֹם",
+        "translit": "mqum",
+        "strong": "",
+        "gloss": "place ri",
+        "meaning_vi": "place ri"
+      },
+      {
+        "orig": "אֶחָד",
+        "translit": "achd",
+        "strong": "",
+        "gloss": "one",
+        "meaning_vi": "one"
+      },
+      {
+        "orig": "וְתֵרָאֶה",
+        "translit": "u·thrae",
+        "strong": "",
+        "gloss": "and·she-shall-be-seen",
+        "meaning_vi": "and·she-shall-be-seen"
+      },
+      {
+        "orig": "הַיַּבָּשָׁה",
+        "translit": "e·ibshe",
+        "strong": "",
+        "gloss": "the·dry",
+        "meaning_vi": "the·dry"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "כֵן",
+        "translit": "kn",
+        "strong": "",
+        "gloss": "so",
+        "meaning_vi": "so"
+      }
+    ],
+    "10": [
+      {
+        "orig": "וַיִּקְרָא",
+        "translit": "u·iqra",
+        "strong": "H7121",
+        "gloss": "and·he-is-calling",
+        "meaning_vi": "và Ngài đặt tên / gọi (and He called)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "לַיַּבָּשָׁה",
+        "translit": "l·ibshe",
+        "strong": "",
+        "gloss": "to· the ·dry",
+        "meaning_vi": "to· the ·dry"
+      },
+      {
+        "orig": "אֶרֶץ",
+        "translit": "artz",
+        "strong": "",
+        "gloss": "land",
+        "meaning_vi": "land"
+      },
+      {
+        "orig": "וּלְמִקְוֵה",
+        "translit": "u·l·mque",
+        "strong": "",
+        "gloss": "and·to·confluence-of",
+        "meaning_vi": "and·to·confluence-of"
+      },
+      {
+        "orig": "הַמַּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      },
+      {
+        "orig": "קָרָא",
+        "translit": "qra",
+        "strong": "H7121",
+        "gloss": "he-called",
+        "meaning_vi": "Ngài gọi (He called)"
+      },
+      {
+        "orig": "יַמִּים",
+        "translit": "imim",
+        "strong": "",
+        "gloss": "seas",
+        "meaning_vi": "seas"
+      },
+      {
+        "orig": "וַיַּרְא",
+        "translit": "u·ira",
+        "strong": "H7200",
+        "gloss": "and·he-is-seeing",
+        "meaning_vi": "và Ngài thấy (and He saw)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "טוֹב",
+        "translit": "tub",
+        "strong": "H2896",
+        "gloss": "good",
+        "meaning_vi": "tốt lành (good)"
+      }
+    ],
+    "11": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "תַּדְשֵׁא",
+        "translit": "thdsha",
+        "strong": "",
+        "gloss": "she-shall-cause-to -vegetate",
+        "meaning_vi": "she-shall-cause-to -vegetate"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·land",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "דֶּשֶׁא",
+        "translit": "dsha",
+        "strong": "H1877",
+        "gloss": "vegetation",
+        "meaning_vi": "Cỏ xanh tươi (green grass)"
+      },
+      {
+        "orig": "עֵשֶׂב",
+        "translit": "oshb",
+        "strong": "",
+        "gloss": "herbage",
+        "meaning_vi": "herbage"
+      },
+      {
+        "orig": "מַזְרִיעַ",
+        "translit": "mzrio",
+        "strong": "",
+        "gloss": "csowing",
+        "meaning_vi": "csowing"
+      },
+      {
+        "orig": "זֶרַע",
+        "translit": "zro",
+        "strong": "",
+        "gloss": "seed",
+        "meaning_vi": "seed"
+      },
+      {
+        "orig": "עֵץ",
+        "translit": "otz",
+        "strong": "",
+        "gloss": "tree-of",
+        "meaning_vi": "tree-of"
+      },
+      {
+        "orig": "פְּרִי",
+        "translit": "phri",
+        "strong": "",
+        "gloss": "fruit",
+        "meaning_vi": "fruit"
+      },
+      {
+        "orig": "עֹשֶׂה",
+        "translit": "oshe",
+        "strong": "",
+        "gloss": "making do",
+        "meaning_vi": "making do"
+      },
+      {
+        "orig": "פְּרִי",
+        "translit": "phri",
+        "strong": "",
+        "gloss": "fruit",
+        "meaning_vi": "fruit"
+      },
+      {
+        "orig": "לְמִינוֹ",
+        "translit": "l·min·u",
+        "strong": "",
+        "gloss": "to·species-of·him",
+        "meaning_vi": "to·species-of·him"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "זַרְעוֹ",
+        "translit": "zro·u",
+        "strong": "",
+        "gloss": "seed-of·him",
+        "meaning_vi": "seed-of·him"
+      },
+      {
+        "orig": "בוֹ",
+        "translit": "b·u",
+        "strong": "",
+        "gloss": "in·him",
+        "meaning_vi": "in·him"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·land",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "כֵן",
+        "translit": "kn",
+        "strong": "",
+        "gloss": "so",
+        "meaning_vi": "so"
+      }
+    ],
+    "12": [
+      {
+        "orig": "וַתּוֹצֵא",
+        "translit": "u·thutza",
+        "strong": "",
+        "gloss": "and·she-is-cbring ing -forth",
+        "meaning_vi": "and·she-is-cbring ing -forth"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·land",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "דֶּשֶׁא",
+        "translit": "dsha",
+        "strong": "H1877",
+        "gloss": "vegetation",
+        "meaning_vi": "Cỏ xanh tươi (green grass)"
+      },
+      {
+        "orig": "עֵשֶׂב",
+        "translit": "oshb",
+        "strong": "",
+        "gloss": "herbage",
+        "meaning_vi": "herbage"
+      },
+      {
+        "orig": "מַזְרִיעַ",
+        "translit": "mzrio",
+        "strong": "",
+        "gloss": "csowing",
+        "meaning_vi": "csowing"
+      },
+      {
+        "orig": "זֶרַע",
+        "translit": "zro",
+        "strong": "",
+        "gloss": "seed",
+        "meaning_vi": "seed"
+      },
+      {
+        "orig": "לְמִינֵהוּ",
+        "translit": "l·min·eu",
+        "strong": "",
+        "gloss": "to·species-of·him",
+        "meaning_vi": "to·species-of·him"
+      },
+      {
+        "orig": "וְעֵץ",
+        "translit": "u·otz",
+        "strong": "",
+        "gloss": "and·tree",
+        "meaning_vi": "and·tree"
+      },
+      {
+        "orig": "עֹשֶׂה",
+        "translit": "oshe",
+        "strong": "",
+        "gloss": "making do",
+        "meaning_vi": "making do"
+      },
+      {
+        "orig": "פְּרִי",
+        "translit": "phri",
+        "strong": "",
+        "gloss": "fruit",
+        "meaning_vi": "fruit"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "זַרְעוֹ",
+        "translit": "zro·u",
+        "strong": "",
+        "gloss": "seed-of·him",
+        "meaning_vi": "seed-of·him"
+      },
+      {
+        "orig": "בוֹ",
+        "translit": "b·u",
+        "strong": "",
+        "gloss": "in·him",
+        "meaning_vi": "in·him"
+      },
+      {
+        "orig": "לְמִינֵהוּ",
+        "translit": "l·min·eu",
+        "strong": "",
+        "gloss": "to·species-of·him",
+        "meaning_vi": "to·species-of·him"
+      },
+      {
+        "orig": "וַיַּרְא",
+        "translit": "u·ira",
+        "strong": "H7200",
+        "gloss": "and·he-is-seeing",
+        "meaning_vi": "và Ngài thấy (and He saw)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "טוֹב",
+        "translit": "tub",
+        "strong": "H2896",
+        "gloss": "good",
+        "meaning_vi": "tốt lành (good)"
+      }
+    ],
+    "13": [
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "עֶרֶב",
+        "translit": "orb",
+        "strong": "H6153",
+        "gloss": "evening",
+        "meaning_vi": "buổi chiều (evening)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "בֹקֶר",
+        "translit": "bqr",
+        "strong": "H1242",
+        "gloss": "morning",
+        "meaning_vi": "buổi sáng (morning)"
+      },
+      {
+        "orig": "יוֹם",
+        "translit": "ium",
+        "strong": "H3117",
+        "gloss": "day",
+        "meaning_vi": "ngày (day)"
+      },
+      {
+        "orig": "שְׁלִישִׁי",
+        "translit": "shlishi",
+        "strong": "",
+        "gloss": "third",
+        "meaning_vi": "third"
+      },
+      {
+        "orig": "פ",
+        "translit": "p",
+        "strong": "H853",
+        "gloss": "morning were the third day.",
+        "meaning_vi": "chỉ định từ trực tiếp"
+      }
+    ],
+    "14": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "יְהִי",
+        "translit": "iei",
+        "strong": "H1961",
+        "gloss": "he-shall-become",
+        "meaning_vi": "hãy có / hãy hiện hữu (let there be)"
+      },
+      {
+        "orig": "מְאֹרֹת",
+        "translit": "marth",
+        "strong": "",
+        "gloss": "luminaries",
+        "meaning_vi": "luminaries"
+      },
+      {
+        "orig": "בִּרְקִיעַ",
+        "translit": "b·rqio",
+        "strong": "",
+        "gloss": "in·atmosphere-of",
+        "meaning_vi": "in·atmosphere-of"
+      },
+      {
+        "orig": "הַשָּׁמַיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      },
+      {
+        "orig": "לְהַבְדִּיל",
+        "translit": "l·ebdil",
+        "strong": "",
+        "gloss": "to·to-cseparate-of",
+        "meaning_vi": "to·to-cseparate-of"
+      },
+      {
+        "orig": "בֵּין",
+        "translit": "bin",
+        "strong": "H996",
+        "gloss": "between",
+        "meaning_vi": "ở giữa (between)"
+      },
+      {
+        "orig": "הַיּוֹם",
+        "translit": "e·ium",
+        "strong": "",
+        "gloss": "the·day",
+        "meaning_vi": "the·day"
+      },
+      {
+        "orig": "וּבֵין",
+        "translit": "u·bin",
+        "strong": "H996",
+        "gloss": "and·between",
+        "meaning_vi": "và ở giữa (and between)"
+      },
+      {
+        "orig": "הַלָּיְלָה",
+        "translit": "e·lile",
+        "strong": "",
+        "gloss": "the·night",
+        "meaning_vi": "the·night"
+      },
+      {
+        "orig": "וְהָיוּ",
+        "translit": "u·eiu",
+        "strong": "",
+        "gloss": "and·they-become",
+        "meaning_vi": "and·they-become"
+      },
+      {
+        "orig": "לְאֹתֹת",
+        "translit": "l·athth",
+        "strong": "",
+        "gloss": "for·signs",
+        "meaning_vi": "for·signs"
+      },
+      {
+        "orig": "זעֲדִים וּלְמוֹ",
+        "translit": "u·l·muodim",
+        "strong": "",
+        "gloss": "and·for·appointments",
+        "meaning_vi": "and·for·appointments"
+      },
+      {
+        "orig": "וּלְיָמִים",
+        "translit": "u·l·imim",
+        "strong": "",
+        "gloss": "and·for·days",
+        "meaning_vi": "and·for·days"
+      },
+      {
+        "orig": "וְשָׁנִים",
+        "translit": "u·shnim",
+        "strong": "",
+        "gloss": "and·years",
+        "meaning_vi": "and·years"
+      }
+    ],
+    "15": [
+      {
+        "orig": "וְהָיוּ",
+        "translit": "u·eiu",
+        "strong": "",
+        "gloss": "and·they-become",
+        "meaning_vi": "and·they-become"
+      },
+      {
+        "orig": "לִמְאוֹרֹת",
+        "translit": "l·maurth",
+        "strong": "",
+        "gloss": "for·luminaries",
+        "meaning_vi": "for·luminaries"
+      },
+      {
+        "orig": "בִּרְקִיעַ",
+        "translit": "b·rqio",
+        "strong": "",
+        "gloss": "in·atmosphere-of",
+        "meaning_vi": "in·atmosphere-of"
+      },
+      {
+        "orig": "הַשָּׁמַיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      },
+      {
+        "orig": "לְהָאִיר",
+        "translit": "l·eair",
+        "strong": "",
+        "gloss": "to·to-cgive -light-of",
+        "meaning_vi": "to·to-cgive -light-of"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·earth",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "כֵן",
+        "translit": "kn",
+        "strong": "",
+        "gloss": "so",
+        "meaning_vi": "so"
+      }
+    ],
+    "16": [
+      {
+        "orig": "וַיַּעַשׂ",
+        "translit": "u·iosh",
+        "strong": "",
+        "gloss": "and·he-is-making do",
+        "meaning_vi": "and·he-is-making do"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "שְׁנֵי",
+        "translit": "shni",
+        "strong": "",
+        "gloss": "two-of",
+        "meaning_vi": "two-of"
+      },
+      {
+        "orig": "הַמְּאֹרֹת",
+        "translit": "e·marth",
+        "strong": "",
+        "gloss": "the·luminaries",
+        "meaning_vi": "the·luminaries"
+      },
+      {
+        "orig": "הַגְּדֹלִים",
+        "translit": "e·gdlim",
+        "strong": "",
+        "gloss": "the·great-ones",
+        "meaning_vi": "the·great-ones"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "הַמָּאוֹר",
+        "translit": "e·maur",
+        "strong": "",
+        "gloss": "the·luminary",
+        "meaning_vi": "the·luminary"
+      },
+      {
+        "orig": "הַגָּדֹל",
+        "translit": "e·gdl",
+        "strong": "",
+        "gloss": "the·great",
+        "meaning_vi": "the·great"
+      },
+      {
+        "orig": "לְמֶמְשֶׁלֶת",
+        "translit": "l·mmshlth",
+        "strong": "",
+        "gloss": "to·ruling-of",
+        "meaning_vi": "to·ruling-of"
+      },
+      {
+        "orig": "הַיּוֹם",
+        "translit": "e·ium",
+        "strong": "",
+        "gloss": "the·day",
+        "meaning_vi": "the·day"
+      },
+      {
+        "orig": "וְאֶת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "הַמָּאוֹר",
+        "translit": "e·maur",
+        "strong": "",
+        "gloss": "the·luminary",
+        "meaning_vi": "the·luminary"
+      },
+      {
+        "orig": "הַקָּטֹן",
+        "translit": "e·qtn",
+        "strong": "",
+        "gloss": "the·small",
+        "meaning_vi": "the·small"
+      },
+      {
+        "orig": "לְמֶמְשֶׁלֶת",
+        "translit": "l·mmshlth",
+        "strong": "",
+        "gloss": "to·ruling-of",
+        "meaning_vi": "to·ruling-of"
+      },
+      {
+        "orig": "הַלַּיְלָה",
+        "translit": "e·lile",
+        "strong": "",
+        "gloss": "the·night",
+        "meaning_vi": "the·night"
+      },
+      {
+        "orig": "וְאֵת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "זכָבִים הַכּוֹ",
+        "translit": "e·kukbim",
+        "strong": "",
+        "gloss": "the·stars",
+        "meaning_vi": "the·stars"
+      }
+    ],
+    "17": [
+      {
+        "orig": "וַיִּתֵּן",
+        "translit": "u·ithn",
+        "strong": "",
+        "gloss": "and·he-is-giving",
+        "meaning_vi": "and·he-is-giving"
+      },
+      {
+        "orig": "אֹתָם",
+        "translit": "ath·m",
+        "strong": "",
+        "gloss": "»·them",
+        "meaning_vi": "»·them"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "בִּרְקִיעַ",
+        "translit": "b·rqio",
+        "strong": "",
+        "gloss": "in·atmosphere-of",
+        "meaning_vi": "in·atmosphere-of"
+      },
+      {
+        "orig": "הַשָּׁמָיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      },
+      {
+        "orig": "לְהָאִיר",
+        "translit": "l·eair",
+        "strong": "",
+        "gloss": "to·to-cgive -light-of",
+        "meaning_vi": "to·to-cgive -light-of"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·earth",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      }
+    ],
+    "18": [
+      {
+        "orig": "וְלִמְשֹׁל",
+        "translit": "u·l·mshl",
+        "strong": "",
+        "gloss": "and·to·to-rule-of",
+        "meaning_vi": "and·to·to-rule-of"
+      },
+      {
+        "orig": "בַּיּוֹם",
+        "translit": "b·ium",
+        "strong": "",
+        "gloss": "in· the ·day",
+        "meaning_vi": "in· the ·day"
+      },
+      {
+        "orig": "וּבַלַּיְלָה",
+        "translit": "u·b·lile",
+        "strong": "",
+        "gloss": "and·in· the ·night",
+        "meaning_vi": "and·in· the ·night"
+      },
+      {
+        "orig": "וּלֲהַבְדִּיל",
+        "translit": "u·l·ebdil",
+        "strong": "",
+        "gloss": "and·to·to-cseparate-of",
+        "meaning_vi": "and·to·to-cseparate-of"
+      },
+      {
+        "orig": "בֵּין",
+        "translit": "bin",
+        "strong": "H996",
+        "gloss": "between",
+        "meaning_vi": "ở giữa (between)"
+      },
+      {
+        "orig": "הָאוֹר",
+        "translit": "e·aur",
+        "strong": "H216",
+        "gloss": "the·light",
+        "meaning_vi": "sự sáng (the light)"
+      },
+      {
+        "orig": "וּבֵין",
+        "translit": "u·bin",
+        "strong": "H996",
+        "gloss": "and·between",
+        "meaning_vi": "và ở giữa (and between)"
+      },
+      {
+        "orig": "הַחֹשְֶׁך",
+        "translit": "e·chshk",
+        "strong": "H2822",
+        "gloss": "the·darkness",
+        "meaning_vi": "sự tối tăm (the darkness)"
+      },
+      {
+        "orig": "וַיַּרְא",
+        "translit": "u·ira",
+        "strong": "H7200",
+        "gloss": "and·he-is-seeing",
+        "meaning_vi": "và Ngài thấy (and He saw)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "טוֹב",
+        "translit": "tub",
+        "strong": "H2896",
+        "gloss": "good",
+        "meaning_vi": "tốt lành (good)"
+      }
+    ],
+    "19": [
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "עֶרֶב",
+        "translit": "orb",
+        "strong": "H6153",
+        "gloss": "evening",
+        "meaning_vi": "buổi chiều (evening)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "בֹקֶר",
+        "translit": "bqr",
+        "strong": "H1242",
+        "gloss": "morning",
+        "meaning_vi": "buổi sáng (morning)"
+      },
+      {
+        "orig": "יוֹם",
+        "translit": "ium",
+        "strong": "H3117",
+        "gloss": "day",
+        "meaning_vi": "ngày (day)"
+      },
+      {
+        "orig": "רְבִיעִי",
+        "translit": "rbioi",
+        "strong": "",
+        "gloss": "fourth",
+        "meaning_vi": "fourth"
+      },
+      {
+        "orig": "פ",
+        "translit": "p",
+        "strong": "H853",
+        "gloss": "morning were the fourth",
+        "meaning_vi": "chỉ định từ trực tiếp"
+      }
+    ],
+    "20": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "יִשְׁרְצוּ",
+        "translit": "ishrtzu",
+        "strong": "",
+        "gloss": "they-shall-roam",
+        "meaning_vi": "they-shall-roam"
+      },
+      {
+        "orig": "הַמַּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      },
+      {
+        "orig": "שֶׁרֶץ",
+        "translit": "shrtz",
+        "strong": "",
+        "gloss": "roamer-of",
+        "meaning_vi": "roamer-of"
+      },
+      {
+        "orig": "נֶפֶשׁ",
+        "translit": "nphsh",
+        "strong": "",
+        "gloss": "soul",
+        "meaning_vi": "soul"
+      },
+      {
+        "orig": "חַיָּה",
+        "translit": "chie",
+        "strong": "",
+        "gloss": "living",
+        "meaning_vi": "living"
+      },
+      {
+        "orig": "וְעוֹף",
+        "translit": "u·ouph",
+        "strong": "",
+        "gloss": "and·flyer",
+        "meaning_vi": "and·flyer"
+      },
+      {
+        "orig": "יְעוֹפֵף",
+        "translit": "iouphph",
+        "strong": "",
+        "gloss": "he-shall-mfly",
+        "meaning_vi": "he-shall-mfly"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "over",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·earth",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "פְּנֵי",
+        "translit": "phni",
+        "strong": "H6440",
+        "gloss": "faces-of",
+        "meaning_vi": "mặt / diện mạo (surfaces of)"
+      },
+      {
+        "orig": "רְקִיעַ",
+        "translit": "rqio",
+        "strong": "",
+        "gloss": "atmosphere-of",
+        "meaning_vi": "atmosphere-of"
+      },
+      {
+        "orig": "הַשָּׁמָיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      }
+    ],
+    "21": [
+      {
+        "orig": "וַיִּבְרָא",
+        "translit": "u·ibra",
+        "strong": "",
+        "gloss": "and·he-is-creating",
+        "meaning_vi": "and·he-is-creating"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "הַתַּנִּינִם",
+        "translit": "e·thninm",
+        "strong": "",
+        "gloss": "the·monsters",
+        "meaning_vi": "the·monsters"
+      },
+      {
+        "orig": "הַגְּדֹלִים",
+        "translit": "e·gdlim",
+        "strong": "",
+        "gloss": "the·great-ones",
+        "meaning_vi": "the·great-ones"
+      },
+      {
+        "orig": "וְאֵת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "כָּל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "every-of",
+        "meaning_vi": "every-of"
+      },
+      {
+        "orig": "נֶפֶשׁ",
+        "translit": "nphsh",
+        "strong": "",
+        "gloss": "soul",
+        "meaning_vi": "soul"
+      },
+      {
+        "orig": "הַחַיָּה",
+        "translit": "e·chie",
+        "strong": "",
+        "gloss": "the·living",
+        "meaning_vi": "the·living"
+      },
+      {
+        "orig": "הָרֹמֶשֶׂת",
+        "translit": "e·rmshth",
+        "strong": "",
+        "gloss": "the·moving",
+        "meaning_vi": "the·moving"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "שָׁרְצוּ",
+        "translit": "shrtzu",
+        "strong": "",
+        "gloss": "they-roam",
+        "meaning_vi": "they-roam"
+      },
+      {
+        "orig": "הַמַּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      },
+      {
+        "orig": "לְמִינֵהֶם",
+        "translit": "l·min·em",
+        "strong": "",
+        "gloss": "to·species-of·them",
+        "meaning_vi": "to·species-of·them"
+      },
+      {
+        "orig": "וְאֵת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "כָּל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "every-of",
+        "meaning_vi": "every-of"
+      },
+      {
+        "orig": "עוֹף",
+        "translit": "ouph",
+        "strong": "",
+        "gloss": "flyer-of",
+        "meaning_vi": "flyer-of"
+      },
+      {
+        "orig": "כָּנָף",
+        "translit": "knph",
+        "strong": "",
+        "gloss": "wing",
+        "meaning_vi": "wing"
+      },
+      {
+        "orig": "לְמִינֵהוּ",
+        "translit": "l·min·eu",
+        "strong": "",
+        "gloss": "to·species-of·him",
+        "meaning_vi": "to·species-of·him"
+      },
+      {
+        "orig": "וַיַּרְא",
+        "translit": "u·ira",
+        "strong": "H7200",
+        "gloss": "and·he-is-seeing",
+        "meaning_vi": "và Ngài thấy (and He saw)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "טוֹב",
+        "translit": "tub",
+        "strong": "H2896",
+        "gloss": "good",
+        "meaning_vi": "tốt lành (good)"
+      }
+    ],
+    "22": [
+      {
+        "orig": "וַיְבָרְֶך",
+        "translit": "u·ibrk",
+        "strong": "",
+        "gloss": "and·he-is-mblessing",
+        "meaning_vi": "and·he-is-mblessing"
+      },
+      {
+        "orig": "אֹתָם",
+        "translit": "ath·m",
+        "strong": "",
+        "gloss": "»·them",
+        "meaning_vi": "»·them"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "לֵאמֹר",
+        "translit": "l·amr",
+        "strong": "",
+        "gloss": "to·to-say-of",
+        "meaning_vi": "to·to-say-of"
+      },
+      {
+        "orig": "פְּרוּ",
+        "translit": "phru",
+        "strong": "",
+        "gloss": "be-fruitful-you (p) !",
+        "meaning_vi": "be-fruitful-you (p) !"
+      },
+      {
+        "orig": "וּרְבוּ",
+        "translit": "u·rbu",
+        "strong": "",
+        "gloss": "and·increase-you (p) !",
+        "meaning_vi": "and·increase-you (p) !"
+      },
+      {
+        "orig": "וּמִלְאוּ",
+        "translit": "u·mlau",
+        "strong": "",
+        "gloss": "and·fill-you (p) !",
+        "meaning_vi": "and·fill-you (p) !"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "הַמַּיִם",
+        "translit": "e·mim",
+        "strong": "H4325",
+        "gloss": "the·waters",
+        "meaning_vi": "mặt nước (the waters)"
+      },
+      {
+        "orig": "בַּיַּמִּים",
+        "translit": "b·imim",
+        "strong": "",
+        "gloss": "in· the ·seas",
+        "meaning_vi": "in· the ·seas"
+      },
+      {
+        "orig": "וְהָעוֹף",
+        "translit": "u·e·ouph",
+        "strong": "",
+        "gloss": "and·the·flyer",
+        "meaning_vi": "and·the·flyer"
+      },
+      {
+        "orig": "יִרֶב",
+        "translit": "irb",
+        "strong": "",
+        "gloss": "he-shall-increase",
+        "meaning_vi": "he-shall-increase"
+      },
+      {
+        "orig": "בָּאָרֶץ",
+        "translit": "b·artz",
+        "strong": "",
+        "gloss": "in· the ·earth",
+        "meaning_vi": "in· the ·earth"
+      }
+    ],
+    "23": [
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "עֶרֶב",
+        "translit": "orb",
+        "strong": "H6153",
+        "gloss": "evening",
+        "meaning_vi": "buổi chiều (evening)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "בֹקֶר",
+        "translit": "bqr",
+        "strong": "H1242",
+        "gloss": "morning",
+        "meaning_vi": "buổi sáng (morning)"
+      },
+      {
+        "orig": "יוֹם",
+        "translit": "ium",
+        "strong": "H3117",
+        "gloss": "day",
+        "meaning_vi": "ngày (day)"
+      },
+      {
+        "orig": "חֲמִישִׁי",
+        "translit": "chmishi",
+        "strong": "",
+        "gloss": "fifth",
+        "meaning_vi": "fifth"
+      },
+      {
+        "orig": "פ",
+        "translit": "p",
+        "strong": "H853",
+        "gloss": "morning were the fifth day.",
+        "meaning_vi": "chỉ định từ trực tiếp"
+      }
+    ],
+    "24": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "תּוֹצֵא",
+        "translit": "thutza",
+        "strong": "",
+        "gloss": "she-shall-cbring -forth",
+        "meaning_vi": "she-shall-cbring -forth"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·earth",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "נֶפֶשׁ",
+        "translit": "nphsh",
+        "strong": "",
+        "gloss": "soul",
+        "meaning_vi": "soul"
+      },
+      {
+        "orig": "חַיָּה",
+        "translit": "chie",
+        "strong": "",
+        "gloss": "living",
+        "meaning_vi": "living"
+      },
+      {
+        "orig": "לְמִינָהּ",
+        "translit": "l·min·e",
+        "strong": "",
+        "gloss": "to·species-of·her",
+        "meaning_vi": "to·species-of·her"
+      },
+      {
+        "orig": "בְּהֵמָה",
+        "translit": "beme",
+        "strong": "",
+        "gloss": "beast",
+        "meaning_vi": "beast"
+      },
+      {
+        "orig": "וָרֶמֶשׂ",
+        "translit": "u·rmsh",
+        "strong": "",
+        "gloss": "and·moving -animal",
+        "meaning_vi": "and·moving -animal"
+      },
+      {
+        "orig": "וְחַיְתוֹ",
+        "translit": "u·chith·u",
+        "strong": "",
+        "gloss": "and·animal-of·him",
+        "meaning_vi": "and·animal-of·him"
+      },
+      {
+        "orig": "אֶרֶץ",
+        "translit": "artz",
+        "strong": "",
+        "gloss": "land",
+        "meaning_vi": "land"
+      },
+      {
+        "orig": "לְמִינָהּ",
+        "translit": "l·min·e",
+        "strong": "",
+        "gloss": "to·species-of·her",
+        "meaning_vi": "to·species-of·her"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "כֵן",
+        "translit": "kn",
+        "strong": "",
+        "gloss": "so",
+        "meaning_vi": "so"
+      }
+    ],
+    "25": [
+      {
+        "orig": "וַיַּעַשׂ",
+        "translit": "u·iosh",
+        "strong": "",
+        "gloss": "and·he-is-making do",
+        "meaning_vi": "and·he-is-making do"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "חַיַּת",
+        "translit": "chith",
+        "strong": "",
+        "gloss": "animal-of",
+        "meaning_vi": "animal-of"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·land",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "לְמִינָהּ",
+        "translit": "l·min·e",
+        "strong": "",
+        "gloss": "to·species-of·her",
+        "meaning_vi": "to·species-of·her"
+      },
+      {
+        "orig": "וְאֶת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "הַבְּהֵמָה",
+        "translit": "e·beme",
+        "strong": "",
+        "gloss": "the·beast",
+        "meaning_vi": "the·beast"
+      },
+      {
+        "orig": "לְמִינָהּ",
+        "translit": "l·min·e",
+        "strong": "",
+        "gloss": "to·species-of·her",
+        "meaning_vi": "to·species-of·her"
+      },
+      {
+        "orig": "וְאֵת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "כָּל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "every-of",
+        "meaning_vi": "every-of"
+      },
+      {
+        "orig": "רֶמֶשׂ",
+        "translit": "rmsh",
+        "strong": "",
+        "gloss": "moving -animal -of",
+        "meaning_vi": "moving -animal -of"
+      },
+      {
+        "orig": "הָאֲדָמָה",
+        "translit": "e·adme",
+        "strong": "",
+        "gloss": "the·ground",
+        "meaning_vi": "the·ground"
+      },
+      {
+        "orig": "לְמִינֵהוּ",
+        "translit": "l·min·eu",
+        "strong": "",
+        "gloss": "to·species-of·him",
+        "meaning_vi": "to·species-of·him"
+      },
+      {
+        "orig": "וַיַּרְא",
+        "translit": "u·ira",
+        "strong": "H7200",
+        "gloss": "and·he-is-seeing",
+        "meaning_vi": "và Ngài thấy (and He saw)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "טוֹב",
+        "translit": "tub",
+        "strong": "H2896",
+        "gloss": "good",
+        "meaning_vi": "tốt lành (good)"
+      }
+    ],
+    "26": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "נַעֲשֶׂה",
+        "translit": "noshe",
+        "strong": "",
+        "gloss": "we-shall-make do",
+        "meaning_vi": "we-shall-make do"
+      },
+      {
+        "orig": "אָדָם",
+        "translit": "adm",
+        "strong": "",
+        "gloss": "human",
+        "meaning_vi": "human"
+      },
+      {
+        "orig": "בְּצַלְמֵנוּ",
+        "translit": "b·tzlm·nu",
+        "strong": "",
+        "gloss": "in·image-of·us",
+        "meaning_vi": "in·image-of·us"
+      },
+      {
+        "orig": "כִּדְמוּתֵנוּ",
+        "translit": "k·dmuth·nu",
+        "strong": "",
+        "gloss": "as·likeness-of·us",
+        "meaning_vi": "as·likeness-of·us"
+      },
+      {
+        "orig": "וְיִרְדּוּ",
+        "translit": "u·irdu",
+        "strong": "",
+        "gloss": "and·they-shall-sway",
+        "meaning_vi": "and·they-shall-sway"
+      },
+      {
+        "orig": "בִדְגַת",
+        "translit": "b·dgth",
+        "strong": "",
+        "gloss": "in·fish-of",
+        "meaning_vi": "in·fish-of"
+      },
+      {
+        "orig": "הַיָּם",
+        "translit": "e·im",
+        "strong": "",
+        "gloss": "the·sea",
+        "meaning_vi": "the·sea"
+      },
+      {
+        "orig": "וּבְעוֹף",
+        "translit": "u·b·ouph",
+        "strong": "",
+        "gloss": "and·in·flyer-of",
+        "meaning_vi": "and·in·flyer-of"
+      },
+      {
+        "orig": "הַשָּׁמַיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      },
+      {
+        "orig": "וּבַבְּהֵמָה",
+        "translit": "u·b·beme",
+        "strong": "",
+        "gloss": "and·in· the ·beast",
+        "meaning_vi": "and·in· the ·beast"
+      },
+      {
+        "orig": "וּבְכָל",
+        "translit": "u·b·kl",
+        "strong": "",
+        "gloss": "and·in·all-of",
+        "meaning_vi": "and·in·all-of"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·earth",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "וּבְכָל",
+        "translit": "u·b·kl",
+        "strong": "",
+        "gloss": "and·in·every-of",
+        "meaning_vi": "and·in·every-of"
+      },
+      {
+        "orig": "הָרֶמֶשׂ",
+        "translit": "e·rmsh",
+        "strong": "",
+        "gloss": "the·moving -animal",
+        "meaning_vi": "the·moving -animal"
+      },
+      {
+        "orig": "הָרֹמֵשׂ",
+        "translit": "e·rmsh",
+        "strong": "",
+        "gloss": "the·one-moving",
+        "meaning_vi": "the·one-moving"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·land",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      }
+    ],
+    "27": [
+      {
+        "orig": "וַיִּבְרָא",
+        "translit": "u·ibra",
+        "strong": "",
+        "gloss": "and·he-is-creating",
+        "meaning_vi": "and·he-is-creating"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "הָאָדָם",
+        "translit": "e·adm",
+        "strong": "",
+        "gloss": "the·human",
+        "meaning_vi": "the·human"
+      },
+      {
+        "orig": "בְּצַלְמוֹ",
+        "translit": "b·tzlm·u",
+        "strong": "",
+        "gloss": "in·image-of·him",
+        "meaning_vi": "in·image-of·him"
+      },
+      {
+        "orig": "בְּצֶלֶם",
+        "translit": "b·tzlm",
+        "strong": "",
+        "gloss": "in·image-of",
+        "meaning_vi": "in·image-of"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "בָּרָא",
+        "translit": "bra",
+        "strong": "H1254",
+        "gloss": "he-created",
+        "meaning_vi": "Sáng tạo / Dựng nên"
+      },
+      {
+        "orig": "אֹתוֹ",
+        "translit": "ath·u",
+        "strong": "",
+        "gloss": "»·him",
+        "meaning_vi": "»·him"
+      },
+      {
+        "orig": "זָכָר",
+        "translit": "zkr",
+        "strong": "",
+        "gloss": "male",
+        "meaning_vi": "male"
+      },
+      {
+        "orig": "וּנְקֵבָה",
+        "translit": "u·nqbe",
+        "strong": "",
+        "gloss": "and·female",
+        "meaning_vi": "and·female"
+      },
+      {
+        "orig": "בָּרָא",
+        "translit": "bra",
+        "strong": "H1254",
+        "gloss": "he-created",
+        "meaning_vi": "Sáng tạo / Dựng nên"
+      },
+      {
+        "orig": "אֹתָם",
+        "translit": "ath·m",
+        "strong": "",
+        "gloss": "»·them",
+        "meaning_vi": "»·them"
+      }
+    ],
+    "28": [
+      {
+        "orig": "וַיְבָרְֶך",
+        "translit": "u·ibrk",
+        "strong": "",
+        "gloss": "and·he-is-mblessing",
+        "meaning_vi": "and·he-is-mblessing"
+      },
+      {
+        "orig": "אֹתָם",
+        "translit": "ath·m",
+        "strong": "",
+        "gloss": "»·them",
+        "meaning_vi": "»·them"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "לָהֶם",
+        "translit": "l·em",
+        "strong": "",
+        "gloss": "to·them",
+        "meaning_vi": "to·them"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "פְּרוּ",
+        "translit": "phru",
+        "strong": "",
+        "gloss": "be-fruitful-you (p) !",
+        "meaning_vi": "be-fruitful-you (p) !"
+      },
+      {
+        "orig": "וּרְבוּ",
+        "translit": "u·rbu",
+        "strong": "",
+        "gloss": "and·increase-you (p) !",
+        "meaning_vi": "and·increase-you (p) !"
+      },
+      {
+        "orig": "וּמִלְאוּ",
+        "translit": "u·mlau",
+        "strong": "",
+        "gloss": "and·fill-you (p) !",
+        "meaning_vi": "and·fill-you (p) !"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·earth",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "וְכִבְשֻׁהָ",
+        "translit": "u·kbsh·e",
+        "strong": "",
+        "gloss": "and·subdue-you (p)·her !",
+        "meaning_vi": "and·subdue-you (p)·her !"
+      },
+      {
+        "orig": "וּרְדוּ",
+        "translit": "u·rdu",
+        "strong": "",
+        "gloss": "and·sway-you (p) !",
+        "meaning_vi": "and·sway-you (p) !"
+      },
+      {
+        "orig": "בִּדְגַת",
+        "translit": "b·dgth",
+        "strong": "",
+        "gloss": "in·fish-of",
+        "meaning_vi": "in·fish-of"
+      },
+      {
+        "orig": "הַיָּם",
+        "translit": "e·im",
+        "strong": "",
+        "gloss": "the·sea",
+        "meaning_vi": "the·sea"
+      },
+      {
+        "orig": "וּבְעוֹף",
+        "translit": "u·b·ouph",
+        "strong": "",
+        "gloss": "and·in·flyer-of",
+        "meaning_vi": "and·in·flyer-of"
+      },
+      {
+        "orig": "הַשָּׁמַיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      },
+      {
+        "orig": "וּבְכָל",
+        "translit": "u·b·kl",
+        "strong": "",
+        "gloss": "and·in·every-of",
+        "meaning_vi": "and·in·every-of"
+      },
+      {
+        "orig": "חַיָּה",
+        "translit": "chie",
+        "strong": "",
+        "gloss": "animal",
+        "meaning_vi": "animal"
+      },
+      {
+        "orig": "הָרֹמֶשֶׂת",
+        "translit": "e·rmshth",
+        "strong": "",
+        "gloss": "the·one-moving",
+        "meaning_vi": "the·one-moving"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·land",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      }
+    ],
+    "29": [
+      {
+        "orig": "וַיֹּאמֶר",
+        "translit": "u·iamr",
+        "strong": "H559",
+        "gloss": "and·he-is-saying",
+        "meaning_vi": "và Ngài phán (and He said)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "הִנֵּה",
+        "translit": "ene",
+        "strong": "",
+        "gloss": "behold !",
+        "meaning_vi": "behold !"
+      },
+      {
+        "orig": "נָתַתִּי",
+        "translit": "nththi",
+        "strong": "",
+        "gloss": "I-give",
+        "meaning_vi": "I-give"
+      },
+      {
+        "orig": "לָכֶם",
+        "translit": "l·km",
+        "strong": "",
+        "gloss": "to·you (p)",
+        "meaning_vi": "to·you (p)"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "כָּל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "every-of",
+        "meaning_vi": "every-of"
+      },
+      {
+        "orig": "עֵשֶׂב",
+        "translit": "oshb",
+        "strong": "",
+        "gloss": "herbage",
+        "meaning_vi": "herbage"
+      },
+      {
+        "orig": "זֹרֵעַ",
+        "translit": "zro",
+        "strong": "",
+        "gloss": "seeding",
+        "meaning_vi": "seeding"
+      },
+      {
+        "orig": "זֶרַע",
+        "translit": "zro",
+        "strong": "",
+        "gloss": "seed",
+        "meaning_vi": "seed"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "פְּנֵי",
+        "translit": "phni",
+        "strong": "H6440",
+        "gloss": "sur faces-of",
+        "meaning_vi": "mặt / diện mạo (surfaces of)"
+      },
+      {
+        "orig": "כָל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "all-of",
+        "meaning_vi": "all-of"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·earth",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "וְאֶת",
+        "translit": "u·ath",
+        "strong": "H853",
+        "gloss": "and·»",
+        "meaning_vi": "và chỉ định từ (và »)"
+      },
+      {
+        "orig": "כָּל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "every-of",
+        "meaning_vi": "every-of"
+      },
+      {
+        "orig": "הָעֵץ",
+        "translit": "e·otz",
+        "strong": "",
+        "gloss": "the·tree",
+        "meaning_vi": "the·tree"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "בּוֹ",
+        "translit": "b·u",
+        "strong": "",
+        "gloss": "in·him",
+        "meaning_vi": "in·him"
+      },
+      {
+        "orig": "פְרִי",
+        "translit": "phri",
+        "strong": "",
+        "gloss": "fruit-of",
+        "meaning_vi": "fruit-of"
+      },
+      {
+        "orig": "עֵץ",
+        "translit": "otz",
+        "strong": "",
+        "gloss": "tree",
+        "meaning_vi": "tree"
+      },
+      {
+        "orig": "זֹרֵעַ",
+        "translit": "zro",
+        "strong": "",
+        "gloss": "seeding",
+        "meaning_vi": "seeding"
+      },
+      {
+        "orig": "זָרַע",
+        "translit": "zro",
+        "strong": "",
+        "gloss": "seed",
+        "meaning_vi": "seed"
+      },
+      {
+        "orig": "לָכֶם",
+        "translit": "l·km",
+        "strong": "",
+        "gloss": "for·you (p)",
+        "meaning_vi": "for·you (p)"
+      },
+      {
+        "orig": "יִהְיֶה",
+        "translit": "ieie",
+        "strong": "",
+        "gloss": "he-is-becoming",
+        "meaning_vi": "he-is-becoming"
+      },
+      {
+        "orig": "לְאָכְלָה",
+        "translit": "l·akle",
+        "strong": "",
+        "gloss": "for·food",
+        "meaning_vi": "for·food"
+      }
+    ],
+    "30": [
+      {
+        "orig": "וּלְכָל",
+        "translit": "u·l·kl",
+        "strong": "",
+        "gloss": "and·for·every-of",
+        "meaning_vi": "and·for·every-of"
+      },
+      {
+        "orig": "חַיַּת",
+        "translit": "chith",
+        "strong": "",
+        "gloss": "animal-of",
+        "meaning_vi": "animal-of"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·land",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "וּלְכָל",
+        "translit": "u·l·kl",
+        "strong": "",
+        "gloss": "and·for·every-of",
+        "meaning_vi": "and·for·every-of"
+      },
+      {
+        "orig": "עוֹף",
+        "translit": "ouph",
+        "strong": "",
+        "gloss": "flyer-of",
+        "meaning_vi": "flyer-of"
+      },
+      {
+        "orig": "הַשָּׁמַיִם",
+        "translit": "e·shmim",
+        "strong": "H8064",
+        "gloss": "the·heavens",
+        "meaning_vi": "các tầng trời (the heavens)"
+      },
+      {
+        "orig": "וּלְכֹל",
+        "translit": "u·l·kl",
+        "strong": "",
+        "gloss": "and·for·every-of",
+        "meaning_vi": "and·for·every-of"
+      },
+      {
+        "orig": "זמֵשׂ רוֹ",
+        "translit": "rumsh",
+        "strong": "",
+        "gloss": "moving -animal",
+        "meaning_vi": "moving -animal"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "הָאָרֶץ",
+        "translit": "e·artz",
+        "strong": "H776",
+        "gloss": "the·land",
+        "meaning_vi": "đất / địa cầu (the earth)"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "בּוֹ",
+        "translit": "b·u",
+        "strong": "",
+        "gloss": "in·him",
+        "meaning_vi": "in·him"
+      },
+      {
+        "orig": "נֶפֶשׁ",
+        "translit": "nphsh",
+        "strong": "",
+        "gloss": "soul",
+        "meaning_vi": "soul"
+      },
+      {
+        "orig": "חַיָּה",
+        "translit": "chie",
+        "strong": "",
+        "gloss": "living",
+        "meaning_vi": "living"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "כָּל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "every-of",
+        "meaning_vi": "every-of"
+      },
+      {
+        "orig": "יֶרֶק",
+        "translit": "irq",
+        "strong": "",
+        "gloss": "green",
+        "meaning_vi": "green"
+      },
+      {
+        "orig": "עֵשֶׂב",
+        "translit": "oshb",
+        "strong": "",
+        "gloss": "herbage",
+        "meaning_vi": "herbage"
+      },
+      {
+        "orig": "לְאָכְלָה",
+        "translit": "l·akle",
+        "strong": "",
+        "gloss": "for·food",
+        "meaning_vi": "for·food"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "כֵן",
+        "translit": "kn",
+        "strong": "",
+        "gloss": "so",
+        "meaning_vi": "so"
+      }
+    ],
+    "31": [
+      {
+        "orig": "וַיַּרְא",
+        "translit": "u·ira",
+        "strong": "H7200",
+        "gloss": "and·he-is-seeing",
+        "meaning_vi": "và Ngài thấy (and He saw)"
+      },
+      {
+        "orig": "אֱֹלהִים",
+        "translit": "aleim",
+        "strong": "H430",
+        "gloss": "Elohim",
+        "meaning_vi": "Đức Chúa Trời (Elohim)"
+      },
+      {
+        "orig": "אֶת",
+        "translit": "ath",
+        "strong": "H853",
+        "gloss": "»",
+        "meaning_vi": "chỉ định từ trực tiếp (»)"
+      },
+      {
+        "orig": "כָּל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "all-of",
+        "meaning_vi": "all-of"
+      },
+      {
+        "orig": "אֲשֶׁר",
+        "translit": "ashr",
+        "strong": "",
+        "gloss": "which",
+        "meaning_vi": "which"
+      },
+      {
+        "orig": "עָשָׂה",
+        "translit": "oshe",
+        "strong": "",
+        "gloss": "he-made do",
+        "meaning_vi": "he-made do"
+      },
+      {
+        "orig": "וְהִנֵּה",
+        "translit": "u·ene",
+        "strong": "",
+        "gloss": "and·behold !",
+        "meaning_vi": "and·behold !"
+      },
+      {
+        "orig": "טוֹב",
+        "translit": "tub",
+        "strong": "H2896",
+        "gloss": "good",
+        "meaning_vi": "tốt lành (good)"
+      },
+      {
+        "orig": "מְאֹד",
+        "translit": "mad",
+        "strong": "",
+        "gloss": "very",
+        "meaning_vi": "very"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "עֶרֶב",
+        "translit": "orb",
+        "strong": "H6153",
+        "gloss": "evening",
+        "meaning_vi": "buổi chiều (evening)"
+      },
+      {
+        "orig": "וַיְהִי",
+        "translit": "u·iei",
+        "strong": "H1961",
+        "gloss": "and·he-is-becoming",
+        "meaning_vi": "và liền có (and there was)"
+      },
+      {
+        "orig": "בֹקֶר",
+        "translit": "bqr",
+        "strong": "H1242",
+        "gloss": "morning",
+        "meaning_vi": "buổi sáng (morning)"
+      },
+      {
+        "orig": "יוֹם",
+        "translit": "ium",
+        "strong": "H3117",
+        "gloss": "day-of",
+        "meaning_vi": "ngày (day)"
+      },
+      {
+        "orig": "הַשִּׁשִּׁי",
+        "translit": "e·shshi",
+        "strong": "",
+        "gloss": "the·sixth",
+        "meaning_vi": "the·sixth"
+      },
+      {
+        "orig": "פ",
+        "translit": "p",
+        "strong": "H853",
+        "gloss": "Genesis 1  -  Genesis 2",
+        "meaning_vi": "chỉ định từ trực tiếp"
+      }
+    ]
+  }
+}

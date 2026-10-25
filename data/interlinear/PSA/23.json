@@ -1,0 +1,422 @@
+{
+  "book_id": "PSA",
+  "chapter": 23,
+  "testament": "OT",
+  "language": "Hebrew",
+  "source": "Scripture4All Online Interlinear (WLC / ScrTR)",
+  "scripture4all_pdf_url": "https://www.scripture4all.org/OnlineInterlinear/OTpdf/psa23.pdf",
+  "total_verses": 6,
+  "verses": {
+    "1": [
+      {
+        "orig": "מִזְמוֹר",
+        "translit": "mzmur",
+        "strong": "H4210",
+        "gloss": "psalm",
+        "meaning_vi": "Thi thiên / Bài ca (psalm)"
+      },
+      {
+        "orig": "לְדָוִד",
+        "translit": "l·dud",
+        "strong": "H1732",
+        "gloss": "to·David",
+        "meaning_vi": "Của Đa-vít (of David)"
+      },
+      {
+        "orig": "יְהוָה",
+        "translit": "ieue",
+        "strong": "H3068",
+        "gloss": "Yahweh",
+        "meaning_vi": "ĐỨC GIÊ-HÔ-VA (Yahweh)"
+      },
+      {
+        "orig": "רֹעִי",
+        "translit": "ro·i",
+        "strong": "H7462",
+        "gloss": "one-being-shepherd-of·me",
+        "meaning_vi": "Đấng chăn giữ tôi (my shepherd)"
+      },
+      {
+        "orig": "לֹא",
+        "translit": "la",
+        "strong": "H3808",
+        "gloss": "not",
+        "meaning_vi": "Chẳng / Không (not)"
+      },
+      {
+        "orig": "אֶחְסָר",
+        "translit": "achsr",
+        "strong": "H2637",
+        "gloss": "I-shall-lack",
+        "meaning_vi": "Tôi sẽ chẳng thiếu thốn (I shall not lack)"
+      }
+    ],
+    "2": [
+      {
+        "orig": "בִּנְאוֹת",
+        "translit": "b·nauth",
+        "strong": "H4999",
+        "gloss": "in·oases-of",
+        "meaning_vi": "Nơi đồng cỏ (in pastures of)"
+      },
+      {
+        "orig": "דֶּשֶׁא",
+        "translit": "dsha",
+        "strong": "H1877",
+        "gloss": "vegetation",
+        "meaning_vi": "Cỏ xanh tươi (green grass)"
+      },
+      {
+        "orig": "יַרְבִּיצֵנִי",
+        "translit": "irbitz·ni",
+        "strong": "H7257",
+        "gloss": "he-is-cmak ing-recline·me",
+        "meaning_vi": "Ngài cho tôi nằm nghỉ (He makes me lie down)"
+      },
+      {
+        "orig": "עַל",
+        "translit": "ol",
+        "strong": "H5921",
+        "gloss": "on",
+        "meaning_vi": "trên / ở trên (over)"
+      },
+      {
+        "orig": "מֵי",
+        "translit": "mi",
+        "strong": "H4325",
+        "gloss": "waters-of",
+        "meaning_vi": "Nước (waters of)"
+      },
+      {
+        "orig": "מְנֻחוֹת",
+        "translit": "mnchuth",
+        "strong": "H4496",
+        "gloss": "resting-place s",
+        "meaning_vi": "Bình tịnh / An nghỉ (restful)"
+      },
+      {
+        "orig": "יְנַהֲלֵנִי",
+        "translit": "inel·ni",
+        "strong": "H5095",
+        "gloss": "he-is-mconducting·me",
+        "meaning_vi": "Ngài dẫn tôi (He leads me)"
+      }
+    ],
+    "3": [
+      {
+        "orig": "נַפְשִׁי",
+        "translit": "nphsh·i",
+        "strong": "H5315",
+        "gloss": "soul-of·me",
+        "meaning_vi": "Linh hồn tôi (my soul)"
+      },
+      {
+        "orig": "יְשׁוֹבֵב",
+        "translit": "ishubb",
+        "strong": "H7725",
+        "gloss": "he-is-mrestoring",
+        "meaning_vi": "Ngài bổ lại (He restores)"
+      },
+      {
+        "orig": "יַנְחֵנִי",
+        "translit": "inch·ni",
+        "strong": "H5148",
+        "gloss": "he-is-cguiding·me",
+        "meaning_vi": "Ngài dẫn tôi (He guides me)"
+      },
+      {
+        "orig": "בְמַעְגְּלֵי",
+        "translit": "b·mogli",
+        "strong": "H4570",
+        "gloss": "in·rounds-of",
+        "meaning_vi": "Trong các lối (in paths of)"
+      },
+      {
+        "orig": "צֶדֶק",
+        "translit": "tzdq",
+        "strong": "H6664",
+        "gloss": "righteousness",
+        "meaning_vi": "Sự công bình (righteousness)"
+      },
+      {
+        "orig": "לְמַעַן",
+        "translit": "lmon",
+        "strong": "H4616",
+        "gloss": "on-account-of",
+        "meaning_vi": "Vì cớ (for sake of)"
+      },
+      {
+        "orig": "שְׁמוֹ",
+        "translit": "shm·u",
+        "strong": "H8034",
+        "gloss": "name-of·him",
+        "meaning_vi": "Danh Ngài (His name)"
+      }
+    ],
+    "4": [
+      {
+        "orig": "גַּם",
+        "translit": "gm",
+        "strong": "H1571",
+        "gloss": "even",
+        "meaning_vi": "Dầu / Cho dù (even)"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "אֵלְֵך",
+        "translit": "alk",
+        "strong": "H3212",
+        "gloss": "I-shall-go",
+        "meaning_vi": "Tôi đi qua (I walk)"
+      },
+      {
+        "orig": "בְּגֵיא",
+        "translit": "b·gia",
+        "strong": "H1516",
+        "gloss": "in·ravine-of",
+        "meaning_vi": "Trong trũng (in valley of)"
+      },
+      {
+        "orig": "צַלְמָוֶת",
+        "translit": "tzlmuth",
+        "strong": "H6757",
+        "gloss": "shadow-of-death",
+        "meaning_vi": "Bóng sự chết (shadow of death)"
+      },
+      {
+        "orig": "לֹא",
+        "translit": "la",
+        "strong": "H3808",
+        "gloss": "not",
+        "meaning_vi": "Chẳng / Không (not)"
+      },
+      {
+        "orig": "אִירָא",
+        "translit": "aira",
+        "strong": "H3372",
+        "gloss": "I-shall-fear",
+        "meaning_vi": "Tôi chẳng sợ (I will fear)"
+      },
+      {
+        "orig": "רָע",
+        "translit": "ro",
+        "strong": "H7451",
+        "gloss": "evil",
+        "meaning_vi": "Tai họa / Sự dữ (evil)"
+      },
+      {
+        "orig": "כִּי",
+        "translit": "ki",
+        "strong": "H3588",
+        "gloss": "that",
+        "meaning_vi": "rằng / là (that)"
+      },
+      {
+        "orig": "אַתָּה",
+        "translit": "athe",
+        "strong": "H859",
+        "gloss": "you",
+        "meaning_vi": "Chúa / Ngài (You)"
+      },
+      {
+        "orig": "עִמָּדִי",
+        "translit": "omd·i",
+        "strong": "H5978",
+        "gloss": "with·me",
+        "meaning_vi": "Ở cùng tôi (with me)"
+      },
+      {
+        "orig": "שִׁבְטְָך",
+        "translit": "shbt·k",
+        "strong": "H7626",
+        "gloss": "club-of·you",
+        "meaning_vi": "Cây trượng của Ngài (Your rod)"
+      },
+      {
+        "orig": "וּמִשְׁעַנְתֶָּך",
+        "translit": "u·mshonth·k",
+        "strong": "H4938",
+        "gloss": "and·staff-of·you",
+        "meaning_vi": "Và cây gậy của Ngài (and Your staff)"
+      },
+      {
+        "orig": "הֵמָּה",
+        "translit": "eme",
+        "strong": "H1992",
+        "gloss": "they",
+        "meaning_vi": "Chúng nó (they)"
+      },
+      {
+        "orig": "יְנַחֲמֻנִי",
+        "translit": "inchm·ni",
+        "strong": "H5162",
+        "gloss": "they-are-mcomforting·me",
+        "meaning_vi": "An ủi tôi (comfort me)"
+      }
+    ],
+    "5": [
+      {
+        "orig": "תַּעֲרְֹך",
+        "translit": "thork",
+        "strong": "",
+        "gloss": "you-are-arranging",
+        "meaning_vi": "you-are-arranging"
+      },
+      {
+        "orig": "לְפָנַי",
+        "translit": "l·phn·i",
+        "strong": "",
+        "gloss": "to·faces-of·me",
+        "meaning_vi": "to·faces-of·me"
+      },
+      {
+        "orig": "שֻׁלְחָן",
+        "translit": "shlchn",
+        "strong": "",
+        "gloss": "table",
+        "meaning_vi": "table"
+      },
+      {
+        "orig": "נֶגֶד",
+        "translit": "ngd",
+        "strong": "",
+        "gloss": "in-front-of",
+        "meaning_vi": "in-front-of"
+      },
+      {
+        "orig": "צֹרְרָי",
+        "translit": "tzrr·i",
+        "strong": "",
+        "gloss": "ones-be ing-foes-of·me",
+        "meaning_vi": "ones-be ing-foes-of·me"
+      },
+      {
+        "orig": "דִּשַּׁנְתָּ",
+        "translit": "dshnth",
+        "strong": "",
+        "gloss": "you-make-sleek",
+        "meaning_vi": "you-make-sleek"
+      },
+      {
+        "orig": "בַשֶּׁמֶן",
+        "translit": "b·shmn",
+        "strong": "",
+        "gloss": "in· the ·oil",
+        "meaning_vi": "in· the ·oil"
+      },
+      {
+        "orig": "רֹאשִׁי",
+        "translit": "rash·i",
+        "strong": "",
+        "gloss": "head-of·me",
+        "meaning_vi": "head-of·me"
+      },
+      {
+        "orig": "כּוֹסִי",
+        "translit": "kus·i",
+        "strong": "",
+        "gloss": "cup-of·me",
+        "meaning_vi": "cup-of·me"
+      },
+      {
+        "orig": "רְוָיָה",
+        "translit": "ruie",
+        "strong": "",
+        "gloss": "satiation",
+        "meaning_vi": "satiation"
+      }
+    ],
+    "6": [
+      {
+        "orig": "אְַך",
+        "translit": "ak",
+        "strong": "",
+        "gloss": "yea",
+        "meaning_vi": "yea"
+      },
+      {
+        "orig": "טוֹב",
+        "translit": "tub",
+        "strong": "H2896",
+        "gloss": "goodness",
+        "meaning_vi": "tốt lành (good)"
+      },
+      {
+        "orig": "וָחֶסֶד",
+        "translit": "u·chsd",
+        "strong": "",
+        "gloss": "and·kindness",
+        "meaning_vi": "and·kindness"
+      },
+      {
+        "orig": "יִרְדְּפוּנִי",
+        "translit": "irdphu·ni",
+        "strong": "",
+        "gloss": "they-shall-pursue·me",
+        "meaning_vi": "they-shall-pursue·me"
+      },
+      {
+        "orig": "כָּל",
+        "translit": "kl",
+        "strong": "",
+        "gloss": "all-of",
+        "meaning_vi": "all-of"
+      },
+      {
+        "orig": "יְמֵי",
+        "translit": "imi",
+        "strong": "",
+        "gloss": "days-of",
+        "meaning_vi": "days-of"
+      },
+      {
+        "orig": "חַיָּי",
+        "translit": "chi·i",
+        "strong": "",
+        "gloss": "lives-of·me",
+        "meaning_vi": "lives-of·me"
+      },
+      {
+        "orig": "וְשַׁבְתִּי",
+        "translit": "u·shbthi",
+        "strong": "",
+        "gloss": "and·I-dwell",
+        "meaning_vi": "and·I-dwell"
+      },
+      {
+        "orig": "בְּבֵית",
+        "translit": "b·bith",
+        "strong": "",
+        "gloss": "in·house-of",
+        "meaning_vi": "in·house-of"
+      },
+      {
+        "orig": "יְהוָה",
+        "translit": "ieue",
+        "strong": "H3068",
+        "gloss": "Yahweh",
+        "meaning_vi": "ĐỨC GIÊ-HÔ-VA (Yahweh)"
+      },
+      {
+        "orig": "לְאֹרְֶך",
+        "translit": "l·ark",
+        "strong": "",
+        "gloss": "for·length-of",
+        "meaning_vi": "for·length-of"
+      },
+      {
+        "orig": "יָמִים",
+        "translit": "imim",
+        "strong": "",
+        "gloss": "days",
+        "meaning_vi": "days"
+      }
+    ]
+  }
+}

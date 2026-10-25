@@ -1,0 +1,6851 @@
+{
+  "book_id": "MAT",
+  "chapter": 5,
+  "testament": "NT",
+  "language": "Greek",
+  "source": "Scripture4All Online Interlinear (WLC / ScrTR)",
+  "scripture4all_pdf_url": "https://www.scripture4all.org/OnlineInterlinear/NTpdf/mat5.pdf",
+  "total_verses": 48,
+  "verses": {
+    "1": [
+      {
+        "orig": "Ἰδὼν",
+        "translit": "idOn",
+        "strong": "G1492",
+        "pos": "vp 2Aor Act Nom Sg m",
+        "gloss": "PERCEIVING",
+        "meaning_vi": "Thấy / Nhìn xem"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ὄχλους",
+        "translit": "ochlous",
+        "strong": "G3793",
+        "pos": "n_ Acc Pl m",
+        "gloss": "THRONGS",
+        "meaning_vi": "Đoàn dân đông"
+      },
+      {
+        "orig": "ἀνέβη",
+        "translit": "anebE",
+        "strong": "G305",
+        "pos": "vi 2Aor Act 3 Sg",
+        "gloss": "He-UP-STEPPed / he-ascended",
+        "meaning_vi": "Lên / Đi lên"
+      },
+      {
+        "orig": "εἰς",
+        "translit": "eis",
+        "strong": "G1519",
+        "pos": "Prep",
+        "gloss": "INTO",
+        "meaning_vi": "Vào trong / Lên"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ὄρος",
+        "translit": "oros",
+        "strong": "G3735",
+        "pos": "n_ Acc Sg n",
+        "gloss": "mountain",
+        "meaning_vi": "Núi / Vùng đồi"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND / he went up into a mountain: / and when he was set, his / disciples came unto him: / 1",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "καθίσαντος",
+        "translit": "kathisantos",
+        "strong": "G2523",
+        "pos": "vp Aor Act Gen Sg m",
+        "gloss": "OF-be ing -seated",
+        "meaning_vi": "Khi đã ngồi"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "Him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "προσῆλθον",
+        "translit": "prosElthon",
+        "strong": "G4334",
+        "pos": "vi Aor Act 3 Pl",
+        "gloss": "TOWARD-CAME / came-to",
+        "meaning_vi": "Đến gần / Đến cùng"
+      },
+      {
+        "orig": "αὐτῷ",
+        "translit": "autO",
+        "strong": "G846",
+        "pos": "pp Dat Sg m",
+        "gloss": "to-Him / him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "μαθηταὶ",
+        "translit": "mathEtai",
+        "strong": "G3101",
+        "pos": "n_ Nom Pl m",
+        "gloss": "LEARNers / disciples",
+        "meaning_vi": "Các môn đồ"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-Him",
+        "meaning_vi": "Ngài / Người"
+      }
+    ],
+    "2": [
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "ἀνοίξας",
+        "translit": "anoixas",
+        "strong": "G455",
+        "pos": "vp Aor Act Nom Sg m",
+        "gloss": "UP-OPEN ing / open ing",
+        "meaning_vi": "UP-OPEN ing / open ing"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "στόμα",
+        "translit": "stoma",
+        "strong": "G4750",
+        "pos": "n_ Acc Sg n",
+        "gloss": "MOUTH",
+        "meaning_vi": "Miệng Ngài"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-Him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "ἐδίδασκεν",
+        "translit": "edidasken",
+        "strong": "G1321",
+        "pos": "vi Impf Act 3 Sg",
+        "gloss": "He-TAUGHT",
+        "meaning_vi": "Dạy dỗ rằng"
+      },
+      {
+        "orig": "αὐτοὺς",
+        "translit": "autous",
+        "strong": "G846",
+        "pos": "pp Acc Pl m",
+        "gloss": "them",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "λέγων",
+        "translit": "legOn",
+        "strong": "G3004",
+        "pos": "vp Pres Act Nom Sg m",
+        "gloss": "sayING / And he opened his mouth, / and taught them, saying, / 2",
+        "meaning_vi": "sayING / And he opened his mouth, / and taught them, saying, / 2"
+      }
+    ],
+    "3": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY / happy -are",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "πτωχοὶ",
+        "translit": "ptOchoi",
+        "strong": "G4434",
+        "pos": "a_ Nom Pl m",
+        "gloss": "POOR- ones / poor-ones",
+        "meaning_vi": "Kẻ nghèo khó / Khiêm nhường"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg n",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "πνεύματι",
+        "translit": "pneumati",
+        "strong": "G4151",
+        "pos": "n_ Dat Sg n",
+        "gloss": "spirit",
+        "meaning_vi": "Tâm linh / Thần linh"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "αὐτῶν",
+        "translit": "autOn",
+        "strong": "G846",
+        "pos": "pp Gen Pl m",
+        "gloss": "OF-them",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "ἐστιν",
+        "translit": "estin",
+        "strong": "G2076",
+        "pos": "vi Pres vxx 3 Sg",
+        "gloss": "IS",
+        "meaning_vi": "IS"
+      },
+      {
+        "orig": "ἡ",
+        "translit": "hE",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg f",
+        "gloss": "THE / of heaven. / 3",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "βασιλεία",
+        "translit": "basileia",
+        "strong": "G932",
+        "pos": "n_ Nom Sg f",
+        "gloss": "KINGdom",
+        "meaning_vi": "Nước / Vương quốc"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "οὐρανῶν",
+        "translit": "ouranOn",
+        "strong": "G3772",
+        "pos": "n_ Gen Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      }
+    ],
+    "4": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY / happy -are",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "πενθοῦντες",
+        "translit": "penthountes",
+        "strong": "G3996",
+        "pos": "vp Pres Act Nom Pl m",
+        "gloss": "MOURNING- ones / ones-mourning",
+        "meaning_vi": "Kẻ than khóc"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "autoi",
+        "translit": "autoi",
+        "strong": "G846",
+        "pos": "pp Nom Pl m",
+        "gloss": "they",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "παρακληθήσονται",
+        "translit": "paraklEthEsontai",
+        "strong": "G3870",
+        "pos": "vi Fut Pas 3 Pl",
+        "gloss": "SHALL-BE-BEING-BESIDE-CALLED / shall-be-being-consoled / Blessed [are] they that / mourn: for they shall be / comforted. / 4",
+        "meaning_vi": "Sẽ được an ủi"
+      }
+    ],
+    "5": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY / happy -are",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "πρᾳεῖς",
+        "translit": "praeis",
+        "strong": "G4239",
+        "pos": "a_ Nom Pl m",
+        "gloss": "MEEK / meek-ones",
+        "meaning_vi": "Kẻ nhu mì"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "autoi",
+        "translit": "autoi",
+        "strong": "G846",
+        "pos": "pp Nom Pl m",
+        "gloss": "they",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "klEronomEsousin",
+        "translit": "klEronomEsousin",
+        "strong": "G2816",
+        "pos": "vi Fut Act 3 Pl",
+        "gloss": "SHALL-BE-tenantING",
+        "meaning_vi": "Hưởng cơ nghiệp"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "γῆν",
+        "translit": "gEn",
+        "strong": "G1093",
+        "pos": "n_ Acc Sg f",
+        "gloss": "LAND / 5",
+        "meaning_vi": "LAND / 5"
+      }
+    ],
+    "6": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY / happy -are",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "πεινῶντες",
+        "translit": "peinOntes",
+        "strong": "G3983",
+        "pos": "vp Pres Act Nom Pl m",
+        "gloss": "ones -HUNGERING / ones-hungering",
+        "meaning_vi": "Kẻ đói"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "διψῶντες",
+        "translit": "dipsOntes",
+        "strong": "G1372",
+        "pos": "vp Pres Act Nom Pl m",
+        "gloss": "THIRSTING",
+        "meaning_vi": "Kẻ khát"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "dikaiosunEn",
+        "translit": "dikaiosunEn",
+        "strong": "G1343",
+        "pos": "n_ Acc Sg f",
+        "gloss": "JUSTice / righteousness",
+        "meaning_vi": "Sự công chính"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that / Blessed [are] they which do / hunger and thirst after / righteousness: for they shall be / filled. / 6",
+        "meaning_vi": "that / Blessed [are] they which do / hunger and thirst after / righteousness: for they shall be / filled. / 6"
+      },
+      {
+        "orig": "autoi",
+        "translit": "autoi",
+        "strong": "G846",
+        "pos": "pp Nom Pl m",
+        "gloss": "they",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "χορτασθήσονται",
+        "translit": "chortasthEsontai",
+        "strong": "G5526",
+        "pos": "vi Fut Pas 3 Pl",
+        "gloss": "SHALL-BE-BEING-satisfiED",
+        "meaning_vi": "Sẽ được no đủ"
+      }
+    ],
+    "7": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY / happy -are",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ἐλεήμονες",
+        "translit": "eleEmones",
+        "strong": "G1655",
+        "pos": "a_ Nom Pl m",
+        "gloss": "MERCIful / merciful-ones",
+        "meaning_vi": "Kẻ hay thương xót"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "autoi",
+        "translit": "autoi",
+        "strong": "G846",
+        "pos": "pp Nom Pl m",
+        "gloss": "they",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "ἐλεηθήσονται",
+        "translit": "eleEthEsontai",
+        "strong": "G1653",
+        "pos": "vi Fut Pas 3 Pl",
+        "gloss": "SHALL-BE-BEING-MERCIED / shall-be-being- shown -mercy / for they shall obtain mercy. / 7",
+        "meaning_vi": "Sẽ được thương xót"
+      }
+    ],
+    "8": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY / happy -are",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "καθαροὶ",
+        "translit": "katharoi",
+        "strong": "G2513",
+        "pos": "a_ Nom Pl m",
+        "gloss": "clean / clean-ones",
+        "meaning_vi": "Kẻ có lòng trong sạch"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "καρδίᾳ",
+        "translit": "kardia",
+        "strong": "G2588",
+        "pos": "n_ Dat Sg f",
+        "gloss": "HEART",
+        "meaning_vi": "HEART"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "autoi",
+        "translit": "autoi",
+        "strong": "G846",
+        "pos": "pp Nom Pl m",
+        "gloss": "they",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "Θεόν",
+        "translit": "theon",
+        "strong": "G2316",
+        "pos": "n_ Acc Sg m",
+        "gloss": "God / heart: for they shall see God. / 8",
+        "meaning_vi": "Đức Chúa Trời (Theos)"
+      },
+      {
+        "orig": "ὄψονται",
+        "translit": "opsontai",
+        "strong": "G3700",
+        "pos": "vi Fut midD 3 Pl",
+        "gloss": "SHALL-BE-VIEWING / shall-be-seeing",
+        "meaning_vi": "Sẽ thấy Đức Chúa Trời"
+      }
+    ],
+    "9": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY / happy -are",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "εἰρηνοποιοί",
+        "translit": "eirEnopoioi",
+        "strong": "G1518",
+        "pos": "a_ Nom Pl m",
+        "gloss": "PEACE-makers",
+        "meaning_vi": "Kẻ làm cho hòa thuận"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "autoi",
+        "translit": "autoi",
+        "strong": "G846",
+        "pos": "pp Nom Pl m",
+        "gloss": "they",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "huioi",
+        "translit": "huioi",
+        "strong": "G5207",
+        "pos": "n_ Nom Pl m",
+        "gloss": "SONS",
+        "meaning_vi": "Con cái Đức Chúa Trời"
+      },
+      {
+        "orig": "theou",
+        "translit": "theou",
+        "strong": "G2316",
+        "pos": "n_ Gen Sg m",
+        "gloss": "OF-God",
+        "meaning_vi": "Đức Chúa Trời (Theos)"
+      },
+      {
+        "orig": "κληθήσονται",
+        "translit": "klEthEsontai",
+        "strong": "G2564",
+        "pos": "vi Fut Pas 3 Pl",
+        "gloss": "SHALL-BE-BEING-CALLED / Blessed [are] the / peacemakers: for they shall be / 9 / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org",
+        "meaning_vi": "SHALL-BE-BEING-CALLED / Blessed [are] the / peacemakers: for they shall be / 9 / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org"
+      }
+    ],
+    "10": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY / happy -are",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "δεδιωγμένοι",
+        "translit": "dediOgmenoi",
+        "strong": "G1377",
+        "pos": "vp Perf Pas Nom Pl m",
+        "gloss": "ones -HAVING- been -CHASED / ones-having- been -persecuted",
+        "meaning_vi": "Kẻ chịu bắt bớ"
+      },
+      {
+        "orig": "ἕνεκεν",
+        "translit": "heneken",
+        "strong": "G1752",
+        "pos": "Adv",
+        "gloss": "on-account-of",
+        "meaning_vi": "on-account-of"
+      },
+      {
+        "orig": "dikaiosunEs",
+        "translit": "dikaiosunEs",
+        "strong": "G1343",
+        "pos": "n_ Gen Sg f",
+        "gloss": "OF-JUSTice / righteousness",
+        "meaning_vi": "Sự công chính"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "αὐτῶν",
+        "translit": "autOn",
+        "strong": "G846",
+        "pos": "pp Gen Pl m",
+        "gloss": "OF-them / Blessed [are] they which are / persecuted for / righteousness'sake: for theirs is / 10",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "ἐστιν",
+        "translit": "estin",
+        "strong": "G2076",
+        "pos": "vi Pres vxx 3 Sg",
+        "gloss": "IS",
+        "meaning_vi": "IS"
+      },
+      {
+        "orig": "ἡ",
+        "translit": "hE",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "βασιλεία",
+        "translit": "basileia",
+        "strong": "G932",
+        "pos": "n_ Nom Sg f",
+        "gloss": "KINGdom",
+        "meaning_vi": "Nước / Vương quốc"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "οὐρανῶν",
+        "translit": "ouranOn",
+        "strong": "G3772",
+        "pos": "n_ Gen Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      }
+    ],
+    "11": [
+      {
+        "orig": "Μακάριοι",
+        "translit": "makarioi",
+        "strong": "G3107",
+        "pos": "a_ Nom Pl m",
+        "gloss": "HAPPY",
+        "meaning_vi": "Phước cho / Hạnh phúc thay"
+      },
+      {
+        "orig": "este",
+        "translit": "este",
+        "strong": "G2075",
+        "pos": "vi Pres vxx 2 Pl",
+        "gloss": "YE-ARE",
+        "meaning_vi": "YE-ARE"
+      },
+      {
+        "orig": "hotan",
+        "translit": "hotan",
+        "strong": "G3752",
+        "pos": "Conj",
+        "gloss": "when-EVER / whenever",
+        "meaning_vi": "when-EVER / whenever"
+      },
+      {
+        "orig": "oneidisOsin",
+        "translit": "oneidisOsin",
+        "strong": "G3679",
+        "pos": "vs Aor Act 3 Pl",
+        "gloss": "THEY-SHOULD-BE-REPROACHING",
+        "meaning_vi": "THEY-SHOULD-BE-REPROACHING"
+      },
+      {
+        "orig": "humas",
+        "translit": "humas",
+        "strong": "G5209",
+        "pos": "pp 2 Acc Pl",
+        "gloss": "YOU (p) / ye",
+        "meaning_vi": "YOU (p) / ye"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND / Blessed are ye, when [men] / shall revile you, and persecute / [you], and shall say all manner / of evil against you falsely, for / my sake. / 11",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "diOxOsin",
+        "translit": "diOxOsin",
+        "strong": "G1377",
+        "pos": "vs Aor Act 3 Pl",
+        "gloss": "THEY-SHOULD-BE-CHASING / they-should-be-persecuting",
+        "meaning_vi": "Kẻ chịu bắt bớ"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "eipOsin",
+        "translit": "eipOsin",
+        "strong": "G2036",
+        "pos": "vs 2Aor Act 3 Pl",
+        "gloss": "THEY-MAY-BE-sayING",
+        "meaning_vi": "THEY-MAY-BE-sayING"
+      },
+      {
+        "orig": "pan",
+        "translit": "pan",
+        "strong": "G3956",
+        "pos": "a_ Acc Sg n",
+        "gloss": "EVERY",
+        "meaning_vi": "Muôn vật / Mọi điều"
+      },
+      {
+        "orig": "ponEron",
+        "translit": "ponEron",
+        "strong": "G4190",
+        "pos": "a_ Acc Sg n",
+        "gloss": "wicked",
+        "meaning_vi": "wicked"
+      },
+      {
+        "orig": "rEma",
+        "translit": "rEma",
+        "strong": "G4487",
+        "pos": "n_ Acc Sg n",
+        "gloss": "declaration",
+        "meaning_vi": "declaration"
+      },
+      {
+        "orig": "kath",
+        "translit": "kath",
+        "strong": "G2596",
+        "pos": "Prep",
+        "gloss": "DOWN / against",
+        "meaning_vi": "DOWN / against"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / ye",
+        "meaning_vi": "OF-YOU (p) / ye"
+      },
+      {
+        "orig": "pseudomenoi",
+        "translit": "pseudomenoi",
+        "strong": "G5574",
+        "pos": "vp Pres mid/pas Nom Pl m",
+        "gloss": "FALSifyING",
+        "meaning_vi": "FALSifyING"
+      },
+      {
+        "orig": "ἕνεκεν",
+        "translit": "heneken",
+        "strong": "G1752",
+        "pos": "Adv",
+        "gloss": "on-account-of",
+        "meaning_vi": "on-account-of"
+      },
+      {
+        "orig": "emou",
+        "translit": "emou",
+        "strong": "G1700",
+        "pos": "pp 1 Gen Sg",
+        "gloss": "ME",
+        "meaning_vi": "ME"
+      }
+    ],
+    "12": [
+      {
+        "orig": "chairete",
+        "translit": "chairete",
+        "strong": "G5463",
+        "pos": "vm Pres Act 2 Pl",
+        "gloss": "BE-YE-JOYING / be-ye-rejoicing !",
+        "meaning_vi": "BE-YE-JOYING / be-ye-rejoicing !"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "agalliasthe",
+        "translit": "agalliasthe",
+        "strong": "G21",
+        "pos": "vm Pres midD/pasD 2 Pl",
+        "gloss": "BE- be ING-exultED / be-ye-exulting !",
+        "meaning_vi": "BE- be ING-exultED / be-ye-exulting !"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "misthos",
+        "translit": "misthos",
+        "strong": "G3408",
+        "pos": "n_ Nom Sg m",
+        "gloss": "HIRE / wage s",
+        "meaning_vi": "HIRE / wage s"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "polus",
+        "translit": "polus",
+        "strong": "G4183",
+        "pos": "a_ Nom Sg m",
+        "gloss": "much / vast",
+        "meaning_vi": "much / vast"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN / Rejoice, and be exceeding / glad: for great [is] your reward / in heaven: for so persecuted / before you. / 12",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tois",
+        "translit": "tois",
+        "strong": "G3588",
+        "pos": "t_ Dat Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ouranois",
+        "translit": "ouranois",
+        "strong": "G3772",
+        "pos": "n_ Dat Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      },
+      {
+        "orig": "houtOs",
+        "translit": "houtOs",
+        "strong": "G3779",
+        "pos": "Adv",
+        "gloss": "thus",
+        "meaning_vi": "thus"
+      },
+      {
+        "orig": "gar",
+        "translit": "gar",
+        "strong": "G1063",
+        "pos": "Conj",
+        "gloss": "for",
+        "meaning_vi": "for"
+      },
+      {
+        "orig": "ediOxan",
+        "translit": "ediOxan",
+        "strong": "G1377",
+        "pos": "vi Aor Act 3 Pl",
+        "gloss": "THEY-CHASE / they-persecute",
+        "meaning_vi": "Kẻ chịu bắt bớ"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "prophEtas",
+        "translit": "prophEtas",
+        "strong": "G4396",
+        "pos": "n_ Acc Pl m",
+        "gloss": "BEFORE-AVERers / prophets",
+        "meaning_vi": "BEFORE-AVERers / prophets"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "pro",
+        "translit": "pro",
+        "strong": "G4253",
+        "pos": "Prep",
+        "gloss": "BEFORE",
+        "meaning_vi": "BEFORE"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "YOU (p) / ye",
+        "meaning_vi": "YOU (p) / ye"
+      }
+    ],
+    "13": [
+      {
+        "orig": "humeis",
+        "translit": "humeis",
+        "strong": "G5210",
+        "pos": "pp 2 Nom Pl",
+        "gloss": "YOU (p) / ye",
+        "meaning_vi": "YOU (p) / ye"
+      },
+      {
+        "orig": "este",
+        "translit": "este",
+        "strong": "G2075",
+        "pos": "vi Pres vxx 2 Pl",
+        "gloss": "ARE",
+        "meaning_vi": "ARE"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "halas",
+        "translit": "halas",
+        "strong": "G217",
+        "pos": "n_ Nom Sg n",
+        "gloss": "SALT",
+        "meaning_vi": "SALT"
+      },
+      {
+        "orig": "tEs",
+        "translit": "tEs",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg f",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "gEs",
+        "translit": "gEs",
+        "strong": "G1093",
+        "pos": "n_ Gen Sg f",
+        "gloss": "LAND / earth",
+        "meaning_vi": "LAND / earth"
+      },
+      {
+        "orig": "ean",
+        "translit": "ean",
+        "strong": "G1437",
+        "pos": "Cond",
+        "gloss": "IF-EVER",
+        "meaning_vi": "IF-EVER"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg n",
+        "gloss": "THE / savour, wherewith shall it be / salted? it is thenceforth good / for nothing, but to be cast out, / and to be trodden under foot of / men. / 13",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "halas",
+        "translit": "halas",
+        "strong": "G217",
+        "pos": "n_ Nom Sg n",
+        "gloss": "SALT",
+        "meaning_vi": "SALT"
+      },
+      {
+        "orig": "mOranthE",
+        "translit": "mOranthE",
+        "strong": "G3471",
+        "pos": "vs Aor Pas 3 Sg",
+        "gloss": "MAY-BE-BEING-made-INSIPID",
+        "meaning_vi": "MAY-BE-BEING-made-INSIPID"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tini",
+        "translit": "tini",
+        "strong": "G5101",
+        "pos": "pi Dat Sg n",
+        "gloss": "ANY / what ?",
+        "meaning_vi": "ANY / what ?"
+      },
+      {
+        "orig": "halisthEsetai",
+        "translit": "halisthEsetai",
+        "strong": "G233",
+        "pos": "vi Fut Pas 3 Sg",
+        "gloss": "it-SHALL-BE-BEING-SALTED",
+        "meaning_vi": "it-SHALL-BE-BEING-SALTED"
+      },
+      {
+        "orig": "εἰς",
+        "translit": "eis",
+        "strong": "G1519",
+        "pos": "Prep",
+        "gloss": "INTO",
+        "meaning_vi": "Vào trong / Lên"
+      },
+      {
+        "orig": "ouden",
+        "translit": "ouden",
+        "strong": "G3762",
+        "pos": "a_ Acc Sg n",
+        "gloss": "NOT-YET-ONE / nothing",
+        "meaning_vi": "NOT-YET-ONE / nothing"
+      },
+      {
+        "orig": "ischuei",
+        "translit": "ischuei",
+        "strong": "G2480",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "it-IS-beING-STRONG / it-is-availing",
+        "meaning_vi": "it-IS-beING-STRONG / it-is-availing"
+      },
+      {
+        "orig": "eti",
+        "translit": "eti",
+        "strong": "G2089",
+        "pos": "Adv",
+        "gloss": "STILL",
+        "meaning_vi": "STILL"
+      },
+      {
+        "orig": "ei",
+        "translit": "ei",
+        "strong": "G1487",
+        "pos": "Cond",
+        "gloss": "IF",
+        "meaning_vi": "IF"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "blEthEnai",
+        "translit": "blEthEnai",
+        "strong": "G906",
+        "pos": "vn Aor Pas",
+        "gloss": "TO-BE-CAST",
+        "meaning_vi": "TO-BE-CAST"
+      },
+      {
+        "orig": "exO",
+        "translit": "exO",
+        "strong": "G1854",
+        "pos": "Adv",
+        "gloss": "OUT / out side",
+        "meaning_vi": "OUT / out side"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "katapateisthai",
+        "translit": "katapateisthai",
+        "strong": "G2662",
+        "pos": "vn Pres Pas",
+        "gloss": "TO-BE- be ING-tramplED",
+        "meaning_vi": "TO-BE- be ING-tramplED"
+      },
+      {
+        "orig": "hupo",
+        "translit": "hupo",
+        "strong": "G5259",
+        "pos": "Prep",
+        "gloss": "UNDER / by",
+        "meaning_vi": "UNDER / by"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ἀνθρώπων",
+        "translit": "anthrOpOn",
+        "strong": "G444",
+        "pos": "n_ Gen Pl m",
+        "gloss": "humans",
+        "meaning_vi": "Loài người / Nhân loại"
+      }
+    ],
+    "14": [
+      {
+        "orig": "humeis",
+        "translit": "humeis",
+        "strong": "G5210",
+        "pos": "pp 2 Nom Pl",
+        "gloss": "YOU (p) / ye",
+        "meaning_vi": "YOU (p) / ye"
+      },
+      {
+        "orig": "este",
+        "translit": "este",
+        "strong": "G2075",
+        "pos": "vi Pres vxx 2 Pl",
+        "gloss": "ARE",
+        "meaning_vi": "ARE"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "φῶς",
+        "translit": "phOs",
+        "strong": "G5457",
+        "pos": "n_ Nom Sg n",
+        "gloss": "LIGHT",
+        "meaning_vi": "Sự sáng (Phos)"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "kosmou",
+        "translit": "kosmou",
+        "strong": "G2889",
+        "pos": "n_ Gen Sg m",
+        "gloss": "SYSTEM / world",
+        "meaning_vi": "SYSTEM / world"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT",
+        "meaning_vi": "NOT"
+      },
+      {
+        "orig": "dunatai",
+        "translit": "dunatai",
+        "strong": "G1410",
+        "pos": "vi Pres midD/pasD 3 Sg",
+        "gloss": "IS-ABLE / can / world. A city that is set on an / hill cannot be hid. / 14",
+        "meaning_vi": "IS-ABLE / can / world. A city that is set on an / hill cannot be hid. / 14"
+      },
+      {
+        "orig": "polis",
+        "translit": "polis",
+        "strong": "G4172",
+        "pos": "n_ Nom Sg f",
+        "gloss": "city",
+        "meaning_vi": "city"
+      },
+      {
+        "orig": "krubEnai",
+        "translit": "krubEnai",
+        "strong": "G2928",
+        "pos": "vn 2Aor Pas",
+        "gloss": "TO-BE-HID",
+        "meaning_vi": "TO-BE-HID"
+      },
+      {
+        "orig": "epanO",
+        "translit": "epanO",
+        "strong": "G1883",
+        "pos": "Adv",
+        "gloss": "ON-UP / upon",
+        "meaning_vi": "ON-UP / upon"
+      },
+      {
+        "orig": "orous",
+        "translit": "orous",
+        "strong": "G3735",
+        "pos": "n_ Gen Sg n",
+        "gloss": "OF-mountain / mountain",
+        "meaning_vi": "Núi / Vùng đồi"
+      },
+      {
+        "orig": "keimenE",
+        "translit": "keimenE",
+        "strong": "G2749",
+        "pos": "vp Pres midD/pasD Nom Sg f",
+        "gloss": "LYING / be ing-located / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org",
+        "meaning_vi": "LYING / be ing-located / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org"
+      }
+    ],
+    "15": [
+      {
+        "orig": "οὐδὲ",
+        "translit": "oude",
+        "strong": "G3761",
+        "pos": "Adv",
+        "gloss": "NOT-YET / neither",
+        "meaning_vi": "Chẳng có / Không hề"
+      },
+      {
+        "orig": "kaiousin",
+        "translit": "kaiousin",
+        "strong": "G2545",
+        "pos": "vi Pres Act 3 Pl",
+        "gloss": "THEY-ARE-BURNING",
+        "meaning_vi": "THEY-ARE-BURNING"
+      },
+      {
+        "orig": "luchnon",
+        "translit": "luchnon",
+        "strong": "G3088",
+        "pos": "n_ Acc Sg f",
+        "gloss": "LAMP",
+        "meaning_vi": "LAMP"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "titheasin",
+        "translit": "titheasin",
+        "strong": "G5087",
+        "pos": "vi Pres Act 3 Pl",
+        "gloss": "ARE-PLACING",
+        "meaning_vi": "ARE-PLACING"
+      },
+      {
+        "orig": "auton",
+        "translit": "auton",
+        "strong": "G846",
+        "pos": "pp Acc Sg m",
+        "gloss": "it / him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "hupo",
+        "translit": "hupo",
+        "strong": "G5259",
+        "pos": "Prep",
+        "gloss": "UNDER",
+        "meaning_vi": "UNDER"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "modion",
+        "translit": "modion",
+        "strong": "G3426",
+        "pos": "n_ Acc Sg m",
+        "gloss": "MEASURE / peck- measure / Neither do men light a / candle, and put it under a / bushel, but on a candlestick; / and it giveth light unto all that / are in the house. / 15",
+        "meaning_vi": "MEASURE / peck- measure / Neither do men light a / candle, and put it under a / bushel, but on a candlestick; / and it giveth light unto all that / are in the house. / 15"
+      },
+      {
+        "orig": "all",
+        "translit": "all",
+        "strong": "G235",
+        "pos": "Conj",
+        "gloss": "but",
+        "meaning_vi": "but"
+      },
+      {
+        "orig": "epi",
+        "translit": "epi",
+        "strong": "G1909",
+        "pos": "Prep",
+        "gloss": "ON",
+        "meaning_vi": "ON"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "luchnian",
+        "translit": "luchnian",
+        "strong": "G3087",
+        "pos": "n_ Acc Sg f",
+        "gloss": "LAMPstand",
+        "meaning_vi": "LAMPstand"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "lampei",
+        "translit": "lampei",
+        "strong": "G2989",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "it-IS-SHINING / she-is-shining",
+        "meaning_vi": "it-IS-SHINING / she-is-shining"
+      },
+      {
+        "orig": "pasin",
+        "translit": "pasin",
+        "strong": "G3956",
+        "pos": "a_ Dat Pl m",
+        "gloss": "to-ALL",
+        "meaning_vi": "Muôn vật / Mọi điều"
+      },
+      {
+        "orig": "tois",
+        "translit": "tois",
+        "strong": "G3588",
+        "pos": "t_ Dat Pl m",
+        "gloss": "THE- ones / the-ones",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "oikia",
+        "translit": "oikia",
+        "strong": "G3614",
+        "pos": "n_ Dat Sg f",
+        "gloss": "HOME / house",
+        "meaning_vi": "HOME / house"
+      }
+    ],
+    "16": [
+      {
+        "orig": "houtOs",
+        "translit": "houtOs",
+        "strong": "G3779",
+        "pos": "Adv",
+        "gloss": "thus",
+        "meaning_vi": "thus"
+      },
+      {
+        "orig": "lampsatO",
+        "translit": "lampsatO",
+        "strong": "G2989",
+        "pos": "vm Aor Act 3 Sg",
+        "gloss": "LET-SHINE / let-it-shine !",
+        "meaning_vi": "LET-SHINE / let-it-shine !"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "φῶς",
+        "translit": "phOs",
+        "strong": "G5457",
+        "pos": "n_ Nom Sg n",
+        "gloss": "LIGHT",
+        "meaning_vi": "Sự sáng (Phos)"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "emprosthen",
+        "translit": "emprosthen",
+        "strong": "G1715",
+        "pos": "Prep",
+        "gloss": "IN-TOWARD-PLACE / in-front-of",
+        "meaning_vi": "IN-TOWARD-PLACE / in-front-of"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "OF-THE / the",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ἀνθρώπων",
+        "translit": "anthrOpOn",
+        "strong": "G444",
+        "pos": "n_ Gen Pl m",
+        "gloss": "humans / Let your light so shine / before men, that they may see / your good works, and glorify / your Father which is in heaven. / 16",
+        "meaning_vi": "Loài người / Nhân loại"
+      },
+      {
+        "orig": "hopOs",
+        "translit": "hopOs",
+        "strong": "G3704",
+        "pos": "Adv",
+        "gloss": "WHICH-how / so-that",
+        "meaning_vi": "WHICH-how / so-that"
+      },
+      {
+        "orig": "idOsin",
+        "translit": "idOsin",
+        "strong": "G1492",
+        "pos": "vs 2Aor Act 3 Pl",
+        "gloss": "THEY-MAY-BE-PERCEIVING",
+        "meaning_vi": "Thấy / Nhìn xem"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "ta",
+        "translit": "ta",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "kala",
+        "translit": "kala",
+        "strong": "G2570",
+        "pos": "a_ Acc Pl n",
+        "gloss": "IDEAL",
+        "meaning_vi": "IDEAL"
+      },
+      {
+        "orig": "erga",
+        "translit": "erga",
+        "strong": "G2041",
+        "pos": "n_ Acc Pl n",
+        "gloss": "ACTS",
+        "meaning_vi": "ACTS"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "doxasOsin",
+        "translit": "doxasOsin",
+        "strong": "G1392",
+        "pos": "vs Aor Act 3 Pl",
+        "gloss": "SHOULD-BE-esteemING / should-be-glorifying",
+        "meaning_vi": "SHOULD-BE-esteemING / should-be-glorifying"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "patera",
+        "translit": "patera",
+        "strong": "G3962",
+        "pos": "n_ Acc Sg m",
+        "gloss": "FATHER",
+        "meaning_vi": "FATHER"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tois",
+        "translit": "tois",
+        "strong": "G3588",
+        "pos": "t_ Dat Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ouranois",
+        "translit": "ouranois",
+        "strong": "G3772",
+        "pos": "n_ Dat Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      }
+    ],
+    "17": [
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "nomisEte",
+        "translit": "nomisEte",
+        "strong": "G3543",
+        "pos": "vs Aor Act 2 Pl",
+        "gloss": "YE-SHOULD-BE-inferrING",
+        "meaning_vi": "YE-SHOULD-BE-inferrING"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "Elthon",
+        "translit": "Elthon",
+        "strong": "G2064",
+        "pos": "vi 2Aor Act 1 Sg",
+        "gloss": "I-CAME",
+        "meaning_vi": "I-CAME"
+      },
+      {
+        "orig": "katalusai",
+        "translit": "katalusai",
+        "strong": "G2647",
+        "pos": "vn Aor Act",
+        "gloss": "TO-DOWN-LOOSE / to-demolish",
+        "meaning_vi": "TO-DOWN-LOOSE / to-demolish"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "nomon",
+        "translit": "nomon",
+        "strong": "G3551",
+        "pos": "n_ Acc Sg m",
+        "gloss": "LAW",
+        "meaning_vi": "LAW"
+      },
+      {
+        "orig": "E",
+        "translit": "E",
+        "strong": "G2228",
+        "pos": "Part",
+        "gloss": "OR / prophets: I am not come to / destroy, but to fulfil. / 17",
+        "meaning_vi": "OR / prophets: I am not come to / destroy, but to fulfil. / 17"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "prophEtas",
+        "translit": "prophEtas",
+        "strong": "G4396",
+        "pos": "n_ Acc Pl m",
+        "gloss": "BEFORE-AVERers / prophets",
+        "meaning_vi": "BEFORE-AVERers / prophets"
+      },
+      {
+        "orig": "ouk",
+        "translit": "ouk",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT",
+        "meaning_vi": "NOT"
+      },
+      {
+        "orig": "Elthon",
+        "translit": "Elthon",
+        "strong": "G2064",
+        "pos": "vi 2Aor Act 1 Sg",
+        "gloss": "I-CAME",
+        "meaning_vi": "I-CAME"
+      },
+      {
+        "orig": "katalusai",
+        "translit": "katalusai",
+        "strong": "G2647",
+        "pos": "vn Aor Act",
+        "gloss": "TO-DOWN-LOOSE / to-demolish",
+        "meaning_vi": "TO-DOWN-LOOSE / to-demolish"
+      },
+      {
+        "orig": "alla",
+        "translit": "alla",
+        "strong": "G235",
+        "pos": "Conj",
+        "gloss": "but",
+        "meaning_vi": "but"
+      },
+      {
+        "orig": "plErOsai",
+        "translit": "plErOsai",
+        "strong": "G4137",
+        "pos": "vn Aor Act",
+        "gloss": "TO-FILL / to-fulfill",
+        "meaning_vi": "TO-FILL / to-fulfill"
+      }
+    ],
+    "18": [
+      {
+        "orig": "amEn",
+        "translit": "amEn",
+        "strong": "G281",
+        "pos": "Hebrew",
+        "gloss": "AMEN / verily",
+        "meaning_vi": "AMEN / verily"
+      },
+      {
+        "orig": "gar",
+        "translit": "gar",
+        "strong": "G1063",
+        "pos": "Conj",
+        "gloss": "for",
+        "meaning_vi": "for"
+      },
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "I-AM-sayING",
+        "meaning_vi": "I-AM-sayING"
+      },
+      {
+        "orig": "humin",
+        "translit": "humin",
+        "strong": "G5213",
+        "pos": "pp 2 Dat Pl",
+        "gloss": "to-YOU (p) / to-ye",
+        "meaning_vi": "to-YOU (p) / to-ye"
+      },
+      {
+        "orig": "heOs",
+        "translit": "heOs",
+        "strong": "G2193",
+        "pos": "Conj",
+        "gloss": "TILL",
+        "meaning_vi": "TILL"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER",
+        "meaning_vi": "EVER"
+      },
+      {
+        "orig": "parelthE",
+        "translit": "parelthE",
+        "strong": "G3928",
+        "pos": "vs 2Aor Act 3 Sg",
+        "gloss": "MAY-BE-BESIDE-COMING / may-be-passing-by",
+        "meaning_vi": "MAY-BE-BESIDE-COMING / may-be-passing-by"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ouranos",
+        "translit": "ouranos",
+        "strong": "G3772",
+        "pos": "n_ Nom Sg m",
+        "gloss": "heaven / For verily I say unto you, / Till heaven and earth pass, one / jot or one tittle shall in no wise / fulfilled. / 18",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "ἡ",
+        "translit": "hE",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "gE",
+        "translit": "gE",
+        "strong": "G1093",
+        "pos": "n_ Nom Sg f",
+        "gloss": "LAND / earth",
+        "meaning_vi": "LAND / earth"
+      },
+      {
+        "orig": "iOta",
+        "translit": "iOta",
+        "strong": "G2503",
+        "pos": "ni letter",
+        "gloss": "IOTA",
+        "meaning_vi": "IOTA"
+      },
+      {
+        "orig": "ἓν",
+        "translit": "hen",
+        "strong": "G1520",
+        "pos": "a_ Nom Sg n",
+        "gloss": "ONE",
+        "meaning_vi": "Một điều nào"
+      },
+      {
+        "orig": "E",
+        "translit": "E",
+        "strong": "G2228",
+        "pos": "Part",
+        "gloss": "OR",
+        "meaning_vi": "OR"
+      },
+      {
+        "orig": "mia",
+        "translit": "mia",
+        "strong": "G1520",
+        "pos": "a_ Nom Sg f",
+        "gloss": "ONE",
+        "meaning_vi": "Một điều nào"
+      },
+      {
+        "orig": "keraia",
+        "translit": "keraia",
+        "strong": "G2762",
+        "pos": "n_ Nom Sg f",
+        "gloss": "horn / serif",
+        "meaning_vi": "horn / serif"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT",
+        "meaning_vi": "NOT"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "parelthE",
+        "translit": "parelthE",
+        "strong": "G3928",
+        "pos": "vs 2Aor Act 3 Sg",
+        "gloss": "MAY-BE-BESIDE-COMING / may-be-passing-by",
+        "meaning_vi": "MAY-BE-BESIDE-COMING / may-be-passing-by"
+      },
+      {
+        "orig": "apo",
+        "translit": "apo",
+        "strong": "G575",
+        "pos": "Prep",
+        "gloss": "FROM",
+        "meaning_vi": "FROM"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "nomou",
+        "translit": "nomou",
+        "strong": "G3551",
+        "pos": "n_ Gen Sg m",
+        "gloss": "LAW",
+        "meaning_vi": "LAW"
+      },
+      {
+        "orig": "heOs",
+        "translit": "heOs",
+        "strong": "G2193",
+        "pos": "Conj",
+        "gloss": "TILL",
+        "meaning_vi": "TILL"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER",
+        "meaning_vi": "EVER"
+      },
+      {
+        "orig": "πάντα",
+        "translit": "panta",
+        "strong": "G3956",
+        "pos": "a_ Nom Pl n",
+        "gloss": "ALL",
+        "meaning_vi": "Muôn vật / Mọi điều"
+      },
+      {
+        "orig": "genEtai",
+        "translit": "genEtai",
+        "strong": "G1096",
+        "pos": "vs 2Aor midD 3 Sg",
+        "gloss": "MAY-BE-BECOMING / may-be-occurring",
+        "meaning_vi": "Dựng nên / Hiện hữu"
+      }
+    ],
+    "19": [
+      {
+        "orig": "hos",
+        "translit": "hos",
+        "strong": "G3739",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO",
+        "meaning_vi": "Điều mà / Cái đã"
+      },
+      {
+        "orig": "ean",
+        "translit": "ean",
+        "strong": "G1437",
+        "pos": "Cond",
+        "gloss": "IF-EVER",
+        "meaning_vi": "IF-EVER"
+      },
+      {
+        "orig": "oun",
+        "translit": "oun",
+        "strong": "G3767",
+        "pos": "Conj",
+        "gloss": "THEN",
+        "meaning_vi": "THEN"
+      },
+      {
+        "orig": "lusE",
+        "translit": "lusE",
+        "strong": "G3089",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-LOOSING / should-be-annulling",
+        "meaning_vi": "SHOULD-BE-LOOSING / should-be-annulling"
+      },
+      {
+        "orig": "mian",
+        "translit": "mian",
+        "strong": "G1520",
+        "pos": "a_ Acc Sg f",
+        "gloss": "ONE",
+        "meaning_vi": "Một điều nào"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl f",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "entolOn",
+        "translit": "entolOn",
+        "strong": "G1785",
+        "pos": "n_ Gen Pl f",
+        "gloss": "directions / precepts",
+        "meaning_vi": "directions / precepts"
+      },
+      {
+        "orig": "toutOn",
+        "translit": "toutOn",
+        "strong": "G5130",
+        "pos": "pd Gen Pl f",
+        "gloss": "these",
+        "meaning_vi": "these"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl f",
+        "gloss": "THE / Whosoever therefore shall / break one of these least / commandments, and shall / teach men so, he shall be called / heaven: but whosoever shall do / shall be called great in the / kingdom of heaven. / 19",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "elachistOn",
+        "translit": "elachistOn",
+        "strong": "G1646",
+        "pos": "a_ Gen Pl f",
+        "gloss": "INFERIOR-most / least",
+        "meaning_vi": "INFERIOR-most / least"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "didaxE",
+        "translit": "didaxE",
+        "strong": "G1321",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-TEACHING",
+        "meaning_vi": "Dạy dỗ rằng"
+      },
+      {
+        "orig": "houtOs",
+        "translit": "houtOs",
+        "strong": "G3779",
+        "pos": "Adv",
+        "gloss": "thus",
+        "meaning_vi": "thus"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "anthrOpous",
+        "translit": "anthrOpous",
+        "strong": "G444",
+        "pos": "n_ Acc Pl m",
+        "gloss": "humans",
+        "meaning_vi": "Loài người / Nhân loại"
+      },
+      {
+        "orig": "elachistos",
+        "translit": "elachistos",
+        "strong": "G1646",
+        "pos": "a_ Nom Sg m",
+        "gloss": "INFERIOR-most / least-one",
+        "meaning_vi": "INFERIOR-most / least-one"
+      },
+      {
+        "orig": "klEthEsetai",
+        "translit": "klEthEsetai",
+        "strong": "G2564",
+        "pos": "vi Fut Pas 3 Sg",
+        "gloss": "SHALL-BE-BEING-CALLED / he-shall-be-being-called",
+        "meaning_vi": "SHALL-BE-BEING-CALLED / he-shall-be-being-called"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "βασιλεία",
+        "translit": "basileia",
+        "strong": "G932",
+        "pos": "n_ Dat Sg f",
+        "gloss": "KINGdom",
+        "meaning_vi": "Nước / Vương quốc"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "οὐρανῶν",
+        "translit": "ouranOn",
+        "strong": "G3772",
+        "pos": "n_ Gen Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      },
+      {
+        "orig": "hos",
+        "translit": "hos",
+        "strong": "G3739",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO",
+        "meaning_vi": "Điều mà / Cái đã"
+      },
+      {
+        "orig": "d",
+        "translit": "d",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org",
+        "meaning_vi": "EVER / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org"
+      },
+      {
+        "orig": "poiEsE",
+        "translit": "poiEsE",
+        "strong": "G4160",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-DOING",
+        "meaning_vi": "SHOULD-BE-DOING"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "didaxE",
+        "translit": "didaxE",
+        "strong": "G1321",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-TEACHING",
+        "meaning_vi": "Dạy dỗ rằng"
+      },
+      {
+        "orig": "οὗτος",
+        "translit": "houtos",
+        "strong": "G3778",
+        "pos": "pd Nom Sg m",
+        "gloss": "this- one / this-one",
+        "meaning_vi": "Đấng này / Người này"
+      },
+      {
+        "orig": "megas",
+        "translit": "megas",
+        "strong": "G3173",
+        "pos": "a_ Nom Sg m",
+        "gloss": "GREAT",
+        "meaning_vi": "GREAT"
+      },
+      {
+        "orig": "klEthEsetai",
+        "translit": "klEthEsetai",
+        "strong": "G2564",
+        "pos": "vi Fut Pas 3 Sg",
+        "gloss": "SHALL-BE-BEING-CALLED",
+        "meaning_vi": "SHALL-BE-BEING-CALLED"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "βασιλεία",
+        "translit": "basileia",
+        "strong": "G932",
+        "pos": "n_ Dat Sg f",
+        "gloss": "KINGdom",
+        "meaning_vi": "Nước / Vương quốc"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "οὐρανῶν",
+        "translit": "ouranOn",
+        "strong": "G3772",
+        "pos": "n_ Gen Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      }
+    ],
+    "20": [
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "I-AM-sayING",
+        "meaning_vi": "I-AM-sayING"
+      },
+      {
+        "orig": "gar",
+        "translit": "gar",
+        "strong": "G1063",
+        "pos": "Conj",
+        "gloss": "for",
+        "meaning_vi": "for"
+      },
+      {
+        "orig": "humin",
+        "translit": "humin",
+        "strong": "G5213",
+        "pos": "pp 2 Dat Pl",
+        "gloss": "to-YOU (p) / to-ye",
+        "meaning_vi": "to-YOU (p) / to-ye"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "ean",
+        "translit": "ean",
+        "strong": "G1437",
+        "pos": "Cond",
+        "gloss": "IF-EVER",
+        "meaning_vi": "IF-EVER"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "perisseusE",
+        "translit": "perisseusE",
+        "strong": "G4052",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-exceedING",
+        "meaning_vi": "SHOULD-BE-exceedING"
+      },
+      {
+        "orig": "ἡ",
+        "translit": "hE",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "dikaiosunE",
+        "translit": "dikaiosunE",
+        "strong": "G1343",
+        "pos": "n_ Nom Sg f",
+        "gloss": "JUSTice / righteousness / For I say unto you, That / except your righteousness shall / shall in no case enter into the / kingdom of heaven. / 20",
+        "meaning_vi": "Sự công chính"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p)",
+        "meaning_vi": "OF-YOU (p)"
+      },
+      {
+        "orig": "pleion",
+        "translit": "pleion",
+        "strong": "G4119",
+        "pos": "a_ Acc Sg n Cmp",
+        "gloss": "MORE",
+        "meaning_vi": "MORE"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "grammateOn",
+        "translit": "grammateOn",
+        "strong": "G1122",
+        "pos": "n_ Gen Pl m",
+        "gloss": "WRITers / scribes",
+        "meaning_vi": "WRITers / scribes"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "pharisaiOn",
+        "translit": "pharisaiOn",
+        "strong": "G5330",
+        "pos": "n_ Gen Pl m",
+        "gloss": "PHARISEES",
+        "meaning_vi": "PHARISEES"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT",
+        "meaning_vi": "NOT"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "eiselthEte",
+        "translit": "eiselthEte",
+        "strong": "G1525",
+        "pos": "vs 2Aor Act 2 Pl",
+        "gloss": "YE-MAY-BE-INTO-COMING / ye-may-be-entering",
+        "meaning_vi": "YE-MAY-BE-INTO-COMING / ye-may-be-entering"
+      },
+      {
+        "orig": "εἰς",
+        "translit": "eis",
+        "strong": "G1519",
+        "pos": "Prep",
+        "gloss": "INTO",
+        "meaning_vi": "Vào trong / Lên"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "basileian",
+        "translit": "basileian",
+        "strong": "G932",
+        "pos": "n_ Acc Sg f",
+        "gloss": "KINGdom",
+        "meaning_vi": "Nước / Vương quốc"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "οὐρανῶν",
+        "translit": "ouranOn",
+        "strong": "G3772",
+        "pos": "n_ Gen Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      }
+    ],
+    "21": [
+      {
+        "orig": "Ekousate",
+        "translit": "Ekousate",
+        "strong": "G191",
+        "pos": "vi Aor Act 2 Pl",
+        "gloss": "YE-HEAR",
+        "meaning_vi": "YE-HEAR"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "errethE",
+        "translit": "errethE",
+        "strong": "G4483",
+        "pos": "vi Aor Pas 3 Sg",
+        "gloss": "it-WAS-declarED",
+        "meaning_vi": "it-WAS-declarED"
+      },
+      {
+        "orig": "tois",
+        "translit": "tois",
+        "strong": "G3588",
+        "pos": "t_ Dat Pl m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "archaiois",
+        "translit": "archaiois",
+        "strong": "G744",
+        "pos": "a_ Dat Pl m",
+        "gloss": "ORIGINals / ancients",
+        "meaning_vi": "ORIGINals / ancients"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT",
+        "meaning_vi": "NOT"
+      },
+      {
+        "orig": "phoneuseis",
+        "translit": "phoneuseis",
+        "strong": "G5407",
+        "pos": "vi Fut Act 2 Sg",
+        "gloss": "YOU-SHALL-BE-MURDERING",
+        "meaning_vi": "YOU-SHALL-BE-MURDERING"
+      },
+      {
+        "orig": "hos",
+        "translit": "hos",
+        "strong": "G3739",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO / said by them of old time, Thou / shalt not kill; and whosoever / shall kill shall be in danger of / the judgment: / 21",
+        "meaning_vi": "Điều mà / Cái đã"
+      },
+      {
+        "orig": "d",
+        "translit": "d",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER",
+        "meaning_vi": "EVER"
+      },
+      {
+        "orig": "phoneusE",
+        "translit": "phoneusE",
+        "strong": "G5407",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-MURDERING",
+        "meaning_vi": "SHOULD-BE-MURDERING"
+      },
+      {
+        "orig": "enochos",
+        "translit": "enochos",
+        "strong": "G1777",
+        "pos": "a_ Nom Sg m",
+        "gloss": "liable",
+        "meaning_vi": "liable"
+      },
+      {
+        "orig": "estai",
+        "translit": "estai",
+        "strong": "G2071",
+        "pos": "vi Fut vxx 3 Sg",
+        "gloss": "SHALL-BE",
+        "meaning_vi": "SHALL-BE"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "krisei",
+        "translit": "krisei",
+        "strong": "G2920",
+        "pos": "n_ Dat Sg f",
+        "gloss": "JUDGing",
+        "meaning_vi": "JUDGing"
+      }
+    ],
+    "22": [
+      {
+        "orig": "egO",
+        "translit": "egO",
+        "strong": "G1473",
+        "pos": "pp 1 Nom Sg",
+        "gloss": "I",
+        "meaning_vi": "I"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "AM-sayING",
+        "meaning_vi": "AM-sayING"
+      },
+      {
+        "orig": "humin",
+        "translit": "humin",
+        "strong": "G5213",
+        "pos": "pp 2 Dat Pl",
+        "gloss": "to-YOU (p) / to-ye",
+        "meaning_vi": "to-YOU (p) / to-ye"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "pas",
+        "translit": "pas",
+        "strong": "G3956",
+        "pos": "a_ Nom Sg m",
+        "gloss": "EVERY",
+        "meaning_vi": "Muôn vật / Mọi điều"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE- one / the-one",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "orgizomenos",
+        "translit": "orgizomenos",
+        "strong": "G3710",
+        "pos": "vp Pres Pas Nom Sg m",
+        "gloss": "be ING-INDIGNANT / be ing-angry",
+        "meaning_vi": "be ING-INDIGNANT / be ing-angry"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE / But I say unto you, That / whosoever is angry with his / brother without a cause shall / and whosoever shall say to his / brother, Raca, shall be in / whosoever shall say, Thou / fool, shall be in danger of hell / fire. / 22",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "adelphO",
+        "translit": "adelphO",
+        "strong": "G80",
+        "pos": "n_ Dat Sg m",
+        "gloss": "brother",
+        "meaning_vi": "brother"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "eikE",
+        "translit": "eikE",
+        "strong": "G1500",
+        "pos": "Adv",
+        "gloss": "SIMULATEly / feignedly",
+        "meaning_vi": "SIMULATEly / feignedly"
+      },
+      {
+        "orig": "enochos",
+        "translit": "enochos",
+        "strong": "G1777",
+        "pos": "a_ Nom Sg m",
+        "gloss": "liable",
+        "meaning_vi": "liable"
+      },
+      {
+        "orig": "estai",
+        "translit": "estai",
+        "strong": "G2071",
+        "pos": "vi Fut vxx 3 Sg",
+        "gloss": "SHALL-BE",
+        "meaning_vi": "SHALL-BE"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "krisei",
+        "translit": "krisei",
+        "strong": "G2920",
+        "pos": "n_ Dat Sg f",
+        "gloss": "JUDGing",
+        "meaning_vi": "JUDGing"
+      },
+      {
+        "orig": "hos",
+        "translit": "hos",
+        "strong": "G3739",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO",
+        "meaning_vi": "Điều mà / Cái đã"
+      },
+      {
+        "orig": "d",
+        "translit": "d",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER",
+        "meaning_vi": "EVER"
+      },
+      {
+        "orig": "eipE",
+        "translit": "eipE",
+        "strong": "G2036",
+        "pos": "vs 2Aor Act 3 Sg",
+        "gloss": "MAY-BE-sayING",
+        "meaning_vi": "MAY-BE-sayING"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "adelphO",
+        "translit": "adelphO",
+        "strong": "G80",
+        "pos": "n_ Dat Sg m",
+        "gloss": "brother",
+        "meaning_vi": "brother"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "raka",
+        "translit": "raka",
+        "strong": "G4469",
+        "pos": "Aramaic",
+        "gloss": "RAKA ( Heb ,empty) / Raka !",
+        "meaning_vi": "RAKA ( Heb ,empty) / Raka !"
+      },
+      {
+        "orig": "enochos",
+        "translit": "enochos",
+        "strong": "G1777",
+        "pos": "a_ Nom Sg m",
+        "gloss": "liable",
+        "meaning_vi": "liable"
+      },
+      {
+        "orig": "estai",
+        "translit": "estai",
+        "strong": "G2071",
+        "pos": "vi Fut vxx 3 Sg",
+        "gloss": "SHALL-BE",
+        "meaning_vi": "SHALL-BE"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg n",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "sunedriO",
+        "translit": "sunedriO",
+        "strong": "G4892",
+        "pos": "n_ Dat Sg n",
+        "gloss": "Sanhedrin",
+        "meaning_vi": "Sanhedrin"
+      },
+      {
+        "orig": "hos",
+        "translit": "hos",
+        "strong": "G3739",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO",
+        "meaning_vi": "Điều mà / Cái đã"
+      },
+      {
+        "orig": "d",
+        "translit": "d",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER",
+        "meaning_vi": "EVER"
+      },
+      {
+        "orig": "eipE",
+        "translit": "eipE",
+        "strong": "G2036",
+        "pos": "vs 2Aor Act 3 Sg",
+        "gloss": "MAY-BE-sayING",
+        "meaning_vi": "MAY-BE-sayING"
+      },
+      {
+        "orig": "mOre",
+        "translit": "mOre",
+        "strong": "G3474",
+        "pos": "a_ Voc Sg m",
+        "gloss": "INSIPID ! / Stupid !",
+        "meaning_vi": "INSIPID ! / Stupid !"
+      },
+      {
+        "orig": "enochos",
+        "translit": "enochos",
+        "strong": "G1777",
+        "pos": "a_ Nom Sg m",
+        "gloss": "liable",
+        "meaning_vi": "liable"
+      },
+      {
+        "orig": "estai",
+        "translit": "estai",
+        "strong": "G2071",
+        "pos": "vi Fut vxx 3 Sg",
+        "gloss": "SHALL-BE",
+        "meaning_vi": "SHALL-BE"
+      },
+      {
+        "orig": "εἰς",
+        "translit": "eis",
+        "strong": "G1519",
+        "pos": "Prep",
+        "gloss": "INTO",
+        "meaning_vi": "Vào trong / Lên"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "geennan",
+        "translit": "geennan",
+        "strong": "G1067",
+        "pos": "n_ Acc Sg f",
+        "gloss": "GEHENNA",
+        "meaning_vi": "GEHENNA"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg n",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "puros",
+        "translit": "puros",
+        "strong": "G4442",
+        "pos": "n_ Gen Sg n",
+        "gloss": "FIRE",
+        "meaning_vi": "FIRE"
+      }
+    ],
+    "23": [
+      {
+        "orig": "ean",
+        "translit": "ean",
+        "strong": "G1437",
+        "pos": "Cond",
+        "gloss": "IF-EVER",
+        "meaning_vi": "IF-EVER"
+      },
+      {
+        "orig": "oun",
+        "translit": "oun",
+        "strong": "G3767",
+        "pos": "Conj",
+        "gloss": "THEN",
+        "meaning_vi": "THEN"
+      },
+      {
+        "orig": "prospherEs",
+        "translit": "prospherEs",
+        "strong": "G4374",
+        "pos": "vs Pres Act 2 Sg",
+        "gloss": "YOU-MAY-BE-TOWARD-CARRYING / you-may-be-offering",
+        "meaning_vi": "YOU-MAY-BE-TOWARD-CARRYING / you-may-be-offering"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "dOron",
+        "translit": "dOron",
+        "strong": "G1435",
+        "pos": "n_ Acc Sg n",
+        "gloss": "oblation / approach -present",
+        "meaning_vi": "oblation / approach -present"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "epi",
+        "translit": "epi",
+        "strong": "G1909",
+        "pos": "Prep",
+        "gloss": "ON",
+        "meaning_vi": "ON"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE / Therefore if thou bring thy / rememberest that thy brother / hath ought against thee; / 23 / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "thusiastErion",
+        "translit": "thusiastErion",
+        "strong": "G2379",
+        "pos": "n_ Acc Sg n",
+        "gloss": "SACRIFICE-place / altar",
+        "meaning_vi": "SACRIFICE-place / altar"
+      },
+      {
+        "orig": "kakei",
+        "translit": "kakei",
+        "strong": "G2546",
+        "pos": "Adv Con",
+        "gloss": "AND-there",
+        "meaning_vi": "AND-there"
+      },
+      {
+        "orig": "mnEsthEs",
+        "translit": "mnEsthEs",
+        "strong": "G3415",
+        "pos": "vs Aor Pas 2 Sg",
+        "gloss": "YOU-SHOULD-BE-BEING-REMINDED",
+        "meaning_vi": "YOU-SHOULD-BE-BEING-REMINDED"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "adelphos",
+        "translit": "adelphos",
+        "strong": "G80",
+        "pos": "n_ Nom Sg m",
+        "gloss": "brother",
+        "meaning_vi": "brother"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "echei",
+        "translit": "echei",
+        "strong": "G2192",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "IS-HAVING",
+        "meaning_vi": "IS-HAVING"
+      },
+      {
+        "orig": "ti",
+        "translit": "ti",
+        "strong": "G5100",
+        "pos": "px Acc Sg n",
+        "gloss": "ANY / any thing",
+        "meaning_vi": "ANY / any thing"
+      },
+      {
+        "orig": "kata",
+        "translit": "kata",
+        "strong": "G2596",
+        "pos": "Prep",
+        "gloss": "DOWN / against",
+        "meaning_vi": "DOWN / against"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU / you",
+        "meaning_vi": "OF-YOU / you"
+      }
+    ],
+    "24": [
+      {
+        "orig": "aphes",
+        "translit": "aphes",
+        "strong": "G863",
+        "pos": "vm 2Aor Act 2 Sg",
+        "gloss": "FROM-LET / leave-you !",
+        "meaning_vi": "FROM-LET / leave-you !"
+      },
+      {
+        "orig": "ekei",
+        "translit": "ekei",
+        "strong": "G1563",
+        "pos": "Adv",
+        "gloss": "there",
+        "meaning_vi": "there"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "dOron",
+        "translit": "dOron",
+        "strong": "G1435",
+        "pos": "n_ Acc Sg n",
+        "gloss": "oblation / approach -present",
+        "meaning_vi": "oblation / approach -present"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "emprosthen",
+        "translit": "emprosthen",
+        "strong": "G1715",
+        "pos": "Prep",
+        "gloss": "IN-TOWARD-PLACE / in-front-of",
+        "meaning_vi": "IN-TOWARD-PLACE / in-front-of"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg n",
+        "gloss": "OF-THE / the / Leave there thy gift before / be reconciled to thy brother, / and then come and offer thy / gift. / 24",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "thusiastEriou",
+        "translit": "thusiastEriou",
+        "strong": "G2379",
+        "pos": "n_ Gen Sg n",
+        "gloss": "SACRIFICE-place / altar",
+        "meaning_vi": "SACRIFICE-place / altar"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "hupage",
+        "translit": "hupage",
+        "strong": "G5217",
+        "pos": "vm Pres Act 2 Sg",
+        "gloss": "BE-UNDER-LEADING / be-you-going-away !",
+        "meaning_vi": "BE-UNDER-LEADING / be-you-going-away !"
+      },
+      {
+        "orig": "prOton",
+        "translit": "prOton",
+        "strong": "G4412",
+        "pos": "Adv",
+        "gloss": "BEFORE-most / first",
+        "meaning_vi": "BEFORE-most / first"
+      },
+      {
+        "orig": "diallagEthi",
+        "translit": "diallagEthi",
+        "strong": "G1259",
+        "pos": "vm 2Aor Pas 2 Sg",
+        "gloss": "YOU-BE-THRU-CHANGED / be-you-placated !",
+        "meaning_vi": "YOU-BE-THRU-CHANGED / be-you-placated !"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "adelphO",
+        "translit": "adelphO",
+        "strong": "G80",
+        "pos": "n_ Dat Sg m",
+        "gloss": "brother",
+        "meaning_vi": "brother"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "tote",
+        "translit": "tote",
+        "strong": "G5119",
+        "pos": "Adv",
+        "gloss": "then",
+        "meaning_vi": "then"
+      },
+      {
+        "orig": "elthOn",
+        "translit": "elthOn",
+        "strong": "G2064",
+        "pos": "vp 2Aor Act Nom Sg m",
+        "gloss": "COMING",
+        "meaning_vi": "COMING"
+      },
+      {
+        "orig": "prosphere",
+        "translit": "prosphere",
+        "strong": "G4374",
+        "pos": "vm Pres Act 2 Sg",
+        "gloss": "BE-TOWARD-CARRYING / be-you-offering !",
+        "meaning_vi": "BE-TOWARD-CARRYING / be-you-offering !"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "dOron",
+        "translit": "dOron",
+        "strong": "G1435",
+        "pos": "n_ Acc Sg n",
+        "gloss": "oblation / approach -present",
+        "meaning_vi": "oblation / approach -present"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      }
+    ],
+    "25": [
+      {
+        "orig": "isthi",
+        "translit": "isthi",
+        "strong": "G2468",
+        "pos": "vm Pres vxx 2 Sg",
+        "gloss": "YOU-BE / be-you !",
+        "meaning_vi": "YOU-BE / be-you !"
+      },
+      {
+        "orig": "eunoOn",
+        "translit": "eunoOn",
+        "strong": "G2132",
+        "pos": "vp Pres Act Nom Sg m",
+        "gloss": "WELL-MINDING / humoring",
+        "meaning_vi": "WELL-MINDING / humoring"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "antidikO",
+        "translit": "antidikO",
+        "strong": "G476",
+        "pos": "n_ Dat Sg m",
+        "gloss": "INSTEAD-JUSTer / plaintiff",
+        "meaning_vi": "INSTEAD-JUSTer / plaintiff"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "tachu",
+        "translit": "tachu",
+        "strong": "G5035",
+        "pos": "Adv",
+        "gloss": "SWIFTLY / quickly",
+        "meaning_vi": "SWIFTLY / quickly"
+      },
+      {
+        "orig": "heOs",
+        "translit": "heOs",
+        "strong": "G2193",
+        "pos": "Conj",
+        "gloss": "TILL",
+        "meaning_vi": "TILL"
+      },
+      {
+        "orig": "hotou",
+        "translit": "hotou",
+        "strong": "G3755",
+        "pos": "pr Gen Sg n Att",
+        "gloss": "OF-WHICH-ANY / which-any / Agree with thine adversary / quickly, whiles thou art in the / way with him; lest at any time / cast into prison. / 25",
+        "meaning_vi": "OF-WHICH-ANY / which-any / Agree with thine adversary / quickly, whiles thou art in the / way with him; lest at any time / cast into prison. / 25"
+      },
+      {
+        "orig": "ei",
+        "translit": "ei",
+        "strong": "G1488",
+        "pos": "vi Pres vxx 2 Sg",
+        "gloss": "YOU-ARE",
+        "meaning_vi": "YOU-ARE"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "hodO",
+        "translit": "hodO",
+        "strong": "G3598",
+        "pos": "n_ Dat Sg f",
+        "gloss": "WAY",
+        "meaning_vi": "WAY"
+      },
+      {
+        "orig": "met",
+        "translit": "met",
+        "strong": "G3326",
+        "pos": "Prep",
+        "gloss": "WITH",
+        "meaning_vi": "WITH"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "mEpote",
+        "translit": "mEpote",
+        "strong": "G3379",
+        "pos": "Adv",
+        "gloss": "NO-?-when / lest-at-some-time",
+        "meaning_vi": "NO-?-when / lest-at-some-time"
+      },
+      {
+        "orig": "se",
+        "translit": "se",
+        "strong": "G4571",
+        "pos": "pp 2 Acc Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "paradO",
+        "translit": "paradO",
+        "strong": "G3860",
+        "pos": "vs 2Aor Act 3 Sg",
+        "gloss": "MAY-BE-BESIDE-GIVING / may-be-giving-up",
+        "meaning_vi": "MAY-BE-BESIDE-GIVING / may-be-giving-up"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "antidikos",
+        "translit": "antidikos",
+        "strong": "G476",
+        "pos": "n_ Nom Sg m",
+        "gloss": "INSTEAD-JUSTer / plaintiff",
+        "meaning_vi": "INSTEAD-JUSTer / plaintiff"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "kritE",
+        "translit": "kritE",
+        "strong": "G2923",
+        "pos": "n_ Dat Sg m",
+        "gloss": "JUDGer / judge",
+        "meaning_vi": "JUDGer / judge"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "kritEs",
+        "translit": "kritEs",
+        "strong": "G2923",
+        "pos": "n_ Nom Sg m",
+        "gloss": "JUDGer / judge",
+        "meaning_vi": "JUDGer / judge"
+      },
+      {
+        "orig": "se",
+        "translit": "se",
+        "strong": "G4571",
+        "pos": "pp 2 Acc Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "paradO",
+        "translit": "paradO",
+        "strong": "G3860",
+        "pos": "vs 2Aor Act 3 Sg",
+        "gloss": "MAY-BE BESIDE-GIVING / may-be-giving-up",
+        "meaning_vi": "MAY-BE BESIDE-GIVING / may-be-giving-up"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "hupEretE",
+        "translit": "hupEretE",
+        "strong": "G5257",
+        "pos": "n_ Dat Sg m",
+        "gloss": "subservient / deputy",
+        "meaning_vi": "subservient / deputy"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "εἰς",
+        "translit": "eis",
+        "strong": "G1519",
+        "pos": "Prep",
+        "gloss": "INTO",
+        "meaning_vi": "Vào trong / Lên"
+      },
+      {
+        "orig": "phulakEn",
+        "translit": "phulakEn",
+        "strong": "G5438",
+        "pos": "n_ Acc Sg f",
+        "gloss": "GUARD-house / jail",
+        "meaning_vi": "GUARD-house / jail"
+      },
+      {
+        "orig": "blEthEsE",
+        "translit": "blEthEsE",
+        "strong": "G906",
+        "pos": "vi Fut Pas 2 Sg",
+        "gloss": "YOU-SHOULD-BE-BEING-CAST",
+        "meaning_vi": "YOU-SHOULD-BE-BEING-CAST"
+      }
+    ],
+    "26": [
+      {
+        "orig": "amEn",
+        "translit": "amEn",
+        "strong": "G281",
+        "pos": "Hebrew",
+        "gloss": "AMEN / verily",
+        "meaning_vi": "AMEN / verily"
+      },
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "I-AM-sayING",
+        "meaning_vi": "I-AM-sayING"
+      },
+      {
+        "orig": "soi",
+        "translit": "soi",
+        "strong": "G4671",
+        "pos": "pp 2 Dat Sg",
+        "gloss": "to-YOU",
+        "meaning_vi": "to-YOU"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT",
+        "meaning_vi": "NOT"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "exelthEs",
+        "translit": "exelthEs",
+        "strong": "G1831",
+        "pos": "vs 2Aor Act 2 Sg",
+        "gloss": "YOU-MAY-BE-OUT-COMING / you-may-be-coming-out",
+        "meaning_vi": "YOU-MAY-BE-OUT-COMING / you-may-be-coming-out"
+      },
+      {
+        "orig": "ekeithen",
+        "translit": "ekeithen",
+        "strong": "G1564",
+        "pos": "Adv",
+        "gloss": "thence",
+        "meaning_vi": "thence"
+      },
+      {
+        "orig": "heOs",
+        "translit": "heOs",
+        "strong": "G2193",
+        "pos": "Conj",
+        "gloss": "TILL",
+        "meaning_vi": "TILL"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER / Verily I say unto thee, Thou / shalt by no means come out / thence, till thou hast paid the / uttermost farthing. / 26",
+        "meaning_vi": "EVER / Verily I say unto thee, Thou / shalt by no means come out / thence, till thou hast paid the / uttermost farthing. / 26"
+      },
+      {
+        "orig": "apodOs",
+        "translit": "apodOs",
+        "strong": "G591",
+        "pos": "vs 2Aor Act 2 Sg",
+        "gloss": "YOU-MAY-BE-FROM-GIVING / you-may-be-paying",
+        "meaning_vi": "YOU-MAY-BE-FROM-GIVING / you-may-be-paying"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "eschaton",
+        "translit": "eschaton",
+        "strong": "G2078",
+        "pos": "a_ Acc Sg m",
+        "gloss": "LAST",
+        "meaning_vi": "LAST"
+      },
+      {
+        "orig": "kodrantEn",
+        "translit": "kodrantEn",
+        "strong": "G2835",
+        "pos": "n_ Acc Sg m",
+        "gloss": "QUADRANS",
+        "meaning_vi": "QUADRANS"
+      }
+    ],
+    "27": [
+      {
+        "orig": "Ekousate",
+        "translit": "Ekousate",
+        "strong": "G191",
+        "pos": "vi Aor Act 2 Pl",
+        "gloss": "YE-HEAR",
+        "meaning_vi": "YE-HEAR"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "errethE",
+        "translit": "errethE",
+        "strong": "G4483",
+        "pos": "vi Aor Pas 3 Sg",
+        "gloss": "it-WAS-declarED",
+        "meaning_vi": "it-WAS-declarED"
+      },
+      {
+        "orig": "tois",
+        "translit": "tois",
+        "strong": "G3588",
+        "pos": "t_ Dat Pl m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "archaiois",
+        "translit": "archaiois",
+        "strong": "G744",
+        "pos": "a_ Dat Pl m",
+        "gloss": "ORIGINals / ancients",
+        "meaning_vi": "ORIGINals / ancients"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT",
+        "meaning_vi": "NOT"
+      },
+      {
+        "orig": "moicheuseis",
+        "translit": "moicheuseis",
+        "strong": "G3431",
+        "pos": "vi Fut Act 2 Sg",
+        "gloss": "YOU-SHALL-BE-ADULTERING / you-shall-be- committ ing-adulter y / said by them of old time, Thou / shalt not commit adultery: / 27",
+        "meaning_vi": "YOU-SHALL-BE-ADULTERING / you-shall-be- committ ing-adulter y / said by them of old time, Thou / shalt not commit adultery: / 27"
+      }
+    ],
+    "28": [
+      {
+        "orig": "egO",
+        "translit": "egO",
+        "strong": "G1473",
+        "pos": "pp 1 Nom Sg",
+        "gloss": "I",
+        "meaning_vi": "I"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "AM-sayING",
+        "meaning_vi": "AM-sayING"
+      },
+      {
+        "orig": "humin",
+        "translit": "humin",
+        "strong": "G5213",
+        "pos": "pp 2 Dat Pl",
+        "gloss": "to-YOU (p) / to-ye",
+        "meaning_vi": "to-YOU (p) / to-ye"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "pas",
+        "translit": "pas",
+        "strong": "G3956",
+        "pos": "a_ Nom Sg m",
+        "gloss": "EVERY",
+        "meaning_vi": "Muôn vật / Mọi điều"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "blepOn",
+        "translit": "blepOn",
+        "strong": "G991",
+        "pos": "vp Pres Act Nom Sg m",
+        "gloss": "one -lookING / one-looking",
+        "meaning_vi": "one -lookING / one-looking"
+      },
+      {
+        "orig": "gunaika",
+        "translit": "gunaika",
+        "strong": "G1135",
+        "pos": "n_ Acc Sg f",
+        "gloss": "WOMAN / But I say unto you, That / whosoever looketh on a / woman to lust after her hath / committed adultery with her / already in his heart. / 28 / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org",
+        "meaning_vi": "WOMAN / But I say unto you, That / whosoever looketh on a / woman to lust after her hath / committed adultery with her / already in his heart. / 28 / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org"
+      },
+      {
+        "orig": "πρὸς",
+        "translit": "pros",
+        "strong": "G4314",
+        "pos": "Prep",
+        "gloss": "TOWARD",
+        "meaning_vi": "Ở cùng / Hướng về"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "epithumEsai",
+        "translit": "epithumEsai",
+        "strong": "G1937",
+        "pos": "vn Aor Act",
+        "gloss": "TO-ON-FEEL / to-lust",
+        "meaning_vi": "TO-ON-FEEL / to-lust"
+      },
+      {
+        "orig": "autEs",
+        "translit": "autEs",
+        "strong": "G846",
+        "pos": "pp Gen Sg f",
+        "gloss": "OF-her",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "EdE",
+        "translit": "EdE",
+        "strong": "G2235",
+        "pos": "Adv",
+        "gloss": "ALREADY",
+        "meaning_vi": "ALREADY"
+      },
+      {
+        "orig": "emoicheusen",
+        "translit": "emoicheusen",
+        "strong": "G3431",
+        "pos": "vi Aor Act 3 Sg",
+        "gloss": "commits-ADULTERY / commit s-adulter y",
+        "meaning_vi": "commits-ADULTERY / commit s-adulter y"
+      },
+      {
+        "orig": "autEn",
+        "translit": "autEn",
+        "strong": "G846",
+        "pos": "pp Acc Sg f",
+        "gloss": "her",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "καρδίᾳ",
+        "translit": "kardia",
+        "strong": "G2588",
+        "pos": "n_ Dat Sg f",
+        "gloss": "HEART",
+        "meaning_vi": "HEART"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-him",
+        "meaning_vi": "Ngài / Người"
+      }
+    ],
+    "29": [
+      {
+        "orig": "ei",
+        "translit": "ei",
+        "strong": "G1487",
+        "pos": "Cond",
+        "gloss": "IF",
+        "meaning_vi": "IF"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ophthalmos",
+        "translit": "ophthalmos",
+        "strong": "G3788",
+        "pos": "n_ Nom Sg m",
+        "gloss": "VIEWer / eye",
+        "meaning_vi": "VIEWer / eye"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "dexios",
+        "translit": "dexios",
+        "strong": "G1188",
+        "pos": "a_ Nom Sg m",
+        "gloss": "RIGHT",
+        "meaning_vi": "RIGHT"
+      },
+      {
+        "orig": "skandalizei",
+        "translit": "skandalizei",
+        "strong": "G4624",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "IS-SNARING",
+        "meaning_vi": "IS-SNARING"
+      },
+      {
+        "orig": "se",
+        "translit": "se",
+        "strong": "G4571",
+        "pos": "pp 2 Acc Sg",
+        "gloss": "YOU / And if thy right eye offend / thee, pluck it out, and cast [it] / from thee: for it is profitable / for thee that one of thy / members should perish, and / not [that] thy whole body / should be cast into hell. / 29",
+        "meaning_vi": "YOU / And if thy right eye offend / thee, pluck it out, and cast [it] / from thee: for it is profitable / for thee that one of thy / members should perish, and / not [that] thy whole body / should be cast into hell. / 29"
+      },
+      {
+        "orig": "exele",
+        "translit": "exele",
+        "strong": "G1807",
+        "pos": "vm 2Aor Act 2 Sg",
+        "gloss": "BE-OUT-LIFTING / be-you-wrenching-out !",
+        "meaning_vi": "BE-OUT-LIFTING / be-you-wrenching-out !"
+      },
+      {
+        "orig": "auton",
+        "translit": "auton",
+        "strong": "G846",
+        "pos": "pp Acc Sg m",
+        "gloss": "it / him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "bale",
+        "translit": "bale",
+        "strong": "G906",
+        "pos": "vm 2Aor Act 2 Sg",
+        "gloss": "BE-CASTING / be-you-casting !",
+        "meaning_vi": "BE-CASTING / be-you-casting !"
+      },
+      {
+        "orig": "apo",
+        "translit": "apo",
+        "strong": "G575",
+        "pos": "Prep",
+        "gloss": "FROM",
+        "meaning_vi": "FROM"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "sumpherei",
+        "translit": "sumpherei",
+        "strong": "G4851",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "it-IS-beING-expedient",
+        "meaning_vi": "it-IS-beING-expedient"
+      },
+      {
+        "orig": "gar",
+        "translit": "gar",
+        "strong": "G1063",
+        "pos": "Conj",
+        "gloss": "for",
+        "meaning_vi": "for"
+      },
+      {
+        "orig": "soi",
+        "translit": "soi",
+        "strong": "G4671",
+        "pos": "pp 2 Dat Sg",
+        "gloss": "to-YOU",
+        "meaning_vi": "to-YOU"
+      },
+      {
+        "orig": "hina",
+        "translit": "hina",
+        "strong": "G2443",
+        "pos": "Conj",
+        "gloss": "THAT",
+        "meaning_vi": "THAT"
+      },
+      {
+        "orig": "apolEtai",
+        "translit": "apolEtai",
+        "strong": "G622",
+        "pos": "vs 2Aor Mid 3 Sg",
+        "gloss": "SHOULD-BE- be ING-destroyED / should-be-perishing",
+        "meaning_vi": "SHOULD-BE- be ING-destroyED / should-be-perishing"
+      },
+      {
+        "orig": "ἓν",
+        "translit": "hen",
+        "strong": "G1520",
+        "pos": "a_ Acc Sg n",
+        "gloss": "ONE",
+        "meaning_vi": "Một điều nào"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl n",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "melOn",
+        "translit": "melOn",
+        "strong": "G3196",
+        "pos": "n_ Gen Pl n",
+        "gloss": "MEMBERS",
+        "meaning_vi": "MEMBERS"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "holon",
+        "translit": "holon",
+        "strong": "G3650",
+        "pos": "a_ Nom Sg n",
+        "gloss": "WHOLE",
+        "meaning_vi": "WHOLE"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "sOma",
+        "translit": "sOma",
+        "strong": "G4983",
+        "pos": "n_ Nom Sg n",
+        "gloss": "BODY",
+        "meaning_vi": "BODY"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "blEthE",
+        "translit": "blEthE",
+        "strong": "G906",
+        "pos": "vs Aor Pas 3 Sg",
+        "gloss": "MAY-BE-BEING-CAST",
+        "meaning_vi": "MAY-BE-BEING-CAST"
+      },
+      {
+        "orig": "εἰς",
+        "translit": "eis",
+        "strong": "G1519",
+        "pos": "Prep",
+        "gloss": "INTO",
+        "meaning_vi": "Vào trong / Lên"
+      },
+      {
+        "orig": "geennan",
+        "translit": "geennan",
+        "strong": "G1067",
+        "pos": "n_ Acc Sg f",
+        "gloss": "GEHENNA",
+        "meaning_vi": "GEHENNA"
+      }
+    ],
+    "30": [
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "ei",
+        "translit": "ei",
+        "strong": "G1487",
+        "pos": "Cond",
+        "gloss": "IF",
+        "meaning_vi": "IF"
+      },
+      {
+        "orig": "ἡ",
+        "translit": "hE",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "dexia",
+        "translit": "dexia",
+        "strong": "G1188",
+        "pos": "a_ Nom Sg f",
+        "gloss": "RIGHT",
+        "meaning_vi": "RIGHT"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "cheir",
+        "translit": "cheir",
+        "strong": "G5495",
+        "pos": "n_ Nom Sg f",
+        "gloss": "HAND",
+        "meaning_vi": "HAND"
+      },
+      {
+        "orig": "skandalizei",
+        "translit": "skandalizei",
+        "strong": "G4624",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "IS-SNARING",
+        "meaning_vi": "IS-SNARING"
+      },
+      {
+        "orig": "se",
+        "translit": "se",
+        "strong": "G4571",
+        "pos": "pp 2 Acc Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "ekkopson",
+        "translit": "ekkopson",
+        "strong": "G1581",
+        "pos": "vm Aor Act 2 Sg",
+        "gloss": "OUT-STRIKE / strike-off-you ! / And if thy right hand offend / thee, cut it off, and cast [it] / from thee: for it is profitable / for thee that one of thy / members should perish, and / not [that] thy whole body / should be cast into hell. / 30",
+        "meaning_vi": "OUT-STRIKE / strike-off-you ! / And if thy right hand offend / thee, cut it off, and cast [it] / from thee: for it is profitable / for thee that one of thy / members should perish, and / not [that] thy whole body / should be cast into hell. / 30"
+      },
+      {
+        "orig": "autEn",
+        "translit": "autEn",
+        "strong": "G846",
+        "pos": "pp Acc Sg f",
+        "gloss": "her",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "bale",
+        "translit": "bale",
+        "strong": "G906",
+        "pos": "vm 2Aor Act 2 Sg",
+        "gloss": "BE-CASTING / be-you-casting !",
+        "meaning_vi": "BE-CASTING / be-you-casting !"
+      },
+      {
+        "orig": "apo",
+        "translit": "apo",
+        "strong": "G575",
+        "pos": "Prep",
+        "gloss": "FROM",
+        "meaning_vi": "FROM"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "sumpherei",
+        "translit": "sumpherei",
+        "strong": "G4851",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "it-IS-beING-expedient",
+        "meaning_vi": "it-IS-beING-expedient"
+      },
+      {
+        "orig": "gar",
+        "translit": "gar",
+        "strong": "G1063",
+        "pos": "Conj",
+        "gloss": "for",
+        "meaning_vi": "for"
+      },
+      {
+        "orig": "soi",
+        "translit": "soi",
+        "strong": "G4671",
+        "pos": "pp 2 Dat Sg",
+        "gloss": "to-YOU",
+        "meaning_vi": "to-YOU"
+      },
+      {
+        "orig": "hina",
+        "translit": "hina",
+        "strong": "G2443",
+        "pos": "Conj",
+        "gloss": "THAT",
+        "meaning_vi": "THAT"
+      },
+      {
+        "orig": "apolEtai",
+        "translit": "apolEtai",
+        "strong": "G622",
+        "pos": "vs 2Aor Mid 3 Sg",
+        "gloss": "SHOULD-BE- be ING-destroyED / should-be-perishing",
+        "meaning_vi": "SHOULD-BE- be ING-destroyED / should-be-perishing"
+      },
+      {
+        "orig": "ἓν",
+        "translit": "hen",
+        "strong": "G1520",
+        "pos": "a_ Acc Sg n",
+        "gloss": "ONE",
+        "meaning_vi": "Một điều nào"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl n",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "melOn",
+        "translit": "melOn",
+        "strong": "G3196",
+        "pos": "n_ Gen Pl n",
+        "gloss": "MEMBERS",
+        "meaning_vi": "MEMBERS"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "holon",
+        "translit": "holon",
+        "strong": "G3650",
+        "pos": "a_ Nom Sg n",
+        "gloss": "WHOLE",
+        "meaning_vi": "WHOLE"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "sOma",
+        "translit": "sOma",
+        "strong": "G4983",
+        "pos": "n_ Nom Sg n",
+        "gloss": "BODY",
+        "meaning_vi": "BODY"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "blEthE",
+        "translit": "blEthE",
+        "strong": "G906",
+        "pos": "vs Aor Pas 3 Sg",
+        "gloss": "MAY-BE-BEING-CAST",
+        "meaning_vi": "MAY-BE-BEING-CAST"
+      },
+      {
+        "orig": "εἰς",
+        "translit": "eis",
+        "strong": "G1519",
+        "pos": "Prep",
+        "gloss": "INTO",
+        "meaning_vi": "Vào trong / Lên"
+      },
+      {
+        "orig": "geennan",
+        "translit": "geennan",
+        "strong": "G1067",
+        "pos": "n_ Acc Sg f",
+        "gloss": "GEHENNA",
+        "meaning_vi": "GEHENNA"
+      }
+    ],
+    "31": [
+      {
+        "orig": "errethE",
+        "translit": "errethE",
+        "strong": "G4483",
+        "pos": "vi Aor Pas 3 Sg",
+        "gloss": "it-WAS-declarED",
+        "meaning_vi": "it-WAS-declarED"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "hos",
+        "translit": "hos",
+        "strong": "G3739",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO",
+        "meaning_vi": "Điều mà / Cái đã"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER",
+        "meaning_vi": "EVER"
+      },
+      {
+        "orig": "apolusE",
+        "translit": "apolusE",
+        "strong": "G630",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-FROM-LOOSING / should-be-dismissing",
+        "meaning_vi": "SHOULD-BE-FROM-LOOSING / should-be-dismissing"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "gunaika",
+        "translit": "gunaika",
+        "strong": "G1135",
+        "pos": "n_ Acc Sg f",
+        "gloss": "WOMAN / wife / It hath been said, / Whosoever shall put away his / wife, let him give her a writing / of divorcement: / 31",
+        "meaning_vi": "WOMAN / wife / It hath been said, / Whosoever shall put away his / wife, let him give her a writing / of divorcement: / 31"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "dotO",
+        "translit": "dotO",
+        "strong": "G1325",
+        "pos": "vm 2Aor Act 3 Sg",
+        "gloss": "LET-him-BE-GIVING / let-him-be-giving !",
+        "meaning_vi": "Đã ban cho"
+      },
+      {
+        "orig": "autE",
+        "translit": "autE",
+        "strong": "G846",
+        "pos": "pp Dat Sg f",
+        "gloss": "to-her",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "apostasion",
+        "translit": "apostasion",
+        "strong": "G647",
+        "pos": "n_ Acc Sg n",
+        "gloss": "FROM-STAND / divorce",
+        "meaning_vi": "FROM-STAND / divorce"
+      }
+    ],
+    "32": [
+      {
+        "orig": "egO",
+        "translit": "egO",
+        "strong": "G1473",
+        "pos": "pp 1 Nom Sg",
+        "gloss": "I",
+        "meaning_vi": "I"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "AM-sayING",
+        "meaning_vi": "AM-sayING"
+      },
+      {
+        "orig": "humin",
+        "translit": "humin",
+        "strong": "G5213",
+        "pos": "pp 2 Dat Pl",
+        "gloss": "to-YOU (p) / to-ye",
+        "meaning_vi": "to-YOU (p) / to-ye"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "hos",
+        "translit": "hos",
+        "strong": "G3739",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO",
+        "meaning_vi": "Điều mà / Cái đã"
+      },
+      {
+        "orig": "an",
+        "translit": "an",
+        "strong": "G302",
+        "pos": "Part",
+        "gloss": "EVER",
+        "meaning_vi": "EVER"
+      },
+      {
+        "orig": "apolusE",
+        "translit": "apolusE",
+        "strong": "G630",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-FROM-LOOSING / should-be-dismissing",
+        "meaning_vi": "SHOULD-BE-FROM-LOOSING / should-be-dismissing"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE / But I say unto you, That / whosoever shall put away his / fornication, causeth her to / commit adultery: and / 32 / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org / whosoever shall marry her that / is divorced committeth / adultery.",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "gunaika",
+        "translit": "gunaika",
+        "strong": "G1135",
+        "pos": "n_ Acc Sg f",
+        "gloss": "WOMAN / wife",
+        "meaning_vi": "WOMAN / wife"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "parektos",
+        "translit": "parektos",
+        "strong": "G3924",
+        "pos": "Adv",
+        "gloss": "BESIDE-OUTed / outside",
+        "meaning_vi": "BESIDE-OUTed / outside"
+      },
+      {
+        "orig": "logou",
+        "translit": "logou",
+        "strong": "G3056",
+        "pos": "n_ Gen Sg m",
+        "gloss": "OF-saying / of-case",
+        "meaning_vi": "Ngôi Lời (Logos)"
+      },
+      {
+        "orig": "porneias",
+        "translit": "porneias",
+        "strong": "G4202",
+        "pos": "n_ Gen Sg f",
+        "gloss": "OF-PROSTITUTION",
+        "meaning_vi": "OF-PROSTITUTION"
+      },
+      {
+        "orig": "poiei",
+        "translit": "poiei",
+        "strong": "G4160",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "IS-makING",
+        "meaning_vi": "IS-makING"
+      },
+      {
+        "orig": "autEn",
+        "translit": "autEn",
+        "strong": "G846",
+        "pos": "pp Acc Sg f",
+        "gloss": "her",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "moichasthai",
+        "translit": "moichasthai",
+        "strong": "G3429",
+        "pos": "vn Pres midD/pasD",
+        "gloss": "TO-BE-ADULTERING / to- commit -adultery",
+        "meaning_vi": "TO-BE-ADULTERING / to- commit -adultery"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "hos",
+        "translit": "hos",
+        "strong": "G3739",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO",
+        "meaning_vi": "Điều mà / Cái đã"
+      },
+      {
+        "orig": "ean",
+        "translit": "ean",
+        "strong": "G1437",
+        "pos": "Cond",
+        "gloss": "IF-EVER",
+        "meaning_vi": "IF-EVER"
+      },
+      {
+        "orig": "apolelumenEn",
+        "translit": "apolelumenEn",
+        "strong": "G630",
+        "pos": "vp Perf Pas Acc Sg f",
+        "gloss": "one -HAVING- been -FROM-LOOSED / one-having- been -dismissed (f)",
+        "meaning_vi": "one -HAVING- been -FROM-LOOSED / one-having- been -dismissed (f)"
+      },
+      {
+        "orig": "gamEsE",
+        "translit": "gamEsE",
+        "strong": "G1060",
+        "pos": "vs Aor Act 3 Sg",
+        "gloss": "SHOULD-BE-MARRYING",
+        "meaning_vi": "SHOULD-BE-MARRYING"
+      },
+      {
+        "orig": "moichatai",
+        "translit": "moichatai",
+        "strong": "G3429",
+        "pos": "vi Pres midD/pasD 3 Sg",
+        "gloss": "IS-committING-ADULTERY / is- committ ing-adulter y",
+        "meaning_vi": "IS-committING-ADULTERY / is- committ ing-adulter y"
+      }
+    ],
+    "33": [
+      {
+        "orig": "palin",
+        "translit": "palin",
+        "strong": "G3825",
+        "pos": "Adv",
+        "gloss": "AGAIN",
+        "meaning_vi": "AGAIN"
+      },
+      {
+        "orig": "Ekousate",
+        "translit": "Ekousate",
+        "strong": "G191",
+        "pos": "vi Aor Act 2 Pl",
+        "gloss": "YE-HEAR",
+        "meaning_vi": "YE-HEAR"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "errethE",
+        "translit": "errethE",
+        "strong": "G4483",
+        "pos": "vi Aor Pas 3 Sg",
+        "gloss": "it-WAS-declarED",
+        "meaning_vi": "it-WAS-declarED"
+      },
+      {
+        "orig": "tois",
+        "translit": "tois",
+        "strong": "G3588",
+        "pos": "t_ Dat Pl m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "archaiois",
+        "translit": "archaiois",
+        "strong": "G744",
+        "pos": "a_ Dat Pl m",
+        "gloss": "ORIGINals / ancients",
+        "meaning_vi": "ORIGINals / ancients"
+      },
+      {
+        "orig": "ouk",
+        "translit": "ouk",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT",
+        "meaning_vi": "NOT"
+      },
+      {
+        "orig": "epiorkEseis",
+        "translit": "epiorkEseis",
+        "strong": "G1964",
+        "pos": "vi Fut Act 2 Sg",
+        "gloss": "YOU-SHALL-BE-ON-OATHING / you-shall-be-perjuring / it hath been said by them of / old time, Thou shalt not / forswear thyself, but shalt / oaths: / 33",
+        "meaning_vi": "YOU-SHALL-BE-ON-OATHING / you-shall-be-perjuring / it hath been said by them of / old time, Thou shalt not / forswear thyself, but shalt / oaths: / 33"
+      },
+      {
+        "orig": "apodOseis",
+        "translit": "apodOseis",
+        "strong": "G591",
+        "pos": "vi Fut Act 2 Sg",
+        "gloss": "YOU-SHALL-BE-FROM-GIVING / you-shall-be-paying",
+        "meaning_vi": "YOU-SHALL-BE-FROM-GIVING / you-shall-be-paying"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "kuriO",
+        "translit": "kuriO",
+        "strong": "G2962",
+        "pos": "n_ Dat Sg m",
+        "gloss": "Master / Lord",
+        "meaning_vi": "Master / Lord"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "horkous",
+        "translit": "horkous",
+        "strong": "G3727",
+        "pos": "n_ Acc Pl m",
+        "gloss": "OATHS",
+        "meaning_vi": "OATHS"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      }
+    ],
+    "34": [
+      {
+        "orig": "egO",
+        "translit": "egO",
+        "strong": "G1473",
+        "pos": "pp 1 Nom Sg",
+        "gloss": "I",
+        "meaning_vi": "I"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "AM-sayING",
+        "meaning_vi": "AM-sayING"
+      },
+      {
+        "orig": "humin",
+        "translit": "humin",
+        "strong": "G5213",
+        "pos": "pp 2 Dat Pl",
+        "gloss": "to-YOU (p) / to-ye",
+        "meaning_vi": "to-YOU (p) / to-ye"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "omosai",
+        "translit": "omosai",
+        "strong": "G3660",
+        "pos": "vn Aor Act",
+        "gloss": "TO-SWEAR",
+        "meaning_vi": "TO-SWEAR"
+      },
+      {
+        "orig": "holOs",
+        "translit": "holOs",
+        "strong": "G3654",
+        "pos": "Adv",
+        "gloss": "WHOLly / at-all",
+        "meaning_vi": "WHOLly / at-all"
+      },
+      {
+        "orig": "mEte",
+        "translit": "mEte",
+        "strong": "G3383",
+        "pos": "Conj",
+        "gloss": "NO-BESIDES / neither",
+        "meaning_vi": "NO-BESIDES / neither"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "THE / But I say unto you, Swear / not at all; neither by heaven; / for it is God's throne: / 34",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ouranO",
+        "translit": "ouranO",
+        "strong": "G3772",
+        "pos": "n_ Dat Sg m",
+        "gloss": "heaven",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "thronos",
+        "translit": "thronos",
+        "strong": "G2362",
+        "pos": "n_ Nom Sg m",
+        "gloss": "THRONE",
+        "meaning_vi": "THRONE"
+      },
+      {
+        "orig": "ἐστιν",
+        "translit": "estin",
+        "strong": "G2076",
+        "pos": "vi Pres vxx 3 Sg",
+        "gloss": "it-IS",
+        "meaning_vi": "it-IS"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "theou",
+        "translit": "theou",
+        "strong": "G2316",
+        "pos": "n_ Gen Sg m",
+        "gloss": "God",
+        "meaning_vi": "Đức Chúa Trời (Theos)"
+      }
+    ],
+    "35": [
+      {
+        "orig": "mEte",
+        "translit": "mEte",
+        "strong": "G3383",
+        "pos": "Conj",
+        "gloss": "NO-BESIDES / nor",
+        "meaning_vi": "NO-BESIDES / nor"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "gE",
+        "translit": "gE",
+        "strong": "G1093",
+        "pos": "n_ Dat Sg f",
+        "gloss": "LAND / earth",
+        "meaning_vi": "LAND / earth"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "hupopodion",
+        "translit": "hupopodion",
+        "strong": "G5286",
+        "pos": "n_ Nom Sg n",
+        "gloss": "UNDER-FOOT / footstool",
+        "meaning_vi": "UNDER-FOOT / footstool"
+      },
+      {
+        "orig": "ἐστιν",
+        "translit": "estin",
+        "strong": "G2076",
+        "pos": "vi Pres vxx 3 Sg",
+        "gloss": "it-IS",
+        "meaning_vi": "it-IS"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "podOn",
+        "translit": "podOn",
+        "strong": "G4228",
+        "pos": "n_ Gen Pl m",
+        "gloss": "FEET / footstool: neither by Jerusalem; / King. / 35",
+        "meaning_vi": "FEET / footstool: neither by Jerusalem; / King. / 35"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-Him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "mEte",
+        "translit": "mEte",
+        "strong": "G3383",
+        "pos": "Conj",
+        "gloss": "NO-BESIDES / nor",
+        "meaning_vi": "NO-BESIDES / nor"
+      },
+      {
+        "orig": "εἰς",
+        "translit": "eis",
+        "strong": "G1519",
+        "pos": "Prep",
+        "gloss": "INTO",
+        "meaning_vi": "Vào trong / Lên"
+      },
+      {
+        "orig": "ierosoluma",
+        "translit": "ierosoluma",
+        "strong": "G2414",
+        "pos": "n_ Acc Sg f",
+        "gloss": "JERUSALEM",
+        "meaning_vi": "JERUSALEM"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "polis",
+        "translit": "polis",
+        "strong": "G4172",
+        "pos": "n_ Nom Sg f",
+        "gloss": "city",
+        "meaning_vi": "city"
+      },
+      {
+        "orig": "ἐστιν",
+        "translit": "estin",
+        "strong": "G2076",
+        "pos": "vi Pres vxx 3 Sg",
+        "gloss": "it-IS",
+        "meaning_vi": "it-IS"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "megalou",
+        "translit": "megalou",
+        "strong": "G3173",
+        "pos": "a_ Gen Sg m",
+        "gloss": "GREAT",
+        "meaning_vi": "GREAT"
+      },
+      {
+        "orig": "basileOs",
+        "translit": "basileOs",
+        "strong": "G935",
+        "pos": "n_ Gen Sg m",
+        "gloss": "KING",
+        "meaning_vi": "KING"
+      }
+    ],
+    "36": [
+      {
+        "orig": "mEte",
+        "translit": "mEte",
+        "strong": "G3383",
+        "pos": "Conj",
+        "gloss": "NO-BESIDES / nor",
+        "meaning_vi": "NO-BESIDES / nor"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tE",
+        "translit": "tE",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "kephalE",
+        "translit": "kephalE",
+        "strong": "G2776",
+        "pos": "n_ Dat Sg f",
+        "gloss": "HEAD",
+        "meaning_vi": "HEAD"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "omosEs",
+        "translit": "omosEs",
+        "strong": "G3660",
+        "pos": "vs Aor Act 2 Sg",
+        "gloss": "YOU-SHOULD-BE-SWEARING",
+        "meaning_vi": "YOU-SHOULD-BE-SWEARING"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT / Neither shalt thou swear by / thy head, because thou canst / not make one hair white or / black. / 36",
+        "meaning_vi": "NOT / Neither shalt thou swear by / thy head, because thou canst / not make one hair white or / black. / 36"
+      },
+      {
+        "orig": "dunasai",
+        "translit": "dunasai",
+        "strong": "G1410",
+        "pos": "vi Pres midD/pasD 2 Sg",
+        "gloss": "YOU-ARE-ABLE",
+        "meaning_vi": "YOU-ARE-ABLE"
+      },
+      {
+        "orig": "mian",
+        "translit": "mian",
+        "strong": "G1520",
+        "pos": "a_ Acc Sg f",
+        "gloss": "ONE",
+        "meaning_vi": "Một điều nào"
+      },
+      {
+        "orig": "tricha",
+        "translit": "tricha",
+        "strong": "G2359",
+        "pos": "n_ Acc Sg f",
+        "gloss": "HAIR",
+        "meaning_vi": "HAIR"
+      },
+      {
+        "orig": "leukEn",
+        "translit": "leukEn",
+        "strong": "G3022",
+        "pos": "a_ Acc Sg f",
+        "gloss": "WHITE",
+        "meaning_vi": "WHITE"
+      },
+      {
+        "orig": "E",
+        "translit": "E",
+        "strong": "G2228",
+        "pos": "Part",
+        "gloss": "OR",
+        "meaning_vi": "OR"
+      },
+      {
+        "orig": "melainan",
+        "translit": "melainan",
+        "strong": "G3189",
+        "pos": "a_ Acc Sg f",
+        "gloss": "BLACK",
+        "meaning_vi": "BLACK"
+      },
+      {
+        "orig": "poiEsai",
+        "translit": "poiEsai",
+        "strong": "G4160",
+        "pos": "vn Aor Act",
+        "gloss": "TO-make",
+        "meaning_vi": "TO-make"
+      }
+    ],
+    "37": [
+      {
+        "orig": "estO",
+        "translit": "estO",
+        "strong": "G2077",
+        "pos": "vm Pres vxx 3 Sg",
+        "gloss": "LET-BE / let-him-be !",
+        "meaning_vi": "LET-BE / let-him-be !"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "Λόγος",
+        "translit": "logos",
+        "strong": "G3056",
+        "pos": "n_ Nom Sg m",
+        "gloss": "saying / word",
+        "meaning_vi": "Ngôi Lời (Logos)"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "nai",
+        "translit": "nai",
+        "strong": "G3483",
+        "pos": "Part",
+        "gloss": "YEA",
+        "meaning_vi": "YEA"
+      },
+      {
+        "orig": "nai",
+        "translit": "nai",
+        "strong": "G3483",
+        "pos": "Part",
+        "gloss": "YEA",
+        "meaning_vi": "YEA"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT / no t",
+        "meaning_vi": "NOT / no t"
+      },
+      {
+        "orig": "ou",
+        "translit": "ou",
+        "strong": "G3756",
+        "pos": "Part Neg",
+        "gloss": "NOT / no t",
+        "meaning_vi": "NOT / no t"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET / But let your communication / be, Yea, yea; Nay, nay: for / whatsoever is more than these / cometh of evil. / 37",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "perisson",
+        "translit": "perisson",
+        "strong": "G4053",
+        "pos": "a_ Nom Sg n",
+        "gloss": "excessive / excess",
+        "meaning_vi": "excessive / excess"
+      },
+      {
+        "orig": "toutOn",
+        "translit": "toutOn",
+        "strong": "G5130",
+        "pos": "pd Gen Pl m",
+        "gloss": "OF-these",
+        "meaning_vi": "OF-these"
+      },
+      {
+        "orig": "ek",
+        "translit": "ek",
+        "strong": "G1537",
+        "pos": "Prep",
+        "gloss": "OUT",
+        "meaning_vi": "OUT"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ponErou",
+        "translit": "ponErou",
+        "strong": "G4190",
+        "pos": "a_ Gen Sg m",
+        "gloss": "wicked / wicked-one",
+        "meaning_vi": "wicked / wicked-one"
+      },
+      {
+        "orig": "ἐστιν",
+        "translit": "estin",
+        "strong": "G2076",
+        "pos": "vi Pres vxx 3 Sg",
+        "gloss": "IS / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org",
+        "meaning_vi": "IS / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org"
+      }
+    ],
+    "38": [
+      {
+        "orig": "Ekousate",
+        "translit": "Ekousate",
+        "strong": "G191",
+        "pos": "vi Aor Act 2 Pl",
+        "gloss": "YE-HEAR",
+        "meaning_vi": "YE-HEAR"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "errethE",
+        "translit": "errethE",
+        "strong": "G4483",
+        "pos": "vi Aor Pas 3 Sg",
+        "gloss": "it-WAS-declarED",
+        "meaning_vi": "it-WAS-declarED"
+      },
+      {
+        "orig": "ophthalmon",
+        "translit": "ophthalmon",
+        "strong": "G3788",
+        "pos": "n_ Acc Sg m",
+        "gloss": "VIEWer / eye",
+        "meaning_vi": "VIEWer / eye"
+      },
+      {
+        "orig": "anti",
+        "translit": "anti",
+        "strong": "G473",
+        "pos": "Prep",
+        "gloss": "INSTEAD",
+        "meaning_vi": "INSTEAD"
+      },
+      {
+        "orig": "ophthalmou",
+        "translit": "ophthalmou",
+        "strong": "G3788",
+        "pos": "n_ Gen Sg m",
+        "gloss": "OF-VIEWer / of-eye",
+        "meaning_vi": "OF-VIEWer / of-eye"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "odonta",
+        "translit": "odonta",
+        "strong": "G3599",
+        "pos": "n_ Acc Sg m",
+        "gloss": "TOOTH",
+        "meaning_vi": "TOOTH"
+      },
+      {
+        "orig": "anti",
+        "translit": "anti",
+        "strong": "G473",
+        "pos": "Prep",
+        "gloss": "INSTEAD / been said, An eye for an eye, / and a tooth for a tooth: / 38",
+        "meaning_vi": "INSTEAD / been said, An eye for an eye, / and a tooth for a tooth: / 38"
+      },
+      {
+        "orig": "odontos",
+        "translit": "odontos",
+        "strong": "G3599",
+        "pos": "n_ Gen Sg m",
+        "gloss": "OF-TOOTH",
+        "meaning_vi": "OF-TOOTH"
+      }
+    ],
+    "39": [
+      {
+        "orig": "egO",
+        "translit": "egO",
+        "strong": "G1473",
+        "pos": "pp 1 Nom Sg",
+        "gloss": "I",
+        "meaning_vi": "I"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "AM-sayING",
+        "meaning_vi": "AM-sayING"
+      },
+      {
+        "orig": "humin",
+        "translit": "humin",
+        "strong": "G5213",
+        "pos": "pp 2 Dat Pl",
+        "gloss": "to-YOU (p) / to-ye",
+        "meaning_vi": "to-YOU (p) / to-ye"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "antistEnai",
+        "translit": "antistEnai",
+        "strong": "G436",
+        "pos": "vn 2Aor Act",
+        "gloss": "TO-withSTAND",
+        "meaning_vi": "TO-withSTAND"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ponErO",
+        "translit": "ponErO",
+        "strong": "G4190",
+        "pos": "a_ Dat Sg m",
+        "gloss": "wicked / wicked- person",
+        "meaning_vi": "wicked / wicked- person"
+      },
+      {
+        "orig": "all",
+        "translit": "all",
+        "strong": "G235",
+        "pos": "Conj",
+        "gloss": "but / But I say unto you, That ye / resist not evil: but whosoever / shall smite thee on thy right / also. / 39",
+        "meaning_vi": "but / But I say unto you, That ye / resist not evil: but whosoever / shall smite thee on thy right / also. / 39"
+      },
+      {
+        "orig": "hostis",
+        "translit": "hostis",
+        "strong": "G3748",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO-ANY / any one -who",
+        "meaning_vi": "WHO-ANY / any one -who"
+      },
+      {
+        "orig": "se",
+        "translit": "se",
+        "strong": "G4571",
+        "pos": "pp 2 Acc Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "rapisei",
+        "translit": "rapisei",
+        "strong": "G4474",
+        "pos": "vi Fut Act 3 Sg",
+        "gloss": "SHALL-SLAP",
+        "meaning_vi": "SHALL-SLAP"
+      },
+      {
+        "orig": "epi",
+        "translit": "epi",
+        "strong": "G1909",
+        "pos": "Prep",
+        "gloss": "ON",
+        "meaning_vi": "ON"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "dexian",
+        "translit": "dexian",
+        "strong": "G1188",
+        "pos": "a_ Acc Sg f",
+        "gloss": "RIGHT",
+        "meaning_vi": "RIGHT"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "siagona",
+        "translit": "siagona",
+        "strong": "G4600",
+        "pos": "n_ Acc Sg f",
+        "gloss": "CHEEK",
+        "meaning_vi": "CHEEK"
+      },
+      {
+        "orig": "strepson",
+        "translit": "strepson",
+        "strong": "G4762",
+        "pos": "vm Aor Act 2 Sg",
+        "gloss": "TURN / turn-you !",
+        "meaning_vi": "TURN / turn-you !"
+      },
+      {
+        "orig": "αὐτῷ",
+        "translit": "autO",
+        "strong": "G846",
+        "pos": "pp Dat Sg m",
+        "gloss": "to-him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND / also",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "τὴν",
+        "translit": "tEn",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg f",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "allEn",
+        "translit": "allEn",
+        "strong": "G243",
+        "pos": "a_ Acc Sg f",
+        "gloss": "other",
+        "meaning_vi": "other"
+      }
+    ],
+    "40": [
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "thelonti",
+        "translit": "thelonti",
+        "strong": "G2309",
+        "pos": "vp Pres Act Dat Sg m",
+        "gloss": "one -WILLING / one-willing",
+        "meaning_vi": "one -WILLING / one-willing"
+      },
+      {
+        "orig": "soi",
+        "translit": "soi",
+        "strong": "G4671",
+        "pos": "pp 2 Dat Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "krithEnai",
+        "translit": "krithEnai",
+        "strong": "G2919",
+        "pos": "vn Aor Pas",
+        "gloss": "TO-BE-JUDGED / to-sue",
+        "meaning_vi": "TO-BE-JUDGED / to-sue"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "chitOna",
+        "translit": "chitOna",
+        "strong": "G5509",
+        "pos": "n_ Acc Sg m",
+        "gloss": "TUNIC",
+        "meaning_vi": "TUNIC"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU / And if any man will sue / thy coat, let him have [thy] / cloke also. / 40",
+        "meaning_vi": "OF-YOU / And if any man will sue / thy coat, let him have [thy] / cloke also. / 40"
+      },
+      {
+        "orig": "labein",
+        "translit": "labein",
+        "strong": "G2983",
+        "pos": "vn 2Aor Act",
+        "gloss": "TO-BE-GETTING / to-be-obtaining",
+        "meaning_vi": "TO-BE-GETTING / to-be-obtaining"
+      },
+      {
+        "orig": "aphes",
+        "translit": "aphes",
+        "strong": "G863",
+        "pos": "vm 2Aor Act 2 Sg",
+        "gloss": "FROM-LET / leave-you !",
+        "meaning_vi": "FROM-LET / leave-you !"
+      },
+      {
+        "orig": "αὐτῷ",
+        "translit": "autO",
+        "strong": "G846",
+        "pos": "pp Dat Sg m",
+        "gloss": "to-him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND / also",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "himation",
+        "translit": "himation",
+        "strong": "G2440",
+        "pos": "n_ Acc Sg n",
+        "gloss": "cloak",
+        "meaning_vi": "cloak"
+      }
+    ],
+    "41": [
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "hostis",
+        "translit": "hostis",
+        "strong": "G3748",
+        "pos": "pr Nom Sg m",
+        "gloss": "WHO-ANY / any one -who",
+        "meaning_vi": "WHO-ANY / any one -who"
+      },
+      {
+        "orig": "se",
+        "translit": "se",
+        "strong": "G4571",
+        "pos": "pp 2 Acc Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "aggareusei",
+        "translit": "aggareusei",
+        "strong": "G29",
+        "pos": "vi Fut Act 3 Sg",
+        "gloss": "SHALL-BE-DRAFTING / shall-be-conscripting",
+        "meaning_vi": "SHALL-BE-DRAFTING / shall-be-conscripting"
+      },
+      {
+        "orig": "milion",
+        "translit": "milion",
+        "strong": "G3400",
+        "pos": "n_ Acc Sg n",
+        "gloss": "MILE (1000 paces) / mile",
+        "meaning_vi": "MILE (1000 paces) / mile"
+      },
+      {
+        "orig": "ἓν",
+        "translit": "hen",
+        "strong": "G1520",
+        "pos": "a_ Acc Sg n",
+        "gloss": "ONE",
+        "meaning_vi": "Một điều nào"
+      },
+      {
+        "orig": "hupage",
+        "translit": "hupage",
+        "strong": "G5217",
+        "pos": "vm Pres Act 2 Sg",
+        "gloss": "BE-UNDER-LEADING / be-you-going-away !",
+        "meaning_vi": "BE-UNDER-LEADING / be-you-going-away !"
+      },
+      {
+        "orig": "met",
+        "translit": "met",
+        "strong": "G3326",
+        "pos": "Prep",
+        "gloss": "WITH / And whosoever shall / compel thee to go a mile, go / with him twain. / 41",
+        "meaning_vi": "WITH / And whosoever shall / compel thee to go a mile, go / with him twain. / 41"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "duo",
+        "translit": "duo",
+        "strong": "G1417",
+        "pos": "a_ Nom",
+        "gloss": "TWO",
+        "meaning_vi": "TWO"
+      }
+    ],
+    "42": [
+      {
+        "orig": "tO",
+        "translit": "tO",
+        "strong": "G3588",
+        "pos": "t_ Dat Sg m",
+        "gloss": "to-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "aitounti",
+        "translit": "aitounti",
+        "strong": "G154",
+        "pos": "vp Pres Act Dat Sg m",
+        "gloss": "one -REQUESTING / one-requesting",
+        "meaning_vi": "one -REQUESTING / one-requesting"
+      },
+      {
+        "orig": "se",
+        "translit": "se",
+        "strong": "G4571",
+        "pos": "pp 2 Acc Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "didou",
+        "translit": "didou",
+        "strong": "G1325",
+        "pos": "vm Pres Act 2 Sg",
+        "gloss": "BE-GIVING / be-you-giving !",
+        "meaning_vi": "Đã ban cho"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "thelonta",
+        "translit": "thelonta",
+        "strong": "G2309",
+        "pos": "vp Pres Act Acc Sg m",
+        "gloss": "one -WILLING / one-willing",
+        "meaning_vi": "one -WILLING / one-willing"
+      },
+      {
+        "orig": "apo",
+        "translit": "apo",
+        "strong": "G575",
+        "pos": "Prep",
+        "gloss": "FROM / Give to him that asketh / thee, and from him that would / borrow of thee turn not thou / away. / 42",
+        "meaning_vi": "FROM / Give to him that asketh / thee, and from him that would / borrow of thee turn not thou / away. / 42"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "YOU",
+        "meaning_vi": "YOU"
+      },
+      {
+        "orig": "daneisasthai",
+        "translit": "daneisasthai",
+        "strong": "G1155",
+        "pos": "vn Aor Mid",
+        "gloss": "TO- be -LOANED / to-borrow",
+        "meaning_vi": "TO- be -LOANED / to-borrow"
+      },
+      {
+        "orig": "mE",
+        "translit": "mE",
+        "strong": "G3361",
+        "pos": "Part Neg",
+        "gloss": "NO",
+        "meaning_vi": "NO"
+      },
+      {
+        "orig": "apostraphEs",
+        "translit": "apostraphEs",
+        "strong": "G654",
+        "pos": "vs 2Aor Pas 2 Sg",
+        "gloss": "YOU-MAY-BE-FROM-TURNING / you-may-be-turning-away",
+        "meaning_vi": "YOU-MAY-BE-FROM-TURNING / you-may-be-turning-away"
+      }
+    ],
+    "43": [
+      {
+        "orig": "Ekousate",
+        "translit": "Ekousate",
+        "strong": "G191",
+        "pos": "vi Aor Act 2 Pl",
+        "gloss": "YE-HEAR",
+        "meaning_vi": "YE-HEAR"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "errethE",
+        "translit": "errethE",
+        "strong": "G4483",
+        "pos": "vi Aor Pas 3 Sg",
+        "gloss": "it-WAS-declarED",
+        "meaning_vi": "it-WAS-declarED"
+      },
+      {
+        "orig": "agapEseis",
+        "translit": "agapEseis",
+        "strong": "G25",
+        "pos": "vi Fut Act 2 Sg",
+        "gloss": "YOU-SHALL-BE-LOVING",
+        "meaning_vi": "YOU-SHALL-BE-LOVING"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "plEsion",
+        "translit": "plEsion",
+        "strong": "G4139",
+        "pos": "Adv",
+        "gloss": "NIGH- one / associate",
+        "meaning_vi": "NIGH- one / associate"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU",
+        "meaning_vi": "OF-YOU"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND / been said, Thou shalt love thy / neighbour, and hate thine / enemy. / 43",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "misEseis",
+        "translit": "misEseis",
+        "strong": "G3404",
+        "pos": "vi Fut Act 2 Sg",
+        "gloss": "YOU-SHALL-BE-HATING",
+        "meaning_vi": "YOU-SHALL-BE-HATING"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "echthron",
+        "translit": "echthron",
+        "strong": "G2190",
+        "pos": "a_ Acc Sg m",
+        "gloss": "enemy",
+        "meaning_vi": "enemy"
+      },
+      {
+        "orig": "sou",
+        "translit": "sou",
+        "strong": "G4675",
+        "pos": "pp 2 Gen Sg",
+        "gloss": "OF-YOU / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org",
+        "meaning_vi": "OF-YOU / Matthew 5 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org"
+      }
+    ],
+    "44": [
+      {
+        "orig": "egO",
+        "translit": "egO",
+        "strong": "G1473",
+        "pos": "pp 1 Nom Sg",
+        "gloss": "I",
+        "meaning_vi": "I"
+      },
+      {
+        "orig": "δὲ",
+        "translit": "de",
+        "strong": "G1161",
+        "pos": "Conj",
+        "gloss": "YET",
+        "meaning_vi": "Bấy giờ / Nhưng"
+      },
+      {
+        "orig": "legO",
+        "translit": "legO",
+        "strong": "G3004",
+        "pos": "vi Pres Act 1 Sg",
+        "gloss": "AM-sayING",
+        "meaning_vi": "AM-sayING"
+      },
+      {
+        "orig": "humin",
+        "translit": "humin",
+        "strong": "G5213",
+        "pos": "pp 2 Dat Pl",
+        "gloss": "to-YOU (p) / to-ye",
+        "meaning_vi": "to-YOU (p) / to-ye"
+      },
+      {
+        "orig": "agapate",
+        "translit": "agapate",
+        "strong": "G25",
+        "pos": "vm Pres Act 2 Pl",
+        "gloss": "BE-YE-LOVING / be-ye-loving !",
+        "meaning_vi": "BE-YE-LOVING / be-ye-loving !"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "echthrous",
+        "translit": "echthrous",
+        "strong": "G2190",
+        "pos": "a_ Acc Pl m",
+        "gloss": "enemies",
+        "meaning_vi": "enemies"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "eulogeite",
+        "translit": "eulogeite",
+        "strong": "G2127",
+        "pos": "vm Pres Act 2 Pl",
+        "gloss": "BE-blessING / be-ye-blessing ! / But I say unto you, Love / your enemies, bless them that / curse you, do good to them that / hate you, and pray for them / which despitefully use you, / and persecute you; / 44",
+        "meaning_vi": "BE-blessING / be-ye-blessing ! / But I say unto you, Love / your enemies, bless them that / curse you, do good to them that / hate you, and pray for them / which despitefully use you, / and persecute you; / 44"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "katarOmenous",
+        "translit": "katarOmenous",
+        "strong": "G2672",
+        "pos": "vp Pres midD/pasD Acc Pl m",
+        "gloss": "ones -DOWN-EXECRATING / ones-cursing",
+        "meaning_vi": "ones -DOWN-EXECRATING / ones-cursing"
+      },
+      {
+        "orig": "humas",
+        "translit": "humas",
+        "strong": "G5209",
+        "pos": "pp 2 Acc Pl",
+        "gloss": "YOU (p)",
+        "meaning_vi": "YOU (p)"
+      },
+      {
+        "orig": "kalOs",
+        "translit": "kalOs",
+        "strong": "G2573",
+        "pos": "Adv",
+        "gloss": "IDEALly",
+        "meaning_vi": "IDEALly"
+      },
+      {
+        "orig": "poieite",
+        "translit": "poieite",
+        "strong": "G4160",
+        "pos": "vm Pres Act 2 Pl",
+        "gloss": "BE-DOING / be-ye-doing !",
+        "meaning_vi": "BE-DOING / be-ye-doing !"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "misountas",
+        "translit": "misountas",
+        "strong": "G3404",
+        "pos": "vp Pres Act Acc Pl m",
+        "gloss": "ones -HATING / ones-hating",
+        "meaning_vi": "ones -HATING / ones-hating"
+      },
+      {
+        "orig": "humas",
+        "translit": "humas",
+        "strong": "G5209",
+        "pos": "pp 2 Acc Pl",
+        "gloss": "YOU (p)",
+        "meaning_vi": "YOU (p)"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "proseuchesthe",
+        "translit": "proseuchesthe",
+        "strong": "G4336",
+        "pos": "vm Pres midD/pasD 2 Pl",
+        "gloss": "BE-YE-prayING / be-ye-praying !",
+        "meaning_vi": "BE-YE-prayING / be-ye-praying !"
+      },
+      {
+        "orig": "huper",
+        "translit": "huper",
+        "strong": "G5228",
+        "pos": "Prep",
+        "gloss": "OVER / for- the -sake-of",
+        "meaning_vi": "OVER / for- the -sake-of"
+      },
+      {
+        "orig": "τῶν",
+        "translit": "tOn",
+        "strong": "G3588",
+        "pos": "t_ Gen Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "epEreazontOn",
+        "translit": "epEreazontOn",
+        "strong": "G1908",
+        "pos": "vp Pres Act Gen Pl m",
+        "gloss": "ones -traducING / ones-traducing",
+        "meaning_vi": "ones -traducING / ones-traducing"
+      },
+      {
+        "orig": "humas",
+        "translit": "humas",
+        "strong": "G5209",
+        "pos": "pp 2 Acc Pl",
+        "gloss": "YOU (p)",
+        "meaning_vi": "YOU (p)"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "diOkontOn",
+        "translit": "diOkontOn",
+        "strong": "G1377",
+        "pos": "vp Pres Act Gen Pl m",
+        "gloss": "ones -CHASING / ones-persecuting",
+        "meaning_vi": "Kẻ chịu bắt bớ"
+      },
+      {
+        "orig": "humas",
+        "translit": "humas",
+        "strong": "G5209",
+        "pos": "pp 2 Acc Pl",
+        "gloss": "YOU (p) / ye",
+        "meaning_vi": "YOU (p) / ye"
+      }
+    ],
+    "45": [
+      {
+        "orig": "hopOs",
+        "translit": "hopOs",
+        "strong": "G3704",
+        "pos": "Adv",
+        "gloss": "WHICH-how / so-that",
+        "meaning_vi": "WHICH-how / so-that"
+      },
+      {
+        "orig": "genEsthe",
+        "translit": "genEsthe",
+        "strong": "G1096",
+        "pos": "vs 2Aor midD 2 Pl",
+        "gloss": "YE-MAY-BE-BECOMING",
+        "meaning_vi": "Dựng nên / Hiện hữu"
+      },
+      {
+        "orig": "huioi",
+        "translit": "huioi",
+        "strong": "G5207",
+        "pos": "n_ Nom Pl m",
+        "gloss": "SONS",
+        "meaning_vi": "Con cái Đức Chúa Trời"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg m",
+        "gloss": "OF-THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "patros",
+        "translit": "patros",
+        "strong": "G3962",
+        "pos": "n_ Gen Sg m",
+        "gloss": "FATHER",
+        "meaning_vi": "FATHER"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "tou",
+        "translit": "tou",
+        "strong": "G3588",
+        "pos": "t_ Gen Sg m",
+        "gloss": "THE- One / the-one",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN / of your Father which is in / heaven: for he maketh his sun / good, and sendeth rain on the / 45",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "ouranois",
+        "translit": "ouranois",
+        "strong": "G3772",
+        "pos": "n_ Dat Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      },
+      {
+        "orig": "ὅτι",
+        "translit": "hoti",
+        "strong": "G3754",
+        "pos": "Conj",
+        "gloss": "that",
+        "meaning_vi": "that"
+      },
+      {
+        "orig": "τὸν",
+        "translit": "ton",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "hElion",
+        "translit": "hElion",
+        "strong": "G2246",
+        "pos": "n_ Acc Sg m",
+        "gloss": "SUN",
+        "meaning_vi": "SUN"
+      },
+      {
+        "orig": "αὐτοῦ",
+        "translit": "autou",
+        "strong": "G846",
+        "pos": "pp Gen Sg m",
+        "gloss": "OF-Him",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "anatellei",
+        "translit": "anatellei",
+        "strong": "G393",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "IS-UP-risING / is-rising",
+        "meaning_vi": "IS-UP-risING / is-rising"
+      },
+      {
+        "orig": "epi",
+        "translit": "epi",
+        "strong": "G1909",
+        "pos": "Prep",
+        "gloss": "ON",
+        "meaning_vi": "ON"
+      },
+      {
+        "orig": "ponErous",
+        "translit": "ponErous",
+        "strong": "G4190",
+        "pos": "a_ Acc Pl m",
+        "gloss": "wicked / wicked-ones",
+        "meaning_vi": "wicked / wicked-ones"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "agathous",
+        "translit": "agathous",
+        "strong": "G18",
+        "pos": "a_ Acc Pl m",
+        "gloss": "GOOD / good-ones",
+        "meaning_vi": "GOOD / good-ones"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "brechei",
+        "translit": "brechei",
+        "strong": "G1026",
+        "pos": "vi Pres Act 3 Sg",
+        "gloss": "IS-RAINING / it-is-raining",
+        "meaning_vi": "IS-RAINING / it-is-raining"
+      },
+      {
+        "orig": "epi",
+        "translit": "epi",
+        "strong": "G1909",
+        "pos": "Prep",
+        "gloss": "ON",
+        "meaning_vi": "ON"
+      },
+      {
+        "orig": "dikaious",
+        "translit": "dikaious",
+        "strong": "G1342",
+        "pos": "a_ Acc Pl m",
+        "gloss": "JUST / just-ones",
+        "meaning_vi": "JUST / just-ones"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "adikous",
+        "translit": "adikous",
+        "strong": "G94",
+        "pos": "a_ Acc Pl m",
+        "gloss": "UN-JUST / unjust-ones",
+        "meaning_vi": "UN-JUST / unjust-ones"
+      }
+    ],
+    "46": [
+      {
+        "orig": "ean",
+        "translit": "ean",
+        "strong": "G1437",
+        "pos": "Cond",
+        "gloss": "IF-EVER",
+        "meaning_vi": "IF-EVER"
+      },
+      {
+        "orig": "gar",
+        "translit": "gar",
+        "strong": "G1063",
+        "pos": "Conj",
+        "gloss": "for",
+        "meaning_vi": "for"
+      },
+      {
+        "orig": "agapEsEte",
+        "translit": "agapEsEte",
+        "strong": "G25",
+        "pos": "vs Aor Act 2 Pl",
+        "gloss": "YE-SHOULD-BE-LOVING",
+        "meaning_vi": "YE-SHOULD-BE-LOVING"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "agapOntas",
+        "translit": "agapOntas",
+        "strong": "G25",
+        "pos": "vp Pres Act Acc Pl m",
+        "gloss": "ones -LOVING / ones-loving",
+        "meaning_vi": "ones -LOVING / ones-loving"
+      },
+      {
+        "orig": "humas",
+        "translit": "humas",
+        "strong": "G5209",
+        "pos": "pp 2 Acc Pl",
+        "gloss": "YOU (p) / ye",
+        "meaning_vi": "YOU (p) / ye"
+      },
+      {
+        "orig": "tina",
+        "translit": "tina",
+        "strong": "G5101",
+        "pos": "pi Acc Sg m",
+        "gloss": "ANY / what ?",
+        "meaning_vi": "ANY / what ?"
+      },
+      {
+        "orig": "misthon",
+        "translit": "misthon",
+        "strong": "G3408",
+        "pos": "n_ Acc Sg m",
+        "gloss": "HIRE / wage s / For if ye love them which / love you, what reward have / the same? / 46",
+        "meaning_vi": "HIRE / wage s / For if ye love them which / love you, what reward have / the same? / 46"
+      },
+      {
+        "orig": "echete",
+        "translit": "echete",
+        "strong": "G2192",
+        "pos": "vi Pres Act 2 Pl",
+        "gloss": "YE-ARE-HAVING",
+        "meaning_vi": "YE-ARE-HAVING"
+      },
+      {
+        "orig": "ouchi",
+        "translit": "ouchi",
+        "strong": "G3780",
+        "pos": "Part Int",
+        "gloss": "NOT (emph.)",
+        "meaning_vi": "NOT (emph.)"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND / also",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "telOnai",
+        "translit": "telOnai",
+        "strong": "G5057",
+        "pos": "n_ Nom Pl m",
+        "gloss": "tribute-collectors",
+        "meaning_vi": "tribute-collectors"
+      },
+      {
+        "orig": "τὸ",
+        "translit": "to",
+        "strong": "G3588",
+        "pos": "t_ Acc Sg n",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "auto",
+        "translit": "auto",
+        "strong": "G846",
+        "pos": "pp Acc Sg n",
+        "gloss": "SAME",
+        "meaning_vi": "Ngài / Người"
+      },
+      {
+        "orig": "poiousin",
+        "translit": "poiousin",
+        "strong": "G4160",
+        "pos": "vi Pres Act 3 Pl",
+        "gloss": "ARE-DOING",
+        "meaning_vi": "ARE-DOING"
+      }
+    ],
+    "47": [
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "ean",
+        "translit": "ean",
+        "strong": "G1437",
+        "pos": "Cond",
+        "gloss": "IF-EVER",
+        "meaning_vi": "IF-EVER"
+      },
+      {
+        "orig": "aspasEsthe",
+        "translit": "aspasEsthe",
+        "strong": "G782",
+        "pos": "vs Aor midD 2 Pl",
+        "gloss": "YE-SHOULD-BE-greetING",
+        "meaning_vi": "YE-SHOULD-BE-greetING"
+      },
+      {
+        "orig": "τοὺς",
+        "translit": "tous",
+        "strong": "G3588",
+        "pos": "t_ Acc Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "adelphous",
+        "translit": "adelphous",
+        "strong": "G80",
+        "pos": "n_ Acc Pl m",
+        "gloss": "brothers",
+        "meaning_vi": "brothers"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "monon",
+        "translit": "monon",
+        "strong": "G3440",
+        "pos": "Adv",
+        "gloss": "ONLY",
+        "meaning_vi": "ONLY"
+      },
+      {
+        "orig": "ti",
+        "translit": "ti",
+        "strong": "G5101",
+        "pos": "pi Acc Sg n",
+        "gloss": "ANY / what / And if ye salute your / brethren only, what do ye more / [than others]? do not even the / publicans so? / 47",
+        "meaning_vi": "ANY / what / And if ye salute your / brethren only, what do ye more / [than others]? do not even the / publicans so? / 47"
+      },
+      {
+        "orig": "perisson",
+        "translit": "perisson",
+        "strong": "G4053",
+        "pos": "a_ Acc Sg n",
+        "gloss": "excessive",
+        "meaning_vi": "excessive"
+      },
+      {
+        "orig": "poieite",
+        "translit": "poieite",
+        "strong": "G4160",
+        "pos": "vi Pres Act 2 Pl",
+        "gloss": "YE-ARE-DOING",
+        "meaning_vi": "YE-ARE-DOING"
+      },
+      {
+        "orig": "ouchi",
+        "translit": "ouchi",
+        "strong": "G3780",
+        "pos": "Part Int",
+        "gloss": "NOT (emph.)",
+        "meaning_vi": "NOT (emph.)"
+      },
+      {
+        "orig": "καὶ",
+        "translit": "kai",
+        "strong": "G2532",
+        "pos": "Conj",
+        "gloss": "AND / also",
+        "meaning_vi": "Và / Cùng"
+      },
+      {
+        "orig": "οἱ",
+        "translit": "hoi",
+        "strong": "G3588",
+        "pos": "t_ Nom Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "telOnai",
+        "translit": "telOnai",
+        "strong": "G5057",
+        "pos": "n_ Nom Pl m",
+        "gloss": "tribute-collectors",
+        "meaning_vi": "tribute-collectors"
+      },
+      {
+        "orig": "houtOs",
+        "translit": "houtOs",
+        "strong": "G3779",
+        "pos": "Adv",
+        "gloss": "thus",
+        "meaning_vi": "thus"
+      },
+      {
+        "orig": "poiousin",
+        "translit": "poiousin",
+        "strong": "G4160",
+        "pos": "vi Pres Act 3 Pl",
+        "gloss": "ARE-DOING",
+        "meaning_vi": "ARE-DOING"
+      }
+    ],
+    "48": [
+      {
+        "orig": "esesthe",
+        "translit": "esesthe",
+        "strong": "G2071",
+        "pos": "vi Fut vxx 2 Pl",
+        "gloss": "SHALL-BE",
+        "meaning_vi": "SHALL-BE"
+      },
+      {
+        "orig": "oun",
+        "translit": "oun",
+        "strong": "G3767",
+        "pos": "Conj",
+        "gloss": "THEN",
+        "meaning_vi": "THEN"
+      },
+      {
+        "orig": "humeis",
+        "translit": "humeis",
+        "strong": "G5210",
+        "pos": "pp 2 Nom Pl",
+        "gloss": "YOU (p) / ye",
+        "meaning_vi": "YOU (p) / ye"
+      },
+      {
+        "orig": "teleioi",
+        "translit": "teleioi",
+        "strong": "G5046",
+        "pos": "a_ Nom Pl m",
+        "gloss": "mature / perfect",
+        "meaning_vi": "mature / perfect"
+      },
+      {
+        "orig": "hOsper",
+        "translit": "hOsper",
+        "strong": "G5618",
+        "pos": "Adv",
+        "gloss": "AS-EVEN / even-as",
+        "meaning_vi": "AS-EVEN / even-as"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "patEr",
+        "translit": "patEr",
+        "strong": "G3962",
+        "pos": "n_ Nom Sg m",
+        "gloss": "FATHER",
+        "meaning_vi": "FATHER"
+      },
+      {
+        "orig": "humOn",
+        "translit": "humOn",
+        "strong": "G5216",
+        "pos": "pp 2 Gen Pl",
+        "gloss": "OF-YOU (p) / of-ye",
+        "meaning_vi": "OF-YOU (p) / of-ye"
+      },
+      {
+        "orig": "ὁ",
+        "translit": "ho",
+        "strong": "G3588",
+        "pos": "t_ Nom Sg m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "Ἐν",
+        "translit": "en",
+        "strong": "G1722",
+        "pos": "Prep",
+        "gloss": "IN / Be ye therefore perfect, / even as your Father which is in / heaven is perfect. / 48",
+        "meaning_vi": "Trong / Tại"
+      },
+      {
+        "orig": "tois",
+        "translit": "tois",
+        "strong": "G3588",
+        "pos": "t_ Dat Pl m",
+        "gloss": "THE",
+        "meaning_vi": "Đấng / Sự / Cái (Mạo từ)"
+      },
+      {
+        "orig": "ouranois",
+        "translit": "ouranois",
+        "strong": "G3772",
+        "pos": "n_ Dat Pl m",
+        "gloss": "heavens",
+        "meaning_vi": "Thiên đàng / Các tầng trời"
+      },
+      {
+        "orig": "teleios",
+        "translit": "teleios",
+        "strong": "G5046",
+        "pos": "a_ Nom Sg m",
+        "gloss": "mature / perfect",
+        "meaning_vi": "mature / perfect"
+      },
+      {
+        "orig": "ἐστιν",
+        "translit": "estin",
+        "strong": "G2076",
+        "pos": "vi Pres vxx 3 Sg",
+        "gloss": "IS / Matthew 5  -  Matthew 6 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org",
+        "meaning_vi": "IS / Matthew 5  -  Matthew 6 / ScrTR  :  ScrTR_t  1.0   /  Strong  1.0   /  Parsing  1.1   /  CGTS  1.5   /  CGES_id  2.3   Translation : AV © 2010 Scripture4all Foundation - www.scripture4all.org"
+      }
+    ]
+  }
+}

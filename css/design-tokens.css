@@ -90,13 +90,156 @@
 
   --border-subtle: rgba(87, 76, 61, 0.12);
   --border-medium: rgba(87, 76, 61, 0.25);
-  --glass-bg: rgba(244, 236, 216, 0.85);
+  --glass-bg: rgba(244, 236, 216, 0.88);
   --glass-border: rgba(150, 103, 8, 0.25);
 
   --shadow-sm: 0 2px 4px rgba(60, 45, 20, 0.08);
   --shadow-md: 0 4px 12px rgba(60, 45, 20, 0.12);
   --shadow-lg: 0 10px 30px rgba(60, 45, 20, 0.18);
   --shadow-gold: 0 0 20px rgba(150, 103, 8, 0.18);
+}
+
+/* 3. Pure Light Theme (Minimalist White Page) */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-surface: #f8fafc;
+  --bg-card: #f1f5f9;
+  --bg-card-hover: #e2e8f0;
+  --bg-overlay: rgba(255, 255, 255, 0.92);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-verse-num: #b45309;
+
+  --accent-gold: #b45309;
+  --accent-gold-light: #d97706;
+  --accent-gold-dark: #78350f;
+  --accent-gold-glow: rgba(180, 83, 9, 0.18);
+  --accent-gold-border: rgba(180, 83, 9, 0.32);
+
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-medium: rgba(15, 23, 42, 0.16);
+  --glass-bg: rgba(248, 250, 252, 0.9);
+  --glass-border: rgba(180, 83, 9, 0.22);
+
+  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.09);
+  --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.12);
+  --shadow-gold: 0 0 20px rgba(180, 83, 9, 0.15);
+}
+
+/* 4. Sepia Warm Twilight Theme (Eye Care / Sunset Reading) */
+[data-theme="sepia"] {
+  --bg-primary: #f5ebd7;
+  --bg-surface: #ebdcc4;
+  --bg-card: #dfceb0;
+  --bg-card-hover: #d2be9d;
+  --bg-overlay: rgba(245, 235, 215, 0.9);
+
+  --text-primary: #382618;
+  --text-secondary: #5c4028;
+  --text-muted: #7d5b3d;
+  --text-verse-num: #8f420b;
+
+  --accent-gold: #a05214;
+  --accent-gold-light: #c26d25;
+  --accent-gold-dark: #6e3308;
+  --accent-gold-glow: rgba(160, 82, 20, 0.2);
+  --accent-gold-border: rgba(160, 82, 20, 0.35);
+
+  --border-subtle: rgba(56, 38, 24, 0.12);
+  --border-medium: rgba(56, 38, 24, 0.22);
+  --glass-bg: rgba(235, 220, 196, 0.88);
+  --glass-border: rgba(160, 82, 20, 0.25);
+
+  --shadow-sm: 0 2px 4px rgba(56, 38, 24, 0.08);
+  --shadow-md: 0 4px 12px rgba(56, 38, 24, 0.12);
+  --shadow-lg: 0 10px 30px rgba(56, 38, 24, 0.16);
+  --shadow-gold: 0 0 20px rgba(160, 82, 20, 0.18);
+}
+
+/* 5. Midnight Galilee Blue Theme (Deep Ocean Calm) */
+[data-theme="midnight"] {
+  --bg-primary: #080e1a;
+  --bg-surface: #0f1b2f;
+  --bg-card: #162642;
+  --bg-card-hover: #1e3357;
+  --bg-overlay: rgba(8, 14, 26, 0.88);
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-verse-num: #38bdf8;
+
+  --accent-gold: #38bdf8;
+  --accent-gold-light: #7dd3fc;
+  --accent-gold-dark: #0284c7;
+  --accent-gold-glow: rgba(56, 189, 248, 0.25);
+  --accent-gold-border: rgba(56, 189, 248, 0.4);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --glass-bg: rgba(15, 27, 47, 0.85);
+  --glass-border: rgba(56, 189, 248, 0.25);
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.65);
+  --shadow-gold: 0 0 20px rgba(56, 189, 248, 0.25);
+}
+
+/* 6. Olive Garden Sage Theme (Peaceful Sanctuary Green) */
+[data-theme="sage"] {
+  --bg-primary: #0a1410;
+  --bg-surface: #11221b;
+  --bg-card: #193127;
+  --bg-card-hover: #214134;
+  --bg-overlay: rgba(10, 20, 16, 0.88);
+
+  --text-primary: #ecfdf5;
+  --text-secondary: #a7f3d0;
+  --text-muted: #6ee7b7;
+  --text-verse-num: #34d399;
+
+  --accent-gold: #10b981;
+  --accent-gold-light: #6ee7b7;
+  --accent-gold-dark: #047857;
+  --accent-gold-glow: rgba(16, 185, 129, 0.25);
+  --accent-gold-border: rgba(16, 185, 129, 0.4);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --glass-bg: rgba(17, 34, 27, 0.85);
+  --glass-border: rgba(16, 185, 129, 0.25);
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.65);
+  --shadow-gold: 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+/* ==========================================================================
+   DYNAMIC TYPOGRAPHY & FONT SIZE SCALING
+   ========================================================================== */
+[data-font-size="small"] {
+  --bible-font-size: 1.05rem;
+  --bible-line-height: 1.75;
+}
+
+[data-font-size="medium"] {
+  --bible-font-size: 1.18rem;
+  --bible-line-height: 1.9;
+}
+
+[data-font-size="large"] {
+  --bible-font-size: 1.35rem;
+  --bible-line-height: 2.0;
+}
+
+[data-font-size="xlarge"] {
+  --bible-font-size: 1.55rem;
+  --bible-line-height: 2.15;
 }
 
 /* ==========================================================================

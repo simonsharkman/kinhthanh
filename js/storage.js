@@ -79,6 +79,171 @@ export class LogosStorage {
     });
   }
 
+  // Master Blogs Storage
+  saveMasterBlogs(blogs) {
+    this.savePreference('master_blogs', blogs);
+  }
+
+  getMasterBlogs(defaultBlogs = []) {
+    return this.getPreference('master_blogs', defaultBlogs);
+  }
+
+  // Community Posts Storage
+  saveCommunityPosts(posts) {
+    this.savePreference('community_posts', posts);
+  }
+
+  getCommunityPosts(defaultPosts = []) {
+    return this.getPreference('community_posts', defaultPosts);
+  }
+
+  // Reader Analytics & Metrics Intelligence
+  getAnalytics() {
+    const defaultData = {
+      total_visits: 1845,
+      unique_visitors: 420,
+      total_verses_read: 16850,
+      avg_time_minutes: 24,
+      top_passages: [
+        { ref: 'JHN.1', label: 'Giăng 1 (Ngôi Lời Nhập Thể)', count: 542, percent: 89 },
+        { ref: 'PSA.23', label: 'Thi Thiên 23 (Chúa Là Đấng Chăn Giữ)', count: 485, percent: 80 },
+        { ref: 'GEN.1', label: 'Sáng Thế Ký 1 (Sự Sáng Tạo)', count: 430, percent: 71 },
+        { ref: 'ROM.8', label: 'Rô-ma 8 (Đắc Thắng Trong Đấng Christ)', count: 390, percent: 64 },
+        { ref: 'REV.21', label: 'Khải Huyền 21 (Trời Mới Đất Mới)', count: 345, percent: 57 },
+        { ref: 'JOS.24', label: 'Giô-suê 24 (Ta Và Nhà Ta Phục Sự Chúa)', count: 295, percent: 48 },
+        { ref: '1CO.13', label: '1 Cô-rinh-tô 13 (Bài Ca Yêu Thương)', count: 260, percent: 43 }
+      ],
+      top_translations: [
+        { id: 'BTT', name: 'Bản Truyền Thống 1925 (BTT)', count: 1420, percent: 86 },
+        { id: 'BDM', name: 'Bản Dịch Mới 2002 (BDM)', count: 960, percent: 58 },
+        { id: 'BTHD', name: 'Bản Truyền Thống Hiệu Đính (RVV11)', count: 820, percent: 50 },
+        { id: 'ORIGINAL', name: 'Interlinear Hy Lạp / Hê-bơ-rơ + Strong’s', count: 710, percent: 43 },
+        { id: 'KJV', name: 'King James Version 1611 (KJV)', count: 615, percent: 37 },
+        { id: 'EDE', name: 'Kinh Thánh Tiếng Ê-đê (RRB)', count: 340, percent: 21 },
+        { id: 'JARAI', name: 'Kinh Thánh Tiếng Gia-rai (JBSV)', count: 285, percent: 17 }
+      ],
+      top_metaphors: [
+        { name: 'Chiên Con (Lamb of God)', count: 580 },
+        { name: 'Cây Nho Thật (True Vine)', count: 520 },
+        { name: 'Bánh Sự Sống (Bread of Life)', count: 460 },
+        { name: 'Nước Sống (Living Water)', count: 410 },
+        { name: 'Đá Góc Nhà (Chief Cornerstone)', count: 375 },
+        { name: 'Muối & Ánh Sáng (Salt & Light)', count: 330 }
+      ],
+      top_articles: [
+        { id: 'art_logos_incarnation', title: "Ngôi Lời Nhập Thể: Mầu Nhiệm 'Logos'", views: 1120 },
+        { id: 'art_typology_lamb', title: 'Hành Trình Chiên Con: Sợi Chỉ Đỏ Cứu Chuộc', views: 890 }
+      ],
+      top_queries: [
+        { query: 'Giăng 3:16', count: 380 },
+        { query: 'Ngôi Lời', count: 310 },
+        { query: 'Cứu Rỗi', count: 250 },
+        { query: 'Đền Tạm', count: 215 },
+        { query: 'Khải Huyền', count: 180 }
+      ]
+    };
+    return this.getPreference('analytics_data', defaultData);
+  }
+
+  saveAnalytics(data) {
+    this.savePreference('analytics_data', data);
+  }
+
+  recordPassageVisit(book, chapter) {
+    const data = this.getAnalytics();
+    data.total_verses_read = (data.total_verses_read || 0) + 1;
+    const refKey = `${book}.${chapter}`;
+    let item = data.top_passages.find(p => p.ref === refKey);
+    if (item) {
+      item.count += 1;
+    } else {
+      data.top_passages.push({
+        ref: refKey,
+        label: `${book} ${chapter}`,
+        count: 1,
+        percent: 10
+      });
+    }
+    // Recompute percentage based on max
+    const maxCount = Math.max(...data.top_passages.map(p => p.count), 1);
+    data.top_passages.forEach(p => {
+      p.percent = Math.min(100, Math.round((p.count / maxCount) * 100));
+    });
+    data.top_passages.sort((a, b) => b.count - a.count);
+    this.saveAnalytics(data);
+  }
+
+  recordTranslationUsed(versionId) {
+    const data = this.getAnalytics();
+    let item = data.top_translations.find(t => t.id === versionId);
+    if (item) {
+      item.count += 1;
+    } else {
+      data.top_translations.push({
+        id: versionId,
+        name: versionId,
+        count: 1,
+        percent: 10
+      });
+    }
+    const maxCount = Math.max(...data.top_translations.map(t => t.count), 1);
+    data.top_translations.forEach(t => {
+      t.percent = Math.min(100, Math.round((t.count / maxCount) * 100));
+    });
+    data.top_translations.sort((a, b) => b.count - a.count);
+    this.saveAnalytics(data);
+  }
+
+  recordArticleVisit(articleId, title = '') {
+    const data = this.getAnalytics();
+    let item = data.top_articles.find(a => a.id === articleId);
+    if (item) {
+      item.views = (item.views || 0) + 1;
+    } else {
+      data.top_articles.push({
+        id: articleId,
+        title: title || articleId,
+        views: 1
+      });
+    }
+    data.top_articles.sort((a, b) => (b.views || 0) - (a.views || 0));
+    this.saveAnalytics(data);
+  }
+
+  recordSearchQuery(query) {
+    if (!query || query.trim().length < 2) return;
+    const cleanQ = query.trim();
+    const data = this.getAnalytics();
+    let item = data.top_queries.find(q => q.query.toLowerCase() === cleanQ.toLowerCase());
+    if (item) {
+      item.count += 1;
+    } else {
+      data.top_queries.push({ query: cleanQ, count: 1 });
+    }
+    data.top_queries.sort((a, b) => b.count - a.count);
+    if (data.top_queries.length > 15) {
+      data.top_queries = data.top_queries.slice(0, 15);
+    }
+    this.saveAnalytics(data);
+  }
+
+  recordSessionVisit() {
+    try {
+      if (!sessionStorage.getItem('logos_session_recorded')) {
+        sessionStorage.setItem('logos_session_recorded', 'true');
+        const data = this.getAnalytics();
+        data.total_visits = (data.total_visits || 0) + 1;
+        if (!localStorage.getItem('logos_unique_user')) {
+          localStorage.setItem('logos_unique_user', 'true');
+          data.unique_visitors = (data.unique_visitors || 0) + 1;
+        }
+        this.saveAnalytics(data);
+      }
+    } catch (e) {
+      // ignore in restricted environments
+    }
+  }
+
   // Passage Offline Caching via IndexedDB
   async cachePassage(passageKey, data) {
     if (!this.db) {

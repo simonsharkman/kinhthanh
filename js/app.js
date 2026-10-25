@@ -3,15 +3,15 @@
    Integrates Parallel Bible Engine, Hermeneutics, Media, AI & Community
    ========================================================================== */
 
-import { state, ALL_TRANSLATIONS } from './state.js';
-import { storage } from './storage.js';
-import { bibleEngine } from './bible-engine.js';
-import { hermeneuticsEngine } from './hermeneutics-engine.js';
-import { crossRefEngine } from './crossref-engine.js';
-import { mediaEngine } from './media-engine.js';
-import { aiAssistant } from './ai-assistant.js';
-import { blogSystem } from './blog-community.js';
-import { bereaGuardian } from './berea-guardian.js';
+import { state, ALL_TRANSLATIONS, THEMES_LIST, FONT_SIZES } from './state.js?v=4.1.0';
+import { storage } from './storage.js?v=4.1.0';
+import { bibleEngine } from './bible-engine.js?v=4.1.0';
+import { hermeneuticsEngine } from './hermeneutics-engine.js?v=4.1.0';
+import { crossRefEngine } from './crossref-engine.js?v=4.1.0';
+import { mediaEngine } from './media-engine.js?v=4.1.0';
+import { aiAssistant } from './ai-assistant.js?v=4.1.0';
+import { blogSystem } from './blog-community.js?v=4.1.0';
+import { bereaGuardian } from './berea-guardian.js?v=4.1.0';
 
 class LogosApp {
   constructor() {
@@ -32,8 +32,12 @@ class LogosApp {
       blogSystem.init()
     ]);
 
-    // 2. Thiết lập giao diện theme
+    // 2. Thiết lập giao diện theme & font size
     document.documentElement.setAttribute('data-theme', state.currentTheme);
+    document.documentElement.setAttribute('data-font-size', state.currentFontSize);
+    this.updateThemeUI(state.currentTheme);
+    this.updateFontSizeUI(state.currentFontSize);
+    this.initThemeSelectorModal();
     this.updateAdminBannerUI(state.adminBannerConfig);
     this.updateRoleUI(state.currentUserRole);
 
@@ -42,12 +46,33 @@ class LogosApp {
 
     // 4. Gắn kết sự kiện UI
     this.bindEvents();
-    this.initFloatingAI();
+    this.initMobileResponsiveUX();
+
+    // Dọn dẹp bộ nhớ đệm cục bộ nếu có thiết lập cũ
+    try {
+      localStorage.removeItem('logos_pref_reading_mode');
+      localStorage.removeItem('logos_pref_ai_popup');
+    } catch (e) {}
 
     // 5. Render nội dung ban đầu (Giăng 1)
+    this.updatePrimaryVersionLabel();
+    this.populatePrimaryVersionSelector();
     await this.renderChapter(state.currentBook, state.currentChapter);
     this.populateBookPicker();
     this.populateVersionSelector();
+    storage.recordSessionVisit();
+    this.updateHeaderVisitorCount();
+    storage.recordPassageVisit(state.currentBook, state.currentChapter);
+
+    // Nếu URL có #tsk hoặc ?view=tsk thì tự động mở ngay Tab Riêng "KT Đối Chiếu"
+    if (typeof window !== 'undefined' && (window.location.hash === '#tsk' || window.location.search.includes('view=tsk'))) {
+      state.setActiveView('tsk');
+    } else if (typeof window !== 'undefined' && window.innerWidth >= 992) {
+      // Trên máy tính (>= 992px): Mặc định mở ngay Bảng Đối Chiếu (Drawer Inspector) cho Câu 1
+      state.setReadingMode('standard');
+      state.setDrawerTab('parallel');
+      state.selectVerse(1, true);
+    }
 
     console.log('✨ Logos MultiVerse đã sẵn sàng phục vụ học viên!');
   }
@@ -55,33 +80,88 @@ class LogosApp {
   // State Event Listener
   handleStateEvent(event, data) {
     switch (event) {
+      case 'PRIMARY_VERSION_CHANGED':
+        this.updatePrimaryVersionLabel();
+        this.populatePrimaryVersionSelector();
+        storage.recordTranslationUsed(data.primaryVersion);
+        this.renderChapter(state.currentBook, state.currentChapter);
+        break;
       case 'PASSAGE_CHANGED':
-        this.renderChapter(data.book, data.chapter);
+        storage.recordPassageVisit(data.book, data.chapter);
+        this.renderChapter(data.book, data.chapter).then(() => {
+          if (state.isDrawerOpen) {
+            this.renderDrawerContent();
+          }
+          if (state.activeView === 'tsk') {
+            this.renderTSKView();
+          }
+        });
         this.updateShelfActiveState(data.book, data.chapter);
-        this.updateFloatingAIChips();
         break;
       case 'VERSE_SELECTED':
+        if (state.activeView === 'tsk') {
+          this.renderTSKView();
+          break;
+        }
+        if (typeof window !== 'undefined' && window.innerWidth <= 991 && state.activeDrawerTab !== 'parallel') {
+          state.activeDrawerTab = 'parallel';
+        }
         this.highlightActiveVerse(data.verse);
         this.renderDrawerContent();
         this.toggleDrawer(data.isDrawerOpen);
         setTimeout(() => {
           const activeEl = document.querySelector(`.verse-item[data-verse="${data.verse}"]`);
           if (activeEl) {
-            activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (window.innerWidth <= 991) {
+              // Trên điện thoại: Căn chỉnh câu đang chọn vào chính giữa nửa trên (#app-body) khi chia đôi màn hình 50/50
+              const appBody = document.getElementById('app-body');
+              if (appBody && state.isDrawerOpen) {
+                const bodyRect = appBody.getBoundingClientRect();
+                const verseRect = activeEl.getBoundingClientRect();
+                const offsetInside = (verseRect.top - bodyRect.top) + appBody.scrollTop;
+                const centerTarget = offsetInside - (appBody.clientHeight / 2) + (verseRect.height / 2);
+                appBody.scrollTo({ top: Math.max(0, centerTarget), behavior: 'smooth' });
+              } else {
+                const rect = activeEl.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const targetY = scrollTop + rect.top - 110;
+                window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+              }
+            } else {
+              activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
           }
         }, 120);
         break;
+      case 'TSK_LANGUAGE_CHANGED':
+        crossRefEngine.activeLangMode = data.tskLanguage;
+        if (state.activeView === 'tsk') {
+          this.renderTSKView();
+        }
+        if (state.isDrawerOpen && state.activeDrawerTab === 'crossref') {
+          this.renderDrawerContent();
+        }
+        break;
       case 'VERSIONS_CHANGED':
+        if (Array.isArray(data.activeVersions)) {
+          data.activeVersions.forEach(v => storage.recordTranslationUsed(v));
+        }
         this.updateActiveVersionsCount();
         this.renderChapter(state.currentBook, state.currentChapter);
         if (state.isDrawerOpen) this.renderDrawerContent();
         break;
       case 'THEME_CHANGED':
         document.documentElement.setAttribute('data-theme', data.theme);
+        this.updateThemeUI(data.theme);
+        break;
+      case 'FONT_SIZE_CHANGED':
+        document.documentElement.setAttribute('data-font-size', data.fontSize);
+        this.updateFontSizeUI(data.fontSize);
         break;
       case 'ROLE_CHANGED':
         this.updateRoleUI(data.role);
         if (state.activeView === 'blog') this.renderBlogView();
+        if (state.activeView === 'community') this.renderCommunityView();
         break;
       case 'BANNER_CHANGED':
         this.updateAdminBannerUI(data.banner);
@@ -95,6 +175,10 @@ class LogosApp {
       case 'DRAWER_TAB_CHANGED':
         this.renderDrawerContent();
         break;
+      case 'READING_MODE_CHANGED':
+        this.updateReadingModeUI(data.readingMode);
+        this.renderChapter(state.currentBook, state.currentChapter);
+        break;
     }
   }
 
@@ -104,6 +188,7 @@ class LogosApp {
     document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
 
     document.querySelectorAll('.nav-btn').forEach(btn => {
+      if (btn.id === 'top-nav-ai-btn' || btn.dataset.view === 'ai') return;
       btn.classList.toggle('active', btn.dataset.view === viewName);
     });
 
@@ -113,9 +198,35 @@ class LogosApp {
       targetPanel.classList.add('active');
     }
 
+    // Ẩn thanh lọc thể loại khi mở Tab riêng (như KT Đối Chiếu) để hiển thị toàn màn hình
+    const genreBar = document.getElementById('genre-filter-bar');
+    const genreShelf = document.getElementById('genre-bookshelf');
+    if (genreBar) genreBar.classList.toggle('hidden', viewName !== 'bible');
+    if (genreShelf && viewName !== 'bible') genreShelf.classList.add('hidden');
+
+    if (viewName === 'tsk') {
+      if (state.isDrawerOpen) {
+        state.setDrawerOpen(false);
+      }
+      this.renderTSKView();
+    }
     if (viewName === 'blog') this.renderBlogView();
     if (viewName === 'community') this.renderCommunityView();
     if (viewName === 'media') this.renderMediaView();
+
+    // Cập nhật trạng thái nút Đọc & KT Đối Chiếu trên mobile bottom nav và header
+    const mobileReadBtn = document.getElementById('btn-mobile-read');
+    if (mobileReadBtn) {
+      mobileReadBtn.classList.toggle('active', viewName === 'bible');
+    }
+    const mobileTskBtn = document.getElementById('btn-mobile-tsk');
+    if (mobileTskBtn) {
+      mobileTskBtn.classList.toggle('active', viewName === 'tsk');
+    }
+    const headerTskBtn = document.getElementById('mobile-header-tsk-btn');
+    if (headerTskBtn) {
+      headerTskBtn.classList.toggle('active', viewName === 'tsk');
+    }
   }
 
   // 2. Render Chapter into Focus Reader
@@ -132,12 +243,31 @@ class LogosApp {
 
     this.currentPassageData = await bibleEngine.loadPassage(bookId, chapterNum);
     this.activeTypologyMetaphorId = null;
-    const html = bibleEngine.renderChapterHTML(this.currentPassageData, state.activeVersions);
+
+    // Trên cả máy tính và điện thoại: Nửa trên (#focus-reader) luôn hiển thị bản đọc chính thuần khiết
+    // Khi đối chiếu trên điện thoại sẽ chia đều 50/50: nửa trên bản đọc chính, nửa dưới (#drawer-inspector) các bản đối chiếu
+    const effectiveMode = 'standard';
+
+    // Render theo Chế độ Đọc Thường hoặc Chế độ Đọc Đối Chiếu Trực Tiếp (trên mobile)
+    let html = '';
+    if (effectiveMode === 'parallel') {
+      html = bibleEngine.renderChapterParallelHTML(this.currentPassageData, state.activeVersions, state.primaryVersion);
+    } else {
+      html = bibleEngine.renderChapterHTML(this.currentPassageData, state.activeVersions, state.primaryVersion);
+    }
     readerContainer.innerHTML = html;
 
-    // Tự động tải trước các bản dịch đang kích hoạt (đặc biệt là tiếng Sắc tộc / HTTLVN)
-    bibleEngine.ensurePassageTranslations(bookId, chapterNum, state.activeVersions).then(loaded => {
+    // Tự động tải trước các bản dịch đang kích hoạt và bản đọc chính (đặc biệt là tiếng Sắc tộc / HTTLVN / CGKPV)
+    const versionsToEnsure = Array.from(new Set([...state.activeVersions, state.primaryVersion]));
+    bibleEngine.ensurePassageTranslations(bookId, chapterNum, versionsToEnsure).then(loaded => {
       if (loaded && state.currentBook === bookId && state.currentChapter === chapterNum) {
+        if (effectiveMode === 'parallel') {
+          readerContainer.innerHTML = bibleEngine.renderChapterParallelHTML(this.currentPassageData, state.activeVersions, state.primaryVersion);
+          this.rebindReaderVerseEvents(readerContainer);
+        } else if (state.primaryVersion && state.primaryVersion !== 'BTT') {
+          readerContainer.innerHTML = bibleEngine.renderChapterHTML(this.currentPassageData, state.activeVersions, state.primaryVersion);
+          this.rebindReaderVerseEvents(readerContainer);
+        }
         if (state.activeDrawerTab === 'parallel' && state.isDrawerOpen) {
           this.renderDrawerContent();
         }
@@ -151,10 +281,42 @@ class LogosApp {
       currentPassageLabel.textContent = `${book.name_vi} ${chapterNum}`;
     }
 
-    // Gắn sự kiện click cho từng câu
+    this.rebindReaderVerseEvents(readerContainer);
+
+    // Tự động highlight câu đang chọn
+    this.highlightActiveVerse(state.currentVerse);
+
+    // Tự động cập nhật bảng khảo cứu Drawer nếu đang mở để đồng bộ ngay lập tức
+    if (state.isDrawerOpen) {
+      this.renderDrawerContent();
+    }
+  }
+
+  rebindReaderVerseEvents(readerContainer) {
+    if (!readerContainer) return;
+
+    // Gắn sự kiện click cho từng câu trong chế độ đọc thường
     readerContainer.querySelectorAll('.verse-item').forEach(el => {
       el.addEventListener('click', () => {
         const verseNum = el.dataset.verse;
+        state.selectVerse(verseNum, true);
+      });
+    });
+
+    // Gắn sự kiện click cho thẻ đối chiếu trong chế độ đối chiếu trực tiếp
+    readerContainer.querySelectorAll('.verse-compare-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.compare-quick-drawer-btn')) {
+          const verseNum = card.dataset.verse;
+          state.selectVerse(verseNum, true);
+        }
+      });
+    });
+
+    readerContainer.querySelectorAll('.compare-quick-drawer-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const verseNum = btn.dataset.verse;
         state.selectVerse(verseNum, true);
       });
     });
@@ -166,18 +328,19 @@ class LogosApp {
         const metaphorId = el.dataset.metaphor;
         this.activeTypologyMetaphorId = metaphorId;
         state.setDrawerTab('metaphors');
-        state.selectVerse(el.closest('.verse-item').dataset.verse, true);
+        const parentVerse = el.closest('.verse-item') || el.closest('.verse-compare-card');
+        state.selectVerse(parentVerse?.dataset?.verse || 1, true);
         this.renderDrawerContent();
       });
     });
-
-    // Tự động highlight câu đang chọn
-    this.highlightActiveVerse(state.currentVerse);
   }
 
   highlightActiveVerse(verseNum) {
     document.querySelectorAll('.verse-item').forEach(el => {
       el.classList.toggle('verse-highlight-active', el.dataset.verse == verseNum);
+    });
+    document.querySelectorAll('.verse-compare-card').forEach(card => {
+      card.classList.toggle('active', card.dataset.verse == verseNum);
     });
   }
 
@@ -188,11 +351,31 @@ class LogosApp {
     const drawerBadge = document.getElementById('drawer-verse-genre');
     if (!drawerBody || !this.currentPassageData) return;
 
-    const book = bibleEngine.getBookById(state.currentBook) || { name_vi: state.currentBook, genre: 'torah' };
-    const verseRefStr = `${book.name_vi} ${state.currentChapter}:${state.currentVerse}`;
-    const verseKey = `${state.currentBook}.${state.currentChapter}.${state.currentVerse}`;
+    // Luôn ưu tiên đồng bộ theo phân đoạn đang hiển thị trên Focus Reader
+    const currentBookId = this.currentPassageData.book_id || state.currentBook;
+    const currentChapterNum = this.currentPassageData.chapter_num || state.currentChapter;
+    if (state.currentBook !== currentBookId) state.currentBook = currentBookId;
+    if (state.currentChapter !== currentChapterNum) state.currentChapter = currentChapterNum;
 
-    if (drawerTitle) drawerTitle.textContent = `Khảo Cứu: ${verseRefStr}`;
+    // Giới hạn câu chọn hợp lệ theo phân đoạn đang mở
+    const totalVerses = (this.currentPassageData.verses && this.currentPassageData.verses.length) || 1;
+    if (!state.currentVerse || state.currentVerse < 1) state.currentVerse = 1;
+    if (state.currentVerse > totalVerses) state.currentVerse = totalVerses;
+
+    const book = bibleEngine.getBookById(currentBookId) || { name_vi: currentBookId, genre: 'torah' };
+    const verseRefStr = `${book.name_vi} ${currentChapterNum}:${state.currentVerse}`;
+    const verseKey = `${currentBookId}.${currentChapterNum}.${state.currentVerse}`;
+
+    // Trên điện thoại (<= 991px): Luôn khóa vào tab 'parallel' để chỉ tập trung vào các bản đối chiếu, không hiện mục thừa
+    if (typeof window !== 'undefined' && window.innerWidth <= 991) {
+      state.activeDrawerTab = 'parallel';
+    }
+
+    if (drawerTitle) {
+      drawerTitle.textContent = state.activeDrawerTab === 'parallel'
+        ? `Đối Chiếu: ${verseRefStr}`
+        : `Khảo Cứu: ${verseRefStr}`;
+    }
     if (drawerBadge) {
       drawerBadge.textContent = book.genre.toUpperCase();
       drawerBadge.style.background = `var(--genre-${book.genre}, var(--accent-gold))`;
@@ -210,16 +393,21 @@ class LogosApp {
     switch (state.activeDrawerTab) {
       case 'parallel': {
         // Tab 1: Đối Chiếu Song Song Đa Bản Dịch & Diff Words
-        const versesList = bibleEngine.getParallelVerses(state.currentBook, state.currentChapter, state.currentVerse, state.activeVersions);
+        const versesList = bibleEngine.getParallelVerses(currentBookId, currentChapterNum, state.currentVerse, state.activeVersions);
         let html = `
           <div class="parallel-grid animate-fade-in">
-            <div class="metaphor-card" style="border-color: var(--accent-gold-border); margin-bottom: 0.5rem;">
-              <h4 style="font-family: var(--font-brand); color: var(--accent-gold); margin-bottom: 0.35rem;">
-                <i class="fa-solid fa-columns"></i> Đối Chiếu Song Song ${versesList.length} Bản Dịch
-              </h4>
-              <p style="font-size: 0.82rem; color: var(--text-muted);">
-                Làm nổi bật sự khác biệt từ ngữ giữa các bản dịch để nhìn thấy sắc thái thần học chính xác nhất.
-              </p>
+            <div class="metaphor-card parallel-intro-banner" style="border-color: var(--accent-gold-border); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+              <div>
+                <h4 style="font-family: var(--font-brand); color: var(--accent-gold); margin-bottom: 0.25rem;">
+                  <i class="fa-solid fa-columns"></i> Đối Chiếu Song Song ${versesList.length} Bản Dịch
+                </h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+                  So sánh từ ngữ và nguyên ngữ gốc để nắm bắt sâu sắc từng câu Kinh Thánh.
+                </p>
+              </div>
+              <button id="parallel-add-versions-btn" class="drawer-action-btn" style="background: var(--accent-gold); color: #000; border: none; font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem;">
+                <i class="fa-solid fa-layer-group"></i> Chọn Bản Dịch
+              </button>
             </div>
         `;
 
@@ -229,19 +417,25 @@ class LogosApp {
 
         versesList.forEach((item, idx) => {
           let displayText = item.text;
-          // Chỉ so sánh diff từ ngữ nếu là bản dịch tiếng Việt, khác với bản baseVi, và baseViText tồn tại
-          if (item.lang === 'vi' && baseViItem && item.version_id !== baseViItem.version_id && baseViText) {
+          if (item.version_id === 'INTERLINEAR') {
+            displayText = this.renderInterlinearWordTiles(item, currentBookId, currentChapterNum);
+          } else if (item.lang === 'vi' && baseViItem && item.version_id !== baseViItem.version_id && baseViText) {
             displayText = bibleEngine.diffWords(item.text, baseViText);
           }
 
           html += `
-            <div class="parallel-verse-card">
+            <div class="parallel-verse-card clickable-popout-card" data-version="${item.version_id}">
               <div class="parallel-card-header">
                 <span class="version-code-badge">${item.version_id} • ${item.version_name}</span>
-                <span class="version-name-label">${item.category}</span>
+                <button class="card-popout-btn" data-version="${item.version_id}" aria-label="Mở cửa sổ đọc">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở cửa sổ đọc
+                </button>
               </div>
               <div class="parallel-card-text ${item.version_id === 'INTERLINEAR' ? 'interlinear-text' : ''}">
                 ${displayText}
+              </div>
+              <div class="parallel-card-footer-hint">
+                <i class="fa-regular fa-window-restore"></i> Nhấp để đọc trọn đoạn ${verseRefStr} trong cửa sổ riêng
               </div>
             </div>
           `;
@@ -250,10 +444,45 @@ class LogosApp {
         html += `</div>`;
         drawerBody.innerHTML = html;
 
-        // Tự động kiểm tra và tải các bản dịch còn thiếu / đang hiển thị loading pulse từ HTTLVN
-        const needsFetch = versesList.some(v => typeof v.text === 'string' && v.text.includes('httlvn-loading-pulse'));
+        // Gắn sự kiện nút Chọn Bản Dịch ngay trong header đối chiếu
+        drawerBody.querySelector('#parallel-add-versions-btn')?.addEventListener('click', () => {
+          this.populateVersionSelector('vi');
+          document.getElementById('version-selector-modal')?.classList.remove('hidden');
+        });
+
+        // Gắn sự kiện mở cửa sổ đọc độc lập khi nhấp vào thẻ bản dịch hoặc nút mở
+        drawerBody.querySelectorAll('.parallel-verse-card.clickable-popout-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const vId = card.dataset.version;
+            this.openPopoutReader(currentBookId, currentChapterNum, vId, state.currentVerse);
+          });
+        });
+        drawerBody.querySelectorAll('.card-popout-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const vId = btn.dataset.version;
+            this.openPopoutReader(currentBookId, currentChapterNum, vId, state.currentVerse);
+          });
+        });
+        drawerBody.querySelectorAll('.btn-s4a-link, .tsk-external-link').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+          });
+        });
+
+        // Gắn sự kiện click vào bất kỳ địa chỉ Kinh Thánh Đối Chiếu (TSK) nào để xem nhanh câu đó
+        drawerBody.querySelectorAll('.tsk-ref-link').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const ref = btn.dataset.ref;
+            if (ref) this.openPassagePreviewDialog(ref);
+          });
+        });
+
+        // Tự động kiểm tra và tải các bản dịch còn thiếu / đang hiển thị loading pulse từ HTTLVN hoặc TSK
+        const needsFetch = versesList.some(v => typeof v.text === 'string' && (v.text.includes('httlvn-loading-pulse') || v.text.includes('tsk-fallback-block')));
         if (needsFetch) {
-          bibleEngine.ensurePassageTranslations(state.currentBook, state.currentChapter, state.activeVersions).then(loaded => {
+          bibleEngine.ensurePassageTranslations(currentBookId, currentChapterNum, state.activeVersions).then(loaded => {
             if (loaded && state.activeDrawerTab === 'parallel') {
               this.renderDrawerContent();
             }
@@ -264,10 +493,10 @@ class LogosApp {
 
       case 'metaphors': {
         // Tab 2: Ẩn Dụ & Biểu Tượng Thần Học - Tự Động Đồng Bộ Theo Nội Dung Đang Mở
-        const book = bibleEngine.getBookById(state.currentBook) || { id: state.currentBook, name_vi: state.currentBook };
+        const book = bibleEngine.getBookById(currentBookId) || { id: currentBookId, name_vi: currentBookId };
         const detectionResult = hermeneuticsEngine.detectPassageMetaphors({
-          book: { id: state.currentBook, name_vi: book.name_vi },
-          chapterNum: state.currentChapter,
+          book: { id: currentBookId, name_vi: book.name_vi },
+          chapterNum: currentChapterNum,
           verses: this.currentPassageData.verses,
           selectedVerseNum: state.currentVerse,
           preferredMetaphorId: this.activeTypologyMetaphorId || null
@@ -298,17 +527,49 @@ class LogosApp {
       }
 
       case 'crossref': {
-        // Tab 3: Kinh Thánh Tự Giải Thích Kinh Thánh (TSK)
+        // Tab 3: Kinh Thánh Đối Chiếu (BibleHub TSK & Bản Truyền Thống 1925)
         const currVerseObj = this.currentPassageData.verses.find(v => v.verse_num === state.currentVerse);
         const refs = (currVerseObj && currVerseObj.cross_refs) ? currVerseObj.cross_refs : null;
         drawerBody.innerHTML = crossRefEngine.renderCrossReferenceHTML(verseKey, refs);
 
-        drawerBody.querySelectorAll('.crossref-peek-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
+        drawerBody.querySelectorAll('.crossref-peek-btn, .tsk-ref-link').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
             const ref = btn.dataset.ref;
-            this.openPassagePreviewDialog(ref);
+            if (ref) this.openPassagePreviewDialog(ref);
           });
         });
+
+        drawerBody.querySelectorAll('.tsk-verse-anchor-link').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const b = btn.dataset.tskJumpBook;
+            const c = parseInt(btn.dataset.tskJumpCh, 10) || 1;
+            const v = parseInt(btn.dataset.tskJumpV, 10) || 1;
+            if (b) {
+              state.setPassage(b, c, v);
+            }
+          });
+        });
+
+        drawerBody.querySelector('#drawer-open-full-tsk-tab-btn')?.addEventListener('click', () => {
+          state.setActiveView('tsk');
+        });
+
+        drawerBody.querySelectorAll('.tsk-lang-toggle-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const lang = btn.dataset.tskLang || 'vi';
+            state.setTSKLanguage(lang);
+          });
+        });
+
+        if (!bibleEngine.tskBookCache[currentBookId.toUpperCase()]) {
+          bibleEngine.fetchTSKBook(currentBookId).then(tskBook => {
+            if (tskBook && state.activeDrawerTab === 'crossref') {
+              this.renderDrawerContent();
+            }
+          });
+        }
         break;
       }
 
@@ -348,11 +609,20 @@ class LogosApp {
           messagesList.appendChild(loadingMsg);
           messagesList.scrollTop = messagesList.scrollHeight;
 
+          const genreKey = book.genre || 'gospel';
+          const genreGuide = hermeneuticsEngine?.getGenreGuide ? hermeneuticsEngine.getGenreGuide(genreKey) : (hermeneuticsEngine?.genreGuides?.[genreKey] || null);
+          const crossRefs = crossRefEngine.getCrossReferences(verseKey);
+
           const responseText = await aiAssistant.ask(queryText, {
             ref: verseRefStr,
             book: book.name_vi,
-            chapter: state.currentChapter,
-            verse: state.currentVerse
+            bookId: currentBookId,
+            chapter: currentChapterNum,
+            verse: state.currentVerse,
+            passageData: this.currentPassageData,
+            activeVersions: state.activeVersions,
+            crossReferences: crossRefs,
+            genreGuide: genreGuide
           });
 
           loadingMsg.innerHTML = `
@@ -374,14 +644,66 @@ class LogosApp {
           chip.addEventListener('click', () => executeQuery(chip.dataset.prompt));
         });
 
+        // Role buttons in drawer
+        drawerBody.querySelectorAll('.fab-role-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const role = btn.dataset.role;
+            aiAssistant.setRole(role);
+            this.updateFloatingAIRolePills();
+            drawerBody.querySelectorAll('.fab-role-btn').forEach(b => b.classList.toggle('active', b.dataset.role === role));
+          });
+        });
+
         const keyBtn = drawerBody.querySelector('#ai-configure-key-btn');
         if (keyBtn) {
           keyBtn.addEventListener('click', () => {
-            const currentKey = aiAssistant.getApiKey();
-            const newKey = prompt('Nhập OpenAI API Key của bạn (bỏ trống để dùng AI Thần Học Offline miễn phí sẵn có):', currentKey);
-            if (newKey !== null) {
-              aiAssistant.setApiKey(newKey);
-              this.renderDrawerContent();
+            this.openAISettingsModal();
+          });
+        }
+
+        const badgeBtn = drawerBody.querySelector('#ai-model-badge-btn');
+        if (badgeBtn) {
+          badgeBtn.addEventListener('click', () => {
+            this.openAISettingsModal();
+          });
+        }
+
+        const deepToggleBtn = drawerBody.querySelector('#ai-deep-research-toggle-btn');
+        if (deepToggleBtn) {
+          deepToggleBtn.addEventListener('click', () => {
+            const cur = aiAssistant.getDeepResearchEnabled();
+            aiAssistant.setDeepResearchEnabled(!cur);
+            this.renderDrawerContent();
+            const floatingDeepBtn = document.getElementById('floating-deep-research-btn');
+            if (floatingDeepBtn) {
+              const isNow = aiAssistant.getDeepResearchEnabled();
+              floatingDeepBtn.classList.toggle('active', isNow);
+              const textSpan = floatingDeepBtn.querySelector('.ctrl-btn-text');
+              if (textSpan) textSpan.textContent = isNow ? 'Deep: BẬT' : 'Deep: TẮT';
+            }
+          });
+        }
+
+        const clearHistoryBtn = drawerBody.querySelector('#ai-clear-history-btn');
+        if (clearHistoryBtn) {
+          clearHistoryBtn.addEventListener('click', () => {
+            aiAssistant.clearConversationHistory();
+            if (messagesList) {
+              messagesList.innerHTML = `
+                <div class="ai-message assistant">
+                  <i class="fa-solid fa-dove" style="color: var(--accent-gold); margin-top: 2px;"></i>
+                  <div>Đã làm mới dòng bộ nhớ hội thoại Kimchi Stream. Sẵn sàng tiếp nhận câu hỏi mới!</div>
+                </div>
+              `;
+            }
+            const floatingMsgs = document.getElementById('floating-ai-messages');
+            if (floatingMsgs) {
+              floatingMsgs.innerHTML = `
+                <div class="floating-ai-msg assistant animate-fade-in">
+                  <div class="fab-avatar"><i class="fa-solid fa-dove"></i></div>
+                  <div class="fab-bubble">Đã làm mới dòng bộ nhớ hội thoại Kimchi Stream. Sẵn sàng hỗ trợ bạn!</div>
+                </div>
+              `;
             }
           });
         }
@@ -392,6 +714,13 @@ class LogosApp {
             const cur = aiAssistant.getWebSearchEnabled();
             aiAssistant.setWebSearchEnabled(!cur);
             this.renderDrawerContent();
+            const floatingWebBtn = document.getElementById('floating-web-toggle-btn');
+            if (floatingWebBtn) {
+              const isNow = aiAssistant.getWebSearchEnabled();
+              floatingWebBtn.classList.toggle('active', isNow);
+              const textSpan = floatingWebBtn.querySelector('.ctrl-btn-text');
+              if (textSpan) textSpan.textContent = isNow ? 'Web: BẬT' : 'Web: TẮT';
+            }
           });
         }
         break;
@@ -403,11 +732,31 @@ class LogosApp {
     const drawer = document.getElementById('drawer-inspector');
     if (drawer) {
       drawer.classList.toggle('open', isOpen);
+      if (!isOpen) drawer.classList.remove('expanded');
     }
     document.body.classList.toggle('drawer-open', isOpen);
+    document.body.classList.toggle('mobile-split-active', isOpen);
     const appBody = document.getElementById('app-body');
     if (appBody) {
       appBody.classList.toggle('drawer-open', isOpen);
+    }
+    // Đồng bộ nút Đối Chiếu trên Mobile Header với trạng thái chia đôi màn hình 50/50
+    const headerCompareBtn = document.getElementById('mobile-header-compare-btn');
+    const headerCompareLabel = document.getElementById('mobile-header-compare-label');
+    if (headerCompareBtn) {
+      headerCompareBtn.classList.toggle('active', isOpen);
+      const icon = headerCompareBtn.querySelector('i');
+      if (icon) {
+        icon.className = isOpen ? 'fa-solid fa-book-open' : 'fa-solid fa-columns';
+      }
+    }
+    if (headerCompareLabel) {
+      headerCompareLabel.textContent = isOpen ? 'Đọc Thường' : 'Đối Chiếu';
+    }
+    // Cập nhật trạng thái nút Đối Chiếu trên Mobile Bottom Nav
+    const parallelBtn = document.getElementById('btn-mobile-parallel');
+    if (parallelBtn) {
+      parallelBtn.classList.toggle('active', isOpen && state.activeDrawerTab === 'parallel');
     }
   }
 
@@ -508,15 +857,71 @@ class LogosApp {
     const createBlogBtn = blogView.querySelector('#admin-create-blog-btn');
     if (createBlogBtn) {
       createBlogBtn.addEventListener('click', () => {
-        alert('Mở trình soạn thảo Markdown cho Quản trị viên...');
+        this.openAdminArticleModal();
       });
     }
+
+    // Gắn sự kiện Sửa bài khảo luận
+    blogView.querySelectorAll('.btn-edit-article').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        this.openAdminArticleModal(id);
+      });
+    });
+
+    // Gắn sự kiện Xóa bài khảo luận
+    blogView.querySelectorAll('.btn-delete-article').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        if (confirm('Bạn có chắc chắn muốn xóa bài khảo luận này không?')) {
+          blogSystem.deleteMasterBlog(id);
+          this.renderBlogView();
+        }
+      });
+    });
   }
 
   renderCommunityView() {
     const commView = document.getElementById('community-view');
     if (!commView) return;
-    commView.innerHTML = blogSystem.renderCommunityCirclesHTML();
+    commView.innerHTML = blogSystem.renderCommunityCirclesHTML(state.currentUserRole);
+
+    // Gắn sự kiện Duyệt bài cho Quản trị viên
+    commView.querySelectorAll('.btn-mod-approve').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        blogSystem.approveCommunityPost(id);
+        alert('Đã phê duyệt xuất bản bài viết cộng đồng thành công!');
+        this.renderCommunityView();
+      });
+    });
+
+    commView.querySelectorAll('.btn-mod-reject').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        blogSystem.rejectCommunityPost(id);
+        alert('Đã từ chối hiển thị bài viết.');
+        this.renderCommunityView();
+      });
+    });
+
+    commView.querySelectorAll('.btn-mod-delete').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        if (confirm('Bạn có chắc chắn muốn xóa bài chia sẻ này khỏi hệ thống không?')) {
+          blogSystem.deleteCommunityPost(id);
+          this.renderCommunityView();
+        }
+      });
+    });
+
+    // Gắn sự kiện Sửa bài viết cộng đồng cho Quản trị viên
+    commView.querySelectorAll('.btn-edit-community-post').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        this.openAdminCommunityPostModal(id);
+      });
+    });
 
     // Xử lý gửi bài chia sẻ cộng đồng
     const submitBtn = commView.querySelector('#submit-community-post-btn');
@@ -528,13 +933,18 @@ class LogosApp {
         const title = commView.querySelector('#community-title-input').value;
         const content = commView.querySelector('#community-content-input').value;
 
+        if (!title.trim() || !content.trim()) {
+          alert('Vui lòng nhập đầy đủ tiêu đề và nội dung bài chia sẻ.');
+          return;
+        }
+
         const res = blogSystem.submitCommunityPost({ author, branch_id, title, content });
         if (!res.success) {
           alertBox.innerHTML = bereaGuardian.renderGuardianNoticeHTML(res.reason, res.reminder);
           alertBox.classList.remove('hidden');
         } else {
           alertBox.classList.add('hidden');
-          alert('Bài viết của bạn đã vượt qua sự kiểm duyệt của Agent Berea và được xuất bản thành công!');
+          alert('Bài viết của bạn đã vượt qua sự kiểm duyệt của Agent Berea và đang chờ Quản Trị Viên phê duyệt trước khi xuất bản công khai!');
           this.renderCommunityView();
         }
       });
@@ -567,6 +977,169 @@ class LogosApp {
     if (mediaView) {
       mediaView.innerHTML = mediaEngine.renderMediaHubHTML();
     }
+  }
+
+  // 4.5 Render Dedicated "KT Đối Chiếu" Tab (#tsk-view - https://biblehub.com/tsk/ in English & Vietnamese BTT 1925)
+  async renderTSKView() {
+    const tskView = document.getElementById('tsk-view');
+    if (!tskView) return;
+    const container = tskView.querySelector('.tsk-container') || tskView;
+
+    const bookId = (state.currentBook || 'JHN').toUpperCase();
+    const chapterNum = parseInt(state.currentChapter, 10) || 1;
+    let verseNum = parseInt(state.currentVerse, 10) || 1;
+    const lang = state.tskLanguage || 'vi';
+
+    // Ensure passage & local 66-book TSK database are loaded
+    const [passageData] = await Promise.all([
+      bibleEngine.loadPassage(bookId, chapterNum),
+      bibleEngine.fetchTSKBook(bookId)
+    ]);
+    this.currentPassageData = passageData;
+
+    const totalVerses = (passageData?.verses && passageData.verses.length) || 1;
+    if (verseNum < 1) verseNum = 1;
+    if (verseNum > totalVerses) verseNum = totalVerses;
+
+    const cachedLive = crossRefEngine.liveCache[`${bookId}.${chapterNum}.${verseNum}`] || null;
+
+    container.innerHTML = crossRefEngine.renderTSKHubHTML({
+      bookId,
+      chapterNum,
+      verseNum,
+      lang,
+      passageData,
+      liveData: cachedLive
+    });
+
+    this.bindTSKViewEvents(container, bookId, chapterNum, verseNum, totalVerses);
+
+    // Fetch live BibleHub TSK metadata (Outline, Jump to Previous/Next, Parallel Verses, Live TSK) if not cached yet
+    if (!cachedLive) {
+      crossRefEngine.fetchLiveBibleHubData(bookId, chapterNum, verseNum).then(liveData => {
+        if (
+          liveData &&
+          state.activeView === 'tsk' &&
+          (state.currentBook || '').toUpperCase() === bookId &&
+          parseInt(state.currentChapter, 10) === chapterNum &&
+          parseInt(state.currentVerse, 10) === verseNum
+        ) {
+          container.innerHTML = crossRefEngine.renderTSKHubHTML({
+            bookId,
+            chapterNum,
+            verseNum,
+            lang: state.tskLanguage || 'vi',
+            passageData: this.currentPassageData,
+            liveData
+          });
+          this.bindTSKViewEvents(container, bookId, chapterNum, verseNum, totalVerses);
+        }
+      });
+    }
+  }
+
+  bindTSKViewEvents(container, bookId, chapterNum, verseNum, totalVerses) {
+    if (!container) return;
+
+    // 1. Chuyển đổi 2 phiên bản ngôn ngữ: Vietnamese (Bản Truyền Thống 1925) <-> English (BibleHub TSK)
+    container.querySelectorAll('.tsk-edition-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const edition = btn.dataset.tskEdition || 'vi';
+        state.setTSKLanguage(edition);
+      });
+    });
+
+    // 2. Bật/tắt bảng Danh Mục 66 Sách (Index of /tsk/)
+    container.querySelector('#tsk-toggle-directory-btn')?.addEventListener('click', () => {
+      crossRefEngine.showBookDirectory = !crossRefEngine.showBookDirectory;
+      this.renderTSKView();
+    });
+
+    // 3. Nhấp chọn sách từ Danh Mục 66 Sách
+    container.querySelectorAll('.tsk-dir-book-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const targetBook = chip.dataset.dirBook;
+        if (targetBook) {
+          crossRefEngine.showBookDirectory = false;
+          state.setPassage(targetBook, 1, 1);
+        }
+      });
+    });
+
+    // 4. Dropdown chọn Sách / Đoạn / Câu
+    container.querySelector('#tsk-select-book')?.addEventListener('change', (e) => {
+      state.setPassage(e.target.value, 1, 1);
+    });
+
+    container.querySelector('#tsk-select-chapter')?.addEventListener('change', (e) => {
+      const ch = parseInt(e.target.value, 10) || 1;
+      state.setPassage(bookId, ch, 1);
+    });
+
+    container.querySelector('#tsk-select-verse')?.addEventListener('change', (e) => {
+      const v = parseInt(e.target.value, 10) || 1;
+      crossRefEngine.viewScope = 'verse';
+      state.selectVerse(v, state.isDrawerOpen);
+    });
+
+    // 5. Nút Câu Trước (◄ Prev) & Câu Tiếp (Next ►)
+    container.querySelector('#tsk-prev-verse-btn')?.addEventListener('click', () => {
+      crossRefEngine.viewScope = 'verse';
+      if (verseNum > 1) {
+        state.selectVerse(verseNum - 1, state.isDrawerOpen);
+      } else if (chapterNum > 1) {
+        state.setPassage(bookId, chapterNum - 1, 1);
+      }
+    });
+
+    container.querySelector('#tsk-next-verse-btn')?.addEventListener('click', () => {
+      crossRefEngine.viewScope = 'verse';
+      const bookObj = bibleEngine.getBookById(bookId);
+      const maxCh = bookObj?.chapters_count || 1;
+      if (verseNum < totalVerses) {
+        state.selectVerse(verseNum + 1, state.isDrawerOpen);
+      } else if (chapterNum < maxCh) {
+        state.setPassage(bookId, chapterNum + 1, 1);
+      }
+    });
+
+    // 6. Chuyển đổi chế độ Xem Từng Câu <-> Xem Cả Đoạn
+    container.querySelector('#tsk-scope-toggle-btn')?.addEventListener('click', () => {
+      crossRefEngine.viewScope = crossRefEngine.viewScope === 'chapter' ? 'verse' : 'chapter';
+      this.renderTSKView();
+    });
+
+    // 7. Nhấp chọn nhanh câu trên thanh Verse Pills hoặc Bố Cục Chương (Chapter Outline)
+    container.querySelectorAll('.tsk-vnum-pill, .tsk-outline-vbtn, .tsk-focus-single-btn').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const v = parseInt(pill.dataset.tskVpill, 10) || 1;
+        crossRefEngine.viewScope = 'verse';
+        state.selectVerse(v, state.isDrawerOpen);
+      });
+    });
+
+    // 8. Nhấp vào địa chỉ câu đối chiếu (.tsk-verse-anchor-link) hoặc chủ đề (.tsk-jump-chip) để mở câu đó ngay trong tab KT Đối Chiếu
+    container.querySelectorAll('.tsk-verse-anchor-link, .tsk-jump-chip').forEach(link => {
+      link.addEventListener('click', () => {
+        const b = link.dataset.tskJumpBook;
+        const c = parseInt(link.dataset.tskJumpCh, 10) || 1;
+        const v = parseInt(link.dataset.tskJumpV, 10) || 1;
+        if (b) {
+          crossRefEngine.viewScope = 'verse';
+          state.setPassage(b, c, v);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // 9. Nút Xem Đoạn Nhanh (Modal Peek)
+    container.querySelectorAll('.tsk-peek-modal-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const ref = btn.dataset.ref;
+        if (ref) this.openPassagePreviewDialog(ref);
+      });
+    });
   }
 
   // 5. Admin Banner UI & Customization Modal
@@ -640,11 +1213,17 @@ class LogosApp {
     const modal = document.getElementById('admin-auth-modal');
     if (modal) {
       modal.classList.remove('hidden');
+      const errorMsg = document.getElementById('admin-auth-error-msg');
+      if (errorMsg) errorMsg.classList.add('hidden');
+
       setTimeout(() => {
-        const input = document.getElementById('admin-secret-key-input');
-        if (input) {
-          input.focus();
-          input.select();
+        const userInput = document.getElementById('admin-username-input');
+        const passInput = document.getElementById('admin-password-input');
+        if (userInput && !userInput.value) {
+          userInput.focus();
+        } else if (passInput) {
+          passInput.focus();
+          passInput.select();
         }
       }, 100);
     }
@@ -658,6 +1237,307 @@ class LogosApp {
     }
     if (authBtn) {
       authBtn.style.borderColor = role === 'admin' ? 'var(--accent-gold)' : 'var(--border-subtle)';
+    }
+    this.updateHeaderVisitorCount();
+  }
+
+  updateHeaderVisitorCount() {
+    const analyticsBtn = document.getElementById('admin-analytics-btn');
+    const analyticsLabel = document.getElementById('analytics-label');
+    if (analyticsLabel) {
+      const data = storage.getAnalytics();
+      const visits = data.total_visits || 1845;
+      const formatted = visits >= 1000 ? `${(visits / 1000).toFixed(1)}k` : visits;
+      analyticsLabel.textContent = `${formatted} xem`;
+      if (analyticsBtn) {
+        analyticsBtn.classList.remove('hidden');
+        analyticsBtn.title = `Thống kê độc giả: ${visits.toLocaleString('vi-VN')} lượt xem (Nhấp để xem chi tiết)`;
+      }
+    }
+  }
+
+  // 6.1 Admin Article Studio Modal (Create / Edit Master Theological Journals)
+  openAdminArticleModal(articleId = null) {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+    const modal = document.getElementById('admin-article-modal');
+    if (!modal) return;
+
+    const modalTitle = document.getElementById('admin-article-modal-title');
+    const idInput = document.getElementById('admin-art-id');
+    const titleInput = document.getElementById('admin-art-title');
+    const authorInput = document.getElementById('admin-art-author');
+    const catInput = document.getElementById('admin-art-category');
+    const sumInput = document.getElementById('admin-art-summary');
+    const contInput = document.getElementById('admin-art-content');
+    const tagsInput = document.getElementById('admin-art-tags');
+    const imgInput = document.getElementById('admin-art-image');
+    const imgPrevWrap = document.getElementById('admin-art-img-preview');
+    const imgPrevTag = document.getElementById('admin-art-img-preview-tag');
+    const docNameInput = document.getElementById('admin-art-doc-name');
+    const docMetaInput = document.getElementById('admin-art-doc-meta');
+    const docUrlInput = document.getElementById('admin-art-doc-url');
+
+    if (articleId) {
+      const art = blogSystem.getMasterBlog(articleId);
+      if (art) {
+        if (modalTitle) modalTitle.innerHTML = '<i class="fa-solid fa-pen-to-square" style="color: var(--accent-gold);"></i> CHỈNH SỬA KHẢO LUẬN THẦN HỌC';
+        if (idInput) idInput.value = art.id;
+        if (titleInput) titleInput.value = art.title_vi || '';
+        if (authorInput) authorInput.value = art.author || '';
+        if (catInput) catInput.value = art.category || 'Thần Học Phúc Âm';
+        if (sumInput) sumInput.value = art.summary || '';
+        if (contInput) contInput.value = art.content || '';
+        if (tagsInput) tagsInput.value = (art.tags || []).join(', ');
+        if (imgInput) imgInput.value = art.cover_image || '';
+        if (art.cover_image && imgPrevTag && imgPrevWrap) {
+          imgPrevTag.src = art.cover_image;
+          imgPrevWrap.classList.remove('hidden');
+        } else if (imgPrevWrap) {
+          imgPrevWrap.classList.add('hidden');
+        }
+
+        const firstDoc = (art.documents && art.documents[0]) || null;
+        if (firstDoc) {
+          if (docNameInput) docNameInput.value = firstDoc.name || '';
+          if (docMetaInput) docMetaInput.value = `${firstDoc.type || 'PDF'} • ${firstDoc.size || '1.8 MB'}`;
+          if (docUrlInput) docUrlInput.value = firstDoc.url || '';
+        } else {
+          if (docNameInput) docNameInput.value = '';
+          if (docMetaInput) docMetaInput.value = 'PDF • 1.8 MB';
+          if (docUrlInput) docUrlInput.value = '';
+        }
+      }
+    } else {
+      if (modalTitle) modalTitle.innerHTML = '<i class="fa-solid fa-feather-pointed" style="color: var(--accent-gold);"></i> SOẠN THẢO KHẢO LUẬN THẦN HỌC';
+      if (idInput) idInput.value = '';
+      if (titleInput) titleInput.value = '';
+      if (authorInput) authorInput.value = 'Quản Trị Viên / Mục Sư';
+      if (catInput) catInput.value = 'Thần Học Phúc Âm';
+      if (sumInput) sumInput.value = '';
+      if (contInput) contInput.value = '';
+      if (tagsInput) tagsInput.value = 'Ngôi Lời, Khảo Luận, Thần Học';
+      if (imgInput) imgInput.value = '';
+      if (imgPrevWrap) imgPrevWrap.classList.add('hidden');
+      if (docNameInput) docNameInput.value = '';
+      if (docMetaInput) docMetaInput.value = 'PDF • 1.8 MB';
+      if (docUrlInput) docUrlInput.value = '';
+    }
+
+    modal.classList.remove('hidden');
+  }
+
+  saveAdminArticleFromModal() {
+    const idInput = document.getElementById('admin-art-id');
+    const title = (document.getElementById('admin-art-title')?.value || '').trim();
+    const author = (document.getElementById('admin-art-author')?.value || 'Quản Trị Viên').trim();
+    const category = document.getElementById('admin-art-category')?.value || 'Thần Học Phúc Âm';
+    const summary = (document.getElementById('admin-art-summary')?.value || '').trim();
+    const content = (document.getElementById('admin-art-content')?.value || '').trim();
+    const tagsRaw = (document.getElementById('admin-art-tags')?.value || '').trim();
+    const cover_image = (document.getElementById('admin-art-image')?.value || '').trim();
+    const docName = (document.getElementById('admin-art-doc-name')?.value || '').trim();
+    const docMeta = (document.getElementById('admin-art-doc-meta')?.value || '').trim();
+    const docUrl = (document.getElementById('admin-art-doc-url')?.value || '').trim();
+
+    if (!title || !content) {
+      alert('Vui lòng nhập tiêu đề và nội dung bài khảo luận.');
+      return;
+    }
+
+    const tags = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
+    const documents = [];
+    if (docName && docUrl) {
+      const parts = docMeta.split('•').map(p => p.trim());
+      documents.push({
+        name: docName,
+        type: parts[0] || 'PDF',
+        size: parts[1] || 'Tài liệu nghiên cứu',
+        url: docUrl
+      });
+    }
+
+    const articleData = {
+      title_vi: title,
+      author,
+      category,
+      summary,
+      content,
+      tags,
+      cover_image,
+      documents
+    };
+
+    if (idInput && idInput.value) {
+      blogSystem.updateMasterBlog(idInput.value, articleData);
+      alert('Đã cập nhật bài khảo luận thành công!');
+    } else {
+      blogSystem.createMasterBlog(articleData);
+      alert('Đã xuất bản bài khảo luận mới thành công!');
+    }
+
+    document.getElementById('admin-article-modal')?.classList.add('hidden');
+    this.renderBlogView();
+  }
+
+  // 6.15 Admin Community Post Studio Modal (Edit Any Community Post)
+  openAdminCommunityPostModal(postId) {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+    const modal = document.getElementById('admin-community-post-modal');
+    if (!modal) return;
+
+    const post = blogSystem.getCommunityPost(postId);
+    if (!post) {
+      alert('Không tìm thấy bài viết cộng đồng cần sửa.');
+      return;
+    }
+
+    const idInput = document.getElementById('admin-comm-post-id');
+    const titleInput = document.getElementById('admin-comm-post-title');
+    const authorInput = document.getElementById('admin-comm-post-author');
+    const statusSelect = document.getElementById('admin-comm-post-status');
+    const branchSelect = document.getElementById('admin-comm-post-branch');
+    const contentInput = document.getElementById('admin-comm-post-content');
+
+    if (idInput) idInput.value = post.id;
+    if (titleInput) titleInput.value = post.title || '';
+    if (authorInput) authorInput.value = post.author || '';
+    if (statusSelect) statusSelect.value = post.status || 'approved';
+    if (branchSelect) branchSelect.value = post.branch_id || 'branch_devotion';
+    if (contentInput) contentInput.value = post.content || '';
+
+    modal.classList.remove('hidden');
+  }
+
+  saveAdminCommunityPostFromModal() {
+    const idInput = document.getElementById('admin-comm-post-id');
+    const title = (document.getElementById('admin-comm-post-title')?.value || '').trim();
+    const author = (document.getElementById('admin-comm-post-author')?.value || '').trim();
+    const status = document.getElementById('admin-comm-post-status')?.value || 'approved';
+    const branch_id = document.getElementById('admin-comm-post-branch')?.value || 'branch_devotion';
+    const content = (document.getElementById('admin-comm-post-content')?.value || '').trim();
+
+    if (!idInput || !idInput.value) return;
+    if (!title || !content) {
+      alert('Vui lòng nhập đầy đủ tiêu đề và nội dung bài chia sẻ.');
+      return;
+    }
+
+    const res = blogSystem.updateCommunityPost(idInput.value, {
+      title,
+      author,
+      status,
+      branch_id,
+      content
+    });
+
+    if (res.success) {
+      alert('Đã cập nhật bài viết cộng đồng thành công!');
+      document.getElementById('admin-community-post-modal')?.classList.add('hidden');
+      this.renderCommunityView();
+    } else {
+      alert(res.reason || 'Có lỗi xảy ra khi lưu bài viết.');
+    }
+  }
+
+  // 6.2 Admin Reader Analytics Intelligence Modal
+  openAdminAnalyticsModal() {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+    const modal = document.getElementById('admin-analytics-modal');
+    if (!modal) return;
+    this.renderAnalyticsDashboard();
+    modal.classList.remove('hidden');
+  }
+
+  renderAnalyticsDashboard() {
+    const data = storage.getAnalytics();
+    if (!data) return;
+
+    // Update KPI counters
+    const visitsEl = document.getElementById('analytics-metric-visits');
+    const usersEl = document.getElementById('analytics-metric-users');
+    const versesEl = document.getElementById('analytics-metric-verses');
+    const timeEl = document.getElementById('analytics-metric-time');
+
+    if (visitsEl) visitsEl.textContent = (data.total_visits || 1845).toLocaleString('vi-VN');
+    if (usersEl) usersEl.textContent = (data.unique_visitors || 420).toLocaleString('vi-VN');
+    if (versesEl) versesEl.textContent = (data.total_verses_read || 16850).toLocaleString('vi-VN');
+    if (timeEl) timeEl.textContent = `${data.avg_time_minutes || 24} phút`;
+
+    // 1. Top Passages
+    const passagesList = document.getElementById('analytics-top-passages-list');
+    if (passagesList) {
+      passagesList.innerHTML = (data.top_passages || []).slice(0, 6).map(p => `
+        <div style="font-size: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+            <strong style="color: var(--text-primary);">${p.label || p.ref}</strong>
+            <span style="color: var(--accent-gold); font-weight: 700;">${p.count} lượt đọc</span>
+          </div>
+          <div style="height: 6px; background: var(--bg-surface); border-radius: 3px; overflow: hidden; border: 1px solid var(--border-subtle);">
+            <div style="height: 100%; width: ${p.percent || 50}%; background: linear-gradient(90deg, var(--accent-gold) 0%, #ffe082 100%);"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 2. Top Translations
+    const transList = document.getElementById('analytics-top-translations-list');
+    if (transList) {
+      transList.innerHTML = (data.top_translations || []).slice(0, 6).map(t => `
+        <div style="font-size: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+            <strong style="color: var(--text-primary);">${t.name || t.id}</strong>
+            <span style="color: #17a2b8; font-weight: 700;">${t.count} tra cứu</span>
+          </div>
+          <div style="height: 6px; background: var(--bg-surface); border-radius: 3px; overflow: hidden; border: 1px solid var(--border-subtle);">
+            <div style="height: 100%; width: ${t.percent || 50}%; background: linear-gradient(90deg, #17a2b8 0%, #5bc0de 100%);"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 3. Top Metaphors
+    const metaList = document.getElementById('analytics-top-metaphors-list');
+    if (metaList) {
+      metaList.innerHTML = (data.top_metaphors || []).slice(0, 5).map(m => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.6rem; background: var(--bg-surface); border-radius: 4px; border-left: 3px solid var(--accent-gold); font-size: 0.82rem;">
+          <span style="color: var(--text-primary); font-weight: 600;"><i class="fa-solid fa-seedling" style="color: var(--accent-gold);"></i> ${m.name}</span>
+          <span class="banner-badge" style="background: var(--bg-card); color: var(--accent-gold); border: 1px solid var(--accent-gold-border); font-size: 0.72rem;">${m.count} tra cứu</span>
+        </div>
+      `).join('');
+    }
+
+    // 4. Top Queries & Articles
+    const queriesList = document.getElementById('analytics-top-queries-list');
+    if (queriesList) {
+      const queriesHTML = (data.top_queries || []).slice(0, 4).map(q => `
+        <span style="background: var(--bg-surface); border: 1px solid var(--border-medium); padding: 0.2rem 0.5rem; border-radius: 12px; font-size: 0.75rem; color: var(--text-primary);">
+          🔍 ${q.query} (${q.count})
+        </span>
+      `).join(' ');
+
+      const articlesHTML = (data.top_articles || []).slice(0, 2).map(a => `
+        <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.4rem;">
+          <i class="fa-solid fa-file-lines" style="color: var(--accent-gold);"></i> <strong>${a.title}</strong>: <span style="color: var(--accent-gold);">${a.views || 0} xem</span>
+        </div>
+      `).join('');
+
+      queriesList.innerHTML = `
+        <div style="margin-bottom: 0.5rem; font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">TỪ KHÓA TÌM KIẾM NHIỀU:</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.65rem;">${queriesHTML}</div>
+        <div style="border-top: 1px dashed var(--border-subtle); padding-top: 0.4rem;">
+          <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.3rem;">BÀI KHẢO LUẬN XEM NHẤT:</div>
+          ${articlesHTML}
+        </div>
+      `;
     }
   }
 
@@ -993,6 +1873,220 @@ class LogosApp {
     }
   }
 
+  updatePrimaryVersionLabel() {
+    const label = document.getElementById('primary-version-label');
+    if (!label) return;
+    const transObj = ALL_TRANSLATIONS.find(t => t.id === state.primaryVersion || t.code === state.primaryVersion);
+    if (transObj) {
+      if (transObj.id === 'CGKPV') {
+        label.textContent = 'CGKPV (Công Giáo)';
+      } else if (transObj.id === 'BTT') {
+        label.textContent = 'BTT 1925';
+      } else {
+        label.textContent = `${transObj.id} (${transObj.category})`;
+      }
+    } else {
+      label.textContent = state.primaryVersion || 'BTT 1925';
+    }
+  }
+
+  populatePrimaryVersionSelector() {
+    const container = document.getElementById('primary-version-list');
+    if (!container) return;
+
+    const categories = [
+      { id: 'vi', title: 'Bản Dịch Tiếng Việt Phổ Biến (Tin Lành)', icon: 'fa-flag', filter: t => t.category === 'Tiếng Việt' && t.id !== 'CGKPV' },
+      { id: 'cgkpv', title: 'Bản Dịch Công Giáo Chính Thống (CGKPV)', icon: 'fa-cross', filter: t => t.id === 'CGKPV' },
+      { id: 'ethnic', title: 'Bản Dịch Các Thứ Tiếng Sắc Tộc Việt Nam (HTTLVN)', icon: 'fa-mountain', filter: t => t.category === 'Sắc Tộc' },
+      { id: 'intl', title: 'Bản Dịch Kinh Điển Quốc Tế & Nguyên Ngữ Hy Lạp/Hê-bơ-rơ', icon: 'fa-globe', filter: t => t.category === 'Quốc Tế' || t.category === 'Nguyên Ngữ' }
+    ];
+
+    let html = '';
+    categories.forEach(cat => {
+      const transList = ALL_TRANSLATIONS.filter(cat.filter);
+      if (transList.length === 0) return;
+
+      html += `
+        <div class="primary-version-category-section">
+          <div class="primary-version-category-title">
+            <i class="fa-solid ${cat.icon}"></i> ${cat.title}
+          </div>
+          <div class="primary-version-grid">
+      `;
+
+      transList.forEach(t => {
+        const isActive = state.primaryVersion === t.id;
+        html += `
+          <div class="primary-version-item ${isActive ? 'active' : ''}" data-version-id="${t.id}" title="Chọn đọc ${t.name}">
+            <div class="pvi-info">
+              <div class="pvi-name">
+                ${isActive ? '<i class="fa-solid fa-circle-check" style="color: var(--accent-gold); margin-right: 0.35rem;"></i>' : ''}
+                ${t.name}
+              </div>
+              <div class="pvi-note">${t.note || t.category}</div>
+            </div>
+            <span class="pvi-badge">${t.id}</span>
+          </div>
+        `;
+      });
+
+      html += `
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+
+    container.querySelectorAll('.primary-version-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const vId = item.dataset.versionId;
+        state.setPrimaryVersion(vId);
+        document.getElementById('primary-version-modal')?.classList.add('hidden');
+      });
+    });
+  }
+
+  // Hiển thị trực quan từng chữ bản dịch Interlinear (Hê-bơ-rơ / Hy Lạp) kèm phiên âm, Strong's, và link Scripture4All
+  renderInterlinearWordTiles(item, bookId, chapterNum) {
+    const book = bibleEngine.getBookById(bookId);
+    const isOT = book?.testament === 'OT';
+    const pdfUrl = item.scripture4all_pdf || bibleEngine.getScripture4AllPdfUrl(bookId, chapterNum);
+    const sourceTitle = isOT 
+      ? 'Cựu Ước Hê-bơ-rơ (Westminster Leningrad Codex - WLC)' 
+      : 'Tân Ước Hy Lạp (Scrivener Textus Receptus - ScrTR)';
+
+    let words = item.interlinear_words;
+    if (!words || !Array.isArray(words) || words.length === 0) {
+      // Parse tokens from item.text e.g. "WORD (translit - strong - gloss)"
+      words = [];
+      const tokenRegex = /([^\s\(\)]+)\s*\(([^)]+)\)/g;
+      let m;
+      while ((m = tokenRegex.exec(item.text)) !== null) {
+        const orig = m[1];
+        const parts = m[2].split(' - ').map(s => s.trim());
+        const translit = parts[0] || '';
+        const strong = parts[1] || '';
+        const gloss = parts.slice(2).join(' - ') || '';
+        words.push({ orig, translit, strong, gloss, meaning_vi: gloss });
+      }
+    }
+
+    const verseNum = state.currentVerse || 1;
+    const verseCoord = `${chapterNum}:${verseNum}`;
+
+    let tilesHtml = '';
+    if (words && words.length > 0) {
+      tilesHtml = words.map(w => `
+        <div class="s4a-word-col interlinear-word-tile">
+          <div class="s4a-orig tile-orig ${isOT ? 'hebrew-text orig-hebrew' : 'greek-text orig-greek'}">${w.orig || ''}</div>
+          <div class="s4a-translit tile-translit">${w.translit || ''}</div>
+          ${w.strong ? `<div class="s4a-strong tile-strong">${w.strong}</div>` : ''}
+          ${w.pos ? `<div class="s4a-pos">${w.pos}</div>` : ''}
+          <div class="s4a-gloss tile-gloss">${(w.gloss || '').toUpperCase()}</div>
+          ${(w.meaning_vi && w.meaning_vi.toLowerCase() !== (w.gloss || '').toLowerCase()) ? `<div class="s4a-subgloss">${w.meaning_vi}</div>` : ''}
+        </div>
+      `).join('');
+    } else {
+      tilesHtml = `<div class="s4a-raw-text">${item.text}</div>`;
+    }
+
+    return `
+      <div class="s4a-interlinear-wrapper interlinear-container">
+        <div class="s4a-interlinear-header interlinear-header-bar">
+          <span class="s4a-source-badge source-tag"><i class="fa-solid fa-scroll"></i> ${sourceTitle}</span>
+          ${pdfUrl ? `
+            <a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" class="btn-s4a-link" title="Mở file PDF gốc từ Scripture4All.org">
+              <i class="fa-solid fa-file-pdf"></i> Xem PDF Gốc Scripture4All.org
+            </a>
+          ` : ''}
+        </div>
+        <div class="s4a-interlinear-content ${isOT ? 'rtl-flow rtl-direction' : 'ltr-flow ltr-direction'}">
+          <span class="s4a-verse-tag">${verseCoord}</span>
+          <div class="s4a-words-stream interlinear-words-grid">
+            ${tilesHtml}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Mở cửa sổ đọc độc lập theo bản dịch đã chọn mà không ảnh hưởng cửa sổ chính
+  async openPopoutReader(bookId, chapterNum, versionId, targetVerseNum = 1) {
+    const modal = document.getElementById('popout-reader-modal');
+    const body = document.getElementById('popout-reader-body');
+    const badge = document.getElementById('popout-version-badge');
+    const title = document.getElementById('popout-reader-title');
+    const refTag = document.getElementById('popout-current-ref-display');
+    const subtitle = document.getElementById('popout-reader-subtitle');
+    if (!modal || !body) return;
+
+    const book = bibleEngine.getBookById(bookId) || { id: bookId, name_vi: bookId, chapters_count: 1 };
+    const transObj = ALL_TRANSLATIONS.find(t => t.id === versionId || t.code === versionId) || { id: versionId, name: versionId, category: 'Bản Dịch' };
+
+    if (badge) badge.textContent = `${transObj.name} (${transObj.id})`;
+    if (title) title.innerHTML = `<i class="fa-solid fa-book-open-reader" style="color: var(--accent-gold);"></i> ${book.name_vi} - Đoạn ${chapterNum}`;
+    if (refTag) refTag.textContent = `${book.name_vi} ${chapterNum} • ${transObj.id}`;
+    
+    if (subtitle) {
+      if (versionId === 'INTERLINEAR') {
+        const s4aUrl = bibleEngine.getScripture4AllPdfUrl(bookId, chapterNum);
+        subtitle.innerHTML = `Bản gốc ${book.testament === 'OT' ? 'Hê-bơ-rơ (Westminster Leningrad Codex - WLC)' : 'Hy Lạp (Scrivener Textus Receptus - ScrTR)'} • ${s4aUrl ? `<a href="${s4aUrl}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline; font-weight: 600;"><i class="fa-solid fa-file-pdf"></i> Mở PDF Gốc Scripture4All.org</a>` : ''}`;
+      } else {
+        subtitle.textContent = `Bản dịch: ${transObj.name} (${transObj.category}) • Cửa sổ đọc độc lập`;
+      }
+    }
+
+    modal.dataset.currentBook = bookId;
+    modal.dataset.currentChapter = chapterNum;
+    modal.dataset.currentVersion = versionId;
+    modal.dataset.currentVerse = targetVerseNum;
+
+    body.innerHTML = `
+      <div style="text-align: center; padding: 3rem 0;">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent-gold);"></i>
+        <p style="margin-top: 1rem; color: var(--text-muted);">Đang tải toàn bộ phân đoạn theo bản dịch ${transObj.name}...</p>
+      </div>
+    `;
+    modal.classList.remove('hidden');
+
+    let passageData = await bibleEngine.loadPassage(bookId, chapterNum);
+    await bibleEngine.ensurePassageTranslations(bookId, chapterNum, [versionId]);
+    const updatedPassage = bibleEngine.passagesCache[`${bookId}.${chapterNum}`] || passageData;
+
+    let versesHtml = '';
+    updatedPassage.verses.forEach(v => {
+      let vText = '';
+      if (v.translations && (v.translations[versionId] || (transObj.code && v.translations[transObj.code]))) {
+        vText = v.translations[versionId] || v.translations[transObj.code];
+      } else {
+        vText = bibleEngine.generateVerseTranslation(v, versionId, book, chapterNum);
+      }
+      if (!vText || typeof vText !== 'string') {
+        vText = v.text_primary;
+      }
+
+      const isTarget = v.verse_num == targetVerseNum;
+      versesHtml += `
+        <div class="popout-verse-item ${isTarget ? 'verse-focus-target' : ''}" data-verse="${v.verse_num}">
+          <span class="popout-vnum">${v.verse_num}</span>
+          <span class="popout-vtext">${vText}</span>
+        </div>
+      `;
+    });
+
+    body.innerHTML = versesHtml;
+
+    setTimeout(() => {
+      const targetEl = body.querySelector('.verse-focus-target');
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        body.scrollTop = 0;
+      }
+    }, 120);
+  }
+
   openHTTLVNSearchModal(initialQuery = '') {
     const modal = document.getElementById('httlvn-search-modal');
     const input = document.getElementById('httlvn-search-query');
@@ -1128,7 +2222,16 @@ class LogosApp {
     // Top Navigation Tabs
     document.querySelectorAll('.nav-btn').forEach(btn => {
       btn.addEventListener('click', () => {
+        // Trên điện thoại: Nhấp lại vào nút KT Đối Chiếu khi đang mở sẽ quay về đọc Kinh Thánh
+        if (btn.dataset.view === 'tsk' && state.activeView === 'tsk' && typeof window !== 'undefined' && window.innerWidth <= 991) {
+          state.setActiveView('bible');
+          return;
+        }
         state.setActiveView(btn.dataset.view);
+        if (btn.dataset.view === 'bible' && window.innerWidth >= 992) {
+          state.setDrawerTab('parallel');
+          state.selectVerse(state.currentVerse || 1, true);
+        }
       });
     });
 
@@ -1162,9 +2265,9 @@ class LogosApp {
       });
     });
 
-    // Theme Toggle
+    // Theme Palette Modal Trigger
     document.getElementById('theme-toggle-btn')?.addEventListener('click', () => {
-      state.toggleTheme();
+      this.openThemeSelectorModal();
     });
 
     // Admin Auth Button
@@ -1179,22 +2282,95 @@ class LogosApp {
     });
 
     const handleAdminAuthSubmit = () => {
-      const key = (document.getElementById('admin-secret-key-input')?.value || '').trim();
-      if (state.verifyAdminSecret(key)) {
+      const userInput = document.getElementById('admin-username-input');
+      const passInput = document.getElementById('admin-password-input');
+      const secretInput = document.getElementById('admin-secret-key-input');
+      const errorMsg = document.getElementById('admin-auth-error-msg');
+      const errorText = document.getElementById('admin-auth-error-text');
+
+      const username = (userInput?.value || '').trim();
+      const password = (passInput?.value || secretInput?.value || '').trim();
+
+      if (!username && !password) {
+        if (errorMsg) {
+          errorMsg.classList.remove('hidden');
+          if (errorText) errorText.textContent = 'Vui lòng nhập tên đăng nhập và mật khẩu!';
+        }
+        return;
+      }
+
+      // Zero-leak security: Validate username & password without revealing secrets
+      const isSuccess = state.verifyAdminCredentials(username || 'admin', password);
+
+      if (isSuccess) {
         document.getElementById('admin-auth-modal').classList.add('hidden');
-        document.getElementById('admin-secret-key-input').value = '';
-        alert('Xác thực Quản Trị Viên thành công! Bạn có quyền sửa Banner và tạo Blog.');
+        if (userInput) userInput.value = '';
+        if (passInput) passInput.value = '';
+        if (secretInput) secretInput.value = '';
+        if (errorMsg) errorMsg.classList.add('hidden');
+
+        // Re-render views immediately so all edit buttons appear
+        if (state.activeView === 'blog') this.renderBlogView();
+        if (state.activeView === 'community') this.renderCommunityView();
+
+        alert('Đăng nhập Quản Trị Viên thành công! Toàn bộ quyền chỉnh sửa bài viết đã được kích hoạt.');
       } else {
-        alert('Mã bí mật không chính xác. Mẹo: Mã mặc định là logos777');
+        if (errorMsg) {
+          errorMsg.classList.remove('hidden');
+          if (errorText) errorText.textContent = 'Tên đăng nhập hoặc mật khẩu không chính xác. Vui lòng thử lại!';
+        }
+        if (passInput) {
+          passInput.focus();
+          passInput.select();
+        }
       }
     };
 
     document.getElementById('submit-admin-auth-btn')?.addEventListener('click', handleAdminAuthSubmit);
+    document.getElementById('admin-login-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleAdminAuthSubmit();
+    });
+    document.getElementById('admin-username-input')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const passInput = document.getElementById('admin-password-input');
+        if (passInput && !passInput.value) {
+          passInput.focus();
+        } else {
+          handleAdminAuthSubmit();
+        }
+      }
+    });
+    document.getElementById('admin-password-input')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleAdminAuthSubmit();
+      }
+    });
     document.getElementById('admin-secret-key-input')?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
         handleAdminAuthSubmit();
       }
+    });
+
+    // Toggle password visibility
+    document.getElementById('admin-toggle-pwd-btn')?.addEventListener('click', () => {
+      const passInput = document.getElementById('admin-password-input');
+      const toggleBtn = document.getElementById('admin-toggle-pwd-btn');
+      if (passInput) {
+        const isPass = passInput.type === 'password';
+        passInput.type = isPass ? 'text' : 'password';
+        if (toggleBtn) {
+          toggleBtn.innerHTML = isPass ? '<i class="fa-solid fa-eye-slash"></i>' : '<i class="fa-solid fa-eye"></i>';
+        }
+      }
+    });
+
+    // Admin Community Post Save Button
+    document.getElementById('save-admin-community-post-btn')?.addEventListener('click', () => {
+      this.saveAdminCommunityPostFromModal();
     });
 
     // Admin Banner Edit Trigger
@@ -1204,6 +2380,49 @@ class LogosApp {
 
     document.getElementById('save-admin-banner-btn')?.addEventListener('click', () => {
       this.saveAdminBannerFromModal();
+    });
+
+    // Admin Article Studio Events
+    document.getElementById('save-admin-article-btn')?.addEventListener('click', () => {
+      this.saveAdminArticleFromModal();
+    });
+
+    // Sample Image Selectors for Admin Article Studio
+    document.querySelectorAll('.btn-sample-img').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.dataset.url;
+        const imgInput = document.getElementById('admin-art-image');
+        const imgPrevWrap = document.getElementById('admin-art-img-preview');
+        const imgPrevTag = document.getElementById('admin-art-img-preview-tag');
+        if (imgInput) imgInput.value = url;
+        if (imgPrevTag) imgPrevTag.src = url;
+        if (imgPrevWrap) imgPrevWrap.classList.remove('hidden');
+      });
+    });
+
+    const artImgInput = document.getElementById('admin-art-image');
+    if (artImgInput) {
+      artImgInput.addEventListener('input', () => {
+        const url = artImgInput.value.trim();
+        const imgPrevWrap = document.getElementById('admin-art-img-preview');
+        const imgPrevTag = document.getElementById('admin-art-img-preview-tag');
+        if (url && imgPrevTag && imgPrevWrap) {
+          imgPrevTag.src = url;
+          imgPrevWrap.classList.remove('hidden');
+        } else if (imgPrevWrap) {
+          imgPrevWrap.classList.add('hidden');
+        }
+      });
+    }
+
+    // Admin Reader Analytics Intelligence Events
+    document.getElementById('admin-analytics-btn')?.addEventListener('click', () => {
+      this.openAdminAnalyticsModal();
+    });
+
+    document.getElementById('refresh-analytics-btn')?.addEventListener('click', () => {
+      this.renderAnalyticsDashboard();
+      alert('Đã làm mới số liệu phân tích độc giả mới nhất!');
     });
 
     // Testament tabs in Book Picker Modal
@@ -1245,8 +2464,8 @@ class LogosApp {
 
     // Version Quick Actions
     document.getElementById('quick-select-vi-btn')?.addEventListener('click', () => {
-      state.setActiveVersions(['BTT', 'BTHD', 'BDM']);
-      this.populateVersionSelector();
+      state.setActiveVersions(['BTT', 'KTHD', 'BTHD', 'BDM']);
+      this.populateVersionSelector('vi');
     });
 
     document.getElementById('quick-select-ethnic-btn')?.addEventListener('click', () => {
@@ -1327,6 +2546,106 @@ class LogosApp {
       document.getElementById('passage-preview-modal')?.classList.add('hidden');
     });
 
+    // Nút mở Modal Chọn Bản Đọc Chính (Primary Reading Version)
+    document.getElementById('primary-version-trigger')?.addEventListener('click', () => {
+      this.populatePrimaryVersionSelector();
+      document.getElementById('primary-version-modal')?.classList.remove('hidden');
+    });
+
+    // Cửa Sổ Đọc Độc Lập (Popout Reader Window Events)
+    document.getElementById('popout-prev-chapter-btn')?.addEventListener('click', () => {
+      const modal = document.getElementById('popout-reader-modal');
+      const bookId = modal.dataset.currentBook || state.currentBook;
+      const ch = parseInt(modal.dataset.currentChapter || state.currentChapter, 10);
+      const vId = modal.dataset.currentVersion || state.primaryVersion;
+      if (ch > 1) {
+        this.openPopoutReader(bookId, ch - 1, vId, 1);
+      }
+    });
+
+    document.getElementById('popout-next-chapter-btn')?.addEventListener('click', () => {
+      const modal = document.getElementById('popout-reader-modal');
+      const bookId = modal.dataset.currentBook || state.currentBook;
+      const ch = parseInt(modal.dataset.currentChapter || state.currentChapter, 10);
+      const vId = modal.dataset.currentVersion || state.primaryVersion;
+      const book = bibleEngine.getBookById(bookId);
+      const maxCh = book ? book.chapters_count : 150;
+      if (ch < maxCh) {
+        this.openPopoutReader(bookId, ch + 1, vId, 1);
+      }
+    });
+
+    document.getElementById('popout-copy-btn')?.addEventListener('click', () => {
+      const modal = document.getElementById('popout-reader-modal');
+      const bookId = modal.dataset.currentBook || state.currentBook;
+      const ch = modal.dataset.currentChapter || state.currentChapter;
+      const vId = modal.dataset.currentVersion || state.primaryVersion;
+      const book = bibleEngine.getBookById(bookId) || { name_vi: bookId };
+      const transObj = ALL_TRANSLATIONS.find(t => t.id === vId || t.code === vId);
+
+      const items = document.querySelectorAll('#popout-reader-body .popout-verse-item');
+      let textToCopy = `=== ${book.name_vi} ${ch} (${transObj ? transObj.name : vId}) ===\n\n`;
+      items.forEach(it => {
+        const num = it.querySelector('.popout-vnum')?.textContent.trim();
+        const txt = it.querySelector('.popout-vtext')?.textContent.trim();
+        if (num && txt) textToCopy += `${num}. ${txt}\n`;
+      });
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert(`Đã sao chép toàn bộ phân đoạn ${book.name_vi} ${ch} (${transObj ? transObj.name : vId}) vào bộ nhớ tạm!`);
+      }).catch(err => {
+        console.warn('Copy failed:', err);
+      });
+    });
+
+    document.getElementById('popout-open-tab-btn')?.addEventListener('click', () => {
+      const modal = document.getElementById('popout-reader-modal');
+      const bookId = modal.dataset.currentBook || state.currentBook;
+      const ch = modal.dataset.currentChapter || state.currentChapter;
+      const vId = modal.dataset.currentVersion || state.primaryVersion;
+      const book = bibleEngine.getBookById(bookId) || { name_vi: bookId };
+      const transObj = ALL_TRANSLATIONS.find(t => t.id === vId || t.code === vId) || { name: vId, id: vId };
+
+      const bodyHtml = document.getElementById('popout-reader-body')?.innerHTML || '';
+      const w = window.open('', '_blank', 'width=900,height=800,scrollbars=yes,resizable=yes');
+      if (w) {
+        w.document.write(`
+          <!DOCTYPE html>
+          <html lang="vi" data-theme="${state.currentTheme}">
+          <head>
+            <meta charset="utf-8">
+            <title>${book.name_vi} ${ch} - ${transObj.name}</title>
+            <link rel="stylesheet" href="css/design-tokens.css">
+            <link rel="stylesheet" href="css/components.css">
+            <link rel="stylesheet" href="css/layout.css">
+            <style>
+              body { padding: 2.5rem 3rem; max-width: 860px; margin: 0 auto; background: var(--bg-deep, #0a0d14); color: var(--text-primary, #e6edf3); font-family: var(--font-body, system-ui); }
+              .header { border-bottom: 2px solid var(--accent-gold, #d4af37); padding-bottom: 1.25rem; margin-bottom: 2rem; }
+              .header h1 { font-family: var(--font-brand, Georgia); color: var(--accent-gold, #d4af37); margin: 0; font-size: 1.8rem; }
+              .header p { color: var(--text-muted, #8b949e); margin-top: 0.5rem; font-size: 0.95rem; }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <h1>${book.name_vi} - Đoạn ${ch}</h1>
+              <p>Bản dịch: <b>${transObj.name} (${transObj.id})</b> • Logos MultiVerse Independent Window</p>
+            </div>
+            <div class="popout-verses-container">${bodyHtml}</div>
+          </body>
+          </html>
+        `);
+        w.document.close();
+      }
+    });
+
+    // Đóng bất kỳ Modal nào khi nhấn phím Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay:not(.hidden)').forEach(modal => {
+          modal.classList.add('hidden');
+        });
+      }
+    });
+
     // Omni-Search Input & Dropdown (AI Suggestion, Full-Text Scripture, Coordinates & Metaphors)
     const searchInput = document.getElementById('omni-search-input');
     const searchDropdown = document.getElementById('search-dropdown');
@@ -1342,12 +2661,96 @@ class LogosApp {
         }
       });
 
+      const renderDefaultSuggestions = () => {
+        let html = `
+          <div style="padding: 0.85rem 1rem 0.65rem 1rem; border-bottom: 1px solid var(--border-subtle); background: rgba(212, 175, 55, 0.04);">
+            <div style="font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: var(--accent-gold); letter-spacing: 0.06em; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.35rem;">
+              <i class="fa-solid fa-compass"></i> GỢI Ý ĐỊA CHỈ & PHÂN ĐOẠN PHỔ BIẾN
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.5rem;">
+              <button type="button" class="quick-suggest-chip" data-book="JHN" data-ch="3" data-v="16" style="background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 12px; padding: 0.25rem 0.6rem; font-size: 0.76rem; color: var(--text-primary); cursor: pointer;">📍 Giăng 3:16</button>
+              <button type="button" class="quick-suggest-chip" data-book="PSA" data-ch="23" data-v="1" style="background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 12px; padding: 0.25rem 0.6rem; font-size: 0.76rem; color: var(--text-primary); cursor: pointer;">📍 Thi Thiên 23</button>
+              <button type="button" class="quick-suggest-chip" data-book="ROM" data-ch="8" data-v="28" style="background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 12px; padding: 0.25rem 0.6rem; font-size: 0.76rem; color: var(--text-primary); cursor: pointer;">📍 Rô-ma 8:28</button>
+              <button type="button" class="quick-suggest-chip" data-book="GEN" data-ch="1" data-v="1" style="background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 12px; padding: 0.25rem 0.6rem; font-size: 0.76rem; color: var(--text-primary); cursor: pointer;">📍 Sáng Thế Ký 1:1</button>
+              <button type="button" class="quick-suggest-chip" data-book="1CO" data-ch="13" data-v="4" style="background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 12px; padding: 0.25rem 0.6rem; font-size: 0.76rem; color: var(--text-primary); cursor: pointer;">📍 1 Cô-rinh-tô 13</button>
+              <button type="button" class="quick-suggest-chip" data-book="REV" data-ch="21" data-v="1" style="background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 12px; padding: 0.25rem 0.6rem; font-size: 0.76rem; color: var(--text-primary); cursor: pointer;">📍 Khải Huyền 21</button>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.5;">
+              💡 <em>Gõ tên sách (vd: Giăng), địa chỉ (vd: Giăng 3:16) hoặc từ khóa (vd: Yêu thương, Chiên con)...</em>
+            </div>
+          </div>
+        `;
+        searchDropdown.innerHTML = html;
+        searchDropdown.classList.remove('hidden');
+
+        searchDropdown.querySelectorAll('.quick-suggest-chip').forEach(btn => {
+          btn.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            const b = btn.dataset.book;
+            const c = parseInt(btn.dataset.ch, 10);
+            const v = parseInt(btn.dataset.v, 10) || 1;
+            this.navigateToPassage(b, c, v);
+            searchDropdown.classList.add('hidden');
+            searchInput.value = '';
+          });
+        });
+      };
+
+      searchInput.addEventListener('focus', () => {
+        if (!searchInput.value.trim()) {
+          renderDefaultSuggestions();
+        }
+      });
+
+      searchInput.addEventListener('click', () => {
+        if (!searchInput.value.trim()) {
+          renderDefaultSuggestions();
+        }
+      });
+
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const q = searchInput.value.trim();
+          if (q) {
+            const results = bibleEngine.searchScripture(q, hermeneuticsEngine.metaphors);
+            const coordItem = results.find(r => r.type === 'coordinate');
+            if (coordItem) {
+              searchDropdown.classList.add('hidden');
+              this.navigateToPassage(coordItem.book_id, coordItem.chapter, coordItem.verse);
+              searchInput.value = '';
+              searchInput.blur();
+              return;
+            }
+            searchDropdown.classList.add('hidden');
+            this.openHTTLVNSearchModal(q);
+          }
+        }
+      });
+
       searchInput.addEventListener('input', (e) => {
         const query = e.target.value;
+        if (!query.trim()) {
+          renderDefaultSuggestions();
+          return;
+        }
+
         const results = bibleEngine.searchScripture(query, hermeneuticsEngine.metaphors);
 
         if (results.length === 0) {
-          searchDropdown.classList.add('hidden');
+          searchDropdown.innerHTML = `
+            <div style="padding: 1rem; text-align: center; color: var(--text-muted); font-size: 0.82rem;">
+              Không tìm thấy địa chỉ hoặc câu trực tiếp cho "<strong>${query}</strong>".<br>
+              <button type="button" class="btn-primary" style="margin-top: 0.65rem; padding: 0.35rem 0.75rem; font-size: 0.78rem;" id="btn-fallback-httlvn">
+                <i class="fa-solid fa-magnifying-glass"></i> Mở Tra Cứu Toàn Văn HTTLVN
+              </button>
+            </div>
+          `;
+          searchDropdown.classList.remove('hidden');
+          searchDropdown.querySelector('#btn-fallback-httlvn')?.addEventListener('click', () => {
+            searchDropdown.classList.add('hidden');
+            this.openHTTLVNSearchModal(query.trim());
+          });
           return;
         }
 
@@ -1363,7 +2766,17 @@ class LogosApp {
           </div>
         `;
         results.forEach(r => {
-          if (r.type === 'ai_topic') {
+          if (r.type === 'coordinate') {
+            html += `
+              <div class="search-item search-item-coord" data-type="coordinate" data-book="${r.book_id}" data-ch="${r.chapter}" data-v="${r.verse}" style="background: rgba(212, 175, 55, 0.12); border-left: 3px solid var(--accent-gold);">
+                <div class="search-item-header">
+                  <span class="search-item-badge" style="background: var(--accent-gold); color: #000; font-weight: 700;">${r.badge}</span>
+                  <strong class="verse-ref" style="color: var(--accent-gold-light); font-size: 0.95rem;">${r.title}</strong>
+                </div>
+                <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.2rem;">${r.subtitle}</div>
+              </div>
+            `;
+          } else if (r.type === 'ai_topic') {
             html += `
               <div class="search-item search-item-ai" data-type="ai_topic" data-topic-id="${r.id}">
                 <div class="search-item-header">
@@ -1488,43 +2901,59 @@ class LogosApp {
     const reader = document.getElementById('focus-reader');
     if (reader) reader.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    if (verseNum > 1) {
-      setTimeout(() => {
-        state.setCurrentVerse(verseNum);
-        state.setDrawerOpen(true);
-        const verseEl = document.querySelector(`.verse-item[data-verse="${verseNum}"]`);
-        if (verseEl) {
-          verseEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 250);
+    setTimeout(() => {
+      state.selectVerse(verseNum, true);
+      const verseEl = document.querySelector(`.verse-item[data-verse="${verseNum}"]`);
+      if (verseEl) {
+        verseEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      this.renderDrawerContent();
+    }, 250);
+  }
+
+  // Open Floating AI Copilot Widget (Kimchi-Grade)
+  openFloatingAI(query = null) {
+    const widget = document.getElementById('floating-ai-widget');
+    const input = document.getElementById('floating-ai-input');
+    const messagesContainer = document.getElementById('floating-ai-messages');
+    if (!widget) return;
+
+    widget.classList.remove('hidden');
+    this.updateFloatingAIChips();
+    this.updateFloatingAIModelBadge();
+    this.updateFloatingAIRolePills();
+
+    if (messagesContainer && messagesContainer.children.length === 0) {
+      const currentBookObj = bibleEngine.getBookById(state.currentBook);
+      const bookNameVi = currentBookObj ? currentBookObj.name_vi : state.currentBook;
+      this.addFloatingAIMessage('assistant', `
+        Chào bạn! Tôi là <strong>Trợ Lý Thần Học Berea AI (Kimchi-Grade Long Context)</strong>.<br>
+        Tôi có thể nạp toàn bộ chương <strong>${bookNameVi} đoạn ${state.currentChapter}</strong>, đối chiếu ma trận bản dịch song song (BTT, KJV, ESV, CGKPV, Ê-đê, Gia-rai, Ba-na...), phân tích TSK, tra cứu không gian mạng và phân tích thần học. Hãy đặt câu hỏi hoặc chọn các thẻ gợi ý bên dưới!
+      `);
+    }
+
+    if (query) {
+      if (input) input.value = query;
+      const sendBtn = document.getElementById('floating-ai-send-btn');
+      sendBtn?.click();
+    } else {
+      input?.focus();
+    }
+  }
+
+  toggleFloatingAI() {
+    const widget = document.getElementById('floating-ai-widget');
+    if (!widget) return;
+    if (widget.classList.contains('hidden')) {
+      this.openFloatingAI();
+    } else {
+      widget.classList.add('hidden');
     }
   }
 
   // Ask AI Copilot anywhere
   askAIAboutTopic(topicQuery) {
-    const widget = document.getElementById('floating-ai-widget');
-    if (widget) {
-      widget.classList.remove('hidden');
-      this.updateFloatingAIChips();
-      const input = document.getElementById('floating-ai-input');
-      const sendBtn = document.getElementById('floating-ai-send-btn');
-      if (input && sendBtn) {
-        input.value = topicQuery;
-        sendBtn.click();
-        return;
-      }
-    }
-
-    state.setDrawerTab('ai');
-    state.setDrawerOpen(true);
-    setTimeout(() => {
-      const input = document.getElementById('ai-user-query-input');
-      const sendBtn = document.getElementById('ai-send-btn');
-      if (input && sendBtn) {
-        input.value = `Tìm các câu Kinh Thánh và giải nghĩa thần học về: "${topicQuery}"`;
-        sendBtn.click();
-      }
-    }, 200);
+    this.openFloatingAI(`Tìm các câu Kinh Thánh và giải nghĩa thần học về: "${topicQuery}"`);
   }
 
   // Floating AI Copilot FAB & Pop-up Widget
@@ -1537,27 +2966,24 @@ class LogosApp {
     const sendBtn = document.getElementById('floating-ai-send-btn');
     const input = document.getElementById('floating-ai-input');
     const messagesContainer = document.getElementById('floating-ai-messages');
+    const topNavAiBtn = document.getElementById('top-nav-ai-btn');
+    const headerAiBtn = document.getElementById('header-ai-trigger-btn');
 
     if (!fabBtn || !widget) return;
 
     // Toggle widget open/close
     fabBtn.addEventListener('click', () => {
-      const isHidden = widget.classList.contains('hidden');
-      if (isHidden) {
-        widget.classList.remove('hidden');
-        this.updateFloatingAIChips();
-        if (messagesContainer && messagesContainer.children.length === 0) {
-          const currentBookObj = bibleEngine.getBookById(state.currentBook);
-          const bookNameVi = currentBookObj ? currentBookObj.name_vi : state.currentBook;
-          this.addFloatingAIMessage('assistant', `
-            Chào bạn! Tôi là <strong>Trợ Lý Thần Học Berea AI</strong>.<br>
-            Tôi có thể phân tích bối cảnh trước giả, giải nghĩa nguyên ngữ Hy Lạp/Hê-bơ-rơ của <strong>${bookNameVi} đoạn ${state.currentChapter}</strong>, và <em>tự động tra cứu không gian mạng</em>. Bạn cần tìm hiểu điều gì?
-          `);
-        }
-        input?.focus();
-      } else {
-        widget.classList.add('hidden');
-      }
+      this.toggleFloatingAI();
+    });
+
+    topNavAiBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openFloatingAI();
+    });
+
+    headerAiBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openFloatingAI();
     });
 
     closeBtn?.addEventListener('click', () => {
@@ -1605,6 +3031,10 @@ class LogosApp {
       const currentBookObj = bibleEngine.getBookById(state.currentBook);
       const bookNameVi = currentBookObj ? currentBookObj.name_vi : state.currentBook;
       const refStr = `${bookNameVi} ${state.currentChapter}:${state.currentVerse || 1}`;
+      const verseKey = `${state.currentBook}.${state.currentChapter}.${state.currentVerse || 1}`;
+      const crossRefs = crossRefEngine.getCrossReferences(verseKey);
+      const genreKey = currentBookObj?.genre || 'gospel';
+      const genreGuide = hermeneuticsEngine?.getGenreGuide ? hermeneuticsEngine.getGenreGuide(genreKey) : (hermeneuticsEngine?.genreGuides?.[genreKey] || null);
 
       try {
         const responseText = await aiAssistant.ask(q, {
@@ -1612,7 +3042,11 @@ class LogosApp {
           book: bookNameVi,
           bookId: state.currentBook,
           chapter: state.currentChapter,
-          verse: state.currentVerse || 1
+          verse: state.currentVerse || 1,
+          passageData: this.currentPassageData,
+          activeVersions: state.activeVersions,
+          crossReferences: crossRefs,
+          genreGuide: genreGuide
         });
 
         loadingEl.innerHTML = responseText;
@@ -1626,12 +3060,282 @@ class LogosApp {
       }
     };
 
+    // Deep Research Mode Button
+    const deepBtn = document.getElementById('floating-deep-research-btn');
+    if (deepBtn) {
+      const isDeepInit = aiAssistant.getDeepResearchEnabled();
+      deepBtn.classList.toggle('active', isDeepInit);
+      const textSpan = deepBtn.querySelector('.ctrl-btn-text');
+      if (textSpan) textSpan.textContent = isDeepInit ? 'Deep: BẬT' : 'Deep: TẮT';
+
+      deepBtn.addEventListener('click', () => {
+        const cur = aiAssistant.getDeepResearchEnabled();
+        aiAssistant.setDeepResearchEnabled(!cur);
+        const isNow = aiAssistant.getDeepResearchEnabled();
+        deepBtn.classList.toggle('active', isNow);
+        if (textSpan) textSpan.textContent = isNow ? 'Deep: BẬT' : 'Deep: TẮT';
+        const drawerDeepBtn = document.getElementById('ai-deep-research-toggle-btn');
+        if (drawerDeepBtn) {
+          drawerDeepBtn.classList.toggle('active', isNow);
+          drawerDeepBtn.innerHTML = `<i class="fa-solid fa-dna"></i> ${isNow ? 'Deep: BẬT' : 'Deep: TẮT'}`;
+        }
+      });
+    }
+
+    // Clear Conversation History Button
+    const clearHistoryBtn = document.getElementById('floating-clear-history-btn');
+    if (clearHistoryBtn) {
+      clearHistoryBtn.addEventListener('click', () => {
+        aiAssistant.clearConversationHistory();
+        if (messagesContainer) {
+          messagesContainer.innerHTML = `
+            <div class="floating-ai-msg assistant animate-fade-in">
+              <div class="fab-avatar"><i class="fa-solid fa-dove"></i></div>
+              <div class="fab-bubble">Đã làm mới dòng bộ nhớ hội thoại Kimchi Stream. Sẵn sàng hỗ trợ bạn!</div>
+            </div>
+          `;
+        }
+        const drawerMsgs = document.getElementById('ai-messages-list');
+        if (drawerMsgs) {
+          drawerMsgs.innerHTML = `
+            <div class="ai-message assistant">
+              <i class="fa-solid fa-dove" style="color: var(--accent-gold); margin-top: 2px;"></i>
+              <div>Đã làm mới dòng bộ nhớ hội thoại Kimchi Stream. Sẵn sàng tiếp nhận câu hỏi mới!</div>
+            </div>
+          `;
+        }
+      });
+    }
+
+    // Settings Modal Trigger
+    const settingsBtn = document.getElementById('floating-ai-settings-btn');
+    settingsBtn?.addEventListener('click', () => {
+      this.openAISettingsModal();
+    });
+
+    // Initialize Model Badge & Role Pills
+    this.updateFloatingAIModelBadge();
+    this.updateFloatingAIRolePills();
+
+    // Role Buttons Selection
+    widget.querySelectorAll('.fab-role-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const role = btn.dataset.role;
+        aiAssistant.setRole(role);
+        this.updateFloatingAIRolePills();
+        document.querySelectorAll('#drawer-inspector .fab-role-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.role === role);
+        });
+      });
+    });
+
     sendBtn?.addEventListener('click', () => executeFloatingQuery());
     input?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         executeFloatingQuery();
       }
+    });
+  }
+
+  // Update Active AI Model Badge
+  updateFloatingAIModelBadge() {
+    const badge = document.getElementById('floating-ai-model-badge');
+    if (!badge) return;
+    const pInfo = aiAssistant.getActiveProviderInfo();
+    badge.innerHTML = `<i class="fa-solid fa-microchip"></i> ${pInfo.badge}`;
+  }
+
+  // Update Active Role Pills styling
+  updateFloatingAIRolePills() {
+    const currentRole = aiAssistant.getRole();
+    document.querySelectorAll('.fab-role-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.role === currentRole);
+    });
+  }
+
+  // Open AI Multi-Model Configuration Modal (Kimchi-Style)
+  openAISettingsModal() {
+    const modal = document.getElementById('ai-settings-modal');
+    if (!modal) return;
+
+    const providerSelect = document.getElementById('ai-provider-select');
+    const roleSelect = document.getElementById('ai-default-role-select');
+
+    if (providerSelect) providerSelect.value = aiAssistant.getProvider();
+    if (roleSelect) roleSelect.value = aiAssistant.getRole();
+
+    providerSelect?.dispatchEvent(new Event('change'));
+    modal.classList.remove('hidden');
+  }
+
+  // Initialize AI Multi-Model Configuration Modal Listeners
+  initAISettingsModal() {
+    const modal = document.getElementById('ai-settings-modal');
+    if (!modal) return;
+
+    const closeBtn = document.getElementById('ai-settings-close-btn');
+    const cancelBtn = document.getElementById('ai-settings-cancel-btn');
+    const saveBtn = document.getElementById('ai-settings-save-btn');
+    const providerSelect = document.getElementById('ai-provider-select');
+    const modelSelect = document.getElementById('ai-model-select');
+    const apiKeyGroup = document.getElementById('ai-api-key-group');
+    const apiKeyInput = document.getElementById('ai-api-key-input');
+    const apiKeyLabel = document.getElementById('ai-api-key-label');
+    const apiKeyHelpLink = document.getElementById('ai-api-key-help-link');
+    const toggleKeyVisibilityBtn = document.getElementById('ai-toggle-key-visibility-btn');
+    const ollamaGroup = document.getElementById('ai-ollama-group');
+    const ollamaEndpointInput = document.getElementById('ai-ollama-endpoint-input');
+    const roleSelect = document.getElementById('ai-default-role-select');
+    const testBtn = document.getElementById('ai-test-connection-btn');
+    const testStatus = document.getElementById('ai-test-status');
+
+    const updateProviderFields = () => {
+      const provId = providerSelect.value;
+      const providers = aiAssistant.getProvidersList();
+      const p = providers.find(x => x.id === provId);
+
+      // Populate models
+      if (modelSelect) {
+        modelSelect.innerHTML = (p?.models || []).map(m => `
+          <option value="${m.id}">${m.name}</option>
+        `).join('');
+        modelSelect.value = aiAssistant.getModel(provId);
+      }
+
+      if (provId === 'berea-offline') {
+        apiKeyGroup?.classList.add('hidden');
+        ollamaGroup?.classList.add('hidden');
+      } else if (provId === 'ollama') {
+        apiKeyGroup?.classList.add('hidden');
+        ollamaGroup?.classList.remove('hidden');
+        if (ollamaEndpointInput) ollamaEndpointInput.value = aiAssistant.getOllamaEndpoint();
+      } else {
+        apiKeyGroup?.classList.remove('hidden');
+        ollamaGroup?.classList.add('hidden');
+        if (apiKeyInput) apiKeyInput.value = aiAssistant.getApiKey(provId);
+
+        if (provId === 'gemini') {
+          if (apiKeyLabel) apiKeyLabel.textContent = 'Google Gemini API Key';
+          if (apiKeyHelpLink) {
+            apiKeyHelpLink.href = 'https://aistudio.google.com/app/apikey';
+            apiKeyHelpLink.textContent = 'Lấy Gemini API Key miễn phí (Google AI Studio)';
+          }
+        } else if (provId === 'deepseek') {
+          if (apiKeyLabel) apiKeyLabel.textContent = 'DeepSeek API Key';
+          if (apiKeyHelpLink) {
+            apiKeyHelpLink.href = 'https://platform.deepseek.com/';
+            apiKeyHelpLink.textContent = 'Lấy DeepSeek API Key';
+          }
+        } else {
+          if (apiKeyLabel) apiKeyLabel.textContent = 'OpenAI API Key';
+          if (apiKeyHelpLink) {
+            apiKeyHelpLink.href = 'https://platform.openai.com/api-keys';
+            apiKeyHelpLink.textContent = 'Lấy OpenAI API Key';
+          }
+        }
+      }
+      if (testStatus) testStatus.style.display = 'none';
+    };
+
+    providerSelect?.addEventListener('change', updateProviderFields);
+
+    toggleKeyVisibilityBtn?.addEventListener('click', () => {
+      if (apiKeyInput.type === 'password') {
+        apiKeyInput.type = 'text';
+        toggleKeyVisibilityBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+      } else {
+        apiKeyInput.type = 'password';
+        toggleKeyVisibilityBtn.innerHTML = '<i class="fa-solid fa-eye"></i>';
+      }
+    });
+
+    testBtn?.addEventListener('click', async () => {
+      if (!testStatus) return;
+      testStatus.style.display = 'block';
+      testStatus.style.background = 'rgba(88, 166, 255, 0.1)';
+      testStatus.style.border = '1px solid #58a6ff';
+      testStatus.style.color = '#58a6ff';
+      testStatus.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang kiểm tra kết nối với mô hình...';
+
+      const provId = providerSelect.value;
+      const keyVal = (apiKeyInput?.value || '').trim();
+
+      try {
+        if (provId === 'berea-offline') {
+          testStatus.style.background = 'rgba(46, 160, 67, 0.15)';
+          testStatus.style.border = '1px solid #2ea043';
+          testStatus.style.color = '#3fb950';
+          testStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i> Berea Autonomous Core (Offline RAG) luôn sẵn sàng 100%! Không cần kết nối internet.';
+          return;
+        }
+
+        if (provId === 'gemini') {
+          if (!keyVal) throw new Error('Vui lòng nhập Gemini API Key trước khi kiểm tra.');
+          const mod = modelSelect?.value || 'gemini-2.0-flash';
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mod}:generateContent?key=${keyVal}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Ping: Berea AI' }] }] })
+          });
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            throw new Error(err.error?.message || `Lỗi phản hồi (${res.status})`);
+          }
+        } else if (provId === 'openai') {
+          if (!keyVal) throw new Error('Vui lòng nhập OpenAI API Key trước khi kiểm tra.');
+          const res = await fetch('https://api.openai.com/v1/models', {
+            headers: { 'Authorization': `Bearer ${keyVal}` }
+          });
+          if (!res.ok) throw new Error('OpenAI API Key không hợp lệ.');
+        } else if (provId === 'deepseek') {
+          if (!keyVal) throw new Error('Vui lòng nhập DeepSeek API Key trước khi kiểm tra.');
+          const res = await fetch('https://api.deepseek.com/models', {
+            headers: { 'Authorization': `Bearer ${keyVal}` }
+          });
+          if (!res.ok) throw new Error('DeepSeek API Key không hợp lệ.');
+        } else if (provId === 'ollama') {
+          const endpoint = (ollamaEndpointInput?.value || 'http://localhost:11434').replace(/\/$/, '');
+          const res = await fetch(`${endpoint}/api/tags`);
+          if (!res.ok) throw new Error(`Không thể kết nối với Ollama tại ${endpoint}.`);
+        }
+
+        testStatus.style.background = 'rgba(46, 160, 67, 0.15)';
+        testStatus.style.border = '1px solid #2ea043';
+        testStatus.style.color = '#3fb950';
+        testStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i> Kết nối thành công! Mô hình đã sẵn sàng hoạt động.';
+      } catch (err) {
+        testStatus.style.background = 'rgba(248, 81, 73, 0.15)';
+        testStatus.style.border = '1px solid #f85149';
+        testStatus.style.color = '#f85149';
+        testStatus.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${err.message}`;
+      }
+    });
+
+    saveBtn?.addEventListener('click', () => {
+      const provId = providerSelect?.value || 'berea-offline';
+      const modelId = modelSelect?.value || 'berea-v2';
+      const keyVal = (apiKeyInput?.value || '').trim();
+      const roleId = roleSelect?.value || 'copilot';
+      const ollamaEndpoint = (ollamaEndpointInput?.value || 'http://localhost:11434').trim();
+
+      aiAssistant.setProvider(provId);
+      aiAssistant.setModel(provId, modelId);
+      aiAssistant.setApiKey(keyVal, provId);
+      aiAssistant.setRole(roleId);
+      aiAssistant.setOllamaEndpoint(ollamaEndpoint);
+
+      this.updateFloatingAIModelBadge();
+      this.updateFloatingAIRolePills();
+      this.renderDrawerContent();
+
+      modal.classList.add('hidden');
+    });
+
+    closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
+    cancelBtn?.addEventListener('click', () => modal.classList.add('hidden'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.add('hidden');
     });
   }
 
@@ -1711,6 +3415,293 @@ class LogosApp {
         }
       });
     });
+  }
+
+  // 11.8 Quản lý Bảng Màu Sắc & Cỡ Chữ (Theme Palette & Typography Studio)
+  openThemeSelectorModal() {
+    this.populateThemeSelectorModal();
+    const modal = document.getElementById('theme-selector-modal');
+    modal?.classList.remove('hidden');
+  }
+
+  populateThemeSelectorModal() {
+    const grid = document.getElementById('themes-grid');
+    if (!grid) return;
+
+    grid.innerHTML = THEMES_LIST.map(theme => {
+      const isActive = state.currentTheme === theme.id;
+      return `
+        <div class="theme-card ${isActive ? 'active' : ''}" data-theme-id="${theme.id}">
+          <div class="theme-card-header">
+            <div class="theme-card-title">
+              <i class="fa-solid ${theme.icon}" style="color: ${theme.palette[3]};"></i>
+              <span>${theme.name}</span>
+            </div>
+            <span class="theme-active-badge"><i class="fa-solid fa-check"></i> Đang dùng</span>
+          </div>
+
+          <div class="theme-swatches-row">
+            <div class="theme-swatch-circle" style="background: ${theme.palette[0]};" title="Màu nền chính"></div>
+            <div class="theme-swatch-circle" style="background: ${theme.palette[1]};" title="Màu bề mặt"></div>
+            <div class="theme-swatch-circle" style="background: ${theme.palette[2]};" title="Màu chữ"></div>
+            <div class="theme-swatch-circle" style="background: ${theme.palette[3]};" title="Màu điểm nhấn"></div>
+          </div>
+
+          <div class="theme-preview-strip" style="background: ${theme.previewCard}; color: ${theme.previewText}; border-color: ${theme.previewAccent};">
+            <span style="color: ${theme.previewAccent}; font-weight: 700; margin-right: 4px;">1</span> Ban đầu có Ngôi Lời...
+          </div>
+
+          <div class="theme-desc">${theme.subtitle}</div>
+        </div>
+      `;
+    }).join('');
+
+    // Gắn sự kiện chuyển đổi màu sắc 1-chạm
+    grid.querySelectorAll('.theme-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const themeId = card.dataset.themeId;
+        state.setTheme(themeId);
+      });
+    });
+
+    this.updateFontSizeUI(state.currentFontSize);
+  }
+
+  initThemeSelectorModal() {
+    const fontOptions = document.getElementById('font-size-options');
+    if (!fontOptions) return;
+
+    fontOptions.querySelectorAll('.font-size-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const size = btn.dataset.size;
+        state.setFontSize(size);
+      });
+    });
+  }
+
+  updateThemeUI(themeId) {
+    const themeObj = THEMES_LIST.find(t => t.id === themeId) || THEMES_LIST[0];
+
+    // Cập nhật nhãn màu trên thanh Header
+    const label = document.getElementById('current-theme-label');
+    if (label && themeObj) {
+      label.textContent = themeObj.name.split(' ')[0];
+    }
+
+    // Làm nổi bật thẻ đang chọn trong modal
+    document.querySelectorAll('#themes-grid .theme-card').forEach(card => {
+      card.classList.toggle('active', card.dataset.themeId === themeId);
+    });
+
+    // Cập nhật dòng trạng thái trên Menu Mobile
+    const mobileText = document.getElementById('mobile-theme-status-text');
+    if (mobileText && themeObj) {
+      mobileText.textContent = `Giao Diện: ${themeObj.name}`;
+    }
+  }
+
+  updateFontSizeUI(fontSize = 'medium') {
+    document.querySelectorAll('#font-size-options .font-size-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.size === fontSize);
+    });
+  }
+
+  // 12. Triển khai Hệ Thống Điều Hướng & Đối Chiếu Di Động (Mobile Responsive UX)
+  initMobileResponsiveUX() {
+    const btnRead = document.getElementById('btn-mobile-read');
+    const btnParallel = document.getElementById('btn-mobile-parallel');
+    const btnTsk = document.getElementById('btn-mobile-tsk');
+    const btnBooks = document.getElementById('btn-mobile-books');
+    const btnSearch = document.getElementById('btn-mobile-search');
+    const btnMenu = document.getElementById('btn-mobile-menu');
+    const drawer = document.getElementById('drawer-inspector');
+    const dragHandle = document.getElementById('bottom-sheet-drag-handle');
+    const mobileMenuModal = document.getElementById('mobile-menu-modal');
+
+    const headerCompareBtn = document.getElementById('mobile-header-compare-btn');
+    const headerTskBtn = document.getElementById('mobile-header-tsk-btn');
+
+    // Nút mở Tab Riêng "KT Đối Chiếu" trên Header & Bottom Nav Mobile
+    headerTskBtn?.addEventListener('click', () => {
+      if (state.activeView === 'tsk') {
+        state.setActiveView('bible');
+      } else {
+        state.setActiveView('tsk');
+      }
+    });
+
+    btnTsk?.addEventListener('click', () => {
+      state.setActiveView('tsk');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Nút Bật/Tắt Chế Độ Đối Chiếu Chia Đôi Màn Hình 50/50 (Trên / Dưới) trên Header Mobile
+    headerCompareBtn?.addEventListener('click', () => {
+      if (state.activeView !== 'bible') {
+        state.setActiveView('bible');
+      }
+      if (typeof window !== 'undefined' && window.innerWidth <= 991) {
+        if (state.isDrawerOpen) {
+          state.setDrawerOpen(false);
+        } else {
+          state.setReadingMode('standard');
+          state.setDrawerTab('parallel');
+          state.selectVerse(state.currentVerse || 1, true);
+        }
+      } else {
+        state.toggleReadingMode();
+      }
+    });
+
+    // Nút 1: Đọc Kinh Thánh (Chế độ đọc chuẩn)
+    btnRead?.addEventListener('click', () => {
+      state.setActiveView('bible');
+      state.setReadingMode('standard');
+      drawer?.classList.remove('expanded');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Nút 2: Mở Chế Độ Đối Chiếu Đa Bản Dịch Trực Tiếp hoặc Mở Bảng Đối Chiếu Bottom Sheet
+    btnParallel?.addEventListener('click', () => {
+      if (state.readingMode !== 'parallel') {
+        state.setReadingMode('parallel');
+      } else {
+        // Nếu đã ở chế độ đối chiếu, chuyển đổi mở/đóng Bottom Sheet
+        if (state.isDrawerOpen && state.activeDrawerTab === 'parallel') {
+          state.setDrawerOpen(false);
+        } else {
+          state.setDrawerTab('parallel');
+          state.setDrawerOpen(true);
+        }
+      }
+    });
+
+    // Nút 3: Chọn Sách & Chương Nhanh
+    btnBooks?.addEventListener('click', () => {
+      this.populateBookPicker();
+      document.getElementById('book-picker-modal')?.classList.remove('hidden');
+    });
+
+    // Nút 4: Tìm Kiếm Nhanh
+    btnSearch?.addEventListener('click', () => {
+      const searchInput = document.getElementById('omni-search-input');
+      if (searchInput) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        searchInput.focus();
+        searchInput.select();
+      }
+    });
+
+    // Nút 5: Menu Khám Phá
+    btnMenu?.addEventListener('click', () => {
+      if (mobileMenuModal) {
+        // Cập nhật trạng thái Quản trị viên trên menu
+        const statusText = document.getElementById('mobile-admin-status-text');
+        if (statusText) {
+          statusText.textContent = state.currentUserRole === 'admin' 
+            ? 'Quản Trị Viên (Đang Đăng Nhập)' 
+            : 'Đăng Nhập Quản Trị';
+        }
+        mobileMenuModal.classList.remove('hidden');
+      }
+    });
+
+    // Thanh Kéo Bottom Sheet (Drag Handle Gestures & Tap)
+    if (dragHandle && drawer) {
+      // Chạm vào thanh kéo để chuyển đổi độ cao 56vh <-> 82vh (Mở rộng để tra cứu nhiều bản dịch)
+      dragHandle.addEventListener('click', () => {
+        drawer.classList.toggle('expanded');
+      });
+
+      // Vuốt xuống để đóng Bottom Sheet
+      let touchStartY = 0;
+      dragHandle.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      dragHandle.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchEndY - touchStartY;
+        if (deltaY > 50) {
+          // Vuốt xuống quá 50px -> Đóng Drawer
+          state.setDrawerOpen(false);
+          drawer.classList.remove('expanded');
+        } else if (deltaY < -40) {
+          // Vuốt lên quá 40px -> Mở rộng toàn màn hình
+          drawer.classList.add('expanded');
+        }
+      }, { passive: true });
+    }
+
+    // Xử lý các nút trong Menu Khám Phá Mobile
+    if (mobileMenuModal) {
+      mobileMenuModal.querySelectorAll('.mobile-menu-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetNav = btn.dataset.nav;
+          mobileMenuModal.classList.add('hidden');
+          if (targetNav === 'bible' || targetNav === 'tsk' || targetNav === 'blog' || targetNav === 'community' || targetNav === 'media') {
+            state.setActiveView(targetNav);
+          } else if (targetNav === 'versions') {
+            this.populateVersionSelector('vi');
+            document.getElementById('version-selector-modal')?.classList.remove('hidden');
+          }
+        });
+      });
+
+      // Nút Chọn Nhanh 66 Sách trong Lưới Menu Mobile
+      document.getElementById('mobile-menu-books-shortcut-btn')?.addEventListener('click', () => {
+        mobileMenuModal.classList.add('hidden');
+        this.populateBookPicker();
+        document.getElementById('book-picker-modal')?.classList.remove('hidden');
+      });
+
+      // Nút Theme trong Menu Mobile
+      document.getElementById('mobile-menu-theme-btn')?.addEventListener('click', () => {
+        mobileMenuModal.classList.add('hidden');
+        this.openThemeSelectorModal();
+      });
+
+      // Nút Chọn Sách trong Menu Mobile
+      document.getElementById('mobile-menu-books-btn')?.addEventListener('click', () => {
+        mobileMenuModal.classList.add('hidden');
+        this.populateBookPicker();
+        document.getElementById('book-picker-modal')?.classList.remove('hidden');
+      });
+
+      // Nút Quản Trị trong Menu Mobile
+      document.getElementById('mobile-menu-admin-btn')?.addEventListener('click', () => {
+        mobileMenuModal.classList.add('hidden');
+        if (state.currentUserRole === 'admin') {
+          if (confirm('Bạn đang ở quyền Quản Trị Viên. Bạn có muốn đăng xuất về quyền Khách không?')) {
+            state.logoutAdmin();
+          }
+        } else {
+          this.openAdminAuthModal();
+        }
+      });
+    }
+  }
+
+  // Cập nhật giao diện khi chuyển đổi chế độ đọc (Đọc Thường <-> Đọc Đối Chiếu)
+  updateReadingModeUI(mode) {
+    const isParallel = mode === 'parallel';
+    const headerBtn = document.getElementById('mobile-header-compare-btn');
+    const headerLabel = document.getElementById('mobile-header-compare-label');
+    if (headerBtn) {
+      headerBtn.classList.toggle('active', isParallel);
+      const icon = headerBtn.querySelector('i');
+      if (icon) {
+        icon.className = isParallel ? 'fa-solid fa-book-open' : 'fa-solid fa-columns';
+      }
+    }
+    if (headerLabel) {
+      headerLabel.textContent = isParallel ? 'Đọc Thường' : 'Đối Chiếu';
+    }
+
+    const mobileReadBtn = document.getElementById('btn-mobile-read');
+    const mobileParallelBtn = document.getElementById('btn-mobile-parallel');
+    if (mobileReadBtn) mobileReadBtn.classList.toggle('active', !isParallel && state.activeView === 'bible');
+    if (mobileParallelBtn) mobileParallelBtn.classList.toggle('active', isParallel && state.activeView === 'bible');
   }
 }
 

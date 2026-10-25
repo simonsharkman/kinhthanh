@@ -15,10 +15,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/design-tokens.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/design-tokens.css?v=4.1.0">
+  <link rel="stylesheet" href="css/animations.css?v=4.1.0">
+  <link rel="stylesheet" href="css/layout.css?v=4.1.0">
+  <link rel="stylesheet" href="css/components.css?v=4.1.0">
 </head>
 <body>
 
@@ -39,15 +39,23 @@
   <!-- 2. Header Hoàng Gia (Main Navigation Header) -->
   <header id="main-header">
     <div class="header-brand" id="brand-home-btn" title="Về trang chủ">
-      <span class="brand-symbol"><i class="fa-solid fa-cross"></i></span>
+      <span class="brand-symbol">
+        <img src="data/cross_holy_gold.gif" alt="Thánh Giá Logos" class="brand-gif-cross">
+      </span>
       <div class="brand-text">
-        <h1>LOGOS MULTIVERSE</h1>
-        <div class="brand-tagline">Hệ Thống Đối Chiếu Kinh Thánh & Giải Nghĩa Thần Học</div>
+        <h1 class="brand-title">LOGOS <span class="brand-sub">MULTIVERSE</span></h1>
       </div>
     </div>
 
     <!-- Thanh Điều Hướng Nhanh (Book, Chapter & Translation Selectors) -->
     <div class="header-controls">
+      <!-- Nút Chọn Bản Kinh Thánh Để Đọc Chính -->
+      <button id="primary-version-trigger" class="selector-pill primary-version-pill" title="Chọn bản Kinh Thánh để đọc chính">
+        <i class="fa-solid fa-book-bookmark" style="color: var(--accent-gold);"></i>
+        <span id="primary-version-label">BTT 1925</span>
+        <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+      </button>
+
       <!-- Nút Chọn Sách / Chương -->
       <button id="book-nav-trigger" class="selector-pill" title="Chọn Sách và Chương">
         <i class="fa-solid fa-book-bible"></i>
@@ -55,35 +63,49 @@
         <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
       </button>
 
+      <!-- Nút Chuyển Đổi Nhanh Chế Độ Đối Chiếu Trên Điện Thoại (Mobile Compare Toggle) -->
+      <button id="mobile-header-compare-btn" class="selector-pill mobile-compare-pill" title="Chuyển chế độ đọc đối chiếu đa bản dịch trực tiếp">
+        <i class="fa-solid fa-columns"></i>
+        <span id="mobile-header-compare-label">Đối Chiếu</span>
+      </button>
+
       <!-- Nút Quản Lý Bản Dịch Song Song -->
-      <button id="translations-modal-trigger" class="selector-pill" title="Chọn các bản dịch để đối chiếu">
+      <button id="translations-modal-trigger" class="selector-pill" title="Chọn các bản dịch Kinh Thánh để so sánh (BTT, KTHD, KJV...)">
         <i class="fa-solid fa-columns"></i>
         <span id="active-versions-count">4 Bản Dịch</span>
         <i class="fa-solid fa-sliders" style="font-size: 0.75rem;"></i>
       </button>
 
-      <!-- Omni-Search Bar -->
+      <!-- Omni-Search Bar (Mở rộng tìm địa chỉ, câu kinh thánh, gợi ý thông minh) -->
       <div class="omni-search-wrapper">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="omni-search-input" placeholder="Tìm câu, ẩn dụ, từ khóa (VD: Giang 3:16, Chiên con, Men)..." autocomplete="off">
+        <input type="text" id="omni-search-input" placeholder="Tìm địa chỉ (vd: Giăng 3:16) hoặc từ khóa..." autocomplete="off">
         <div id="search-dropdown" class="search-dropdown hidden"></div>
       </div>
 
-      <!-- Navigation Tabs (Kinh Thánh, Blog, Nhánh Cộng Đồng, Media) -->
+      <!-- Navigation Tabs (Đọc Kinh Thánh, KT Đối Chiếu BibleHub TSK, Blog, Nhánh Cộng Đồng, Media) -->
       <nav class="nav-links">
-        <button class="nav-btn active" data-view="bible"><i class="fa-solid fa-book-open"></i> Đọc & Đối Chiếu</button>
+        <button class="nav-btn active" data-view="bible" title="Đọc Kinh Thánh & so sánh các bản dịch"><i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh</button>
+        <button class="nav-btn" data-view="tsk" title="Kinh Thánh Đối Chiếu (BibleHub TSK - Bản Tiếng Việt & Tiếng Anh)"><i class="fa-solid fa-book-atlas"></i> KT Đối Chiếu</button>
         <button class="nav-btn" data-view="blog"><i class="fa-solid fa-feather-pointed"></i> Blog Chuyên Sâu</button>
         <button class="nav-btn" data-view="community"><i class="fa-solid fa-users"></i> Nhánh Cộng Đồng</button>
         <button class="nav-btn" data-view="media"><i class="fa-solid fa-photo-film"></i> Media & Video</button>
       </nav>
 
-      <!-- Chế độ Theme (Dark / Parchment) -->
-      <button id="theme-toggle-btn" class="selector-pill" title="Chuyển chế độ Giấy Cổ (Parchment) / Than Đá (Dark)">
-        <i class="fa-solid fa-scroll"></i>
+      <!-- Nút Đổi Màu Sắc & Giao Diện Trang (6 Bộ Màu Tuyệt Đẹp) -->
+      <button id="theme-toggle-btn" class="selector-pill theme-selector-pill" title="Đổi màu sắc & giao diện trang">
+        <i class="fa-solid fa-palette" style="color: var(--accent-gold);"></i>
+        <span id="current-theme-label">Dạ Kim</span>
       </button>
 
-      <!-- Nút Đăng Nhập / Phân Quyền Quản Trị -->
-      <button id="role-auth-btn" class="selector-pill" title="Chế độ Quản trị / Khách">
+      <!-- Nút Thống Kê & Số Lượng Độc Giả (Thu nhỏ & Hiển thị số lượt xem) -->
+      <button id="admin-analytics-btn" class="selector-pill analytics-pill" title="Thống Kê Độc Giả (Nhấp để xem chi tiết)">
+        <i class="fa-solid fa-chart-line" style="color: var(--accent-gold);"></i>
+        <span id="analytics-label">1.8k xem</span>
+      </button>
+
+      <!-- Nút Đăng Nhập / Phân Quyền Quản Trị (Thu nhỏ) -->
+      <button id="role-auth-btn" class="selector-pill auth-pill" title="Chế độ Quản trị / Khách">
         <i class="fa-solid fa-user-shield"></i>
         <span id="role-label">Khách</span>
       </button>
@@ -118,6 +140,13 @@
       </div>
     </div>
 
+    <!-- View 1.5: Tab Riêng Biệt "KT Đối Chiếu" (BibleHub Treasury of Scripture Knowledge - English & Vietnamese BTT) -->
+    <div id="tsk-view" class="view-panel hidden">
+      <div class="tsk-container">
+        <!-- Render động toàn bộ dữ liệu https://biblehub.com/tsk/ (English & Vietnamese BTT) bởi crossref-engine.js -->
+      </div>
+    </div>
+
     <!-- View 2: Blog Chuyên Sâu Của Tác Giả -->
     <div id="blog-view" class="view-panel hidden">
       <div class="blog-container">
@@ -142,34 +171,32 @@
 
   <!-- 5. Bảng Điều Tra Chuyên Sâu Trượt Ra Cạnh Phải (Drawer Inspector) -->
   <aside id="drawer-inspector" aria-label="Bảng giải nghĩa và đối chiếu chi tiết">
+    <!-- Thanh kéo Bottom Sheet trên Điện thoại (Dynamic Drag Handle) -->
+    <div class="bottom-sheet-drag-handle" id="bottom-sheet-drag-handle" title="Chạm để mở rộng hoặc vuốt xuống để đóng"></div>
     <div class="drawer-header">
       <div class="drawer-header-info">
         <h3 id="drawer-verse-title" class="drawer-title">Đối Chiếu: Giăng 1:1</h3>
         <span id="drawer-verse-genre" class="drawer-badge">Phúc Âm</span>
       </div>
-      <button id="drawer-close-btn" class="drawer-close-btn" title="Đóng bảng giải nghĩa">&times;</button>
+      <div class="drawer-header-actions">
+        <button id="drawer-manage-versions-btn" class="drawer-action-btn" title="Chọn các bản dịch để đối chiếu">
+          <i class="fa-solid fa-sliders"></i> Chọn Bản Dịch
+        </button>
+        <button id="drawer-close-btn" class="drawer-close-btn" title="Đóng bảng đối chiếu">&times;</button>
+      </div>
     </div>
 
-    <!-- Thanh Chọn Nhanh Các Bản Dịch Đối Chiếu Trực Tiếp Trong Bảng Khảo Cứu -->
-    <div class="drawer-version-bar" id="drawer-version-bar">
-      <div class="drawer-version-bar-header">
-        <span class="drawer-version-bar-title"><i class="fa-solid fa-columns"></i> Bản dịch đối chiếu:</span>
-        <button id="drawer-manage-versions-btn" class="drawer-version-manage-btn" title="Thêm hoặc đổi bản dịch đối chiếu">
-          <i class="fa-solid fa-sliders"></i> Tùy chọn
-        </button>
-      </div>
-      <div class="drawer-version-chips" id="drawer-version-chips">
-        <!-- Render động các chip bản dịch đang chọn -->
-      </div>
+    <!-- Thanh Bản Dịch Đối Chiếu (Ẩn hoàn toàn để không chiếm diện tích như người dùng yêu cầu) -->
+    <div class="drawer-version-bar hidden" id="drawer-version-bar" style="display: none !important;">
+      <div class="drawer-version-chips" id="drawer-version-chips"></div>
     </div>
 
     <!-- 4 Tab Nghiệp Vụ Chuyên Sâu -->
     <div class="drawer-tabs">
-      <button class="drawer-tab-btn active" data-tab="parallel"><i class="fa-solid fa-columns"></i> Đối Chiếu</button>
+      <button class="drawer-tab-btn active" data-tab="parallel"><i class="fa-solid fa-columns"></i> So Sánh Bản Dịch</button>
+      <button class="drawer-tab-btn" data-tab="crossref"><i class="fa-solid fa-link"></i> Câu Tham Chiếu</button>
       <button class="drawer-tab-btn" data-tab="metaphors"><i class="fa-solid fa-dove"></i> Ẩn Dụ & Biểu Tượng</button>
-      <button class="drawer-tab-btn" data-tab="crossref"><i class="fa-solid fa-link"></i> KT Giải Thích KT</button>
       <button class="drawer-tab-btn" data-tab="context"><i class="fa-solid fa-landmark"></i> Bối Cảnh & Thể Loại</button>
-      <button class="drawer-tab-btn" data-tab="ai"><i class="fa-solid fa-robot"></i> Trợ Lý AI</button>
     </div>
 
     <!-- Nội dung 5 Tab -->
@@ -209,14 +236,14 @@
 
       <!-- Thanh Tab Phân Loại Bản Dịch -->
       <div class="version-tabs">
-        <button class="version-tab-btn active" data-vtab="vi"><i class="fa-solid fa-flag"></i> Tiếng Việt (6)</button>
+        <button class="version-tab-btn active" data-vtab="vi"><i class="fa-solid fa-flag"></i> Tiếng Việt (8)</button>
         <button class="version-tab-btn" data-vtab="ethnic"><i class="fa-solid fa-mountain"></i> Sắc Tộc Việt Nam (7)</button>
         <button class="version-tab-btn" data-vtab="intl"><i class="fa-solid fa-globe"></i> Quốc Tế & Nguyên Ngữ (7)</button>
       </div>
 
       <!-- Thanh Thao Tác Nhanh -->
       <div class="version-quick-actions">
-        <button id="quick-select-vi-btn" class="quick-pill"><i class="fa-solid fa-check-double"></i> Chọn 3 Bản Việt Chuẩn</button>
+        <button id="quick-select-vi-btn" class="quick-pill"><i class="fa-solid fa-check-double"></i> Chọn Bản Việt Chuẩn</button>
         <button id="quick-select-ethnic-btn" class="quick-pill"><i class="fa-solid fa-feather"></i> Thêm Tiếng Sắc Tộc</button>
         <button id="quick-select-all-btn" class="quick-pill"><i class="fa-solid fa-list-check"></i> Chọn Tất Cả</button>
         <button id="quick-clear-btn" class="quick-pill"><i class="fa-solid fa-xmark"></i> Bỏ Chọn</button>
@@ -267,6 +294,7 @@
             <select id="httlvn-filter-version" class="httlvn-select">
               <optgroup label="Tiếng Việt">
                 <option value="VI1934" selected>Bản Truyền Thống 1925 (VI1934)</option>
+                <option value="KTHD">Kinh Thánh Hiện Đại (KTHD - Bible.com 1638)</option>
                 <option value="RVV11">Bản Truyền Thống Hiệu Đính 2010 (RVV11)</option>
                 <option value="NVB">Bản Dịch Mới (NVB)</option>
                 <option value="BD2011">Bản Dịch 2011 (BD2011)</option>
@@ -365,15 +393,286 @@
 
   <!-- Modal 4: Xác Thực Quản Trị Viên (Admin Authentication Gate) -->
   <div id="admin-auth-modal" class="modal-overlay hidden">
-    <div class="modal-card" style="max-width: 420px;">
+    <div class="modal-card" style="max-width: 440px;">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-lock"></i> XÁC THỰC QUẢN TRỊ</h3>
+        <h3><i class="fa-solid fa-user-shield"></i> ĐĂNG NHẬP QUẢN TRỊ VIÊN</h3>
         <button class="modal-close-btn" data-modal="admin-auth-modal">&times;</button>
       </div>
-      <p class="modal-desc">Nhập mã bí mật để kích hoạt quyền Quản trị viên (sửa Banner, viết Blog chính thức):</p>
-      <input type="password" id="admin-secret-key-input" placeholder="Nhập khóa bí mật..." style="width: 100%; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
-      <div class="modal-footer">
-        <button id="submit-admin-auth-btn" class="btn-primary" style="width: 100%;">Xác Thực</button>
+      <p class="modal-desc" style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.15rem; line-height: 1.5;">
+        Vui lòng nhập tài khoản quản trị để kích hoạt toàn quyền chỉnh sửa bài viết, quản lý Banner và kiểm duyệt cộng đồng:
+      </p>
+
+      <form id="admin-login-form" onsubmit="return false;">
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-primary); display: block; margin-bottom: 0.35rem;">
+            <i class="fa-solid fa-user"></i> Tên Đăng Nhập:
+          </label>
+          <input type="text" id="admin-username-input" placeholder="Nhập tên đăng nhập..." autocomplete="username" style="width: 100%; padding: 0.7rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-size: 0.92rem;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-primary); display: block; margin-bottom: 0.35rem;">
+            <i class="fa-solid fa-key"></i> Mật Khẩu:
+          </label>
+          <div style="position: relative; display: flex; align-items: center;">
+            <input type="password" id="admin-password-input" placeholder="Nhập mật khẩu quản trị..." autocomplete="current-password" style="width: 100%; padding: 0.7rem 2.6rem 0.7rem 0.7rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-size: 0.92rem;">
+            <button type="button" id="admin-toggle-pwd-btn" title="Hiện/Ẩn mật khẩu" style="position: absolute; right: 0.6rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 0.4rem; font-size: 0.95rem;">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Trường ẩn giữ tương thích backward nếu có test kiểm tra admin-secret-key-input -->
+        <input type="hidden" id="admin-secret-key-input" value="">
+
+        <!-- Thông báo lỗi đăng nhập bảo mật (Không alert, Không lộ mật khẩu) -->
+        <div id="admin-auth-error-msg" class="auth-error-msg hidden" style="background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; color: #ff6b6b; padding: 0.65rem 0.85rem; border-radius: 6px; font-size: 0.85rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span id="admin-auth-error-text">Tên đăng nhập hoặc mật khẩu không chính xác. Vui lòng thử lại!</span>
+        </div>
+
+        <div class="modal-footer" style="padding: 0; margin-top: 0.75rem; display: flex; gap: 0.5rem;">
+          <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-auth-modal" style="flex: 1; padding: 0.65rem;">Hủy</button>
+          <button type="submit" id="submit-admin-auth-btn" class="btn-primary" style="flex: 2; padding: 0.65rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 4.1: Soạn Thảo & Chỉnh Sửa Khảo Luận Thần Học (Admin Article Studio) -->
+  <div id="admin-article-modal" class="modal-overlay hidden" aria-label="Soạn thảo khảo luận cho quản trị viên">
+    <div class="modal-card" style="max-width: 720px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header">
+        <h3 id="admin-article-modal-title"><i class="fa-solid fa-feather-pointed" style="color: var(--accent-gold);"></i> SOẠN THẢO KHẢO LUẬN THẦN HỌC</h3>
+        <button class="modal-close-btn" data-modal="admin-article-modal">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <input type="hidden" id="admin-art-id" value="">
+        <div class="form-group">
+          <label>Tiêu Đề Khảo Luận:</label>
+          <input type="text" id="admin-art-title" placeholder="VD: Ngôi Lời Nhập Thể Trong Phúc Âm Giăng...">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Tác Giả:</label>
+            <input type="text" id="admin-art-author" value="Quản Trị Viên / Mục Sư">
+          </div>
+          <div class="form-group">
+            <label>Chuyên Mục Thần Học:</label>
+            <select id="admin-art-category">
+              <option value="Thần Học Phúc Âm">Thần Học Phúc Âm</option>
+              <option value="Hình Bóng & Ẩn Dụ">Hình Bóng & Ẩn Dụ</option>
+              <option value="Bối Cảnh Lịch Sử & Khảo Cổ">Bối Cảnh Lịch Sử & Khảo Cổ</option>
+              <option value="Nguyên Ngữ & Strong's">Nguyên Ngữ & Strong's</option>
+              <option value="Tiên Tri & Khải Huyền">Tiên Tri & Khải Huyền</option>
+              <option value="Suy Ngẫm Ứng Dụng">Suy Ngẫm Ứng Dụng</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Tóm Tắt Khảo Luận (Ngắn gọn):</label>
+          <textarea id="admin-art-summary" rows="2" placeholder="Tóm tắt ngắn gọn luận điểm chính của bài nghiên cứu..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Nội Dung Khảo Luận Chi Tiết (Hỗ trợ trích câu Kinh Thánh #Giang 1:14):</label>
+          <textarea id="admin-art-content" rows="6" placeholder="Nội dung chuyên sâu, đối chiếu bản dịch, phân tích nguyên ngữ..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Thẻ Chủ Đề / Tags (Cách nhau bằng dấu phẩy):</label>
+          <input type="text" id="admin-art-tags" placeholder="Ngôi Lời, Giăng 1, Nhập Thể, Hy Lạp">
+        </div>
+        
+        <!-- Section: Thêm Hình Ảnh -->
+        <div style="border-top: 1px dashed var(--border-medium); padding-top: 1rem; margin-top: 1rem;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+            <i class="fa-solid fa-image"></i> THÊM HÌNH ẢNH MINH HỌA / BẢN ĐỒ
+          </div>
+          <div class="form-group">
+            <label>Đường dẫn hình ảnh (URL Image):</label>
+            <input type="url" id="admin-art-image" placeholder="https://... hoặc chọn mẫu bên dưới">
+          </div>
+          <!-- Gợi ý ảnh nhanh -->
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+            <button type="button" class="btn-secondary btn-sample-img" data-url="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80" style="font-size: 0.72rem; padding: 0.2rem 0.5rem;">📜 Cuộn Kinh Thánh Cổ</button>
+            <button type="button" class="btn-secondary btn-sample-img" data-url="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80" style="font-size: 0.72rem; padding: 0.2rem 0.5rem;">🏜️ Hoang Mạc Sinai</button>
+            <button type="button" class="btn-secondary btn-sample-img" data-url="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=1200&q=80" style="font-size: 0.72rem; padding: 0.2rem 0.5rem;">⭐ Ngôi Sao Bết-lê-hem</button>
+            <button type="button" class="btn-secondary btn-sample-img" data-url="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80" style="font-size: 0.72rem; padding: 0.2rem 0.5rem;">🍇 Vườn Nho Thánh Địa</button>
+          </div>
+          <!-- Image Live Preview -->
+          <div id="admin-art-img-preview" class="hidden" style="max-height: 180px; border-radius: 6px; overflow: hidden; border: 1px solid var(--accent-gold-border); margin-bottom: 0.75rem;">
+            <img id="admin-art-img-preview-tag" src="" alt="Xem trước ảnh" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+        </div>
+
+        <!-- Section: Thêm Tài Liệu Tham Khảo -->
+        <div style="border-top: 1px dashed var(--border-medium); padding-top: 1rem; margin-top: 1rem;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+            <i class="fa-solid fa-file-circle-plus"></i> ĐÍNH KÈM TÀI LIỆU NGHIÊN CỨU & PDF
+          </div>
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 0.75rem;">
+            <div class="form-group">
+              <label>Tên tài liệu:</label>
+              <input type="text" id="admin-art-doc-name" placeholder="VD: Khao_Luan_Ngoi_Loi_Logos.pdf">
+            </div>
+            <div class="form-group">
+              <label>Loại tệp & Dung lượng:</label>
+              <input type="text" id="admin-art-doc-meta" placeholder="PDF • 2.5 MB" value="PDF • 1.8 MB">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Đường dẫn tệp tài liệu (URL hoặc file path):</label>
+            <input type="text" id="admin-art-doc-url" placeholder="https://... hoặc docs/khao-luan-logos.pdf">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-article-modal">Hủy</button>
+        <button id="save-admin-article-btn" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.4rem;">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Lưu & Xuất Bản Khảo Luận
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4.15: Chỉnh Sửa Bài Viết Cộng Đồng (Admin Community Post Studio) -->
+  <div id="admin-community-post-modal" class="modal-overlay hidden" aria-label="Chỉnh sửa bài viết cộng đồng">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <h3 id="admin-community-modal-title"><i class="fa-solid fa-pen-to-square" style="color: var(--accent-gold);"></i> CHỈNH SỬA BÀI VIẾT CỘNG ĐỒNG</h3>
+        <button class="modal-close-btn" data-modal="admin-community-post-modal">&times;</button>
+      </div>
+      <div class="admin-modal-body" style="padding: 1rem 0;">
+        <input type="hidden" id="admin-comm-post-id" value="">
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Tiêu Đề Bài Chia Sẻ:</label>
+          <input type="text" id="admin-comm-post-title" placeholder="Tiêu đề..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.85rem;">
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Tác Giả / Người Gửi:</label>
+            <input type="text" id="admin-comm-post-author" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          </div>
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Trạng Thái Kiểm Duyệt:</label>
+            <select id="admin-comm-post-status" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <option value="approved">✅ Đã Phê Duyệt (Hiển thị công khai)</option>
+              <option value="pending">⏳ Chờ Quản Trị Duyệt</option>
+              <option value="rejected">❌ Đã Từ Chối</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Nhánh Thảo Luận:</label>
+          <select id="admin-comm-post-branch" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <option value="branch_devotion">Nhánh 1: Suy Ngẫm & Ứng Dụng Đời Sống</option>
+            <option value="branch_original_languages">Nhánh 2: Nghiên Cứu Nguyên Ngữ & Thể Loại Văn Chương</option>
+            <option value="branch_typology_symbols">Nhánh 3: Giải Mã Hình Ảnh Ẩn Dụ & Tiên Tri</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Nội Dung Bài Chia Sẻ:</label>
+          <textarea id="admin-comm-post-content" rows="6" placeholder="Nội dung chia sẻ..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.6;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+        <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-community-post-modal">Hủy</button>
+        <button type="button" id="save-admin-community-post-btn" class="btn-primary" style="font-weight: 700;">
+          <i class="fa-solid fa-floppy-disk"></i> Lưu Thay Đổi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4.2: Trung Tâm Thống Kê & Phân Tích Độc Giả (Admin Reader Analytics Intelligence) -->
+  <div id="admin-analytics-modal" class="modal-overlay hidden" aria-label="Trung tâm thống kê dữ liệu truy cập và thói quen đọc">
+    <div class="modal-card" style="max-width: 860px; max-height: 92vh; overflow-y: auto;">
+      <div class="modal-header">
+        <div>
+          <span class="preview-badge" style="background: var(--accent-gold); color: #000; font-weight: 700;">HỆ THỐNG PHÂN TÍCH ĐỘC GIẢ</span>
+          <h3 style="margin-top: 0.25rem;"><i class="fa-solid fa-chart-line" style="color: var(--accent-gold);"></i> SỐ LIỆU TRUY CẬP & THÓI QUEN ĐỌC KINH THÁNH</h3>
+        </div>
+        <button class="modal-close-btn" data-modal="admin-analytics-modal">&times;</button>
+      </div>
+
+      <div class="admin-modal-body" style="padding-top: 0.5rem;">
+        <!-- 4 Thẻ KPI Tổng Quan -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="parallel-verse-card" style="padding: 1rem; text-align: center; border-top: 3px solid var(--accent-gold);">
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Tổng Lượt Xem (Visits)</div>
+            <div id="analytics-metric-visits" style="font-size: 1.8rem; font-weight: 800; color: var(--accent-gold); margin: 0.3rem 0;">1,845</div>
+            <div style="font-size: 0.72rem; color: var(--status-success);"><i class="fa-solid fa-arrow-trend-up"></i> +14.2% so với tuần trước</div>
+          </div>
+          <div class="parallel-verse-card" style="padding: 1rem; text-align: center; border-top: 3px solid #17a2b8;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Độc Giả Duy Nhất (Users)</div>
+            <div id="analytics-metric-users" style="font-size: 1.8rem; font-weight: 800; color: #17a2b8; margin: 0.3rem 0;">420</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Phiên đọc trên thiết bị</div>
+          </div>
+          <div class="parallel-verse-card" style="padding: 1rem; text-align: center; border-top: 3px solid #28a745;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Phân Đoạn & Câu Đã Đọc</div>
+            <div id="analytics-metric-verses" style="font-size: 1.8rem; font-weight: 800; color: #28a745; margin: 0.3rem 0;">16,850</div>
+            <div style="font-size: 0.72rem; color: var(--status-success);"><i class="fa-solid fa-book-bible"></i> Tương tác đa bản dịch</div>
+          </div>
+          <div class="parallel-verse-card" style="padding: 1rem; text-align: center; border-top: 3px solid #fd7e14;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Thời Gian Đọc Trung Bình</div>
+            <div id="analytics-metric-time" style="font-size: 1.8rem; font-weight: 800; color: #fd7e14; margin: 0.3rem 0;">24 phút</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Mỗi phiên suy ngẫm sâu</div>
+          </div>
+        </div>
+
+        <!-- Bảng Top Nội Dung Đọc Nhiều Nhất -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+          <!-- Top Passages -->
+          <div class="metaphor-card" style="border-color: var(--border-medium);">
+            <h4 style="font-family: var(--font-brand); color: var(--accent-gold-light); font-size: 1.05rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-book-open-reader"></i> SÁCH & PHÂN ĐOẠN ĐỌC NHIỀU NHẤT
+            </h4>
+            <div id="analytics-top-passages-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
+              <!-- Render động -->
+            </div>
+          </div>
+
+          <!-- Top Translations -->
+          <div class="metaphor-card" style="border-color: var(--border-medium);">
+            <h4 style="font-family: var(--font-brand); color: var(--accent-gold-light); font-size: 1.05rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-columns"></i> BẢN DỊCH ĐƯỢC ĐỐI CHIẾU NHIỀU NHẤT
+            </h4>
+            <div id="analytics-top-translations-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
+              <!-- Render động -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Hàng 3: Biểu Tượng Ẩn Dụ & Từ Khóa Tìm Kiếm -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <!-- Top Metaphors -->
+          <div class="metaphor-card" style="border-color: var(--border-medium);">
+            <h4 style="font-family: var(--font-brand); color: var(--accent-gold-light); font-size: 1.05rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-seedling"></i> BIỂU TƯỢNG ẨN DỤ TRA CỨU HÀNG ĐẦU
+            </h4>
+            <div id="analytics-top-metaphors-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <!-- Render động -->
+            </div>
+          </div>
+
+          <!-- Top Queries & Articles -->
+          <div class="metaphor-card" style="border-color: var(--border-medium);">
+            <h4 style="font-family: var(--font-brand); color: var(--accent-gold-light); font-size: 1.05rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-magnifying-glass-chart"></i> TỪ KHÓA TÌM KIẾM & BÀI BLOG TOP
+            </h4>
+            <div id="analytics-top-queries-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <!-- Render động -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <button id="refresh-analytics-btn" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 0.4rem;">
+          <i class="fa-solid fa-arrows-rotate"></i> Làm Mới Dữ Liệu
+        </button>
+        <button type="button" class="btn-primary modal-close-btn" data-modal="admin-analytics-modal">Đóng</button>
       </div>
     </div>
   </div>
@@ -404,63 +703,230 @@
     </div>
   </div>
 
-  <!-- 6. Floating AI Copilot Widget & FAB Pop-up (Hiển thị nổi ở bất kỳ đâu) -->
-  <button id="floating-ai-fab" class="floating-ai-fab" title="Trợ Lý Thần Học Berea AI (Nhấp để mở cửa sổ chat)">
-    <div class="fab-pulse-ring"></div>
-    <div class="fab-icon-box">
-      <i class="fa-solid fa-robot"></i>
-    </div>
-    <span class="fab-label">AI Berea</span>
-  </button>
-
-  <div id="floating-ai-widget" class="floating-ai-widget hidden" aria-label="Cửa sổ Trợ Lý Thần Học Berea AI">
-    <div class="floating-ai-header">
-      <div class="floating-ai-header-left">
-        <div class="fab-avatar"><i class="fa-solid fa-robot"></i></div>
-        <div class="fab-header-text">
-          <h4 class="floating-ai-title">Trợ Lý Thần Học Berea AI</h4>
-          <span class="floating-ai-status">
-            <span class="status-indicator-dot online"></span>
-            <span id="floating-ai-status-label">Trực tuyến • Không gian mạng</span>
-          </span>
+  <!-- Modal 7: Chọn Bản Kinh Thánh Đọc Chính (Primary Reading Version Picker) -->
+  <div id="primary-version-modal" class="modal-overlay hidden" aria-label="Chọn bản Kinh Thánh để đọc chính">
+    <div class="modal-card primary-version-modal-card animate-scale-up">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="preview-badge" style="background: var(--accent-gold); color: #000; font-weight: 700;">BẢN ĐỌC CHÍNH</span>
+          <h3 id="primary-version-modal-title"><i class="fa-solid fa-book-bookmark" style="color: var(--accent-gold);"></i> CHỌN BẢN KINH THÁNH ĐỂ ĐỌC</h3>
         </div>
+        <button class="modal-close-btn" data-modal="primary-version-modal">&times;</button>
       </div>
-      <div class="floating-ai-controls">
-        <button id="floating-web-toggle-btn" class="fab-ctrl-btn active" title="Bật/Tắt tra cứu trực tuyến trên mạng">
-          <i class="fa-solid fa-globe"></i> <span class="ctrl-btn-text">Web: BẬT</span>
-        </button>
-        <button id="floating-dock-btn" class="fab-ctrl-btn" title="Mở rộng sang bảng điều khiển bên phải (Drawer)">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        </button>
-        <button id="floating-ai-close-btn" class="fab-ctrl-btn close" title="Đóng cửa sổ">&times;</button>
+      <p class="modal-desc" style="padding: 0 1.5rem; margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+        Chọn bản dịch hiển thị trên màn hình đọc chính. Bạn có thể chuyển đổi bất kỳ lúc nào để nghiên cứu theo văn phong và góc nhìn thần học mong muốn:
+      </p>
+
+      <div class="primary-version-list" id="primary-version-list">
+        <!-- Render động danh sách các bản dịch grouped by category -->
       </div>
-    </div>
 
-    <!-- Khay Gợi Ý Nhanh Bối Cảnh Phân Đoạn -->
-    <div class="floating-ai-chips-bar" id="floating-ai-chips-bar">
-      <!-- Render động theo sách/đoạn đang mở -->
-    </div>
-
-    <!-- Luồng Tin Nhắn Hội Thoại -->
-    <div id="floating-ai-messages" class="floating-ai-messages">
-      <!-- Render tin nhắn của người dùng và trợ lý AI -->
-    </div>
-
-    <!-- Khung Nhập Liệu & Thao Tác -->
-    <div class="floating-ai-input-area">
-      <div class="floating-ai-input-box-wrapper">
-        <textarea id="floating-ai-input" rows="1" placeholder="Hỏi bối cảnh, từ gốc, trước giả, sự kiện mạng..."></textarea>
-        <button id="floating-ai-send-btn" class="fab-send-btn" title="Gửi câu hỏi">
-          <i class="fa-solid fa-paper-plane"></i>
-        </button>
-      </div>
-      <div class="floating-ai-footer-note">
-        <span>✨ Tra cứu thần học & dữ liệu không gian mạng • Đức Chúa Trời là Tác Giả Tối Thượng</span>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; align-items: center;">
+        <button type="button" class="btn-secondary modal-close-btn" data-modal="primary-version-modal">Đóng</button>
       </div>
     </div>
   </div>
 
+  <!-- Modal 8: Cửa Sổ Đọc Bản Dịch Độc Lập / Mở Ra Cửa Sổ Mới (Independent Translation Popout Window) -->
+  <div id="popout-reader-modal" class="modal-overlay hidden" aria-label="Cửa sổ đọc bản dịch độc lập">
+    <div class="modal-card popout-reader-card animate-scale-up">
+      <div class="modal-header popout-reader-header">
+        <div class="modal-title-wrap">
+          <span class="preview-badge" id="popout-version-badge">BẢN CÔNG GIÁO (CGKPV)</span>
+          <h3 id="popout-reader-title"><i class="fa-solid fa-book-open-reader" style="color: var(--accent-gold);"></i> Giăng 1</h3>
+          <span class="popout-reader-subtitle" id="popout-reader-subtitle">Cửa sổ đọc độc lập — Không ảnh hưởng màn hình chính</span>
+        </div>
+        <div class="popout-header-actions">
+          <button id="popout-open-tab-btn" class="popout-tool-btn" title="Mở trang đọc này ra tab trình duyệt mới">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Cửa sổ rời
+          </button>
+          <button id="popout-copy-btn" class="popout-tool-btn" title="Sao chép toàn bộ phân đoạn">
+            <i class="fa-solid fa-copy"></i> Sao chép
+          </button>
+          <button class="modal-close-btn popout-close-btn" data-modal="popout-reader-modal" title="Đóng cửa sổ đọc [Esc]">&times;</button>
+        </div>
+      </div>
+
+      <!-- Quick Chapter Navigator in popout -->
+      <div class="popout-nav-bar">
+        <button id="popout-prev-chapter-btn" class="quick-pill"><i class="fa-solid fa-chevron-left"></i> Đoạn trước</button>
+        <span id="popout-current-ref-display" class="popout-ref-tag">Giăng 1</span>
+        <button id="popout-next-chapter-btn" class="quick-pill">Đoạn sau <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <div class="popout-reader-body" id="popout-reader-body">
+        <!-- Render toàn bộ các câu kinh thánh của chương theo bản dịch đã chọn -->
+      </div>
+
+      <div class="modal-footer popout-reader-footer">
+        <span class="popout-hint-text"><i class="fa-solid fa-circle-info"></i> Bạn có thể cuộn đọc tự do, đối chiếu song song với cửa sổ chính hoặc tắt đi bất cứ lúc nào.</span>
+        <button type="button" class="btn-primary modal-close-btn" data-modal="popout-reader-modal">
+          <i class="fa-solid fa-xmark"></i> Đóng Cửa Sổ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 9.5: Bộ Chọn Màu Sắc & Giao Diện Đọc (Theme Palette & Typography Studio) -->
+  <div id="theme-selector-modal" class="modal-overlay hidden" aria-label="Tùy chọn màu sắc và giao diện đọc">
+    <div class="modal-card theme-modal-card animate-scale-up">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3><i class="fa-solid fa-palette" style="color: var(--accent-gold);"></i> TÙY CHỌN MÀU SẮC & GIAO DIỆN</h3>
+          <span class="modal-subtitle">Chọn màu sắc và cỡ chữ phù hợp với thị hiếu và ánh sáng khi đọc Lời Chúa</span>
+        </div>
+        <button class="modal-close-btn" data-modal="theme-selector-modal" title="Đóng [Esc]">&times;</button>
+      </div>
+
+      <div class="theme-modal-body">
+        <!-- Section 1: 6 Giao Diện Màu Sắc Sắc Nét -->
+        <div class="theme-section-title">
+          <i class="fa-solid fa-swatchbook"></i> 6 GIAO DIỆN MÀU SẮC KINH THÁNH
+        </div>
+        <div class="themes-grid" id="themes-grid">
+          <!-- Render động từ THEMES_LIST -->
+        </div>
+
+        <!-- Section 2: Tùy Chỉnh Kích Thước Chữ (Font Size Scaler) -->
+        <div class="theme-section-title" style="margin-top: 1.5rem;">
+          <i class="fa-solid fa-text-height"></i> CỠ CHỮ ĐỌC KINH THÁNH
+        </div>
+        <div class="font-size-options" id="font-size-options">
+          <button class="font-size-btn" data-size="small">
+            <span class="font-preview-char" style="font-size: 0.95rem;">A</span>
+            <span class="font-label">Nhỏ (17px)</span>
+          </button>
+          <button class="font-size-btn active" data-size="medium">
+            <span class="font-preview-char" style="font-size: 1.15rem;">A</span>
+            <span class="font-label">Chuẩn (19px)</span>
+          </button>
+          <button class="font-size-btn" data-size="large">
+            <span class="font-preview-char" style="font-size: 1.35rem;">A</span>
+            <span class="font-label">Lớn (22px)</span>
+          </button>
+          <button class="font-size-btn" data-size="xlarge">
+            <span class="font-preview-char" style="font-size: 1.6rem;">A</span>
+            <span class="font-label">Rất Lớn (25px)</span>
+          </button>
+        </div>
+
+        <!-- Live Preview Quote Box -->
+        <div class="theme-live-preview-box">
+          <div class="preview-verse-badge"><i class="fa-solid fa-book-bible"></i> Bản xem trước mẫu:</div>
+          <div class="preview-verse-text">
+            "Lời Chúa là ngọn đèn cho chân tôi, ánh sáng cho đường lối tôi." <em>(Thi Thiên 119:105)</em>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="theme-modal-hint"><i class="fa-solid fa-circle-check" style="color: var(--accent-gold);"></i> Tự động lưu lựa chọn của bạn cho mọi lần đọc tiếp theo.</span>
+        <button type="button" class="btn-primary modal-close-btn" data-modal="theme-selector-modal">
+          <i class="fa-solid fa-check"></i> Hoàn Tất
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 10: Menu Khám Phá Nhanh Trên Điện Thoại (Mobile Explorer Drawer) -->
+  <div id="mobile-menu-modal" class="modal-overlay hidden">
+    <div class="modal-card mobile-menu-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3><i class="fa-solid fa-compass" style="color: var(--accent-gold);"></i> MENU KHÁM PHÁ</h3>
+        </div>
+        <button class="modal-close-btn" data-modal="mobile-menu-modal">&times;</button>
+      </div>
+      <div class="mobile-menu-body">
+        <div class="mobile-menu-section-title">CHUYỂN KHÔNG GIAN</div>
+        <div class="mobile-menu-grid">
+          <button class="mobile-menu-btn" data-nav="bible">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Đọc Kinh Thánh</span>
+          </button>
+          <button class="mobile-menu-btn" data-nav="tsk">
+            <i class="fa-solid fa-book-atlas"></i>
+            <span>KT Đối Chiếu</span>
+          </button>
+          <button class="mobile-menu-btn" data-nav="blog">
+            <i class="fa-solid fa-feather-pointed"></i>
+            <span>Blog Chuyên Sâu</span>
+          </button>
+          <button class="mobile-menu-btn" data-nav="community">
+            <i class="fa-solid fa-users"></i>
+            <span>Nhánh Cộng Đồng</span>
+          </button>
+          <button class="mobile-menu-btn" data-nav="media">
+            <i class="fa-solid fa-photo-film"></i>
+            <span>Media & Video</span>
+          </button>
+          <button class="mobile-menu-btn" data-nav="versions">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Chọn Bản Dịch</span>
+          </button>
+          <button class="mobile-menu-btn" id="mobile-menu-books-shortcut-btn">
+            <i class="fa-solid fa-book-bible"></i>
+            <span>66 Sách</span>
+          </button>
+        </div>
+
+        <div class="mobile-menu-section-title">TIỆN ÍCH & CÀI ĐẶT</div>
+        <div class="mobile-menu-list">
+          <button class="mobile-menu-row" id="mobile-menu-theme-btn">
+            <div class="row-info">
+              <i class="fa-solid fa-palette" style="color: var(--accent-gold);"></i>
+              <span id="mobile-theme-status-text">Đổi Màu Sắc & Cỡ Chữ (6 Màu)</span>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <button class="mobile-menu-row" id="mobile-menu-books-btn">
+            <div class="row-info">
+              <i class="fa-solid fa-book-bible"></i>
+              <span>Chọn Sách & Chương</span>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <button class="mobile-menu-row" id="mobile-menu-admin-btn">
+            <div class="row-info">
+              <i class="fa-solid fa-user-shield"></i>
+              <span id="mobile-admin-status-text">Đăng Nhập Quản Trị</span>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. Thanh Điều Hướng Dưới Đáy Màn Hình Điện Thoại (Mobile Bottom Navigation Bar) -->
+  <nav id="mobile-bottom-nav" class="mobile-bottom-nav" aria-label="Điều hướng di động">
+    <button class="mobile-nav-item active" id="btn-mobile-read" data-action="read" title="Đọc Kinh Thánh">
+      <i class="fa-solid fa-book-open"></i>
+      <span>Đọc</span>
+    </button>
+    <button class="mobile-nav-item" id="btn-mobile-parallel" data-action="parallel" title="Mở chế độ đối chiếu bản dịch">
+      <i class="fa-solid fa-columns"></i>
+      <span>Đối Chiếu</span>
+    </button>
+    <button class="mobile-nav-item" id="btn-mobile-tsk" data-action="tsk" title="Mở Tab KT Đối Chiếu (BibleHub TSK)">
+      <i class="fa-solid fa-book-atlas"></i>
+      <span>KT Đối Chiếu</span>
+    </button>
+    <button class="mobile-nav-item" id="btn-mobile-books" data-action="books" title="Chọn Sách & Chương">
+      <i class="fa-solid fa-book-bible"></i>
+      <span>Chọn Sách</span>
+    </button>
+    <button class="mobile-nav-item" id="btn-mobile-search" data-action="search" title="Tìm kiếm câu, từ khóa">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Tìm Kiếm</span>
+    </button>
+    <button class="mobile-nav-item" id="btn-mobile-menu" data-action="menu" title="Mở menu khám phá">
+      <i class="fa-solid fa-bars"></i>
+      <span>Khám Phá</span>
+    </button>
+  </nav>
+
   <!-- Scripts: ES6 Modules Architecture -->
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/app.js?v=4.1.0"></script>
 </body>
 </html>

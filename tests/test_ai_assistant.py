@@ -35,11 +35,11 @@ def test_ai_assistant_web_search_and_theology_contract():
     assert "Trước giả" in content
     assert "Tác Giả Tối Thượng" in content
 
-def test_html_floating_ai_elements():
+def test_html_floating_ai_elements_eradicated():
     with open("index.html", "r", encoding="utf-8") as f:
         html = f.read()
 
-    assert "id=\"floating-ai-fab\"" in html
-    assert "id=\"floating-ai-widget\"" in html
-    assert "id=\"floating-ai-messages\"" in html
-    assert "id=\"floating-ai-input\"" in html
+    assert "id=\"floating-ai-fab\"" not in html
+    assert "id=\"floating-ai-widget\"" not in html
+    assert "id=\"floating-ai-messages\"" not in html
+    assert "id=\"floating-ai-input\"" not in html

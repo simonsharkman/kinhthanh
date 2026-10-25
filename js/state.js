@@ -3,11 +3,12 @@
    Observer Pattern with Event Dispatching
    ========================================================================== */
 
-import { storage } from './storage.js';
+import { storage } from './storage.js?v=3.7.0';
 
 export const ALL_TRANSLATIONS = [
-  // 1. Nhóm Bản Dịch Tiếng Việt (HTTLVN & Phổ Biến)
+  // 1. Nhóm Bản Dịch Tiếng Việt (HTTLVN, Bible.com & Phổ Biến)
   { id: 'BTT', code: 'VI1934', name: 'Bản Truyền Thống 1925', lang: 'vi', category: 'Tiếng Việt', note: 'Bản dịch chuẩn mực lịch sử của Hội Thánh Tin Lành Việt Nam' },
+  { id: 'KTHD', code: 'KTHD', name: 'Kinh Thánh Hiện Đại (KTHD)', lang: 'vi', category: 'Tiếng Việt', note: 'Bản dịch Kinh Thánh Hiện Đại (Bible.com #1638 / Biblica) văn phong hiện đại, gần gũi, dễ hiểu' },
   { id: 'BTHD', code: 'RVV11', name: 'Bản Truyền Thống Hiệu Đính 2010', lang: 'vi', category: 'Tiếng Việt', note: 'Hiệu đính ngữ nghĩa chính xác từ nguyên bản Hy Lạp / Hê-bơ-rơ (RVV11)' },
   { id: 'BDM', code: 'NVB', name: 'Bản Dịch Mới 2002', lang: 'vi', category: 'Tiếng Việt', note: 'Văn phong tiếng Việt hiện đại, sáng sủa, dễ hiểu' },
   { id: 'BD2011', code: 'BD2011', name: 'Bản Dịch 2011 (Đặng Ngọc Báu)', lang: 'vi', category: 'Tiếng Việt', note: 'Bản dịch công phu từ bản văn gốc của MS Đặng Ngọc Báu' },
@@ -34,6 +35,82 @@ export const ALL_TRANSLATIONS = [
   { id: 'INTERLINEAR', code: 'ORIGINAL', name: 'Interlinear Hy Lạp/Hê-bơ-rơ + Strong’s', lang: 'original', category: 'Nguyên Ngữ', note: 'Bản văn gốc Hy Lạp (Tân Ước) & Hê-bơ-rơ (Cựu Ước) kèm mã Strong’s' }
 ];
 
+export const THEMES_LIST = [
+  {
+    id: 'dark',
+    name: 'Dạ Kim Hoàng Gia',
+    subtitle: 'Nền tối trầm mặc • Vàng kim quý phái (Chống mỏi mắt ban đêm)',
+    icon: 'fa-moon',
+    palette: ['#0a0d14', '#121824', '#f1f5f9', '#d4af37'],
+    previewBg: '#0a0d14',
+    previewCard: '#121824',
+    previewText: '#f1f5f9',
+    previewAccent: '#d4af37'
+  },
+  {
+    id: 'parchment',
+    name: 'Giấy Cổ Cuộn Kinh',
+    subtitle: 'Tone kem ngà ấm áp • Chữ nâu sẫm cổ điển (Dịu mắt ban ngày)',
+    icon: 'fa-scroll',
+    palette: ['#fcf8ee', '#f4ecd8', '#272118', '#966708'],
+    previewBg: '#fcf8ee',
+    previewCard: '#f4ecd8',
+    previewText: '#272118',
+    previewAccent: '#966708'
+  },
+  {
+    id: 'light',
+    name: 'Trang Sách Trắng Tinh',
+    subtitle: 'Nền trắng tinh khôi • Chữ đen mực sắc nét như trang sách in',
+    icon: 'fa-sun',
+    palette: ['#ffffff', '#f8fafc', '#0f172a', '#b45309'],
+    previewBg: '#ffffff',
+    previewCard: '#f8fafc',
+    previewText: '#0f172a',
+    previewAccent: '#b45309'
+  },
+  {
+    id: 'sepia',
+    name: 'Hổ Phách Hoàng Hôn',
+    subtitle: 'Nâu trà ấm dịu • Triệt tiêu ánh sáng xanh khi đọc lâu',
+    icon: 'fa-mug-saucer',
+    palette: ['#f5ebd7', '#ebdcc4', '#382618', '#a05214'],
+    previewBg: '#f5ebd7',
+    previewCard: '#ebdcc4',
+    previewText: '#382618',
+    previewAccent: '#a05214'
+  },
+  {
+    id: 'midnight',
+    name: 'Biển Hồ Ga-li-lê',
+    subtitle: 'Xanh thẫm huyền bí • Ngọc lam đại dương sâu lắng tĩnh tâm',
+    icon: 'fa-water',
+    palette: ['#080e1a', '#0f1b2f', '#e2e8f0', '#38bdf8'],
+    previewBg: '#080e1a',
+    previewCard: '#0f1b2f',
+    previewText: '#e2e8f0',
+    previewAccent: '#38bdf8'
+  },
+  {
+    id: 'sage',
+    name: 'Vườn Ô-liu Tĩnh Lặng',
+    subtitle: 'Xanh lục bảo thiền tịnh • An định và thanh thản tâm hồn',
+    icon: 'fa-seedling',
+    palette: ['#0a1410', '#11221b', '#ecfdf5', '#10b981'],
+    previewBg: '#0a1410',
+    previewCard: '#11221b',
+    previewText: '#ecfdf5',
+    previewAccent: '#10b981'
+  }
+];
+
+export const FONT_SIZES = [
+  { id: 'small', label: 'Nhỏ (17px)', size: '1.05rem', lineHeight: '1.75' },
+  { id: 'medium', label: 'Vừa (19px)', size: '1.18rem', lineHeight: '1.9' },
+  { id: 'large', label: 'Lớn (22px)', size: '1.35rem', lineHeight: '2.0' },
+  { id: 'xlarge', label: 'Rất Lớn (25px)', size: '1.55rem', lineHeight: '2.15' }
+];
+
 export class AppState {
   constructor() {
     this.listeners = [];
@@ -44,12 +121,38 @@ export class AppState {
     this.currentVerse = 1;
     this.currentGenre = 'all';
 
-    // Active Parallel Translations
-    const savedVersions = storage.getPreference('active_versions', ['BTT', 'BDM', 'KJV', 'ESV']);
-    this.activeVersions = Array.isArray(savedVersions) ? savedVersions : ['BTT', 'BDM', 'KJV', 'ESV'];
+    // Primary Reading Bible Version (Bản Kinh Thánh đọc chính trên màn hình chính)
+    this.primaryVersion = storage.getPreference('primary_version', 'BTT');
 
-    // Visual Theme (dark or parchment)
+    // Active Parallel Translations (Tự động bật sẵn KTHD - Kinh Thánh Hiện Đại trong danh sách đối chiếu)
+    const savedVersions = storage.getPreference('active_versions', ['BTT', 'KTHD', 'BDM', 'KJV', 'ESV']);
+    this.activeVersions = Array.isArray(savedVersions)
+      ? savedVersions.filter(v => v !== 'TSK_BTT' && v !== 'TSK')
+      : ['BTT', 'KTHD', 'BDM', 'KJV', 'ESV'];
+    if (this.activeVersions.length === 0) {
+      this.activeVersions = ['BTT', 'KTHD', 'BDM', 'KJV', 'ESV'];
+    }
+    if (!storage.getPreference('kthd_auto_added_v1', false)) {
+      if (!this.activeVersions.includes('KTHD')) {
+        const bttIdx = this.activeVersions.indexOf('BTT');
+        if (bttIdx !== -1) {
+          this.activeVersions.splice(bttIdx + 1, 0, 'KTHD');
+        } else {
+          this.activeVersions.unshift('KTHD');
+        }
+      }
+      storage.savePreference('kthd_auto_added_v1', true);
+    }
+    storage.savePreference('active_versions', this.activeVersions);
+
+    // Ngôn ngữ hiển thị cho Tab riêng biệt "KT Đối Chiếu" (BibleHub TSK): 'vi' (Vietnamese - BTT 1925) hoặc 'en' (English - BibleHub TSK)
+    this.tskLanguage = storage.getPreference('tsk_language', 'vi');
+
+    // Visual Theme (dark, parchment, light, sepia, midnight, sage)
     this.currentTheme = storage.getPreference('theme', 'dark');
+
+    // Font Size Preference (small, medium, large, xlarge)
+    this.currentFontSize = storage.getPreference('font_size', 'medium');
 
     // User Role: 'guest' or 'admin'
     this.currentUserRole = storage.getPreference('user_role', 'guest');
@@ -63,6 +166,11 @@ export class AppState {
     // Active Drawer Tab: 'parallel', 'metaphors', 'crossref', 'context', 'ai'
     this.activeDrawerTab = 'parallel';
     this.isDrawerOpen = false;
+
+    // Chế độ hiển thị: Trên máy tính (>= 992px) luôn luôn là 'standard' (Đọc chuẩn + Bảng Đối Chiếu Drawer Inspector bên phải)
+    // Chế độ 'parallel' chỉ áp dụng khi người dùng trên thiết bị di động (< 992px) chuyển đổi
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 991;
+    this.readingMode = isMobile ? storage.getPreference('reading_mode', 'standard') : 'standard';
   }
 
   // Observer Pattern
@@ -103,6 +211,10 @@ export class AppState {
     this.notify('VERSE_SELECTED', { verse: this.currentVerse, isDrawerOpen: this.isDrawerOpen });
   }
 
+  setCurrentVerse(verseNum) {
+    this.selectVerse(verseNum, true);
+  }
+
   // Translation Management
   toggleVersion(versionId) {
     if (this.activeVersions.includes(versionId)) {
@@ -113,10 +225,10 @@ export class AppState {
         return;
       }
     } else {
-      if (this.activeVersions.length < 20) {
+      if (this.activeVersions.length < 25) {
         this.activeVersions.push(versionId);
       } else {
-        alert('Tối đa có thể chọn 20 bản dịch để đối chiếu song song.');
+        alert('Tối đa có thể chọn 25 bản dịch để đối chiếu song song.');
         return;
       }
     }
@@ -131,30 +243,83 @@ export class AppState {
     this.notify('VERSIONS_CHANGED', { activeVersions: this.activeVersions });
   }
 
-  // Theme Toggling
+  // Quản lý Bản Kinh Thánh Đọc Chính (Primary Reading Version)
+  setPrimaryVersion(versionId) {
+    if (!versionId) return;
+    this.primaryVersion = versionId;
+    storage.savePreference('primary_version', versionId);
+    this.notify('PRIMARY_VERSION_CHANGED', { primaryVersion: versionId });
+  }
+
+  // Theme & Color Palette Management
   setTheme(themeName) {
     this.currentTheme = themeName;
     storage.savePreference('theme', themeName);
-    document.documentElement.setAttribute('data-theme', themeName);
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', themeName);
+    }
     this.notify('THEME_CHANGED', { theme: themeName });
   }
 
-  toggleTheme() {
-    const nextTheme = this.currentTheme === 'dark' ? 'parchment' : 'dark';
-    this.setTheme(nextTheme);
+  setFontSize(fontSize) {
+    this.currentFontSize = fontSize;
+    storage.savePreference('font_size', fontSize);
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-font-size', fontSize);
+    }
+    this.notify('FONT_SIZE_CHANGED', { fontSize });
   }
 
-  // Role Authentication Gate
-  verifyAdminSecret(secretKey) {
-    // Zero-tamper security: Admin key validation
-    const masterSecret = 'logos777';
-    if (secretKey === masterSecret) {
+  toggleTheme() {
+    const themeOrder = ['dark', 'parchment', 'light', 'sepia', 'midnight', 'sage'];
+    const currentIndex = themeOrder.indexOf(this.currentTheme);
+    const nextIndex = (currentIndex + 1) % themeOrder.length;
+    this.setTheme(themeOrder[nextIndex]);
+  }
+
+  // Quản lý Chế Độ Đọc: 'standard' (Đọc thường) | 'parallel' (Đọc đối chiếu đa bản dịch trực tiếp)
+  setReadingMode(mode) {
+    if (typeof window !== 'undefined' && window.innerWidth >= 992) {
+      mode = 'standard';
+    }
+    if (this.readingMode === mode) return;
+    this.readingMode = mode;
+    storage.savePreference('reading_mode', mode);
+    this.notify('READING_MODE_CHANGED', { readingMode: this.readingMode });
+  }
+
+  toggleReadingMode() {
+    if (typeof window !== 'undefined' && window.innerWidth >= 992) {
+      this.setReadingMode('standard');
+      return 'standard';
+    }
+    const nextMode = this.readingMode === 'parallel' ? 'standard' : 'parallel';
+    this.setReadingMode(nextMode);
+    return nextMode;
+  }
+
+  // Role Authentication Gate (Username & Password)
+  verifyAdminCredentials(username, password) {
+    const u = (username || '').trim().toLowerCase();
+    const p = (password || '').trim();
+
+    // Tài khoản quản trị mặc định: admin / logos777 (hoặc tài khoản tùy chỉnh trong storage)
+    const customCreds = storage.getPreference('admin_credentials', null);
+    const validUser = (customCreds?.username || 'admin').toLowerCase();
+    const validPass = customCreds?.password || 'logos777';
+
+    if (u === validUser && p === validPass) {
       this.currentUserRole = 'admin';
       storage.savePreference('user_role', 'admin');
       this.notify('ROLE_CHANGED', { role: 'admin' });
       return true;
     }
     return false;
+  }
+
+  verifyAdminSecret(secretKey) {
+    // Zero-tamper security: Admin key validation (backward compatibility)
+    return this.verifyAdminCredentials('admin', secretKey);
   }
 
   logoutAdmin() {
@@ -188,6 +353,13 @@ export class AppState {
   setDrawerTab(tabName) {
     this.activeDrawerTab = tabName;
     this.notify('DRAWER_TAB_CHANGED', { tab: tabName });
+  }
+
+  setTSKLanguage(lang) {
+    const cleanLang = (lang === 'en') ? 'en' : 'vi';
+    this.tskLanguage = cleanLang;
+    storage.savePreference('tsk_language', cleanLang);
+    this.notify('TSK_LANGUAGE_CHANGED', { lang: cleanLang });
   }
 }
 
