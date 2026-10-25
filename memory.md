@@ -217,3 +217,9 @@
   3. Tự động chuyển và phát đoạn tiếp theo khi nghe hết chương hiện tại (`ended` event).
   4. Thanh tiến trình thu gọn thành đường chỉ 2.5px siêu mảnh trên đỉnh mép thanh phát, không tốn diện tích hiển thị.
 - **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
+
+### 19. Khắc Phục Lỗi Hiển Thị Nút "☰ ≡ Tìm" Trên Thanh Menu Phụ Subnav (25/10/2026)
+- **Thắc mắc từ anh Jimmy**: *"cái này là gì ?"* (kèm ảnh chụp cận cảnh nút `☰ ≡ Tim` nền xanh ô-liu `media_1792943357982_8c8cf6ef.png`).
+- **Nguyên nhân**: Trong tệp `index.html` dòng 126, nút mở bộ máy tìm kiếm toàn diện (`#site-subnav-search`) trước đó bị lỗi gõ nhầm thẻ `<i class="fa-solid fa-bars"></i> ≡ Tìm`. Do đó trình duyệt vừa hiển thị icon 3 gạch `fa-bars` (`☰`), vừa hiển thị ký tự 3 gạch `≡` và chữ `Tìm`.
+- **Khắc phục**: Thay thế hoàn toàn bằng nút chuẩn: `<i class="fa-solid fa-magnifying-glass"></i> Tìm Kiếm`, mở trực tiếp hộp thoại tra cứu chuẩn Hội Thánh Tin Lành Việt Nam (HTTLVN Search Hub).
+- **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
