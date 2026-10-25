@@ -235,3 +235,14 @@
   - Nâng cấp `#mobile-menu-modal` thành `.mobile-drawer-sheet` (slide từ trái `translateX(-100%)` sang `0`, header Thánh Giá vàng, greeting độc giả, các mục phân nhóm rõ ràng).
   - Thêm `.portal-mobile-dashboard` với 8 thẻ thao tác 2 cột bo tròn 14px (Đọc, Đối Chiếu, Câu Gốc, Đố Kinh Thánh, Đối Đáp, Lược Khảo, Truyện Tích, Từ Điển).
   - Bảo đảm 128/128 bài test Pytest PASS 100%.
+
+### 14. Loại Bỏ Triệt Để Danh Xưng "Berea" & "Thần Học Berea" Khỏi Toàn Trang Web (25/10/2026)
+- **Mệnh lệnh từ anh Jimmy**: Loại bỏ tất cả những cái gì có tên "Thần học Berea", "Berea" trong trang web.
+- **Lý do thần học & thực tế**: Tránh hoàn toàn sự liên hệ hoặc nhầm lẫn với phong trào Berea gây tranh cãi; đưa toàn bộ hệ thống về quy chuẩn thần học Tin Lành truyền thống chính thống (Hội Thánh Tin Lành Việt Nam - HTTLVN).
+- **Hành động đã hoàn thành**:
+  1. `index.html`: Xóa bỏ "Berea", "Thần học Berea", thay bằng "Cộng đồng thông công học Lời Chúa" và "Dữ liệu chuẩn Hội Thánh Tin Lành Việt Nam (HTTLVN)".
+  2. `js/blog-community.js`: Chuyển "CỘNG ĐỒNG BEREA" thành "CỘNG ĐỒNG THÔNG CÔNG", "Agent Berea" thành "Hệ Thống Kiểm Duyệt Nội Dung".
+  3. `js/ai-assistant.js`: Chuyển "Trợ Lý Thần Học Berea AI", "Berea Copilot", "Berea Autonomous Core" thành "Trợ Lý Thánh Kinh AI", "Logos Copilot", "Logos Autonomous Core".
+  4. `js/berea-guardian.js`: Xóa mọi thông báo kiểm duyệt hiển thị chữ "Agent Berea", thay bằng "Hệ Thống Kiểm Duyệt Đạo Đức Thánh Kinh".
+  5. `js/storage.js`: Đổi tác giả mặc định thành "Độc giả Thánh Kinh".
+  6. Bảo đảm 128/128 bài test Pytest PASS 100%.
