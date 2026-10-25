@@ -200,3 +200,10 @@
   2. Phóng to hình ảnh Thánh Giá vàng `.drawer-cross-gif` từ 28px lên 44px kèm hiệu ứng tỏa sáng ánh kim (`drop-shadow`). Phóng to `.brand-gif-cross` trên thanh header điện thoại lên 30px.
   3. Nâng cỡ chữ tiêu đề `<h3>Logos Thánh Kinh</h3>` lên 1.22rem cân đối hoàn hảo với biểu tượng Thánh Giá.
   4. Đạt 128/128 bài test Pytest PASS 100%.
+
+### 17. Ẩn Biểu Tượng Thánh Giá Trên Thanh Header Di Động (25/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"trên giao diện điện thoại bỏ cái này đi"* (kèm ảnh `media_1792942144709_1c66f784.png` khoanh đỏ biểu tượng Thánh Giá trên header).
+- **Phân tích UX**: Trên màn hình điện thoại hẹp, cụm logo `.header-brand` chứa biểu tượng Thánh Giá nằm kẹp giữa nút Hamburger `☰` và nút chọn bản dịch `BDM (Tiếng Việt) ⌵`, gây chật chội và đè lấn không gian của các nút điều hướng đọc. Biểu tượng Thánh Giá lớn đã hiện diện trang nghiêm ngay bên trong Menu Trượt `☰`.
+- **Thực hiện**: Đặt `.header-brand { display: none !important; }` trên mobile (`max-width: 991px`).
+- **Hiệu quả**: Giải phóng toàn bộ diện tích hàng đầu: nút Hamburger `☰` nằm gọn bên mép trái, dãy nút chọn Bản dịch, chọn Sách/Chương, chế độ Đọc và Màu sắc trải rộng thông thoáng, không còn bị chèn ép.
+- **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
