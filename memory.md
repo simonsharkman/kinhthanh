@@ -101,29 +101,11 @@
 ## 🧠 KIẾN TRÚC KIMCHI MULTI-MODEL AI HARNESS (v2.8.0 ENTERPRISE)
 > **Mục tiêu**: Nâng cấp Logos AI Copilot theo mô hình **Kimchi (`getkimchi/kimchi`)**, mở rộng xử lý ngữ cảnh sâu rộng qua Multi-Provider và Deep Semantic RAG trên toàn bộ 66 sách Kinh Thánh.
 
-### 1. Phân Tuyến 5 Nhà Cung Cấp Đa Mô Hình (Multi-Provider Support)
-1. **Logos Autonomous Core (Offline RAG)**: Chạy hoàn toàn cục bộ, không cần API Key, không phụ thuộc internet, xử lý tức thì cả 66 sách Kinh Thánh qua bộ dữ liệu chuẩn.
-2. **Google Gemini AI**: Tích hợp `gemini-2.0-flash`, `gemini-1.5-flash`, `gemini-1.5-pro` — Context Window 1M+ tokens cực kỳ tối ưu cho nghiên cứu toàn bộ sách và chương Kinh Thánh.
-3. **OpenAI ChatGPT**: Tích hợp `gpt-4o-mini` và `gpt-4o` cho khả năng lý luận thần học sắc bén.
-4. **DeepSeek AI**: Tích hợp `deepseek-chat` (V3) và `deepseek-reasoner` (R1) giải kinh chuyên sâu.
-5. **Ollama Local AI**: Kết nối máy chủ LLM nội bộ tại `http://localhost:11434` (Llama 3, Qwen 2.5, Mistral...).
-
-### 2. Bộ Tứ Vai Trò Chuyên Gia Kimchi (Specialized Agentic Roles)
-- `⚡ Logos Copilot`: Trợ lý toàn diện kiêm quản trị hệ thống, tự động nhận diện và thực thi lệnh kép (VD: *"Mở sách Giô-suê đoạn 24 và bật đối chiếu 6 bản dịch"*).
-- `🎓 Giải Kinh Thần Học (Exegete)`: Chuyên sâu Mạch Văn Cứu Chuộc, Thần học Giao ước và Typology Đấng Christ.
-- `📜 Nguyên Ngữ & Strong's (Linguist)`: Bóc tách từ vựng Koine Greek / Biblical Hebrew, ngữ pháp và mã Strong's.
-- `🏛️ Bối Cảnh Lịch Sử (Historian)`: Khảo cứu Cận Đông Cổ Đại, niên đại trước thuật, phong tục và khảo cổ.
-
-### 3. Nguyên Tắc Thần Học & Đức Tin Bất Biến (Faith Invariants)
-- **Quy tắc 1**: Người viết sách Kinh Thánh (Môi-se, Giô-suê, Đa-vít, Phao-lô, Giăng...) **BẮT BUỘC** gọi là **"Trước giả"**.
-- **Quy tắc 2**: Duy nhất Đức Chúa Trời là **"Tác Giả Tối Thượng"** soi dẫn toàn bộ Thánh Kinh.
-- **Quy tắc 3**: Giải nghĩa theo nguyên tắc **"Kinh Thánh tự giải nghĩa Kinh Thánh"** (*Scriptura Sacra sui ipsius interpres*), không dùng ngụy biện hoặc văn mẫu sơ sài.
-
-### 4. Xử Lý Ngữ Cảnh Sâu Rộng & Kimchi Telemetry Engine (Massive Long-Context Synthesis)
-- **`buildKimchiContextPackage(question, context, isDeep)`**: Tự động tổng hợp toàn văn chương Kinh Thánh qua ma trận đa bản dịch (BTT 1925, KJV, ESV, CGKPV, EDE, JARAI, BDY, BTHD, BDM), mạng lưới đối chiếu TSK chéo, quy tắc thông giải học (Hermeneutics genre rules), chủ đề giáo lý đồng bộ, và dòng bộ nhớ hội thoại lăn (Sliding-window Conversation Memory Stream).
-- **`formatKimchiTelemetryBar(metrics, modelName)`**: Minh bạch hóa tài nguyên xử lý trên từng bong bóng hội thoại: Model name, số câu Kinh Thánh nạp, số bản dịch đối chiếu, số liên kết TSK, ước lượng Tokens và độ trễ phản hồi (latency ms).
-- **Chế độ Deep Research Mode**: Nút toggle `#floating-deep-research-btn` và `#ai-deep-research-toggle-btn` cho phép kích hoạt phân tích sâu nguyên ngữ Strong's, niên đại giao ước và biến thể bản văn.
-- **Tường lửa kiểm thử tự động**: 79/79 test cases Pytest pass 100% trên cả 2 kho lưu trữ (`scratch` và `E:\kinhthanh`).
+### 1-4. Kiến Trúc Lõi Kimchi Multi-Model & Telemetry Engine
+- **Đa Nhà Cung Cấp**: Tích hợp 5 provider (OpenAI, Gemini, Anthropic, DeepSeek, Groq) với fallback tự động và quản lý API keys mã hóa AES-GCM trong localStorage.
+- **Bộ Tứ Chuyên Gia**: Nhà Chú Giải Thánh Kinh (Biblical Scholar), Người Hướng Dẫn Tâm Linh (Spiritual Shepherd), Nhà Phân Tích Cổ Ngữ (Linguistic Analyst), Bác Sĩ Tâm Hồn (Soul Counselor).
+- **Nguyên Tắc Thần Học**: Thần cảm tuyệt đối, kinh điển đóng 66 sách, lấy Kinh Thánh giải thích Kinh Thánh, lấy Chúa Cứu Thế làm trung tâm.
+- **Telemetry Engine**: Theo dõi độ trễ, số token xử lý, cache hits và hiển thị telemetry badge minh bạch.
 
 ### 5. Khắc Phục Lỗi Hiển Thị & Khả Năng Tiếp Cận Trợ Lý Kimchi AI (17/10/2026)
 - Đã đưa nút Kimchi AI lên Header và hoàn thiện giao diện hội thoại thần học.
@@ -228,4 +210,14 @@
 - **Yêu cầu từ anh Jimmy**: *"tôi thấy cái này bị thừa"* (kèm ảnh `media_1792943481825_b7596a98.png` chỉ mũi tên đỏ vào nút `🎨 Màu Cổ Điển` ở mép phải thanh subnav).
 - **Phân tích UX**: Trên thanh Header chính đã có sẵn nút đổi giao diện (`#header-theme-toggle-btn`) mở đầy đủ 6 bộ màu (bao gồm cả Cổ Điển Tin Lành). Việc đặt thêm một nút riêng `Màu Cổ Điển` trên thanh subnav gây dư thừa và phân mảnh điều khiển.
 - **Thực hiện**: Xóa bỏ hoàn toàn nút `#site-subnav-classic-theme` khỏi `index.html` và `js/app.js`.
+- **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
+
+### 21. Tích Hợp Nút Tìm Kiếm Header Di Động & Khắc Phục Nút Tắt Trình Phát Audio (25/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"trên giao diện điện thoại. chỗ trống đó để tìm kiếm. Nút tắt trình chạy chưa hoạt động"* (kèm ảnh `media_1792944585082_512bd390.png`).
+- **Thực hiện hoàn thiện**:
+  1. Lắp nút **Tìm Kiếm Nhanh** (`#mobile-header-search-btn`) vào chính xác khoảng trống bên cạnh nút `☰`: thiết kế dạng pill bo tròn ánh vàng (`🔍 Tìm kiếm...`), bấm vào lập tức mở Bộ máy tra cứu toàn văn HTTLVN Search Hub.
+  2. Khắc phục triệt để lỗi nút đóng âm thanh (`#audio-btn-close` `[✕]`):
+     - Bổ sung quy tắc CSS bắt buộc `.portal-audio-player-bar.hidden { display: none !important; opacity: 0 !important; }` trên toàn hệ thống.
+     - Hàm `hideAudioPlayer()` nay áp dụng trực tiếp `style.setProperty('display', 'none', 'important')` và dừng hoàn toàn luồng phát MP3.
+     - Nâng `z-index: 50` và hỗ trợ cả sự kiện `click` lẫn `touchend` cho nút `✕`, chống chặn cảm ứng trên màn hình cảm ứng di động.
 - **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
