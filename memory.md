@@ -221,3 +221,11 @@
      - Hàm `hideAudioPlayer()` nay áp dụng trực tiếp `style.setProperty('display', 'none', 'important')` và dừng hoàn toàn luồng phát MP3.
      - Nâng `z-index: 50` và hỗ trợ cả sự kiện `click` lẫn `touchend` cho nút `✕`, chống chặn cảm ứng trên màn hình cảm ứng di động.
 - **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
+
+
+### 22. Ẩn Thanh Tiêu Đề Cổng Dưỡng Linh Cũ Trên Điện Thoại (25/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"tôi thấy không cần hiển thị cái này trên điện thoại"* (kèm ảnh `media_1792945549838_6eba13db.png` gạch chéo đỏ thanh banner xanh lá `.portal-brand-bar`).
+- **Phân tích UX**: Thanh banner cũ chứa tiêu đề "Chuyên Mục Tĩnh Nguyện & Dưỡng Linh" và 3 nút tròn chiếm gần nửa màn hình đầu trên điện thoại, đồng thời trùng lặp chức năng với lưới 8 thẻ thao tác nhanh (`.portal-mobile-dashboard`) ngay bên dưới.
+- **Thực hiện**: Đặt `.portal-brand-bar { display: none !important; }` trên toàn bộ thiết bị di động/máy tính bảng (`max-width: 991px`).
+- **Hiệu quả**: Đưa lưới 8 thẻ thao tác hiện đại 2 cột (Đọc Lời Chúa, Đối Chiếu, Câu Gốc, Đố Kinh Thánh, v.v.) lên vị trí nổi bật ngay dưới thanh Header, giao diện cực kỳ hiện đại, trực quan và tối ưu diện tích đọc.
+- **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
