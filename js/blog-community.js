@@ -439,8 +439,8 @@ export class BlogSystem {
           <span class="chapter-badge" style="background: var(--genre-acts); color: #fff;">
             <i class="fa-solid fa-users"></i> THÔNG CÔNG & TRAO ĐỔI LỜI CHÚA
           </span>
-          <h2 class="chapter-title">CÁC NHÁNH CỘNG ĐỒNG BEREA</h2>
-          <p class="chapter-subtitle">Học viên tham gia thảo luận, gửi bài suy ngẫm dưới sự điều phối của Berea Guardian Agent</p>
+          <h2 class="chapter-title">CÁC NHÁNH CỘNG ĐỒNG THÔNG CÔNG</h2>
+          <p class="chapter-subtitle">Học viên tham gia thảo luận, chia sẻ bài suy ngẫm bồi linh trên nền tảng Lời Chúa</p>
         </div>
 
         ${adminModerationQueueHTML}
@@ -458,7 +458,7 @@ export class BlogSystem {
                 <i class="fa-solid fa-pen-fancy"></i> Gửi Bài Suy Ngẫm Vào Nhánh Cộng Đồng
               </h3>
               <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">
-                Mọi bài viết được kiểm duyệt qua <strong>Agent Berea</strong> và sẽ được <strong>Quản Trị Viên</strong> phê duyệt trước khi xuất bản công khai.
+                Mọi bài viết được kiểm duyệt nội dung và sẽ được <strong>Quản Trị Viên</strong> phê duyệt trước khi xuất bản công khai.
               </p>
               <div id="berea-validation-alert" class="hidden" style="margin-bottom: 1rem;"></div>
               <div class="form-group">
@@ -482,7 +482,7 @@ export class BlogSystem {
                 <textarea id="community-content-input" rows="4" placeholder="Viết cảm nhận của bạn..."></textarea>
               </div>
               <button id="submit-community-post-btn" class="btn-primary" style="width: 100%;">
-                <i class="fa-solid fa-paper-plane"></i> Gửi Bài Chia Sẻ (Kiểm Duyệt Qua Berea Agent)
+                <i class="fa-solid fa-paper-plane"></i> Gửi Bài Chia Sẻ (Kiểm Duyệt Nội Dung)
               </button>
             </div>
 

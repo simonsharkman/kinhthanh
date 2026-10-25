@@ -1,7 +1,7 @@
 # 🧠 Memory Persistence — Logos MultiVerse (v2.5.0 Enterprise)
 
 ## 📌 Tổng Quan Dự Án & Định Danh
-- **Dự án**: Logos MultiVerse (Nền tảng tra cứu, đối chiếu đa bản dịch và trợ lý AI thần học Berea).
+- **Dự án**: Logos MultiVerse (Nền tảng tra cứu, đối chiếu đa bản dịch và trợ lý Thánh Kinh AI).
 - **Trạng thái kiểm thử**: 102/102 Pytest suites PASS (100% Green).
 - **Workspace chính**: `E:\kinhthanh`
 - **Mirror workspace**: `C:\Users\Admin\.gemini\antigravity-ide\scratch\logos-bible-multiverse`
@@ -26,7 +26,7 @@
 2. **Hermeneutics Engine (`js/hermeneutics-engine.js`)**:
    - Tích hợp từ điển biểu tượng thần học (Metaphors & Typology).
    - TSK cross-reference engine và dynamic typology scanner.
-3. **Trợ Lý AI Thần Học Berea (`js/ai-assistant.js`)**:
+3. **Trợ Lý Thánh Kinh AI (`js/ai-assistant.js`)**:
    - Hỗ trợ Zero-Setup (nội suy kiến thức) và ChatGPT API integration (GPT-4o).
    - Tự động gợi ý câu hỏi theo phân đoạn Kinh Thánh hiện tại.
 4. **Bảo Mật Zero-Tamper & Quản Trị Hệ Thống (`js/community-guardian.js`, `js/blog-community.js`)**:
@@ -85,7 +85,7 @@
   - *Nhánh Cộng Đồng (`#community-view`)*
   - *Trung Tâm Media (`#media-view`)*
   - *Admin Banner & Quyền Quản Trị*
-  - *Trợ Lý AI Thần Học Berea*
+  - *Trợ Lý Thánh Kinh AI*
   - *Chuyển đổi giao diện Sáng / Tối (Theme)*
   - **Quy tắc cách ly**: Tất cả các tính năng trên CHỈ được hiển thị trong View Panel hoặc Modal riêng biệt; **TUYỆT ĐỐI KHÔNG** được phép can thiệp, xóa bộ đệm `passagesCache`, hay làm thay đổi ngữ cảnh phân đoạn đang mở của Focus Reader nếu người dùng không chủ động chọn đọc phân đoạn đó.
 
@@ -99,17 +99,17 @@
 ---
 
 ## 🧠 KIẾN TRÚC KIMCHI MULTI-MODEL AI HARNESS (v2.8.0 ENTERPRISE)
-> **Mục tiêu**: Nâng cấp Berea AI Copilot theo mô hình **Kimchi (`getkimchi/kimchi`)**, mở rộng xử lý ngữ cảnh sâu rộng qua Multi-Provider và Deep Semantic RAG trên toàn bộ 66 sách Kinh Thánh.
+> **Mục tiêu**: Nâng cấp Logos AI Copilot theo mô hình **Kimchi (`getkimchi/kimchi`)**, mở rộng xử lý ngữ cảnh sâu rộng qua Multi-Provider và Deep Semantic RAG trên toàn bộ 66 sách Kinh Thánh.
 
 ### 1. Phân Tuyến 5 Nhà Cung Cấp Đa Mô Hình (Multi-Provider Support)
-1. **Berea Autonomous Core (Offline RAG)**: Chạy hoàn toàn cục bộ, không cần API Key, không phụ thuộc internet, xử lý tức thì cả 66 sách Kinh Thánh qua bộ dữ liệu chuẩn.
+1. **Logos Autonomous Core (Offline RAG)**: Chạy hoàn toàn cục bộ, không cần API Key, không phụ thuộc internet, xử lý tức thì cả 66 sách Kinh Thánh qua bộ dữ liệu chuẩn.
 2. **Google Gemini AI**: Tích hợp `gemini-2.0-flash`, `gemini-1.5-flash`, `gemini-1.5-pro` — Context Window 1M+ tokens cực kỳ tối ưu cho nghiên cứu toàn bộ sách và chương Kinh Thánh.
 3. **OpenAI ChatGPT**: Tích hợp `gpt-4o-mini` và `gpt-4o` cho khả năng lý luận thần học sắc bén.
 4. **DeepSeek AI**: Tích hợp `deepseek-chat` (V3) và `deepseek-reasoner` (R1) giải kinh chuyên sâu.
 5. **Ollama Local AI**: Kết nối máy chủ LLM nội bộ tại `http://localhost:11434` (Llama 3, Qwen 2.5, Mistral...).
 
 ### 2. Bộ Tứ Vai Trò Chuyên Gia Kimchi (Specialized Agentic Roles)
-- `⚡ Berea Copilot`: Trợ lý toàn diện kiêm quản trị hệ thống, tự động nhận diện và thực thi lệnh kép (VD: *"Mở sách Giô-suê đoạn 24 và bật đối chiếu 6 bản dịch"*).
+- `⚡ Logos Copilot`: Trợ lý toàn diện kiêm quản trị hệ thống, tự động nhận diện và thực thi lệnh kép (VD: *"Mở sách Giô-suê đoạn 24 và bật đối chiếu 6 bản dịch"*).
 - `🎓 Giải Kinh Thần Học (Exegete)`: Chuyên sâu Mạch Văn Cứu Chuộc, Thần học Giao ước và Typology Đấng Christ.
 - `📜 Nguyên Ngữ & Strong's (Linguist)`: Bóc tách từ vựng Koine Greek / Biblical Hebrew, ngữ pháp và mã Strong's.
 - `🏛️ Bối Cảnh Lịch Sử (Historian)`: Khảo cứu Cận Đông Cổ Đại, niên đại trước thuật, phong tục và khảo cổ.

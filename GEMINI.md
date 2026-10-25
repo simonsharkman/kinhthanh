@@ -19,7 +19,7 @@
 2. **Hermeneutics Engine (`js/hermeneutics-engine.js`)**:
    - Giải mã hình ảnh ẩn dụ & biểu tượng (Biblical Typology & Metaphors).
    - Nguyên tắc "Kinh Thánh tự giải nghĩa Kinh Thánh" (*Scriptura Sacra sui ipsius interpres*), TSK Cross-References.
-3. **Theological AI Copilot Berea (`js/ai-assistant.js`)**:
+3. **Theological AI Copilot Logos (`js/ai-assistant.js`)**:
    - Chế độ Zero-Setup nội suy dữ liệu thần học chính thống.
    - Chế độ ChatGPT (BYO OpenAI API Key).
 4. **Community Guardian & Zero-Tamper Security (`js/community-guardian.js`)**:

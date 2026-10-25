@@ -1426,7 +1426,7 @@ export class BibleEngine {
       }
     });
 
-    // 6. Action: Hỏi Trợ Lý AI Berea
+    // 6. Action: Hỏi Trợ Lý Thánh Kinh AI
     results.push({
       type: 'ask_ai',
       badge: '✨ AI COPILOT',

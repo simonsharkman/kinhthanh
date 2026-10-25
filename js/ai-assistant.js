@@ -1,6 +1,6 @@
 /* ==========================================================================
    LOGOS MULTIVERSE - THEOLOGICAL AI COPILOT & AUTONOMOUS AGENT (KIMCHI-GRADE)
-   Multi-Model Orchestration (Gemini, OpenAI, DeepSeek, Ollama, Berea Autonomous),
+   Multi-Model Orchestration (Gemini, OpenAI, DeepSeek, Ollama, Logos Autonomous),
    Specialized Agentic Roles, Deep Hermeneutics, Biblical Characters Encyclopedia,
    66-Book Masterclass RAG Engine, Live Web Search & Autonomous Copilot Actions
    ========================================================================== */
@@ -12,9 +12,9 @@ import { state } from './state.js';
 export const AI_ROLES = {
   copilot: {
     id: 'copilot',
-    name: 'Berea Copilot',
+    name: 'Logos Copilot',
     icon: 'fa-bolt',
-    badge: '⚡ Berea Copilot',
+    badge: '⚡ Logos Copilot',
     desc: 'Trợ lý toàn diện: Tra cứu thần học & Tự động điều khiển trang web theo lệnh',
     systemFocus: 'Cân bằng giữa giải nghĩa thần học và tự động điều khiển trang web theo yêu cầu người dùng.'
   },
@@ -48,11 +48,11 @@ export const AI_ROLES = {
 export const AI_PROVIDERS = {
   'berea-offline': {
     id: 'berea-offline',
-    name: 'Berea Autonomous Core (Offline RAG)',
-    badge: '⚡ Berea Offline (Không cần Key)',
+    name: 'Logos Autonomous Core (Ngoại Tuyến RAG)',
+    badge: '⚡ Ngoại Tuyến (Không cần Key)',
     requiresKey: false,
     models: [
-      { id: 'berea-v2', name: 'Berea Semantic RAG Engine v2.5 (Toàn bộ 66 Sách)' }
+      { id: 'berea-v2', name: 'Logos Semantic RAG Engine v2.5 (Toàn bộ 66 Sách)' }
     ]
   },
   'gemini': {
@@ -281,7 +281,7 @@ export class AIAssistant {
       let memBlock = `=== DÒNG BỘ NHỚ HỘI THOẠI TRƯỚC ĐÓ (CONVERSATION ROLLING STREAM) ===\n`;
       const recentTurns = this.conversationHistory.slice(-4);
       recentTurns.forEach(turn => {
-        const speaker = turn.role === 'user' ? 'Người Dùng' : 'Trợ Lý Berea AI';
+        const speaker = turn.role === 'user' ? 'Người Dùng' : 'Trợ Lý Thánh Kinh AI';
         const snippet = (turn.content || '').replace(/<[^>]*>/g, '').slice(0, 250);
         memBlock += `[${speaker}]: ${snippet}...\n`;
       });
@@ -937,7 +937,7 @@ export class AIAssistant {
   }
 
   // Wrap response with Kimchi Telemetry Bar
-  wrapWithTelemetry(html, kimchiPkg, startTime, modelName = 'Berea Autonomous Core') {
+  wrapWithTelemetry(html, kimchiPkg, startTime, modelName = 'Logos Autonomous Core') {
     const endTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
     const latencyMs = Math.round(endTime - startTime);
     const telemetryBar = this.formatKimchiTelemetryBar({ ...(kimchiPkg?.metrics || {}), latencyMs: Math.max(12, latencyMs) }, modelName);
@@ -972,14 +972,14 @@ export class AIAssistant {
       }
       html += this.generateChapterMasterclass(passageMention.bookMeta.name_vi, passageMention.chapter, passageMention.bookMeta);
       if (webData) html += this.formatWebDataCitations(webData);
-      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
     }
 
     // 2. Biblical Character Query ("giô-na là ai", "ai là môi-se", "kể về giô-suê", v.v.)
     const characterMatch = this.findCharacterMatch(question);
     if (characterMatch) {
       const html = this.renderCharacterMasterclass(characterMatch, copilotResult, webData);
-      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
     }
 
     // 3. Whole Book Overview Query (without explicit chapter)
@@ -995,7 +995,7 @@ export class AIAssistant {
       }
       html += this.generateChapterMasterclass(passageMention.bookMeta.name_vi, passageMention.chapter, passageMention.bookMeta);
       if (webData) html += this.formatWebDataCitations(webData);
-      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
     }
 
     // 3. Whole Chapter Study Query for Current Context
@@ -1011,7 +1011,7 @@ export class AIAssistant {
       }
       html += this.generateChapterMasterclass(bookName, chapterNum, bookMeta);
       if (webData) html += this.formatWebDataCitations(webData);
-      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
     }
 
     // 4. Original Languages & Strong's Query
@@ -1034,7 +1034,7 @@ export class AIAssistant {
         </div>
       `;
       if (webData) html += this.formatWebDataCitations(webData);
-      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
     }
 
     // 5. Historical & Cultural Context Query
@@ -1054,7 +1054,7 @@ export class AIAssistant {
         </div>
       `;
       if (webData) html += this.formatWebDataCitations(webData);
-      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
     }
 
     // 6. Metaphors & Typology Query
@@ -1073,7 +1073,7 @@ export class AIAssistant {
         </div>
       `;
       if (webData) html += this.formatWebDataCitations(webData);
-      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
     }
 
     // 7. Practical Life Application Query
@@ -1092,7 +1092,7 @@ export class AIAssistant {
         </div>
       `;
       if (webData) html += this.formatWebDataCitations(webData);
-      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+      return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
     }
 
     // 8. General Substantive Response (Never Weak Generic Fallbacks!)
@@ -1110,7 +1110,7 @@ export class AIAssistant {
       <div class="theological-masterclass-card animate-fade-in" style="line-height: 1.6;">
         ${actionBadge}
         <div class="masterclass-header" style="border-bottom: 1px solid var(--accent-gold-border); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
-          <span class="badge-gold" style="background: var(--accent-gold); color: #121212; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 4px;">TRỢ LÝ THẦN HỌC BEREA AI COPILOT</span>
+          <span class="badge-gold" style="background: var(--accent-gold); color: #121212; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 4px;">TRỢ LÝ THÁNH KINH AI COPILOT</span>
           <h4 style="color: var(--accent-gold); margin: 0.35rem 0 0.15rem 0; font-size: 1.05rem;">TRA CỨU THẦN HỌC: "${question}"</h4>
         </div>
 
@@ -1120,7 +1120,7 @@ export class AIAssistant {
         </p>
 
         <div style="background: rgba(212,175,55,0.05); border-left: 3px solid var(--accent-gold); padding: 0.65rem 0.85rem; border-radius: 6px; margin: 0.6rem 0; font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6;">
-          <strong style="color: var(--accent-gold);"><i class="fa-solid fa-compass"></i> Hướng Dẫn Khảo Cứu Berea:</strong><br>
+          <strong style="color: var(--accent-gold);"><i class="fa-solid fa-compass"></i> Hướng Dẫn Khảo Cứu Thánh Kinh:</strong><br>
           • <strong>Tra cứu toàn bộ 66 sách:</strong> Bạn có thể gõ trực tiếp tên bất kỳ sách nào kèm số đoạn (VD: <code>Giô-suê 24</code>, <code>Rô-ma 8</code>, <code>Thi thiên 23</code>, <code>Ê-sai 53</code>) để mở bài giảng giải kinh chuyên sâu.<br>
           • <strong>Ra lệnh điều khiển tự động:</strong> Gõ <code>mở sách Giô-suê 24 và bật đối chiếu 6 bản dịch</code>, <code>bật bản dịch Ê-đê và KJV</code>, hoặc <code>giao diện tối</code>.<br>
           • <strong>Mở rộng trí tuệ nhân tạo:</strong> Nhấp vào biểu tượng ⚙️ ở góc trên để cấu hình <strong>Google Gemini</strong>, <strong>OpenAI ChatGPT</strong> hoặc <strong>DeepSeek</strong> để nâng cao khả năng xử lý ngữ cảnh sâu rộng như Kimchi!
@@ -1143,7 +1143,7 @@ export class AIAssistant {
     if (webData) {
       html += this.formatWebDataCitations(webData);
     }
-    return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Berea Autonomous Core');
+    return this.wrapWithTelemetry(html, kimchiPkg, startTime, 'Logos Autonomous Core');
   }
 
   // Format Web Search Citations
@@ -1183,7 +1183,7 @@ export class AIAssistant {
       ? `\n\n${kimchiPackage.contextString}`
       : '';
 
-    return `Bạn là Trợ Lý Thần Học Berea AI kiêm Autonomous Copilot của hệ thống Logos MultiVerse.
+    return `Bạn là Trợ Lý Thánh Kinh AI kiêm Autonomous Copilot của hệ thống Logos MultiVerse.
 VAI TRÒ HIỆN TẠI CỦA BẠN: ${roleConfig.name} (${roleConfig.badge}).
 ĐỊNH HƯỚNG VAI TRÒ: ${roleConfig.systemFocus}
 
@@ -1404,7 +1404,7 @@ BỐI CẢNH PHÂN ĐOẠN HIỆN TẠI:
         console.warn('Gemini query failed, falling back to Autonomous Core:', e);
         resultHTML = this.queryOfflineTheology(question, context, webData, kimchiPackage) + `
           <div style="font-size: 0.74rem; color: var(--status-warning); margin-top: 0.6rem; padding: 0.4rem 0.6rem; background: rgba(212,175,55,0.08); border-radius: 4px;">
-            <i class="fa-solid fa-triangle-exclamation"></i> Đã tự động chuyển sang Berea Autonomous Core do sự cố Gemini (${e.message}).
+            <i class="fa-solid fa-triangle-exclamation"></i> Đã tự động chuyển sang Logos Autonomous Core do sự cố Gemini (${e.message}).
           </div>
         `;
       }
@@ -1416,7 +1416,7 @@ BỐI CẢNH PHÂN ĐOẠN HIỆN TẠI:
         console.warn('OpenAI query failed, falling back to Autonomous Core:', e);
         resultHTML = this.queryOfflineTheology(question, context, webData, kimchiPackage) + `
           <div style="font-size: 0.74rem; color: var(--status-warning); margin-top: 0.6rem; padding: 0.4rem 0.6rem; background: rgba(212,175,55,0.08); border-radius: 4px;">
-            <i class="fa-solid fa-triangle-exclamation"></i> Đã tự động chuyển sang Berea Autonomous Core do sự cố OpenAI (${e.message}).
+            <i class="fa-solid fa-triangle-exclamation"></i> Đã tự động chuyển sang Logos Autonomous Core do sự cố OpenAI (${e.message}).
           </div>
         `;
       }
@@ -1428,7 +1428,7 @@ BỐI CẢNH PHÂN ĐOẠN HIỆN TẠI:
         console.warn('DeepSeek query failed, falling back to Autonomous Core:', e);
         resultHTML = this.queryOfflineTheology(question, context, webData, kimchiPackage) + `
           <div style="font-size: 0.74rem; color: var(--status-warning); margin-top: 0.6rem; padding: 0.4rem 0.6rem; background: rgba(212,175,55,0.08); border-radius: 4px;">
-            <i class="fa-solid fa-triangle-exclamation"></i> Đã tự động chuyển sang Berea Autonomous Core do sự cố DeepSeek (${e.message}).
+            <i class="fa-solid fa-triangle-exclamation"></i> Đã tự động chuyển sang Logos Autonomous Core do sự cố DeepSeek (${e.message}).
           </div>
         `;
       }
@@ -1440,12 +1440,12 @@ BỐI CẢNH PHÂN ĐOẠN HIỆN TẠI:
         console.warn('Ollama query failed, falling back to Autonomous Core:', e);
         resultHTML = this.queryOfflineTheology(question, context, webData, kimchiPackage) + `
           <div style="font-size: 0.74rem; color: var(--status-warning); margin-top: 0.6rem; padding: 0.4rem 0.6rem; background: rgba(212,175,55,0.08); border-radius: 4px;">
-            <i class="fa-solid fa-triangle-exclamation"></i> Đã tự động chuyển sang Berea Autonomous Core do sự cố Ollama (${e.message}).
+            <i class="fa-solid fa-triangle-exclamation"></i> Đã tự động chuyển sang Logos Autonomous Core do sự cố Ollama (${e.message}).
           </div>
         `;
       }
     } else {
-      // 5. Default: Berea Autonomous Core (Zero-Setup RAG across 66 Books)
+      // 5. Default: Logos Autonomous Core (Zero-Setup RAG across 66 Books)
       resultHTML = this.queryOfflineTheology(question, context, webData, kimchiPackage);
     }
 
@@ -1483,7 +1483,7 @@ BỐI CẢNH PHÂN ĐOẠN HIỆN TẠI:
         <div class="metaphor-card" style="padding: 1rem; border-color: var(--accent-gold-border);">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
             <span style="font-weight: 700; color: var(--accent-gold); font-size: 0.88rem; display: flex; align-items: center; gap: 0.35rem;">
-              <i class="fa-solid fa-robot"></i> TRỢ LÝ THẦN HỌC BEREA AI COPILOT
+              <i class="fa-solid fa-robot"></i> TRỢ LÝ THÁNH KINH AI COPILOT
               <span class="online-indicator" title="Sẵn sàng tra cứu không gian mạng" style="font-size: 0.7rem; color: #58a6ff; font-weight: normal; margin-left: 0.3rem;">
                 <span class="online-dot"></span> Live Web
               </span>
@@ -1519,7 +1519,7 @@ BỐI CẢNH PHÂN ĐOẠN HIỆN TẠI:
           <div class="ai-message assistant">
             <i class="fa-solid fa-dove" style="color: var(--accent-gold); margin-top: 2px;"></i>
             <div>
-              Chào bạn! Tôi là <strong>Trợ Lý Thần Học Berea AI Copilot</strong>. Bạn có thể hỏi tôi bất kỳ điều gì về toàn bộ 66 sách Thánh Kinh (VD: <em>"Phân tích Giô-suê 24"</em>, <em>"Giô-na là ai?"</em>), hoặc ra lệnh trực tiếp: <em>"Mở sách Giô-suê đoạn 24 và bật đối chiếu 6 bản dịch"</em>.
+              Chào bạn! Tôi là <strong>Trợ Lý Thánh Kinh AI Copilot</strong>. Bạn có thể hỏi tôi bất kỳ điều gì về toàn bộ 66 sách Thánh Kinh (VD: <em>"Phân tích Giô-suê 24"</em>, <em>"Giô-na là ai?"</em>), hoặc ra lệnh trực tiếp: <em>"Mở sách Giô-suê đoạn 24 và bật đối chiếu 6 bản dịch"</em>.
             </div>
           </div>
         </div>

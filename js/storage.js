@@ -262,7 +262,7 @@ export class LogosStorage {
       },
       {
         id: 'fb_default_2',
-        author: 'Độc giả Berea',
+        author: 'Độc giả Thánh Kinh',
         contact: 'Ẩn danh',
         category: 'Góp ý tính năng & Giao diện',
         message: 'Giao diện chia đôi 50/50 trên điện thoại để đối chiếu nhiều bản dịch cùng lúc rất tiện lợi khi học Kinh Thánh nhóm nhỏ.',

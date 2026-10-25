@@ -33,7 +33,7 @@
    - Nhúng trình phát video hoạt hình giải thích cấu trúc từng sách từ **The Bible Project**.
    - Cổng liên kết 1 chạm đến các nền tảng học thuật: **BibleHub, StepBible (Tyndale House Cambridge), OpenBible**.
 
-6. **Trợ Lý AI Thần Học Berea (Theological AI Copilot)**:
+6. **Trợ Lý Thánh Kinh AI (Logos AI Copilot)**:
    - **Chế độ Zero-Setup**: Trả lời tức thì các câu hỏi về bối cảnh, từ gốc và ứng dụng thực tiễn mà không cần API Key.
    - **Chế độ ChatGPT**: Hỗ trợ nhập OpenAI API Key cá nhân để trò chuyện mở rộng chuyên sâu với GPT-4o.
    - Gợi ý câu hỏi nhanh 1 chạm theo phân đoạn đang đọc.
@@ -42,10 +42,10 @@
    - Quản trị viên có toàn quyền thay đổi câu gốc tuần, lời thông báo, nút kêu gọi hành động (CTA), chọn tông màu (Ánh Vàng Hoàng Gia, Đỏ Ruby, Xanh Biển) và bật/tắt hiển thị.
    - **Mã Bí Mật Mặc Định**: `logos777` (có thể đổi qua giao diện).
 
-8. **Blog Cá Nhân, Nhánh Cộng Đồng & Berea Guardian Agent**:
+8. **Blog Cá Nhân, Nhánh Cộng Đồng & Hệ Thống Kiểm Duyệt Đạo Đức**:
    - **Zero-Tamper Protection**: Toàn bộ văn bản Kinh Thánh và bài viết của chủ trang được bảo vệ **Chỉ Đọc (Read-Only)**; khách không thể sửa đổi hoặc phá hoại nội dung.
    - Học viên được tham gia gửi bài suy ngẫm vào 3 nhánh thảo luận và chat trực tiếp trong phòng thảo luận.
-   - **Agent Berea**: Tự động kiểm duyệt ngôn từ theo thời gian thực, nhắc nhở đạo đức nhã nhặn theo *Cô-lô-se 4:6*.
+   - **Hệ Thống Kiểm Duyệt**: Tự động kiểm duyệt ngôn từ theo thời gian thực, nhắc nhở đạo đức nhã nhặn theo *Cô-lô-se 4:6*.
 
 ---
 

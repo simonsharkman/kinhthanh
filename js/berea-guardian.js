@@ -6,7 +6,7 @@
 
 export class BereaGuardian {
   constructor() {
-    this.name = "Berea Sentinel Agent";
+    this.name = "Logos Ethics Sentinel Agent";
     this.scriptureMotto = "Lời nói anh em phải luôn luôn có ân hậu, nêm thêm muối, để anh em biết phải đối đáp thế nào với mỗi người. (Cô-lô-se 4:6)";
 
     // Prohibited words, spam signals, hostility patterns
@@ -45,7 +45,7 @@ export class BereaGuardian {
         return {
           passed: false,
           reason: "Nội dung chứa từ ngữ khiếm nhã, thô tục, quảng cáo rác hoặc vi phạm tiêu chuẩn đạo đức cộng đồng.",
-          reminder: `Agent Berea nhắc nhở: "${this.scriptureMotto}"\nXin hãy chọn lọc lời lẽ tôn trọng và gây dựng lẫn nhau trong tình yêu thương.`
+          reminder: `Hệ thống kiểm duyệt nhắc nhở: "${this.scriptureMotto}"\nXin hãy chọn lọc lời lẽ tôn trọng và gây dựng lẫn nhau trong tình yêu thương.`
         };
       }
     }
@@ -64,7 +64,7 @@ export class BereaGuardian {
       <div class="metaphor-card animate-fade-in" style="border-left: 4px solid var(--status-warning); background: rgba(245, 158, 11, 0.08);">
         <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--status-warning); font-weight: 700; margin-bottom: 0.4rem;">
           <i class="fa-solid fa-shield-halved"></i>
-          <span>AGENT BEREA - THÔNG BÁO KIỂM DUYỆT ĐẠO ĐỨC</span>
+          <span>HỆ THỐNG KIỂM DUYỆT ĐẠO ĐỨC THÁNH KINH</span>
         </div>
         <p style="font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.5rem;">
           <strong>Lý do từ chối:</strong> ${reason}

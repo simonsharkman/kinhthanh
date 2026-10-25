@@ -674,7 +674,7 @@ class LogosApp {
       }
 
       case 'ai': {
-        // Tab 5: Trợ Lý AI Thần Học Berea
+        // Tab 5: Trợ Lý Thánh Kinh AI
         drawerBody.innerHTML = aiAssistant.renderAIChatHTML({
           ref: verseRefStr,
           book: book.name_vi,
@@ -1038,7 +1038,7 @@ class LogosApp {
           alertBox.classList.remove('hidden');
         } else {
           alertBox.classList.add('hidden');
-          alert('Bài viết của bạn đã vượt qua sự kiểm duyệt của Agent Berea và đang chờ Quản Trị Viên phê duyệt trước khi xuất bản công khai!');
+          alert('Bài viết của bạn đã vượt qua sự kiểm duyệt nội dung và đang chờ Quản Trị Viên phê duyệt trước khi xuất bản công khai!');
           this.renderCommunityView();
         }
       });
@@ -1053,7 +1053,7 @@ class LogosApp {
         if (!text.trim()) return;
         const res = blogSystem.sendChatMessage('Bạn', text);
         if (!res.success) {
-          alert(`Agent Berea nhắc nhở:\n${res.reason}\n\n${res.reminder}`);
+          alert(`Hệ thống kiểm duyệt nhắc nhở:\n${res.reason}\n\n${res.reminder}`);
         } else {
           chatInput.value = '';
           this.renderCommunityView();
@@ -4720,7 +4720,7 @@ class LogosApp {
       const currentBookObj = bibleEngine.getBookById(state.currentBook);
       const bookNameVi = currentBookObj ? currentBookObj.name_vi : state.currentBook;
       this.addFloatingAIMessage('assistant', `
-        Chào bạn! Tôi là <strong>Trợ Lý Thần Học Berea AI (Kimchi-Grade Long Context)</strong>.<br>
+        Chào bạn! Tôi là <strong>Trợ Lý Thánh Kinh AI (Logos MultiVerse Core)</strong>.<br>
         Tôi có thể nạp toàn bộ chương <strong>${bookNameVi} đoạn ${state.currentChapter}</strong>, đối chiếu ma trận bản dịch song song (BTT, KJV, ESV, CGKPV, Ê-đê, Gia-rai, Ba-na...), phân tích TSK, tra cứu không gian mạng và phân tích thần học. Hãy đặt câu hỏi hoặc chọn các thẻ gợi ý bên dưới!
       `);
     }
@@ -5069,7 +5069,7 @@ class LogosApp {
           const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mod}:generateContent?key=${keyVal}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Ping: Berea AI' }] }] })
+            body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Ping: Logos AI' }] }] })
           });
           if (!res.ok) {
             const err = await res.json().catch(() => ({}));
