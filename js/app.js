@@ -1902,10 +1902,9 @@ class LogosApp {
       });
 
       audioEl.addEventListener('ended', () => {
-        this.audioState.isPlaying = false;
-        this.audioState.isPaused = false;
-        this.updatePlayPauseBtnIcon(false);
-        this.showToast(`Đã nghe xong ${this.audioState.currentBook || ''} đoạn ${this.audioState.currentChapter || ''}.`, 'success');
+        // Tự động nhảy sang đoạn tiếp theo khi phát xong chương hiện tại
+        this.showToast(`Đã nghe xong đoạn ${this.audioState.currentChapter || ''}. Đang chuyển đoạn tiếp...`, 'info');
+        this.nextChapterAudio();
       });
 
       audioEl.addEventListener('error', (e) => {
@@ -2141,32 +2140,55 @@ class LogosApp {
     document.getElementById('portal-audio-player-bar')?.classList.add('hidden');
   }
 
-  nextVerseAudio() {
-    // Tua tới 15 giây trên luồng phát Studio
-    const audioEl = document.getElementById('portal-audio-media-element');
-    if (audioEl && audioEl.duration) {
-      audioEl.currentTime = Math.min(audioEl.duration, audioEl.currentTime + 15);
-      this.showToast('Đã tua tới 15 giây', 'info');
-    } else if (this.audioState.verses && this.audioState.verses.length) {
-      if (this.audioState.currentVerseIndex < this.audioState.verses.length - 1) {
-        this.audioState.currentVerseIndex++;
-        this.speakCurrentVerse();
+  nextChapterAudio() {
+    const bookId = this.audioState.currentBook || state.currentBook || 'GEN';
+    const curCh = parseInt(this.audioState.currentChapter || state.currentChapter || 1, 10);
+    const book = bibleEngine.getBookById(bookId);
+    const maxCh = book?.chapters_count || 1;
+
+    if (curCh < maxCh) {
+      const nextCh = curCh + 1;
+      this.playChapterAudio(bookId, nextCh, 1);
+    } else {
+      const books = bibleEngine.books || [];
+      const bIdx = books.findIndex(b => b.id === bookId);
+      if (bIdx >= 0 && bIdx < books.length - 1) {
+        const nextBook = books[bIdx + 1];
+        this.playChapterAudio(nextBook.id, 1, 1);
+        this.showToast(`Chuyển sang sách ${nextBook.name_vi} đoạn 1`, 'info');
+      } else {
+        this.showToast('Đã đến chương cuối cùng của Kinh Thánh', 'info');
       }
     }
   }
 
-  prevVerseAudio() {
-    // Tua lùi 15 giây trên luồng phát Studio
-    const audioEl = document.getElementById('portal-audio-media-element');
-    if (audioEl) {
-      audioEl.currentTime = Math.max(0, audioEl.currentTime - 15);
-      this.showToast('Đã tua lùi 15 giây', 'info');
-    } else if (this.audioState.verses && this.audioState.verses.length) {
-      if (this.audioState.currentVerseIndex > 0) {
-        this.audioState.currentVerseIndex--;
-        this.speakCurrentVerse();
+  prevChapterAudio() {
+    const bookId = this.audioState.currentBook || state.currentBook || 'GEN';
+    const curCh = parseInt(this.audioState.currentChapter || state.currentChapter || 1, 10);
+
+    if (curCh > 1) {
+      const prevCh = curCh - 1;
+      this.playChapterAudio(bookId, prevCh, 1);
+    } else {
+      const books = bibleEngine.books || [];
+      const bIdx = books.findIndex(b => b.id === bookId);
+      if (bIdx > 0) {
+        const prevBook = books[bIdx - 1];
+        const lastCh = prevBook.chapters_count || 1;
+        this.playChapterAudio(prevBook.id, lastCh, 1);
+        this.showToast(`Chuyển về sách ${prevBook.name_vi} đoạn ${lastCh}`, 'info');
+      } else {
+        this.showToast('Đã ở chương đầu tiên của Kinh Thánh', 'info');
       }
     }
+  }
+
+  nextVerseAudio() {
+    this.nextChapterAudio();
+  }
+
+  prevVerseAudio() {
+    this.prevChapterAudio();
   }
 
   changeAudioSpeed(speed) {
