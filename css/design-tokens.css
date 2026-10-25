@@ -46,14 +46,14 @@
   --status-info: #3b82f6;
 
   /* Typography & HTTLVN Authentic Scripture Fonts */
-  --font-brand: 'Playfair Display', 'Merriweather', Georgia, serif;
-  --font-heading: 'Playfair Display', 'Merriweather', Georgia, serif;
-  --font-bible: 'Noto Serif', 'Playfair Display', 'Merriweather', Georgia, serif;
-  --font-scripture: 'Noto Serif', 'Merriweather', Georgia, serif;
-  --font-ui: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-hebrew-greek: 'SBL BibLit', 'Cardo', serif;
+  --font-brand: 'Playfair Display', 'Noto Serif', 'Merriweather', Georgia, serif;
+  --font-heading: 'Playfair Display', 'Noto Serif', 'Merriweather', Georgia, serif;
+  --font-bible: 'Noto Serif', 'Merriweather', 'Charter', Georgia, serif;
+  --font-scripture: 'Noto Serif', 'Merriweather', 'Charter', Georgia, serif;
+  --font-ui: 'Outfit', 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-hebrew-greek: 'SBL BibLit', 'Cardo', 'Times New Roman', serif;
 
-  /* Font Scaling & Line Heights */
+  /* Font Scaling & Line Heights (Tối ưu cho tiếng Việt có dấu) */
   --bible-font-size: 1.2rem;
   --bible-line-height: 1.95;
   --bible-letter-spacing: 0.012em;
