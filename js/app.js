@@ -1848,11 +1848,6 @@ class LogosApp {
       this.openHTTLVNSearchModal();
     });
 
-    document.getElementById('site-subnav-classic-theme')?.addEventListener('click', () => {
-      state.setTheme('classic-httlvn');
-      this.showToast('Đã kích hoạt giao diện Màu Cổ Điển Tin Lành!', 'success');
-    });
-
     // Chuyển tab giữa Tĩnh Nguyện & Dưỡng Linh và Bản Văn Kinh Thánh
     document.getElementById('portal-tab-devotion-btn')?.addEventListener('click', () => {
       this.switchPortalTab('devotion');
