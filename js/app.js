@@ -1945,8 +1945,21 @@ class LogosApp {
       this.changeAudioSpeed(parseFloat(e.target.value) || 1.0);
     });
 
-    document.getElementById('audio-btn-close')?.addEventListener('click', () => {
-      this.hideAudioPlayer();
+    const closeBtn = document.getElementById('audio-btn-close');
+    if (closeBtn) {
+      const handleClose = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        this.hideAudioPlayer();
+      };
+      closeBtn.addEventListener('click', handleClose);
+      closeBtn.addEventListener('touchend', handleClose);
+    }
+
+    document.getElementById('mobile-header-search-btn')?.addEventListener('click', () => {
+      this.openHTTLVNSearchModal();
     });
 
     document.getElementById('btn-clear-playlist')?.addEventListener('click', () => {
@@ -1966,7 +1979,10 @@ class LogosApp {
 
     // Hiển thị thanh audio bar
     const bar = document.getElementById('portal-audio-player-bar');
-    if (bar) bar.classList.remove('hidden');
+    if (bar) {
+      bar.classList.remove('hidden');
+      bar.style.removeProperty('display');
+    }
 
     const titleEl = document.getElementById('audio-player-title');
     if (titleEl) titleEl.textContent = `${bookNameVi} đoạn ${ch}`;
@@ -2132,7 +2148,12 @@ class LogosApp {
 
   hideAudioPlayer() {
     this.stopChapterAudio();
-    document.getElementById('portal-audio-player-bar')?.classList.add('hidden');
+    const bar = document.getElementById('portal-audio-player-bar');
+    if (bar) {
+      bar.classList.add('hidden');
+      bar.style.setProperty('display', 'none', 'important');
+    }
+    this.showToast('Đã tắt trình phát âm thanh', 'info');
   }
 
   nextChapterAudio() {

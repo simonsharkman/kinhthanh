@@ -816,8 +816,18 @@ body {
    Chế độ đối chiếu Split-Screen 50/50 (Chia đều Trên & Dưới) & Tối giản mục thừa
    ========================================================================== */
 /* Nút Hamburger Mở Menu Trượt Di Động */
-.mobile-drawer-toggle-btn {
+.mobile-drawer-toggle-btn,
+.mobile-header-search-btn {
   display: none;
+}
+
+.hidden,
+.portal-audio-player-bar.hidden,
+#portal-audio-player-bar.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }
 
 @media (max-width: 991px) {
@@ -871,9 +881,39 @@ body {
     overflow: hidden !important;
   }
 
-  /* Ẩn logo và biểu tượng Thánh Giá trên header điện thoại theo yêu cầu anh Jimmy (giải phóng không gian cho các nút đọc) */
+  /* Ẩn logo và biểu tượng Thánh Giá trên header điện thoại theo yêu cầu anh Jimmy */
   .header-brand {
     display: none !important;
+  }
+
+  /* Nút Tìm Kiếm Nhanh lắp vào khoảng trống header điện thoại theo yêu cầu anh Jimmy */
+  .mobile-header-search-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.35rem;
+    height: 32px;
+    padding: 0 0.65rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    margin-right: auto !important;
+  }
+
+  .mobile-header-search-btn:active {
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
+  }
+
+  .mobile-header-search-btn i {
+    color: var(--accent-gold);
+    font-size: 0.8rem;
   }
 
   .brand-text h1,

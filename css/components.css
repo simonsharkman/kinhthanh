@@ -6287,14 +6287,26 @@
   cursor: pointer;
 }
 
+.hidden,
+.portal-audio-player-bar.hidden,
+#portal-audio-player-bar.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
 .audio-close-btn {
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   cursor: pointer;
-  padding: 0.35rem;
+  padding: 0.35rem 0.5rem;
   border-radius: 4px;
+  position: relative;
+  z-index: 50;
+  touch-action: manipulation;
 }
 
 .audio-close-btn:hover {
