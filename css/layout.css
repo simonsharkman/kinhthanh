@@ -192,10 +192,10 @@ body {
 #main-header {
   min-height: 60px;
   height: auto;
-  background: var(--glass-bg, var(--bg-surface));
+  background: linear-gradient(135deg, #4b5e28 0%, #36441c 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(229, 193, 88, 0.22);
+  border-bottom: 2px solid #283313;
   padding: 0.45rem 1.25rem;
   position: sticky;
   top: 0;
@@ -248,7 +248,7 @@ body {
   font-family: var(--font-brand);
   font-size: 1.15rem;
   letter-spacing: 0.06em;
-  color: var(--accent-gold-light);
+  color: #f7e07b;
   line-height: 1;
   white-space: nowrap;
   margin: 0;
@@ -257,9 +257,36 @@ body {
 .brand-text .brand-sub {
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--accent-gold);
-  letter-spacing: 0.1em;
-  opacity: 0.9;
+  color: #e2e8f0;
+  letter-spacing: 0.04em;
+  opacity: 0.95;
+}
+
+#main-header .selector-pill {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+#main-header .selector-pill:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #f7e07b;
+  color: #f7e07b;
+}
+
+#main-header .nav-links .nav-btn {
+  color: #e6eed6;
+}
+
+#main-header .nav-links .nav-btn:hover {
+  color: #f7e07b;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+#main-header .nav-links .nav-btn.active {
+  background: #283313;
+  color: #f7e07b;
+  border: 1px solid rgba(247, 224, 123, 0.4);
 }
 
 .brand-tagline {

@@ -45,12 +45,13 @@
 
   <!-- 2. Header Hoàng Gia (Main Navigation Header) -->
   <header id="main-header">
-    <div class="header-brand" id="brand-home-btn" title="Về trang chủ">
+    <div class="header-brand" id="brand-home-btn" title="Về trang chủ Cổng Tĩnh Nguyện">
+      <span class="portal-logo-v">V</span>
       <span class="brand-symbol">
         <img src="data/cross_holy_gold.gif" alt="Thánh Giá Logos" class="brand-gif-cross">
       </span>
       <div class="brand-text">
-        <h1 class="brand-title">LOGOS <span class="brand-sub">MULTIVERSE</span></h1>
+        <h1 class="brand-title">Kinh Thánh <span class="brand-sub">Chuyên Mục Tĩnh Nguyện & Dưỡng Linh • Logos MultiVerse</span></h1>
       </div>
     </div>
 
@@ -92,8 +93,8 @@
 
       <!-- Navigation Tabs (Cổng Tĩnh Nguyện, Đọc Kinh Thánh, KT Đối Chiếu BibleHub TSK, Blog, Nhánh Cộng Đồng, Media, Dâng Hiến Xây Dựng Website) -->
       <nav class="nav-links">
-        <button class="nav-btn" data-view="portal" title="Cổng Thông Tin & Dưỡng Linh Thánh Kinh (Giao diện Truyền Thống kinhthanh.net)"><i class="fa-solid fa-house-chimney-window"></i> Cổng Tĩnh Nguyện</button>
-        <button class="nav-btn active" data-view="bible" title="Đọc Kinh Thánh & so sánh các bản dịch"><i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh</button>
+        <button class="nav-btn active" data-view="portal" title="Cổng Thông Tin & Dưỡng Linh Thánh Kinh (kinhthanh.net)"><i class="fa-solid fa-house-chimney-window"></i> Cổng Tĩnh Nguyện</button>
+        <button class="nav-btn" data-view="bible" title="Đọc Kinh Thánh & so sánh các bản dịch"><i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh</button>
         <button class="nav-btn" data-view="tsk" title="Kinh Thánh Đối Chiếu (BibleHub TSK - Bản Tiếng Việt & Tiếng Anh)"><i class="fa-solid fa-book-atlas"></i> KT Đối Chiếu</button>
         <button class="nav-btn" data-view="blog"><i class="fa-solid fa-feather-pointed"></i> Blog Chuyên Sâu</button>
         <button class="nav-btn" data-view="community"><i class="fa-solid fa-users"></i> Nhánh Cộng Đồng</button>
@@ -127,6 +128,17 @@
     </div>
   </header>
 
+  <!-- 2.5 Thanh Menu Phụ Truyền Thống (Portal Sub-nav Bar Cố Định) -->
+  <nav id="site-subnav-bar" class="portal-subnav-bar" aria-label="Menu phụ Cổng Kinh Thánh">
+    <button class="portal-subnav-btn" id="site-subnav-search"><i class="fa-solid fa-bars"></i> ≡ Tìm</button>
+    <button class="portal-subnav-btn" id="site-subnav-playlist"><i class="fa-solid fa-list-ul"></i> Playlist</button>
+    <button class="portal-subnav-btn" id="site-subnav-newest"><i class="fa-solid fa-clock"></i> Mới Đăng</button>
+    <button class="portal-subnav-btn" id="site-subnav-recent"><i class="fa-solid fa-eye"></i> Mới Xem</button>
+    <button class="portal-subnav-btn" id="site-subnav-popular"><i class="fa-solid fa-fire"></i> Xem Nhiều</button>
+    <button class="portal-subnav-btn" id="site-subnav-thanksgiving"><i class="fa-solid fa-wheat-awn"></i> Mùa Tạ Ơn</button>
+    <button class="portal-subnav-btn" id="site-subnav-classic-theme" style="margin-left: auto;"><i class="fa-solid fa-palette"></i> Màu Cổ Điển</button>
+  </nav>
+
   <!-- 3. Thanh Lọc 8 Thể Loại Văn Chương Kinh Thánh (Genre Filter Bar) -->
   <section id="genre-filter-bar" aria-label="Lọc theo thể loại văn chương">
     <span class="genre-filter-label"><i class="fa-solid fa-layer-group"></i> THỂ LOẠI:</span>
@@ -149,7 +161,7 @@
   <!-- 4. Thân Ứng Dụng Chính (App Body Workspace) -->
   <main id="app-body">
     <!-- View 0: Cổng Thông Tin & Dưỡng Linh Thánh Kinh Truyền Thống (kinhthanh.net / Tin Lành Classic Portal) -->
-    <div id="portal-view" class="view-panel hidden">
+    <div id="portal-view" class="view-panel active">
       <div class="portal-container">
         <!-- 1. Thanh Tiêu Đề Cổng Thông Tin -->
         <div class="portal-brand-bar">
@@ -309,10 +321,22 @@
             </div>
           </aside>
 
-          <!-- Cột Phải: Nội Dung Chính (TĨNH NGUYỆN & DƯỠNG LINH) -->
+          <!-- Cột Phải: Nội Dung Chính (TĨNH NGUYỆN, DƯỠNG LINH & ĐỌC KINH THÁNH) -->
           <main class="portal-main">
-            <!-- Box A: TĨNH NGUYỆN -->
-            <div class="portal-card">
+            <!-- Thanh Tab Switcher Cột Phải -->
+            <div class="portal-main-tabs" role="tablist">
+              <button type="button" class="portal-tab-btn active" id="portal-tab-devotion-btn" data-target="devotion">
+                <i class="fa-solid fa-scroll"></i> Tĩnh Nguyện & Dưỡng Linh
+              </button>
+              <button type="button" class="portal-tab-btn" id="portal-tab-reader-btn" data-target="reader">
+                <i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh (<span id="portal-passage-tab-label">Giăng 1</span>)
+              </button>
+            </div>
+
+            <!-- Tab 1: TĨNH NGUYỆN & DƯỠNG LINH -->
+            <div id="portal-tab-devotion-panel" class="portal-tab-panel active">
+              <!-- Box A: TĨNH NGUYỆN -->
+              <div class="portal-card">
               <div class="portal-card-header header-terracotta">TĨNH NGUYỆN</div>
               <div class="portal-card-body">
                 <!-- 1. Câu Gốc -->
@@ -479,13 +503,33 @@
                 </table>
               </div>
             </div>
-          </main>
-        </div>
+          </div>
+
+          <!-- Tab 2: ĐỌC KINH THÁNH TRỰC TIẾP TRÊN NỀN PORTAL -->
+          <div id="portal-tab-reader-panel" class="portal-tab-panel hidden">
+            <div class="portal-card">
+              <div class="portal-card-header header-blue portal-reader-header">
+                <span><i class="fa-solid fa-book-open"></i> BẢN VĂN KINH THÁNH TRỰC TIẾP</span>
+                <div class="portal-reader-actions">
+                  <button type="button" class="portal-back-to-devotion-btn" id="portal-back-to-devotion-btn" title="Quay lại Tĩnh Nguyện & Dưỡng Linh">
+                    <i class="fa-solid fa-arrow-left"></i> Về Tĩnh Nguyện
+                  </button>
+                </div>
+              </div>
+              <div class="portal-card-body" style="padding: 0;">
+                <div id="portal-reader-chapter-container">
+                  <!-- Render động bởi bible-engine.js và app.js -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
+  </div>
 
-    <!-- View 1: Focus Reader (Không gian đọc tĩnh & đối chiếu) -->
-    <div id="focus-reader" class="view-panel active">
+  <!-- View 1: Focus Reader (Không gian đọc tĩnh & đối chiếu) -->
+  <div id="focus-reader" class="view-panel hidden">
       <div id="reader-chapter-container">
         <!-- Nội dung chương và câu sẽ được render động bởi bible-engine.js -->
       </div>

@@ -70,18 +70,30 @@ class LogosApp {
     // 7. Khởi tạo Cổng Thông Tin & Dưỡng Linh Cổ Điển Tin Lành
     this.initPortalView();
 
-    // Nếu URL có #portal / ?view=portal, #tsk / ?view=tsk hoặc #donate / ?view=donate thì tự động mở ngay Tab tương ứng
-    if (typeof window !== 'undefined' && (window.location.hash === '#portal' || window.location.search.includes('view=portal'))) {
-      state.setActiveView('portal');
-    } else if (typeof window !== 'undefined' && (window.location.hash === '#tsk' || window.location.search.includes('view=tsk'))) {
-      state.setActiveView('tsk');
-    } else if (typeof window !== 'undefined' && (window.location.hash === '#donate' || window.location.search.includes('view=donate'))) {
-      state.setActiveView('donate');
-    } else if (typeof window !== 'undefined' && window.innerWidth >= 992) {
-      // Trên máy tính (>= 992px): Mặc định mở ngay Bảng Đối Chiếu (Drawer Inspector) cho Câu 1
-      state.setReadingMode('standard');
-      state.setDrawerTab('parallel');
-      state.selectVerse(1, true);
+    // Thiết lập view ban đầu: Nếu URL có hash cụ thể thì mở tab đó, mặc định lấy Cổng Tĩnh Nguyện 'portal' làm nền chính
+    if (typeof window !== 'undefined') {
+      if (window.location.hash === '#bible' || window.location.search.includes('view=bible')) {
+        state.setActiveView('bible');
+      } else if (window.location.hash === '#tsk' || window.location.search.includes('view=tsk')) {
+        state.setActiveView('tsk');
+      } else if (window.location.hash === '#donate' || window.location.search.includes('view=donate')) {
+        state.setActiveView('donate');
+      } else if (window.location.hash === '#blog' || window.location.search.includes('view=blog')) {
+        state.setActiveView('blog');
+      } else if (window.location.hash === '#community' || window.location.search.includes('view=community')) {
+        state.setActiveView('community');
+      } else if (window.location.hash === '#media' || window.location.search.includes('view=media')) {
+        state.setActiveView('media');
+      } else {
+        state.setActiveView('portal');
+      }
+
+      if (window.innerWidth >= 992) {
+        // Trên máy tính (>= 992px): Mặc định mở ngay Bảng Đối Chiếu (Drawer Inspector) cho Câu 1
+        state.setReadingMode('standard');
+        state.setDrawerTab('parallel');
+        state.selectVerse(1, true);
+      }
     }
 
     console.log('✨ Logos MultiVerse đã sẵn sàng phục vụ học viên!');
@@ -288,16 +300,32 @@ class LogosApp {
     }
     readerContainer.innerHTML = html;
 
+    const portalReaderContainer = document.getElementById('portal-reader-chapter-container');
+    if (portalReaderContainer) {
+      portalReaderContainer.innerHTML = html;
+      this.rebindReaderVerseEvents(portalReaderContainer);
+    }
+
     // Tự động tải trước các bản dịch đang kích hoạt và bản đọc chính (đặc biệt là tiếng Sắc tộc / HTTLVN / CGKPV)
     const versionsToEnsure = Array.from(new Set([...state.activeVersions, state.primaryVersion]));
     bibleEngine.ensurePassageTranslations(bookId, chapterNum, versionsToEnsure).then(loaded => {
       if (loaded && state.currentBook === bookId && state.currentChapter === chapterNum) {
         if (effectiveMode === 'parallel') {
-          readerContainer.innerHTML = bibleEngine.renderChapterParallelHTML(this.currentPassageData, state.activeVersions, state.primaryVersion);
+          const updatedHtml = bibleEngine.renderChapterParallelHTML(this.currentPassageData, state.activeVersions, state.primaryVersion);
+          readerContainer.innerHTML = updatedHtml;
           this.rebindReaderVerseEvents(readerContainer);
+          if (portalReaderContainer) {
+            portalReaderContainer.innerHTML = updatedHtml;
+            this.rebindReaderVerseEvents(portalReaderContainer);
+          }
         } else if (state.primaryVersion && state.primaryVersion !== 'BTT') {
-          readerContainer.innerHTML = bibleEngine.renderChapterHTML(this.currentPassageData, state.activeVersions, state.primaryVersion);
+          const updatedHtml = bibleEngine.renderChapterHTML(this.currentPassageData, state.activeVersions, state.primaryVersion);
+          readerContainer.innerHTML = updatedHtml;
           this.rebindReaderVerseEvents(readerContainer);
+          if (portalReaderContainer) {
+            portalReaderContainer.innerHTML = updatedHtml;
+            this.rebindReaderVerseEvents(portalReaderContainer);
+          }
         }
         if (state.activeDrawerTab === 'parallel' && state.isDrawerOpen) {
           this.renderDrawerContent();
@@ -310,6 +338,10 @@ class LogosApp {
     const currentPassageLabel = document.getElementById('current-passage-label');
     if (currentPassageLabel && book) {
       currentPassageLabel.textContent = `${book.name_vi} ${chapterNum}`;
+    }
+    const portalPassageTabLabel = document.getElementById('portal-passage-tab-label');
+    if (portalPassageTabLabel && book) {
+      portalPassageTabLabel.textContent = `${book.name_vi} ${chapterNum}`;
     }
 
     this.rebindReaderVerseEvents(readerContainer);
@@ -1778,10 +1810,51 @@ class LogosApp {
     document.getElementById('portal-nav-thanksgiving')?.addEventListener('click', () => {
       this.askAIAboutTopic('Các phân đoạn Kinh Thánh ngợi khen và cảm tạ ơn Chúa trong Mùa Tạ Ơn');
     });
+
+    // Chuyển tab giữa Tĩnh Nguyện & Dưỡng Linh và Đọc Bản Văn Kinh Thánh
+    document.getElementById('portal-tab-devotion-btn')?.addEventListener('click', () => {
+      this.switchPortalTab('devotion');
+    });
+
+    document.getElementById('portal-tab-reader-btn')?.addEventListener('click', () => {
+      this.switchPortalTab('reader');
+      const portalReader = document.getElementById('portal-reader-chapter-container');
+      if (portalReader && !portalReader.innerHTML.trim()) {
+        this.loadPassage(state.currentBook, state.currentChapter);
+      }
+    });
+
+    document.getElementById('portal-back-to-devotion-btn')?.addEventListener('click', () => {
+      this.switchPortalTab('devotion');
+    });
+  }
+
+  // Quản lý chuyển tab trong Cổng Tĩnh Nguyện (giữa Tĩnh Nguyện & Dưỡng Linh và Bản Văn Đọc)
+  switchPortalTab(tabName = 'devotion') {
+    const devotionBtn = document.getElementById('portal-tab-devotion-btn');
+    const readerBtn = document.getElementById('portal-tab-reader-btn');
+    const devotionPanel = document.getElementById('portal-tab-devotion-panel');
+    const readerPanel = document.getElementById('portal-tab-reader-panel');
+
+    if (tabName === 'reader') {
+      devotionBtn?.classList.remove('active');
+      readerBtn?.classList.add('active');
+      devotionPanel?.classList.add('hidden');
+      readerPanel?.classList.remove('hidden');
+    } else {
+      devotionBtn?.classList.add('active');
+      readerBtn?.classList.remove('active');
+      devotionPanel?.classList.remove('hidden');
+      readerPanel?.classList.add('hidden');
+    }
   }
 
   renderPortalView() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    const portalReader = document.getElementById('portal-reader-chapter-container');
+    if (portalReader && (!portalReader.innerHTML.trim() || portalReader.innerHTML.includes('fa-spinner'))) {
+      this.loadPassage(state.currentBook, state.currentChapter);
+    }
   }
 
   // 5. Admin Banner UI & Customization Modal (Supports Verse, Announcement & Ad Banner with Image, URL & Marquee)
@@ -3694,11 +3767,19 @@ class LogosApp {
   }
 
   // Navigate directly to passage and optionally scroll to verse
-  navigateToPassage(bookId, chapterNum, verseNum = 1) {
+  navigateToPassage(bookId, chapterNum, verseNum = 1, options = {}) {
     state.setPassage(bookId, chapterNum, verseNum);
-    state.setActiveView('bible');
-    const reader = document.getElementById('focus-reader');
-    if (reader) reader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Nếu đang ở cổng Tĩnh Nguyện (hoặc stayInPortal), giữ nguyên cổng và chuyển sang Tab Đọc Kinh Thánh của Portal
+    if (state.activeView === 'portal' || options.stayInPortal) {
+      this.switchPortalTab('reader');
+      const portalReader = document.getElementById('portal-reader-chapter-container');
+      if (portalReader) portalReader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      state.setActiveView('bible');
+      const reader = document.getElementById('focus-reader');
+      if (reader) reader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     setTimeout(() => {
       state.selectVerse(verseNum, true);

@@ -160,8 +160,8 @@ export class AppState {
     // Admin Banner Configuration
     this.adminBannerConfig = storage.getAdminBanner();
 
-    // Active View: 'bible', 'blog', 'community', 'media'
-    this.activeView = 'bible';
+    // Active View: 'portal' (Cổng Tĩnh Nguyện & Dưỡng Linh làm nền chính), 'bible', 'blog', 'community', 'media', 'donate', 'tsk'
+    this.activeView = 'portal';
 
     // Active Drawer Tab: 'parallel', 'metaphors', 'crossref', 'context', 'ai'
     this.activeDrawerTab = 'parallel';
