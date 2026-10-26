@@ -277,6 +277,61 @@ body {
   color: #fff;
 }
 
+/* Cụm 4 nút tiện ích phụ bên phải Header (Theme, Banner, Lượt xem, Quyền truy cập):
+   Chỉ hiển thị chữ nhỏ gọn (0.72rem), không icon, chìm tinh tế để người đọc tập trung hoàn toàn vào Lời Chúa */
+#main-header #theme-toggle-btn,
+#main-header #header-admin-banner-btn,
+#main-header #admin-analytics-btn,
+#main-header #role-auth-btn,
+.header-compact-text-btn {
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  line-height: 1.25 !important;
+  padding: 0.18rem 0.45rem !important;
+  border-radius: 4px !important;
+  background: rgba(0, 0, 0, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  box-shadow: none !important;
+  gap: 0 !important;
+  min-height: auto !important;
+  height: auto !important;
+  width: auto !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease;
+}
+
+#main-header #theme-toggle-btn:hover,
+#main-header #header-admin-banner-btn:hover,
+#main-header #admin-analytics-btn:hover,
+#main-header #role-auth-btn:hover,
+.header-compact-text-btn:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+#main-header #theme-toggle-btn i,
+#main-header #header-admin-banner-btn i,
+#main-header #admin-analytics-btn i,
+#main-header #role-auth-btn i,
+.header-compact-text-btn i {
+  display: none !important;
+}
+
+#main-header #theme-toggle-btn span,
+#main-header #header-admin-banner-btn span,
+#main-header #admin-analytics-btn span,
+#main-header #role-auth-btn span,
+.header-compact-text-btn span {
+  display: inline !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+}
+
 #main-header .selector-pill:hover {
   background: rgba(255, 255, 255, 0.25);
   border-color: #f7e07b;
@@ -1119,25 +1174,26 @@ body {
     color: #0a0d14 !important;
   }
 
-  /* Nút đổi màu sắc & cỡ chữ trên Mobile Header: Gọn gàng và tinh tế */
+  /* Nút đổi màu sắc & cỡ chữ trên Mobile Header: Chữ nhỏ tối giản */
   #theme-toggle-btn {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 28px !important;
-    height: 28px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    background: var(--bg-surface) !important;
-    border: 1px solid var(--border-medium) !important;
-    color: var(--accent-gold) !important;
-    font-size: 0.78rem !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0.15rem 0.35rem !important;
+    border-radius: 4px !important;
+    background: rgba(0, 0, 0, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    color: rgba(255, 255, 255, 0.72) !important;
+    font-size: 0.72rem !important;
     cursor: pointer !important;
     flex-shrink: 0 !important;
   }
 
   #theme-toggle-btn span {
-    display: none !important;
+    display: inline !important;
+    font-size: 0.72rem !important;
   }
 
   .chapter-header {

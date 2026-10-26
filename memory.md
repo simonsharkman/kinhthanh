@@ -100,27 +100,12 @@
 - Chuẩn hóa xác thực Admin 2 trường (`admin` / `logos777`) bảo đảm zero-leak security.
 - Tối ưu giao diện đọc di động toàn màn hình, loại bỏ tooltip hover cản trở tầm nhìn, tích hợp deep links tra cứu nguyên bản Hy Lạp/Hê-bơ-rơ Scripture4All & BibleHub.
 - Đặt Cổng Tĩnh Nguyện & Dưỡng Linh Cổ Điển làm trang chủ mặc định của hệ thống.
-### 12. Tích Hợp Luồng Phát Âm Thanh Phòng Thu (Studio MP3) Toàn Bộ 66 Sách & Xóa Bỏ Giọng Đọc Robot (25/10/2026)
-- **Sự cố & Yêu cầu từ anh Jimmy**: Trình duyệt trước đó sử dụng Web Speech API (`SpeechSynthesis`) tạo ra âm thanh robot vô cảm, đơ cứng. Anh phản ánh: *"cái âm thanh này là bạn làm à ? nếu đã làm cho đọc thì phải là âm thanh chất lượng"*.
-- Đã hoàn tất và kiểm thử Pytest PASS 100%.
-### 13. Tái Cấu Trúc Giao Diện Di Động: Menu Trượt Slide-out Drawer, Hamburger Lên Header & Lưới Thao Tác Nhanh (25/10/2026)
-- **Yêu cầu & Hình ảnh tham chiếu**:
-- Đã hoàn tất và kiểm thử Pytest PASS 100%.
-### 14. Loại Bỏ Triệt Để Danh Xưng "Berea" & "Thần Học Berea" Khỏi Toàn Trang Web (25/10/2026)
-- **Mệnh lệnh từ anh Jimmy**: Loại bỏ tất cả những cái gì có tên "Thần học Berea", "Berea" trong trang web.
-- Đã hoàn tất và kiểm thử Pytest PASS 100%.
-### 15. Tối Ưu Hóa Typography & Font Chữ Đọc Kinh Thánh Chuẩn HTTLVN (25/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"hãy kiểm tra lại font chữ hiển thị đã đẹp và dễ dang cho người đọc chưa?"*
-- **Rà soát & Phát hiện**:
-  1. Font stack cũ chứa `Playfair Display` lẫn vào thân văn bản câu Kinh Thánh khiến nét thanh đậm tương phản gắt gây mỏi mắt khi đọc lâu.
-  2. Thiếu font sans-serif tối ưu dấu tiếng Việt (`Be Vietnam Pro`) cho các nút bấm và nhãn UI.
-  3. Lỗi khoá font trên di động: media query `<= 640px` và `body.drawer-open` bị gán cứng `font-size: 0.98rem !important; line-height: 1.6 !important;`, vô hiệu hóa tùy chọn phóng to chữ của người đọc.
-- **Giải pháp hoàn thiện**:
-  1. Tách bạch font stack: `--font-bible` và `--font-scripture` thuần Serif trang nghiêm (`Noto Serif`, `Merriweather`, `Charter`, Georgia); giữ `Playfair Display` riêng cho tiêu đề chương và nhãn thương hiệu (`--font-brand`, `--font-heading`).
-  2. Bổ sung `Be Vietnam Pro` (weights 400-700) vào Google Fonts CDN và `--font-ui`, cho chữ giao diện sắc nét, tròn trịa, không lỗi dấu.
-  3. Tối ưu độ thoáng: line-height chuẩn `1.8 - 1.95`, letter-spacing `0.012em`, bổ sung `optimizeLegibility`, `-webkit-font-smoothing: antialiased;` chống nhòe răng cưa trên mọi màn hình.
-  4. Mở khóa toàn diện cỡ chữ di động: dùng `var(--bible-font-size, 1.15rem) !important;` giúp độc giả tự do phóng to chữ (17px - 25px) trên điện thoại mà không bị bó hẹp.
-  5. Đạt 136/136 bài test Pytest PASS 100%.
+### 12-15. Audio Studio MP3, Menu Slide-Out, Zero-Berea & Typography HTTLVN (25/10/2026)
+- Tích hợp luồng phát Audio MP3 phòng thu 66 sách, xóa bỏ SpeechSynthesis robot vô cảm.
+- Tái cấu trúc Menu trượt Slide-out Drawer, đưa nút Hamburger lên Header, lưới thao tác nhanh.
+- Loại bỏ triệt để danh xưng Berea / Thần học Berea khỏi toàn bộ hệ thống (Zero-Berea Mandate).
+- Tối ưu Typography chuẩn HTTLVN: Serif Noto Serif/Merriweather cho Lời Chúa, Be Vietnam Pro cho UI, mở khóa cỡ chữ linh hoạt trên di động.
+- Kiểm thử: Đạt 136/136 bài test Pytest PASS 100%.
 
 ### 16-22. Tối Ưu UX Header Di Động, Audio 48px, Tìm Kiếm & Thanh Tiêu Đề (25/10/2026)
 - **Chuỗi Tinh Chỉnh Giao Diện Di Động Theo Phản Hồi Hình Ảnh Của Anh Jimmy**:
@@ -213,4 +198,16 @@
   - `bibleEngine`: Bổ sung `fetchInterlinearChapter(bookId, chapterNum)` nạp tự động `data/interlinear/{bookId}/{chapterNum}.json` trong `ensurePassageTranslations()`.
   - Cửa sổ đọc độc lập (`openPopoutReader`): Tự động định dạng toàn bộ các câu của chương theo chuẩn thẻ 3 tầng khi chọn đọc bản `INTERLINEAR`.
 - **Kiểm thử & Đồng bộ**: Bổ sung `test_three_tier_interlinear_hierarchy` trong `tests/test_scripture4all_interlinear.py`. Toàn bộ **146/146 bài test Pytest PASS 100%**. Đồng bộ trọn vẹn sang mirror Antigravity scratch.
+### 31. Tối Giản Hóa Cụm Nút Tiện Ích Header (Chỉ Hiển Thị Chữ Nhỏ & Ẩn Icon) (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"chỗ nãy viết chữ thôi và nhỏ thôi. chúng muốn người đọc tập trung vào nội dung."* (kèm ảnh chụp khoanh đỏ 4 nút tiện ích góc phải Header: Theme `Dạ`, `Banner`, Lượt xem `1.8k xem`, Quyền truy cập `Khách`).
+- **Phân tích UX**: Các nút góc phải trước đây dùng thẻ icon màu vàng kim nổi bật kèm bo góc tròn kiểu badge lớn, gây phân tán thị giác khi đọc Lời Chúa.
+- **Thực hiện tinh chỉnh**:
+  1. *Chỉ viết chữ (Text-only)*: Loại bỏ toàn bộ các thẻ icon `<i>` (`fa-palette`, `fa-bullhorn`, `fa-chart-line`, `fa-user-shield`) khỏi cả 4 nút tiện ích trong `index.html` và ép ẩn `display: none !important;` trong CSS.
+  2. *Thu nhỏ & chìm tinh tế (Compact & Low-Profile)*:
+     - Giảm cỡ chữ xuống `0.72rem`, `font-weight: 500`.
+     - Padding siêu gọn `0.18rem 0.45rem`, bo góc nhẹ `4px`.
+     - Nền chìm `rgba(0, 0, 0, 0.18)`, viền mảnh mờ `rgba(255, 255, 255, 0.14)`, chữ màu xám sáng `rgba(255, 255, 255, 0.72)`.
+     - Xóa bỏ hoàn toàn hiệu ứng bóng đổ (`box-shadow: none !important;`), không giật nhảy hay phát sáng gây xao nhãng.
+  3. *Tập trung tối đa vào nội dung*: Giúp thanh Header trở nên thanh thoát, nhường 100% sự chú ý thị giác của người đọc cho nội dung Kinh Thánh và suy ngẫm.
+- **Kiểm thử**: Bổ sung `test_text_only_compact_header_utility_buttons` vào `tests/test_header_improvements.py`. Toàn bộ **147/147 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
 

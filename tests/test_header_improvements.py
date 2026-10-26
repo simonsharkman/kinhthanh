@@ -63,6 +63,34 @@ def test_compact_analytics_and_role_buttons():
     assert "#role-auth-btn" in comp_css
 
 
+def test_text_only_compact_header_utility_buttons():
+    """Kiểm tra cụm 4 nút tiện ích phụ (Theme, Banner, Lượt xem, Khách) hiển thị chữ nhỏ tối giản, không chứa icon để người đọc tập trung vào nội dung"""
+    with open("index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Verify buttons have compact text class
+    assert 'class="selector-pill theme-selector-pill header-compact-text-btn"' in html
+    assert 'class="selector-pill admin-banner-pill header-compact-text-btn"' in html
+    assert 'class="selector-pill analytics-pill header-compact-text-btn"' in html
+    assert 'class="selector-pill auth-pill header-compact-text-btn"' in html
+
+    # Verify no <i> icons inside these 4 buttons in index.html
+    import re
+    btn_blocks = re.findall(r'<button id="(?:theme-toggle-btn|header-admin-banner-btn|admin-analytics-btn|role-auth-btn)"[^>]*>(.*?)</button>', html, re.DOTALL)
+    assert len(btn_blocks) == 4
+    for b in btn_blocks:
+        assert '<i ' not in b, "Các nút tiện ích góc phải không được chứa thẻ <i> icon"
+
+    # Verify CSS enforces small font and hides any icons
+    with open("css/layout.css", "r", encoding="utf-8") as f:
+        layout_css = f.read()
+
+    assert ".header-compact-text-btn" in layout_css
+    assert "font-size: 0.72rem" in layout_css
+    assert ".header-compact-text-btn i" in layout_css
+    assert "display: none !important" in layout_css
+
+
 def test_smart_search_coordinates_and_suggestions():
     """Kiểm tra logic nhận diện địa chỉ Kinh Thánh và gợi ý thông minh trong JS"""
     with open("js/bible-engine.js", "r", encoding="utf-8") as f:
