@@ -209,3 +209,12 @@
      - Nâng cấp nút `#save-admin-banner-btn`: `<i class="fa-solid fa-circle-check"></i> Xác Nhận & Cập Nhật Banner` với màu vàng kim, độ tương phản cao, đổ bóng nhẹ.
      - Tích hợp phản hồi kép (`this.showToast` + `alert`) thông báo tức thì: *"✅ Đã xác nhận và cập nhật Banner thành công!"*.
 - **Kiểm thử**: Bổ sung `test_admin_modal_scroll_and_confirmation_button` vào `tests/test_portal_and_header_sticky.py`. Toàn bộ **145/145 bài test Pytest PASS 100%**.
+
+### 29. Thiết Lập & Hiển Thị Trực Tiếp Banner Thông Báo Mục Vụ Trên Máy Tính (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"cho hiển thị bằng này trên máy tính đi"* (kèm ảnh chụp `media_1793001189568_816b66e2.png` cấu hình Banner Thông Báo Mục Vụ / Tin Tức Hội Thánh).
+- **Thực hiện thiết lập đồng bộ**:
+  1. *Banner Đỉnh Trang (`#admin-banner-bar`)*: Đặt làm banner mặc định hiển thị trên máy tính với lớp `theme-crimson banner-mode-announcement`, huy hiệu `📢 THÔNG BÁO`, tông màu Đỏ Ruby Sâu Lắng (Regal Crimson) sang trọng.
+  2. *Nội dung & Dòng chữ chạy (Marquee Ticker)*: Áp dụng dòng chữ chạy ngang liên tục `🔔 Chương trình Đọc Kinh Thánh Trọn Năm 2026 & Bồi Linh Hội Thánh đang diễn ra. Chúc quý con cái Chúa được tươi mới trong Lời Ngài!`.
+  3. *Nút Hành Động (CTA)*: Nút `Vào Cổng Tĩnh Nguyện` dẫn hướng trực tiếp đến Cổng Tĩnh Nguyện (`#portal`).
+  4. *Lưu trữ & Khởi tạo*: Cập nhật `storage.getAdminBanner()` tự động áp dụng cấu hình này cho mọi phiên đọc mới và nâng cấp thiết lập cũ trong CSDL.
+- **Kiểm thử**: Toàn bộ **145/145 bài test Pytest PASS 100%**.
