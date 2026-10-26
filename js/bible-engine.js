@@ -57,6 +57,66 @@ export class BibleEngine {
     return this.books.find(b => b.id === bookId) || null;
   }
 
+  // Normalization and Auto-Healing Pipeline for Vietnamese Scripture Text
+  // Heals broken composite accents, detached acute/grave marks (e.g. biê´ t -> biết, nhắ´ c -> nhắc, bằ` ng -> bằng)
+  // and fixes legacy VNI/VPS capitalization artifacts (Aáy -> Ấy).
+  cleanScriptureText(text) {
+    if (!text || typeof text !== 'string') return text;
+    let t = text.normalize('NFC');
+    
+    // 1. Old VNI/VPS artifact Aáy / aáy
+    t = t.replace(/\bAáy\b/g, 'Ấy').replace(/\baáy\b/g, 'ấy');
+
+    // 2. Diphthongs with detached acute/grave: iê´ -> iế, iê` -> iề, uô´ -> uố, uô` -> uồ
+    t = t.replace(/([bBcCdDđĐgGhHkKlLmMnNpPqrRsStTvVxX]?)iê[\u00b4\u02ca\'\u2019]\s*(ng|nh|ch|[cmnpt])(?![a-zA-Z\u00C0-\u1EF9])/gi, '$1iế$2');
+    t = t.replace(/([bBcCdDđĐgGhHkKlLmMnNpPqrRsStTvVxX]?)iê[\u0060\u02cb]\s*(ng|nh|ch|[cmnpt])(?![a-zA-Z\u00C0-\u1EF9])/gi, '$1iề$2');
+    t = t.replace(/([bBcCdDđĐgGhHkKlLmMnNpPqrRsStTvVxX]?)uô[\u00b4\u02ca\'\u2019]\s*(ng|[cmnpt])(?![a-zA-Z\u00C0-\u1EF9])/gi, '$1uố$2');
+    t = t.replace(/([bBcCdDđĐgGhHkKlLmMnNpPqrRsStTvVxX]?)uô[\u0060\u02cb]\s*(ng|[cmnpt])(?![a-zA-Z\u00C0-\u1EF9])/gi, '$1uồ$2');
+
+    // 3. Syllable reconnect when base vowel already has accent and detached mark is duplicate:
+    // e.g., nhắ´ c -> nhắc, đế´ n -> đến, vố´ n -> vốn, thấ´ y -> thấy, xuố´ ng -> xuống, bằ` ng -> bằng, Thầ` y -> Thầy
+    const suffixes = ['ng', 'nh', 'ch', 'c', 'n', 'm', 'p', 't', 'y', 'u', 'i', 'o'];
+    for (const suf of suffixes) {
+      const re = new RegExp('([áàảãạắằẳẵặấầẩẫậéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵÁÀẢÃẠẮẰẲẴẶẤẦẨẪẬÉÈẺẼẸẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌỐỒỔỖỘỚỜỞỠỢÚÙỦŨỤỨỪỬỮỰÝỲỶỸỴ])\\s*[\\u00b4\\u02ca\\u0060\\u02cb]\\s*' + suf + '(?![a-zA-Z\\u00C0-\\u1EF9])', 'g');
+      t = t.replace(re, '$1' + suf);
+    }
+
+    // 4. Detached accent before another word: bồ` câu -> bồ câu
+    t = t.replace(/([a-zA-Z\u00C0-\u1EF9]+)[\u00b4\u02ca\u0060\u02cb]\s+([a-zA-Z\u00C0-\u1EF9]+)/g, '$1 $2');
+
+    // 5. Detached mark before punctuation: công bố´ : -> công bố:
+    t = t.replace(/([a-zA-Z\u00C0-\u1EF9]+)\s*[\u00b4\u02ca\u0060\u02cb]\s*([,.:;?!])/g, '$1$2');
+
+    // 6. Remove any remaining stray detached acute/grave marks
+    t = t.replace(/[\u00b4\u02ca\u0060\u02cb]/g, '');
+
+    // 7. Spacing before punctuation cleanup
+    t = t.replace(/([a-zA-Z\u00C0-\u1EF9])\s+([,.:;?!])/g, '$1$2');
+
+    // 8. Collapse spaces and normalize
+    return t.replace(/[\u200b\ufeff\u00a0]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  // Deep sanitize an array of verse objects
+  sanitizePassageVerses(verses) {
+    if (!Array.isArray(verses)) return verses;
+    return verses.map(v => {
+      if (!v) return v;
+      const cleanV = { ...v };
+      if (cleanV.text_primary && typeof cleanV.text_primary === 'string') {
+        cleanV.text_primary = this.cleanScriptureText(cleanV.text_primary);
+      }
+      if (cleanV.translations && typeof cleanV.translations === 'object') {
+        const cleanTrans = {};
+        for (const [k, val] of Object.entries(cleanV.translations)) {
+          cleanTrans[k] = typeof val === 'string' ? this.cleanScriptureText(val) : val;
+        }
+        cleanV.translations = cleanTrans;
+      }
+      return cleanV;
+    });
+  }
+
   // Parse Scripture Reference String (e.g., "Ê-sai 53:7", "Xuất Ê-díp-tô Ký 12:1-13", "Giăng 1:29")
   parseReference(refString) {
     if (!refString || typeof refString !== 'string') return null;
@@ -160,7 +220,7 @@ export class BibleEngine {
             book_id: bookId,
             chapter_num: chapterNum,
             title_vi: `${bookData.name_vi} - Đoạn ${chapterNum}`,
-            verses: bookData.chapters[chStr]
+            verses: this.sanitizePassageVerses(bookData.chapters[chStr])
           };
           this.passagesCache[key] = passage;
           await storage.cachePassage(key, passage);
@@ -183,6 +243,7 @@ export class BibleEngine {
       const res = await fetch('data/default-bible-passages.json');
       const allPassages = await res.json();
       if (allPassages[key]) {
+        allPassages[key].verses = this.sanitizePassageVerses(allPassages[key].verses);
         this.passagesCache[key] = allPassages[key];
         await storage.cachePassage(key, allPassages[key]);
         return allPassages[key];
@@ -332,6 +393,8 @@ export class BibleEngine {
         corrBadge = `<span class="verse-corrected-tag" title="Câu đã được Quản Trị Viên hiệu đính: ${corr.note || 'Sửa lỗi chính tả'}"><i class="fa-solid fa-check"></i> Đã hiệu đính</span>`;
       }
 
+      verseText = this.cleanScriptureText(verseText);
+
       const isAdmin = storage.getPreference('user_role') === 'admin';
       const adminEditBtn = isAdmin ? `
         <button type="button" class="btn-admin-edit-verse" data-book="${book.id}" data-ch="${chNum}" data-v="${v.verse_num}" data-ver="${primaryVersion}" title="Hiệu đính / sửa lỗi câu Kinh Thánh này">
@@ -420,10 +483,10 @@ export class BibleEngine {
 
         // Check for Admin Verse Correction in Parallel View
         const corrParallel = storage.getVerseCorrection(passageData.book_id, passageData.chapter_num, v.verse_num, vId);
-        let parallelClean = cleanText;
+        let parallelClean = this.cleanScriptureText(cleanText);
         let corrParallelBadge = '';
         if (corrParallel && corrParallel.correctedText) {
-          parallelClean = corrParallel.correctedText;
+          parallelClean = this.cleanScriptureText(corrParallel.correctedText);
           corrParallelBadge = `<span class="verse-corrected-tag" title="Đã hiệu đính: ${corrParallel.note || 'Lỗi văn bản'}"><i class="fa-solid fa-check"></i> Hiệu đính</span>`;
         }
 
