@@ -107,32 +107,15 @@
 - **Nguyên Tắc Thần Học**: Thần cảm tuyệt đối, kinh điển đóng 66 sách, lấy Kinh Thánh giải thích Kinh Thánh, lấy Chúa Cứu Thế làm trung tâm.
 - **Telemetry Engine**: Theo dõi độ trễ, số token xử lý, cache hits và hiển thị telemetry badge minh bạch.
 
-### 5. Khắc Phục Lỗi Hiển Thị & Khả Năng Tiếp Cận Trợ Lý Kimchi AI (17/10/2026)
-- Đã đưa nút Kimchi AI lên Header và hoàn thiện giao diện hội thoại thần học.
-
-### 6. Nâng Cấp Đăng Nhập Quản Trị Viên Chuẩn 2 Trường & Quyền Chỉnh Sửa Toàn Bộ Bài Viết (17/10/2026)
-- Hoàn thiện module Admin 2 trường (username, password) và quản trị bài viết cộng đồng.
-
-### 7. Loại Bỏ Tooltip Che Khuất Văn Bản Kinh Thánh Khi Rê Chuột (17/10/2026)
-- Loại bỏ tooltip hover gây cản trở tầm nhìn khi đọc Lời Chúa.
-
-### 8. Tối Ưu Giao Diện Di Động: Toàn Màn Hình Đọc & Thanh Đối Chiếu Siêu Gọn (18/10/2026)
-- Đã tối ưu layout mobile 50/50, ẩn các thành phần thừa và thanh bottom dock gọn gàng.
-
-### 9. Nâng Cấp Giao Diện Header Toàn Diện Theo Phản Hồi Hình Ảnh (19/10/2026)
-- **Thực hiện**: Đổi cây thập tự thành GIF động phát sáng (`cross_holy_gold.gif`), thu gọn thanh subnav hai tầng, chuyển các nút điều khiển quan trọng lên Header và thanh đọc nhanh `#reader-quick-bar`.
-- **Hiệu quả**: Loại bỏ 140px thanh điều hướng cồng kềnh trên mobile, giải phóng không gian đọc Kinh Thánh.
-### 10. Phục Hồi Chuẩn Xác Giao Diện Máy Tính & Interlinear Scripture4All (19/10/2026)
-- **Thực hiện**: Phục hồi bố cục desktop 3 cột hoàng gia, tích hợp bảng liên dòng Interlinear Hy Lạp/Do Thái theo phong cách Scripture4All kèm từ điển Strong's Concordance.
-- **Di động**: Triển khai cơ chế chia đôi màn hình 50/50 (`body.mobile-split-active`) khi mở đối chiếu bản dịch.
-### 11. Cổng Tĩnh Nguyện & Dưỡng Linh Cổ Điển Làm Nền Chính (25/10/2026)
-- **Thực hiện**: Thiết lập Cổng Tĩnh Nguyện (`#devotional-portal-view`) làm trang chủ mặc định với bìa nâu da bò cổ điển trang nhã theo mẫu anh Jimmy cung cấp.
-- **Vận hành**: Kết nối hoàn chỉnh 100% các nút chức năng: Nghe Audio (Studio MP3), Đọc Cả Đoạn, Chia Sẻ Ảnh Câu Gốc, Sao Chép và 6 thẻ Khám Phá Thánh Kinh.
+### 5-11. Tối Ưu Hóa Nền Tảng Kimchi AI, Header, Interlinear & Cổng Tĩnh Nguyện (17-25/10/2026)
+- Chuẩn hóa xác thực Admin 2 trường (`admin` / `logos777`) bảo đảm zero-leak security.
+- Tối ưu giao diện đọc di động toàn màn hình, loại bỏ tooltip hover cản trở tầm nhìn, tích hợp deep links tra cứu nguyên bản Hy Lạp/Hê-bơ-rơ Scripture4All & BibleHub.
+- Đặt Cổng Tĩnh Nguyện & Dưỡng Linh Cổ Điển làm trang chủ mặc định của hệ thống.
 ### 12. Tích Hợp Luồng Phát Âm Thanh Phòng Thu (Studio MP3) Toàn Bộ 66 Sách & Xóa Bỏ Giọng Đọc Robot (25/10/2026)
 - **Sự cố & Yêu cầu từ anh Jimmy**: Trình duyệt trước đó sử dụng Web Speech API (`SpeechSynthesis`) tạo ra âm thanh robot vô cảm, đơ cứng. Anh phản ánh: *"cái âm thanh này là bạn làm à ? nếu đã làm cho đọc thì phải là âm thanh chất lượng"*.
 - **Giải pháp dứt khoát**:
-  1. Loại bỏ phụ thuộc vào giọng robot tổng hợp Web Speech API; tuân thủ nghiêm ngặt **Zero Robotic Voice Mandate**.
-  2. Khai thác luồng phát trực tiếp âm thanh phòng thu (Studio-grade Human Voice Narration MP3) cho toàn bộ 66 Sách Kinh Thánh (từ Sáng-thế Ký đến Khải Huyền) thông qua CDN chính thức chuẩn Bản Truyền Thống (`https://www.wordproaudio.net/bibles/app/audio/19/{book_num}/{chapter}.mp3`).
+  1. Loại bỏ giọng robot Web Speech API; tuân thủ nghiêm ngặt **Zero Robotic Voice Mandate**.
+  2. Khai thác luồng phát âm thanh phòng thu MP3 chất lượng cao cho toàn bộ 66 Sách Kinh Thánh qua CDN chính thức chuẩn Bản Truyền Thống.
   3. Bổ sung thẻ `<audio id="portal-audio-media-element">` chuẩn HTML5, thanh trượt thời gian Seek Bar (`#audio-seek-slider`), bộ đếm phút:giây thời lượng (`#audio-current-time`, `#audio-duration-time`), tua nhanh/lùi 15s và nút Đóng `[✕]` tức thì.
   4. Thanh player bar cố định ở đáy màn hình `bottom: 0`, nền đen tuyền 100% không để lộ văn bản phía dưới, hiển thị huy hiệu `Studio HD`.
   5. Bảo đảm 128/128 unit test Pytest pass 100%.
@@ -229,3 +212,24 @@
 - **Thực hiện**: Đặt `.portal-brand-bar { display: none !important; }` trên toàn bộ thiết bị di động/máy tính bảng (`max-width: 991px`).
 - **Hiệu quả**: Đưa lưới 8 thẻ thao tác hiện đại 2 cột (Đọc Lời Chúa, Đối Chiếu, Câu Gốc, Đố Kinh Thánh, v.v.) lên vị trí nổi bật ngay dưới thanh Header, giao diện cực kỳ hiện đại, trực quan và tối ưu diện tích đọc.
 - **Kiểm thử**: Đạt 128/128 bài test Pytest PASS 100%.
+
+### 23. Nâng Cấp Hệ Thống Quản Trị Toàn Diện Full Admin CMS v3.0 (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"tôi muốn chỉnh sửa tất cả. kể cả kinh thánh khi tôi phát hiện bị lỗi. tôi cũng muốn cập nhật media theo từng mùa nữa"* (sau khi đăng nhập Quản Trị thành công nhưng thấy màn hình Cổng Tĩnh Nguyện chưa có nút chỉnh sửa trực tiếp).
+- **Phân tích & Thiết kế**: Chuyển hóa toàn bộ hệ thống từ hiển thị tĩnh sang **Full Dynamic CMS** dưới quyền Quản Trị Viên:
+  1. **Quản Trị Cổng Tĩnh Nguyện (`portal-view`)**:
+     - Nút vàng **`⚙ Quản Trị Tĩnh Nguyện`** (`#admin-devotion-edit-btn`) chỉ hiện khi vai trò là `admin`.
+     - Mở Modal **`#admin-devotion-modal`**: Cho phép Admin cập nhật Câu Gốc trong ngày (sách, đoạn, câu, nội dung lời Chúa), sửa 4 kế hoạch Lịch Đọc Kinh Thánh hàng ngày, và soạn bài suy ngẫm *Sống Với Thánh Kinh*.
+     - Hỗ trợ nút khôi phục mẫu chuẩn mực bất kỳ lúc nào (`#btn-devotion-reset-default`).
+  2. **Hiệu Đính Lời Chúa Khi Phát Hiện Lỗi (`bible-engine.js`)**:
+     - Khi là Quản Trị Viên, trên mỗi câu Kinh Thánh ở Focus Reader và Parallel Comparison xuất hiện nút bút chì **`✏ Sửa`** (`.btn-admin-edit-verse`).
+     - Mở Modal **`#admin-verse-correction-modal`**: Hiển thị chính xác tọa độ câu và bản dịch, ô soạn thảo sửa câu chữ và ô ghi chú lý do hiệu đính.
+     - Dữ liệu hiệu đính lưu vào `storage.saveVerseCorrection()` và ghi đè hiển thị tức thì, kèm nhãn nhận diện `<span class="verse-corrected-tag">Đã hiệu đính</span>`.
+     - Cho phép khôi phục nguyên văn gốc 1-chạm (`#reset-admin-verse-corr-btn`).
+  3. **Quản Trị Thư Viện Media & Video Theo Từng Mùa (`media-engine.js`)**:
+     - Tích hợp thanh lọc mùa vụ 6 phân loại (`all`, `christmas`, `easter`, `worship`, `harvest`, `academic`).
+     - Khi là Quản Trị Viên: Xuất hiện nút **`+ Cập Nhật / Thêm Media Mùa Mới`** trên đầu trang và các nút **`Sửa`**, **`Xóa`** trên từng thẻ Video/Media.
+     - Mở Modal **`#admin-media-modal`**: Hỗ trợ thêm/sửa link YouTube, thời lượng, tiêu đề, mô tả và chọn mùa lễ tương ứng.
+- **Kiểm thử & Chất lượng**:
+  - Viết bộ test mới `tests/test_admin_full_cms.py` bao phủ toàn diện 5 nhóm chức năng.
+  - Toàn bộ **133/133 bài test Pytest PASS 100%**.
+  - Cam kết bảo mật: Tuyệt đối không rò rỉ mã mặc định trong `js/app.js`.
