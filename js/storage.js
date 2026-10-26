@@ -401,6 +401,59 @@ export class LogosStorage {
     return mediaData;
   }
 
+  // --- 4. TIỂU MỤC CMS STORAGE (Câu Gốc, Đố Kinh Thánh, Truyện Tích, Đối Đáp) ---
+  getUtilityFavVerses() {
+    return this.getPreference('utility_fav_verses', null);
+  }
+
+  saveUtilityFavVerses(list) {
+    this.savePreference('utility_fav_verses', list);
+    return list;
+  }
+
+  resetUtilityFavVerses() {
+    localStorage.removeItem('logos_pref_utility_fav_verses');
+  }
+
+  getUtilityQuizzes() {
+    return this.getPreference('utility_quizzes', null);
+  }
+
+  saveUtilityQuizzes(list) {
+    this.savePreference('utility_quizzes', list);
+    return list;
+  }
+
+  resetUtilityQuizzes() {
+    localStorage.removeItem('logos_pref_utility_quizzes');
+  }
+
+  getUtilityStories() {
+    return this.getPreference('utility_stories', null);
+  }
+
+  saveUtilityStories(list) {
+    this.savePreference('utility_stories', list);
+    return list;
+  }
+
+  resetUtilityStories() {
+    localStorage.removeItem('logos_pref_utility_stories');
+  }
+
+  getUtilityResponsiveReadings() {
+    return this.getPreference('utility_responsive', null);
+  }
+
+  saveUtilityResponsiveReadings(list) {
+    this.savePreference('utility_responsive', list);
+    return list;
+  }
+
+  resetUtilityResponsiveReadings() {
+    localStorage.removeItem('logos_pref_utility_responsive');
+  }
+
   // Passage Offline Caching via IndexedDB
   async cachePassage(passageKey, data) {
     if (!this.db) {

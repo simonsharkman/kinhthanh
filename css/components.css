@@ -6924,3 +6924,108 @@
   padding-top: 0.35rem;
   font-size: 0.7rem;
 }
+
+
+/* ==========================================================================
+   PORTAL UTILITY CMS ADMIN STYLES (Câu Gốc, Đố Kinh Thánh, Truyện Tích, Đối Đáp)
+   ========================================================================== */
+.portal-utility-admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.utility-admin-badge {
+  background: var(--accent-gold);
+  color: #111;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  letter-spacing: 0.02em;
+}
+
+.utility-admin-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  justify-content: flex-end;
+}
+
+.btn-utility-admin-edit,
+.btn-utility-admin-delete {
+  padding: 0.22rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.btn-utility-admin-edit {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--accent-gold-border);
+  color: var(--accent-gold);
+}
+
+.btn-utility-admin-edit:hover {
+  background: var(--accent-gold);
+  color: #111;
+}
+
+.btn-utility-admin-delete {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
+.btn-utility-admin-delete:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.quiz-admin-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.quiz-admin-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.quiz-admin-option {
+  padding: 0.28rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.84rem;
+  margin-bottom: 0.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.quiz-admin-option.is-correct {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  font-weight: 700;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}

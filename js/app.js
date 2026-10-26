@@ -36,6 +36,9 @@ class LogosApp {
       selectedAnswer: null,
       answered: false
     };
+    this.currentUtilityCategory = null;
+    this.currentEditingUtilityIndex = null;
+    this.quizAdminManageMode = false;
   }
 
   async init() {
@@ -1847,8 +1850,7 @@ class LogosApp {
 
     document.getElementById('portal-item-schedule')?.addEventListener('click', (e) => {
       e.preventDefault();
-      const el = document.querySelector('.devotion-reading-list');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      this.openPortalUtilityModal('schedule');
     });
 
     document.getElementById('portal-item-survey')?.addEventListener('click', (e) => {
@@ -2402,7 +2404,23 @@ class LogosApp {
     const bodyContainer = document.getElementById('portal-utility-body');
     if (!modal || !titleEl || !bodyContainer) return;
 
+    this.currentUtilityCategory = category;
     modal.classList.remove('hidden');
+
+    const adminActions = document.getElementById('portal-utility-admin-actions');
+    if (adminActions) {
+      const isAdmin = state.currentUserRole === 'admin';
+      const isManageable = ['fav_verses', 'quiz', 'stories', 'responsive'].includes(category);
+      adminActions.classList.toggle('hidden', !isAdmin || !isManageable);
+      const addBtn = document.getElementById('btn-utility-admin-add');
+      if (addBtn) {
+        if (category === 'fav_verses') addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Thêm Câu Gốc';
+        else if (category === 'quiz') addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Thêm Câu Đố';
+        else if (category === 'stories') addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Thêm Truyện Tích';
+        else if (category === 'responsive') addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Thêm Bài Đối Đáp';
+        else addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Thêm Mới';
+      }
+    }
 
     if (category === 'fav_verses') {
       titleEl.innerHTML = '<i class="fa-solid fa-star" style="color: var(--accent-gold);"></i> Tuyển Tập Câu Gốc Yêu Thích (Nền Tảng Đức Tin)';
@@ -2410,7 +2428,7 @@ class LogosApp {
       this.renderUtilityFavVerses(subfilter || 'all');
     } else if (category === 'quiz') {
       titleEl.innerHTML = '<i class="fa-solid fa-circle-question" style="color: var(--accent-gold);"></i> Đố Kinh Thánh (Interactive Bible Quiz)';
-      subEl.textContent = 'Khảo sát và rèn luyện kiến thức Lời Chúa với 10 câu đố chọn lọc có giải nghĩa';
+      subEl.textContent = 'Khảo sát và rèn luyện kiến thức Lời Chúa với các câu đố chọn lọc có giải nghĩa';
       this.renderUtilityQuiz(0);
     } else if (category === 'responsive') {
       titleEl.innerHTML = '<i class="fa-solid fa-scroll" style="color: var(--accent-gold);"></i> Kinh Thánh Đối Đáp (Phụng Vụ HTTLVN)';
@@ -2428,6 +2446,10 @@ class LogosApp {
       titleEl.innerHTML = '<i class="fa-solid fa-book-atlas" style="color: var(--accent-gold);"></i> Thánh Kinh Từ Điển (Bách Khoa Địa Danh & Nhân Vật)';
       subEl.textContent = 'Tra cứu nhanh nguồn gốc, ngữ nghĩa và xuất xứ các nhân vật, địa danh Kinh Thánh';
       this.renderUtilityDict('');
+    } else if (category === 'schedule') {
+      titleEl.innerHTML = '<i class="fa-solid fa-calendar-check" style="color: var(--accent-gold);"></i> Lịch Đọc Kinh Thánh Hằng Ngày (365 Ngày)';
+      subEl.textContent = 'Nuôi dưỡng đời sống tâm linh mỗi ngày qua 4 phân đoạn Cựu Ước, Tân Ước và Thi Thiên';
+      this.renderUtilitySchedule();
     }
   }
 
@@ -2456,9 +2478,12 @@ class LogosApp {
       });
     });
 
-    const filtered = activeSubfilter === 'all'
-      ? FAV_VERSES_DATA
-      : FAV_VERSES_DATA.filter(v => v.theme === activeSubfilter);
+    const allVerses = storage.getUtilityFavVerses() || FAV_VERSES_DATA;
+    const isAdmin = state.currentUserRole === 'admin';
+
+    const filtered = allVerses
+      .map((v, originalIndex) => ({ ...v, originalIndex }))
+      .filter(v => activeSubfilter === 'all' || v.theme === activeSubfilter);
 
     bodyContainer.innerHTML = `
       <div class="utility-verses-grid">
@@ -2468,10 +2493,10 @@ class LogosApp {
             <div class="utility-verse-footer">
               <span class="utility-ref-badge"><i class="fa-solid fa-bookmark"></i> ${v.ref}</span>
               <div class="utility-verse-actions">
-                <button type="button" class="utility-action-btn btn-read-passage" data-book="${v.book}" data-ch="${v.ch}" data-v="${v.v}" title="Đọc phân đoạn này">
+                <button type="button" class="utility-action-btn btn-read-passage" data-book="${v.book}" data-ch="${v.ch}" data-v="${v.v || 1}" title="Đọc phân đoạn này">
                   <i class="fa-solid fa-book-open"></i> Đọc
                 </button>
-                <button type="button" class="utility-action-btn btn-listen-verse" data-book="${v.book}" data-ch="${v.ch}" data-v="${v.v}" title="Nghe đọc đoạn này">
+                <button type="button" class="utility-action-btn btn-listen-verse" data-book="${v.book}" data-ch="${v.ch}" data-v="${v.v || 1}" title="Nghe đọc đoạn này">
                   <i class="fa-solid fa-volume-high"></i> Nghe
                 </button>
                 <button type="button" class="utility-action-btn btn-copy-verse" data-text="${encodeURIComponent(v.text + ' — ' + v.ref)}" title="Sao chép câu gốc">
@@ -2479,9 +2504,21 @@ class LogosApp {
                 </button>
               </div>
             </div>
+            ${isAdmin ? `
+              <div class="utility-admin-item-actions">
+                <span class="utility-admin-badge"><i class="fa-solid fa-shield"></i> Quản trị</span>
+                <button type="button" class="btn-utility-admin-edit" data-category="fav_verses" data-index="${v.originalIndex}" title="Chỉnh sửa câu gốc">
+                  <i class="fa-solid fa-pen-to-square"></i> Sửa
+                </button>
+                <button type="button" class="btn-utility-admin-delete" data-category="fav_verses" data-index="${v.originalIndex}" title="Xóa câu gốc này">
+                  <i class="fa-solid fa-trash"></i> Xóa
+                </button>
+              </div>
+            ` : ''}
           </div>
         `).join('')}
       </div>
+      ${filtered.length === 0 ? '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">Chưa có câu gốc nào trong chủ đề này.</p>' : ''}
     `;
 
     bodyContainer.querySelectorAll('.btn-read-passage').forEach(btn => {
@@ -2507,6 +2544,20 @@ class LogosApp {
         }
       });
     });
+
+    bodyContainer.querySelectorAll('.btn-utility-admin-edit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index, 10);
+        this.openUtilityEditorModal('fav_verses', idx);
+      });
+    });
+
+    bodyContainer.querySelectorAll('.btn-utility-admin-delete').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index, 10);
+        this.deleteUtilityItem('fav_verses', idx);
+      });
+    });
   }
 
   renderUtilityQuiz(questionIndex = 0) {
@@ -2514,10 +2565,91 @@ class LogosApp {
     const bodyContainer = document.getElementById('portal-utility-body');
     if (!tabsContainer || !bodyContainer) return;
 
-    tabsContainer.innerHTML = ''; // Không cần tabs cho quiz
+    tabsContainer.innerHTML = '';
+    const quizzes = storage.getUtilityQuizzes() || BIBLE_QUIZ_DATA;
+    const isAdmin = state.currentUserRole === 'admin';
 
-    if (questionIndex >= BIBLE_QUIZ_DATA.length) {
-      // Đã hoàn thành 10 câu
+    // Nếu Admin đang ở chế độ quản lý danh sách toàn bộ câu hỏi
+    if (isAdmin && this.quizAdminManageMode) {
+      bodyContainer.innerHTML = `
+        <div style="max-width: 760px; margin: 0 auto;">
+          <div class="quiz-admin-mode-toggle" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-weight: 700; color: var(--accent-gold); font-size: 0.95rem;">
+              <i class="fa-solid fa-list-check"></i> Chế Độ Quản Trị: Danh Sách Câu Đố (${quizzes.length} câu)
+            </div>
+            <button type="button" class="btn-primary" id="btn-quiz-exit-manage-mode" style="padding: 0.35rem 0.85rem; font-size: 0.82rem;">
+              <i class="fa-solid fa-gamepad"></i> Chơi Trắc Nghiệm
+            </button>
+          </div>
+          <div class="quiz-admin-list">
+            ${quizzes.map((q, idx) => `
+              <div class="quiz-admin-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                  <span style="font-weight: 800; color: var(--accent-gold); font-size: 0.92rem;">
+                    #${idx + 1}. ${q.question}
+                  </span>
+                  <div style="display: flex; gap: 0.35rem; flex-shrink: 0;">
+                    <button type="button" class="btn-utility-admin-edit" data-quiz-index="${idx}" title="Chỉnh sửa câu hỏi này">
+                      <i class="fa-solid fa-pen-to-square"></i> Sửa
+                    </button>
+                    <button type="button" class="btn-utility-admin-delete" data-quiz-index="${idx}" title="Xóa câu hỏi này">
+                      <i class="fa-solid fa-trash"></i> Xóa
+                    </button>
+                  </div>
+                </div>
+                <div class="quiz-admin-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; margin-bottom: 0.45rem;">
+                  ${q.options.map((opt, oi) => `
+                    <div class="quiz-admin-option ${oi === q.correct ? 'is-correct' : ''}">
+                      <strong>${String.fromCharCode(65 + oi)}.</strong> ${opt} ${oi === q.correct ? '✓ (Đáp án đúng)' : ''}
+                    </div>
+                  `).join('')}
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 0.4rem;">
+                  <span><i class="fa-solid fa-bookmark"></i> <strong>Căn cứ:</strong> ${q.ref || 'Kinh Thánh'}</span>
+                  <span><i class="fa-solid fa-circle-info"></i> <strong>Giải thích:</strong> ${q.explanation || 'Không có'}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      bodyContainer.querySelector('#btn-quiz-exit-manage-mode')?.addEventListener('click', () => {
+        this.quizAdminManageMode = false;
+        this.renderUtilityQuiz(0);
+      });
+
+      bodyContainer.querySelectorAll('.btn-utility-admin-edit').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.quizIndex, 10);
+          this.openUtilityEditorModal('quiz', idx);
+        });
+      });
+
+      bodyContainer.querySelectorAll('.btn-utility-admin-delete').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.quizIndex, 10);
+          this.deleteUtilityItem('quiz', idx);
+        });
+      });
+      return;
+    }
+
+    if (quizzes.length === 0) {
+      bodyContainer.innerHTML = `
+        <div style="text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+          <i class="fa-solid fa-clipboard-question" style="font-size: 2.5rem; margin-bottom: 0.75rem; color: var(--accent-gold);"></i>
+          <p>Hiện chưa có câu hỏi đố Kinh Thánh nào.</p>
+          ${isAdmin ? `<button type="button" class="btn-primary" id="btn-quiz-empty-add" style="margin-top: 1rem;"><i class="fa-solid fa-plus"></i> Thêm câu hỏi đầu tiên</button>` : ''}
+        </div>
+      `;
+      bodyContainer.querySelector('#btn-quiz-empty-add')?.addEventListener('click', () => {
+        this.openUtilityEditorModal('quiz', null);
+      });
+      return;
+    }
+
+    if (questionIndex >= quizzes.length) {
       bodyContainer.innerHTML = `
         <div class="quiz-container" style="text-align: center; padding: 2.5rem 1rem;">
           <div style="font-size: 3.5rem; color: var(--accent-gold); margin-bottom: 1rem;">
@@ -2527,14 +2659,21 @@ class LogosApp {
             Chúc mừng bạn đã hoàn tất bài trắc nghiệm!
           </h3>
           <div style="font-size: 1.15rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 1.5rem;">
-            Tổng điểm của bạn: ${this.quizState.score} / ${BIBLE_QUIZ_DATA.length}
+            Tổng điểm của bạn: ${this.quizState.score} / ${quizzes.length}
           </div>
           <p style="color: var(--text-secondary); max-width: 480px; margin: 0 auto 1.5rem; line-height: 1.6;">
             "Hãy chuyên tâm cho được đẹp lòng Đức Chúa Trời như người làm công không chỗ trách được, lấy lòng ngay thẳng giảng dạy lời của lẽ thật." (2 Ti-mô-thê 2:15)
           </p>
-          <button type="button" class="btn-primary" id="quiz-btn-restart" style="padding: 0.75rem 1.75rem; font-weight: 800;">
-            <i class="fa-solid fa-rotate-left"></i> Làm lại từ đầu
-          </button>
+          <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+            <button type="button" class="btn-primary" id="quiz-btn-restart" style="padding: 0.75rem 1.75rem; font-weight: 800;">
+              <i class="fa-solid fa-rotate-left"></i> Làm lại từ đầu
+            </button>
+            ${isAdmin ? `
+              <button type="button" class="btn-secondary" id="quiz-btn-admin-manage" style="padding: 0.75rem 1.25rem;">
+                <i class="fa-solid fa-list-check"></i> Quản lý toàn bộ câu hỏi
+              </button>
+            ` : ''}
+          </div>
         </div>
       `;
 
@@ -2542,22 +2681,37 @@ class LogosApp {
         this.quizState.score = 0;
         this.renderUtilityQuiz(0);
       });
+
+      bodyContainer.querySelector('#quiz-btn-admin-manage')?.addEventListener('click', () => {
+        this.quizAdminManageMode = true;
+        this.renderUtilityQuiz(0);
+      });
       return;
     }
 
-    const q = BIBLE_QUIZ_DATA[questionIndex];
+    const q = quizzes[questionIndex];
     this.quizState.currentIndex = questionIndex;
     this.quizState.answered = false;
 
     bodyContainer.innerHTML = `
       <div class="quiz-container">
-        <div class="quiz-header-bar">
+        <div class="quiz-header-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
           <span style="font-weight: 800; color: var(--text-muted); font-size: 0.92rem;">
-            Câu hỏi ${questionIndex + 1} / ${BIBLE_QUIZ_DATA.length}
+            Câu hỏi ${questionIndex + 1} / ${quizzes.length}
           </span>
-          <span class="quiz-score-pill">
-            <i class="fa-solid fa-star"></i> Điểm: ${this.quizState.score}
-          </span>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="quiz-score-pill">
+              <i class="fa-solid fa-star"></i> Điểm: ${this.quizState.score}
+            </span>
+            ${isAdmin ? `
+              <button type="button" class="btn-utility-admin-edit" id="btn-quiz-quick-edit" title="Sửa câu hỏi này">
+                <i class="fa-solid fa-pen-to-square"></i> Sửa
+              </button>
+              <button type="button" class="btn-utility-admin-edit" id="btn-quiz-enter-manage" title="Quản lý toàn bộ danh sách">
+                <i class="fa-solid fa-list-check"></i> DS (${quizzes.length})
+              </button>
+            ` : ''}
+          </div>
         </div>
 
         <div class="quiz-question-card">
@@ -2576,6 +2730,15 @@ class LogosApp {
       </div>
     `;
 
+    bodyContainer.querySelector('#btn-quiz-quick-edit')?.addEventListener('click', () => {
+      this.openUtilityEditorModal('quiz', questionIndex);
+    });
+
+    bodyContainer.querySelector('#btn-quiz-enter-manage')?.addEventListener('click', () => {
+      this.quizAdminManageMode = true;
+      this.renderUtilityQuiz(0);
+    });
+
     const optionBtns = bodyContainer.querySelectorAll('.quiz-option-btn');
     optionBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -2587,34 +2750,50 @@ class LogosApp {
 
         const resultArea = bodyContainer.querySelector('#quiz-result-area');
         if (selected === q.correct) {
-          btn.classList.add('correct');
           this.quizState.score++;
-          this.showToast('Chính xác! +1 Điểm', 'success');
-        } else {
-          btn.classList.add('wrong');
-          const correctBtn = bodyContainer.querySelector(`[data-opt-idx="${q.correct}"]`);
-          if (correctBtn) correctBtn.classList.add('correct');
-          this.showToast('Chưa chính xác!', 'danger');
-        }
-
-        if (resultArea) {
-          resultArea.classList.remove('hidden');
+          btn.classList.add('correct');
+          resultArea.className = 'quiz-feedback feedback-correct';
           resultArea.innerHTML = `
-            <div class="quiz-explanation-box">
-              <strong style="color: var(--accent-gold);"><i class="fa-solid fa-circle-info"></i> Giải nghĩa & Câu gốc:</strong><br>
-              ${q.explanation} (<em>${q.ref}</em>)
+            <div style="font-weight: 800; font-size: 1.05rem; margin-bottom: 0.35rem;">
+              <i class="fa-solid fa-circle-check"></i> Chính xác!
             </div>
-            <div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
-              <button type="button" class="btn-primary" id="quiz-btn-next" style="padding: 0.65rem 1.45rem; font-weight: 700;">
-                ${questionIndex + 1 < BIBLE_QUIZ_DATA.length ? 'Câu tiếp theo <i class="fa-solid fa-arrow-right"></i>' : 'Xem kết quả <i class="fa-solid fa-trophy"></i>'}
+            <div style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 0.65rem;">${q.explanation || 'Xuất sắc! Bạn nắm rất vững Kinh Thánh.'}</div>
+            <div style="font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 0.75rem;">
+              <i class="fa-solid fa-bookmark"></i> Căn cứ Kinh Thánh: ${q.ref || 'Thánh Kinh'}
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+              <button type="button" class="btn-primary" id="quiz-btn-next" style="padding: 0.45rem 1.15rem; font-weight: 700;">
+                Câu tiếp theo <i class="fa-solid fa-arrow-right"></i>
               </button>
             </div>
           `;
+        } else {
+          btn.classList.add('wrong');
+          const correctBtn = optionBtns[q.correct];
+          if (correctBtn) correctBtn.classList.add('correct');
 
-          resultArea.querySelector('#quiz-btn-next')?.addEventListener('click', () => {
-            this.renderUtilityQuiz(questionIndex + 1);
-          });
+          resultArea.className = 'quiz-feedback feedback-wrong';
+          resultArea.innerHTML = `
+            <div style="font-weight: 800; font-size: 1.05rem; margin-bottom: 0.35rem;">
+              <i class="fa-solid fa-circle-xmark"></i> Chưa chính xác!
+            </div>
+            <div style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 0.65rem;">
+              Đáp án đúng là <strong>${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}</strong>. ${q.explanation || ''}
+            </div>
+            <div style="font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 0.75rem;">
+              <i class="fa-solid fa-bookmark"></i> Căn cứ Kinh Thánh: ${q.ref || 'Thánh Kinh'}
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+              <button type="button" class="btn-primary" id="quiz-btn-next" style="padding: 0.45rem 1.15rem; font-weight: 700;">
+                Câu tiếp theo <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          `;
         }
+
+        resultArea.querySelector('#quiz-btn-next')?.addEventListener('click', () => {
+          this.renderUtilityQuiz(questionIndex + 1);
+        });
       });
     });
   }
@@ -2624,7 +2803,27 @@ class LogosApp {
     const bodyContainer = document.getElementById('portal-utility-body');
     if (!tabsContainer || !bodyContainer) return;
 
-    tabsContainer.innerHTML = RESPONSIVE_READINGS_DATA.map((r, i) => `
+    const readings = storage.getUtilityResponsiveReadings() || RESPONSIVE_READINGS_DATA;
+    const isAdmin = state.currentUserRole === 'admin';
+
+    if (readings.length === 0) {
+      tabsContainer.innerHTML = '';
+      bodyContainer.innerHTML = `
+        <div style="text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+          <i class="fa-solid fa-scroll" style="font-size: 2.5rem; margin-bottom: 0.75rem; color: var(--accent-gold);"></i>
+          <p>Hiện chưa có bài Kinh Thánh đối đáp nào.</p>
+          ${isAdmin ? `<button type="button" class="btn-primary" id="btn-resp-empty-add" style="margin-top: 1rem;"><i class="fa-solid fa-plus"></i> Thêm bài đối đáp</button>` : ''}
+        </div>
+      `;
+      bodyContainer.querySelector('#btn-resp-empty-add')?.addEventListener('click', () => {
+        this.openUtilityEditorModal('responsive', null);
+      });
+      return;
+    }
+
+    if (activeIdx >= readings.length) activeIdx = 0;
+
+    tabsContainer.innerHTML = readings.map((r, i) => `
       <button type="button" class="portal-utility-tab-btn ${i === activeIdx ? 'active' : ''}" data-resp-idx="${i}">
         ${r.title.split(':')[0]}
       </button>
@@ -2636,7 +2835,7 @@ class LogosApp {
       });
     });
 
-    const reading = RESPONSIVE_READINGS_DATA[activeIdx];
+    const reading = readings[activeIdx];
     bodyContainer.innerHTML = `
       <div style="max-width: 720px; margin: 0 auto;">
         <div style="margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem;">
@@ -2644,9 +2843,19 @@ class LogosApp {
             <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--accent-gold); margin: 0;">${reading.title}</h3>
             <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-solid fa-book-bible"></i> Kinh Thánh: ${reading.passage}</span>
           </div>
-          <button type="button" class="btn-primary" id="btn-resp-read-passage" data-book="${reading.bookId}" data-ch="${reading.ch}" style="padding: 0.4rem 0.85rem; font-size: 0.82rem;">
-            <i class="fa-solid fa-book-open"></i> Đọc Toàn Đoạn
-          </button>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <button type="button" class="btn-primary" id="btn-resp-read-passage" data-book="${reading.bookId}" data-ch="${reading.ch}" style="padding: 0.4rem 0.85rem; font-size: 0.82rem;">
+              <i class="fa-solid fa-book-open"></i> Đọc Toàn Đoạn
+            </button>
+            ${isAdmin ? `
+              <button type="button" class="btn-utility-admin-edit" id="btn-resp-admin-edit" data-resp-index="${activeIdx}" title="Sửa bài đối đáp này">
+                <i class="fa-solid fa-pen-to-square"></i> Sửa
+              </button>
+              <button type="button" class="btn-utility-admin-delete" id="btn-resp-admin-delete" data-resp-index="${activeIdx}" title="Xóa bài đối đáp này">
+                <i class="fa-solid fa-trash"></i> Xóa
+              </button>
+            ` : ''}
+          </div>
         </div>
 
         <div class="responsive-reading-item">
@@ -2663,6 +2872,14 @@ class LogosApp {
       const btn = e.currentTarget;
       document.getElementById('portal-utility-modal')?.classList.add('hidden');
       this.navigateToPassage(btn.dataset.book, parseInt(btn.dataset.ch, 10), 1, { stayInPortal: true });
+    });
+
+    bodyContainer.querySelector('#btn-resp-admin-edit')?.addEventListener('click', () => {
+      this.openUtilityEditorModal('responsive', activeIdx);
+    });
+
+    bodyContainer.querySelector('#btn-resp-admin-delete')?.addEventListener('click', () => {
+      this.deleteUtilityItem('responsive', activeIdx);
     });
   }
 
@@ -2725,14 +2942,16 @@ class LogosApp {
     if (!tabsContainer || !bodyContainer) return;
 
     tabsContainer.innerHTML = '';
+    const stories = storage.getUtilityStories() || BIBLE_STORIES_DATA;
+    const isAdmin = state.currentUserRole === 'admin';
 
     bodyContainer.innerHTML = `
       <div class="stories-grid">
-        ${BIBLE_STORIES_DATA.map(s => `
+        ${stories.map((s, idx) => `
           <div class="story-card">
             <div>
               <div class="story-card-title">
-                <i class="fa-solid ${s.icon}"></i> ${s.title}
+                <i class="fa-solid ${s.icon || 'fa-fire'}"></i> ${s.title}
               </div>
               <div style="font-size: 0.8rem; color: var(--accent-gold); margin: 0.25rem 0 0.65rem;">
                 <i class="fa-solid fa-bookmark"></i> Địa chỉ: ${s.ref}
@@ -2743,21 +2962,46 @@ class LogosApp {
               <div class="story-card-takeaway">
                 <strong><i class="fa-solid fa-lightbulb"></i> Bài học đức tin:</strong> ${s.takeaway}
               </div>
-              <div style="margin-top: 0.65rem; display: flex; justify-content: flex-end;">
-                <button type="button" class="btn-primary btn-read-story" data-book="${s.bookId}" data-ch="${s.ch}" style="padding: 0.35rem 0.85rem; font-size: 0.82rem;">
+              <div style="margin-top: 0.65rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem;">
+                <button type="button" class="btn-primary btn-read-story" data-book="${s.bookId || 'GEN'}" data-ch="${s.ch || 1}" style="padding: 0.35rem 0.85rem; font-size: 0.82rem;">
                   <i class="fa-solid fa-book-open"></i> Đọc Phân Đoạn Này
                 </button>
+                ${isAdmin ? `
+                  <div class="utility-admin-item-actions" style="margin-top: 0; padding-top: 0; border-top: none;">
+                    <button type="button" class="btn-utility-admin-edit" data-story-index="${idx}" title="Chỉnh sửa truyện tích">
+                      <i class="fa-solid fa-pen-to-square"></i> Sửa
+                    </button>
+                    <button type="button" class="btn-utility-admin-delete" data-story-index="${idx}" title="Xóa truyện tích">
+                      <i class="fa-solid fa-trash"></i> Xóa
+                    </button>
+                  </div>
+                ` : ''}
               </div>
             </div>
           </div>
         `).join('')}
       </div>
+      ${stories.length === 0 ? '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">Chưa có truyện tích nào.</p>' : ''}
     `;
 
     bodyContainer.querySelectorAll('.btn-read-story').forEach(btn => {
       btn.addEventListener('click', () => {
         document.getElementById('portal-utility-modal')?.classList.add('hidden');
         this.navigateToPassage(btn.dataset.book, parseInt(btn.dataset.ch, 10), 1, { stayInPortal: true });
+      });
+    });
+
+    bodyContainer.querySelectorAll('.btn-utility-admin-edit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.storyIndex, 10);
+        this.openUtilityEditorModal('stories', idx);
+      });
+    });
+
+    bodyContainer.querySelectorAll('.btn-utility-admin-delete').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.storyIndex, 10);
+        this.deleteUtilityItem('stories', idx);
       });
     });
   }
@@ -2799,6 +3043,532 @@ class LogosApp {
       this.renderUtilityDict(ev.target.value);
     });
     searchInput?.focus();
+  }
+
+  renderUtilitySchedule() {
+    const tabsContainer = document.getElementById('portal-utility-tabs');
+    const bodyContainer = document.getElementById('portal-utility-body');
+    if (!tabsContainer || !bodyContainer) return;
+
+    tabsContainer.innerHTML = '';
+    const devotion = storage.getDevotionData();
+    const readingList = devotion.reading_list || [];
+    const isAdmin = state.currentUserRole === 'admin';
+
+    bodyContainer.innerHTML = `
+      <div style="max-width: 760px; margin: 0 auto;">
+        <div style="background: var(--bg-card); border: 1px solid var(--accent-gold-border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div>
+              <span class="badge" style="background: rgba(212,175,55,0.15); color: var(--accent-gold); font-size: 0.78rem; font-weight: 700; padding: 2px 8px;">
+                <i class="fa-solid fa-calendar-day"></i> Kế Hoạch Đọc Kinh Thánh Hôm Nay
+              </span>
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin: 0.35rem 0 0;">
+                ${devotion.date || 'Hôm Nay'} — 4 Phân Đoạn Mỗi Ngày
+              </h3>
+            </div>
+            ${isAdmin ? `
+              <button type="button" class="btn-primary" id="btn-utility-edit-devotion-plan" style="font-size: 0.82rem; padding: 0.4rem 0.85rem;">
+                <i class="fa-solid fa-pen-to-square"></i> Sửa Lịch & Bài Dưỡng Linh
+              </button>
+            ` : ''}
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.5; margin: 0 0 1rem;">
+            Kế hoạch đọc Kinh Thánh theo chu kỳ 1 năm giúp bạn đọc qua trọn vẹn Cựu Ước một lần và Tân Ước hai lần.
+          </p>
+          <div class="schedule-readings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem;">
+            ${readingList.map((item, idx) => `
+              <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-size: 0.75rem; color: var(--accent-gold); font-weight: 700;">PHẦN ${idx + 1}</div>
+                  <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-primary); margin: 0.15rem 0;">${item.ref}</div>
+                </div>
+                <div style="display: flex; gap: 0.35rem;">
+                  <button type="button" class="utility-action-btn btn-sched-read" data-book="${item.book}" data-ch="${item.ch}" title="Đọc đoạn này">
+                    <i class="fa-solid fa-book-open"></i> Đọc
+                  </button>
+                  <button type="button" class="utility-action-btn btn-sched-listen" data-book="${item.book}" data-ch="${item.ch}" title="Nghe âm thanh">
+                    <i class="fa-solid fa-volume-high"></i>
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1rem;">
+          <button type="button" class="btn-secondary" id="btn-goto-portal-reading" style="padding: 0.5rem 1.25rem; font-size: 0.88rem;">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Xem Chi Tiết Trên Cổng Dưỡng Linh
+          </button>
+        </div>
+      </div>
+    `;
+
+    bodyContainer.querySelectorAll('.btn-sched-read').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('portal-utility-modal')?.classList.add('hidden');
+        this.navigateToPassage(btn.dataset.book, parseInt(btn.dataset.ch, 10), 1, { stayInPortal: true });
+      });
+    });
+
+    bodyContainer.querySelectorAll('.btn-sched-listen').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('portal-utility-modal')?.classList.add('hidden');
+        this.playChapterAudio(btn.dataset.book, parseInt(btn.dataset.ch, 10), 1);
+      });
+    });
+
+    bodyContainer.querySelector('#btn-goto-portal-reading')?.addEventListener('click', () => {
+      document.getElementById('portal-utility-modal')?.classList.add('hidden');
+      const el = document.querySelector('.devotion-reading-list');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    bodyContainer.querySelector('#btn-utility-edit-devotion-plan')?.addEventListener('click', () => {
+      document.getElementById('portal-utility-modal')?.classList.add('hidden');
+      this.openAdminDevotionModal();
+    });
+  }
+
+  // Quản lý Modal Soạn Thảo Tiểu Mục (Admin Utility Editor)
+  openUtilityEditorModal(category = null, itemIndex = null) {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+
+    category = category || this.currentUtilityCategory || 'fav_verses';
+    this.currentUtilityCategory = category;
+    this.currentEditingUtilityIndex = itemIndex;
+
+    const modal = document.getElementById('admin-utility-editor-modal');
+    const titleEl = document.getElementById('admin-utility-editor-title');
+    const subEl = document.getElementById('admin-utility-editor-subtitle');
+    const bodyEl = document.getElementById('admin-utility-editor-body');
+    if (!modal || !titleEl || !bodyEl) return;
+
+    const isEdit = itemIndex !== null && itemIndex !== undefined;
+
+    if (category === 'fav_verses') {
+      const allVerses = storage.getUtilityFavVerses() || FAV_VERSES_DATA;
+      const v = isEdit ? allVerses[itemIndex] : { text: '', ref: '', theme: 'peace', book: 'JHN', ch: 1, v: 1 };
+      titleEl.innerHTML = `<i class="fa-solid fa-star"></i> ${isEdit ? 'Chỉnh Sửa Câu Gốc Yêu Thích' : 'Thêm Câu Gốc Yêu Thích Mới'}`;
+      subEl.textContent = 'Quản lý câu gốc hiển thị trong tuyển tập đức tin của cộng đồng';
+
+      bodyEl.innerHTML = `
+        <form id="form-utility-fav-verse" onsubmit="return false;">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Nội Dung Câu Gốc (Lời Chúa):</label>
+            <textarea id="admin-fav-text" class="portal-input" rows="3" style="width: 100%; resize: vertical;" placeholder="Nhập trọn vẹn câu Kinh Thánh..." required>${v.text || ''}</textarea>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Địa Chỉ Trưng Dẫn:</label>
+              <input type="text" id="admin-fav-ref" class="portal-input" value="${v.ref || ''}" placeholder="Ví dụ: Giăng 3:16" required>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Chủ Đề Phân Loại:</label>
+              <select id="admin-fav-theme" class="portal-input">
+                <option value="peace" ${v.theme === 'peace' ? 'selected' : ''}>Bình An & Lo Lắng</option>
+                <option value="love" ${v.theme === 'love' ? 'selected' : ''}>Tình Yêu & Cứu Rỗi</option>
+                <option value="strength" ${v.theme === 'strength' ? 'selected' : ''}>Sức Mạnh & Dẫn Dắt</option>
+                <option value="faith" ${v.theme === 'faith' ? 'selected' : ''}>Lời Hứa & Thành Tín</option>
+              </select>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem;">
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Mã Sách (3 chữ):</label>
+              <input type="text" id="admin-fav-book" class="portal-input" value="${v.book || 'JHN'}" placeholder="JHN, PSA..." required>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Đoạn (Chương):</label>
+              <input type="number" id="admin-fav-ch" class="portal-input" value="${v.ch || 1}" min="1" required>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Câu:</label>
+              <input type="number" id="admin-fav-v" class="portal-input" value="${v.v || 1}" min="1" required>
+            </div>
+          </div>
+        </form>
+      `;
+    } else if (category === 'quiz') {
+      const quizzes = storage.getUtilityQuizzes() || BIBLE_QUIZ_DATA;
+      const q = isEdit ? quizzes[itemIndex] : { question: '', options: ['', '', '', ''], correct: 0, ref: '', explanation: '' };
+      titleEl.innerHTML = `<i class="fa-solid fa-circle-question"></i> ${isEdit ? 'Chỉnh Sửa Câu Đố Kinh Thánh' : 'Thêm Câu Đố Kinh Thánh Mới'}`;
+      subEl.textContent = 'Soạn thảo câu hỏi trắc nghiệm, các phương án lựa chọn và lời giải nghĩa';
+
+      bodyEl.innerHTML = `
+        <form id="form-utility-quiz" onsubmit="return false;">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Câu Hỏi Đố:</label>
+            <textarea id="admin-quiz-question" class="portal-input" rows="2" style="width: 100%; resize: vertical;" placeholder="Nhập nội dung câu hỏi..." required>${q.question || ''}</textarea>
+          </div>
+          <div style="margin-bottom: 0.85rem;">
+            <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">4 Phương Án Trả Lời:</label>
+            ${[0, 1, 2, 3].map(i => `
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+                <span style="font-weight: 800; color: var(--accent-gold); width: 24px;">${String.fromCharCode(65 + i)}.</span>
+                <input type="text" id="admin-quiz-opt-${i}" class="portal-input" style="flex: 1;" value="${(q.options && q.options[i]) || ''}" placeholder="Phương án ${String.fromCharCode(65 + i)}" required>
+              </div>
+            `).join('')}
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Đáp Án Đúng:</label>
+              <select id="admin-quiz-correct" class="portal-input">
+                <option value="0" ${q.correct === 0 ? 'selected' : ''}>A (Phương án A)</option>
+                <option value="1" ${q.correct === 1 ? 'selected' : ''}>B (Phương án B)</option>
+                <option value="2" ${q.correct === 2 ? 'selected' : ''}>C (Phương án C)</option>
+                <option value="3" ${q.correct === 3 ? 'selected' : ''}>D (Phương án D)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Căn Cứ Kinh Thánh:</label>
+              <input type="text" id="admin-quiz-ref" class="portal-input" value="${q.ref || ''}" placeholder="Ví dụ: 2 Sa-mu-ên 5:7">
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Giải Thích Chi Tiết / Bài Học:</label>
+            <textarea id="admin-quiz-explanation" class="portal-input" rows="2" style="width: 100%; resize: vertical;" placeholder="Nhập lời giải nghĩa sau khi trả lời...">${q.explanation || ''}</textarea>
+          </div>
+        </form>
+      `;
+    } else if (category === 'stories') {
+      const stories = storage.getUtilityStories() || BIBLE_STORIES_DATA;
+      const s = isEdit ? stories[itemIndex] : { title: '', icon: 'fa-fire', ref: '', bookId: 'GEN', ch: 1, summary: '', takeaway: '' };
+      titleEl.innerHTML = `<i class="fa-solid fa-fire"></i> ${isEdit ? 'Chỉnh Sửa Truyện Tích Thánh Kinh' : 'Thêm Truyện Tích Thánh Kinh Mới'}`;
+      subEl.textContent = 'Soạn thảo câu chuyện gương đức tin và bài học áp dụng';
+
+      bodyEl.innerHTML = `
+        <form id="form-utility-story" onsubmit="return false;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Tiêu Đề Truyện Tích:</label>
+              <input type="text" id="admin-story-title" class="portal-input" value="${s.title || ''}" placeholder="Ví dụ: Đa-vít Và Gô-li-át" required>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Biểu Tượng FontAwesome:</label>
+              <input type="text" id="admin-story-icon" class="portal-input" value="${s.icon || 'fa-fire'}" placeholder="fa-shield, fa-fire, fa-crown">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Địa Chỉ Tham Chiếu:</label>
+              <input type="text" id="admin-story-ref" class="portal-input" value="${s.ref || ''}" placeholder="Ví dụ: 1 Sa-mu-ên 17" required>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Mã Sách:</label>
+              <input type="text" id="admin-story-book" class="portal-input" value="${s.bookId || '1SA'}" placeholder="1SA" required>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Đoạn:</label>
+              <input type="number" id="admin-story-ch" class="portal-input" value="${s.ch || 1}" min="1" required>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Tóm Tắt Diễn Biến:</label>
+            <textarea id="admin-story-summary" class="portal-input" rows="3" style="width: 100%; resize: vertical;" placeholder="Tóm tắt cốt truyện hào hùng..." required>${s.summary || ''}</textarea>
+          </div>
+          <div class="form-group">
+            <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Bài Học Đức Tin & Áp Dụng:</label>
+            <textarea id="admin-story-takeaway" class="portal-input" rows="2" style="width: 100%; resize: vertical;" placeholder="Bài học thực hành cho đời sống..." required>${s.takeaway || ''}</textarea>
+          </div>
+        </form>
+      `;
+    } else if (category === 'responsive') {
+      const readings = storage.getUtilityResponsiveReadings() || RESPONSIVE_READINGS_DATA;
+      const r = isEdit ? readings[itemIndex] : {
+        title: '',
+        passage: '',
+        bookId: 'PSA',
+        ch: 1,
+        lines: [
+          { speaker: 'leader', label: 'Chủ sự', text: '' },
+          { speaker: 'congregation', label: 'Hội chúng', text: '' }
+        ]
+      };
+      titleEl.innerHTML = `<i class="fa-solid fa-scroll"></i> ${isEdit ? 'Chỉnh Sửa Bài Kinh Thánh Đối Đáp' : 'Thêm Bài Kinh Thánh Đối Đáp Mới'}`;
+      subEl.textContent = 'Soạn thảo bài đọc phụng vụ giữa Chủ sự và Hội chúng';
+
+      const linesFormatted = (r.lines || []).map(l => `${l.label}: ${l.text}`).join('\n');
+
+      bodyEl.innerHTML = `
+        <form id="form-utility-responsive" onsubmit="return false;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Tiêu Đề Bài Đối Đáp:</label>
+              <input type="text" id="admin-resp-title" class="portal-input" value="${r.title || ''}" placeholder="Ví dụ: Bài 10: Sự Bình An Trong Chúa" required>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Kinh Thánh Dẫn Xuất:</label>
+              <input type="text" id="admin-resp-passage" class="portal-input" value="${r.passage || ''}" placeholder="Ví dụ: Thi Thiên 23" required>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Mã Sách:</label>
+              <input type="text" id="admin-resp-book" class="portal-input" value="${r.bookId || 'PSA'}" placeholder="PSA" required>
+            </div>
+            <div class="form-group">
+              <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">Đoạn:</label>
+              <input type="number" id="admin-resp-ch" class="portal-input" value="${r.ch || 1}" min="1" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="display: block; font-weight: 700; margin-bottom: 0.35rem;">
+              Nội Dung Các Câu Đối Đáp (Mỗi dòng một câu, tiền tố <code>Chủ sự:</code> hoặc <code>Hội chúng:</code> hoặc <code>Cùng đọc:</code>):
+            </label>
+            <textarea id="admin-resp-lines" class="portal-input" rows="8" style="width: 100%; font-family: monospace; resize: vertical;" placeholder="Chủ sự: Đức Giê-hô-va là Đấng chăn giữ tôi...\nHội chúng: Ngài khiến tôi an nghỉ nơi đồng cỏ xanh tươi...\nCùng đọc: Quả thật, trọn đời tôi phước hạnh..." required>${linesFormatted}</textarea>
+          </div>
+        </form>
+      `;
+    } else if (category === 'schedule') {
+      this.openAdminDevotionModal();
+      return;
+    }
+
+    modal.classList.remove('hidden');
+  }
+
+  saveUtilityEditorForm() {
+    const category = this.currentUtilityCategory;
+    const isEdit = this.currentEditingUtilityIndex !== null && this.currentEditingUtilityIndex !== undefined;
+    const idx = this.currentEditingUtilityIndex;
+
+    if (category === 'fav_verses') {
+      const text = document.getElementById('admin-fav-text')?.value.trim();
+      const ref = document.getElementById('admin-fav-ref')?.value.trim();
+      const theme = document.getElementById('admin-fav-theme')?.value || 'peace';
+      const book = document.getElementById('admin-fav-book')?.value.trim().toUpperCase() || 'JHN';
+      const ch = parseInt(document.getElementById('admin-fav-ch')?.value, 10) || 1;
+      const v = parseInt(document.getElementById('admin-fav-v')?.value, 10) || 1;
+
+      if (!text || !ref) {
+        alert('Vui lòng nhập đầy đủ câu gốc và địa chỉ!');
+        return;
+      }
+
+      const list = [...(storage.getUtilityFavVerses() || FAV_VERSES_DATA)];
+      const item = {
+        id: isEdit && list[idx]?.id ? list[idx].id : `fav-${Date.now()}`,
+        theme,
+        ref,
+        text,
+        book,
+        ch,
+        v
+      };
+
+      if (isEdit) {
+        list[idx] = item;
+      } else {
+        list.unshift(item);
+      }
+
+      storage.saveUtilityFavVerses(list);
+      document.getElementById('admin-utility-editor-modal')?.classList.add('hidden');
+      this.renderUtilityFavVerses(theme);
+      this.showToast(isEdit ? 'Đã cập nhật câu gốc thành công!' : 'Đã thêm câu gốc mới thành công!', 'success');
+    } else if (category === 'quiz') {
+      const question = document.getElementById('admin-quiz-question')?.value.trim();
+      const opts = [
+        document.getElementById('admin-quiz-opt-0')?.value.trim() || '',
+        document.getElementById('admin-quiz-opt-1')?.value.trim() || '',
+        document.getElementById('admin-quiz-opt-2')?.value.trim() || '',
+        document.getElementById('admin-quiz-opt-3')?.value.trim() || ''
+      ];
+      const correct = parseInt(document.getElementById('admin-quiz-correct')?.value, 10) || 0;
+      const ref = document.getElementById('admin-quiz-ref')?.value.trim() || '';
+      const explanation = document.getElementById('admin-quiz-explanation')?.value.trim() || '';
+
+      if (!question || opts.some(o => !o)) {
+        alert('Vui lòng nhập câu hỏi và đầy đủ 4 phương án trả lời!');
+        return;
+      }
+
+      const list = [...(storage.getUtilityQuizzes() || BIBLE_QUIZ_DATA)];
+      const item = {
+        id: isEdit && list[idx]?.id ? list[idx].id : Date.now(),
+        question,
+        options: opts,
+        correct,
+        ref,
+        explanation
+      };
+
+      if (isEdit) {
+        list[idx] = item;
+      } else {
+        list.push(item);
+      }
+
+      storage.saveUtilityQuizzes(list);
+      document.getElementById('admin-utility-editor-modal')?.classList.add('hidden');
+      this.renderUtilityQuiz(isEdit ? idx : list.length - 1);
+      this.showToast(isEdit ? 'Đã cập nhật câu đố thành công!' : 'Đã thêm câu đố mới thành công!', 'success');
+    } else if (category === 'stories') {
+      const title = document.getElementById('admin-story-title')?.value.trim();
+      const icon = document.getElementById('admin-story-icon')?.value.trim() || 'fa-fire';
+      const ref = document.getElementById('admin-story-ref')?.value.trim();
+      const bookId = document.getElementById('admin-story-book')?.value.trim().toUpperCase() || 'GEN';
+      const ch = parseInt(document.getElementById('admin-story-ch')?.value, 10) || 1;
+      const summary = document.getElementById('admin-story-summary')?.value.trim();
+      const takeaway = document.getElementById('admin-story-takeaway')?.value.trim();
+
+      if (!title || !ref || !summary || !takeaway) {
+        alert('Vui lòng nhập đầy đủ tiêu đề, địa chỉ, tóm tắt và bài học!');
+        return;
+      }
+
+      const list = [...(storage.getUtilityStories() || BIBLE_STORIES_DATA)];
+      const item = {
+        id: isEdit && list[idx]?.id ? list[idx].id : `story-${Date.now()}`,
+        icon,
+        title,
+        ref,
+        bookId,
+        ch,
+        summary,
+        takeaway
+      };
+
+      if (isEdit) {
+        list[idx] = item;
+      } else {
+        list.push(item);
+      }
+
+      storage.saveUtilityStories(list);
+      document.getElementById('admin-utility-editor-modal')?.classList.add('hidden');
+      this.renderUtilityStories();
+      this.showToast(isEdit ? 'Đã cập nhật truyện tích thành công!' : 'Đã thêm truyện tích mới thành công!', 'success');
+    } else if (category === 'responsive') {
+      const title = document.getElementById('admin-resp-title')?.value.trim();
+      const passage = document.getElementById('admin-resp-passage')?.value.trim();
+      const bookId = document.getElementById('admin-resp-book')?.value.trim().toUpperCase() || 'PSA';
+      const ch = parseInt(document.getElementById('admin-resp-ch')?.value, 10) || 1;
+      const linesRaw = document.getElementById('admin-resp-lines')?.value.trim();
+
+      if (!title || !passage || !linesRaw) {
+        alert('Vui lòng nhập tiêu đề, đoạn Kinh Thánh và các câu đối đáp!');
+        return;
+      }
+
+      const parsedLines = linesRaw.split('\n').map(line => {
+        line = line.trim();
+        if (!line) return null;
+        let speaker = 'leader';
+        let label = 'Chủ sự';
+        let text = line;
+
+        if (line.toLowerCase().startsWith('hội chúng:') || line.toLowerCase().startsWith('c:') || line.toLowerCase().startsWith('hc:')) {
+          speaker = 'congregation';
+          label = 'Hội chúng';
+          text = line.replace(/^(hội chúng:|c:|hc:)/i, '').trim();
+        } else if (line.toLowerCase().startsWith('cùng đọc:') || line.toLowerCase().startsWith('all:') || line.toLowerCase().startsWith('chung:')) {
+          speaker = 'all';
+          label = 'Cùng đọc';
+          text = line.replace(/^(cùng đọc:|all:|chung:)/i, '').trim();
+        } else if (line.toLowerCase().startsWith('chủ sự:') || line.toLowerCase().startsWith('l:') || line.toLowerCase().startsWith('cs:')) {
+          speaker = 'leader';
+          label = 'Chủ sự';
+          text = line.replace(/^(chủ sự:|l:|cs:)/i, '').trim();
+        }
+
+        return { speaker, label, text };
+      }).filter(Boolean);
+
+      const list = [...(storage.getUtilityResponsiveReadings() || RESPONSIVE_READINGS_DATA)];
+      const item = {
+        id: isEdit && list[idx]?.id ? list[idx].id : `resp-${Date.now()}`,
+        title,
+        passage,
+        bookId,
+        ch,
+        lines: parsedLines
+      };
+
+      if (isEdit) {
+        list[idx] = item;
+      } else {
+        list.push(item);
+      }
+
+      storage.saveUtilityResponsiveReadings(list);
+      document.getElementById('admin-utility-editor-modal')?.classList.add('hidden');
+      this.renderUtilityResponsive(isEdit ? idx : list.length - 1);
+      this.showToast(isEdit ? 'Đã cập nhật bài đối đáp thành công!' : 'Đã thêm bài đối đáp mới thành công!', 'success');
+    }
+  }
+
+  deleteUtilityItem(category, index) {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+
+    if (!confirm('Bạn có chắc chắn muốn xóa mục này khỏi danh sách?')) return;
+
+    if (category === 'fav_verses') {
+      const list = [...(storage.getUtilityFavVerses() || FAV_VERSES_DATA)];
+      list.splice(index, 1);
+      storage.saveUtilityFavVerses(list);
+      this.renderUtilityFavVerses('all');
+      this.showToast('Đã xóa câu gốc khỏi danh sách.', 'info');
+    } else if (category === 'quiz') {
+      const list = [...(storage.getUtilityQuizzes() || BIBLE_QUIZ_DATA)];
+      list.splice(index, 1);
+      storage.saveUtilityQuizzes(list);
+      this.renderUtilityQuiz(0);
+      this.showToast('Đã xóa câu đố khỏi danh sách.', 'info');
+    } else if (category === 'stories') {
+      const list = [...(storage.getUtilityStories() || BIBLE_STORIES_DATA)];
+      list.splice(index, 1);
+      storage.saveUtilityStories(list);
+      this.renderUtilityStories();
+      this.showToast('Đã xóa truyện tích khỏi danh sách.', 'info');
+    } else if (category === 'responsive') {
+      const list = [...(storage.getUtilityResponsiveReadings() || RESPONSIVE_READINGS_DATA)];
+      list.splice(index, 1);
+      storage.saveUtilityResponsiveReadings(list);
+      this.renderUtilityResponsive(0);
+      this.showToast('Đã xóa bài đối đáp khỏi danh sách.', 'info');
+    }
+  }
+
+  resetCurrentUtilityData(category) {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+
+    if (!confirm('Bạn có chắc chắn muốn khôi phục dữ liệu gốc của mục này từ hệ thống? Mọi thay đổi tùy chỉnh sẽ được thiết lập lại.')) {
+      return;
+    }
+
+    if (category === 'fav_verses') {
+      storage.resetUtilityFavVerses();
+      this.renderUtilityFavVerses('all');
+      this.showToast('Đã khôi phục dữ liệu Câu Gốc Yêu Thích về mặc định!', 'info');
+    } else if (category === 'quiz') {
+      storage.resetUtilityQuizzes();
+      this.quizAdminManageMode = false;
+      this.renderUtilityQuiz(0);
+      this.showToast('Đã khôi phục dữ liệu Đố Kinh Thánh về mặc định!', 'info');
+    } else if (category === 'stories') {
+      storage.resetUtilityStories();
+      this.renderUtilityStories();
+      this.showToast('Đã khôi phục dữ liệu Truyện Tích Thánh Kinh về mặc định!', 'info');
+    } else if (category === 'responsive') {
+      storage.resetUtilityResponsiveReadings();
+      this.renderUtilityResponsive(0);
+      this.showToast('Đã khôi phục dữ liệu Kinh Thánh Đối Đáp về mặc định!', 'info');
+    } else if (category === 'schedule') {
+      storage.saveDevotionData(null);
+      this.renderUtilitySchedule();
+      this.showToast('Đã khôi phục dữ liệu Lịch Đọc về mặc định!', 'info');
+    }
   }
 
   // Quản lý chuyển tab trong Cổng Tĩnh Nguyện (giữa Tĩnh Nguyện & Dưỡng Linh và Bản Văn Đọc)
@@ -3019,6 +3789,15 @@ class LogosApp {
     if (adminDevotionBtn) {
       if (role === 'admin') adminDevotionBtn.classList.remove('hidden');
       else adminDevotionBtn.classList.add('hidden');
+    }
+    const subitemsAdmin = document.getElementById('portal-subitems-admin-indicator');
+    if (subitemsAdmin) {
+      subitemsAdmin.classList.toggle('hidden', role !== 'admin');
+    }
+    const utilityAdminActions = document.getElementById('portal-utility-admin-actions');
+    if (utilityAdminActions) {
+      const isManageable = ['fav_verses', 'quiz', 'stories', 'responsive'].includes(this.currentUtilityCategory);
+      utilityAdminActions.classList.toggle('hidden', role !== 'admin' || !isManageable);
     }
     this.updateHeaderVisitorCount();
   }
@@ -4339,6 +5118,17 @@ class LogosApp {
   }
 
   bindEvents() {
+    // Admin Subitems / Utility CMS Handlers (Câu Gốc, Đố KT, Truyện Tích, Đối Đáp, Lịch Đọc)
+    document.getElementById('btn-utility-admin-add')?.addEventListener('click', () => {
+      this.openUtilityEditorModal(this.currentUtilityCategory, null);
+    });
+    document.getElementById('btn-utility-admin-reset')?.addEventListener('click', () => {
+      this.resetCurrentUtilityData(this.currentUtilityCategory);
+    });
+    document.getElementById('btn-admin-save-utility-item')?.addEventListener('click', () => {
+      this.saveUtilityEditorForm();
+    });
+
     // Full CMS v3.0: Devotion, Verse Correction, Seasonal Media
     document.getElementById('admin-devotion-edit-btn')?.addEventListener('click', () => {
       this.openAdminDevotionModal();

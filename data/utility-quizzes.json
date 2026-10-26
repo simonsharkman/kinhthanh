@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "question": "Ai là người đã vâng mạng Chúa đóng chiếc tàu lớn để cứu gia đình và các loài vật khỏi cơn Nước Lụt?",
+    "options": [
+      "Môi-se",
+      "Nô-ê",
+      "Áp-ra-ham",
+      "Đa-vít"
+    ],
+    "correct": 1,
+    "ref": "Sáng-thế Ký 6:13-14",
+    "explanation": "Chúa phán bảo Nô-ê đóng chiếc tàu bằng cây gô-phe dài 300 thước để bảo tồn sự sống trong cơn nước lụt lớn."
+  },
+  {
+    "id": 2,
+    "question": "Đức Chúa Trời ban Mười Điều Răn cho dân Y-sơ-ra-ên qua vị tiên tri nào tại núi Si-na-i?",
+    "options": [
+      "A-rôn",
+      "Giô-suê",
+      "Môi-se",
+      "Ê-li"
+    ],
+    "correct": 2,
+    "ref": "Xuất Ê-díp-tô Ký 20:1-17",
+    "explanation": "Môi-se lên núi Si-na-i kiêng ăn 40 ngày đêm và nhận hai bảng đá chứng ước do chính ngón tay Đức Chúa Trời khắc ghi."
+  },
+  {
+    "id": 3,
+    "question": "Cậu bé Đa-vít đã dùng vũ khí gì để đánh ngã tên dũng sĩ khổng lồ Gô-li-át của quân Phi-li-tin?",
+    "options": [
+      "Gươm báu của vua Sau-lơ",
+      "Cung tên có tẩm lửa",
+      "Cái trành ném đá và 1 hòn đá bóng láng",
+      "Ngọn giáo bằng đồng"
+    ],
+    "correct": 2,
+    "ref": "1 Sa-mu-ên 17:40-49",
+    "explanation": "Đa-vít nhân danh Đức Giê-hô-va vạn quân, dùng cái trành ném một hòn đá trúng ngay trán Gô-li-át khiến hắn ngã sấp mặt xuống đất."
+  },
+  {
+    "id": 4,
+    "question": "Ai là vị tiên tri bị quăng vào hang sư tử nhưng không hề bị hề hấn gì vì lòng trung thành cầu nguyện với Chúa?",
+    "options": [
+      "Ê-sai",
+      "Đa-ni-ên",
+      "Giê-rê-mi",
+      "Ê-xê-chi-ên"
+    ],
+    "correct": 1,
+    "ref": "Đa-ni-ên 6:16-23",
+    "explanation": "Đức Chúa Trời đã sai thiên sứ bịt miệng các sư tử lại vì Đa-ni-ên vô tội trước mặt Ngài và trước mặt vua Đa-ri-út."
+  },
+  {
+    "id": 5,
+    "question": "Chúa Giê-xu đã sinh ra tại thành phố nào theo đúng lời tiên tri trong sách Mi-chê?",
+    "options": [
+      "Na-xa-rét",
+      "Giê-ru-sa-lem",
+      "Bết-lê-hem",
+      "Ca-bê-na-um"
+    ],
+    "correct": 2,
+    "ref": "Mi-chê 5:1 & Ma-thi-ơ 2:1",
+    "explanation": "Chúa Giê-xu giáng sinh tại Bết-lê-hem xứ Giu-đê, đúng theo lời tiên tri Mi-chê đã công bố trước đó hàng trăm năm."
+  },
+  {
+    "id": 6,
+    "question": "Phép lạ đầu tiên của Chúa Giê-xu được ghi lại trong sách Phúc Âm Giăng là phép lạ nào?",
+    "options": [
+      "Hóa bánh cho 5000 người ăn",
+      "Biến nước thành rượu tại tiệc cưới Ca-na",
+      "Chữa lành người mù từ thuở sinh ra",
+      "Kêu La-xa-rơ sống lại"
+    ],
+    "correct": 1,
+    "ref": "Giăng 2:1-11",
+    "explanation": "Tại tiệc cưới làng Ca-na xứ Ga-li-lê, Chúa Giê-xu đã biến nước trong 6 ché đá thành rượu ngon hảo hạng, bày tỏ sự vinh hiển Ngài."
+  },
+  {
+    "id": 7,
+    "question": "Môn đồ nào đã chối Chúa Giê-xu ba lần trước khi gà gáy, rồi sau đó đã ăn năn khóc lóc đắng cay?",
+    "options": [
+      "Gia-cơ",
+      "Giăng",
+      "Phi-e-rơ",
+      "Giu-đa Ích-ca-ri-ốt"
+    ],
+    "correct": 2,
+    "ref": "Ma-thi-ơ 26:69-75",
+    "explanation": "Phi-e-rơ chối Chúa 3 lần trong sân thầy tế lễ thượng phẩm, nhưng sau khi phục sinh Chúa đã phục hồi chức vụ cho ông bên bờ hồ Ti-bê-ri-át."
+  },
+  {
+    "id": 8,
+    "question": "Sách nào trong Kinh Thánh có số chương nhiều nhất (150 chương)?",
+    "options": [
+      "Ê-sai",
+      "Sáng-thế Ký",
+      "Thi-thiên",
+      "Giê-rê-mi"
+    ],
+    "correct": 2,
+    "ref": "Thi-thiên 1 - 150",
+    "explanation": "Sách Thi-thiên gồm 150 bài ca khen, cầu nguyện và tôn vinh Đức Chúa Trời do Đa-vít, A-sáp, con cháu Cô-rê và nhiều tác giả biên soạn."
+  },
+  {
+    "id": 9,
+    "question": "Vị sứ đồ nào vốn bắt bớ Hội Thánh nhưng đã được Chúa biến đổi trên đường Đa-mách để trở thành người truyền giáo vĩ đại cho dân ngoại?",
+    "options": [
+      "Ba-na-ba",
+      "Phao-lô (Sau-lơ)",
+      "Ti-mô-thê",
+      "A-bô-lô"
+    ],
+    "correct": 1,
+    "ref": "Công-vụ các Sứ-đồ 9:1-19",
+    "explanation": "Sau-lơ người Tạc-sơ được ánh sáng từ trời chiếu lòa trên đường Đa-mách, nghe tiếng phán của Chúa Giê-xu và trở thành Sứ đồ Phao-lô."
+  },
+  {
+    "id": 10,
+    "question": "Sách cuối cùng của bộ Kinh Thánh gồm 66 sách là sách nào?",
+    "options": [
+      "Giu-đe",
+      "Hê-bơ-rơ",
+      "Khải-huyền",
+      "Ma-la-chi"
+    ],
+    "correct": 2,
+    "ref": "Khải-huyền 1 - 22",
+    "explanation": "Sách Khải-huyền do Sứ đồ Giăng nhận khải tượng trên đảo Bát-mô, ghi lại sự chiến thắng vinh quang của Chiên Con và Trời Mới Đất Mới."
+  }
+]

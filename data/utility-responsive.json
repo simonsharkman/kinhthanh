@@ -1,0 +1,266 @@
+[
+  {
+    "id": 1,
+    "title": "Bài 1: Sự Cao Cả & Nhân Từ Của Chúa",
+    "passage": "Thi-thiên 103:1-14",
+    "bookId": "PSA",
+    "ch": 103,
+    "lines": [
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Hỡi linh hồn ta, hãy ngợi khen Đức Giê-hô-va! Mọi điều gì ở trong ta hãy ca tụng danh thánh của Ngài!"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Hỡi linh hồn ta, hãy ngợi khen Đức Giê-hô-va, chớ quên các ân huệ của Ngài."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Ấy là Ngài tha thứ các tội ác ngươi, chữa lành mọi tật bịnh ngươi;"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Cứu chuộc mạng sống ngươi khỏi chốn hư nát, sang trang ngươi bằng sự nhân từ và sự thương xót."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Đức Giê-hô-va có lòng thương xót, hay làm ơn, chậm nóng giận, và đầy sự nhân từ."
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Ngài không bắt tội luôn luôn, cũng chẳng giữ lòng giận đến đời đời."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Vì hễ các từng trời cao trên đất bao nhiêu, thì sự nhân từ Ngài càng lớn cho kẻ kính sợ Ngài bấy nhiêu."
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Phương đông xa cách phương tây bao nhiêu, thì Ngài đã bỏ sự vi phạm chúng ta xa cách chúng ta bấy nhiêu. A-men!"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Bài 2: Sự Bảo Vệ Nơi Đấng Chí Cao",
+    "passage": "Thi-thiên 91:1-12",
+    "bookId": "PSA",
+    "ch": 91,
+    "lines": [
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Người nào ở nơi kín đáo của Đấng Chí Cao, sẽ được hằng ở dưới bóng của Đấng Toàn Năng."
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Tôi nói về Đức Giê-hô-va rằng: Ngài là nơi nương náu tôi, và là đồn lũy tôi; cũng là Đức Chúa Trời tôi, tôi tin cậy nơi Ngài."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Ngài sẽ lấy lông Ngài mà che chở ngươi, và dưới cánh Ngài, ngươi sẽ được nương náu mình;"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Sự chân thật Ngài là cái khiên và cái khiên nhỏ của ngươi."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Ngươi sẽ chẳng sợ sự kinh khiếp ban đêm, hoặc tên bay ban ngày;"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Hoặc dịch hạch lây ra trong tối tăm, hay là sự hủy diệt làm hao mòn lúc trưa."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Sẽ có ngàn người sa ngã bên ngươi, và muôn người bên hữu ngươi; song tai họa sẽ chẳng đến gần ngươi."
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Vì Ngài sẽ ban lịnh cho các thiên sứ Ngài gìn giữ ngươi trong mọi đường lối ngươi. A-men!"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Bài 3: Phước Hạnh Của Người Công Bình",
+    "passage": "Thi-thiên 1:1-6",
+    "bookId": "PSA",
+    "ch": 1,
+    "lines": [
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Phước cho người nào chẳng theo mưu kế của kẻ dữ, chẳng đứng trong đường tội nhân, chẳng ngồi chỗ của kẻ nhạo báng;"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Song lấy làm vui vẻ về luật pháp của Đức Giê-hô-va, và suy ngẫm luật pháp ấy ngày và đêm."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Người ấy sẽ như cây trồng gần dòng nước, sanh bông trái theo thì tiết, lá nó cũng chẳng tàn héo;"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Mọi sự người làm đều sẽ thạnh vượng."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Kẻ ác chẳng thuộc như vậy; bèn như rơm rác gió thổi bay đi."
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Vì Đức Giê-hô-va biết đường người công bình, song đường kẻ ác rồi bị diệt vong. A-men!"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Bài 4: Tôn Vinh & Tạ Ơn Đấng Tạo Hóa",
+    "passage": "Thi-thiên 100:1-5",
+    "bookId": "PSA",
+    "ch": 100,
+    "lines": [
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Hỡi cả trái đất, hãy cất tiếng reo mừng cho Đức Giê-hô-va!"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Khá hầu việc Đức Giê-hô-va cách vui mừng, hãy hát xướng mà đến trước mặt Ngài!"
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Phải biết rằng Giê-hô-va là Đức Chúa Trời. Chính Ngài đã dựng nên chúng ta, chúng ta thuộc về Ngài;"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Chúng ta là dân sự Ngài, là bầy chiên của đồng cỏ Ngài."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Hãy cảm tạ mà vào các cửa Ngài, hãy ngợi khen mà vào các hành lang Ngài!"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Khá cảm tạ Ngài, chúc tụng danh của Ngài. Vì Đức Giê-hô-va là thiện; sự nhân từ Ngài hằng có đời đời, và sự thành tín Ngài còn đến đời đời. A-men!"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Bài 5: Lời Cầu Nguyện Ăn Năn Tha Thứ",
+    "passage": "Thi-thiên 51:1-12",
+    "bookId": "PSA",
+    "ch": 51,
+    "lines": [
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Đức Chúa Trời ôi! Xin đoái thương tôi tùy lòng nhân từ của Ngài; xin xóa các sự vi phạm tôi tùy sự thương xót rất lớn của Ngài."
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Xin hãy rửa tôi sạch hết trọi gian ác, và làm tôi được thanh sạch tội lỗi tôi."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Vì tôi nhận biết các sự vi phạm tôi, tội lỗi tôi hằng ở trước mặt tôi luôn."
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Đức Chúa Trời ôi! Xin hãy dựng nên trong tôi một lòng trong sạch, và làm cho mới lại trong tôi một thần linh ngay thẳng."
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Xin chớ cất tôi khỏi trước mặt Ngài, và đừng cất Thánh Linh Ngài khỏi tôi."
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Xin hãy ban lại cho tôi sự vui vẻ về sự cứu rỗi của Ngài, nâng đỡ tôi bằng thần linh vui lòng dâng hiến. A-men!"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Bài 6: Bát Phước Trong Bài Giảng Trên Núi",
+    "passage": "Ma-thi-ơ 5:1-12",
+    "bookId": "MAT",
+    "ch": 5,
+    "lines": [
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Phước cho những kẻ có lòng khó khăn, vì nước thiên đàng là của những kẻ ấy!"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Phước cho những kẻ than khóc, vì sẽ được an ủi!"
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Phước cho những kẻ nhu mì, vì sẽ hưởng được đất!"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Phước cho những kẻ đói khát sự công bình, vì sẽ được no đủ!"
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Phước cho những kẻ hay thương xót, vì sẽ được thương xót!"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Phước cho những kẻ có lòng trong sạch, vì sẽ thấy Đức Chúa Trời!"
+      },
+      {
+        "speaker": "leader",
+        "label": "Chủ sự",
+        "text": "Phước cho những kẻ làm cho người hòa thuận, vì sẽ được gọi là con Đức Chúa Trời!"
+      },
+      {
+        "speaker": "congregation",
+        "label": "Hội chúng",
+        "text": "Phước cho những kẻ chịu bắt bớ vì sự công bình, vì nước thiên đàng là của những kẻ ấy! A-men!"
+      }
+    ]
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Công Cuộc Sáng Tạo Kỳ Diệu & Vườn Ê-đen",
+    "ref": "Sáng-thế Ký 1-2",
+    "bookId": "GEN",
+    "ch": 1,
+    "icon": "fa-earth-americas",
+    "summary": "Ban đầu, Đức Chúa Trời dùng quyền năng lời phán dựng nên trời, đất, ánh sáng, biển khơi, muôn loài thảo mộc và muôn sinh vật trong sáu ngày. Vào ngày thứ sáu, Ngài tạo dựng con người theo hình ảnh và tượng Ngài, đặt vào vườn Ê-đen để cai quản và hưởng mối tương giao ngọt ngào với Đấng Tạo Hóa.",
+    "takeaway": "Mọi sự Chúa tạo dựng đều rất tốt lành; mỗi chúng ta được Chúa tạo nên với mục đích và giá trị vĩnh hằng."
+  },
+  {
+    "id": 2,
+    "title": "Con Tàu Nô-ê & Giao Ước Cầu Vồng",
+    "ref": "Sáng-thế Ký 6-9",
+    "bookId": "GEN",
+    "ch": 6,
+    "icon": "fa-ship",
+    "summary": "Khi nhân loại chìm đắm trong gian ác, Nô-ê được ơn trước mặt Đức Chúa Trời nhờ đức tin và sự công bình. Ông đã trung tín đóng chiếc tàu gỗ khổng lồ suốt hàng chục năm dù bị thế gian nhạo báng. Khi mưa lụt đổ xuống 40 ngày đêm, gia đình Nô-ê được an toàn tuyệt đối, và chiếc cầu vồng đã trở thành dấu hiệu giao ước trường tồn của Chúa.",
+    "takeaway": "Đức tin vâng phục tuyệt đối đem lại sự cứu rỗi giữa một thế hệ băng hoại."
+  },
+  {
+    "id": 3,
+    "title": "Áp-ra-ham Dâng Y-sác Trên Núi Mô-ri-a",
+    "ref": "Sáng-thế Ký 22",
+    "bookId": "GEN",
+    "ch": 22,
+    "icon": "fa-mountain-sun",
+    "summary": "Đức Chúa Trời thử nghiệm đức tin Áp-ra-ham khi bảo ông dâng Y-sác — người con trai duy nhất của lời hứa. Không hề do dự, Áp-ra-ham thức dậy sớm dắt con lên núi. Ngay khi ông giơ dao, thiên sứ đã ngăn lại và Chúa chuẩn bị sẵn một con chiên đực mắc sừng trong bụi gai để thay thế.",
+    "takeaway": "Đức Giê-hô-va Di-rê — Chúa sẽ chu cấp trọn vẹn khi chúng ta hết lòng vâng lời Ngài."
+  },
+  {
+    "id": 4,
+    "title": "Giô-sép: Từ Hầm Tối Đến Ngai Tể Tướng",
+    "ref": "Sáng-thế Ký 37-50",
+    "bookId": "GEN",
+    "ch": 45,
+    "icon": "fa-crown",
+    "summary": "Bị các anh ghen ghét bán sang Ai Cập làm nô lệ, rồi bị vu oan bỏ vào ngục tối, Giô-sép vẫn giữ lòng ngay lành và kính sợ Chúa. Nhờ ơn giải mộng, ông được lập làm Tể tướng trị vì cả Ai Cập, cứu sống muôn dân qua nạn đói và rộng lòng tha thứ cho các anh mình.",
+    "takeaway": "Các anh toan hại tôi, nhưng Đức Chúa Trời lại toan làm điều ích cho tôi."
+  },
+  {
+    "id": 5,
+    "title": "Biến Cố Vượt Biển Đỏ Lừng Lẫy",
+    "ref": "Xuất Ê-díp-tô Ký 14",
+    "bookId": "EXO",
+    "ch": 14,
+    "icon": "fa-water",
+    "summary": "Phía trước là Biển Đỏ sâu thẳm gầm thét, phía sau là đạo quân chiến mã hùng hậu của Pha-ra-ôn truy đuổi. Chúa phán bảo Môi-se giơ gậy trên biển; một trận gió đông cực mạnh thổi suốt đêm làm nước rẽ đôi thành hai bức thành dựng đứng, mở lối cho hàng triệu dân Y-sơ-ra-ên đi qua đất khô ráo.",
+    "takeaway": "Chúa chiến trận cho chúng ta; hãy đứng yên và chiêm ngưỡng ơn cứu rỗi của Ngài."
+  },
+  {
+    "id": 6,
+    "title": "Đa-vít Quật Ngã Gã Khổng Lồ Gô-li-át",
+    "ref": "1 Sa-mu-ên 17",
+    "bookId": "1SA",
+    "ch": 17,
+    "icon": "fa-shield-halved",
+    "summary": "Trước tên dũng sĩ khổng lồ Gô-li-át cao gần 3 mét khiến cả đạo quân Y-sơ-ra-ên khiếp sợ, chàng thiếu niên chăn chiên Đa-vít chỉ cầm trành ném đá và năm hòn đá bóng láng, dõng dạc tuyên bố: \"Ngươi cầm gươm, giáo mà đến; còn ta nhân danh Đức Giê-hô-va vạn quân mà đến!\" Một viên đá duy nhất đã hạ gục kẻ thù.",
+    "takeaway": "Thắng bại không bởi cung tên hay gươm giáo, nhưng thuộc về Đức Giê-hô-va."
+  },
+  {
+    "id": 7,
+    "title": "Đa-ni-ên Bình An Trong Hang Sư Tử Đói",
+    "ref": "Đa-ni-ên 6",
+    "bookId": "DAN",
+    "ch": 6,
+    "icon": "fa-paw",
+    "summary": "Bất chấp chiếu chỉ tử hình cấm cầu nguyện, Đa-ni-ên vẫn mở cửa sổ hướng về Giê-ru-sa-lem quỳ gối cầu khẩn Chúa ba lần mỗi ngày. Bị quăng vào hang đàn sư tử đói, Chúa đã sai thiên sứ bịt miệng các sư tử suốt đêm, minh oan cho người tôi tớ trung tín của Ngài.",
+    "takeaway": "Không thế lực nào có thể hại người kiên trung bước đi cùng Đức Chúa Trời."
+  },
+  {
+    "id": 8,
+    "title": "Đêm Giáng Sinh Vinh Hiển Tại Bết-lê-hem",
+    "ref": "Lu-ca 2:1-20",
+    "bookId": "LUK",
+    "ch": 2,
+    "icon": "fa-star-and-crescent",
+    "summary": "Trong máng cỏ chuồng chiên nghèo nàn nơi thành Bết-lê-hem, Vua Muôn Vua đã giáng sinh làm người để cứu rỗi nhân loại. Thiên sứ rạng rỡ báo tin vui cho các gã chăn chiên thức đêm thức bầy, muôn vàn thiên binh cùng cất tiếng ngợi khen: \"Sáng danh Đức Chúa Trời trên các từng trời rất cao, Bình an dưới đất, ân trạch cho loài người!\"",
+    "takeaway": "Tình yêu vĩ đại của Chúa Giê-xu đã hạ mình để nâng chúng ta lên làm con cái Ngài."
+  }
+]
