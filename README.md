@@ -67,7 +67,7 @@ Sau đó truy cập: `http://localhost:8089`
 ## 🔑 HƯỚNG DẪN QUẢN TRỊ VIÊN
 
 1. Bấm vào nút **"Khách"** trên thanh Header góc trên bên phải.
-2. Nhập mã bí mật: `logos777` và bấm **Xác Thực**.
+2. Nhập mã bí mật: `..............` và bấm **Xác Thực**.
 3. Sau khi xác thực thành công:
    - Bạn có thể nhấp vào biểu tượng bánh răng ⚙️ trên thanh Banner để chỉnh sửa nội dung Banner tùy chỉnh.
    - Bạn có quyền viết bài khảo luận mới trong mục **Blog Chuyên Sâu**.
@@ -83,4 +83,4 @@ python -m pytest tests/ -v
 
 ---
 
-*Phát triển bởi Đội ngũ Chuyên viên Antigravity 2.1 — Dành tặng cho cộng đồng học hỏi Lời Chúa.*
+Y SIMON KTUL phát triển dành tặng cho quý tôi con Chúa nghiên cứu về lẽ sâu nhiệm của Kinh thánh.
