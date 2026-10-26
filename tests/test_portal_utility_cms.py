@@ -117,3 +117,25 @@ def test_app_js_utility_cms_controller():
     assert "btn-utility-admin-add" in code
     assert "btn-utility-admin-reset" in code
     assert "btn-admin-save-utility-item" in code
+
+def test_bible_dictionary_search_input_integrity_and_ime_stability():
+    """Verify Bible Dictionary search bar preserves DOM element on input, preventing IME cursor jump / reversed text."""
+    app_path = os.path.join(BASE_DIR, "js", "app.js")
+    with open(app_path, "r", encoding="utf-8") as f:
+        code = f.read()
+
+    assert "renderUtilityDict(" in code
+    assert "updateUtilityDictList(" in code
+    assert "dict-search-input" in code
+    assert "dict-search-clear" in code
+    # Ensure input event calls updateUtilityDictList instead of recursively re-rendering the whole container
+    assert "this.updateUtilityDictList(val, entriesList)" in code
+
+    css_path = os.path.join(BASE_DIR, "css", "components.css")
+    with open(css_path, "r", encoding="utf-8") as f:
+        css = f.read()
+
+    assert ".dict-search-bar" in css
+    assert ".dict-search-icon" in css
+    assert ".dict-clear-btn" in css
+

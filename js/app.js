@@ -3013,36 +3013,78 @@ class LogosApp {
 
     tabsContainer.innerHTML = '';
 
-    const kw = searchKeyword.toLowerCase().trim();
-    const entries = kw
-      ? BIBLE_DICT_DATA.filter(d => d.word.toLowerCase().includes(kw) || d.meaning.toLowerCase().includes(kw))
-      : BIBLE_DICT_DATA;
+    // Check if search bar and entries container already exist in DOM to prevent destroying input during typing
+    let searchInput = bodyContainer.querySelector('#dict-search-input');
+    let entriesList = bodyContainer.querySelector('#dict-entries-list');
 
-    bodyContainer.innerHTML = `
-      <div style="max-width: 760px; margin: 0 auto;">
-        <div class="dict-search-bar">
-          <input type="text" class="portal-input" id="dict-search-input" value="${searchKeyword}" placeholder="Nhập tên nhân vật, địa danh, thuật ngữ (ví dụ: Áp-ra-ham, Bết-lê-hem, Manna)...">
+    if (!searchInput || !entriesList) {
+      bodyContainer.innerHTML = `
+        <div style="max-width: 760px; margin: 0 auto;">
+          <div class="dict-search-bar">
+            <i class="fa-solid fa-magnifying-glass dict-search-icon"></i>
+            <input type="text" class="portal-input" id="dict-search-input" value="${searchKeyword}" placeholder="Nhập tên nhân vật, địa danh, thuật ngữ (ví dụ: Áp-ra-ham, Bết-lê-hem, Manna)...">
+            <button type="button" class="dict-clear-btn" id="dict-search-clear" style="display: ${searchKeyword ? 'block' : 'none'};" title="Xóa tìm kiếm">&times;</button>
+          </div>
+          <div class="dict-entries-list" id="dict-entries-list"></div>
         </div>
-        <div class="dict-entries-list">
-          ${entries.map(e => `
-            <div class="dict-entry-card">
-              <div class="dict-word-title"><i class="fa-solid fa-book"></i> ${e.word}</div>
-              <div class="dict-word-def">${e.meaning}</div>
-              <div style="margin-top: 0.5rem; font-size: 0.82rem; color: var(--accent-gold);">
-                <i class="fa-solid fa-scroll"></i> <strong>Kinh Thánh dẫn chứng:</strong> ${e.refs}
-              </div>
-            </div>
-          `).join('')}
-          ${entries.length === 0 ? '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">Không tìm thấy thuật ngữ phù hợp.</p>' : ''}
+      `;
+
+      searchInput = bodyContainer.querySelector('#dict-search-input');
+      entriesList = bodyContainer.querySelector('#dict-entries-list');
+      const clearBtn = bodyContainer.querySelector('#dict-search-clear');
+
+      // Bind input event ONCE: do NOT destroy input, only update the entries list below it
+      searchInput?.addEventListener('input', (ev) => {
+        const val = ev.target.value;
+        if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
+        this.updateUtilityDictList(val, entriesList);
+      });
+
+      clearBtn?.addEventListener('click', () => {
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+        }
+        if (clearBtn) clearBtn.style.display = 'none';
+        this.updateUtilityDictList('', entriesList);
+      });
+
+      searchInput?.focus();
+    } else {
+      searchInput.value = searchKeyword;
+      const clearBtn = bodyContainer.querySelector('#dict-search-clear');
+      if (clearBtn) clearBtn.style.display = searchKeyword ? 'block' : 'none';
+    }
+
+    this.updateUtilityDictList(searchKeyword, entriesList);
+  }
+
+  updateUtilityDictList(searchKeyword, entriesListContainer) {
+    if (!entriesListContainer) return;
+    const normalize = str => (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+    const rawKw = (searchKeyword || '').trim().toLowerCase();
+    const normKw = normalize(rawKw);
+
+    const entries = !rawKw
+      ? BIBLE_DICT_DATA
+      : BIBLE_DICT_DATA.filter(d => {
+          const wLower = (d.word || '').toLowerCase();
+          const mLower = (d.meaning || '').toLowerCase();
+          const rLower = (d.refs || '').toLowerCase();
+          if (wLower.includes(rawKw) || mLower.includes(rawKw) || rLower.includes(rawKw)) return true;
+          return normalize(d.word).includes(normKw) || normalize(d.meaning).includes(normKw);
+        });
+
+    entriesListContainer.innerHTML = entries.map(e => `
+      <div class="dict-entry-card animate-fade-in">
+        <div class="dict-word-title"><i class="fa-solid fa-book"></i> ${e.word}</div>
+        <div class="dict-word-def">${e.meaning}</div>
+        <div style="margin-top: 0.5rem; font-size: 0.82rem; color: var(--accent-gold);">
+          <i class="fa-solid fa-scroll"></i> <strong>Kinh Thánh dẫn chứng:</strong> ${e.refs}
         </div>
       </div>
-    `;
-
-    const searchInput = bodyContainer.querySelector('#dict-search-input');
-    searchInput?.addEventListener('input', (ev) => {
-      this.renderUtilityDict(ev.target.value);
-    });
-    searchInput?.focus();
+    `).join('') + (entries.length === 0 ? '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">Không tìm thấy thuật ngữ phù hợp.</p>' : '');
   }
 
   renderUtilitySchedule() {

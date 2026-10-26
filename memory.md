@@ -112,17 +112,7 @@
 - Lọc sạch 123.887 tiền tố tên bản dịch `[BTT 1925]`, `[KJV 1611]` khỏi 67 tệp JSON và regex bóc tách trong `cleanScriptureText`.
 
 ### 26. Thu Gọn Bảng Đối Chiếu (Inspector Drawer) & Hạ Thấp Vị Trí Tránh Che Khuất Header (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"cho cái này nhỏ lại và hiển thị thấp xuống, không che các mục trang chính"* (ảnh chụp kèm đường gạch đỏ và mũi tên chỉ xuống dưới thanh Header điều hướng chính).
-- **Phân tích UX**: Bảng đối chiếu bên phải (`#drawer-inspector`) trước đây chiếm tới 38vw/540px và đặt `top: 0`, đồng thời bóp nghẹt thanh Header (`#main-header`) sang trái làm che khuất các nút chức năng trang chính (Tìm kiếm, Dạ theme, Banner, 1.8k xem, Quản trị).
-- **Thực hiện cải tiến**:
-  1. **Thu gọn kích thước (`nhỏ lại`)**:
-     - Giảm `--drawer-width` từ 540px/38vw xuống còn `clamp(310px, 26vw, 385px)` (giảm gần 30% diện tích chiếm dụng, nhường 74% màn hình cho khu vực đọc Kinh Thánh).
-     - Thu gọn padding header (`0.65rem 0.95rem`), kích thước chữ tiêu đề (`0.96rem`), các tab đối chiếu và thẻ bản dịch `.parallel-verse-card`.
-  2. **Hạ thấp vị trí & không che mục trang chính (`hiển thị thấp xuống`)**:
-     - Đặt `top: var(--drawer-top-offset, 68px)`, `bottom: 12px` và bo tròn góc trái `border-top-left-radius: 12px; border-bottom-left-radius: 12px;`.
-     - Tự động tính toán vị trí đáy của `#main-header` (`rect.bottom + 6px`) trong `toggleDrawer()`.
-     - Bỏ `margin-right` trên `#main-header` và `#admin-banner-container` để Header luôn giữ trọn 100% bề ngang, hoàn toàn thoáng đãng và không bị bóp méo.
-- **Kiểm thử**: Thêm `test_drawer_compact_and_lower_position` vào `tests/test_ui_foundation.py`. Toàn bộ **139/139 bài test Pytest PASS 100%**.
+- Tối ưu Drawer Inspector: `--drawer-top-offset: 68px; top: var(--drawer-top-offset);` và `body.drawer-open #main-header { margin-right: 0 !important; width: 100% !important; }` không bao giờ che khuất thanh điều hướng.
 
 ### 27. Hệ Thống Quản Trị Tiểu Mục (Subitems CMS) & CSDL Riêng Biệt Cho Từng Mục (26/10/2026)
 - **Yêu cầu từ anh Jimmy**: *"cho phép admin có thể chỉnh sửa và thêm bớt nội dung cho các mục này. tốt nhất nên có nhưng mục lưu trữ tương ứng cho từng mục này"* (kèm ảnh khoanh đỏ cụm TIỂU MỤC ở sidebar: Câu Gốc Yêu Thích, Đố Kinh Thánh, Lịch Đọc Kinh Thánh, Truyện Tích Thánh Kinh, và Kinh Thánh Đối Đáp).
@@ -209,3 +199,12 @@
   2. *Mở rộng vùng đọc*: Tăng `--drawer-width` lên `clamp(330px, 28vw, 420px)` cho trải nghiệm đối chiếu thoáng đãng.
   3. *Bổ sung Tooltip*: Thêm thuộc tính `title` vào từng nút tab trong `index.html`.
 - **Kiểm thử & Đồng bộ**: Bổ sung `test_drawer_tabs_2x2_grid_immunity_against_overlap` vào `tests/test_ui_foundation.py`. Toàn bộ **150/150 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
+
+### 34. Khắc Phục Lỗi Gõ Chữ Tiếng Việt Bị Nhảy Con Trỏ / Ngược Ký Tự Trong Thánh Kinh Từ Điển (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"chỗ mục này gõ chữ bị lỗi"* (kèm ảnh chụp mũi tên đỏ chỉ vào ô tìm kiếm Thánh Kinh Từ Điển `#dict-search-input` bị gõ ngược ký tự `------gdjlgdsnahldasnnab`).
+- **Nguyên nhân gốc rễ**: Phương thức `renderUtilityDict()` gán sự kiện `input` nhưng lại thực thi xóa và render lại toàn bộ `bodyContainer.innerHTML` sau mỗi phím gõ. Việc hủy và tái tạo thẻ `<input>` trên mỗi ký tự làm mất phiên gõ của bộ gõ tiếng Việt (Unikey/EVKey Telex), nhảy con trỏ về vị trí 0 (đầu dòng) và khiến các ký tự tiếp theo bị đẩy ngược về sau.
+- **Thực hiện**:
+  1. *Khởi tạo Input Cố định (DOM Persistence)*: Tách biệt cấu trúc ô tìm kiếm và danh sách kết quả `#dict-entries-list`. Ô `<input>` chỉ được tạo một lần duy nhất khi mở từ điển.
+  2. *Cập nhật Độc lập (`updateUtilityDictList`)*: Khi gõ phím, chỉ lọc dữ liệu `BIBLE_DICT_DATA` và nạp vào `#dict-entries-list`, tuyệt đối không bao giờ chạm vào DOM của ô nhập liệu. Con trỏ và bộ gõ Telex/VNI hoạt động 100% tự nhiên.
+  3. *Tối ưu Tìm Kiếm & UI*: Hỗ trợ tìm kiếm tiếng Việt không dấu (`normalize`), thêm icon kính lúp sang trọng và nút `×` xóa nhanh từ khóa.
+- **Kiểm thử & Đồng bộ**: Bổ sung `test_bible_dictionary_search_input_integrity_and_ime_stability` vào `tests/test_portal_utility_cms.py`. Toàn bộ **151/151 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
