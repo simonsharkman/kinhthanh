@@ -835,6 +835,16 @@ class LogosApp {
     if (appBody) {
       appBody.classList.toggle('drawer-open', isOpen);
     }
+
+    // Dynamic top-offset adjustment on desktop so drawer is always below the sticky header
+    if (isOpen && window.innerWidth >= 992) {
+      const header = document.getElementById('main-header');
+      if (header) {
+        const rect = header.getBoundingClientRect();
+        const topOff = Math.max(Math.round(rect.bottom) + 6, 64);
+        document.documentElement.style.setProperty('--drawer-top-offset', `${topOff}px`);
+      }
+    }
     // Đồng bộ nút Đối Chiếu trên Mobile Header với trạng thái chia đôi màn hình 50/50
     const headerCompareBtn = document.getElementById('mobile-header-compare-btn');
     const headerCompareLabel = document.getElementById('mobile-header-compare-label');

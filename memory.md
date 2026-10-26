@@ -2,7 +2,7 @@
 
 ## 📌 Tổng Quan Dự Án & Định Danh
 - **Dự án**: Logos MultiVerse (Nền tảng tra cứu, đối chiếu đa bản dịch và trợ lý Thánh Kinh AI).
-- **Trạng thái kiểm thử**: 138/138 Pytest suites PASS (100% Green).
+- **Trạng thái kiểm thử**: 139/139 Pytest suites PASS (100% Green).
 - **Workspace chính**: `E:\kinhthanh`
 - **Mirror workspace**: `C:\Users\Admin\.gemini\antigravity-ide\scratch\logos-bible-multiverse`
 
@@ -212,3 +212,16 @@
   1. **Tầng Dữ Liệu Gốc**: Quét và lọc sạch toàn bộ **123.887 vị trí** tiền tố tên bản dịch trên 67 tệp JSON (66 sách `data/bibles/*.json` và `data/default-bible-passages.json`). Số ấn chứng còn lại trong CSDL: **0**.
   2. **Tầng Runtime**: Tích hợp regex bóc tách vào `cleanScriptureText()`, `getParallelVerses()` và toàn bộ render thẻ đối chiếu / cửa sổ đọc độc lập trong `app.js`.
 - **Kiểm thử**: Toàn bộ **138/138 bài test Pytest PASS 100%**.
+
+### 26. Thu Gọn Bảng Đối Chiếu (Inspector Drawer) & Hạ Thấp Vị Trí Tránh Che Khuất Header (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"cho cái này nhỏ lại và hiển thị thấp xuống, không che các mục trang chính"* (ảnh chụp kèm đường gạch đỏ và mũi tên chỉ xuống dưới thanh Header điều hướng chính).
+- **Phân tích UX**: Bảng đối chiếu bên phải (`#drawer-inspector`) trước đây chiếm tới 38vw/540px và đặt `top: 0`, đồng thời bóp nghẹt thanh Header (`#main-header`) sang trái làm che khuất các nút chức năng trang chính (Tìm kiếm, Dạ theme, Banner, 1.8k xem, Quản trị).
+- **Thực hiện cải tiến**:
+  1. **Thu gọn kích thước (`nhỏ lại`)**:
+     - Giảm `--drawer-width` từ 540px/38vw xuống còn `clamp(310px, 26vw, 385px)` (giảm gần 30% diện tích chiếm dụng, nhường 74% màn hình cho khu vực đọc Kinh Thánh).
+     - Thu gọn padding header (`0.65rem 0.95rem`), kích thước chữ tiêu đề (`0.96rem`), các tab đối chiếu và thẻ bản dịch `.parallel-verse-card`.
+  2. **Hạ thấp vị trí & không che mục trang chính (`hiển thị thấp xuống`)**:
+     - Đặt `top: var(--drawer-top-offset, 68px)`, `bottom: 12px` và bo tròn góc trái `border-top-left-radius: 12px; border-bottom-left-radius: 12px;`.
+     - Tự động tính toán vị trí đáy của `#main-header` (`rect.bottom + 6px`) trong `toggleDrawer()`.
+     - Bỏ `margin-right` trên `#main-header` và `#admin-banner-container` để Header luôn giữ trọn 100% bề ngang, hoàn toàn thoáng đãng và không bị bóp méo.
+- **Kiểm thử**: Thêm `test_drawer_compact_and_lower_position` vào `tests/test_ui_foundation.py`. Toàn bộ **139/139 bài test Pytest PASS 100%**.

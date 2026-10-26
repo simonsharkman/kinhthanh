@@ -55,3 +55,14 @@ def test_drawer_side_by_side_split_view():
     assert "toggleDrawer" in app_js
     assert "drawer-open" in app_js
     assert "scrollIntoView" in app_js
+
+def test_drawer_compact_and_lower_position():
+    """Verify drawer is compact and positioned lower down without covering top navigation header."""
+    with open("css/layout.css", "r", encoding="utf-8") as f:
+        layout_css = f.read()
+
+    assert "--drawer-top-offset" in layout_css
+    assert "top: var(--drawer-top-offset)" in layout_css
+    assert "body.drawer-open #main-header" in layout_css
+    assert "margin-right: 0 !important" in layout_css
+
