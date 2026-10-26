@@ -2,7 +2,7 @@
 
 ## 📌 Tổng Quan Dự Án & Định Danh
 - **Dự án**: Logos MultiVerse (Nền tảng tra cứu, đối chiếu đa bản dịch và trợ lý Thánh Kinh AI).
-- **Trạng thái kiểm thử**: 144/144 Pytest suites PASS (100% Green).
+- **Trạng thái kiểm thử**: 145/145 Pytest suites PASS (100% Green).
 - **Workspace chính**: `E:\kinhthanh`
 - **Mirror workspace**: `C:\Users\Admin\.gemini\antigravity-ide\scratch\logos-bible-multiverse`
 
@@ -122,30 +122,13 @@
   4. Mở khóa toàn diện cỡ chữ di động: dùng `var(--bible-font-size, 1.15rem) !important;` giúp độc giả tự do phóng to chữ (17px - 25px) trên điện thoại mà không bị bó hẹp.
   5. Đạt 136/136 bài test Pytest PASS 100%.
 
-### 16-20. Tối Ưu UX Header Di Động, Audio 48px, Menu Phụ & Loại Bỏ Thành Phần Thừa (25/10/2026)
-- **Yêu cầu & Phản hồi từ anh Jimmy**:
-  - *Ảnh media_1792941935551_10a84408*: Bỏ dòng chữ phụ 'Bản Truyền Thống 1925', phóng to biểu tượng Thánh Giá vàng lên 44px (drop-shadow ánh kim).
-  - *Ảnh media_1792942144709_1c66f784*: Ẩn cụm logo '.header-brand' trên mobile (< 992px) để nút Hamburger, chọn bản dịch, chọn sách và chế độ đọc trải rộng thông thoáng.
-  - *Ảnh media_1792942228659_be44d9a8*: Thu gọn thanh audio di động xuống cố định 48px, xếp trọn vẹn trong 1 hàng, tích hợp nút nhảy chương '⏮ Đoạn Trước' & '⏭ Đoạn Tiếp', tự động phát khi hết đoạn.
-  - *Ảnh media_1792943357982_8c8cf6ef*: Khắc phục nút '☰ ≡ Tìm' trên subnav bị lỗi trùng lặp thẻ fontawesome thành nút chuẩn '🔍 Tìm Kiếm' mở HTTLVN Search Hub.
-  - *Ảnh media_1792943481825_b7596a98*: Xóa nút thừa '🎨 Màu Cổ Điển' trên subnav vì thanh Header đã tích hợp bộ chọn 6 theme.
-- **Kiểm thử**: Bảo đảm 136/136 test pass trước khi chuyển bước.
-
-### 21. Tích Hợp Nút Tìm Kiếm Header Di Động & Khắc Phục Nút Tắt Trình Phát Audio (25/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"trên giao diện điện thoại. chỗ trống đó để tìm kiếm. Nút tắt trình chạy chưa hoạt động"* (kèm ảnh `media_1792944585082_512bd390.png`).
-- **Thực hiện hoàn thiện**:
-  1. Lắp nút **Tìm Kiếm Nhanh** (`#mobile-header-search-btn`) vào chính xác khoảng trống bên cạnh nút `☰`: thiết kế dạng pill bo tròn ánh vàng (`🔍 Tìm kiếm...`), bấm vào lập tức mở Bộ máy tra cứu toàn văn HTTLVN Search Hub.
-  2. Khắc phục triệt để lỗi nút đóng âm thanh (`#audio-btn-close` `[✕]`):
-     - Bổ sung quy tắc CSS bắt buộc `.portal-audio-player-bar.hidden { display: none !important; opacity: 0 !important; }` trên toàn hệ thống.
-     - Hàm `hideAudioPlayer()` nay áp dụng trực tiếp `style.setProperty('display', 'none', 'important')` và dừng hoàn toàn luồng phát MP3.
-     - Nâng `z-index: 50` và hỗ trợ cả sự kiện `click` lẫn `touchend` cho nút `✕`, chống chặn cảm ứng trên màn hình cảm ứng di động.
-- **Kiểm thử**: Đạt 136/136 bài test Pytest PASS 100%.
-
-### 22. Ẩn Thanh Tiêu Đề Cổng Dưỡng Linh Cũ Trên Điện Thoại (25/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"tôi thấy không cần hiển thị cái này trên điện thoại"* (kèm ảnh `media_1792945549838_6eba13db.png` gạch chéo đỏ thanh banner xanh lá `.portal-brand-bar`).
-- **Phân tích UX**: Thanh banner cũ chứa tiêu đề "Chuyên Mục Tĩnh Nguyện & Dưỡng Linh" và 3 nút tròn chiếm gần nửa màn hình đầu trên điện thoại, đồng thời trùng lặp chức năng với lưới 8 thẻ thao tác nhanh (`.portal-mobile-dashboard`) ngay bên dưới.
-- **Thực hiện**: Đặt `.portal-brand-bar { display: none !important; }` trên toàn bộ thiết bị di động/máy tính bảng (`max-width: 991px`).
-- **Hiệu quả**: Đưa lưới 8 thẻ thao tác hiện đại 2 cột (Đọc Lời Chúa, Đối Chiếu, Câu Gốc, Đố Kinh Thánh, v.v.) lên vị trí nổi bật ngay dưới thanh Header, giao diện cực kỳ hiện đại, trực quan và tối ưu diện tích đọc.
+### 16-22. Tối Ưu UX Header Di Động, Audio 48px, Tìm Kiếm & Thanh Tiêu Đề (25/10/2026)
+- **Chuỗi Tinh Chỉnh Giao Diện Di Động Theo Phản Hồi Hình Ảnh Của Anh Jimmy**:
+  1. *Header Menu Trượt*: Bỏ dòng chữ phụ 'Bản Truyền Thống 1925', phóng to Thánh Giá vàng 44px (drop-shadow ánh kim).
+  2. *Header Chính Di Động*: Ẩn `.header-brand` để nhường chỗ cho nút Hamburger, dropdown chọn sách/bản dịch và nút Tìm Kiếm Nhanh (`#mobile-header-search-btn`).
+  3. *Trình Phát Audio*: Thu gọn chiều cao xuống 48px xếp trên 1 hàng, tích hợp nút nhảy chương '⏮' & '⏭', khắc phục triệt để nút tắt `[✕]` (`hideAudioPlayer` + `display: none !important; z-index: 50`).
+  4. *Thanh Menu Phụ Subnav*: Sửa nút '☰ ≡ Tìm' thành nút chuẩn '🔍 Tìm Kiếm', loại bỏ nút thừa '🎨 Màu Cổ Điển'.
+  5. *Cổng Tĩnh Nguyện*: Ẩn banner xanh lá `.portal-brand-bar` trên di động để đẩy lưới 8 thẻ dashboard hiện đại lên vị trí tâm điểm.
 - **Kiểm thử**: Đạt 136/136 bài test Pytest PASS 100%.
 
 ### 23. Nâng Cấp Hệ Thống Quản Trị Toàn Diện Full Admin CMS v3.0 (26/10/2026)
@@ -211,3 +194,18 @@
     - Hộp thoại Soạn Thảo Đa Năng `#admin-utility-editor-modal`: Nhập/chỉnh sửa nội dung, tự động kiểm tra trường bắt buộc, phân loại chủ đề và lưu trữ tức thời.
     - Lịch Đọc Kinh Thánh (`#portal-item-schedule`): Hiển thị 4 phân đoạn đọc hôm nay kèm nút chỉnh sửa kết nối trực tiếp vào `#admin-devotion-modal`.
 - **Kiểm thử**: Bổ sung `tests/test_portal_utility_cms.py` kiểm định toàn diện 5 nhóm tiêu chuẩn. Toàn bộ **144/144 bài test Pytest PASS 100%**.
+
+### 28. Cố Định Thanh Nút Xác Nhận & Cuộn Thân Hộp Thoại (Modal Sticky Footer & Body Scroll) (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"chưa có mục xác nhận sau khi cập nhật. hãy kiểm tra và điều chỉnh"* (kèm ảnh chụp `media_1792999506447_8d24c67d.png` hộp thoại "Cấu Hình Banner Máy Tính" bị tràn màn hình cắt ngang cụm checkbox, làm ẩn hoàn toàn thanh chân trang chứa nút lưu/xác nhận).
+- **Nguyên nhân cốt lõi**:
+  - Lớp `.admin-modal-body` và `.modal-body` chưa được định nghĩa quy tắc cuộn flexbox trong `components.css`.
+  - `.modal-card` có `max-height: 85vh; overflow: hidden;` khiến toàn bộ phần chân trang `.modal-footer` bị đẩy ra ngoài phạm vi hiển thị trên các màn hình có chiều cao < 800px.
+- **Thực hiện khắc phục**:
+  1. **Tái cấu trúc CSS Flexbox cho Modal System**:
+     - `.modal-card`: Chuyển sang `max-height: calc(100vh - 2rem); display: flex; flex-direction: column; overflow: hidden;`.
+     - `.modal-header` & `.modal-footer`: Đặt `flex-shrink: 0;` để luôn ghim cố định ở đỉnh và đáy hộp thoại.
+     - `.modal-body, .admin-modal-body`: Đặt `flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;`. Toàn bộ nội dung form cuộn mượt mà bên trong, không bao giờ đẩy trôi nút xác nhận.
+  2. **Nổi bật nút Xác Nhận Cập Nhật**:
+     - Nâng cấp nút `#save-admin-banner-btn`: `<i class="fa-solid fa-circle-check"></i> Xác Nhận & Cập Nhật Banner` với màu vàng kim, độ tương phản cao, đổ bóng nhẹ.
+     - Tích hợp phản hồi kép (`this.showToast` + `alert`) thông báo tức thì: *"✅ Đã xác nhận và cập nhật Banner thành công!"*.
+- **Kiểm thử**: Bổ sung `test_admin_modal_scroll_and_confirmation_button` vào `tests/test_portal_and_header_sticky.py`. Toàn bộ **145/145 bài test Pytest PASS 100%**.
