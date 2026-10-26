@@ -292,3 +292,29 @@ def test_portal_data_repository_integrity():
     assert "'GEN': 1" in data_js
     assert "'MAT': 40" in data_js
     assert "'REV': 66" in data_js
+
+
+def test_admin_modal_scroll_and_confirmation_button():
+    """Kiểm tra cấu trúc modal: Header và Footer cố định, Body cuộn mượt mà và nút Xác Nhận Cập Nhật luôn hiển thị."""
+    with open("E:/kinhthanh/css/components.css", "r", encoding="utf-8") as f:
+        css = f.read()
+
+    with open("E:/kinhthanh/index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    with open("E:/kinhthanh/js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    # 1. CSS Flexbox Layout for Modals
+    assert ".admin-modal-body" in css
+    assert "overflow-y: auto" in css
+    assert "flex-shrink: 0" in css
+    assert "max-height: calc(100vh - 2rem)" in css
+
+    # 2. Prominent Confirmation Button in Admin Banner Modal
+    assert 'id="save-admin-banner-btn"' in html
+    assert "Xác Nhận & Cập Nhật Banner" in html
+    assert "fa-circle-check" in html
+
+    # 3. Confirmation Feedback in JS
+    assert "Đã xác nhận và cập nhật Banner thành công!" in app_js

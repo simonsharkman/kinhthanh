@@ -3749,7 +3749,8 @@ class LogosApp {
 
       state.updateAdminBanner(updated);
       document.getElementById('admin-banner-modal').classList.add('hidden');
-      alert('Đã cập nhật và xuất bản Banner thành công!');
+      this.showToast('✅ Đã xác nhận và cập nhật Banner thành công!', 'success');
+      alert('Đã xác nhận và cập nhật Banner thành công!');
     } catch (e) {
       alert(`Lỗi: ${e.message}`);
     }

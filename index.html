@@ -1170,10 +1170,14 @@
         </div>
       </div>
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
-        <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-banner-modal">Hủy</button>
-        <button id="save-admin-banner-btn" class="btn-primary" style="font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem;">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Lưu & Xuất Bản Banner
+        <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-banner-modal">
+          <i class="fa-solid fa-xmark"></i> Hủy Bỏ
         </button>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <button id="save-admin-banner-btn" class="btn-primary" style="font-weight: 800; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.65rem 1.35rem; font-size: 0.92rem; box-shadow: 0 2px 8px rgba(212, 175, 55, 0.25);">
+            <i class="fa-solid fa-circle-check"></i> Xác Nhận & Cập Nhật Banner
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -1230,7 +1234,7 @@
 
   <!-- Modal 4.1: Soạn Thảo & Chỉnh Sửa Khảo Luận Thần Học (Admin Article Studio) -->
   <div id="admin-article-modal" class="modal-overlay hidden" aria-label="Soạn thảo khảo luận cho quản trị viên">
-    <div class="modal-card" style="max-width: 720px; max-height: 90vh; overflow-y: auto;">
+    <div class="modal-card" style="max-width: 720px;">
       <div class="modal-header">
         <h3 id="admin-article-modal-title"><i class="fa-solid fa-feather-pointed" style="color: var(--accent-gold);"></i> SOẠN THẢO KHẢO LUẬN THẦN HỌC</h3>
         <button class="modal-close-btn" data-modal="admin-article-modal">&times;</button>
@@ -1466,7 +1470,7 @@
 
   <!-- Modal 4.3: Quản Trị Tĩnh Nguyện & Dưỡng Linh (Admin Devotion Studio) -->
   <div id="admin-devotion-modal" class="modal-overlay hidden" aria-label="Quản trị nội dung tĩnh nguyện hôm nay">
-    <div class="modal-card" style="max-width: 780px; max-height: 92vh; overflow-y: auto;">
+    <div class="modal-card" style="max-width: 780px;">
       <div class="modal-header">
         <div>
           <span class="preview-badge" style="background: var(--genre-torah); color: #fff; font-weight: 700;">CỔNG TĨNH NGUYỆN</span>
@@ -1623,7 +1627,7 @@
 
   <!-- Modal 4.5: Quản Trị Media & Video Theo Mùa (Admin Seasonal Media Studio) -->
   <div id="admin-media-modal" class="modal-overlay hidden" aria-label="Quản trị thư viện video và media theo từng mùa">
-    <div class="modal-card" style="max-width: 640px; max-height: 90vh; overflow-y: auto;">
+    <div class="modal-card" style="max-width: 640px;">
       <div class="modal-header">
         <div>
           <span class="preview-badge" style="background: #e11d48; color: #fff; font-weight: 700;">MEDIA THEO MÙA</span>
