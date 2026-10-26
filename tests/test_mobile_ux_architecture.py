@@ -176,3 +176,33 @@ def test_mobile_equal_50_50_split_and_no_redundant_clutter():
     assert "state.activeDrawerTab = 'parallel'" in app_js
 
 
+
+
+def test_mobile_active_verse_highlight_immunity_and_standout():
+    """Kiểm tra câu đối chiếu đang được chọn trên mobile hiển thị nổi bật, miễn nhiễm với override của drawer-open."""
+    with open("css/layout.css", "r", encoding="utf-8") as f:
+        layout_css = f.read()
+
+    # Phải có selector :not(.verse-highlight-active) để tránh đè mất highlight câu đang chọn
+    assert "body.drawer-open .verse-item:not(.verse-highlight-active):not(.verse-selected)" in layout_css
+    assert "body.mobile-split-active .verse-item:not(.verse-highlight-active):not(.verse-selected)" in layout_css
+
+    # Phải có selector chuyên biệt cho câu đang chọn khi drawer mở trên mobile
+    assert "body.drawer-open .verse-item.verse-highlight-active" in layout_css
+    assert "border-left: 4.5px solid var(--accent-gold) !important" in layout_css
+    assert "--accent-gold-glow" in layout_css
+
+    # Số câu của câu đang chọn phải có badge nổi bật
+    assert "body.drawer-open .verse-item.verse-highlight-active .verse-number" in layout_css
+    assert "background: var(--accent-gold) !important" in layout_css
+
+    # Chữ câu đang chọn phải có font-weight: 600
+    assert "body.drawer-open .verse-item.verse-highlight-active .verse-text" in layout_css
+    assert "font-weight: 600 !important" in layout_css
+
+    with open("js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    # highlightActiveVerse phải gắn cả verse-highlight-active và verse-selected
+    assert "el.classList.toggle('verse-highlight-active', isMatch);" in app_js
+    assert "el.classList.toggle('verse-selected', isMatch);" in app_js

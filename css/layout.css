@@ -618,6 +618,8 @@ body {
   cursor: pointer;
   transition: background-color var(--transition-fast), border-left-color var(--transition-fast);
   box-shadow: none;
+  -webkit-tap-highlight-color: rgba(229, 193, 88, 0.15);
+  touch-action: manipulation;
 }
 
 .verse-text {
@@ -638,12 +640,27 @@ body {
 }
 
 .verse-item.verse-highlight-active,
-.verse-item.verse-selected {
-  background: rgba(229, 193, 88, 0.1) !important;
+.verse-item.verse-selected,
+body.drawer-open .verse-item.verse-highlight-active,
+body.drawer-open .verse-item.verse-selected,
+body.mobile-split-active .verse-item.verse-highlight-active,
+body.mobile-split-active .verse-item.verse-selected {
+  background: linear-gradient(90deg, var(--accent-gold-glow, rgba(229, 193, 88, 0.25)) 0%, rgba(229, 193, 88, 0.08) 100%) !important;
   border: none !important;
-  border-left: 3.5px solid var(--accent-gold) !important;
-  box-shadow: 0 0 12px rgba(229, 193, 88, 0.08) !important;
+  border-left: 4.5px solid var(--accent-gold) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 0 16px var(--accent-gold-glow, rgba(229, 193, 88, 0.25)) !important;
   transform: none !important;
+}
+
+.verse-item.verse-highlight-active .verse-text,
+.verse-item.verse-selected .verse-text,
+body.drawer-open .verse-item.verse-highlight-active .verse-text,
+body.drawer-open .verse-item.verse-selected .verse-text,
+body.mobile-split-active .verse-item.verse-highlight-active .verse-text,
+body.mobile-split-active .verse-item.verse-selected .verse-text {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
 }
 
 .verse-item.verse-reading-active {
@@ -676,12 +693,18 @@ body {
 }
 
 .verse-item.verse-highlight-active .verse-number,
-.verse-item.verse-selected .verse-number {
-  background: transparent !important;
-  border: none !important;
-  color: var(--accent-gold-light, #ffd54f) !important;
+.verse-item.verse-selected .verse-number,
+body.drawer-open .verse-item.verse-highlight-active .verse-number,
+body.drawer-open .verse-item.verse-selected .verse-number,
+body.mobile-split-active .verse-item.verse-highlight-active .verse-number,
+body.mobile-split-active .verse-item.verse-selected .verse-number {
+  background: var(--accent-gold) !important;
+  color: var(--bg-primary, #0b130e) !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  font-weight: 800 !important;
   opacity: 1 !important;
-  font-weight: 800;
+  box-shadow: 0 0 8px var(--accent-gold-glow, rgba(229, 193, 88, 0.4)) !important;
 }
 
 .verse-item.verse-reading-active .verse-number {
@@ -1339,8 +1362,8 @@ body {
     padding: 0.45rem 0.55rem 0.65rem 0.55rem !important;
   }
 
-  body.drawer-open .verse-item,
-  body.mobile-split-active .verse-item {
+  body.drawer-open .verse-item:not(.verse-highlight-active):not(.verse-selected),
+  body.mobile-split-active .verse-item:not(.verse-highlight-active):not(.verse-selected) {
     padding: 0.4rem 0.55rem !important;
     margin-bottom: 0.15rem !important;
     font-size: var(--bible-font-size, 1.05rem) !important;
@@ -1353,11 +1376,37 @@ body {
     box-shadow: none !important;
   }
 
-  .verse-item.verse-highlight-active {
-    background: rgba(212, 175, 55, 0.12) !important;
+  /* Câu đối chiếu đang được chọn trên Mobile (Split 50/50): Nổi bật tức thì, rạng rỡ, dễ nhận diện */
+  body.drawer-open .verse-item.verse-highlight-active,
+  body.drawer-open .verse-item.verse-selected,
+  body.mobile-split-active .verse-item.verse-highlight-active,
+  body.mobile-split-active .verse-item.verse-selected {
+    background: linear-gradient(90deg, var(--accent-gold-glow, rgba(229, 193, 88, 0.28)) 0%, rgba(229, 193, 88, 0.08) 100%) !important;
     border: none !important;
-    border-left: 3px solid var(--accent-gold) !important;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.12) !important;
+    border-left: 4.5px solid var(--accent-gold) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 0 16px var(--accent-gold-glow, rgba(229, 193, 88, 0.3)) !important;
+  }
+
+  body.drawer-open .verse-item.verse-highlight-active .verse-number,
+  body.drawer-open .verse-item.verse-selected .verse-number,
+  body.mobile-split-active .verse-item.verse-highlight-active .verse-number,
+  body.mobile-split-active .verse-item.verse-selected .verse-number {
+    background: var(--accent-gold) !important;
+    color: var(--bg-primary, #0b130e) !important;
+    padding: 1px 6px !important;
+    border-radius: 4px !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+    box-shadow: 0 0 8px var(--accent-gold-glow, rgba(229, 193, 88, 0.4)) !important;
+  }
+
+  body.drawer-open .verse-item.verse-highlight-active .verse-text,
+  body.drawer-open .verse-item.verse-selected .verse-text,
+  body.mobile-split-active .verse-item.verse-highlight-active .verse-text,
+  body.mobile-split-active .verse-item.verse-selected .verse-text {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
   }
 
   /* Nửa trên (#app-body): Chiếm chính xác 50% phần màn hình dưới Header, nối liền sát khít với nửa dưới */

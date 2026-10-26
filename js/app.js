@@ -439,7 +439,9 @@ class LogosApp {
 
   highlightActiveVerse(verseNum) {
     document.querySelectorAll('.verse-item').forEach(el => {
-      el.classList.toggle('verse-highlight-active', el.dataset.verse == verseNum);
+      const isMatch = el.dataset.verse == verseNum;
+      el.classList.toggle('verse-highlight-active', isMatch);
+      el.classList.toggle('verse-selected', isMatch);
     });
     document.querySelectorAll('.verse-compare-card').forEach(card => {
       card.classList.toggle('active', card.dataset.verse == verseNum);
