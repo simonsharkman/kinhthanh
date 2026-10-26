@@ -2,7 +2,7 @@
 
 ## 📌 Tổng Quan Dự Án & Định Danh
 - **Dự án**: Logos MultiVerse (Nền tảng tra cứu, đối chiếu đa bản dịch và trợ lý Thánh Kinh AI).
-- **Trạng thái kiểm thử**: 136/136 Pytest suites PASS (100% Green).
+- **Trạng thái kiểm thử**: 138/138 Pytest suites PASS (100% Green).
 - **Workspace chính**: `E:\kinhthanh`
 - **Mirror workspace**: `C:\Users\Admin\.gemini\antigravity-ide\scratch\logos-bible-multiverse`
 
@@ -204,3 +204,11 @@
   1. **Tầng Dữ Liệu**: Quét và sửa 133/333 file JSON trong `data/`, xóa sạch 10.021 vị trí `Aáy` ➔ `Ấy` và đưa về chuẩn Unicode NFC. Kết quả: Còn lại **0** lỗi trong toàn bộ CSDL.
   2. **Tầng Runtime Auto-Healing (`BibleEngine.cleanScriptureText`)**: Tự động hàn gắn nguyên âm/phụ âm bị tách (`biê´ t` ➔ `biết`, `liê` n` ➔ `liền`, `nhắ´ c` ➔ `nhắc`, `Thầ` y` ➔ `Thầy`), xóa dấu rời rải rác và bảo vệ 100% hiển thị Lời Chúa trên Focus Reader và Parallel Comparison.
 - **Kiểm thử**: Viết mới `tests/test_orthography_immunity.py`, đạt **136/136 bài test Pytest PASS 100%**.
+
+### 25. Xóa Bỏ Triệt Để 123.887 Ấn Chứng Tên Bản Dịch Trong Dấu Ngoặc Vuông (`[BTT 1925]`, `[KJV 1611]`, v.v.) (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"xoá bỏ các ấn chứng bản kinh thánh đầu câu thế này đi giúp tôi"* (ảnh chụp gạch chân đỏ tiền tố `[BTT 1925]` ở đầu câu).
+- **Phân tích UX**: Header thẻ đã hiển thị rõ `BTT • Bản Truyền Thống 1925`, việc lặp lại `[BTT 1925]`, `[KJV 1611]`, `[BDM 2002]` đầu câu gây thừa thãi và rối mắt khi đọc.
+- **Thực hiện 2 tầng**:
+  1. **Tầng Dữ Liệu Gốc**: Quét và lọc sạch toàn bộ **123.887 vị trí** tiền tố tên bản dịch trên 67 tệp JSON (66 sách `data/bibles/*.json` và `data/default-bible-passages.json`). Số ấn chứng còn lại trong CSDL: **0**.
+  2. **Tầng Runtime**: Tích hợp regex bóc tách vào `cleanScriptureText()`, `getParallelVerses()` và toàn bộ render thẻ đối chiếu / cửa sổ đọc độc lập trong `app.js`.
+- **Kiểm thử**: Toàn bộ **138/138 bài test Pytest PASS 100%**.
