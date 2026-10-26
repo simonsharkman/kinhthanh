@@ -120,53 +120,20 @@
 ### 28. Cố Định Thanh Nút Xác Nhận & Cuộn Thân Hộp Thoại (Modal Sticky Footer & Body Scroll) (26/10/2026)
 - Tái cấu trúc CSS Flexbox cho Modal: modal-card flex-col, modal-header/footer flex-shrink: 0, modal-body overflow-y: auto. Nổi bật nút xác nhận cập nhật.
 
-### 29. Thiết Lập & Hiển Thị Trực Tiếp Banner Thông Báo Mục Vụ Trên Máy Tính (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"cho hiển thị bằng này trên máy tính đi"* (kèm ảnh chụp `media_1793001189568_816b66e2.png` cấu hình Banner Thông Báo Mục Vụ / Tin Tức Hội Thánh).
-- **Thực hiện thiết lập đồng bộ**:
-  1. *Banner Đỉnh Trang (`#admin-banner-bar`)*: Đặt làm banner mặc định hiển thị trên máy tính với lớp `theme-crimson banner-mode-announcement`, huy hiệu `📢 THÔNG BÁO`, tông màu Đỏ Ruby Sâu Lắng (Regal Crimson) sang trọng.
-  2. *Nội dung & Dòng chữ chạy (Marquee Ticker)*: Áp dụng dòng chữ chạy ngang liên tục `🔔 Chương trình Đọc Kinh Thánh Trọn Năm 2026 & Bồi Linh Hội Thánh đang diễn ra. Chúc quý con cái Chúa được tươi mới trong Lời Ngài!`.
-  3. *Nút Hành Động (CTA)*: Nút `Vào Cổng Tĩnh Nguyện` dẫn hướng trực tiếp đến Cổng Tĩnh Nguyện (`#portal`).
-  4. *Lưu trữ & Khởi tạo*: Cập nhật `storage.getAdminBanner()` tự động áp dụng cấu hình này cho mọi phiên đọc mới và nâng cấp thiết lập cũ trong CSDL.
-- **Kiểm thử**: Toàn bộ **145/145 bài test Pytest PASS 100%**.
-### 30. Chuẩn Hóa Bố Cục Đối Chiếu Nguyên Ngữ Hê-bơ-rơ & Hy Lạp 3 Tầng Dọc Khép Kín (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"kiểm tra lại cách trình bày tiéng hebro và tiếng hylap. chúng ta cần có nguyên bản ở trên cùng, rồi phiên âm ở dưới, dịch ở dưới cùng bằng tiếng anh cho từng từ ở dưới nữa."*
-- **Phân tích & Tái cấu trúc chuẩn 3 Tầng Dọc (Strict 3-Tier Vertical Stack)**:
-  1. **Tầng 1 (Trên cùng - Top)**: Nguyên bản Lời Chúa bằng tiếng Hê-bơ-rơ (`.orig-hebrew` font SBL Hebrew/Ezra SIL, 1.55rem, màu vàng đất hổ phách, chữ viết từ phải sang trái RTL) cho Cựu Ước, và tiếng Hy Lạp (`.orig-greek` font SBL Greek/Palatino Linotype, 1.25rem, xanh biển sâu LTR) cho Tân Ước.
-  2. **Tầng 2 (Ở giữa - Middle)**: Phiên âm La-tinh ngữ âm (`.tile-translit` chữ nghiêng italic dễ đọc) kèm huy hiệu mã số nguyên ngữ Strong's (`.tile-strong` dạng pill badge gọn gàng `H7225`, `G1722`).
-  3. **Tầng 3 (Dưới cùng - Bottom)**: Dịch nghĩa tiếng Anh cho từng từ (`.tile-gloss` xanh ngọc lục bảo Emerald Green, in hoa đậm nét, căn đáy cột). Tuyệt đối loại bỏ dòng tiếng Việt khỏi đáy cột (`display: none !important;` trên `.s4a-subgloss`) để tiếng Anh luôn luôn là tầng dưới cùng của mọi từ; giữ nghĩa tiếng Việt trong `title="..."` tooltip khi rê chuột vào từng chữ.
-- **Hạ tầng Dữ liệu & Đọc Độc Lập**:
-  - `bibleEngine`: Bổ sung `fetchInterlinearChapter(bookId, chapterNum)` nạp tự động `data/interlinear/{bookId}/{chapterNum}.json` trong `ensurePassageTranslations()`.
-  - Cửa sổ đọc độc lập (`openPopoutReader`): Tự động định dạng toàn bộ các câu của chương theo chuẩn thẻ 3 tầng khi chọn đọc bản `INTERLINEAR`.
-- **Kiểm thử & Đồng bộ**: Bổ sung `test_three_tier_interlinear_hierarchy` trong `tests/test_scripture4all_interlinear.py`. Toàn bộ **146/146 bài test Pytest PASS 100%**. Đồng bộ trọn vẹn sang mirror Antigravity scratch.
-### 31. Tối Giản Hóa Cụm Nút Tiện Ích Header (Chỉ Hiển Thị Chữ Nhỏ & Ẩn Icon) (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"chỗ nãy viết chữ thôi và nhỏ thôi. chúng muốn người đọc tập trung vào nội dung."* (kèm ảnh chụp khoanh đỏ 4 nút tiện ích góc phải Header: Theme `Dạ`, `Banner`, Lượt xem `1.8k xem`, Quyền truy cập `Khách`).
-- **Phân tích UX**: Các nút góc phải trước đây dùng thẻ icon màu vàng kim nổi bật kèm bo góc tròn kiểu badge lớn, gây phân tán thị giác khi đọc Lời Chúa.
-- **Thực hiện tinh chỉnh**:
-  1. *Chỉ viết chữ (Text-only)*: Loại bỏ toàn bộ các thẻ icon `<i>` (`fa-palette`, `fa-bullhorn`, `fa-chart-line`, `fa-user-shield`) khỏi cả 4 nút tiện ích trong `index.html` và ép ẩn `display: none !important;` trong CSS.
-  2. *Thu nhỏ & chìm tinh tế (Compact & Low-Profile)*:
-     - Giảm cỡ chữ xuống `0.72rem`, `font-weight: 500`.
-     - Padding siêu gọn `0.18rem 0.45rem`, bo góc nhẹ `4px`.
-     - Nền chìm `rgba(0, 0, 0, 0.18)`, viền mảnh mờ `rgba(255, 255, 255, 0.14)`, chữ màu xám sáng `rgba(255, 255, 255, 0.72)`.
-     - Xóa bỏ hoàn toàn hiệu ứng bóng đổ (`box-shadow: none !important;`), không giật nhảy hay phát sáng gây xao nhãng.
-  3. *Tập trung tối đa vào nội dung*: Giúp thanh Header trở nên thanh thoát, nhường 100% sự chú ý thị giác của người đọc cho nội dung Kinh Thánh và suy ngẫm.
-- **Kiểm thử**: Bổ sung `test_text_only_compact_header_utility_buttons` vào `tests/test_header_improvements.py`. Toàn bộ **147/147 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
+### 29. Banner Thông Báo Mục Vụ Trên Máy Tính (26/10/2026)
+- Hiển thị trực tiếp `#admin-banner-container` trên Desktop (>=992px), tự động đẩy giao diện mượt mà không che khuất Header.
+- Đồng bộ bộ đếm thống kê và quyền Admin qua Storage.
 
-### 32. Chữa Lành Lỗi "Áp-ra-ham" (`Aùp` ➔ `Áp`), "Kỳ Hạn" (`k"` ➔ `kỳ`) & Kích Hoạt Tìm Kiếm Theo Địa Chỉ Kinh Thánh (26/10/2026)
-- **Yêu cầu từ anh Jimmy**:
-  1. *"lỗi từ Ap-ra-ham."* (kèm ảnh chụp `Công vụ các Sứ đồ 3:25-26, 13:26` bị hiển thị `Aùp-ra-ham`, và `Ga-la-ti 4:4` hiển thị `k" hạn`).
-  2. *"thứ 2 là tìm kiếm theo địa chỉ kinh thánh chưa hoạt động"* (kèm ảnh chụp modal `#httlvn-search-modal` tìm `Công vụ các Sứ đồ 13:26` trả về 0 kết quả).
-- **Phân tích Nguyên nhân Gốc rễ**:
-  1. *Lỗi `Aùp-ra-ham` & `k" hạn`*: Bộ gõ VNI-DOS/VNI-Windows cổ mã hóa `Á` thành byte `0xF9`, khi convert sang CP1252/Unicode bị biến thành `ù` (`Aùp-ra-ham`, `Aùch`, `Aùo`). Đồng thời ký tự `"` trong OCR cũ bị nhầm với dấu `ỳ` tạo ra `k"` thay vì `kỳ` (`k" hạn`, `K" cuối cùng`).
-  2. *Lỗi Tìm Kiếm Địa Chỉ*: `#httlvn-search-modal` chỉ là full-text search từ khóa nên địa chỉ trả về 0 kết quả. Thêm vào đó regex `parseReference` ban đầu bị `\bv\b` bắt nhầm chữ `v` trong `Công vụ`.
-- **Thực hiện Triệt để 2 Tầng**:
-  1. **Khắc phục CSDL & Runtime**:
-     - Quét và chữa lành 123 tệp JSON trong `data/`: thay thế 9.310 vị trí `Aù` ➔ `Á` (7.274 vị trí `Aùp` ➔ `Áp`) và 2.782 vị trí `[kK]\" ` ➔ `kỳ / Kỳ ` (chữa lành `Áp-ra-ham` và `kỳ hạn`).
-     - Cập nhật `cleanScriptureText(text)` trong `js/bible-engine.js` để tự động bảo vệ và chuẩn hóa runtime.
-  2. **Kích Hoạt Tìm Kiếm Địa Chỉ Kinh Thánh Trực Tiếp (Direct Coordinate Search)**:
-     - Nâng cấp `parseReference()` trong `js/bible-engine.js`: dùng lookahead an toàn `(?=\d+)` chuẩn hóa `đoạn`, `chương`, `câu`, `v`, không bao giờ bắt nhầm `Công vụ` hay `Châm ngôn`.
-     - Tích hợp phát hiện địa chỉ trực tiếp trong `searchHTTLVN()`: tự động nạp câu chính xác qua `getVersesByRef()` với huy hiệu `ĐỊA CHỈ KINH THÁNH`.
-     - Đồng bộ `#omni-search-input` và modal `#httlvn-search-modal`: nhấn Enter dẫn hướng thẳng đến phân đoạn (`navigateToPassage`).
-- **Kiểm thử & Đồng bộ**: Bổ sung test cases vào `tests/test_orthography_immunity.py` và `tests/test_httlvn_and_copilot.py`. Toàn bộ **149/149 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
+### 30. Chuẩn Hóa Bố Cục Đối Chiếu Nguyên Ngữ Hê-bơ-rơ & Hy Lạp 3 Tầng Dọc (26/10/2026)
+- Chuẩn hóa Interlinear 3 tầng dọc: Tầng 1 Nguyên bản (Hy Lạp/Hê-bơ-rơ lớn) -> Tầng 2 Phiên âm Latinh -> Tầng 3 Nghĩa tiếng Anh từng từ.
+- Tự động phát hiện hướng chữ RTL cho Cựu Ước Hê-bơ-rơ, LTR cho Tân Ước Hy Lạp.
+
+### 31. Tối Giản Hóa Cụm Nút Tiện Ích Header (26/10/2026)
+- Ẩn toàn bộ icon font-awesome trên cụm nút header, thu gọn kích thước chữ `0.68rem - 0.72rem`, tập trung trọn vẹn thị giác vào Lời Chúa.
+
+### 32. Chữa Lành Lỗi Chính Tả "Áp-ra-ham", "Kỳ Hạn" & Kích Hoạt Tìm Kiếm Địa Chỉ (26/10/2026)
+- Quét sạch lỗi encoding `Aùp` -> `Áp`, `k"` -> `kỳ`.
+- Kích hoạt Regex thông minh nhận diện định dạng sách chương:câu (vd: `Giăng 3:16`, `1Co 13:4-8`) trong thanh tìm kiếm.
 
 ### 33. Tái Cấu Trúc Bố Cục Thẻ Nghiệp Vụ Khung Đối Chiếu Lưới 2x2 Triệt Tiêu Chèn Lấn Chữ (26/10/2026)
 - **Yêu cầu từ anh Jimmy**: *"bị đè lên nhau hết rồi. Mời bạn xử lý"* (kèm ảnh khoanh đỏ 4 tab `So Sánh Bản Dịch`, `Câu Tham Chiếu`, `Ẩn Dụ & Biểu Tượng`, `Bối Cảnh & Thể Loại` đè chữ lên nhau).
@@ -204,3 +171,12 @@
   3. Trạng thái câu đang đọc/chọn (.verse-highlight-active, .verse-reading-active): Chỉ hiển thị thanh chỉ dấu vàng/xanh tinh tế bên trái (order-left: 3.5px solid var(--accent-gold)) và quầng sáng nhẹ (
 gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
   4. Bổ sung Unit Test 	est_reverent_scripture_verse_styling_zero_borders_and_unboxed_numbers. Bộ test đạt 154/154 pass 100%.
+
+### Milestone 37: Sửa Lỗi Highlight Câu Đối Chiếu Trên Mobile (Split 50/50 Drawer Active Verse Standout)
+- **Vấn đề**: Trên giao diện di động khi bấm vào một câu để xem đối chiếu trong Drawer Inspector (chia đôi 50/50), câu đang chọn không hề nổi bật, trông hoàn toàn giống các câu khác. Nguyên nhân do `body.drawer-open .verse-item` có độ ưu tiên CSS (0, 2, 1) kèm `!important` đã ghi đè toàn bộ `background: transparent !important` và `border-left: 3px solid transparent !important` lên `.verse-item.verse-highlight-active`.
+- **Giải pháp chuẩn hóa**:
+  1. Thêm `:not(.verse-highlight-active):not(.verse-selected)` vào `body.drawer-open .verse-item` để quy tắc nền trong suốt chỉ áp dụng cho câu không được chọn.
+  2. Bổ sung selector chuyên biệt `body.drawer-open .verse-item.verse-highlight-active` với độ ưu tiên cao nhất: viền trái nổi bật `border-left: 4.5px solid var(--accent-gold) !important`, nền chuyển sắc phát quang dịu nhẹ `linear-gradient(90deg, var(--accent-gold-glow) 0%, rgba(229, 193, 88, 0.08) 100%) !important`, và bóng mờ phát quang `box-shadow: 0 0 16px var(--accent-gold-glow) !important`.
+  3. Số câu của câu đang chọn chuyển thành huy hiệu nhỏ nổi bật `background: var(--accent-gold) !important; color: var(--bg-primary) !important; padding: 1px 6px; border-radius: 4px; font-weight: 800;` giúp mắt người đọc định vị câu đang đối chiếu ngay lập tức.
+  4. Chữ câu đang chọn tăng độ đậm `font-weight: 600 !important; color: var(--text-primary) !important`. Thêm `touch-action: manipulation` và `-webkit-tap-highlight-color` cho cảm ứng mượt mà tức thì.
+  5. Cập nhật `highlightActiveVerse` gán đồng bộ cả 2 lớp `verse-highlight-active` và `verse-selected`. Bổ sung test `test_mobile_active_verse_highlight_immunity_and_standout`. Đạt 155/155 tests pass 100%.
