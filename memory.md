@@ -180,3 +180,11 @@ gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
   3. Số câu của câu đang chọn chuyển thành huy hiệu nhỏ nổi bật `background: var(--accent-gold) !important; color: var(--bg-primary) !important; padding: 1px 6px; border-radius: 4px; font-weight: 800;` giúp mắt người đọc định vị câu đang đối chiếu ngay lập tức.
   4. Chữ câu đang chọn tăng độ đậm `font-weight: 600 !important; color: var(--text-primary) !important`. Thêm `touch-action: manipulation` và `-webkit-tap-highlight-color` cho cảm ứng mượt mà tức thì.
   5. Cập nhật `highlightActiveVerse` gán đồng bộ cả 2 lớp `verse-highlight-active` và `verse-selected`. Bổ sung test `test_mobile_active_verse_highlight_immunity_and_standout`. Đạt 155/155 tests pass 100%.
+
+### Milestone 38: Triệt Tiêu Hiện Tượng Tự Nhảy / Cuộn Màn Hình Khi Bấm Chọn Câu (Zero-Jump Stability Contract)
+- **Vấn đề**: Người dùng phản ánh khi bấm vào một câu Kinh Thánh trên giao diện, màn hình bị tự động giật/cuộn nhảy câu rất khó chịu. Nguyên nhân do `VERSE_SELECTED` trong `app.js` luôn tự động tính toán `centerTarget` và gọi `appBody.scrollTo({ top: centerTarget, behavior: 'smooth' })` nhằm ép câu được chọn vào chính giữa màn hình mỗi lần nhấp chuột, làm xáo trộn vị trí đọc tự nhiên của mắt.
+- **Giải pháp chuẩn hóa**:
+  1. Thay thế ép cuộn vào giữa bằng kiểm tra hiển thị tự nhiên: Nếu câu được bấm đã nằm trong khung nhìn (`(verseRect.top >= bodyRect.top + 6) && (verseRect.bottom <= bodyRect.bottom - 6)`), hệ thống **TUYỆT ĐỐI GIỮ NGUYÊN VỊ TRÍ CUỘN (Zero Scroll/Jump)**, giữ trải nghiệm đọc đầm chắc và ổn định.
+  2. Chỉ thực hiện cuộn nhẹ nhàng (`scrollIntoView({ behavior: 'smooth', block: 'nearest' })`) khi câu thực sự bị khuất hẳn ngoài màn hình (ví dụ chuyển câu qua điều hướng bên ngoài).
+  3. Cân bằng hình học CSS tuyệt đối: Đặt `border-left: 4px` cố định và `padding: 1px 5px` đồng bộ trên `.verse-number` trước và sau khi kích hoạt, triệt tiêu 100% hiện tượng xê dịch pixel do thay đổi kích thước hộp.
+  4. Bổ sung test `test_zero_verse_jump_on_click_contract` vào bộ test. Đạt 156/156 tests pass 100%.
