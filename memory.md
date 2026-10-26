@@ -195,3 +195,12 @@
   3. *Giao Diện Tra Cứu Chuyên Sâu (`renderUtilityStrong`)*: Tìm kiếm theo mã Strong, chữ nguyên ngữ hoặc nghĩa tiếng Việt/Anh; hiển thị chữ nguyên bản đúng font (SBL Hebrew/Greek), phiên âm La-tinh, giải nghĩa chi tiết và nút `[Đọc Lời Chúa]` dẫn thẳng đến phân đoạn.
   4. *Kích Hoạt Chọn Nhanh*: Cập nhật `portal-ref-docs-select` khi chọn `strong` lập tức mở thẳng Từ Điển Strong's.
 - **Kiểm thử & Đồng bộ**: Bổ sung `test_strongs_greek_hebrew_dictionary_integration` vào `tests/test_portal_utility_cms.py`. Toàn bộ **152/152 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
+
+### Milestone 36: Thiết Kế Trình Bày Kinh Thánh Kỉnh Kiềng (Zero Box Borders & Unboxed Small Verse Numbers)
+- **Vấn đề**: Người dùng phản ánh câu Kinh Thánh bị đóng trong từng thẻ hộp có viền (order: 1px solid) và bóng đổ (ox-shadow), số câu dạng badge đóng khung nút 26x26px to bản khiến giao diện giống bảng danh sách/form nhập liệu, làm phân tâm và mất đi vẻ trang nghiêm, kỉnh kiềng trước Lời Đức Chúa Trời.
+- **Giải pháp chuẩn hóa**:
+  1. Loại bỏ toàn bộ viền hộp (order: none, order-left: 3px solid transparent), bỏ nền thẻ (ackground: transparent), bỏ bóng đổ (ox-shadow: none), thu hẹp khoảng cách giữa các câu (gap: 0.15rem) để đoạn Kinh Thánh chảy liền mạch, thanh thoát như một trang Kinh Thánh in kinh điển.
+  2. Tinh chỉnh số câu (.verse-number): Bỏ khung viền và màu nền hộp badge, hiển thị nhỏ gọn (ont-size: 0.72rem, opacity: 0.82), áp dụng màu chuẩn theme ar(--text-verse-num, var(--accent-gold)), căn thẳng baseline chữ đầu tiên.
+  3. Trạng thái câu đang đọc/chọn (.verse-highlight-active, .verse-reading-active): Chỉ hiển thị thanh chỉ dấu vàng/xanh tinh tế bên trái (order-left: 3.5px solid var(--accent-gold)) và quầng sáng nhẹ (
+gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
+  4. Bổ sung Unit Test 	est_reverent_scripture_verse_styling_zero_borders_and_unboxed_numbers. Bộ test đạt 154/154 pass 100%.
