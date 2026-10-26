@@ -324,11 +324,28 @@ export class BibleEngine {
         }
       }
 
+      // Check for Admin Verse Correction (Hiệu đính Lời Chúa khi phát hiện lỗi)
+      const corr = storage.getVerseCorrection(passageData.book_id, chNum, v.verse_num, primaryVersion);
+      let corrBadge = '';
+      if (corr && corr.correctedText) {
+        verseText = corr.correctedText;
+        corrBadge = `<span class="verse-corrected-tag" title="Câu đã được Quản Trị Viên hiệu đính: ${corr.note || 'Sửa lỗi chính tả'}"><i class="fa-solid fa-check"></i> Đã hiệu đính</span>`;
+      }
+
+      const isAdmin = storage.getPreference('user_role') === 'admin';
+      const adminEditBtn = isAdmin ? `
+        <button type="button" class="btn-admin-edit-verse" data-book="${book.id}" data-ch="${chNum}" data-v="${v.verse_num}" data-ver="${primaryVersion}" title="Hiệu đính / sửa lỗi câu Kinh Thánh này">
+          <i class="fa-solid fa-pen-to-square"></i> Sửa
+        </button>
+      ` : '';
+
       html += `
         <div class="verse-item" data-verse="${v.verse_num}">
           <span class="verse-number">${v.verse_num}</span>
           <span class="verse-text">${verseText}</span>
+          ${corrBadge}
           ${metaphorIcon}
+          ${adminEditBtn}
         </div>
       `;
     });
@@ -401,10 +418,28 @@ export class BibleEngine {
         }
         const cleanText = vText.replace(/^\[.*?\]\s*/, '').trim();
 
+        // Check for Admin Verse Correction in Parallel View
+        const corrParallel = storage.getVerseCorrection(passageData.book_id, passageData.chapter_num, v.verse_num, vId);
+        let parallelClean = cleanText;
+        let corrParallelBadge = '';
+        if (corrParallel && corrParallel.correctedText) {
+          parallelClean = corrParallel.correctedText;
+          corrParallelBadge = `<span class="verse-corrected-tag" title="Đã hiệu đính: ${corrParallel.note || 'Lỗi văn bản'}"><i class="fa-solid fa-check"></i> Hiệu đính</span>`;
+        }
+
+        const isParallelAdmin = storage.getPreference('user_role') === 'admin';
+        const adminParallelEditBtn = isParallelAdmin ? `
+          <button type="button" class="btn-admin-edit-verse" data-book="${passageData.book_id}" data-ch="${passageData.chapter_num}" data-v="${v.verse_num}" data-ver="${vId}" title="Hiệu đính câu ${vId}" style="margin-left: auto; background: transparent; border: 1px solid var(--border-medium); color: var(--accent-gold); border-radius: 4px; padding: 0.15rem 0.4rem; font-size: 0.72rem; cursor: pointer;">
+            <i class="fa-solid fa-pen-to-square"></i> Sửa
+          </button>
+        ` : '';
+
         html += `
           <div class="compare-trans-row" data-vid="${vId}">
             <span class="compare-trans-pill trans-${vId.toLowerCase()}">${vId}</span>
-            <span class="compare-trans-text">${cleanText}</span>
+            <span class="compare-trans-text">${parallelClean}</span>
+            ${corrParallelBadge}
+            ${adminParallelEditBtn}
           </div>
         `;
       });

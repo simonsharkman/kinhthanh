@@ -86,6 +86,7 @@ class LogosApp {
 
     // 7. Khởi tạo Cổng Thông Tin & Dưỡng Linh Cổ Điển Tin Lành
     this.initPortalView();
+    this.renderPortalDevotion();
 
     // Thiết lập view ban đầu: Nếu URL có hash cụ thể thì mở tab đó, mặc định lấy Cổng Tĩnh Nguyện 'portal' làm nền chính
     if (typeof window !== 'undefined') {
@@ -1069,7 +1070,39 @@ class LogosApp {
   renderMediaView() {
     const mediaView = document.getElementById('media-view');
     if (mediaView) {
-      mediaView.innerHTML = mediaEngine.renderMediaHubHTML();
+      mediaView.innerHTML = mediaEngine.renderMediaHubHTML(state.currentUserRole);
+
+      // Event listeners for season filter pills
+      mediaView.querySelectorAll('.media-season-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const s = btn.getAttribute('data-season');
+          mediaEngine.setSeason(s);
+          this.renderMediaView();
+        });
+      });
+
+      // Admin Create Media button
+      mediaView.querySelector('#admin-create-media-btn')?.addEventListener('click', () => {
+        this.openAdminMediaModal();
+      });
+
+      // Admin Edit / Delete Media buttons
+      mediaView.querySelectorAll('.btn-edit-media').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const vid = btn.getAttribute('data-id');
+          this.openAdminMediaModal(vid);
+        });
+      });
+
+      mediaView.querySelectorAll('.btn-delete-media').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const vid = btn.getAttribute('data-id');
+          if (confirm('Bạn có chắc muốn xóa video media này không?')) {
+            mediaEngine.deleteMediaVideo(vid);
+            this.renderMediaView();
+          }
+        });
+      });
     }
   }
 
@@ -2972,6 +3005,11 @@ class LogosApp {
     if (authBtn) {
       authBtn.style.borderColor = role === 'admin' ? 'var(--accent-gold)' : 'var(--border-subtle)';
     }
+    const adminDevotionBtn = document.getElementById('admin-devotion-edit-btn');
+    if (adminDevotionBtn) {
+      if (role === 'admin') adminDevotionBtn.classList.remove('hidden');
+      else adminDevotionBtn.classList.add('hidden');
+    }
     this.updateHeaderVisitorCount();
   }
 
@@ -3960,7 +3998,375 @@ class LogosApp {
   }
 
   // 8. Event Binding
+
+  // --- FULL CMS v3.0: Quản Trị Cổng Tĩnh Nguyện, Hiệu Đính Lời Chúa & Media Mùa ---
+  renderPortalDevotion() {
+    const data = storage.getDevotionData();
+    if (!data) return;
+
+    // 1. Câu Gốc
+    const verseBox = document.getElementById('portal-devotion-verse-box');
+    if (verseBox && data.verse) {
+      const v = data.verse;
+      verseBox.innerHTML = `
+        <strong>${v.v || ''}</strong> ${v.text || ''} 
+        <a class="devotion-ref-tag" data-book="${v.book || 'HAB'}" data-ch="${v.ch || 3}" data-v="${v.v || 1}" title="Nhấp để mở đọc và đối chiếu">${v.ref || ''}</a>
+      `;
+    }
+
+    // 2. Lịch Đọc Kinh Thánh
+    const readingList = document.getElementById('portal-devotion-reading-list');
+    if (readingList && data.reading_plan) {
+      readingList.innerHTML = data.reading_plan.map(plan => `
+        <li>
+          <span class="devotion-plan-title">${plan.title}</span><br>
+          <span class="devotion-plan-text">${plan.text}</span>
+          ${plan.audioBook ? `<button type="button" class="devotion-audio-chip" data-book="${plan.audioBook}" data-ch="${plan.audioCh || 1}">NGHE</button>` : ''}
+        </li>
+      `).join('');
+    }
+
+    // 3. Sống Với Thánh Kinh
+    const dailyArticleEl = document.getElementById('portal-devotion-daily-article');
+    if (dailyArticleEl && data.daily_article) {
+      const art = data.daily_article;
+      dailyArticleEl.setAttribute('data-book', art.book || 'PRO');
+      dailyArticleEl.setAttribute('data-ch', art.ch || 22);
+      dailyArticleEl.setAttribute('data-v', art.v || 22);
+      dailyArticleEl.innerHTML = `<span class="portal-arrow">○</span> <strong>${art.title}</strong> <em>(${art.passage_ref})</em>`;
+    }
+
+    // 4. Quản trị viên button visibility
+    const adminBtn = document.getElementById('admin-devotion-edit-btn');
+    if (adminBtn) {
+      if (state.currentUserRole === 'admin') {
+        adminBtn.classList.remove('hidden');
+      } else {
+        adminBtn.classList.add('hidden');
+      }
+    }
+
+    // Gắn lại sự kiện cho các liên kết vừa render
+    verseBox?.querySelectorAll('[data-book]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const b = el.getAttribute('data-book');
+        const c = parseInt(el.getAttribute('data-ch'), 10) || 1;
+        const v = parseInt(el.getAttribute('data-v'), 10) || 1;
+        this.navigateToPassage(b, c, v, { stayInPortal: true });
+      });
+    });
+
+    readingList?.querySelectorAll('.devotion-audio-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const b = btn.getAttribute('data-book');
+        const c = parseInt(btn.getAttribute('data-ch'), 10) || 1;
+        this.playChapterAudio(b, c, 1);
+      });
+    });
+  }
+
+  openAdminDevotionModal() {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+    const modal = document.getElementById('admin-devotion-modal');
+    if (!modal) return;
+
+    const data = storage.getDevotionData();
+
+    if (data.verse) {
+      const vRef = document.getElementById('admin-devotion-verse-ref');
+      const vBook = document.getElementById('admin-devotion-verse-book');
+      const vCh = document.getElementById('admin-devotion-verse-ch');
+      const vV = document.getElementById('admin-devotion-verse-v');
+      const vText = document.getElementById('admin-devotion-verse-text');
+      if (vRef) vRef.value = data.verse.ref || '';
+      if (vBook) vBook.value = data.verse.book || 'HAB';
+      if (vCh) vCh.value = data.verse.ch || 3;
+      if (vV) vV.value = data.verse.v || 19;
+      if (vText) vText.value = data.verse.text || '';
+    }
+
+    if (data.reading_plan && data.reading_plan.length >= 4) {
+      const p1 = document.getElementById('admin-devotion-plan1-text');
+      const p2 = document.getElementById('admin-devotion-plan2-text');
+      const p3 = document.getElementById('admin-devotion-plan3-text');
+      const p4 = document.getElementById('admin-devotion-plan4-text');
+      if (p1) p1.value = data.reading_plan[0]?.text || '';
+      if (p2) p2.value = data.reading_plan[1]?.text || '';
+      if (p3) p3.value = data.reading_plan[2]?.text || '';
+      if (p4) p4.value = data.reading_plan[3]?.text || '';
+    }
+
+    if (data.daily_article) {
+      const t = document.getElementById('admin-devotion-art-title');
+      const r = document.getElementById('admin-devotion-art-ref');
+      const c = document.getElementById('admin-devotion-art-content');
+      if (t) t.value = data.daily_article.title || '';
+      if (r) r.value = data.daily_article.passage_ref || '';
+      if (c) c.value = data.daily_article.content || '';
+    }
+
+    modal.classList.remove('hidden');
+  }
+
+  saveAdminDevotionFromModal() {
+    const current = storage.getDevotionData();
+    const verseRef = (document.getElementById('admin-devotion-verse-ref')?.value || '').trim();
+    const verseBook = (document.getElementById('admin-devotion-verse-book')?.value || 'HAB').trim().toUpperCase();
+    const verseCh = parseInt(document.getElementById('admin-devotion-verse-ch')?.value || '3', 10);
+    const verseV = parseInt(document.getElementById('admin-devotion-verse-v')?.value || '19', 10);
+    const verseText = (document.getElementById('admin-devotion-verse-text')?.value || '').trim();
+
+    const plan1 = (document.getElementById('admin-devotion-plan1-text')?.value || '').trim();
+    const plan2 = (document.getElementById('admin-devotion-plan2-text')?.value || '').trim();
+    const plan3 = (document.getElementById('admin-devotion-plan3-text')?.value || '').trim();
+    const plan4 = (document.getElementById('admin-devotion-plan4-text')?.value || '').trim();
+
+    const artTitle = (document.getElementById('admin-devotion-art-title')?.value || '').trim();
+    const artRef = (document.getElementById('admin-devotion-art-ref')?.value || '').trim();
+    const artContent = (document.getElementById('admin-devotion-art-content')?.value || '').trim();
+
+    const updatedData = {
+      ...current,
+      verse: {
+        ref: verseRef || current.verse?.ref || 'Ha-ba-cúc 3:19',
+        book: verseBook,
+        ch: verseCh,
+        v: verseV,
+        text: verseText || current.verse?.text || ''
+      },
+      reading_plan: [
+        { title: 'Cựu Ước & Tân Ước:', text: plan1 || current.reading_plan[0]?.text, audioBook: 'JER', audioCh: 20 },
+        { title: 'Sáng-thế Ký - Khải-huyền:', text: plan2 || current.reading_plan[1]?.text, audioBook: 'MRK', audioCh: 14 },
+        { title: 'Đọc Tân Ước Trong Ba Tháng:', text: plan3 || current.reading_plan[2]?.text, audioBook: 'LUK', audioCh: 21 },
+        { title: 'Đọc Trong Ba Năm:', text: plan4 || current.reading_plan[3]?.text, audioBook: 'JOB', audioCh: 22 }
+      ],
+      daily_article: {
+        ...current.daily_article,
+        title: artTitle || current.daily_article?.title || 'Sống Với Thánh Kinh',
+        passage_ref: artRef || current.daily_article?.passage_ref || 'Châm Ngôn 22',
+        content: artContent || current.daily_article?.content || ''
+      }
+    };
+
+    storage.saveDevotionData(updatedData);
+    document.getElementById('admin-devotion-modal')?.classList.add('hidden');
+    this.renderPortalDevotion();
+    alert('Đã cập nhật nội dung Cổng Tĩnh Nguyện thành công!');
+  }
+
+  // --- Hiệu Đính Lời Chúa Handlers ---
+  openAdminVerseCorrectionModal(bookId, chNum, verseNum, version = 'BTT') {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+    const modal = document.getElementById('admin-verse-correction-modal');
+    if (!modal) return;
+
+    const bookObj = bibleEngine.getBookById(bookId);
+    const bookName = bookObj?.name_vi || bookId;
+
+    const coordLabel = document.getElementById('admin-corr-coord-label');
+    const bookInput = document.getElementById('admin-corr-book');
+    const chInput = document.getElementById('admin-corr-ch');
+    const vInput = document.getElementById('admin-corr-v');
+    const verInput = document.getElementById('admin-corr-ver');
+    const textInput = document.getElementById('admin-corr-text');
+    const noteInput = document.getElementById('admin-corr-note');
+
+    if (bookInput) bookInput.value = bookId;
+    if (chInput) chInput.value = chNum;
+    if (vInput) vInput.value = verseNum;
+    if (verInput) verInput.value = version;
+
+    if (coordLabel) {
+      coordLabel.innerHTML = `<i class="fa-solid fa-bookmark" style="color: var(--accent-gold);"></i> ${bookName} • Đoạn ${chNum}:${verseNum} • Bản Dịch: <strong>${version}</strong>`;
+    }
+
+    const existingCorr = storage.getVerseCorrection(bookId, chNum, verseNum, version);
+    if (existingCorr && existingCorr.correctedText) {
+      if (textInput) textInput.value = existingCorr.correctedText;
+      if (noteInput) noteInput.value = existingCorr.note || '';
+    } else {
+      const verseEl = document.querySelector(`.verse-item[data-verse="${verseNum}"] .verse-text`);
+      if (textInput) textInput.value = verseEl ? verseEl.textContent.trim() : '';
+      if (noteInput) noteInput.value = '';
+    }
+
+    modal.classList.remove('hidden');
+  }
+
+  saveAdminVerseCorrectionFromModal() {
+    const bookId = document.getElementById('admin-corr-book')?.value;
+    const chNum = parseInt(document.getElementById('admin-corr-ch')?.value, 10);
+    const verseNum = parseInt(document.getElementById('admin-corr-v')?.value, 10);
+    const version = document.getElementById('admin-corr-ver')?.value || 'BTT';
+    const correctedText = (document.getElementById('admin-corr-text')?.value || '').trim();
+    const note = (document.getElementById('admin-corr-note')?.value || '').trim();
+
+    if (!bookId || !chNum || !verseNum || !correctedText) {
+      alert('Vui lòng nhập nội dung câu Kinh Thánh đã hiệu đính.');
+      return;
+    }
+
+    storage.saveVerseCorrection({
+      bookId,
+      chapterNum: chNum,
+      verseNum,
+      version,
+      correctedText,
+      note
+    });
+
+    document.getElementById('admin-verse-correction-modal')?.classList.add('hidden');
+    this.renderChapter(bookId, chNum);
+    alert(`Đã lưu hiệu đính câu ${bookId} ${chNum}:${verseNum} (${version}) thành công!`);
+  }
+
+  resetAdminVerseCorrectionFromModal() {
+    const bookId = document.getElementById('admin-corr-book')?.value;
+    const chNum = parseInt(document.getElementById('admin-corr-ch')?.value, 10);
+    const verseNum = parseInt(document.getElementById('admin-corr-v')?.value, 10);
+    const version = document.getElementById('admin-corr-ver')?.value || 'BTT';
+
+    if (confirm(`Bạn có chắc muốn khôi phục bản gốc của câu ${bookId} ${chNum}:${verseNum} (${version}) không?`)) {
+      storage.deleteVerseCorrection(bookId, chNum, verseNum, version);
+      document.getElementById('admin-verse-correction-modal')?.classList.add('hidden');
+      this.renderChapter(bookId, chNum);
+      alert('Đã khôi phục câu Kinh Thánh về bản gốc ban đầu!');
+    }
+  }
+
+  // --- Quản Trị Media Theo Mùa Handlers ---
+  openAdminMediaModal(videoId = null) {
+    if (state.currentUserRole !== 'admin') {
+      this.openAdminAuthModal();
+      return;
+    }
+    const modal = document.getElementById('admin-media-modal');
+    if (!modal) return;
+
+    const idInput = document.getElementById('admin-media-id');
+    const seasonSelect = document.getElementById('admin-media-season-select');
+    const bookInput = document.getElementById('admin-media-book-input');
+    const titleInput = document.getElementById('admin-media-title-input');
+    const ytInput = document.getElementById('admin-media-youtube-input');
+    const durationInput = document.getElementById('admin-media-duration-input');
+    const descInput = document.getElementById('admin-media-desc-input');
+
+    if (videoId) {
+      const v = mediaEngine.getMediaVideo(videoId);
+      if (v) {
+        if (idInput) idInput.value = v.id;
+        if (seasonSelect) seasonSelect.value = v.season || 'academic';
+        if (bookInput) bookInput.value = v.book_id || 'JHN';
+        if (titleInput) titleInput.value = v.title_vi || '';
+        if (ytInput) ytInput.value = v.youtube_id || '';
+        if (durationInput) durationInput.value = v.duration || '8:00';
+        if (descInput) descInput.value = v.description || '';
+      }
+    } else {
+      if (idInput) idInput.value = '';
+      if (seasonSelect) seasonSelect.value = mediaEngine.currentSeason !== 'all' ? mediaEngine.currentSeason : 'christmas';
+      if (bookInput) bookInput.value = 'JHN';
+      if (titleInput) titleInput.value = '';
+      if (ytInput) ytInput.value = '';
+      if (durationInput) durationInput.value = '8:00';
+      if (descInput) descInput.value = '';
+    }
+
+    modal.classList.remove('hidden');
+  }
+
+  saveAdminMediaFromModal() {
+    const idInput = document.getElementById('admin-media-id')?.value;
+    const season = document.getElementById('admin-media-season-select')?.value || 'academic';
+    const book_id = (document.getElementById('admin-media-book-input')?.value || 'JHN').trim().toUpperCase();
+    const title_vi = (document.getElementById('admin-media-title-input')?.value || '').trim();
+    let youtube_id = (document.getElementById('admin-media-youtube-input')?.value || '').trim();
+    const duration = (document.getElementById('admin-media-duration-input')?.value || '8:00').trim();
+    const description = (document.getElementById('admin-media-desc-input')?.value || '').trim();
+
+    if (!title_vi || !youtube_id) {
+      alert('Vui lòng nhập tiêu đề và YouTube Video ID hoặc link.');
+      return;
+    }
+
+    if (youtube_id.includes('v=')) {
+      youtube_id = youtube_id.split('v=')[1].split('&')[0];
+    } else if (youtube_id.includes('youtu.be/')) {
+      youtube_id = youtube_id.split('youtu.be/')[1].split('?')[0];
+    }
+
+    if (idInput) {
+      mediaEngine.updateMediaVideo(idInput, {
+        season,
+        book_id,
+        title_vi,
+        youtube_id,
+        duration,
+        description
+      });
+      alert('Đã cập nhật video media theo mùa thành công!');
+    } else {
+      mediaEngine.createMediaVideo({
+        season,
+        book_id,
+        title_vi,
+        youtube_id,
+        duration,
+        description
+      });
+      alert('Đã thêm video media theo mùa mới thành công!');
+    }
+
+    document.getElementById('admin-media-modal')?.classList.add('hidden');
+    this.renderMediaView();
+  }
+
   bindEvents() {
+    // Full CMS v3.0: Devotion, Verse Correction, Seasonal Media
+    document.getElementById('admin-devotion-edit-btn')?.addEventListener('click', () => {
+      this.openAdminDevotionModal();
+    });
+    document.getElementById('save-admin-devotion-btn')?.addEventListener('click', () => {
+      this.saveAdminDevotionFromModal();
+    });
+    document.getElementById('btn-devotion-reset-default')?.addEventListener('click', () => {
+      storage.saveDevotionData(null);
+      this.renderPortalDevotion();
+      this.openAdminDevotionModal();
+    });
+
+    document.getElementById('save-admin-verse-corr-btn')?.addEventListener('click', () => {
+      this.saveAdminVerseCorrectionFromModal();
+    });
+    document.getElementById('reset-admin-verse-corr-btn')?.addEventListener('click', () => {
+      this.resetAdminVerseCorrectionFromModal();
+    });
+
+    document.getElementById('save-admin-media-btn')?.addEventListener('click', () => {
+      this.saveAdminMediaFromModal();
+    });
+
+    // Delegate click for verse correction pen buttons
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-admin-edit-verse');
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const b = btn.getAttribute('data-book');
+        const c = btn.getAttribute('data-ch');
+        const v = btn.getAttribute('data-v');
+        const ver = btn.getAttribute('data-ver') || 'BTT';
+        this.openAdminVerseCorrectionModal(b, c, v, ver);
+      }
+    });
+
     // Brand Logo Home
     document.getElementById('brand-home-btn')?.addEventListener('click', () => {
       state.setActiveView('bible');

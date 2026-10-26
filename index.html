@@ -646,14 +646,19 @@
             <div id="portal-tab-devotion-panel" class="portal-tab-panel active">
               <!-- Box A: TĨNH NGUYỆN -->
               <div class="portal-card">
-              <div class="portal-card-header header-terracotta">TĨNH NGUYỆN</div>
+              <div class="portal-card-header header-terracotta" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>TĨNH NGUYỆN</span>
+                <button type="button" id="admin-devotion-edit-btn" class="admin-devotion-edit-btn hidden" style="font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 4px; background: rgba(0,0,0,0.35); border: 1px solid var(--accent-gold); color: var(--accent-gold); cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+                  <i class="fa-solid fa-pen-to-square"></i> Quản Trị Tĩnh Nguyện
+                </button>
+              </div>
               <div class="portal-card-body">
                 <!-- 1. Câu Gốc -->
                 <div class="devotion-block">
                   <div class="devotion-block-title">
                     <i class="fa-solid fa-scroll"></i> Câu Gốc
                   </div>
-                  <div class="devotion-verse-box">
+                  <div class="devotion-verse-box" id="portal-devotion-verse-box">
                     <strong>3:19</strong> Đức Giê-hô-va là Chúa, là sức mạnh của tôi, Ngài làm cho chân tôi giống như chân con hươu, Khiến tôi đi trên các nơi cao của mình. (Phó cho quan phường nhạc, khảy đàn mà hát bài nầy). 
                     <a class="devotion-ref-tag" data-book="HAB" data-ch="3" data-v="19" title="Nhấp để mở đọc và đối chiếu">Ha-ba-cúc 3:19</a>
                   </div>
@@ -664,7 +669,7 @@
                   <div class="devotion-block-title">
                     <i class="fa-solid fa-calendar-check"></i> Lịch Đọc Kinh Thánh
                   </div>
-                  <ol class="devotion-reading-list">
+                  <ol class="devotion-reading-list" id="portal-devotion-reading-list">
                     <li>
                       <span class="devotion-plan-title">Cựu Ước & Tân Ước:</span><br>
                       <a class="devotion-passage-link" data-book="JER" data-ch="20">Giê-rê-mi 20</a>. 
@@ -1450,6 +1455,238 @@
           <i class="fa-solid fa-arrows-rotate"></i> Làm Mới Dữ Liệu
         </button>
         <button type="button" class="btn-primary modal-close-btn" data-modal="admin-analytics-modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4.3: Quản Trị Tĩnh Nguyện & Dưỡng Linh (Admin Devotion Studio) -->
+  <div id="admin-devotion-modal" class="modal-overlay hidden" aria-label="Quản trị nội dung tĩnh nguyện hôm nay">
+    <div class="modal-card" style="max-width: 780px; max-height: 92vh; overflow-y: auto;">
+      <div class="modal-header">
+        <div>
+          <span class="preview-badge" style="background: var(--genre-torah); color: #fff; font-weight: 700;">CỔNG TĨNH NGUYỆN</span>
+          <h3 style="margin-top: 0.25rem;"><i class="fa-solid fa-scroll" style="color: var(--accent-gold);"></i> QUẢN TRỊ TĨNH NGUYỆN HÔM NAY</h3>
+        </div>
+        <button class="modal-close-btn" data-modal="admin-devotion-modal">&times;</button>
+      </div>
+
+      <div class="admin-modal-body" style="padding-top: 0.5rem;">
+        <!-- Phần 1: Câu Gốc Hôm Nay -->
+        <fieldset style="border: 1px solid var(--border-medium); border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+          <legend style="font-weight: 700; color: var(--accent-gold); padding: 0 0.5rem;">
+            <i class="fa-solid fa-star"></i> 1. CÂU GỐC HÔM NAY
+          </legend>
+          <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Tham Chiếu Hiển Thị:</label>
+              <input type="text" id="admin-devotion-verse-ref" placeholder="Ha-ba-cúc 3:19" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Mã Sách:</label>
+              <input type="text" id="admin-devotion-verse-book" placeholder="HAB" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Đoạn:</label>
+              <input type="number" id="admin-devotion-verse-ch" placeholder="3" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Câu:</label>
+              <input type="number" id="admin-devotion-verse-v" placeholder="19" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Nội Dung Lời Chúa (Câu Gốc):</label>
+            <textarea id="admin-devotion-verse-text" rows="3" placeholder="Nhập Lời Chúa..." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Phần 2: Lịch Đọc Kinh Thánh (4 Kế Hoạch) -->
+        <fieldset style="border: 1px solid var(--border-medium); border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+          <legend style="font-weight: 700; color: var(--accent-gold); padding: 0 0.5rem;">
+            <i class="fa-solid fa-calendar-days"></i> 2. LỊCH ĐỌC KINH THÁNH (4 KẾ HOẠCH HÀNG NGÀY)
+          </legend>
+          <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">1. Cựu Ước & Tân Ước:</label>
+              <input type="text" id="admin-devotion-plan1-text" placeholder="Giê-rê-mi 20. Giê-rê-mi 35-36. Cô-lô-se 4." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">2. Sáng-thế Ký - Khải-huyền:</label>
+              <input type="text" id="admin-devotion-plan2-text" placeholder="Mác 14:12-15:47." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">3. Đọc Tân Ước Trong Ba Tháng:</label>
+              <input type="text" id="admin-devotion-plan3-text" placeholder="Lu-ca 21-22." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">4. Đọc Trong Ba Năm:</label>
+              <input type="text" id="admin-devotion-plan4-text" placeholder="Gióp 22." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Phần 3: Sống Với Thánh Kinh -->
+        <fieldset style="border: 1px solid var(--border-medium); border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+          <legend style="font-weight: 700; color: var(--accent-gold); padding: 0 0.5rem;">
+            <i class="fa-solid fa-heart"></i> 3. BÀI VIẾT SỐNG VỚI THÁNH KINH HÀNG NGÀY
+          </legend>
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Tiêu Đề Bài Suy Ngẫm:</label>
+              <input type="text" id="admin-devotion-art-title" placeholder="Áp Bức Người Cùng Khốn" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Phân Đoạn Kinh Thánh:</label>
+              <input type="text" id="admin-devotion-art-ref" placeholder="Châm Ngôn 22:22-23" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            </div>
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Nội Dung Suy Ngẫm / Bài Học Đời Sống:</label>
+            <textarea id="admin-devotion-art-content" rows="4" placeholder="Nội dung bài học..." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);"></textarea>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+        <button type="button" id="btn-devotion-reset-default" class="btn-secondary" style="font-size: 0.82rem;">
+          <i class="fa-solid fa-rotate-left"></i> Khôi Phục Mẫu Mặc Định
+        </button>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-devotion-modal">Hủy</button>
+          <button type="button" id="save-admin-devotion-btn" class="btn-primary" style="font-weight: 700;">
+            <i class="fa-solid fa-floppy-disk"></i> Lưu & Áp Dụng Ngay
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4.4: Hiệu Đính Lời Chúa (Admin Verse Correction Studio) -->
+  <div id="admin-verse-correction-modal" class="modal-overlay hidden" aria-label="Hiệu đính lỗi chính tả văn bản Kinh Thánh">
+    <div class="modal-card" style="max-width: 600px;">
+      <div class="modal-header">
+        <div>
+          <span class="preview-badge" style="background: var(--genre-prophecy); color: #fff; font-weight: 700;">HIỆU ĐÍNH LỜI CHÚA</span>
+          <h3 style="margin-top: 0.25rem;"><i class="fa-solid fa-pen-to-square" style="color: var(--accent-gold);"></i> SỬA LỖI VĂN BẢN KINH THÁNH</h3>
+        </div>
+        <button class="modal-close-btn" data-modal="admin-verse-correction-modal">&times;</button>
+      </div>
+
+      <div class="admin-modal-body" style="padding-top: 0.5rem;">
+        <input type="hidden" id="admin-corr-book" value="">
+        <input type="hidden" id="admin-corr-ch" value="">
+        <input type="hidden" id="admin-corr-v" value="">
+        <input type="hidden" id="admin-corr-ver" value="">
+
+        <div style="background: rgba(212, 175, 55, 0.12); border: 1px solid var(--accent-gold-border); border-radius: 6px; padding: 0.75rem; margin-bottom: 1rem;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-gold);" id="admin-corr-coord-label">
+            Sách • Đoạn • Câu
+          </div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">
+            Quản Trị Viên đang hiệu đính câu Kinh Thánh này. Văn bản sửa đổi sẽ được lưu và áp dụng ngay trên màn hình đọc.
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
+            Văn Bản Câu Kinh Thánh Đã Hiệu Đính:
+          </label>
+          <textarea id="admin-corr-text" rows="4" placeholder="Nhập câu Kinh Thánh đã sửa lỗi chính tả..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.6; font-family: var(--font-reader);"></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
+            Ghi Chú Lý Do Hiệu Đính (Tuỳ chọn):
+          </label>
+          <input type="text" id="admin-corr-note" placeholder="Ví dụ: Sửa lỗi chính tả từ 'nghe' thành 'nghỉ'..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+        <button type="button" id="reset-admin-verse-corr-btn" class="btn-secondary" style="color: #ff6b6b; border-color: rgba(220, 53, 69, 0.4);">
+          <i class="fa-solid fa-rotate-left"></i> Khôi Phục Bản Gốc
+        </button>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-verse-correction-modal">Hủy</button>
+          <button type="button" id="save-admin-verse-corr-btn" class="btn-primary" style="font-weight: 700;">
+            <i class="fa-solid fa-floppy-disk"></i> Lưu Hiệu Đính
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4.5: Quản Trị Media & Video Theo Mùa (Admin Seasonal Media Studio) -->
+  <div id="admin-media-modal" class="modal-overlay hidden" aria-label="Quản trị thư viện video và media theo từng mùa">
+    <div class="modal-card" style="max-width: 640px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header">
+        <div>
+          <span class="preview-badge" style="background: #e11d48; color: #fff; font-weight: 700;">MEDIA THEO MÙA</span>
+          <h3 style="margin-top: 0.25rem;"><i class="fa-brands fa-youtube" style="color: #e11d48;"></i> QUẢN TRỊ MEDIA THEO MÙA VỤ</h3>
+        </div>
+        <button class="modal-close-btn" data-modal="admin-media-modal">&times;</button>
+      </div>
+
+      <div class="admin-modal-body" style="padding-top: 0.5rem;">
+        <input type="hidden" id="admin-media-id" value="">
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
+              Chọn Mùa Vụ / Dịp Lễ:
+            </label>
+            <select id="admin-media-season-select" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-weight: 700;">
+              <option value="christmas">⭐ Mùa Giáng Sinh & Nhập Thể</option>
+              <option value="easter">✝️ Mùa Phục Sinh & Thương Khó</option>
+              <option value="worship">🎶 Mùa Bồi Linh & Thánh Nhạc</option>
+              <option value="harvest">🌾 Năm Mới & Mùa Gặt Phước Hạnh</option>
+              <option value="academic">📖 Thường Niên & Khảo Cứu Lịch Sử</option>
+              <option value="all">🌐 Tất Cả Các Mùa</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
+              Sách Kinh Thánh Liên Quan:
+            </label>
+            <input type="text" id="admin-media-book-input" placeholder="JHN (hoặc GEN, MAT...)" value="JHN" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
+            Tiêu Đề Video / Tác Phẩm Media:
+          </label>
+          <input type="text" id="admin-media-title-input" placeholder="Ví dụ: Dự Án Kinh Thánh: Mùa Nhập Thể & Phục Sinh..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
+              YouTube Video ID (hoặc link):
+            </label>
+            <input type="text" id="admin-media-youtube-input" placeholder="Ví dụ: G-2e9mMf7E8 hoặc link youtube" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          </div>
+          <div class="form-group">
+            <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
+              Thời Lượng (mm:ss):
+            </label>
+            <input type="text" id="admin-media-duration-input" placeholder="8:57" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
+            Mô Tả Tác Phẩm / Ý Nghĩa Mùa Lễ:
+          </label>
+          <textarea id="admin-media-desc-input" rows="3" placeholder="Tóm tắt nội dung video, thông điệp mục vụ theo mùa..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.5rem; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+        <button type="button" class="btn-secondary modal-close-btn" data-modal="admin-media-modal">Hủy</button>
+        <button type="button" id="save-admin-media-btn" class="btn-primary" style="font-weight: 700; background: #e11d48;">
+          <i class="fa-solid fa-floppy-disk"></i> Lưu Video Mùa
+        </button>
       </div>
     </div>
   </div>

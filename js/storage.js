@@ -311,6 +311,96 @@ export class LogosStorage {
     return updated;
   }
 
+  // --- 1. Portal Devotion CMS Storage ---
+  getDevotionData(fallback = null) {
+    const defaultData = fallback || {
+      verse: {
+        book: 'HAB',
+        ch: 3,
+        v: 19,
+        ref: 'Ha-ba-cúc 3:19',
+        text: 'Đức Giê-hô-va là Chúa, là sức mạnh của tôi, Ngài làm cho chân tôi giống như chân con hươu, Khiến tôi đi trên các nơi cao của mình. (Phó cho quan phường nhạc, khảy đàn mà hát bài nầy).'
+      },
+      reading_plan: [
+        { title: 'Cựu Ước & Tân Ước:', text: 'Giê-rê-mi 20. Giê-rê-mi 35-36. Cô-lô-se 4.', audioBook: 'JER', audioCh: 20 },
+        { title: 'Sáng-thế Ký - Khải-huyền:', text: 'Mác 14:12-15:47.', audioBook: 'MRK', audioCh: 14 },
+        { title: 'Đọc Tân Ước Trong Ba Tháng:', text: 'Lu-ca 21-22.', audioBook: 'LUK', audioCh: 21 },
+        { title: 'Đọc Trong Ba Năm:', text: 'Gióp 22.', audioBook: 'JOB', audioCh: 22 }
+      ],
+      daily_article: {
+        title: 'Áp Bức Người Cùng Khốn',
+        passage_ref: 'Châm Ngôn 22:22-23',
+        book: 'PRO',
+        ch: 22,
+        v: 22,
+        content: 'Chớ bóc lột kẻ nghèo khó bởi vì họ nghèo khó, và cũng đừng ức hiếp kẻ khốn cùng nơi cửa thành. Vì Đức Giê-hô-va sẽ bênh vực duyên cớ của họ...'
+      },
+      spiritual_guide: [
+        { need: 'Cảm thấy buồn rầu', passages: 'Giăng 14, Thi-thiên 46' },
+        { need: 'Cảm thấy Đức Chúa Trời dường như ở xa', passages: 'Thi-thiên 139' },
+        { need: 'Cần can đảm', passages: 'Giô-suê 1:1-9' },
+        { need: 'Cần đảm bảo', passages: 'Rô-ma 8' },
+        { need: 'Cần biết ý muốn của Đức Chúa Trời cho cuộc đời bạn', passages: 'Châm-ngôn 3:1-6' },
+        { need: 'Cần những chỉ dẫn trong đời sống', passages: 'Ma-thi-ơ 5-7, Rô-ma 12' }
+      ]
+    };
+    return this.getPreference('portal_devotion_data', defaultData);
+  }
+
+  saveDevotionData(data) {
+    this.savePreference('portal_devotion_data', data);
+    return data;
+  }
+
+  // --- 2. Scripture Verse Correction Storage (Hiệu đính Lời Chúa khi phát hiện lỗi) ---
+  getVerseCorrections() {
+    return this.getPreference('verse_corrections', {});
+  }
+
+  getVerseCorrection(bookId, chapterNum, verseNum, version = 'BTT') {
+    const all = this.getVerseCorrections();
+    const key = `${bookId}_${chapterNum}_${verseNum}_${version}`.toUpperCase();
+    return all[key] || null;
+  }
+
+  saveVerseCorrection({ bookId, chapterNum, verseNum, version = 'BTT', originalText = '', correctedText, note = '' }) {
+    const all = this.getVerseCorrections();
+    const key = `${bookId}_${chapterNum}_${verseNum}_${version}`.toUpperCase();
+    all[key] = {
+      bookId,
+      chapterNum: parseInt(chapterNum, 10),
+      verseNum: parseInt(verseNum, 10),
+      version,
+      originalText,
+      correctedText: (correctedText || '').trim(),
+      note: (note || '').trim(),
+      updated_at: new Date().toLocaleString('vi-VN')
+    };
+    this.savePreference('verse_corrections', all);
+    return all[key];
+  }
+
+  deleteVerseCorrection(bookId, chapterNum, verseNum, version = 'BTT') {
+    const all = this.getVerseCorrections();
+    const key = `${bookId}_${chapterNum}_${verseNum}_${version}`.toUpperCase();
+    if (all[key]) {
+      delete all[key];
+      this.savePreference('verse_corrections', all);
+      return true;
+    }
+    return false;
+  }
+
+  // --- 3. Seasonal Visual Media Library Storage ---
+  getVisualMediaLibrary() {
+    return this.getPreference('visual_media_library', null);
+  }
+
+  saveVisualMediaLibrary(mediaData) {
+    this.savePreference('visual_media_library', mediaData);
+    return mediaData;
+  }
+
   // Passage Offline Caching via IndexedDB
   async cachePassage(passageKey, data) {
     if (!this.db) {
