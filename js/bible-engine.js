@@ -748,7 +748,7 @@ export class BibleEngine {
           lang: t.lang,
           note: t.note,
           text: text,
-          interlinear_words: (t.id === 'INTERLINEAR') ? (verse.interlinear_words || null) : null,
+          interlinear_words: (t.id === 'INTERLINEAR') ? (verse.interlinear_words || (this.interlinearCache && this.interlinearCache[`${bookId.toUpperCase()}.${chapterNum}`]?.verses?.[String(targetVNum)]) || null) : null,
           scripture4all_pdf: (t.id === 'INTERLINEAR') ? (verse.scripture4all_pdf || this.getScripture4AllPdfUrl(bookId, chapterNum)) : null
         });
       }
@@ -856,6 +856,26 @@ export class BibleEngine {
       console.warn(`Fetch KTHD chapter failed for ${bookId} ${chapterNum}:`, e);
     }
     return {};
+  }
+
+  // Tải trọn vẹn dữ liệu Interlinear từ kho data/interlinear/{bookId}/{chapterNum}.json
+  async fetchInterlinearChapter(bookId, chapterNum) {
+    if (!this.interlinearCache) this.interlinearCache = {};
+    const key = `${bookId.toUpperCase()}.${chapterNum}`;
+    if (this.interlinearCache[key]) {
+      return this.interlinearCache[key];
+    }
+    try {
+      const res = await fetch(`data/interlinear/${bookId.toUpperCase()}/${chapterNum}.json`);
+      if (res.ok) {
+        const data = await res.json();
+        this.interlinearCache[key] = data;
+        return data;
+      }
+    } catch (e) {
+      console.warn(`Fetch Interlinear chapter failed for ${bookId} ${chapterNum}:`, e);
+    }
+    return null;
   }
 
   // Lấy đường dẫn trực tiếp trên https://biblehub.com/tsk/{slug}/{chapter}-{verse}.htm
@@ -1066,6 +1086,31 @@ export class BibleEngine {
             }
           }).catch(err => {
             console.warn(`Tải bản dịch CGKPV thất bại:`, err);
+          })
+        );
+        return;
+      }
+
+      // Nếu là INTERLINEAR: nạp nguyên bản Hê-bơ-rơ / Hy Lạp từ data/interlinear/{bookId}/{chapterNum}.json
+      if (transObj.id === 'INTERLINEAR' || transObj.code === 'INTERLINEAR') {
+        fetchPromises.push(
+          this.fetchInterlinearChapter(bookId, chapterNum).then(interData => {
+            if (interData && interData.verses) {
+              hasLoadedAny = true;
+              passage.verses.forEach(v => {
+                const vNumStr = String(v.verse_num);
+                const words = interData.verses[vNumStr];
+                if (words && Array.isArray(words)) {
+                  v.interlinear_words = words;
+                  v.scripture4all_pdf = interData.scripture4all_pdf_url || this.getScripture4AllPdfUrl(bookId, chapterNum);
+                  if (!v.translations) v.translations = {};
+                  const tokens = words.map(w => `${w.orig} (${w.translit || ''} - ${w.strong || ''} - ${w.gloss || ''})`).join(' ');
+                  v.translations['INTERLINEAR'] = tokens;
+                }
+              });
+            }
+          }).catch(err => {
+            console.warn(`Tải bản dịch INTERLINEAR thất bại:`, err);
           })
         );
         return;

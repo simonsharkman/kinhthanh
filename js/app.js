@@ -4509,8 +4509,11 @@ class LogosApp {
     });
   }
 
-  // Hiển thị trực quan từng chữ bản dịch Interlinear (Hê-bơ-rơ / Hy Lạp) kèm phiên âm, Strong's, và link Scripture4All
-  renderInterlinearWordTiles(item, bookId, chapterNum) {
+  // Hiển thị trực quan từng chữ bản dịch Interlinear (Hê-bơ-rơ / Hy Lạp) theo chuẩn 3 tầng:
+  // Tầng 1: Nguyên bản ở trên cùng (Hebrew / Greek)
+  // Tầng 2: Phiên âm ở dưới kèm mã Strong's
+  // Tầng 3: Dịch ở dưới cùng bằng tiếng Anh cho từng từ
+  renderInterlinearWordTiles(item, bookId, chapterNum, verseNum = null) {
     const book = bibleEngine.getBookById(bookId);
     const isOT = book?.testament === 'OT';
     const pdfUrl = item.scripture4all_pdf || bibleEngine.getScripture4AllPdfUrl(bookId, chapterNum);
@@ -4534,21 +4537,40 @@ class LogosApp {
       }
     }
 
-    const verseNum = state.currentVerse || 1;
-    const verseCoord = `${chapterNum}:${verseNum}`;
+    const currentVNum = verseNum || state.currentVerse || 1;
+    const verseCoord = `${chapterNum}:${currentVNum}`;
+
+    const cleanEnglishGloss = (gloss) => {
+      if (!gloss || typeof gloss !== 'string') return '';
+      let g = gloss.replace(/[·•]/g, ' ');
+      g = g.replace(/\s*\/\s*\d+$/g, '');
+      if (g === '»') return '[obj]';
+      if (g === 'and·»' || g === 'and »') return 'and [obj]';
+      return g.trim();
+    };
 
     let tilesHtml = '';
     if (words && words.length > 0) {
-      tilesHtml = words.map(w => `
-        <div class="s4a-word-col interlinear-word-tile">
-          <div class="s4a-orig tile-orig ${isOT ? 'hebrew-text orig-hebrew' : 'greek-text orig-greek'}">${w.orig || ''}</div>
-          <div class="s4a-translit tile-translit">${w.translit || ''}</div>
-          ${w.strong ? `<div class="s4a-strong tile-strong">${w.strong}</div>` : ''}
-          ${w.pos ? `<div class="s4a-pos">${w.pos}</div>` : ''}
-          <div class="s4a-gloss tile-gloss">${(w.gloss || '').toUpperCase()}</div>
-          ${(w.meaning_vi && w.meaning_vi.toLowerCase() !== (w.gloss || '').toLowerCase()) ? `<div class="s4a-subgloss">${w.meaning_vi}</div>` : ''}
-        </div>
-      `).join('');
+      tilesHtml = words.map(w => {
+        const cleanedGloss = cleanEnglishGloss(w.gloss);
+        const tooltipParts = [
+          w.meaning_vi ? `Tiếng Việt: ${w.meaning_vi}` : '',
+          w.strong ? `Strong's: ${w.strong}` : '',
+          w.pos ? `Ngữ pháp: ${w.pos}` : ''
+        ].filter(Boolean);
+        const safeTooltip = tooltipParts.join(' • ').replace(/"/g, '&quot;');
+
+        return `
+          <div class="s4a-word-col interlinear-word-tile" title="${safeTooltip}">
+            <div class="s4a-orig tile-orig ${isOT ? 'hebrew-text orig-hebrew' : 'greek-text orig-greek'}" ${isOT ? 'dir="rtl"' : 'dir="ltr"'}>${w.orig || ''}</div>
+            <div class="s4a-translit-row tile-translit-row">
+              <span class="s4a-translit tile-translit">${w.translit || ''}</span>
+              ${w.strong ? `<span class="s4a-strong tile-strong">${w.strong}</span>` : ''}
+            </div>
+            <div class="s4a-gloss tile-gloss">${cleanedGloss.toUpperCase()}</div>
+          </div>
+        `;
+      }).join('');
     } else {
       tilesHtml = `<div class="s4a-raw-text">${item.text}</div>`;
     }
@@ -4565,7 +4587,7 @@ class LogosApp {
         </div>
         <div class="s4a-interlinear-content ${isOT ? 'rtl-flow rtl-direction' : 'ltr-flow ltr-direction'}">
           <span class="s4a-verse-tag">${verseCoord}</span>
-          <div class="s4a-words-stream interlinear-words-grid">
+          <div class="s4a-words-stream interlinear-words-grid ${isOT ? 'rtl-stream' : 'ltr-stream'}">
             ${tilesHtml}
           </div>
         </div>
@@ -4629,12 +4651,27 @@ class LogosApp {
       }
 
       const isTarget = v.verse_num == targetVerseNum;
-      versesHtml += `
-        <div class="popout-verse-item ${isTarget ? 'verse-focus-target' : ''}" data-verse="${v.verse_num}">
-          <span class="popout-vnum">${v.verse_num}</span>
-          <span class="popout-vtext">${bibleEngine.cleanScriptureText(vText)}</span>
-        </div>
-      `;
+      if (versionId === 'INTERLINEAR') {
+        const itemObj = {
+          version_id: 'INTERLINEAR',
+          text: vText,
+          interlinear_words: v.interlinear_words,
+          scripture4all_pdf: v.scripture4all_pdf
+        };
+        const renderedTiles = this.renderInterlinearWordTiles(itemObj, bookId, chapterNum, v.verse_num);
+        versesHtml += `
+          <div class="popout-verse-item popout-interlinear-item ${isTarget ? 'verse-focus-target' : ''}" data-verse="${v.verse_num}">
+            ${renderedTiles}
+          </div>
+        `;
+      } else {
+        versesHtml += `
+          <div class="popout-verse-item ${isTarget ? 'verse-focus-target' : ''}" data-verse="${v.verse_num}">
+            <span class="popout-vnum">${v.verse_num}</span>
+            <span class="popout-vtext">${bibleEngine.cleanScriptureText(vText)}</span>
+          </div>
+        `;
+      }
     });
 
     body.innerHTML = versesHtml;

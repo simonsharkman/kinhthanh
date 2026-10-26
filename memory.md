@@ -132,33 +132,18 @@
 - **Kiểm thử**: Đạt 136/136 bài test Pytest PASS 100%.
 
 ### 23. Nâng Cấp Hệ Thống Quản Trị Toàn Diện Full Admin CMS v3.0 (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"tôi muốn chỉnh sửa tất cả. kể cả kinh thánh khi tôi phát hiện bị lỗi. tôi cũng muốn cập nhật media theo từng mùa nữa"* (sau khi đăng nhập Quản Trị thành công nhưng thấy màn hình Cổng Tĩnh Nguyện chưa có nút chỉnh sửa trực tiếp).
-- **Phân tích & Thiết kế**: Chuyển hóa toàn bộ hệ thống từ hiển thị tĩnh sang **Full Dynamic CMS** dưới quyền Quản Trị Viên:
-  1. **Quản Trị Cổng Tĩnh Nguyện (`portal-view`)**:
-     - Nút vàng **`⚙ Quản Trị Tĩnh Nguyện`** (`#admin-devotion-edit-btn`) chỉ hiện khi vai trò là `admin`.
-     - Mở Modal **`#admin-devotion-modal`**: Cho phép Admin cập nhật Câu Gốc trong ngày (sách, đoạn, câu, nội dung lời Chúa), sửa 4 kế hoạch Lịch Đọc Kinh Thánh hàng ngày, và soạn bài suy ngẫm *Sống Với Thánh Kinh*.
-     - Hỗ trợ nút khôi phục mẫu chuẩn mực bất kỳ lúc nào (`#btn-devotion-reset-default`).
-  2. **Hiệu Đính Lời Chúa Khi Phát Hiện Lỗi (`bible-engine.js`)**:
-     - Khi là Quản Trị Viên, trên mỗi câu Kinh Thánh ở Focus Reader và Parallel Comparison xuất hiện nút bút chì **`✏ Sửa`** (`.btn-admin-edit-verse`).
-     - Mở Modal **`#admin-verse-correction-modal`**: Hiển thị chính xác tọa độ câu và bản dịch, ô soạn thảo sửa câu chữ và ô ghi chú lý do hiệu đính.
-     - Dữ liệu hiệu đính lưu vào `storage.saveVerseCorrection()` và ghi đè hiển thị tức thì, kèm nhãn nhận diện `<span class="verse-corrected-tag">Đã hiệu đính</span>`.
-     - Cho phép khôi phục nguyên văn gốc 1-chạm (`#reset-admin-verse-corr-btn`).
-  3. **Quản Trị Thư Viện Media & Video Theo Từng Mùa (`media-engine.js`)**:
-     - Tích hợp thanh lọc mùa vụ 6 phân loại (`all`, `christmas`, `easter`, `worship`, `harvest`, `academic`).
-     - Khi là Quản Trị Viên: Xuất hiện nút **`+ Cập Nhật / Thêm Media Mùa Mới`** trên đầu trang và các nút **`Sửa`**, **`Xóa`** trên từng thẻ Video/Media.
-     - Mở Modal **`#admin-media-modal`**: Hỗ trợ thêm/sửa link YouTube, thời lượng, tiêu đề, mô tả và chọn mùa lễ tương ứng.
-- **Kiểm thử & Chất lượng**:
-  - Viết bộ test mới `tests/test_admin_full_cms.py` bao phủ toàn diện 5 nhóm chức năng.
-  - Toàn bộ **136/136 bài test Pytest PASS 100%**.
-  - Cam kết bảo mật: Tuyệt đối không rò rỉ mã mặc định trong `js/app.js`.
+- **Yêu cầu & Phân tích**: Chuyển đổi toàn bộ hệ thống sang Full Dynamic CMS khi đăng nhập vai trò `admin`:
+  1. *Quản trị Tĩnh Nguyện*: Nút `⚙ Quản Trị Tĩnh Nguyện` (`#admin-devotion-modal`) cập nhật Câu Gốc trong ngày, 4 kế hoạch Lịch Đọc và bài suy ngẫm *Sống Với Thánh Kinh*.
+  2. *Hiệu đính câu Kinh Thánh*: Nút `✏ Sửa` trên Focus Reader & Parallel Comparison mở `#admin-verse-correction-modal`, lưu vào `storage.saveVerseCorrection()` và hiển thị thẻ `Đã hiệu đính`.
+  3. *Quản trị Thư Viện Media*: Thêm/sửa link YouTube, thời lượng, phân loại mùa vụ (`all`, `christmas`, `easter`, `worship`, `harvest`, `academic`) qua `#admin-media-modal`.
+- **Kiểm thử**: Viết mới `tests/test_admin_full_cms.py`, đạt 136/136 bài test Pytest PASS 100%.
 
-### 24. Khắc Phục Triệt Để 10.021 Lỗi Dấu Tiếng Việt & Triển Khai Pipeline Tự Động Chuẩn Hóa Lời Chúa (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"kiểm tra lại toàn bộ các bản kinh thánh có các lỗi nào kiểu sai chính tả không"* (ảnh chụp Giăng 1:30–38 bị dấu rời: `biê´ t`, `nhắ´ c`, `đế´ n`, `vố´ n`, `thấ´ y`, `xuố´ ng`, `bằ` ng`, `bồ` câu`, `Người ấ´ y`, `công bố´ :`, `liê` n`, `Thầ` y`, `Aáy`).
-- **Nguyên nhân**: Dấu sắc (`´` U+00B4) & dấu huyền (``` ` ``` U+0060) bị OCR/bộ gõ cũ tách rời chèn khoảng trắng, và tàn dư gõ VNI-DOS cổ `Aáy` thay cho chữ `Ấy`.
-- **Khắc phục toàn diện 2 tầng**:
-  1. **Tầng Dữ Liệu**: Quét và sửa 133/333 file JSON trong `data/`, xóa sạch 10.021 vị trí `Aáy` ➔ `Ấy` và đưa về chuẩn Unicode NFC. Kết quả: Còn lại **0** lỗi trong toàn bộ CSDL.
-  2. **Tầng Runtime Auto-Healing (`BibleEngine.cleanScriptureText`)**: Tự động hàn gắn nguyên âm/phụ âm bị tách (`biê´ t` ➔ `biết`, `liê` n` ➔ `liền`, `nhắ´ c` ➔ `nhắc`, `Thầ` y` ➔ `Thầy`), xóa dấu rời rải rác và bảo vệ 100% hiển thị Lời Chúa trên Focus Reader và Parallel Comparison.
-- **Kiểm thử**: Viết mới `tests/test_orthography_immunity.py`, đạt **136/136 bài test Pytest PASS 100%**.
+### 24. Khắc Phục 10.021 Lỗi Dấu Tiếng Việt & Pipeline Tự Động Chuẩn Hóa Lời Chúa (26/10/2026)
+- **Yêu cầu & Nguyên nhân**: Lời Chúa bị dấu sắc/huyền rời (`biê´ t`, `nhắ´ c`, `đế´ n`, `vố´ n`, `xuố´ ng`, `bằ` ng`, `Thầ` y`) do OCR/bộ gõ cũ, và tàn dư gõ VNI-DOS cổ `Aáy` thay cho `Ấy`.
+- **Khắc phục 2 tầng**:
+  1. *Tầng Dữ Liệu*: Quét và sửa 133 file JSON trong `data/`, xóa sạch 10.021 vị trí lỗi dấu, đưa về chuẩn Unicode NFC.
+  2. *Tầng Runtime Auto-Healing (`BibleEngine.cleanScriptureText`)*: Tự động hàn gắn nguyên âm/phụ âm bị tách và xóa dấu rời rải rác trên Focus Reader và Parallel Comparison.
+- **Kiểm thử**: Viết mới `tests/test_orthography_immunity.py`, đạt 136/136 bài test Pytest PASS 100%.
 
 ### 25. Xóa Bỏ Triệt Để 123.887 Ấn Chứng Tên Bản Dịch Trong Dấu Ngoặc Vuông (`[BTT 1925]`, `[KJV 1611]`, v.v.) (26/10/2026)
 - **Yêu cầu từ anh Jimmy**: *"xoá bỏ các ấn chứng bản kinh thánh đầu câu thế này đi giúp tôi"* (ảnh chụp gạch chân đỏ tiền tố `[BTT 1925]` ở đầu câu).
@@ -218,3 +203,14 @@
   3. *Nút Hành Động (CTA)*: Nút `Vào Cổng Tĩnh Nguyện` dẫn hướng trực tiếp đến Cổng Tĩnh Nguyện (`#portal`).
   4. *Lưu trữ & Khởi tạo*: Cập nhật `storage.getAdminBanner()` tự động áp dụng cấu hình này cho mọi phiên đọc mới và nâng cấp thiết lập cũ trong CSDL.
 - **Kiểm thử**: Toàn bộ **145/145 bài test Pytest PASS 100%**.
+### 30. Chuẩn Hóa Bố Cục Đối Chiếu Nguyên Ngữ Hê-bơ-rơ & Hy Lạp 3 Tầng Dọc Khép Kín (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"kiểm tra lại cách trình bày tiéng hebro và tiếng hylap. chúng ta cần có nguyên bản ở trên cùng, rồi phiên âm ở dưới, dịch ở dưới cùng bằng tiếng anh cho từng từ ở dưới nữa."*
+- **Phân tích & Tái cấu trúc chuẩn 3 Tầng Dọc (Strict 3-Tier Vertical Stack)**:
+  1. **Tầng 1 (Trên cùng - Top)**: Nguyên bản Lời Chúa bằng tiếng Hê-bơ-rơ (`.orig-hebrew` font SBL Hebrew/Ezra SIL, 1.55rem, màu vàng đất hổ phách, chữ viết từ phải sang trái RTL) cho Cựu Ước, và tiếng Hy Lạp (`.orig-greek` font SBL Greek/Palatino Linotype, 1.25rem, xanh biển sâu LTR) cho Tân Ước.
+  2. **Tầng 2 (Ở giữa - Middle)**: Phiên âm La-tinh ngữ âm (`.tile-translit` chữ nghiêng italic dễ đọc) kèm huy hiệu mã số nguyên ngữ Strong's (`.tile-strong` dạng pill badge gọn gàng `H7225`, `G1722`).
+  3. **Tầng 3 (Dưới cùng - Bottom)**: Dịch nghĩa tiếng Anh cho từng từ (`.tile-gloss` xanh ngọc lục bảo Emerald Green, in hoa đậm nét, căn đáy cột). Tuyệt đối loại bỏ dòng tiếng Việt khỏi đáy cột (`display: none !important;` trên `.s4a-subgloss`) để tiếng Anh luôn luôn là tầng dưới cùng của mọi từ; giữ nghĩa tiếng Việt trong `title="..."` tooltip khi rê chuột vào từng chữ.
+- **Hạ tầng Dữ liệu & Đọc Độc Lập**:
+  - `bibleEngine`: Bổ sung `fetchInterlinearChapter(bookId, chapterNum)` nạp tự động `data/interlinear/{bookId}/{chapterNum}.json` trong `ensurePassageTranslations()`.
+  - Cửa sổ đọc độc lập (`openPopoutReader`): Tự động định dạng toàn bộ các câu của chương theo chuẩn thẻ 3 tầng khi chọn đọc bản `INTERLINEAR`.
+- **Kiểm thử & Đồng bộ**: Bổ sung `test_three_tier_interlinear_hierarchy` trong `tests/test_scripture4all_interlinear.py`. Toàn bộ **146/146 bài test Pytest PASS 100%**. Đồng bộ trọn vẹn sang mirror Antigravity scratch.
+

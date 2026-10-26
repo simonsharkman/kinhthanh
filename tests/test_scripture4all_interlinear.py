@@ -136,3 +136,40 @@ def test_frontend_interlinear_components():
     assert '.tile-strong' in css_content
     assert '.tile-gloss' in css_content
     assert '.rtl-direction' in css_content
+
+def test_three_tier_interlinear_hierarchy():
+    """Verify exact 3-tier vertical stack:
+    1. Top: Original text (Hebrew/Greek)
+    2. Middle: Transliteration + Strong's code
+    3. Bottom: English word translation (without Vietnamese subgloss displacing bottom)
+    """
+    app_js = os.path.join(os.path.dirname(__file__), "..", "js", "app.js")
+    engine_js = os.path.join(os.path.dirname(__file__), "..", "js", "bible-engine.js")
+    css_file = os.path.join(os.path.dirname(__file__), "..", "css", "components.css")
+    
+    with open(app_js, 'r', encoding='utf-8') as f:
+        app_content = f.read()
+    with open(engine_js, 'r', encoding='utf-8') as f:
+        engine_content = f.read()
+    with open(css_file, 'r', encoding='utf-8') as f:
+        css_content = f.read()
+
+    # 1. Bible Engine has fetchInterlinearChapter and ensures INTERLINEAR
+    assert 'fetchInterlinearChapter(bookId, chapterNum)' in engine_content
+    assert 'data/interlinear/${bookId.toUpperCase()}/${chapterNum}.json' in engine_content
+    assert 'transObj.id === \'INTERLINEAR\'' in engine_content
+
+    # 2. App renders 3-tier stack: orig -> translit -> gloss at bottom
+    assert 'cleanEnglishGloss' in app_content
+    assert 'tile-translit-row' in app_content
+    assert 'tile-gloss' in app_content
+    # Popout reader handles INTERLINEAR with tiles
+    assert 'popout-interlinear-item' in app_content
+
+    # 3. CSS guarantees 3 tiers and suppresses subgloss from displacing bottom
+    assert '.tile-translit-row' in css_content
+    assert '.s4a-subgloss' in css_content
+    assert 'display: none !important;' in css_content
+    assert '.rtl-stream' in css_content
+    assert '.ltr-stream' in css_content
+
