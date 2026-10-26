@@ -593,21 +593,21 @@ body {
   display: none;
 }
 
-/* Scripture verses — Easy-to-scan cards with Golden Number Badges */
+/* Scripture verses — Sacred, Reverent, Seamless Biblical Typography ("Kỉnh Kiềng") */
 .chapter-verses-list {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.15rem; /* Dòng chảy văn bản trang nghiêm liền mạch, không chia cắt thành từng thẻ đóng hộp */
 }
 
 .verse-item {
   position: relative;
   margin-bottom: 0;
-  padding: 0.85rem 1.15rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-left: 3.5px solid rgba(229, 193, 88, 0.35);
-  border-radius: 12px;
+  padding: 0.45rem 0.65rem;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent; /* Giữ layout cân bằng khi active/hover, không giật hình */
+  border-radius: 6px;
   font-family: var(--font-bible);
   font-size: var(--bible-font-size);
   line-height: var(--bible-line-height);
@@ -616,11 +616,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: pointer;
-  transition: all var(--transition-fast);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: background-color var(--transition-fast), border-left-color var(--transition-fast);
+  box-shadow: none;
 }
 
 .verse-text {
+  flex: 1;
+  min-width: 0;
   display: inline;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -628,42 +630,66 @@ body {
 }
 
 .verse-item:hover {
-  background: var(--bg-card);
-  border-color: rgba(229, 193, 88, 0.45);
-  border-left-color: var(--accent-gold);
-  transform: translateX(2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  background: rgba(229, 193, 88, 0.05);
+  border: none;
+  border-left: 3px solid rgba(229, 193, 88, 0.35);
+  transform: none;
+  box-shadow: none;
 }
 
-.verse-item.verse-highlight-active {
-  background: linear-gradient(90deg, rgba(229, 193, 88, 0.16) 0%, var(--bg-card) 100%);
-  border-color: var(--accent-gold);
-  border-left: 4px solid var(--accent-gold);
-  box-shadow: 0 4px 18px rgba(229, 193, 88, 0.2);
+.verse-item.verse-highlight-active,
+.verse-item.verse-selected {
+  background: rgba(229, 193, 88, 0.1) !important;
+  border: none !important;
+  border-left: 3.5px solid var(--accent-gold) !important;
+  box-shadow: 0 0 12px rgba(229, 193, 88, 0.08) !important;
+  transform: none !important;
 }
 
+.verse-item.verse-reading-active {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border: none !important;
+  border-left: 3.5px solid var(--accent-gold, #10b981) !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.08) !important;
+  transform: none !important;
+}
+
+/* Số câu Kinh Thánh — Nhỏ gọn, thanh thoát, trang nghiêm, không viền hộp */
 .verse-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 26px;
-  height: 26px;
-  padding: 0 0.4rem;
-  border-radius: 7px;
-  background: rgba(229, 193, 88, 0.15);
-  border: 1px solid rgba(229, 193, 88, 0.42);
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  font-weight: 800;
-  color: var(--accent-gold);
-  margin-right: 0.65rem;
-  vertical-align: middle;
+  display: inline-block;
+  min-width: unset;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  font-family: var(--font-ui), var(--font-bible), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-verse-num, var(--accent-gold));
+  opacity: 0.82;
+  margin-right: 0.45rem;
+  line-height: 1.2;
+  vertical-align: baseline;
+  user-select: none;
+  flex-shrink: 0;
 }
 
-.verse-item.verse-highlight-active .verse-number {
-  background: var(--accent-gold);
-  color: #0a0d14;
-  border-color: var(--accent-gold-light);
+.verse-item.verse-highlight-active .verse-number,
+.verse-item.verse-selected .verse-number {
+  background: transparent !important;
+  border: none !important;
+  color: var(--accent-gold-light, #ffd54f) !important;
+  opacity: 1 !important;
+  font-weight: 800;
+}
+
+.verse-item.verse-reading-active .verse-number {
+  background: transparent !important;
+  border: none !important;
+  color: var(--accent-gold-light, #34d399) !important;
+  opacity: 1 !important;
+  font-weight: 800;
 }
 
 .chapter-footer-nav {
@@ -1315,18 +1341,23 @@ body {
 
   body.drawer-open .verse-item,
   body.mobile-split-active .verse-item {
-    padding: 0.55rem 0.75rem !important;
-    margin-bottom: 0.35rem !important;
+    padding: 0.4rem 0.55rem !important;
+    margin-bottom: 0.15rem !important;
     font-size: var(--bible-font-size, 1.05rem) !important;
     line-height: var(--bible-line-height, 1.75) !important;
     letter-spacing: 0.01em;
-    border-radius: 8px !important;
+    border: none !important;
+    border-left: 3px solid transparent !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .verse-item.verse-highlight-active {
-    background: rgba(212, 175, 55, 0.14) !important;
+    background: rgba(212, 175, 55, 0.12) !important;
+    border: none !important;
     border-left: 3px solid var(--accent-gold) !important;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.15) !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.12) !important;
   }
 
   /* Nửa trên (#app-body): Chiếm chính xác 50% phần màn hình dưới Header, nối liền sát khít với nửa dưới */
@@ -1528,7 +1559,10 @@ body {
     font-size: var(--bible-font-size, 1.15rem) !important;
     line-height: var(--bible-line-height, 1.8) !important;
     letter-spacing: 0.01em;
-    padding: 0.65rem 0.85rem;
-    margin-bottom: 0.45rem;
+    padding: 0.45rem 0.65rem;
+    margin-bottom: 0.15rem;
+    border: none;
+    background: transparent;
+    box-shadow: none;
   }
 }

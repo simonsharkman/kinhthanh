@@ -2903,10 +2903,12 @@
 }
 
 .popout-vnum {
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--accent-gold);
-  min-width: 26px;
+  color: var(--text-verse-num, var(--accent-gold));
+  opacity: 0.82;
+  min-width: unset;
+  margin-right: 0.35rem;
   font-family: var(--font-ui);
 }
 
@@ -6545,11 +6547,12 @@
 
 /* Reading Verse Active Highlight */
 .verse-reading-active {
-  background: rgba(212, 175, 55, 0.18) !important;
-  border-left: 3px solid var(--accent-gold) !important;
-  padding-left: 0.5rem !important;
-  border-radius: 4px !important;
-  box-shadow: 0 0 14px rgba(212, 175, 55, 0.3) !important;
+  background: rgba(212, 175, 55, 0.14) !important;
+  border: none !important;
+  border-left: 3.5px solid var(--accent-gold) !important;
+  padding-left: 0.65rem !important;
+  border-radius: 6px !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.15) !important;
   transition: all 0.25s ease;
 }
 

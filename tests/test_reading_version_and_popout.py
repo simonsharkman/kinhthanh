@@ -123,3 +123,34 @@ def test_portal_read_and_search_version_selects_comprehensive_all_22_translation
     for vid in expected_version_ids:
         assert f'value="{vid}"' in search_sel_html, f"Version {vid} missing from portal-search-version-select"
 
+def test_reverent_scripture_verse_styling_zero_borders_and_unboxed_numbers():
+    """Verify that scripture verses are styled with reverence: no boxed card borders, transparent background, and unboxed small verse numbers."""
+    layout_file = os.path.join(BASE_DIR, 'css', 'layout.css')
+    with open(layout_file, 'r', encoding='utf-8') as f:
+        layout_css = f.read()
+
+    # Ensure .verse-item has no enclosing card borders or drop shadows
+    assert '.verse-item {' in layout_css
+    v_item_idx = layout_css.find('.verse-item {')
+    v_item_end = layout_css.find('}', v_item_idx)
+    v_item_block = layout_css[v_item_idx:v_item_end]
+
+    assert 'background: transparent;' in v_item_block
+    assert 'border: none;' in v_item_block
+    assert 'box-shadow: none;' in v_item_block
+
+    # Ensure .verse-number is unboxed, without badge border or badge background
+    assert '.verse-number {' in layout_css
+    v_num_idx = layout_css.find('.verse-number {')
+    v_num_end = layout_css.find('}', v_num_idx)
+    v_num_block = layout_css[v_num_idx:v_num_end]
+
+    assert 'background: transparent;' in v_num_block
+    assert 'border: none;' in v_num_block
+    assert 'min-width: unset;' in v_num_block
+    assert '0.72rem' in v_num_block
+
+    # Ensure tight reverent text flow
+    assert 'gap: 0.15rem;' in layout_css
+
+
