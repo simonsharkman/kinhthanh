@@ -2,7 +2,7 @@
 
 ## 📌 Tổng Quan Dự Án & Định Danh
 - **Dự án**: Logos MultiVerse (Nền tảng tra cứu, đối chiếu đa bản dịch và trợ lý Thánh Kinh AI).
-- **Trạng thái kiểm thử**: 139/139 Pytest suites PASS (100% Green).
+- **Trạng thái kiểm thử**: 144/144 Pytest suites PASS (100% Green).
 - **Workspace chính**: `E:\kinhthanh`
 - **Mirror workspace**: `C:\Users\Admin\.gemini\antigravity-ide\scratch\logos-bible-multiverse`
 
@@ -122,42 +122,14 @@
   4. Mở khóa toàn diện cỡ chữ di động: dùng `var(--bible-font-size, 1.15rem) !important;` giúp độc giả tự do phóng to chữ (17px - 25px) trên điện thoại mà không bị bó hẹp.
   5. Đạt 136/136 bài test Pytest PASS 100%.
 
-### 16. Tinh Chỉnh Header Menu Trượt Di Động Theo Phản Hồi Hình Ảnh (25/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"bỏ chỗ tôi gạch. cho hình thập tự to hơn chút"* (kèm ảnh `media_1792941935551_10a84408.png`).
-- **Thực hiện**:
-  1. Xóa dòng chữ phụ bị gạch đỏ: `<span>Bản Truyền Thống 1925</span>` trong `.drawer-brand-text`.
-  2. Phóng to hình ảnh Thánh Giá vàng `.drawer-cross-gif` từ 28px lên 44px kèm hiệu ứng tỏa sáng ánh kim (`drop-shadow`). Phóng to `.brand-gif-cross` trên thanh header điện thoại lên 30px.
-  3. Nâng cỡ chữ tiêu đề `<h3>Logos Thánh Kinh</h3>` lên 1.22rem cân đối hoàn hảo với biểu tượng Thánh Giá.
-  4. Đạt 136/136 bài test Pytest PASS 100%.
-
-### 17. Ẩn Biểu Tượng Thánh Giá Trên Thanh Header Di Động (25/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"trên giao diện điện thoại bỏ cái này đi"* (kèm ảnh `media_1792942144709_1c66f784.png` khoanh đỏ biểu tượng Thánh Giá trên header).
-- **Phân tích UX**: Trên màn hình điện thoại hẹp, cụm logo `.header-brand` chứa biểu tượng Thánh Giá nằm kẹp giữa nút Hamburger `☰` và nút chọn bản dịch `BDM (Tiếng Việt) ⌵`, gây chật chội và đè lấn không gian của các nút điều hướng đọc. Biểu tượng Thánh Giá lớn đã hiện diện trang nghiêm ngay bên trong Menu Trượt `☰`.
-- **Thực hiện**: Đặt `.header-brand { display: none !important; }` trên mobile (`max-width: 991px`).
-- **Hiệu quả**: Giải phóng toàn bộ diện tích hàng đầu: nút Hamburger `☰` nằm gọn bên mép trái, dãy nút chọn Bản dịch, chọn Sách/Chương, chế độ Đọc và Màu sắc trải rộng thông thoáng, không còn bị chèn ép.
-- **Kiểm thử**: Đạt 136/136 bài test Pytest PASS 100%.
-
-### 18. Tinh Gọn Thanh Audio Di Động (48px) & Tích Hợp Nút Nhảy Chương (25/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"giao diện chạy âm thanh nhỏ thôi. cho phép nhảy chương thay vì trượt"* (kèm ảnh `media_1792942228659_be44d9a8.png`).
-- **Phân tích UX**: Thanh phát audio trước đó xếp chồng 3 hàng cao > 130px, chiếm gần 1/4 màn hình điện thoại; độc giả phải kéo thanh trượt (seek slider) hoặc cuộn trang để tìm nút chuyển chương.
-- **Thực hiện hoàn thiện**:
-  1. Thu gọn chiều cao cố định xuống chỉ **48px** trên di động, xếp trọn vẹn trong **1 hàng duy nhất**: Tên đoạn đọc (trái) - Cụm nút phát (giữa) - Tốc độ & Đóng (phải).
-  2. Tích hợp nút **Đoạn Trước (`⏮`)** và **Đoạn Tiếp (`⏭`)** ngay trên thanh phát: bấm là lập tức chuyển chương và phát audio đoạn mới, không cần kéo trượt.
-  3. Tự động chuyển và phát đoạn tiếp theo khi nghe hết chương hiện tại (`ended` event).
-  4. Thanh tiến trình thu gọn thành đường chỉ 2.5px siêu mảnh trên đỉnh mép thanh phát, không tốn diện tích hiển thị.
-- **Kiểm thử**: Đạt 136/136 bài test Pytest PASS 100%.
-
-### 19. Khắc Phục Lỗi Hiển Thị Nút "☰ ≡ Tìm" Trên Thanh Menu Phụ Subnav (25/10/2026)
-- **Thắc mắc từ anh Jimmy**: *"cái này là gì ?"* (kèm ảnh chụp cận cảnh nút `☰ ≡ Tim` nền xanh ô-liu `media_1792943357982_8c8cf6ef.png`).
-- **Nguyên nhân**: Trong tệp `index.html` dòng 126, nút mở bộ máy tìm kiếm toàn diện (`#site-subnav-search`) trước đó bị lỗi gõ nhầm thẻ `<i class="fa-solid fa-bars"></i> ≡ Tìm`. Do đó trình duyệt vừa hiển thị icon 3 gạch `fa-bars` (`☰`), vừa hiển thị ký tự 3 gạch `≡` và chữ `Tìm`.
-- **Khắc phục**: Thay thế hoàn toàn bằng nút chuẩn: `<i class="fa-solid fa-magnifying-glass"></i> Tìm Kiếm`, mở trực tiếp hộp thoại tra cứu chuẩn Hội Thánh Tin Lành Việt Nam (HTTLVN Search Hub).
-- **Kiểm thử**: Đạt 136/136 bài test Pytest PASS 100%.
-
-### 20. Loại Bỏ Nút "Màu Cổ Điển" Thừa Thãi Trên Thanh Subnav (25/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"tôi thấy cái này bị thừa"* (kèm ảnh `media_1792943481825_b7596a98.png` chỉ mũi tên đỏ vào nút `🎨 Màu Cổ Điển` ở mép phải thanh subnav).
-- **Phân tích UX**: Trên thanh Header chính đã có sẵn nút đổi giao diện (`#header-theme-toggle-btn`) mở đầy đủ 6 bộ màu (bao gồm cả Cổ Điển Tin Lành). Việc đặt thêm một nút riêng `Màu Cổ Điển` trên thanh subnav gây dư thừa và phân mảnh điều khiển.
-- **Thực hiện**: Xóa bỏ hoàn toàn nút `#site-subnav-classic-theme` khỏi `index.html` và `js/app.js`.
-- **Kiểm thử**: Đạt 136/136 bài test Pytest PASS 100%.
+### 16-20. Tối Ưu UX Header Di Động, Audio 48px, Menu Phụ & Loại Bỏ Thành Phần Thừa (25/10/2026)
+- **Yêu cầu & Phản hồi từ anh Jimmy**:
+  - *Ảnh media_1792941935551_10a84408*: Bỏ dòng chữ phụ 'Bản Truyền Thống 1925', phóng to biểu tượng Thánh Giá vàng lên 44px (drop-shadow ánh kim).
+  - *Ảnh media_1792942144709_1c66f784*: Ẩn cụm logo '.header-brand' trên mobile (< 992px) để nút Hamburger, chọn bản dịch, chọn sách và chế độ đọc trải rộng thông thoáng.
+  - *Ảnh media_1792942228659_be44d9a8*: Thu gọn thanh audio di động xuống cố định 48px, xếp trọn vẹn trong 1 hàng, tích hợp nút nhảy chương '⏮ Đoạn Trước' & '⏭ Đoạn Tiếp', tự động phát khi hết đoạn.
+  - *Ảnh media_1792943357982_8c8cf6ef*: Khắc phục nút '☰ ≡ Tìm' trên subnav bị lỗi trùng lặp thẻ fontawesome thành nút chuẩn '🔍 Tìm Kiếm' mở HTTLVN Search Hub.
+  - *Ảnh media_1792943481825_b7596a98*: Xóa nút thừa '🎨 Màu Cổ Điển' trên subnav vì thanh Header đã tích hợp bộ chọn 6 theme.
+- **Kiểm thử**: Bảo đảm 136/136 test pass trước khi chuyển bước.
 
 ### 21. Tích Hợp Nút Tìm Kiếm Header Di Động & Khắc Phục Nút Tắt Trình Phát Audio (25/10/2026)
 - **Yêu cầu từ anh Jimmy**: *"trên giao diện điện thoại. chỗ trống đó để tìm kiếm. Nút tắt trình chạy chưa hoạt động"* (kèm ảnh `media_1792944585082_512bd390.png`).
@@ -225,3 +197,17 @@
      - Tự động tính toán vị trí đáy của `#main-header` (`rect.bottom + 6px`) trong `toggleDrawer()`.
      - Bỏ `margin-right` trên `#main-header` và `#admin-banner-container` để Header luôn giữ trọn 100% bề ngang, hoàn toàn thoáng đãng và không bị bóp méo.
 - **Kiểm thử**: Thêm `test_drawer_compact_and_lower_position` vào `tests/test_ui_foundation.py`. Toàn bộ **139/139 bài test Pytest PASS 100%**.
+
+### 27. Hệ Thống Quản Trị Tiểu Mục (Subitems CMS) & CSDL Riêng Biệt Cho Từng Mục (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"cho phép admin có thể chỉnh sửa và thêm bớt nội dung cho các mục này. tốt nhất nên có nhưng mục lưu trữ tương ứng cho từng mục này"* (kèm ảnh khoanh đỏ cụm TIỂU MỤC ở sidebar: Câu Gốc Yêu Thích, Đố Kinh Thánh, Lịch Đọc Kinh Thánh, Truyện Tích Thánh Kinh, và Kinh Thánh Đối Đáp).
+- **Kiến trúc lưu trữ 2 phân tầng (Dedicated Two-Tier Storage Persistence)**:
+  1. *Phân tầng Static Tĩnh Tại Chỗ*: Xuất 4 tệp CSDL JSON riêng biệt trong `data/`: `utility-fav-verses.json`, `utility-quizzes.json`, `utility-stories.json`, `utility-responsive.json` phục vụ lưu trữ gốc và đối chiếu phiên bản.
+  2. *Phân tầng Dynamic Tương Tác*: Mở rộng `js/storage.js` với 12 phương thức chuyên biệt (`getUtilityFavVerses`, `saveUtilityFavVerses`, `resetUtilityFavVerses`, `getUtilityQuizzes`, `saveUtilityQuizzes`, `resetUtilityQuizzes`, `getUtilityStories`, `saveUtilityStories`, `resetUtilityStories`, `getUtilityResponsiveReadings`, `saveUtilityResponsiveReadings`, `resetUtilityResponsiveReadings`) lưu trữ trực tiếp vào `localStorage` với tiền tố `logos_pref_utility_*` phản hồi tức thì zero-reload.
+- **Giao diện Quản Trị Viên (Admin CMS Controller)**:
+  - Chỉ khi đăng nhập Admin (`user_role === 'admin'`), hệ thống mới kích hoạt:
+    - Huy hiệu `Quản Trị` tại tiêu đề thẻ TIỂU MỤC và thanh công cụ `#portal-utility-admin-actions` (`+ Thêm mới`, `⟲ Khôi phục gốc`).
+    - Nút `✏ Sửa` và `🗑 Xóa` trực tiếp trên từng thẻ Câu gốc, Truyện tích, Bài đối đáp và Câu đố.
+    - Chế độ Quản Trị Câu Đố (`quizAdminManageMode`): Xem toàn bộ danh sách câu đố, đáp án đúng (xanh lá), căn cứ Kinh Thánh và lời giải thích.
+    - Hộp thoại Soạn Thảo Đa Năng `#admin-utility-editor-modal`: Nhập/chỉnh sửa nội dung, tự động kiểm tra trường bắt buộc, phân loại chủ đề và lưu trữ tức thời.
+    - Lịch Đọc Kinh Thánh (`#portal-item-schedule`): Hiển thị 4 phân đoạn đọc hôm nay kèm nút chỉnh sửa kết nối trực tiếp vào `#admin-devotion-modal`.
+- **Kiểm thử**: Bổ sung `tests/test_portal_utility_cms.py` kiểm định toàn diện 5 nhóm tiêu chuẩn. Toàn bộ **144/144 bài test Pytest PASS 100%**.
