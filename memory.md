@@ -103,26 +103,13 @@
 - Tinh chỉnh giao diện di động: Thánh Giá vàng 44px, Audio 48px gọn gàng kèm phím tắt [✕], nút tìm kiếm chuẩn, ẩn banner rườm rà.
 
 ### 23. Nâng Cấp Hệ Thống Quản Trị Toàn Diện Full Admin CMS v3.0 (26/10/2026)
-- **Yêu cầu & Phân tích**: Chuyển đổi toàn bộ hệ thống sang Full Dynamic CMS khi đăng nhập vai trò `admin`:
-  1. *Quản trị Tĩnh Nguyện*: Nút `⚙ Quản Trị Tĩnh Nguyện` (`#admin-devotion-modal`) cập nhật Câu Gốc trong ngày, 4 kế hoạch Lịch Đọc và bài suy ngẫm *Sống Với Thánh Kinh*.
-  2. *Hiệu đính câu Kinh Thánh*: Nút `✏ Sửa` trên Focus Reader & Parallel Comparison mở `#admin-verse-correction-modal`, lưu vào `storage.saveVerseCorrection()` và hiển thị thẻ `Đã hiệu đính`.
-  3. *Quản trị Thư Viện Media*: Thêm/sửa link YouTube, thời lượng, phân loại mùa vụ (`all`, `christmas`, `easter`, `worship`, `harvest`, `academic`) qua `#admin-media-modal`.
-- **Kiểm thử**: Viết mới `tests/test_admin_full_cms.py`, đạt 136/136 bài test Pytest PASS 100%.
+- Full Dynamic CMS cho vai trò admin: Quản trị Tĩnh Nguyện (#admin-devotion-modal), Hiệu đính câu Kinh Thánh (#admin-verse-correction-modal), Quản trị Thư Viện Media YouTube (#admin-media-modal).
 
 ### 24. Khắc Phục 10.021 Lỗi Dấu Tiếng Việt & Pipeline Tự Động Chuẩn Hóa Lời Chúa (26/10/2026)
-- **Yêu cầu & Nguyên nhân**: Lời Chúa bị dấu sắc/huyền rời (`biê´ t`, `nhắ´ c`, `đế´ n`, `vố´ n`, `xuố´ ng`, `bằ` ng`, `Thầ` y`) do OCR/bộ gõ cũ, và tàn dư gõ VNI-DOS cổ `Aáy` thay cho `Ấy`.
-- **Khắc phục 2 tầng**:
-  1. *Tầng Dữ Liệu*: Quét và sửa 133 file JSON trong `data/`, xóa sạch 10.021 vị trí lỗi dấu, đưa về chuẩn Unicode NFC.
-  2. *Tầng Runtime Auto-Healing (`BibleEngine.cleanScriptureText`)*: Tự động hàn gắn nguyên âm/phụ âm bị tách và xóa dấu rời rải rác trên Focus Reader và Parallel Comparison.
-- **Kiểm thử**: Viết mới `tests/test_orthography_immunity.py`, đạt 136/136 bài test Pytest PASS 100%.
+- Quét và sửa 133 file JSON trong data/ (10.021 vị trí lỗi dấu rời `biê´ t`, `nhắ´ c`, `đế´ n`), đưa về chuẩn Unicode NFC và tích hợp auto-healing vào `BibleEngine.cleanScriptureText`.
 
-### 25. Xóa Bỏ Triệt Để 123.887 Ấn Chứng Tên Bản Dịch Trong Dấu Ngoặc Vuông (`[BTT 1925]`, `[KJV 1611]`, v.v.) (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"xoá bỏ các ấn chứng bản kinh thánh đầu câu thế này đi giúp tôi"* (ảnh chụp gạch chân đỏ tiền tố `[BTT 1925]` ở đầu câu).
-- **Phân tích UX**: Header thẻ đã hiển thị rõ `BTT • Bản Truyền Thống 1925`, việc lặp lại `[BTT 1925]`, `[KJV 1611]`, `[BDM 2002]` đầu câu gây thừa thãi và rối mắt khi đọc.
-- **Thực hiện 2 tầng**:
-  1. **Tầng Dữ Liệu Gốc**: Quét và lọc sạch toàn bộ **123.887 vị trí** tiền tố tên bản dịch trên 67 tệp JSON (66 sách `data/bibles/*.json` và `data/default-bible-passages.json`). Số ấn chứng còn lại trong CSDL: **0**.
-  2. **Tầng Runtime**: Tích hợp regex bóc tách vào `cleanScriptureText()`, `getParallelVerses()` và toàn bộ render thẻ đối chiếu / cửa sổ đọc độc lập trong `app.js`.
-- **Kiểm thử**: Toàn bộ **138/138 bài test Pytest PASS 100%**.
+### 25. Xóa Bỏ Triệt Để 123.887 Ấn Chứng Tên Bản Dịch Trong Dấu Ngoặc Vuông (26/10/2026)
+- Lọc sạch 123.887 tiền tố tên bản dịch `[BTT 1925]`, `[KJV 1611]` khỏi 67 tệp JSON và regex bóc tách trong `cleanScriptureText`.
 
 ### 26. Thu Gọn Bảng Đối Chiếu (Inspector Drawer) & Hạ Thấp Vị Trí Tránh Che Khuất Header (26/10/2026)
 - **Yêu cầu từ anh Jimmy**: *"cho cái này nhỏ lại và hiển thị thấp xuống, không che các mục trang chính"* (ảnh chụp kèm đường gạch đỏ và mũi tên chỉ xuống dưới thanh Header điều hướng chính).
@@ -213,3 +200,12 @@
      - Tích hợp phát hiện địa chỉ trực tiếp trong `searchHTTLVN()`: tự động nạp câu chính xác qua `getVersesByRef()` với huy hiệu `ĐỊA CHỈ KINH THÁNH`.
      - Đồng bộ `#omni-search-input` và modal `#httlvn-search-modal`: nhấn Enter dẫn hướng thẳng đến phân đoạn (`navigateToPassage`).
 - **Kiểm thử & Đồng bộ**: Bổ sung test cases vào `tests/test_orthography_immunity.py` và `tests/test_httlvn_and_copilot.py`. Toàn bộ **149/149 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
+
+### 33. Tái Cấu Trúc Bố Cục Thẻ Nghiệp Vụ Khung Đối Chiếu Lưới 2x2 Triệt Tiêu Chèn Lấn Chữ (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"bị đè lên nhau hết rồi. Mời bạn xử lý"* (kèm ảnh khoanh đỏ 4 tab `So Sánh Bản Dịch`, `Câu Tham Chiếu`, `Ẩn Dụ & Biểu Tượng`, `Bối Cảnh & Thể Loại` đè chữ lên nhau).
+- **Nguyên nhân gốc rễ**: CSS trước đây đặt `flex: 1 1 calc(25% - 5px)` và `white-space: nowrap` nhưng độ rộng drawer chỉ 310px-385px. Các nhãn chữ dài 14-18 ký tự tràn ra ngoài biên và đè lên nhau trên cùng 1 hàng.
+- **Thực hiện**:
+  1. *Chuyển sang Lưới 2x2 Cân Đối*: Áp dụng `flex: 1 1 calc(50% - 6px); min-width: 0; max-width: calc(50% - 3px);` kết hợp `overflow: hidden; text-overflow: ellipsis;` tự động chia 2 hàng x 2 nút chuẩn xác.
+  2. *Mở rộng vùng đọc*: Tăng `--drawer-width` lên `clamp(330px, 28vw, 420px)` cho trải nghiệm đối chiếu thoáng đãng.
+  3. *Bổ sung Tooltip*: Thêm thuộc tính `title` vào từng nút tab trong `index.html`.
+- **Kiểm thử & Đồng bộ**: Bổ sung `test_drawer_tabs_2x2_grid_immunity_against_overlap` vào `tests/test_ui_foundation.py`. Toàn bộ **150/150 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.

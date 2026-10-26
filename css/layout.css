@@ -697,7 +697,7 @@ body {
 
 /* 4. Drawer Inspector Slide-Over & Split-Screen Workspace */
 :root {
-  --drawer-width: clamp(310px, 26vw, 385px);
+  --drawer-width: clamp(330px, 28vw, 420px);
   --drawer-top-offset: 68px;
 }
 
@@ -783,37 +783,47 @@ body {
 .drawer-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  padding: 6px 8px;
+  gap: 6px;
+  padding: 8px 10px;
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border-subtle);
   overflow-x: hidden; /* Tuyệt đối không trượt ngang */
+  box-sizing: border-box;
 }
 
 .drawer-tab-btn {
-  flex: 1 1 calc(25% - 5px);
-  min-width: 80px;
+  flex: 1 1 calc(50% - 6px);
+  min-width: 0;
+  max-width: calc(50% - 3px);
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 0.38rem 0.45rem;
-  background: rgba(255, 255, 255, 0.04);
+  gap: 6px;
+  padding: 0.46rem 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-subtle);
-  border-radius: 5px;
+  border-radius: 6px;
   color: var(--text-secondary);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: all var(--transition-fast);
 }
 
+.drawer-tab-btn i {
+  flex-shrink: 0;
+  font-size: 0.82rem;
+}
+
 .drawer-tab-btn:hover {
-  background: rgba(212, 175, 55, 0.12);
+  background: rgba(212, 175, 55, 0.14);
   color: var(--accent-gold);
-  border-color: rgba(212, 175, 55, 0.35);
+  border-color: rgba(212, 175, 55, 0.4);
 }
 
 .drawer-tab-btn.active {

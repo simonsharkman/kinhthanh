@@ -66,3 +66,23 @@ def test_drawer_compact_and_lower_position():
     assert "body.drawer-open #main-header" in layout_css
     assert "margin-right: 0 !important" in layout_css
 
+def test_drawer_tabs_2x2_grid_immunity_against_overlap():
+    """Verify drawer tabs are arranged in a clean 2x2 grid with zero text overlap and zero horizontal scroll."""
+    with open("css/layout.css", "r", encoding="utf-8") as f:
+        layout_css = f.read()
+
+    assert ".drawer-tabs" in layout_css
+    assert "flex-wrap: wrap" in layout_css
+    assert "overflow-x: hidden" in layout_css
+    assert "flex: 1 1 calc(50% - 6px)" in layout_css
+    assert "text-overflow: ellipsis" in layout_css
+
+    with open("index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert 'data-tab="parallel"' in html
+    assert 'data-tab="crossref"' in html
+    assert 'data-tab="metaphors"' in html
+    assert 'data-tab="context"' in html
+
+
