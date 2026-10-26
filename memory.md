@@ -188,3 +188,9 @@ gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
   2. Chỉ thực hiện cuộn nhẹ nhàng (`scrollIntoView({ behavior: 'smooth', block: 'nearest' })`) khi câu thực sự bị khuất hẳn ngoài màn hình (ví dụ chuyển câu qua điều hướng bên ngoài).
   3. Cân bằng hình học CSS tuyệt đối: Đặt `border-left: 4px` cố định và `padding: 1px 5px` đồng bộ trên `.verse-number` trước và sau khi kích hoạt, triệt tiêu 100% hiện tượng xê dịch pixel do thay đổi kích thước hộp.
   4. Bổ sung test `test_zero_verse_jump_on_click_contract` vào bộ test. Đạt 156/156 tests pass 100%.
+
+- **Milestone 39 (2026-10-26)**: Production Vercel & GitHub Deployment Complete:
+  - Repository live at https://github.com/simonsharkman/kinhthanh (branch main).
+  - Production website deployed successfully on Vercel Global Edge CDN at https://kinhthanh-sigma.vercel.app/.
+  - Verified HTTP 200 OK across root index.html, data/books-metadata.json, and dynamic bible scripture files (data/bibles/JHN.json).
+  - Fully responsive on mobile & desktop, zero-jump stability, reverent scripture layout, and 156/156 Pytest suite passing 100%.
