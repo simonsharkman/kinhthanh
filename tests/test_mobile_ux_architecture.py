@@ -206,3 +206,20 @@ def test_mobile_active_verse_highlight_immunity_and_standout():
     # highlightActiveVerse phải gắn cả verse-highlight-active và verse-selected
     assert "el.classList.toggle('verse-highlight-active', isMatch);" in app_js
     assert "el.classList.toggle('verse-selected', isMatch);" in app_js
+
+
+def test_zero_verse_jump_on_click_contract():
+    """Bảo đảm khi nhấp vào câu Kinh Thánh thì màn hình không bị tự động nhảy câu gây khó chịu."""
+    with open("js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    # Nghiêm cấm ép cuộn vào giữa (centerTarget) gây nhảy giật màn hình
+    assert "centerTarget" not in app_js
+    assert "appBody.scrollTo({ top: Math.max(0, centerTarget)" not in app_js
+
+    # Phải có logic kiểm tra isVisible trước khi thực hiện bất kỳ hành động cuộn nào
+    assert "const isVisible = (verseRect.top >= bodyRect.top" in app_js
+    assert "if (!isVisible) {" in app_js
+
+    # Chỉ cuộn nhẹ nhàng block: 'nearest' nếu câu thực sự nằm ngoài khung nhìn
+    assert "block: 'nearest'" in app_js

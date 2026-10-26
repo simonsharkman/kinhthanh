@@ -158,27 +158,35 @@ class LogosApp {
         this.toggleDrawer(data.isDrawerOpen);
         setTimeout(() => {
           const activeEl = document.querySelector(`.verse-item[data-verse="${data.verse}"]`);
-          if (activeEl) {
-            if (window.innerWidth <= 991) {
-              // Trên điện thoại: Căn chỉnh câu đang chọn vào chính giữa nửa trên (#app-body) khi chia đôi màn hình 50/50
-              const appBody = document.getElementById('app-body');
-              if (appBody && state.isDrawerOpen) {
-                const bodyRect = appBody.getBoundingClientRect();
-                const verseRect = activeEl.getBoundingClientRect();
-                const offsetInside = (verseRect.top - bodyRect.top) + appBody.scrollTop;
-                const centerTarget = offsetInside - (appBody.clientHeight / 2) + (verseRect.height / 2);
-                appBody.scrollTo({ top: Math.max(0, centerTarget), behavior: 'smooth' });
-              } else {
-                const rect = activeEl.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const targetY = scrollTop + rect.top - 110;
-                window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+          if (!activeEl) return;
+
+          if (window.innerWidth <= 991) {
+            const appBody = document.getElementById('app-body');
+            if (appBody && state.isDrawerOpen) {
+              const bodyRect = appBody.getBoundingClientRect();
+              const verseRect = activeEl.getBoundingClientRect();
+              // Kiểm tra xem câu đã nằm trong tầm nhìn của nửa trên (#app-body) chưa
+              // Nếu đã nằm trong khung nhìn -> TUYỆT ĐỐI GIỮ NGUYÊN VỊ TRÍ, KHÔNG TỰ CUỘN NHẢY CÂU
+              const isVisible = (verseRect.top >= bodyRect.top + 6) && (verseRect.bottom <= bodyRect.bottom - 6);
+              if (!isVisible) {
+                activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
               }
             } else {
+              const rect = activeEl.getBoundingClientRect();
+              const isVisibleWindow = (rect.top >= 54) && (rect.bottom <= window.innerHeight - 54);
+              if (!isVisibleWindow) {
+                activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
+            }
+          } else {
+            // Trên máy tính: Chỉ cuộn nếu câu bị khuất ngoài tầm nhìn
+            const rect = activeEl.getBoundingClientRect();
+            const isVisibleDesk = (rect.top >= 64) && (rect.bottom <= window.innerHeight - 64);
+            if (!isVisibleDesk) {
               activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
           }
-        }, 120);
+        }, 50);
         break;
       case 'TSK_LANGUAGE_CHANGED':
         crossRefEngine.activeLangMode = data.tskLanguage;
