@@ -69,19 +69,23 @@ export class LogosStorage {
   }
 
   getAdminBanner() {
-    return this.getPreference('admin_banner', {
-      visible: true,
-      type: 'verse', // 'verse', 'announcement', 'ad'
-      badge: 'CÂU GỐC TUẦN',
-      text: '"Ban đầu có Ngôi Lời, Ngôi Lời ở cùng Đức Chúa Trời, và Ngôi Lời là Đức Chúa Trời." (Giăng 1:1)',
-      btnText: 'Khám Phá Đối Chiếu',
-      theme: 'theme-gold',
-      targetRef: 'JHN.1.1',
-      targetUrl: '#bible',
-      imageUrl: '',
-      marquee: false,
-      useAdSense: false
-    });
+    const banner = this.getPreference('admin_banner', null);
+    if (!banner || (banner.text && banner.text.includes('Ban đầu có Ngôi Lời'))) {
+      return {
+        visible: true,
+        type: 'announcement', // 'verse', 'announcement', 'ad'
+        badge: 'THÔNG BÁO',
+        text: '🔔 Chương trình Đọc Kinh Thánh Trọn Năm 2026 & Bồi Linh Hội Thánh đang diễn ra. Chúc quý con cái Chúa được tươi mới trong Lời Ngài!',
+        btnText: 'Vào Cổng Tĩnh Nguyện',
+        theme: 'theme-crimson',
+        targetRef: '#portal',
+        targetUrl: '#portal',
+        imageUrl: '',
+        marquee: true,
+        useAdSense: false
+      };
+    }
+    return banner;
   }
 
   // Master Blogs Storage
