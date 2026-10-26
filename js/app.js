@@ -4788,14 +4788,16 @@ class LogosApp {
 
     let html = '';
     displayItems.forEach((item, i) => {
+      const isCoord = item.is_coordinate_match;
       html += `
-        <div class="httlvn-result-item" data-book="${item.book_id}" data-ch="${item.chapter}" data-v="${item.verse}">
+        <div class="httlvn-result-item ${isCoord ? 'httlvn-coord-highlight' : ''}" data-book="${item.book_id}" data-ch="${item.chapter}" data-v="${item.verse}" style="${isCoord ? 'border: 1px solid var(--accent-gold); background: rgba(212, 175, 55, 0.08);' : ''}">
           <div class="httlvn-result-header">
             <span class="httlvn-result-ref">
-              <i class="fa-solid fa-scroll" style="color: var(--accent-gold); font-size: 0.85rem;"></i>
+              <i class="fa-solid ${isCoord ? 'fa-location-dot' : 'fa-scroll'}" style="color: var(--accent-gold); font-size: 0.85rem;"></i>
               ${item.ref}
+              ${isCoord ? '<span class="badge-coord-tag" style="background: var(--accent-gold); color: #000; font-size: 0.68rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px;">ĐỊA CHỈ KINH THÁNH</span>' : ''}
             </span>
-            <span class="httlvn-result-index">#${item.index || i + 1}</span>
+            <span class="httlvn-result-index">${isCoord ? '<i class="fa-solid fa-arrow-right"></i> Xem ngay' : `#${item.index || i + 1}`}</span>
           </div>
           <div class="httlvn-result-snippet">
             ${item.snippet}
@@ -5711,16 +5713,7 @@ class LogosApp {
     const searchInput = document.getElementById('omni-search-input');
     const searchDropdown = document.getElementById('search-dropdown');
     if (searchInput && searchDropdown) {
-      searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          const q = searchInput.value.trim();
-          if (q) {
-            searchDropdown.classList.add('hidden');
-            this.openHTTLVNSearchModal(q);
-          }
-        }
-      });
+
 
       const renderDefaultSuggestions = () => {
         let html = `
@@ -5774,6 +5767,14 @@ class LogosApp {
           e.preventDefault();
           const q = searchInput.value.trim();
           if (q) {
+            const parsed = bibleEngine.parseReference(q);
+            if (parsed && parsed.book) {
+              searchDropdown.classList.add('hidden');
+              this.navigateToPassage(parsed.book.id, parsed.chapter, parsed.verseStart);
+              searchInput.value = '';
+              searchInput.blur();
+              return;
+            }
             const results = bibleEngine.searchScripture(q, hermeneuticsEngine.metaphors);
             const coordItem = results.find(r => r.type === 'coordinate');
             if (coordItem) {

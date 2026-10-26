@@ -91,30 +91,16 @@
 - Bộ test suite `tests/test_parallel_sync.py`, `tests/test_kimchi_ai_harness.py` cùng 76 test cases tự động kiểm tra nghiêm ngặt:
 - Đã hoàn tất, kiểm thử PASS 100%.
 ### 1-4. Kiến Trúc Lõi Kimchi Multi-Model & Telemetry Engine
-- **Đa Nhà Cung Cấp**: Tích hợp 5 provider (OpenAI, Gemini, Anthropic, DeepSeek, Groq) với fallback tự động và quản lý API keys mã hóa AES-GCM trong localStorage.
-- **Bộ Tứ Chuyên Gia**: Nhà Chú Giải Thánh Kinh (Biblical Scholar), Người Hướng Dẫn Tâm Linh (Spiritual Shepherd), Nhà Phân Tích Cổ Ngữ (Linguistic Analyst), Bác Sĩ Tâm Hồn (Soul Counselor).
-- **Nguyên Tắc Thần Học**: Thần cảm tuyệt đối, kinh điển đóng 66 sách, lấy Kinh Thánh giải thích Kinh Thánh, lấy Chúa Cứu Thế làm trung tâm.
-- **Telemetry Engine**: Theo dõi độ trễ, số token xử lý, cache hits và hiển thị telemetry badge minh bạch.
+- Tích hợp 5 AI Providers (OpenAI, Gemini, Anthropic, DeepSeek, Groq), Bộ Tứ Chuyên Gia Thần Học, và Telemetry Engine theo dõi độ trễ/tokens.
 
 ### 5-11. Tối Ưu Hóa Nền Tảng Kimchi AI, Header, Interlinear & Cổng Tĩnh Nguyện (17-25/10/2026)
-- Chuẩn hóa xác thực Admin 2 trường (`admin` / `logos777`) bảo đảm zero-leak security.
-- Tối ưu giao diện đọc di động toàn màn hình, loại bỏ tooltip hover cản trở tầm nhìn, tích hợp deep links tra cứu nguyên bản Hy Lạp/Hê-bơ-rơ Scripture4All & BibleHub.
-- Đặt Cổng Tĩnh Nguyện & Dưỡng Linh Cổ Điển làm trang chủ mặc định của hệ thống.
+- Chuẩn hóa xác thực Admin logos777, tối ưu đọc di động toàn màn hình, deep links Scripture4All/BibleHub, đặt Cổng Tĩnh Nguyện làm trang chủ mặc định.
+
 ### 12-15. Audio Studio MP3, Menu Slide-Out, Zero-Berea & Typography HTTLVN (25/10/2026)
-- Tích hợp luồng phát Audio MP3 phòng thu 66 sách, xóa bỏ SpeechSynthesis robot vô cảm.
-- Tái cấu trúc Menu trượt Slide-out Drawer, đưa nút Hamburger lên Header, lưới thao tác nhanh.
-- Loại bỏ triệt để danh xưng Berea / Thần học Berea khỏi toàn bộ hệ thống (Zero-Berea Mandate).
-- Tối ưu Typography chuẩn HTTLVN: Serif Noto Serif/Merriweather cho Lời Chúa, Be Vietnam Pro cho UI, mở khóa cỡ chữ linh hoạt trên di động.
-- Kiểm thử: Đạt 136/136 bài test Pytest PASS 100%.
+- Audio MP3 66 sách, Slide-out Drawer Menu, loại bỏ danh xưng Berea (Zero-Berea Mandate), chuẩn hóa Typography HTTLVN.
 
 ### 16-22. Tối Ưu UX Header Di Động, Audio 48px, Tìm Kiếm & Thanh Tiêu Đề (25/10/2026)
-- **Chuỗi Tinh Chỉnh Giao Diện Di Động Theo Phản Hồi Hình Ảnh Của Anh Jimmy**:
-  1. *Header Menu Trượt*: Bỏ dòng chữ phụ 'Bản Truyền Thống 1925', phóng to Thánh Giá vàng 44px (drop-shadow ánh kim).
-  2. *Header Chính Di Động*: Ẩn `.header-brand` để nhường chỗ cho nút Hamburger, dropdown chọn sách/bản dịch và nút Tìm Kiếm Nhanh (`#mobile-header-search-btn`).
-  3. *Trình Phát Audio*: Thu gọn chiều cao xuống 48px xếp trên 1 hàng, tích hợp nút nhảy chương '⏮' & '⏭', khắc phục triệt để nút tắt `[✕]` (`hideAudioPlayer` + `display: none !important; z-index: 50`).
-  4. *Thanh Menu Phụ Subnav*: Sửa nút '☰ ≡ Tìm' thành nút chuẩn '🔍 Tìm Kiếm', loại bỏ nút thừa '🎨 Màu Cổ Điển'.
-  5. *Cổng Tĩnh Nguyện*: Ẩn banner xanh lá `.portal-brand-bar` trên di động để đẩy lưới 8 thẻ dashboard hiện đại lên vị trí tâm điểm.
-- **Kiểm thử**: Đạt 136/136 bài test Pytest PASS 100%.
+- Tinh chỉnh giao diện di động: Thánh Giá vàng 44px, Audio 48px gọn gàng kèm phím tắt [✕], nút tìm kiếm chuẩn, ẩn banner rườm rà.
 
 ### 23. Nâng Cấp Hệ Thống Quản Trị Toàn Diện Full Admin CMS v3.0 (26/10/2026)
 - **Yêu cầu & Phân tích**: Chuyển đổi toàn bộ hệ thống sang Full Dynamic CMS khi đăng nhập vai trò `admin`:
@@ -211,3 +197,19 @@
   3. *Tập trung tối đa vào nội dung*: Giúp thanh Header trở nên thanh thoát, nhường 100% sự chú ý thị giác của người đọc cho nội dung Kinh Thánh và suy ngẫm.
 - **Kiểm thử**: Bổ sung `test_text_only_compact_header_utility_buttons` vào `tests/test_header_improvements.py`. Toàn bộ **147/147 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
 
+### 32. Chữa Lành Lỗi "Áp-ra-ham" (`Aùp` ➔ `Áp`), "Kỳ Hạn" (`k"` ➔ `kỳ`) & Kích Hoạt Tìm Kiếm Theo Địa Chỉ Kinh Thánh (26/10/2026)
+- **Yêu cầu từ anh Jimmy**:
+  1. *"lỗi từ Ap-ra-ham."* (kèm ảnh chụp `Công vụ các Sứ đồ 3:25-26, 13:26` bị hiển thị `Aùp-ra-ham`, và `Ga-la-ti 4:4` hiển thị `k" hạn`).
+  2. *"thứ 2 là tìm kiếm theo địa chỉ kinh thánh chưa hoạt động"* (kèm ảnh chụp modal `#httlvn-search-modal` tìm `Công vụ các Sứ đồ 13:26` trả về 0 kết quả).
+- **Phân tích Nguyên nhân Gốc rễ**:
+  1. *Lỗi `Aùp-ra-ham` & `k" hạn`*: Bộ gõ VNI-DOS/VNI-Windows cổ mã hóa `Á` thành byte `0xF9`, khi convert sang CP1252/Unicode bị biến thành `ù` (`Aùp-ra-ham`, `Aùch`, `Aùo`). Đồng thời ký tự `"` trong OCR cũ bị nhầm với dấu `ỳ` tạo ra `k"` thay vì `kỳ` (`k" hạn`, `K" cuối cùng`).
+  2. *Lỗi Tìm Kiếm Địa Chỉ*: `#httlvn-search-modal` chỉ là full-text search từ khóa nên địa chỉ trả về 0 kết quả. Thêm vào đó regex `parseReference` ban đầu bị `\bv\b` bắt nhầm chữ `v` trong `Công vụ`.
+- **Thực hiện Triệt để 2 Tầng**:
+  1. **Khắc phục CSDL & Runtime**:
+     - Quét và chữa lành 123 tệp JSON trong `data/`: thay thế 9.310 vị trí `Aù` ➔ `Á` (7.274 vị trí `Aùp` ➔ `Áp`) và 2.782 vị trí `[kK]\" ` ➔ `kỳ / Kỳ ` (chữa lành `Áp-ra-ham` và `kỳ hạn`).
+     - Cập nhật `cleanScriptureText(text)` trong `js/bible-engine.js` để tự động bảo vệ và chuẩn hóa runtime.
+  2. **Kích Hoạt Tìm Kiếm Địa Chỉ Kinh Thánh Trực Tiếp (Direct Coordinate Search)**:
+     - Nâng cấp `parseReference()` trong `js/bible-engine.js`: dùng lookahead an toàn `(?=\d+)` chuẩn hóa `đoạn`, `chương`, `câu`, `v`, không bao giờ bắt nhầm `Công vụ` hay `Châm ngôn`.
+     - Tích hợp phát hiện địa chỉ trực tiếp trong `searchHTTLVN()`: tự động nạp câu chính xác qua `getVersesByRef()` với huy hiệu `ĐỊA CHỈ KINH THÁNH`.
+     - Đồng bộ `#omni-search-input` và modal `#httlvn-search-modal`: nhấn Enter dẫn hướng thẳng đến phân đoạn (`navigateToPassage`).
+- **Kiểm thử & Đồng bộ**: Bổ sung test cases vào `tests/test_orthography_immunity.py` và `tests/test_httlvn_and_copilot.py`. Toàn bộ **149/149 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.

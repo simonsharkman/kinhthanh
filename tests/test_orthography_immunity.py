@@ -95,6 +95,18 @@ def test_clean_scripture_text_node_runtime_immunity():
         process.exit(1);
       }
 
+      // Check healing of Aùp-ra-ham and k" hạn
+      const auphahamSample = 'Hỡi anh em, là con cháu của dòng Aùp-ra-ham, và kẻ kính sợ Đức Chúa Trời giữa anh em... Nhưng khi k\\" hạn đã được trọn';
+      const cleanedAup = engine.cleanScriptureText(auphahamSample);
+      if (cleanedAup.includes('Aùp') || !cleanedAup.includes('Áp-ra-ham')) {
+        console.error('FAILED Aùp healing:', cleanedAup);
+        process.exit(1);
+      }
+      if (cleanedAup.includes('k\\"') || !cleanedAup.includes('kỳ hạn')) {
+        console.error('FAILED kỳ hạn healing:', cleanedAup);
+        process.exit(1);
+      }
+
       console.log('PASS');
     }).catch(err => {
       // In case ESM import of browser code throws in Node, fallback to pure method test
@@ -133,4 +145,33 @@ def test_app_js_clean_drawer_and_popout():
 
     assert "bibleEngine.cleanScriptureText(item.text)" in app_js
     assert "bibleEngine.cleanScriptureText(vText)" in app_js
+
+def test_database_zero_aup_and_ky_han_artifacts():
+    """Ensure all JSON files in data/bibles have zero legacy Aùp-ra-ham and zero k\\" hạn."""
+    bibles_dir = os.path.join("data", "bibles")
+    assert os.path.exists(bibles_dir)
+
+    for f in os.listdir(bibles_dir):
+        if f.endswith(".json"):
+            path = os.path.join(bibles_dir, f)
+            with open(path, "r", encoding="utf-8") as jf:
+                content = jf.read()
+                assert "Aùp-ra-ham" not in content, f"Found Aùp-ra-ham in {f}"
+                assert "Aùp" not in content, f"Found Aùp in {f}"
+                assert len(re.findall(r'\b[Kk]\\"\s+[a-zà-ỹ]+', content)) == 0, f"Found corrupted k\\\" in {f}"
+
+    # Verify ACT 3:25 and 13:26 have Áp-ra-ham
+    with open(os.path.join(bibles_dir, "ACT.json"), "r", encoding="utf-8") as f:
+        act = json.load(f)
+    v_3_25 = next(v for v in act["chapters"]["3"] if v["verse_num"] == 25)
+    v_13_26 = next(v for v in act["chapters"]["13"] if v["verse_num"] == 26)
+    assert "Áp-ra-ham" in v_3_25["translations"]["BTT"]
+    assert "Áp-ra-ham" in v_13_26["translations"]["BTT"]
+
+    # Verify GAL 4:4 has kỳ hạn
+    with open(os.path.join(bibles_dir, "GAL.json"), "r", encoding="utf-8") as f:
+        gal = json.load(f)
+    v_4_4 = next(v for v in gal["chapters"]["4"] if v["verse_num"] == 4)
+    assert "kỳ hạn" in v_4_4["translations"]["BTT"]
+
 

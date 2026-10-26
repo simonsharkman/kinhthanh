@@ -44,6 +44,14 @@ export class BibleEngine {
 
   async loadBooks() {
     try {
+      if (typeof window === 'undefined' && typeof process !== 'undefined') {
+        try {
+          const fs = await import('fs');
+          const data = fs.readFileSync('data/books-metadata.json', 'utf8');
+          this.books = JSON.parse(data);
+          return this.books;
+        } catch (err) {}
+      }
       const res = await fetch('data/books-metadata.json');
       this.books = await res.json();
       return this.books;
@@ -67,8 +75,10 @@ export class BibleEngine {
     // 0. Remove translation version prefix tags: [BTT 1925], [KJV 1611], [BDM 2002], [ESV], [BTT], etc.
     t = t.replace(/^\s*\[(?:BTT|BDM|KJV|ESV|BTHD|RVV11|KTHD|NVB|VI1934|VIE|CGKPV|BPT|BD2011|INTERLINEAR|[A-Za-z0-9_\-]{2,10})(?:\s+\d{4})?\]\s*/g, '');
 
-    // 1. Old VNI/VPS artifact Aáy / aáy
+    // 1. Old VNI/VPS artifact Aáy / aáy, Aù / aù, and k" -> kỳ
     t = t.replace(/\bAáy\b/g, 'Ấy').replace(/\baáy\b/g, 'ấy');
+    t = t.replace(/\bAù/g, 'Á').replace(/\baù/g, 'á');
+    t = t.replace(/(^|[\s\(\[\{])([kK])\"([,\.\s:;!\?\)\]\—”]|$)/g, (m, p1, p2, p3) => `${p1}${p2 === 'K' ? 'Kỳ' : 'kỳ'}${p3}`);
 
     // 2. Diphthongs with detached acute/grave: iê´ -> iế, iê` -> iề, uô´ -> uố, uô` -> uồ
     t = t.replace(/([bBcCdDđĐgGhHkKlLmMnNpPqrRsStTvVxX]?)iê[\u00b4\u02ca\'\u2019]\s*(ng|nh|ch|[cmnpt])(?![a-zA-Z\u00C0-\u1EF9])/gi, '$1iế$2');
@@ -120,10 +130,15 @@ export class BibleEngine {
     });
   }
 
-  // Parse Scripture Reference String (e.g., "Ê-sai 53:7", "Xuất Ê-díp-tô Ký 12:1-13", "Giăng 1:29")
+  // Parse Scripture Reference String (e.g., "Ê-sai 53:7", "Công vụ các Sứ đồ 13:26", "Giăng 1:29")
   parseReference(refString) {
     if (!refString || typeof refString !== 'string') return null;
-    const clean = refString.replace(/^[#\[(]+|[#\])]+$/g, '').trim();
+    let clean = refString.replace(/^[#\[(]+|[#\])]+$/g, '').trim();
+    // Normalize words like "đoạn", "chương", "câu" with lookahead to digits
+    clean = clean.replace(/\s*(?:đoạn|chương|ch\.?)\s*(?=\d+)/gi, ' ');
+    clean = clean.replace(/\s*(?:câu|verse|v\.?)\s*(?=\d+)/gi, ':');
+    clean = clean.replace(/\s+/g, ' ').trim();
+
     const match = clean.match(/^(.*?)\s+(\d+)(?::(\d+)(?:-(\d+))?)?$/);
     if (!match) return null;
 
@@ -132,6 +147,15 @@ export class BibleEngine {
     const verseStart = match[3] ? parseInt(match[3], 10) : 1;
     const verseEnd = match[4] ? parseInt(match[4], 10) : (match[3] ? parseInt(match[3], 10) : null);
 
+    const normalize = (str) => (str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[-_\sđ]+/g, '')
+      .trim();
+
+    const bPartNorm = normalize(match[1]);
+
     // Find book by comparing normalized names
     const book = this.books.find(b => {
       const nVi = (b.name_vi || '').toLowerCase().replace(/[-_\s]+/g, '');
@@ -139,12 +163,18 @@ export class BibleEngine {
       const nEn = (b.name_en || '').toLowerCase().replace(/[-_\s]+/g, '');
       const id = (b.id || '').toLowerCase();
       const slug = (b.httlvn_slug || '').toLowerCase();
-      return nVi === bookPart || nHtt === bookPart || nEn === bookPart || id === bookPart || slug === bookPart || nVi.includes(bookPart) || bookPart.includes(nVi);
+      const nViNorm = normalize(b.name_vi);
+
+      return nVi === bookPart || nHtt === bookPart || nEn === bookPart || id === bookPart || slug === bookPart ||
+             nViNorm === bPartNorm || nViNorm.startsWith(bPartNorm) || bPartNorm.startsWith(nViNorm) ||
+             nVi.startsWith(bookPart) || bookPart.startsWith(nVi);
     });
+
+    if (!book) return null;
 
     return {
       rawRef: refString,
-      book: book || { id: 'GEN', name_vi: match[1], genre: 'torah' },
+      book: book,
       chapter: chapter,
       verseStart: verseStart,
       verseEnd: verseEnd
@@ -1182,6 +1212,31 @@ export class BibleEngine {
     const cleanQ = (query || '').trim();
     if (!cleanQ) return { total: 0, time_ms: 0, items: [] };
 
+    // 0. Detect direct Scripture Coordinates (e.g. "Công vụ các Sứ đồ 13:26", "Giăng 3:16", "Thi Thiên 23")
+    let directCoordItem = null;
+    const parsedCoord = this.parseReference(cleanQ);
+    if (parsedCoord && parsedCoord.book) {
+      try {
+        const vData = await this.getVersesByRef(cleanQ);
+        if (vData && vData.verses && vData.verses.length > 0) {
+          const vText = vData.verses.map(v => `<b>[${v.verse_num}]</b> ${this.cleanScriptureText(v.text)}`).join(' ');
+          directCoordItem = {
+            index: 1,
+            ref: `${parsedCoord.book.name_vi} ${parsedCoord.chapter}:${parsedCoord.verseStart}${parsedCoord.verseEnd && parsedCoord.verseEnd !== parsedCoord.verseStart ? `-${parsedCoord.verseEnd}` : ''}`,
+            book_id: parsedCoord.book.id,
+            book_name: parsedCoord.book.name_vi,
+            chapter: parsedCoord.chapter,
+            verse: parsedCoord.verseStart,
+            snippet: vText,
+            is_coordinate_match: true,
+            version_code: versionCode
+          };
+        }
+      } catch (e) {
+        console.warn('Failed to load direct coordinate verse:', e);
+      }
+    }
+
     try {
       const url = `https://kinhthanh.httlvn.org/Search?query=${encodeURIComponent(cleanQ)}&v=${versionCode}&start=${startSlug}&end=${endSlug}`;
       const resp = await fetch(url);
@@ -1194,7 +1249,7 @@ export class BibleEngine {
         const countMatch = htmlText.match(/tìm thấy\s*<b>(\d+)<\/b>\s*kết quả/i);
         if (countMatch) totalCount = parseInt(countMatch[1], 10);
 
-        const items = [];
+        let items = [];
         const linkNodes = doc.querySelectorAll('a[href*="/Redirect"]');
         linkNodes.forEach((a, idx) => {
           const href = a.getAttribute('href') || '';
@@ -1229,6 +1284,11 @@ export class BibleEngine {
           });
         });
 
+        if (directCoordItem) {
+          items = [directCoordItem, ...items.filter(it => !(it.book_id === directCoordItem.book_id && it.chapter === directCoordItem.chapter && it.verse === directCoordItem.verse))];
+          totalCount = Math.max(totalCount, items.length);
+        }
+
         const elapsedMs = Math.round(performance.now() - startTime);
         return {
           total: totalCount || items.length,
@@ -1244,21 +1304,27 @@ export class BibleEngine {
     // Local Search Index Fallback (Instant, 100% offline)
     const localResults = this.searchScripture(cleanQ, [], { limit: 50 });
     const verseResults = localResults.filter(r => r.type === 'verse');
+    let finalItems = verseResults.map((vr, idx) => ({
+      index: idx + 1,
+      ref: vr.title,
+      book_id: vr.book_id,
+      book_name: vr.title.split(' ')[0],
+      chapter: vr.chapter,
+      verse: vr.verse,
+      snippet: vr.subtitle,
+      version_code: versionCode
+    }));
+
+    if (directCoordItem) {
+      finalItems = [directCoordItem, ...finalItems.filter(it => !(it.book_id === directCoordItem.book_id && it.chapter === directCoordItem.chapter && it.verse === directCoordItem.verse))];
+    }
+
     const elapsedMs = Math.round(performance.now() - startTime);
 
     return {
-      total: verseResults.length,
+      total: finalItems.length,
       time_ms: elapsedMs,
-      items: verseResults.map((vr, idx) => ({
-        index: idx + 1,
-        ref: vr.title,
-        book_id: vr.book_id,
-        book_name: vr.title.split(' ')[0],
-        chapter: vr.chapter,
-        verse: vr.verse,
-        snippet: vr.subtitle,
-        version_code: versionCode
-      })),
+      items: finalItems,
       is_online: false
     };
   }

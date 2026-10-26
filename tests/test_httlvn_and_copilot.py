@@ -78,3 +78,35 @@ def test_ai_assistant_biblical_characters():
     assert 'joshua' in content
     assert 'parseAndExecuteCopilotCommand' in content
     assert 'copilot-action-btn' in content
+
+def test_scripture_coordinate_search_resolution():
+    """Verify that BibleEngine correctly parses and resolves scripture references like 'Công vụ các Sứ đồ 13:26'."""
+    import subprocess
+    node_script = """
+    import('./js/bible-engine.js').then(async mod => {
+      const engine = new mod.BibleEngine();
+      await engine.loadBooks();
+      
+      // 1. Test parseReference
+      const ref = engine.parseReference('Công vụ các Sứ đồ 13:26');
+      if (!ref || ref.book.id !== 'ACT' || ref.chapter !== 13 || ref.verseStart !== 26) {
+        console.error('FAILED parseReference:', ref);
+        process.exit(1);
+      }
+
+      const ref2 = engine.parseReference('Giăng 3:16');
+      if (!ref2 || ref2.book.id !== 'JHN' || ref2.chapter !== 3 || ref2.verseStart !== 16) {
+        console.error('FAILED parseReference 2:', ref2);
+        process.exit(1);
+      }
+
+      console.log('PASS_COORD_TEST');
+    }).catch(err => {
+      console.error(err);
+      process.exit(1);
+    });
+    """
+    res = subprocess.run(["node", "--input-type=module", "-e", node_script], capture_output=True, text=True)
+    assert res.returncode == 0
+    assert "PASS_COORD_TEST" in res.stdout
+
