@@ -82,6 +82,19 @@ def test_clean_scripture_text_node_runtime_immunity():
           process.exit(1);
         }
       }
+
+      // Check stripping of version tags [BTT 1925], [KJV 1611], etc.
+      const taggedSample = '[BTT 1925] thêm cho tin kính tình yêu thương anh em, thêm cho tình yêu thương anh em lòng yêu mến.';
+      const cleanedTag = engine.cleanScriptureText(taggedSample);
+      if (cleanedTag.startsWith('[BTT') || cleanedTag.includes('[BTT 1925]')) {
+        console.error('FAILED tag strip:', cleanedTag);
+        process.exit(1);
+      }
+      if (!cleanedTag.startsWith('thêm cho tin kính')) {
+        console.error('FAILED text start:', cleanedTag);
+        process.exit(1);
+      }
+
       console.log('PASS');
     }).catch(err => {
       // In case ESM import of browser code throws in Node, fallback to pure method test
@@ -91,3 +104,33 @@ def test_clean_scripture_text_node_runtime_immunity():
     res = subprocess.run(["node", "--input-type=module", "-e", node_script], capture_output=True, text=True)
     assert res.returncode == 0
     assert "PASS" in res.stdout
+
+def test_zero_version_tags_in_database():
+    """Ensure all translation strings in data/bibles have zero leading [BTT 1925], [KJV 1611], [BDM 2002], [ESV] tags."""
+    tag_pattern = re.compile(r'^\s*\[(?:BTT|BDM|KJV|ESV|BTHD|RVV11|KTHD|NVB|VI1934|VIE|CGKPV|BPT|BD2011)(?:\s+\d{4})?\]')
+    
+    bibles_dir = os.path.join("data", "bibles")
+    assert os.path.exists(bibles_dir), "data/bibles missing"
+
+    found_tags = []
+    for f in os.listdir(bibles_dir):
+        if f.endswith(".json"):
+            path = os.path.join(bibles_dir, f)
+            with open(path, "r", encoding="utf-8") as jf:
+                data = json.load(jf)
+                for ch_num, verses in data.get("chapters", {}).items():
+                    for v in verses:
+                        for ver_id, text in v.get("translations", {}).items():
+                            if isinstance(text, str) and tag_pattern.match(text):
+                                found_tags.append((f, ch_num, v.get("verse_num"), ver_id, text[:30]))
+
+    assert len(found_tags) == 0, f"Found {len(found_tags)} version tags in database: {found_tags[:5]}"
+
+def test_app_js_clean_drawer_and_popout():
+    """Verify that app.js applies cleanScriptureText on drawer and popout readers."""
+    with open("js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    assert "bibleEngine.cleanScriptureText(item.text)" in app_js
+    assert "bibleEngine.cleanScriptureText(vText)" in app_js
+

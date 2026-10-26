@@ -508,14 +508,14 @@ class LogosApp {
 
         // Base text cho diff words: Chỉ dùng bản dịch tiếng Việt làm chuẩn (ưu tiên BTT 1925 hoặc bản vi đầu tiên)
         const baseViItem = versesList.find(i => i.version_id === 'BTT' && i.lang === 'vi') || versesList.find(i => i.lang === 'vi');
-        const baseViText = baseViItem ? baseViItem.text : '';
+        const baseViText = baseViItem ? bibleEngine.cleanScriptureText(baseViItem.text) : '';
 
         versesList.forEach((item, idx) => {
-          let displayText = item.text;
+          let displayText = bibleEngine.cleanScriptureText(item.text);
           if (item.version_id === 'INTERLINEAR') {
             displayText = this.renderInterlinearWordTiles(item, currentBookId, currentChapterNum);
           } else if (item.lang === 'vi' && baseViItem && item.version_id !== baseViItem.version_id && baseViText) {
-            displayText = bibleEngine.diffWords(item.text, baseViText);
+            displayText = bibleEngine.diffWords(displayText, baseViText);
           }
 
           html += `
@@ -3842,7 +3842,7 @@ class LogosApp {
       versesHtml += `
         <div class="popout-verse-item ${isTarget ? 'verse-focus-target' : ''}" data-verse="${v.verse_num}">
           <span class="popout-vnum">${v.verse_num}</span>
-          <span class="popout-vtext">${vText}</span>
+          <span class="popout-vtext">${bibleEngine.cleanScriptureText(vText)}</span>
         </div>
       `;
     });

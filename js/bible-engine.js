@@ -64,6 +64,9 @@ export class BibleEngine {
     if (!text || typeof text !== 'string') return text;
     let t = text.normalize('NFC');
     
+    // 0. Remove translation version prefix tags: [BTT 1925], [KJV 1611], [BDM 2002], [ESV], [BTT], etc.
+    t = t.replace(/^\s*\[(?:BTT|BDM|KJV|ESV|BTHD|RVV11|KTHD|NVB|VI1934|VIE|CGKPV|BPT|BD2011|INTERLINEAR|[A-Za-z0-9_\-]{2,10})(?:\s+\d{4})?\]\s*/g, '');
+
     // 1. Old VNI/VPS artifact Aáy / aáy
     t = t.replace(/\bAáy\b/g, 'Ấy').replace(/\baáy\b/g, 'ấy');
 
@@ -736,6 +739,7 @@ export class BibleEngine {
       }
 
       if (text) {
+        text = this.cleanScriptureText(text);
         results.push({
           version_id: t.id,
           code: t.code,
