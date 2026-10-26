@@ -5353,6 +5353,9 @@
   border: 1px solid var(--border-medium);
   padding: 0.35rem 0.5rem;
   border-radius: 6px;
+  position: sticky;
+  top: 60px;
+  z-index: 940;
 }
 
 .portal-tab-btn {
@@ -5762,6 +5765,12 @@
   /* Ẩn thanh Chuyên Mục Tĩnh Nguyện & Dưỡng Linh trên điện thoại theo yêu cầu anh Jimmy */
   .portal-brand-bar {
     display: none !important;
+  }
+
+  .portal-main-tabs {
+    position: sticky !important;
+    top: 46px !important;
+    z-index: 940 !important;
   }
 
   .portal-brand-text h2 {

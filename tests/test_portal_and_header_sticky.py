@@ -318,3 +318,30 @@ def test_admin_modal_scroll_and_confirmation_button():
 
     # 3. Confirmation Feedback in JS
     assert "Đã xác nhận và cập nhật Banner thành công!" in app_js
+
+
+def test_mobile_and_desktop_sticky_header_contract():
+    """Kiem tra thanh Header va cac Tab dieu huong luon duoc ghim co dinh (sticky) khi luot xuong."""
+    with open("E:/kinhthanh/css/layout.css", "r", encoding="utf-8") as f:
+        layout_css = f.read()
+
+    with open("E:/kinhthanh/css/components.css", "r", encoding="utf-8") as f:
+        components_css = f.read()
+
+    # 1. Bao dam body va html dung overflow-x: clip
+    assert "overflow-x: clip" in layout_css
+
+    # 2. #main-header tren desktop co position: sticky va z-index: 1000
+    assert "position: sticky !important;" in layout_css
+    assert "z-index: 1000 !important;" in layout_css
+
+    # 3. #main-header tren mobile (991px va 640px)
+    mobile_991 = layout_css[layout_css.find("@media (max-width: 991px)"):]
+    assert "position: sticky !important;" in mobile_991
+    assert "z-index: 1000 !important;" in mobile_991
+
+    # 4. Thanh chuong .chapter-header va .portal-main-tabs luon bam sat ngay duoi header
+    assert ".chapter-header" in layout_css
+    assert "top: 46px !important;" in layout_css
+    assert ".portal-main-tabs" in components_css
+    assert "position: sticky" in components_css

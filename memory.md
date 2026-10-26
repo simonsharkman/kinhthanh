@@ -194,3 +194,10 @@ gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
   - Production website deployed successfully on Vercel Global Edge CDN at https://kinhthanh-sigma.vercel.app/.
   - Verified HTTP 200 OK across root index.html, data/books-metadata.json, and dynamic bible scripture files (data/bibles/JHN.json).
   - Fully responsive on mobile & desktop, zero-jump stability, reverent scripture layout, and 156/156 Pytest suite passing 100%.
+
+- **Milestone 40 (2026-10-26)**: Sticky Top Header & Tab Navigation Immunity:
+  - Fixed mobile & desktop issue where scrolling down scripture caused top navigation header & chapter tabs to scroll off screen.
+  - Replaced overflow-x: hidden with overflow-x: clip on ody and html, body (preventing Chromium/WebKit from computing overflow-y: auto and breaking position: sticky).
+  - Added explicit position: sticky !important; top: 0 !important; z-index: 1000 !important; to #main-header on desktop and across mobile viewports (991px and 640px).
+  - Pinned .chapter-header at 	op: 46px !important; z-index: 950 !important; on mobile (and 60px on desktop) and docked .portal-main-tabs with sticky positioning.
+  - Added unit test 	est_mobile_and_desktop_sticky_header_contract; full Pytest suite passing 100% (157/157 passed).

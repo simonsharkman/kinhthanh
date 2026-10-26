@@ -22,7 +22,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow-x: clip;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -206,9 +206,9 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 2px solid #283313;
   padding: 0.45rem 1.25rem;
-  position: sticky;
-  top: 0;
-  z-index: 900;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1000,6 +1000,9 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
   }
 
   #main-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
     height: 46px !important;
     min-height: 46px !important;
     max-height: 46px !important;
@@ -1260,7 +1263,7 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
   .chapter-header {
     position: sticky !important;
     top: 46px !important;
-    z-index: 820 !important;
+    z-index: 950 !important;
     margin-bottom: 0.65rem !important;
     padding: 0.32rem 0.6rem !important;
     border-radius: 999px !important;
@@ -1324,7 +1327,7 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
   html,
   body {
     max-width: 100% !important;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
   }
 
   body.drawer-open,
@@ -1553,6 +1556,9 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
 
 @media (max-width: 640px) {
   #main-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
     padding: 0 0.35rem !important;
     width: 100% !important;
     max-width: 100% !important;
