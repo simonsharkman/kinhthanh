@@ -115,33 +115,10 @@
 - Tối ưu Drawer Inspector: `--drawer-top-offset: 68px; top: var(--drawer-top-offset);` và `body.drawer-open #main-header { margin-right: 0 !important; width: 100% !important; }` không bao giờ che khuất thanh điều hướng.
 
 ### 27. Hệ Thống Quản Trị Tiểu Mục (Subitems CMS) & CSDL Riêng Biệt Cho Từng Mục (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"cho phép admin có thể chỉnh sửa và thêm bớt nội dung cho các mục này. tốt nhất nên có nhưng mục lưu trữ tương ứng cho từng mục này"* (kèm ảnh khoanh đỏ cụm TIỂU MỤC ở sidebar: Câu Gốc Yêu Thích, Đố Kinh Thánh, Lịch Đọc Kinh Thánh, Truyện Tích Thánh Kinh, và Kinh Thánh Đối Đáp).
-- **Kiến trúc lưu trữ 2 phân tầng (Dedicated Two-Tier Storage Persistence)**:
-  1. *Phân tầng Static Tĩnh Tại Chỗ*: Xuất 4 tệp CSDL JSON riêng biệt trong `data/`: `utility-fav-verses.json`, `utility-quizzes.json`, `utility-stories.json`, `utility-responsive.json` phục vụ lưu trữ gốc và đối chiếu phiên bản.
-  2. *Phân tầng Dynamic Tương Tác*: Mở rộng `js/storage.js` với 12 phương thức chuyên biệt (`getUtilityFavVerses`, `saveUtilityFavVerses`, `resetUtilityFavVerses`, `getUtilityQuizzes`, `saveUtilityQuizzes`, `resetUtilityQuizzes`, `getUtilityStories`, `saveUtilityStories`, `resetUtilityStories`, `getUtilityResponsiveReadings`, `saveUtilityResponsiveReadings`, `resetUtilityResponsiveReadings`) lưu trữ trực tiếp vào `localStorage` với tiền tố `logos_pref_utility_*` phản hồi tức thì zero-reload.
-- **Giao diện Quản Trị Viên (Admin CMS Controller)**:
-  - Chỉ khi đăng nhập Admin (`user_role === 'admin'`), hệ thống mới kích hoạt:
-    - Huy hiệu `Quản Trị` tại tiêu đề thẻ TIỂU MỤC và thanh công cụ `#portal-utility-admin-actions` (`+ Thêm mới`, `⟲ Khôi phục gốc`).
-    - Nút `✏ Sửa` và `🗑 Xóa` trực tiếp trên từng thẻ Câu gốc, Truyện tích, Bài đối đáp và Câu đố.
-    - Chế độ Quản Trị Câu Đố (`quizAdminManageMode`): Xem toàn bộ danh sách câu đố, đáp án đúng (xanh lá), căn cứ Kinh Thánh và lời giải thích.
-    - Hộp thoại Soạn Thảo Đa Năng `#admin-utility-editor-modal`: Nhập/chỉnh sửa nội dung, tự động kiểm tra trường bắt buộc, phân loại chủ đề và lưu trữ tức thời.
-    - Lịch Đọc Kinh Thánh (`#portal-item-schedule`): Hiển thị 4 phân đoạn đọc hôm nay kèm nút chỉnh sửa kết nối trực tiếp vào `#admin-devotion-modal`.
-- **Kiểm thử**: Bổ sung `tests/test_portal_utility_cms.py` kiểm định toàn diện 5 nhóm tiêu chuẩn. Toàn bộ **144/144 bài test Pytest PASS 100%**.
+- Tách CSDL 4 file JSON độc lập trong data/ (fav-verses, quizzes, stories, responsive), modal admin CMS (#admin-utility-editor-modal) CRUD toàn diện.
 
 ### 28. Cố Định Thanh Nút Xác Nhận & Cuộn Thân Hộp Thoại (Modal Sticky Footer & Body Scroll) (26/10/2026)
-- **Yêu cầu từ anh Jimmy**: *"chưa có mục xác nhận sau khi cập nhật. hãy kiểm tra và điều chỉnh"* (kèm ảnh chụp `media_1792999506447_8d24c67d.png` hộp thoại "Cấu Hình Banner Máy Tính" bị tràn màn hình cắt ngang cụm checkbox, làm ẩn hoàn toàn thanh chân trang chứa nút lưu/xác nhận).
-- **Nguyên nhân cốt lõi**:
-  - Lớp `.admin-modal-body` và `.modal-body` chưa được định nghĩa quy tắc cuộn flexbox trong `components.css`.
-  - `.modal-card` có `max-height: 85vh; overflow: hidden;` khiến toàn bộ phần chân trang `.modal-footer` bị đẩy ra ngoài phạm vi hiển thị trên các màn hình có chiều cao < 800px.
-- **Thực hiện khắc phục**:
-  1. **Tái cấu trúc CSS Flexbox cho Modal System**:
-     - `.modal-card`: Chuyển sang `max-height: calc(100vh - 2rem); display: flex; flex-direction: column; overflow: hidden;`.
-     - `.modal-header` & `.modal-footer`: Đặt `flex-shrink: 0;` để luôn ghim cố định ở đỉnh và đáy hộp thoại.
-     - `.modal-body, .admin-modal-body`: Đặt `flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;`. Toàn bộ nội dung form cuộn mượt mà bên trong, không bao giờ đẩy trôi nút xác nhận.
-  2. **Nổi bật nút Xác Nhận Cập Nhật**:
-     - Nâng cấp nút `#save-admin-banner-btn`: `<i class="fa-solid fa-circle-check"></i> Xác Nhận & Cập Nhật Banner` với màu vàng kim, độ tương phản cao, đổ bóng nhẹ.
-     - Tích hợp phản hồi kép (`this.showToast` + `alert`) thông báo tức thì: *"✅ Đã xác nhận và cập nhật Banner thành công!"*.
-- **Kiểm thử**: Bổ sung `test_admin_modal_scroll_and_confirmation_button` vào `tests/test_portal_and_header_sticky.py`. Toàn bộ **145/145 bài test Pytest PASS 100%**.
+- Tái cấu trúc CSS Flexbox cho Modal: modal-card flex-col, modal-header/footer flex-shrink: 0, modal-body overflow-y: auto. Nổi bật nút xác nhận cập nhật.
 
 ### 29. Thiết Lập & Hiển Thị Trực Tiếp Banner Thông Báo Mục Vụ Trên Máy Tính (26/10/2026)
 - **Yêu cầu từ anh Jimmy**: *"cho hiển thị bằng này trên máy tính đi"* (kèm ảnh chụp `media_1793001189568_816b66e2.png` cấu hình Banner Thông Báo Mục Vụ / Tin Tức Hội Thánh).
@@ -208,3 +185,13 @@
   2. *Cập nhật Độc lập (`updateUtilityDictList`)*: Khi gõ phím, chỉ lọc dữ liệu `BIBLE_DICT_DATA` và nạp vào `#dict-entries-list`, tuyệt đối không bao giờ chạm vào DOM của ô nhập liệu. Con trỏ và bộ gõ Telex/VNI hoạt động 100% tự nhiên.
   3. *Tối ưu Tìm Kiếm & UI*: Hỗ trợ tìm kiếm tiếng Việt không dấu (`normalize`), thêm icon kính lúp sang trọng và nút `×` xóa nhanh từ khóa.
 - **Kiểm thử & Đồng bộ**: Bổ sung `test_bible_dictionary_search_input_integrity_and_ime_stability` vào `tests/test_portal_utility_cms.py`. Toàn bộ **151/151 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.
+
+### 35. Xây Dựng & Tích Hợp Từ Điển Strong's Hy Lạp & Hê-bơ-rơ Vào Hộp Chọn Tài Liệu Tham Khảo (26/10/2026)
+- **Yêu cầu từ anh Jimmy**: *"từ điển chưa có"* (kèm ảnh chụp hộp chọn `TÀI LIỆU THAM KHẢO` ➔ mục `5. Từ Điển Strong's Hy Lạp/Hê-bơ-rơ`).
+- **Nguyên nhân gốc rễ**: Khi chọn mục 5 trong `#portal-ref-docs-select`, mã trước đây chỉ đổi version sang Interlinear và chuyển view Kinh Thánh, chưa có hộp thoại tra cứu từ điển Strong's chuyên dụng.
+- **Thực hiện**:
+  1. *Cơ Sở Dữ Liệu Strong's*: Xây dựng 43 mục từ căn bản nguyên ngữ Hê-bơ-rơ Cựu Ước (Mã H: `Bereshit H7225`, `Bara H1254`, `Elohim H430`, `Yahweh H3068`, `Shalom H7965`, `Hesed H2617`...) và Hy Lạp Tân Ước (Mã G: `Logos G3056`, `Theos G2316`, `Agape G26`, `Pneuma G4151`, `Charis G5485`...), lưu vào `data/utility-strong-dict.json` và `STRONG_DICT_DATA` trong `portal-data.js`.
+  2. *Hệ Thống Tab 4 Chế Độ*: `Bách Khoa Địa Danh`, `Tất Cả Strong's`, `Strong's Hê-bơ-rơ`, `Strong's Hy Lạp`.
+  3. *Giao Diện Tra Cứu Chuyên Sâu (`renderUtilityStrong`)*: Tìm kiếm theo mã Strong, chữ nguyên ngữ hoặc nghĩa tiếng Việt/Anh; hiển thị chữ nguyên bản đúng font (SBL Hebrew/Greek), phiên âm La-tinh, giải nghĩa chi tiết và nút `[Đọc Lời Chúa]` dẫn thẳng đến phân đoạn.
+  4. *Kích Hoạt Chọn Nhanh*: Cập nhật `portal-ref-docs-select` khi chọn `strong` lập tức mở thẳng Từ Điển Strong's.
+- **Kiểm thử & Đồng bộ**: Bổ sung `test_strongs_greek_hebrew_dictionary_integration` vào `tests/test_portal_utility_cms.py`. Toàn bộ **152/152 bài test Pytest PASS 100%**. Đồng bộ hoàn tất sang Antigravity mirror workspace.

@@ -12,7 +12,7 @@ import { mediaEngine } from './media-engine.js';
 import { aiAssistant } from './ai-assistant.js';
 import { blogSystem } from './blog-community.js';
 import { bereaGuardian } from './berea-guardian.js';
-import { FAV_VERSES_DATA, BIBLE_QUIZ_DATA, RESPONSIVE_READINGS_DATA, BIBLE_STORIES_DATA, BIBLE_DICT_DATA, BIBLE_BOOK_ORDER_MAP, getChapterAudioUrl } from './portal-data.js';
+import { FAV_VERSES_DATA, BIBLE_QUIZ_DATA, RESPONSIVE_READINGS_DATA, BIBLE_STORIES_DATA, BIBLE_DICT_DATA, STRONG_DICT_DATA, BIBLE_BOOK_ORDER_MAP, getChapterAudioUrl } from './portal-data.js';
 
 class LogosApp {
   constructor() {
@@ -1803,9 +1803,7 @@ class LogosApp {
       } else if (val === 'maps') {
         state.setActiveView('media');
       } else if (val === 'strong') {
-        state.setActiveVersions(['BTT', 'INTERLINEAR']);
-        state.setDrawerTab('parallel');
-        state.setActiveView('bible');
+        this.openPortalUtilityModal('strong');
       } else {
         this.navigateToPassage(val, 1, 1, { stayInPortal: true });
       }
@@ -2446,6 +2444,10 @@ class LogosApp {
       titleEl.innerHTML = '<i class="fa-solid fa-book-atlas" style="color: var(--accent-gold);"></i> Thánh Kinh Từ Điển (Bách Khoa Địa Danh & Nhân Vật)';
       subEl.textContent = 'Tra cứu nhanh nguồn gốc, ngữ nghĩa và xuất xứ các nhân vật, địa danh Kinh Thánh';
       this.renderUtilityDict('');
+    } else if (category === 'strong') {
+      titleEl.innerHTML = '<i class="fa-solid fa-language" style="color: var(--accent-gold);"></i> Từ Điển Strong\'s Hy Lạp & Hê-bơ-rơ (Strong\'s Concordance)';
+      subEl.textContent = 'Tra cứu từ căn nguyên ngữ Hê-bơ-rơ (Cựu Ước) và Hy Lạp (Tân Ước) kèm phiên âm, mã Strong và ngữ nghĩa';
+      this.renderUtilityStrong('', subfilter || 'all');
     } else if (category === 'schedule') {
       titleEl.innerHTML = '<i class="fa-solid fa-calendar-check" style="color: var(--accent-gold);"></i> Lịch Đọc Kinh Thánh Hằng Ngày (365 Ngày)';
       subEl.textContent = 'Nuôi dưỡng đời sống tâm linh mỗi ngày qua 4 phân đoạn Cựu Ước, Tân Ước và Thi Thiên';
@@ -3011,7 +3013,33 @@ class LogosApp {
     const bodyContainer = document.getElementById('portal-utility-body');
     if (!tabsContainer || !bodyContainer) return;
 
-    tabsContainer.innerHTML = '';
+    tabsContainer.innerHTML = `
+      <button type="button" class="portal-utility-tab-btn active" id="tab-sub-dict">
+        <i class="fa-solid fa-book-atlas"></i> Bách Khoa Địa Danh & Nhân Vật
+      </button>
+      <button type="button" class="portal-utility-tab-btn" id="tab-sub-strong-all">
+        <i class="fa-solid fa-language"></i> Từ Điển Strong's (Tất Cả)
+      </button>
+      <button type="button" class="portal-utility-tab-btn" id="tab-sub-strong-hebrew">
+        <i class="fa-solid fa-scroll"></i> Strong's Hê-bơ-rơ (Cựu Ước)
+      </button>
+      <button type="button" class="portal-utility-tab-btn" id="tab-sub-strong-greek">
+        <i class="fa-solid fa-feather"></i> Strong's Hy Lạp (Tân Ước)
+      </button>
+    `;
+
+    tabsContainer.querySelector('#tab-sub-dict')?.addEventListener('click', () => {
+      this.openPortalUtilityModal('dict');
+    });
+    tabsContainer.querySelector('#tab-sub-strong-all')?.addEventListener('click', () => {
+      this.openPortalUtilityModal('strong', 'all');
+    });
+    tabsContainer.querySelector('#tab-sub-strong-hebrew')?.addEventListener('click', () => {
+      this.openPortalUtilityModal('strong', 'hebrew');
+    });
+    tabsContainer.querySelector('#tab-sub-strong-greek')?.addEventListener('click', () => {
+      this.openPortalUtilityModal('strong', 'greek');
+    });
 
     // Check if search bar and entries container already exist in DOM to prevent destroying input during typing
     let searchInput = bodyContainer.querySelector('#dict-search-input');
@@ -3085,6 +3113,154 @@ class LogosApp {
         </div>
       </div>
     `).join('') + (entries.length === 0 ? '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">Không tìm thấy thuật ngữ phù hợp.</p>' : '');
+  }
+
+  renderUtilityStrong(searchKeyword = '', langFilter = 'all') {
+    const tabsContainer = document.getElementById('portal-utility-tabs');
+    const bodyContainer = document.getElementById('portal-utility-body');
+    if (!tabsContainer || !bodyContainer) return;
+
+    tabsContainer.innerHTML = `
+      <button type="button" class="portal-utility-tab-btn" id="tab-sub-dict">
+        <i class="fa-solid fa-book-atlas"></i> Bách Khoa Địa Danh & Nhân Vật
+      </button>
+      <button type="button" class="portal-utility-tab-btn ${langFilter === 'all' ? 'active' : ''}" id="tab-sub-strong-all">
+        <i class="fa-solid fa-language"></i> Từ Điển Strong's (Tất Cả)
+      </button>
+      <button type="button" class="portal-utility-tab-btn ${langFilter === 'hebrew' ? 'active' : ''}" id="tab-sub-strong-hebrew">
+        <i class="fa-solid fa-scroll"></i> Strong's Hê-bơ-rơ (Cựu Ước)
+      </button>
+      <button type="button" class="portal-utility-tab-btn ${langFilter === 'greek' ? 'active' : ''}" id="tab-sub-strong-greek">
+        <i class="fa-solid fa-feather"></i> Strong's Hy Lạp (Tân Ước)
+      </button>
+    `;
+
+    tabsContainer.querySelector('#tab-sub-dict')?.addEventListener('click', () => {
+      this.openPortalUtilityModal('dict');
+    });
+    tabsContainer.querySelector('#tab-sub-strong-all')?.addEventListener('click', () => {
+      this.openPortalUtilityModal('strong', 'all');
+    });
+    tabsContainer.querySelector('#tab-sub-strong-hebrew')?.addEventListener('click', () => {
+      this.openPortalUtilityModal('strong', 'hebrew');
+    });
+    tabsContainer.querySelector('#tab-sub-strong-greek')?.addEventListener('click', () => {
+      this.openPortalUtilityModal('strong', 'greek');
+    });
+
+    let searchInput = bodyContainer.querySelector('#strong-search-input');
+    let entriesList = bodyContainer.querySelector('#strong-entries-list');
+
+    if (!searchInput || !entriesList) {
+      bodyContainer.innerHTML = `
+        <div style="max-width: 760px; margin: 0 auto;">
+          <div class="dict-search-bar">
+            <i class="fa-solid fa-magnifying-glass dict-search-icon"></i>
+            <input type="text" class="portal-input" id="strong-search-input" value="${searchKeyword}" placeholder="Nhập mã Strong (H7225, G3056...), từ nguyên ngữ (Bereshit, Logos...) hoặc nghĩa tiếng Việt...">
+            <button type="button" class="dict-clear-btn" id="strong-search-clear" style="display: ${searchKeyword ? 'block' : 'none'};" title="Xóa tìm kiếm">&times;</button>
+          </div>
+          <div class="dict-entries-list" id="strong-entries-list"></div>
+        </div>
+      `;
+
+      searchInput = bodyContainer.querySelector('#strong-search-input');
+      entriesList = bodyContainer.querySelector('#strong-entries-list');
+      const clearBtn = bodyContainer.querySelector('#strong-search-clear');
+
+      searchInput?.addEventListener('input', (ev) => {
+        const val = ev.target.value;
+        if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
+        this.updateUtilityStrongList(val, langFilter, entriesList);
+      });
+
+      clearBtn?.addEventListener('click', () => {
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+        }
+        if (clearBtn) clearBtn.style.display = 'none';
+        this.updateUtilityStrongList('', langFilter, entriesList);
+      });
+
+      searchInput?.focus();
+    } else {
+      searchInput.value = searchKeyword;
+      const clearBtn = bodyContainer.querySelector('#strong-search-clear');
+      if (clearBtn) clearBtn.style.display = searchKeyword ? 'block' : 'none';
+    }
+
+    this.updateUtilityStrongList(searchKeyword, langFilter, entriesList);
+  }
+
+  updateUtilityStrongList(searchKeyword, langFilter, entriesListContainer) {
+    if (!entriesListContainer) return;
+    const normalize = str => (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+    const rawKw = (searchKeyword || '').trim().toLowerCase();
+    const normKw = normalize(rawKw);
+
+    const sourceData = storage.getUtilityStrongDict() || STRONG_DICT_DATA;
+
+    let filtered = sourceData;
+    if (langFilter === 'hebrew') {
+      filtered = filtered.filter(item => item.lang === 'hebrew');
+    } else if (langFilter === 'greek') {
+      filtered = filtered.filter(item => item.lang === 'greek');
+    }
+
+    if (rawKw) {
+      filtered = filtered.filter(d => {
+        const idLower = (d.id || '').toLowerCase();
+        const origLower = (d.orig || '').toLowerCase();
+        const trLower = (d.translit || '').toLowerCase();
+        const viLower = (d.meaning_vi || '').toLowerCase();
+        const enLower = (d.meaning_en || '').toLowerCase();
+        const refLower = (d.refs || '').toLowerCase();
+
+        if (idLower.includes(rawKw) || origLower.includes(rawKw) || trLower.includes(rawKw) ||
+            viLower.includes(rawKw) || enLower.includes(rawKw) || refLower.includes(rawKw)) {
+          return true;
+        }
+
+        return normalize(d.translit).includes(normKw) ||
+               normalize(d.meaning_vi).includes(normKw) ||
+               normalize(d.meaning_en).includes(normKw);
+      });
+    }
+
+    entriesListContainer.innerHTML = filtered.map(e => `
+      <div class="dict-entry-card animate-fade-in" style="border-left: 3px solid ${e.lang === 'hebrew' ? '#f59e0b' : '#38bdf8'};">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem;">
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem;">
+            <span class="badge" style="background: rgba(212,175,55,0.18); color: var(--accent-gold); font-family: monospace; font-size: 0.88rem; font-weight: 800; padding: 3px 8px; border-radius: 4px;">${e.id}</span>
+            <span class="badge" style="background: ${e.lang === 'hebrew' ? 'rgba(245,158,11,0.18)' : 'rgba(56,189,248,0.18)'}; color: ${e.lang === 'hebrew' ? '#f59e0b' : '#38bdf8'}; font-size: 0.74rem; font-weight: 700; padding: 2px 7px; border-radius: 4px;">${e.lang_vi}</span>
+            <span style="font-family: ${e.lang === 'hebrew' ? "'SBL Hebrew', 'Ezra SIL', serif" : "'SBL Greek', serif"}; font-size: 1.35rem; color: ${e.lang === 'hebrew' ? '#fbbf24' : '#38bdf8'}; font-weight: 700; margin-left: 0.35rem;" ${e.lang === 'hebrew' ? 'dir="rtl"' : ''}>${e.orig}</span>
+            <span style="font-style: italic; color: var(--text-muted); font-size: 0.86rem; margin-left: 0.25rem;">(${e.translit})</span>
+          </div>
+          ${e.target_book ? `
+            <button type="button" class="utility-action-btn btn-read-strong-passage" data-book="${e.target_book}" data-ch="${e.target_ch || 1}" data-v="${e.target_v || 1}" title="Đọc phân đoạn này" style="font-size: 0.78rem; padding: 0.25rem 0.6rem;">
+              <i class="fa-solid fa-book-open"></i> Đọc Lời Chúa
+            </button>
+          ` : ''}
+        </div>
+        <div class="dict-word-def" style="margin-top: 0.35rem; font-size: 0.92rem; line-height: 1.5;">
+          <strong>Nghĩa tiếng Việt:</strong> ${e.meaning_vi}
+        </div>
+        <div style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.25rem;">
+          <strong>Tiếng Anh:</strong> <em>${e.meaning_en}</em>
+        </div>
+        <div style="margin-top: 0.45rem; font-size: 0.82rem; color: var(--accent-gold);">
+          <i class="fa-solid fa-scroll"></i> <strong>Kinh Thánh dẫn chứng:</strong> ${e.refs}
+        </div>
+      </div>
+    `).join('') + (filtered.length === 0 ? '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">Không tìm thấy thuật ngữ Strong\'s phù hợp.</p>' : '');
+
+    entriesListContainer.querySelectorAll('.btn-read-strong-passage').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('portal-utility-modal')?.classList.add('hidden');
+        this.navigateToPassage(btn.dataset.book, parseInt(btn.dataset.ch, 10), parseInt(btn.dataset.v, 10), { stayInPortal: true });
+      });
+    });
   }
 
   renderUtilitySchedule() {

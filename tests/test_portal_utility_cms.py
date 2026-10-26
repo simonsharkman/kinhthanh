@@ -139,3 +139,30 @@ def test_bible_dictionary_search_input_integrity_and_ime_stability():
     assert ".dict-search-icon" in css
     assert ".dict-clear-btn" in css
 
+def test_strongs_greek_hebrew_dictionary_integration():
+    """Verify Strong's Greek/Hebrew dictionary data file, storage methods, and app.js controller integration."""
+    strong_json = os.path.join(BASE_DIR, "data", "utility-strong-dict.json")
+    assert os.path.exists(strong_json), "data/utility-strong-dict.json must exist"
+    with open(strong_json, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    assert len(data) >= 20, "Must have at least 20 key Strong's roots"
+    h_sample = next(item for item in data if item["id"] == "H7225")
+    assert h_sample["orig"] == "רֵאשִׁית"
+    g_sample = next(item for item in data if item["id"] == "G3056")
+    assert g_sample["orig"] == "λόγος"
+
+    storage_path = os.path.join(BASE_DIR, "js", "storage.js")
+    with open(storage_path, "r", encoding="utf-8") as f:
+        storage_code = f.read()
+    assert "getUtilityStrongDict" in storage_code
+    assert "saveUtilityStrongDict" in storage_code
+
+    app_path = os.path.join(BASE_DIR, "js", "app.js")
+    with open(app_path, "r", encoding="utf-8") as f:
+        app_code = f.read()
+    assert "STRONG_DICT_DATA" in app_code
+    assert "renderUtilityStrong(" in app_code
+    assert "updateUtilityStrongList(" in app_code
+    assert "this.openPortalUtilityModal('strong')" in app_code
+
+

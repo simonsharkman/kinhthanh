@@ -458,6 +458,19 @@ export class LogosStorage {
     localStorage.removeItem('logos_pref_utility_responsive');
   }
 
+  getUtilityStrongDict() {
+    return this.getPreference('utility_strong_dict', null);
+  }
+
+  saveUtilityStrongDict(list) {
+    this.savePreference('utility_strong_dict', list);
+    return list;
+  }
+
+  resetUtilityStrongDict() {
+    localStorage.removeItem('logos_pref_utility_strong_dict');
+  }
+
   // Passage Offline Caching via IndexedDB
   async cachePassage(passageKey, data) {
     if (!this.db) {
