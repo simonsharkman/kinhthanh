@@ -92,3 +92,34 @@ def test_css_styles_for_popout_and_primary_version():
     assert ".popout-reader-card" in css
     assert ".popout-reader-body" in css
     assert ".verse-focus-target" in css
+
+def test_portal_read_and_search_version_selects_comprehensive_all_22_translations():
+    """Verify portal-read-version-select and portal-search-version-select include all 22 translations from ALL_TRANSLATIONS."""
+    html_file = os.path.join(BASE_DIR, 'index.html')
+    with open(html_file, 'r', encoding='utf-8') as f:
+        html = f.read()
+
+    expected_version_ids = [
+        'BTT', 'KTHD', 'BTHD', 'BDM', 'BD2011', 'BPT', 'BDY', 'CGKPV',
+        'EDE', 'JARAI', 'BRU', 'HMONG_W', 'HMONG_B', 'MNONG', 'DAO',
+        'NKJV', 'NIV', 'KJV', 'ESV', 'RCUV', 'RCUVSS', 'INTERLINEAR'
+    ]
+
+    # Extract portal-read-version-select markup
+    assert 'id="portal-read-version-select"' in html
+    read_sel_start = html.find('id="portal-read-version-select"')
+    read_sel_end = html.find('</select>', read_sel_start)
+    read_sel_html = html[read_sel_start:read_sel_end]
+
+    for vid in expected_version_ids:
+        assert f'value="{vid}"' in read_sel_html, f"Version {vid} missing from portal-read-version-select"
+
+    # Verify search version select
+    assert 'id="portal-search-version-select"' in html
+    search_sel_start = html.find('id="portal-search-version-select"')
+    search_sel_end = html.find('</select>', search_sel_start)
+    search_sel_html = html[search_sel_start:search_sel_end]
+
+    for vid in expected_version_ids:
+        assert f'value="{vid}"' in search_sel_html, f"Version {vid} missing from portal-search-version-select"
+

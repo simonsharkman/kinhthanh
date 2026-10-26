@@ -356,11 +356,36 @@
                 </div>
                 <div class="portal-form-group">
                   <select class="portal-select" id="portal-read-version-select">
-                    <option value="BTT" selected>Bản Truyền Thống</option>
-                    <option value="BDM">Bản Dịch Mới</option>
-                    <option value="BTHD">Bản Hiệu Đính</option>
-                    <option value="KJV">King James Version</option>
-                    <option value="EDE">Tiếng Ê-đê</option>
+                    <optgroup label="Bản Dịch Tiếng Việt (8 Bản)">
+                      <option value="BTT" selected>Bản Truyền Thống 1925 (BTT)</option>
+                      <option value="KTHD">Kinh Thánh Hiện Đại (KTHD)</option>
+                      <option value="BTHD">Bản Truyền Thống Hiệu Đính 2010 (RVV11)</option>
+                      <option value="BDM">Bản Dịch Mới 2002 (NVB)</option>
+                      <option value="BD2011">Bản Dịch 2011 (Đặng Ngọc Báu)</option>
+                      <option value="BPT">Bản Phổ Thông (BPT)</option>
+                      <option value="BDY">Bản Diễn Ý (BDY)</option>
+                      <option value="CGKPV">Bản Công Giáo (CGKPV)</option>
+                    </optgroup>
+                    <optgroup label="Bản Dịch Sắc Tộc Việt Nam (7 Bản)">
+                      <option value="EDE">Tiếng Ê-đê (Klei Aê Diê Blŭ 2015)</option>
+                      <option value="JARAI">Tiếng Gia-rai (Hră Ơi Adai Pơhiăp 2016)</option>
+                      <option value="BRU">Tiếng Bru - Vân Kiều (Parnai Yiang Sursĩ)</option>
+                      <option value="HMONG_W">Tiếng H'Mông Trắng (Vajtswv Txojlus)</option>
+                      <option value="HMONG_B">Tiếng H'Mông Xanh (Vaajtswv Txujlug)</option>
+                      <option value="MNONG">Tiếng M'Nông (Nau Brah Ndu Ngơi)</option>
+                      <option value="DAO">Tiếng Dao (Ging-Sou)</option>
+                    </optgroup>
+                    <optgroup label="Bản Dịch Quốc Tế & Anh Ngữ (6 Bản)">
+                      <option value="NKJV">New King James Version (NKJV)</option>
+                      <option value="NIV">New International Version (NIV)</option>
+                      <option value="KJV">King James Version 1611 (KJV)</option>
+                      <option value="ESV">English Standard Version (ESV)</option>
+                      <option value="RCUV">和合本修訂版 (Tiếng Hoa Phồn Thể)</option>
+                      <option value="RCUVSS">和合本修订版 (Tiếng Hoa Giản Thể)</option>
+                    </optgroup>
+                    <optgroup label="Khảo Cứu Nguyên Ngữ (1 Bản)">
+                      <option value="INTERLINEAR">Interlinear Hy Lạp/Hê-bơ-rơ + Strong's</option>
+                    </optgroup>
                   </select>
                 </div>
                 <div class="portal-btn-row">
@@ -605,9 +630,36 @@
                 </div>
                 <div class="portal-form-group">
                   <select class="portal-select" id="portal-search-version-select">
-                    <option value="BTT" selected>Bản Truyền Thống</option>
-                    <option value="BDM">Bản Dịch Mới</option>
-                    <option value="BTHD">Bản Hiệu Đính</option>
+                    <optgroup label="Bản Dịch Tiếng Việt">
+                      <option value="BTT" selected>Bản Truyền Thống 1925 (BTT)</option>
+                      <option value="KTHD">Kinh Thánh Hiện Đại (KTHD)</option>
+                      <option value="BTHD">Bản Truyền Thống Hiệu Đính 2010 (RVV11)</option>
+                      <option value="BDM">Bản Dịch Mới 2002 (NVB)</option>
+                      <option value="BD2011">Bản Dịch 2011 (BD2011)</option>
+                      <option value="BPT">Bản Phổ Thông (BPT)</option>
+                      <option value="BDY">Bản Diễn Ý (BDY)</option>
+                      <option value="CGKPV">Bản Công Giáo (CGKPV)</option>
+                    </optgroup>
+                    <optgroup label="Bản Dịch Sắc Tộc">
+                      <option value="EDE">Tiếng Ê-đê (RRB)</option>
+                      <option value="JARAI">Tiếng Gia-rai (JBSV)</option>
+                      <option value="BRU">Tiếng Bru - Vân Kiều (BRU)</option>
+                      <option value="HMONG_W">Tiếng H'Mông Trắng (HMOWSV)</option>
+                      <option value="HMONG_B">Tiếng H'Mông Xanh (HMOBSV)</option>
+                      <option value="MNONG">Tiếng M'Nông (BBSV)</option>
+                      <option value="DAO">Tiếng Dao (IUMINR)</option>
+                    </optgroup>
+                    <optgroup label="Bản Dịch Quốc Tế">
+                      <option value="NKJV">New King James Version (NKJV)</option>
+                      <option value="NIV">New International Version (NIV)</option>
+                      <option value="KJV">King James Version 1611 (KJV)</option>
+                      <option value="ESV">English Standard Version (ESV)</option>
+                      <option value="RCUV">Tiếng Hoa Phồn Thể (RCUV)</option>
+                      <option value="RCUVSS">Tiếng Hoa Giản Thể (RCUVSS)</option>
+                    </optgroup>
+                    <optgroup label="Nguyên Ngữ">
+                      <option value="INTERLINEAR">Interlinear Hy Lạp/Hê-bơ-rơ + Strong's</option>
+                    </optgroup>
                   </select>
                 </div>
                 <div class="portal-btn-row">
@@ -1034,6 +1086,7 @@
                 <option value="BD2011">Bản Dịch 2011 (BD2011)</option>
                 <option value="BPT">Bản Phổ Thông (BPT)</option>
                 <option value="BDY">Bản Diễn Ý (BDY)</option>
+                <option value="CGKPV">Bản Công Giáo (CGKPV)</option>
               </optgroup>
               <optgroup label="Tiếng Sắc Tộc">
                 <option value="RRB">Tiếng Ê-đê (RRB - Klei Aê Diê Blŭ)</option>
@@ -1042,10 +1095,16 @@
                 <option value="HMOWSV">Tiếng H'Mông Trắng (HMOWSV - Vajtswv Txojlus)</option>
                 <option value="HMOBSV">Tiếng H'Mông Xanh (HMOBSV - Vaajtswv Txujlug)</option>
                 <option value="BBSV">Tiếng M'Nông (BBSV - Nau Brah Ndu Ngơi)</option>
+                <option value="IUMINR">Tiếng Dao (IUMINR - Ging-Sou)</option>
               </optgroup>
-              <optgroup label="Quốc Tế">
+              <optgroup label="Quốc Tế & Nguyên Ngữ">
                 <option value="NKJV">New King James Version (NKJV)</option>
                 <option value="NIV">New International Version (NIV)</option>
+                <option value="KJV">King James Version 1611 (KJV)</option>
+                <option value="ESV">English Standard Version (ESV)</option>
+                <option value="RCUV">和合本修訂版 (Tiếng Hoa Phồn Thể)</option>
+                <option value="RCUVSS">和合本修订版 (Tiếng Hoa Giản Thể)</option>
+                <option value="ORIGINAL">Interlinear Hy Lạp/Hê-bơ-rơ + Strong's</option>
               </optgroup>
             </select>
           </div>

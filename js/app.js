@@ -126,6 +126,10 @@ class LogosApp {
       case 'PRIMARY_VERSION_CHANGED':
         this.updatePrimaryVersionLabel();
         this.populatePrimaryVersionSelector();
+        const pReadSel = document.getElementById('portal-read-version-select');
+        if (pReadSel && pReadSel.value !== data.primaryVersion) {
+          pReadSel.value = data.primaryVersion;
+        }
         storage.recordTranslationUsed(data.primaryVersion);
         this.renderChapter(state.currentBook, state.currentChapter);
         break;
@@ -1737,6 +1741,11 @@ class LogosApp {
     });
 
     // ĐỌC: Nút Tìm Câu
+    // ĐỌC: Đổi bản dịch trực tiếp
+    document.getElementById('portal-read-version-select')?.addEventListener('change', (e) => {
+      state.setPrimaryVersion(e.target.value);
+    });
+
     document.getElementById('portal-read-submit-btn')?.addEventListener('click', () => {
       const bookId = readBookSel?.value || 'GEN';
       const coordStr = (document.getElementById('portal-read-coord-input')?.value || '1:1').trim();
