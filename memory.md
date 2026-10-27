@@ -201,3 +201,13 @@ gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
   - Added explicit position: sticky !important; top: 0 !important; z-index: 1000 !important; to #main-header on desktop and across mobile viewports (991px and 640px).
   - Pinned .chapter-header at 	op: 46px !important; z-index: 950 !important; on mobile (and 60px on desktop) and docked .portal-main-tabs with sticky positioning.
   - Added unit test 	est_mobile_and_desktop_sticky_header_contract; full Pytest suite passing 100% (157/157 passed).
+
+- **Milestone 41 (2026-10-27)**: Hermeneutics Typology Precision & Zero False-Positive Isolation:
+  - Resolved critical issue in Drawer 'Ẩn Dụ & Biểu Tượng' reported by user on 2 Corinthians 11 where verses were falsely matched to unrelated metaphors:
+    1. 2CO 11:14 (Satan disguised as an 'angel of light') was erroneously tagged as 'Muối Của Đất & Ánh Sáng Của Thế Gian'.
+    2. 2CO 11:26 was tagged as 'Men & Lễ Bánh Không Men' due to substring matching on English 'countrymen' containing 'men'.
+    3. 2CO 11:27 was tagged as 'Nước Sống' due to Paul's physical hunger and thirst ('đói khát') matching 'khát'.
+  - Upgraded HermeneuticsEngine.METAPHOR_SIGNATURES: Replaced single-word keywords with authentic multi-word Vietnamese biblical phrases (e.g., 'bánh không men', 'men của người pha-ri-si', 'nước hằng sống', 'chiên con của đức chúa trời').
+  - Added negative exclusion rules (e.g., excluding 'sa-tan', 'quỉ sa-tan', 'thiên sứ sáng' from holy light metaphors).
+  - Restricted keyword matching to Vietnamese scripture translations, isolating English translations from naive substring collisions.
+  - Added comprehensive test in 	est_hermeneutics.py; full suite passing 100% (158/158 passed).

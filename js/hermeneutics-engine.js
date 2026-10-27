@@ -18,7 +18,18 @@ export class HermeneuticsEngine {
         { book: 'GEN', chapters: [4, 22] },
         { book: 'ACT', chapters: [8] }
       ],
-      keywords: ['chiên con', 'chiên đực', 'chiên của lễ', 'của lễ chiên', 'huyết chiên', 'hàng làm thịt', 'chiên câm', 'arnion', 'amnos', 'lamb']
+      keywords: [
+        'chiên con của đức chúa trời',
+        'chiên con',
+        'huyết chiên con',
+        'chiên của lễ',
+        'chiên lễ vượt qua',
+        'của lễ chiên',
+        'chiên câm trước kẻ hớt lông',
+        'chiên bị đem đi hàng làm thịt',
+        'chiên con đã chịu giết',
+        'chiên đực thế cho y-sác'
+      ]
     },
     true_vine: {
       id: 'true_vine',
@@ -31,7 +42,16 @@ export class HermeneuticsEngine {
         { book: 'MAT', chapters: [20, 21] },
         { book: 'MRK', chapters: [12] }
       ],
-      keywords: ['cây nho', 'gốc nho', 'nhánh nho', 'vườn nho', 'trái nho', 'trồng nho', 'nước nho', 'rượu nho', 'true vine']
+      keywords: [
+        'cây nho thật',
+        'ta là gốc nho',
+        'ta là cây nho',
+        'gốc nho và nhánh',
+        'cây nho và nhánh nho',
+        'vườn nho của chúa',
+        'người trồng nho',
+        'nhánh nào trong ta'
+      ]
     },
     bread_of_life: {
       id: 'bread_of_life',
@@ -45,22 +65,44 @@ export class HermeneuticsEngine {
         { book: 'LUK', chapters: [22] },
         { book: 'DEU', chapters: [8] }
       ],
-      keywords: ['bánh sự sống', 'bánh của sự sống', 'bánh hằng sống', 'bánh từ trời', 'ma-na', 'bánh trần thiết', 'bẻ bánh', 'tiệc thánh', 'thân thể ta', 'bread of life']
+      keywords: [
+        'bánh sự sống',
+        'bánh của sự sống',
+        'bánh hằng sống',
+        'bánh từ trời',
+        'bánh ma-na',
+        'bánh trần thiết',
+        'thịt ta thật là đồ ăn',
+        'bánh của đức chúa trời'
+      ]
     },
     salt_and_light: {
       id: 'salt_and_light',
       bookPassages: [
         { book: 'MAT', chapters: [5] },
-        { book: 'JHN', chapters: [1, 8, 9, 12] },
         { book: 'LUK', chapters: [14] },
         { book: 'PSA', chapters: [119] },
         { book: 'ISA', chapters: [60] },
         { book: 'PHP', chapters: [2] },
-        { book: 'LEV', chapters: [2] },
-        { book: '1TH', chapters: [5] },
-        { book: '1JN', chapters: [1] }
+        { book: 'LEV', chapters: [2] }
       ],
-      keywords: ['muối của đất', 'muối', 'ánh sáng của thế gian', 'sự sáng', 'ánh sáng', 'soi sáng', 'ngọn đèn', 'vầng sáng', 'salt', 'light']
+      keywords: [
+        'muối của đất',
+        'ánh sáng của thế gian',
+        'sự sáng của thế gian',
+        'muối mất mặn',
+        'giao ước muối',
+        'sự sáng soi trong tối tăm',
+        'ngọn đèn cho chân tôi'
+      ],
+      excludeKeywords: [
+        'sa-tan',
+        'quỉ sa-tan',
+        'thiên sứ sáng',
+        'thiên thần sáng',
+        'sáng chói',
+        'sáng láng'
+      ]
     },
     living_water: {
       id: 'living_water',
@@ -74,7 +116,17 @@ export class HermeneuticsEngine {
         { book: '1CO', chapters: [10] },
         { book: 'ISA', chapters: [12, 55] }
       ],
-      keywords: ['nước sống', 'nước hằng sống', 'sông nước sự sống', 'mạch nước', 'nước sự sống', 'giếng gia-cốp', 'hòn đá hô-rếp', 'khát', 'dòng sông', 'living water']
+      keywords: [
+        'nước sống',
+        'nước hằng sống',
+        'sông nước sự sống',
+        'sông nước sống',
+        'mạch nước sống',
+        'mạch nước hằng sống',
+        'nguồn nước sống',
+        'hòn đá hô-rếp phun nước',
+        'uống nước ta cho'
+      ]
     },
     leaven: {
       id: 'leaven',
@@ -87,7 +139,18 @@ export class HermeneuticsEngine {
         { book: '1CO', chapters: [5] },
         { book: 'GAL', chapters: [5] }
       ],
-      keywords: ['men', 'bánh không men', 'dậy bột', 'đống bột', 'pha-ri-si', 'leaven', 'yeast']
+      keywords: [
+        'bánh không men',
+        'lễ bánh không men',
+        'men của người pha-ri-si',
+        'men pha-ri-si',
+        'men sa-đu-sê',
+        'men của sa-đu-sê',
+        'một chút men làm dậy',
+        'tẩy trừ men cũ',
+        'bột mới không men',
+        'men cũ'
+      ]
     },
     fire: {
       id: 'fire',
@@ -101,7 +164,18 @@ export class HermeneuticsEngine {
         { book: 'MAL', chapters: [3] },
         { book: 'DAN', chapters: [3] }
       ],
-      keywords: ['lửa', 'bụi gai cháy', 'trụ lửa', 'than hồng', 'đám lửa thiêu đốt', 'thử lửa', 'luyện bạc', 'lưỡi bằng lửa', 'holy fire']
+      keywords: [
+        'bụi gai cháy',
+        'trụ lửa',
+        'than hồng trên bàn thờ',
+        'than hồng chạm miệng',
+        'lửa từ trời giáng xuống',
+        'lửa luyện bạc',
+        'vàng thử lửa',
+        'lưỡi như bằng lửa',
+        'lửa thánh linh',
+        'đám lửa thiêu đốt'
+      ]
     },
     cornerstone: {
       id: 'cornerstone',
@@ -116,7 +190,16 @@ export class HermeneuticsEngine {
         { book: 'EPH', chapters: [2] },
         { book: '1PE', chapters: [2] }
       ],
-      keywords: ['đá góc', 'đá góc nhà', 'hòn đá góc', 'đá vấp chân', 'vầng đá', 'thợ xây nhà loại ra', 'nền tảng', 'cornerstone']
+      keywords: [
+        'đá góc nhà',
+        'hòn đá góc nhà',
+        'đá góc',
+        'hòn đá góc',
+        'đá vấp chân',
+        'hòn đá thợ xây loại ra',
+        'hòn đá thử nghiệm',
+        'đá góc móng'
+      ]
     }
   };
 
@@ -187,18 +270,33 @@ export class HermeneuticsEngine {
       if (reason === 'chapter') entry.isChapterMatch = true;
     };
 
-    // 1. Quét từng câu để tìm thẻ metaphor_id hoặc từ khóa
+    // 1. Quét từng câu để tìm thẻ metaphor_id hoặc từ khóa trong tiếng Việt (chống khớp sai từ vựng tiếng Anh như countrymen -> men)
     verses.forEach(v => {
-      const vNum = parseInt(v.verse_num, 10);
+      const vNum = parseInt(v.verse_num || v.verse, 10);
       if (v.metaphor_id) {
         addMatch(v.metaphor_id, vNum, 'explicit');
       }
 
-      // Quét từ khóa trong câu (tiếng Việt & nguyên ngữ)
-      const vText = ((v.text_primary || '') + ' ' + Object.values(v.translations || {}).join(' ')).toLowerCase();
+      // Quét các bản dịch tiếng Việt của câu
+      const viParts = [
+        v.text_primary,
+        v.text,
+        v.translations?.BTT,
+        v.translations?.BDM,
+        v.translations?.KTHD,
+        v.translations?.CGKPV
+      ].filter(Boolean);
+      const viText = viParts.join(' ').toLowerCase();
+
       Object.keys(HermeneuticsEngine.METAPHOR_SIGNATURES).forEach(mId => {
         const sig = HermeneuticsEngine.METAPHOR_SIGNATURES[mId];
-        const hasKeyword = sig.keywords.some(kw => vText.includes(kw));
+
+        // Loại trừ nếu câu có chứa các từ khóa tiêu cực hoặc sai ngữ cảnh (ví dụ: Satan giả làm thiên sứ sáng)
+        if (sig.excludeKeywords && sig.excludeKeywords.some(ex => viText.includes(ex))) {
+          return;
+        }
+
+        const hasKeyword = sig.keywords.some(kw => viText.includes(kw));
         if (hasKeyword) {
           addMatch(mId, vNum, 'keyword');
         }
