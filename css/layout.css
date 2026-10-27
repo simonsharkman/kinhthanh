@@ -760,7 +760,7 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
 
 /* 4. Drawer Inspector Slide-Over & Split-Screen Workspace */
 :root {
-  --drawer-width: clamp(330px, 28vw, 420px);
+  --drawer-width: clamp(520px, 45vw, 760px);
   --drawer-top-offset: 68px;
 }
 

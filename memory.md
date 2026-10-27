@@ -178,15 +178,7 @@
   - Triển khai SPA Hash Routing chuẩn: Đồng bộ URL tức thì khi chuyển tab (`#portal`, `#bible/JHN/1`, `#tsk`, `#blog`, `#community`, `#media`, `#donate`). Hỗ trợ Deep Linking mở trực tiếp chương sách, tích hợp `popstate`/`hashchange` cho nút Back/Forward. Đạt 159/159 tests pass.
 
 - **Milestone 43 (2026-10-27)**: Real-time Audio Verse Glowing Illumination & Interactive Seeking:
-  - Tiếp nhận yêu cầu nghiên cứu và triển khai từ anh Jimmy: *"chúng ta có thể làm cho phần đọc này, khi đọc tới câu nào thì câu đó được đánh dấu sáng lên không ?"* (kèm ảnh chụp mũi tên đỏ chỉ vào khối NGHE Sáng-thế Ký 1).
-  - Triển khai kiến trúc đồng bộ âm thanh theo câu thời gian thực:
-    1. Thuật toán `buildVerseTimingMap(verses, duration)`: Tự động phân bổ mốc thời gian (start, end, duration) cho từng câu trong phân đoạn dựa trên số lượng từ và mật độ dấu câu (chấm, phẩy, chấm phẩy) kết hợp trừ bù thời gian mở đầu đọc tiêu đề (~3.2s) và khoảng lặng cuối file.
-    2. Đồng bộ `timeupdate`: Liên tục theo dõi `audioEl.currentTime` để tìm câu đang phát qua `findVerseAtTime(timingMap, currentTime)`, gọi `highlightReadingVerse(activeVerseNum)` và cập nhật subtitle thanh phát Audio.
-    3. Hiệu ứng phát sáng kỉnh kiềng (Radiant Sacred Glow): Câu đang đọc được bao phủ dải màu chuyển sắc ánh vàng hoàng gia `linear-gradient(90deg, rgba(212, 175, 55, 0.22) 0%, rgba(212, 175, 55, 0.08) 75%, transparent 100%)`, viền chỉ dấu nổi bật `border-left: 4.5px solid var(--accent-gold)`, hiệu ứng phát quang `box-shadow: 0 0 16px rgba(212, 175, 55, 0.25)`, và số câu chuyển thành huy hiệu vàng rực rỡ.
-    4. Tương tác chuyển câu trực tiếp (Interactive Verse-Seek): Khi đang nghe audio, người dùng nhấp vào bất kỳ câu nào trong khung đọc thì audio sẽ tự động nhảy đến đúng mốc thời gian câu đó (`jumpAudioToVerse`).
-    5. Nút Câu Tiếp Theo / Câu Trước Đó (`nextVerseAudio` / `prevVerseAudio`) hỗ trợ chuyển câu từng bước mượt mà.
-  - Bổ sung Unit Test `test_audio_verse_glow_highlight_contract` trong `test_portal_and_header_sticky.py`. Toàn bộ **160/160 bài test Pytest PASS 100%**.
-  - Đã sync mirror workspace và tự động deploy lên Vercel.
+  - Đồng bộ âm thanh theo câu thời gian thực: Thuật toán `buildVerseTimingMap(verses, duration)` và `findVerseAtTime`, hiệu ứng phát sáng hoàng gia (`.verse-reading-active` viền vàng `border-left: 4.5px solid var(--accent-gold)`). Hỗ trợ nhấp câu để tua audio trực tiếp (`jumpAudioToVerse`) và nút chuyển câu. Đạt 160/160 tests pass.
 
 - **Milestone 44 (2026-10-27)**: Verse-Level Deep Linking & Multi-Version URL Routing (HTTLVN Standard Alignment):
   - Tiếp nhận phản hồi từ anh Jimmy: *"bấm tới câu 6 mà vẫn không thấy. bạn xem lại. như trang này bấm câu nào là link sẽ nhảy câu đó, kinh thánh bản nào cũng hiện lên. https://kinhthanh.httlvn.org/doc-kinh-thanh/gie/21?v=BD2011#6"* (kèm ảnh chụp khoanh đỏ câu 6 Nê-hê-mi 1 trên giao diện).
@@ -226,3 +218,11 @@
     4. Chiều Rộng Đọc Lý Tưởng (`#focus-reader`): Giới hạn `max-width: 860px` căn giữa chuẩn tỉ lệ vàng (~70 ký tự/dòng).
     5. Cập nhật `test_reading_version_and_popout.py` bảo đảm toàn bộ **166/166 bài test Pytest PASS 100%**.
   - Đã sync mirror workspace và tự động deploy lên Vercel production.
+
+- **Milestone 48 (2026-10-27)**: Expanded Drawer Workspace & Compact Card Headers:
+  - Tiếp nhận yêu cầu & ảnh từ anh Jimmy: Mở rộng khung đối chiếu và thu nhỏ các thành phần phụ để người đọc tập trung vào Lời Chúa.
+  - Triển khai tối ưu:
+    1. Mở Rộng Drawer (`--drawer-width: clamp(520px, 45vw, 760px)`): Tăng không gian hiển thị đối chiếu lên 45vw (rộng hơn 200px), các thẻ bản dịch thoáng đãng, rộng rãi.
+    2. Thu Nhỏ Tiêu Đề Thẻ: Badge tên bản dịch dạng pill nhỏ gọn (`.badge-vcode`), tên bản dịch mờ tinh tế (`.badge-vname`), không bị ngắt thành 2 dòng.
+    3. Nút Popout Tinh Tế: Rút gọn nút to chữ sang icon vuông nhỏ 28x28px (`.card-popout-btn`), ẩn dòng nhắc lặp lại (`.parallel-card-footer-hint`).
+  - Toàn bộ 166/166 bài test Pytest PASS 100%. Đã sync mirror và deploy lên Vercel.

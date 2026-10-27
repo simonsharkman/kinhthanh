@@ -365,9 +365,33 @@
 
 .version-code-badge {
   font-weight: 800;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--accent-gold);
   letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: nowrap;
+}
+
+.version-code-badge .badge-vcode {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--accent-gold);
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.version-code-badge .badge-vname {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.74rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 380px;
 }
 
 .version-name-label {
@@ -2769,36 +2793,32 @@
 }
 
 .card-popout-btn {
-  background: rgba(212, 175, 55, 0.12);
+  background: rgba(212, 175, 55, 0.08);
   border: 1px solid var(--accent-gold-border);
   color: var(--accent-gold-light);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 5px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
   transition: all var(--transition-fast);
+  flex-shrink: 0;
 }
 
 .card-popout-btn:hover {
   background: var(--accent-gold);
   color: #000;
   border-color: var(--accent-gold);
+  transform: scale(1.08);
 }
 
 .parallel-card-footer-hint {
-  margin-top: 0.65rem;
-  padding-top: 0.45rem;
-  border-top: 1px dashed rgba(255, 255, 255, 0.08);
-  font-size: 0.73rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-style: italic;
+  display: none !important;
 }
 
 .parallel-verse-card.clickable-popout-card:hover .parallel-card-footer-hint {

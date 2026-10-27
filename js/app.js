@@ -802,16 +802,16 @@ class LogosApp {
           html += `
             <div class="parallel-verse-card clickable-popout-card" data-version="${item.version_id}">
               <div class="parallel-card-header">
-                <span class="version-code-badge">${item.version_id} • ${item.version_name}</span>
-                <button class="card-popout-btn" data-version="${item.version_id}" aria-label="Mở cửa sổ đọc">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở cửa sổ đọc
+                <span class="version-code-badge">
+                  <span class="badge-vcode">${item.version_id}</span>
+                  <span class="badge-vname">${item.version_name}</span>
+                </span>
+                <button class="card-popout-btn" data-version="${item.version_id}" title="Mở cửa sổ đọc trọn đoạn ${verseRefStr}" aria-label="Mở cửa sổ đọc">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </button>
               </div>
               <div class="parallel-card-text ${item.version_id === 'INTERLINEAR' ? 'interlinear-text' : ''}">
                 ${displayText}
-              </div>
-              <div class="parallel-card-footer-hint">
-                <i class="fa-regular fa-window-restore"></i> Nhấp để đọc trọn đoạn ${verseRefStr} trong cửa sổ riêng
               </div>
             </div>
           `;
