@@ -26,9 +26,12 @@ class LogosApp {
       currentBook: null,
       currentChapter: null,
       currentVerseIndex: 0,
+      currentVerseNum: 1,
       verses: [],
+      timingMap: [],
       utterance: null,
-      speed: 1.0
+      speed: 1.0,
+      isSeeking: false
     };
     this.quizState = {
       currentIndex: 0,
@@ -508,6 +511,11 @@ class LogosApp {
       el.addEventListener('click', () => {
         const verseNum = el.dataset.verse;
         state.selectVerse(verseNum, true);
+
+        // Nếu audio đang phát, đồng bộ nhảy câu phát tương ứng (Interactive Verse-Seek)
+        if (this.audioState.isPlaying) {
+          this.jumpAudioToVerse(verseNum);
+        }
       });
     });
 
@@ -2060,6 +2068,26 @@ class LogosApp {
           if (slider) slider.value = pct;
           const curTimeEl = document.getElementById('audio-current-time');
           if (curTimeEl) curTimeEl.textContent = this.formatAudioTime(audioEl.currentTime);
+
+          // Cập nhật bản đồ thời gian nếu chưa sẵn sàng
+          if ((!this.audioState.timingMap || this.audioState.timingMap.length === 0) && this.audioState.verses?.length > 0) {
+            this.audioState.timingMap = this.buildVerseTimingMap(this.audioState.verses, audioEl.duration);
+          }
+
+          // Tự động đánh dấu sáng lên câu đang đọc (Audio Verse Highlight Sync)
+          if (this.audioState.timingMap && this.audioState.timingMap.length > 0) {
+            const activeV = this.findVerseAtTime(this.audioState.timingMap, audioEl.currentTime);
+            if (activeV && activeV !== this.audioState.currentVerseNum) {
+              this.audioState.currentVerseNum = activeV;
+              this.highlightReadingVerse(activeV);
+
+              const subEl = document.getElementById('audio-player-subtitle');
+              if (subEl) {
+                const totalV = this.audioState.verses.length;
+                subEl.innerHTML = `<span class="audio-badge-studio"><i class="fa-solid fa-microphone"></i> Studio HD</span> Đang đọc câu <strong>${activeV}</strong> / ${totalV} (Bản Truyền Thống)`;
+              }
+            }
+          }
         }
       });
 
@@ -2141,6 +2169,82 @@ class LogosApp {
     });
   }
 
+  // Xây dựng bản đồ thời gian từng câu (Verse Timing Map) cho MP3 Audio Studio HD
+  buildVerseTimingMap(verses, duration) {
+    if (!verses || verses.length === 0 || !duration || duration <= 0) return [];
+
+    // Thời gian đọc tiêu đề sách/chương ở đầu file MP3 (~3.2s) và khoảng lặng cuối file (~2.0s)
+    const introDuration = Math.min(3.2, duration * 0.08);
+    const outroDuration = Math.min(2.0, duration * 0.04);
+    const speechDuration = Math.max(1, duration - introDuration - outroDuration);
+
+    const weights = verses.map(v => {
+      const text = v.text || v.text_primary || (v.translations && v.translations.BTT) || '';
+      const cleanText = text.replace(/\[\d+\]|<[^>]+>/g, '').trim();
+      const words = cleanText ? cleanText.split(/\s+/).length : 5;
+      const periods = (cleanText.match(/[.!?]/g) || []).length;
+      const commas = (cleanText.match(/[,;:]/g) || []).length;
+      return (words * 1.0) + (commas * 0.45) + (periods * 0.9) + 1.2;
+    });
+
+    const totalWeight = weights.reduce((a, b) => a + b, 0);
+    const scale = speechDuration / totalWeight;
+
+    let curr = introDuration;
+    return verses.map((v, i) => {
+      const dur = weights[i] * scale;
+      const startTime = curr;
+      const endTime = curr + dur;
+      curr = endTime;
+      return {
+        verseNum: parseInt(v.verse_num, 10),
+        startTime: Math.round(startTime * 100) / 100,
+        endTime: Math.round(endTime * 100) / 100,
+        duration: Math.round(dur * 100) / 100
+      };
+    });
+  }
+
+  // Tìm câu Kinh Thánh tương ứng với mốc thời gian phát audio (currentTime)
+  findVerseAtTime(timingMap, currentTime) {
+    if (!timingMap || timingMap.length === 0) return null;
+    if (currentTime < timingMap[0].startTime) return timingMap[0].verseNum;
+    for (let i = 0; i < timingMap.length; i++) {
+      if (currentTime >= timingMap[i].startTime && currentTime < timingMap[i].endTime) {
+        return timingMap[i].verseNum;
+      }
+    }
+    return timingMap[timingMap.length - 1].verseNum;
+  }
+
+  // Nhảy trực tiếp âm thanh đến câu Kinh Thánh được chỉ định
+  jumpAudioToVerse(verseNum) {
+    const vNum = parseInt(verseNum, 10);
+    if (!vNum) return;
+
+    const audioEl = document.getElementById('portal-audio-media-element');
+    if (audioEl && audioEl.src && this.audioState.timingMap?.length > 0) {
+      const match = this.audioState.timingMap.find(item => item.verseNum === vNum);
+      if (match) {
+        audioEl.currentTime = match.startTime;
+        this.highlightReadingVerse(vNum);
+        return;
+      }
+    }
+
+    if (this.audioState.verses?.length > 0) {
+      const idx = this.audioState.verses.findIndex(v => parseInt(v.verse_num, 10) === vNum);
+      if (idx !== -1) {
+        this.audioState.currentVerseIndex = idx;
+        if (!audioEl?.src) {
+          this.speakCurrentVerse();
+        } else {
+          this.highlightReadingVerse(vNum);
+        }
+      }
+    }
+  }
+
   async playChapterAudio(bookId, chapterNum, startVerse = 1) {
     this.stopChapterAudio();
 
@@ -2168,6 +2272,12 @@ class LogosApp {
     this.audioState.isPaused = false;
     this.audioState.currentBook = bookId;
     this.audioState.currentChapter = ch;
+    this.audioState.currentVerseNum = parseInt(startVerse, 10) || 1;
+    this.audioState.timingMap = [];
+
+    // Nạp dữ liệu các câu trong chương để tính toán bản đồ thời gian
+    const passage = await bibleEngine.loadPassage(bookId, ch);
+    this.audioState.verses = passage?.verses || [];
 
     const audioEl = document.getElementById('portal-audio-media-element');
     const mp3Url = getChapterAudioUrl(bookId, ch);
@@ -2178,6 +2288,26 @@ class LogosApp {
         audioEl.playbackRate = this.audioState.speed || 1.0;
         audioEl.load();
       }
+
+      const setupTimingMap = () => {
+        if (audioEl.duration && this.audioState.verses.length > 0) {
+          this.audioState.timingMap = this.buildVerseTimingMap(this.audioState.verses, audioEl.duration);
+          if (startVerse > 1) {
+            const match = this.audioState.timingMap.find(m => m.verseNum === parseInt(startVerse, 10));
+            if (match) audioEl.currentTime = match.startTime;
+          }
+        }
+      };
+
+      if (audioEl.duration && Number.isFinite(audioEl.duration) && audioEl.duration > 0) {
+        setupTimingMap();
+      } else {
+        audioEl.addEventListener('loadedmetadata', setupTimingMap, { once: true });
+      }
+
+      // Đánh dấu sáng lên câu bắt đầu
+      this.highlightReadingVerse(startVerse);
+
       this.updatePlayPauseBtnIcon(true);
       this.showToast(`Đang phát âm thanh phòng thu: ${bookNameVi} đoạn ${ch}`, 'info');
       audioEl.play().catch(err => {
@@ -2186,7 +2316,8 @@ class LogosApp {
         this.showToast(`Nhấp nút Phát (▶) để nghe ${bookNameVi} đoạn ${ch}`, 'info');
       });
     } else {
-      // Fallback
+      // Fallback sang Web Speech API
+      this.audioState.currentVerseIndex = Math.max(0, parseInt(startVerse, 10) - 1);
       this.speakCurrentVerse();
     }
   }
@@ -2253,15 +2384,33 @@ class LogosApp {
   }
 
   highlightReadingVerse(verseNum) {
+    const vNum = parseInt(verseNum, 10);
+    if (!vNum) return;
+
+    // Xóa trạng thái câu đang đọc cũ
     document.querySelectorAll('.verse-reading-active').forEach(el => el.classList.remove('verse-reading-active'));
+
+    // Gắn lớp đánh dấu sáng lên cho câu đang đọc (trên cả Portal Reader và Focus Reader)
+    const targets = document.querySelectorAll(`.verse-item[data-verse="${vNum}"]`);
+    targets.forEach(el => {
+      el.classList.add('verse-reading-active');
+    });
+
+    // Cuộn nhẹ nhàng để câu đang đọc luôn nằm trong tầm mắt dễ đọc nhất
     const isPortal = state.activeView === 'portal';
-    const selector = isPortal
-      ? `#portal-reader-chapter-container .verse-item[data-verse="${verseNum}"]`
-      : `.verse-item[data-verse="${verseNum}"]`;
-    const target = document.querySelector(selector);
-    if (target) {
-      target.classList.add('verse-reading-active');
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const activeContainer = isPortal
+      ? document.getElementById('portal-reader-chapter-container')
+      : document.getElementById('reader-chapter-container');
+
+    if (activeContainer) {
+      const activeEl = activeContainer.querySelector(`.verse-item[data-verse="${vNum}"]`);
+      if (activeEl) {
+        const rect = activeEl.getBoundingClientRect();
+        const isInViewport = (rect.top >= 90 && rect.bottom <= (window.innerHeight - 90));
+        if (!isInViewport) {
+          activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
     }
   }
 
@@ -2374,10 +2523,26 @@ class LogosApp {
   }
 
   nextVerseAudio() {
+    if (this.audioState.timingMap?.length > 0) {
+      const curV = this.audioState.currentVerseNum || 1;
+      const nextV = curV + 1;
+      if (nextV <= this.audioState.timingMap.length) {
+        this.jumpAudioToVerse(nextV);
+        return;
+      }
+    }
     this.nextChapterAudio();
   }
 
   prevVerseAudio() {
+    if (this.audioState.timingMap?.length > 0) {
+      const curV = this.audioState.currentVerseNum || 1;
+      const prevV = curV - 1;
+      if (prevV >= 1) {
+        this.jumpAudioToVerse(prevV);
+        return;
+      }
+    }
     this.prevChapterAudio();
   }
 

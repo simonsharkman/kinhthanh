@@ -394,3 +394,69 @@ def test_spa_hash_routing_and_deep_linking_contract():
     ]
     res = subprocess.run(node_cmd, capture_output=True, text=True, check=True)
     assert "ROUTER_PARSE_OK" in res.stdout
+
+
+def test_audio_verse_glow_highlight_contract():
+    """Kiem tra tinh nang danh dau sang len tung cau Kinh Thanh khi nghe Audio."""
+    with open("E:/kinhthanh/js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    with open("E:/kinhthanh/css/components.css", "r", encoding="utf-8") as f:
+        comp_css = f.read()
+
+    with open("E:/kinhthanh/css/layout.css", "r", encoding="utf-8") as f:
+        layout_css = f.read()
+
+    # 1. Timing Map & Audio Seeking methods exist
+    assert "buildVerseTimingMap(verses, duration)" in app_js
+    assert "findVerseAtTime(timingMap, currentTime)" in app_js
+    assert "jumpAudioToVerse(verseNum)" in app_js
+    assert "highlightReadingVerse(verseNum)" in app_js
+
+    # 2. Timeupdate wires audio verse highlight
+    assert "this.findVerseAtTime(this.audioState.timingMap, audioEl.currentTime)" in app_js
+    assert "this.highlightReadingVerse(activeV);" in app_js
+
+    # 3. Interactive verse click jumps audio
+    assert "this.jumpAudioToVerse(verseNum);" in app_js
+
+    # 4. CSS radiant illumination
+    assert ".verse-item.verse-reading-active" in comp_css
+    assert "linear-gradient(90deg, rgba(212, 175, 55, 0.22)" in comp_css
+    assert "border-left: 4.5px solid var(--accent-gold, #d4af37)" in comp_css
+    assert ".verse-item.verse-reading-active .verse-number" in comp_css
+    assert "background: var(--accent-gold, #d4af37)" in comp_css
+
+    # 5. Node.js calculation contract verification
+    node_cmd = [
+        "node", "-e",
+        '''
+        const fs = require('fs');
+        const code = fs.readFileSync('E:/kinhthanh/js/app.js', 'utf8');
+        const matchMap = code.match(/buildVerseTimingMap\\(verses, duration\\)\\s*\\{([\\s\\S]*?)\\n  \\}/);
+        const matchFind = code.match(/findVerseAtTime\\(timingMap, currentTime\\)\\s*\\{([\\s\\S]*?)\\n  \\}/);
+        if (!matchMap || !matchFind) process.exit(1);
+
+        const buildMap = new Function('verses', 'duration', matchMap[1]);
+        const findVerse = new Function('timingMap', 'currentTime', matchFind[1]);
+
+        const mockVerses = [
+          { verse_num: 1, text: "Ban dau Duc Chua Troi dung nen troi dat." },
+          { verse_num: 2, text: "Va dat la vo hinh va trong khong." },
+          { verse_num: 3, text: "Duc Chua Troi phan rang: Phai co su sang; thi co su sang." }
+        ];
+
+        const map = buildMap(mockVerses, 30.0);
+        if (!Array.isArray(map) || map.length !== 3) process.exit(2);
+        if (map[0].verseNum !== 1 || map[1].verseNum !== 2 || map[2].verseNum !== 3) process.exit(3);
+        if (map[0].startTime >= map[0].endTime) process.exit(4);
+
+        const vAtStart = findVerse(map, 1.0);
+        const vAtEnd = findVerse(map, 28.0);
+        if (vAtStart !== 1 || vAtEnd !== 3) process.exit(5);
+
+        console.log('AUDIO_VERSE_GLOW_OK');
+        '''
+    ]
+    res = subprocess.run(node_cmd, capture_output=True, text=True, check=True)
+    assert "AUDIO_VERSE_GLOW_OK" in res.stdout

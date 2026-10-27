@@ -6554,15 +6554,33 @@
   }
 }
 
-/* Reading Verse Active Highlight */
+/* Reading Verse Active Highlight (Đánh dấu sáng lên câu Kinh Thánh khi nghe Audio) */
+.verse-item.verse-reading-active,
 .verse-reading-active {
-  background: rgba(212, 175, 55, 0.14) !important;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.22) 0%, rgba(212, 175, 55, 0.08) 75%, transparent 100%) !important;
   border: none !important;
-  border-left: 3.5px solid var(--accent-gold) !important;
-  padding-left: 0.65rem !important;
+  border-left: 4.5px solid var(--accent-gold, #d4af37) !important;
+  padding-left: 0.75rem !important;
   border-radius: 6px !important;
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.15) !important;
-  transition: all 0.25s ease;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.25), inset 0 0 10px rgba(212, 175, 55, 0.05) !important;
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.verse-item.verse-reading-active .verse-number {
+  background: var(--accent-gold, #d4af37) !important;
+  color: var(--bg-primary, #0b130e) !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  border: none !important;
+  opacity: 1 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.45) !important;
+}
+
+.verse-item.verse-reading-active .verse-text {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
 /* App Toast Notifications */
