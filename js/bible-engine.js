@@ -1349,7 +1349,7 @@ export class BibleEngine {
     return wordsA.map(word => {
       const clean = cleanWord(word);
       if (!wordsB.has(clean) && clean.length > 2) {
-        return `<span class="word-diff-highlight">${word}</span>`;
+        return `<span class="word-diff-highlight" title="Từ ngữ diễn đạt khác biệt so với bản đối chiếu">${word}</span>`;
       }
       return word;
     }).join(' ');

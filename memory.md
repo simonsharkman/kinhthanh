@@ -141,17 +141,11 @@
 ### 34. Khắc Phục Lỗi IME Bộ Gõ Tiếng Việt Trong Thánh Kinh Từ Điển (26/10/2026)
 - Sửa lỗi nhảy con trỏ / gõ ngược tiếng Việt trong `#dict-search-input` bằng cơ chế DOM Persistence (input tạo 1 lần cố định, chỉ cập nhật `#dict-entries-list`), hỗ trợ tìm kiếm không dấu. Đạt 151/151 tests pass.
 
-### 35. Xây Dựng & Tích Hợp Từ Điển Strong's Hy Lạp & Hê-bơ-rơ (26/10/2026)
-- Tích hợp CSDL 43 mục từ Strong's (Hê-bơ-rơ & Hy Lạp) vào `data/utility-strong-dict.json`, giao diện 4 tab tra cứu chuyên sâu (`renderUtilityStrong`) hỗ trợ tìm kiếm mã Strong, phiên âm và nút đọc Lời Chúa. Đạt 152/152 tests pass.
+### 35. Xây Dựng & Tích Hợp Từ Điển Strong (26/10/2026)
+- Tích hợp CSDL 43 mục từ Strong (Hê-bơ-rơ & Hy Lạp), giao diện 4 tab tra cứu chuyên sâu (`renderUtilityStrong`). Đạt 152/152 tests pass.
 
-### Milestone 36: Thiết Kế Trình Bày Kinh Thánh Kỉnh Kiềng (Zero Box Borders & Unboxed Small Verse Numbers)
-- **Vấn đề**: Người dùng phản ánh câu Kinh Thánh bị đóng trong từng thẻ hộp có viền (order: 1px solid) và bóng đổ (ox-shadow), số câu dạng badge đóng khung nút 26x26px to bản khiến giao diện giống bảng danh sách/form nhập liệu, làm phân tâm và mất đi vẻ trang nghiêm, kỉnh kiềng trước Lời Đức Chúa Trời.
-- **Giải pháp chuẩn hóa**:
-  1. Loại bỏ toàn bộ viền hộp (order: none, order-left: 3px solid transparent), bỏ nền thẻ (ackground: transparent), bỏ bóng đổ (ox-shadow: none), thu hẹp khoảng cách giữa các câu (gap: 0.15rem) để đoạn Kinh Thánh chảy liền mạch, thanh thoát như một trang Kinh Thánh in kinh điển.
-  2. Tinh chỉnh số câu (.verse-number): Bỏ khung viền và màu nền hộp badge, hiển thị nhỏ gọn (ont-size: 0.72rem, opacity: 0.82), áp dụng màu chuẩn theme ar(--text-verse-num, var(--accent-gold)), căn thẳng baseline chữ đầu tiên.
-  3. Trạng thái câu đang đọc/chọn (.verse-highlight-active, .verse-reading-active): Chỉ hiển thị thanh chỉ dấu vàng/xanh tinh tế bên trái (order-left: 3.5px solid var(--accent-gold)) và quầng sáng nhẹ (
-gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
-  4. Bổ sung Unit Test 	est_reverent_scripture_verse_styling_zero_borders_and_unboxed_numbers. Bộ test đạt 154/154 pass 100%.
+### Milestone 36: Thiết Kế Trình Bày Kinh Thánh Kỉnh Kiềng (Zero Box Borders & Unboxed Numbers)
+- Loại bỏ viền hộp, bóng đổ, cho dòng chảy câu liền mạch trang nghiêm như Kinh Thánh in. Số câu nhỏ gọn (0.72rem), không đóng khung badge. Đạt 154/154 pass 100%.
 
 ### Milestone 37: Sửa Lỗi Highlight Câu Đối Chiếu Mobile (Split 50/50)
 - Tối ưu CSS specificity trên mobile drawer-open, câu chọn nổi bật với `border-left: 4.5px solid var(--accent-gold)`, nền phát quang và badge số câu vàng rực. Đạt 155/155 tests pass.
@@ -226,4 +220,13 @@ gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
     3. Tối ưu Portal View (`css/components.css`): Chuyển đổi `#portal-view` và `.portal-logo-v` sang Arial.
     4. Giữ nguyên phông nguyên ngữ Hy Lạp / Hê-bơ-rơ chuyên dụng (`--font-hebrew-greek`) để giữ đúng glyph interlinear cổ tự.
   - Bổ sung Unit Test `test_typography_arial.py` kiểm định toàn diện. Toàn bộ **164/164 bài test Pytest PASS 100%**.
+  - Đã sync mirror workspace và tự động deploy lên Vercel production.
+
+- **Milestone 46 (2026-10-27)**: Refined Subtle Word-Diff Underline & Explanatory Legend (User-Centric Option 3):
+  - Tiếp nhận phản hồi từ anh Jimmy: Thắc mắc về việc các từ trong tab "So Sánh Bản Dịch" bị bôi nền vàng lốm đốm (`word-diff-highlight`), chọn triển khai Phương án 3 (chuyển sang gạch chân mờ chấm nhẹ kèm chú thích rõ ràng).
+  - Triển khai nâng cấp tinh tế:
+    1. CSS (`css/components.css`): Chuyển `.word-diff-highlight` từ nền vàng dày sang `background: transparent !important;`, `border-bottom: 1.5px dotted rgba(212, 175, 55, 0.55);`, màu chữ tự nhiên `color: inherit`, hover sáng nhẹ kèm `cursor: help`.
+    2. Tooltip & Nguyên Tắc So Sánh (`js/bible-engine.js` & `js/app.js`): Thêm tooltip `title="Từ ngữ diễn đạt khác biệt so với bản đối chiếu"`. Ưu tiên bản dịch đang đọc chính (`state.primaryVersion`) làm mốc so sánh thay vì ép cố định theo BTT.
+    3. Thẻ Chú Thích Trang Trọng (`.parallel-diff-legend`): Đặt ngay dưới tiêu đề Đối Chiếu giải thích rõ ràng ý nghĩa của các từ gạch chân chấm nhẹ.
+  - Bổ sung Unit Test `test_diff_words_subtle.py`. Bộ kiểm thử đạt **166/166 bài test Pytest PASS 100%**.
   - Đã sync mirror workspace và tự động deploy lên Vercel production.

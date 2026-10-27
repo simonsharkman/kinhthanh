@@ -389,11 +389,19 @@
 }
 
 .word-diff-highlight {
-  background: rgba(212, 175, 55, 0.22);
-  border-radius: 3px;
-  padding: 0 3px;
+  background: transparent !important;
+  border-bottom: 1.5px dotted rgba(212, 175, 55, 0.55);
+  padding: 0 1px 1px 1px;
+  color: inherit;
+  font-weight: inherit;
+  border-radius: 0;
+  transition: border-bottom-color var(--transition-fast), color var(--transition-fast);
+  cursor: help;
+}
+
+.word-diff-highlight:hover {
+  border-bottom-color: var(--accent-gold);
   color: var(--accent-gold-light);
-  font-weight: 500;
 }
 
 .interlinear-text {

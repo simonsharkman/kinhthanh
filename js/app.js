@@ -775,9 +775,21 @@ class LogosApp {
             </div>
         `;
 
-        // Base text cho diff words: Chỉ dùng bản dịch tiếng Việt làm chuẩn (ưu tiên BTT 1925 hoặc bản vi đầu tiên)
-        const baseViItem = versesList.find(i => i.version_id === 'BTT' && i.lang === 'vi') || versesList.find(i => i.lang === 'vi');
+        // Base text cho diff words: Ưu tiên bản dịch tiếng Việt đang đọc chính (state.primaryVersion), sau đó là BTT 1925
+        const primaryVer = (typeof state !== 'undefined' && state.primaryVersion) ? state.primaryVersion : 'BTT';
+        const baseViItem = versesList.find(i => i.version_id === primaryVer && i.lang === 'vi')
+          || versesList.find(i => i.version_id === 'BTT' && i.lang === 'vi')
+          || versesList.find(i => i.lang === 'vi');
         const baseViText = baseViItem ? bibleEngine.cleanScriptureText(baseViItem.text) : '';
+
+        if (baseViItem) {
+          html += `
+            <div class="parallel-diff-legend" style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 0.85rem; padding: 0.4rem 0.75rem; background: rgba(212, 175, 55, 0.05); border-radius: 6px; border: 1px dashed rgba(212, 175, 55, 0.28); display: flex; align-items: center; gap: 0.5rem; line-height: 1.45;">
+              <i class="fa-solid fa-circle-info" style="color: var(--accent-gold); font-size: 0.85rem; flex-shrink: 0;"></i>
+              <span>Các từ có <span style="border-bottom: 1.5px dotted rgba(212, 175, 55, 0.85); color: var(--text-primary); font-weight: 600;">gạch chân chấm nhẹ</span> là từ ngữ được các bản dịch diễn đạt khác biệt so với <strong>${baseViItem.version_name || baseViItem.version_id}</strong>.</span>
+            </div>
+          `;
+        }
 
         versesList.forEach((item, idx) => {
           let displayText = bibleEngine.cleanScriptureText(item.text);
