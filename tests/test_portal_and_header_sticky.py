@@ -345,3 +345,52 @@ def test_mobile_and_desktop_sticky_header_contract():
     assert "top: 46px !important;" in layout_css
     assert ".portal-main-tabs" in components_css
     assert "position: sticky" in components_css
+
+
+def test_spa_hash_routing_and_deep_linking_contract():
+    """Kiem tra he thong SPA Hash Routing va Deep Linking tren thanh dia chi URL."""
+    with open("E:/kinhthanh/js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    # 1. Router methods exist
+    assert "parseHash(hashString)" in app_js
+    assert "updateUrlHash(viewName" in app_js
+    assert "handleUrlRouting(" in app_js
+
+    # 2. History API usage
+    assert "window.history.pushState(" in app_js
+    assert "window.history.replaceState(" in app_js
+
+    # 3. Browser Back / Forward event listeners
+    assert "window.addEventListener('popstate'" in app_js
+    assert "window.addEventListener('hashchange'" in app_js
+
+    # 4. View hash mapping supported
+    assert "#bible" in app_js or "'#bible/'" in app_js
+    assert "#tsk" in app_js or "'#tsk/'" in app_js
+    assert "#portal" in app_js
+    assert "this.updateUrlHash(viewName);" in app_js
+
+    # 5. Dynamic update on passage change
+    assert "this.updateUrlHash('bible', data.book, data.chapter, true);" in app_js
+
+    # 6. Verify Node.js parseHash execution
+    node_cmd = [
+        "node", "-e",
+        '''
+        const fs = require('fs');
+        const code = fs.readFileSync('E:/kinhthanh/js/app.js', 'utf8');
+        const match = code.match(/parseHash\\(hashString\\)\\s*\\{([\\s\\S]*?)\\n  \\}/);
+        if (!match) process.exit(1);
+        const fn = new Function('hashString', match[1]);
+        const r1 = fn('#bible/2CO/11');
+        const r2 = fn('#blog');
+        const r3 = fn('');
+        if (r1.view !== 'bible' || r1.book !== '2CO' || r1.chapter !== 11) process.exit(2);
+        if (r2.view !== 'blog') process.exit(3);
+        if (r3.view !== 'portal') process.exit(4);
+        console.log('ROUTER_PARSE_OK');
+        '''
+    ]
+    res = subprocess.run(node_cmd, capture_output=True, text=True, check=True)
+    assert "ROUTER_PARSE_OK" in res.stdout
