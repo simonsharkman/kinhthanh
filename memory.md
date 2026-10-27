@@ -172,24 +172,10 @@
   - Added unit test 	est_mobile_and_desktop_sticky_header_contract; full Pytest suite passing 100% (157/157 passed).
 
 - **Milestone 41 (2026-10-27)**: Hermeneutics Typology Precision & Zero False-Positive Isolation:
-  - Resolved critical issue in Drawer 'Ẩn Dụ & Biểu Tượng' reported by user on 2 Corinthians 11 where verses were falsely matched to unrelated metaphors:
-    1. 2CO 11:14 (Satan disguised as an 'angel of light') was erroneously tagged as 'Muối Của Đất & Ánh Sáng Của Thế Gian'.
-    2. 2CO 11:26 was tagged as 'Men & Lễ Bánh Không Men' due to substring matching on English 'countrymen' containing 'men'.
-    3. 2CO 11:27 was tagged as 'Nước Sống' due to Paul's physical hunger and thirst ('đói khát') matching 'khát'.
-  - Upgraded HermeneuticsEngine.METAPHOR_SIGNATURES: Replaced single-word keywords with authentic multi-word Vietnamese biblical phrases (e.g., 'bánh không men', 'men của người pha-ri-si', 'nước hằng sống', 'chiên con của đức chúa trời').
-  - Added negative exclusion rules (e.g., excluding 'sa-tan', 'quỉ sa-tan', 'thiên sứ sáng' from holy light metaphors).
-  - Restricted keyword matching to Vietnamese scripture translations, isolating English translations from naive substring collisions.
-  - Added comprehensive test in 	est_hermeneutics.py; full suite passing 100% (158/158 passed).
+  - Khắc phục triệt để lỗi gán nhầm ẩn dụ tại 2 Cô-rinh-tô 11: Nâng cấp cụm từ khóa đa từ (`bánh không men`, `chiên con`, `nước hằng sống`), bổ sung luật loại trừ (`sa-tan`, `thiên sứ sáng`), chỉ match trên bản tiếng Việt. Đạt 158/158 tests pass.
 
 - **Milestone 42 (2026-10-27)**: SPA Deep Link Hash Routing & URL Branch Synchronization:
-  - Khắc phục triệt để thắc mắc của người dùng về việc khi bấm vào các Tab chính (Cổng Tĩnh Nguyện, Đọc Kinh Thánh, KT Đối Chiếu, Blog Chuyên Sâu, Nhánh Cộng Đồng, Media & Video, Dâng Hiến) thì thanh địa chỉ URL vẫn giữ nguyên `kinhthanh-sigma.vercel.app/` không hiện nhánh link.
-  - Triển khai kiến trúc SPA Hash Routing chuẩn:
-    1. Đồng bộ 2 chiều: Khi nhấp tab (`switchView`) hoặc đổi sách/chương (`PASSAGE_CHANGED`), hệ thống tự động cập nhật URL hash tức thì (`#portal`, `#bible/JHN/1`, `#tsk/JHN/1`, `#blog`, `#community`, `#media`, `#donate`) bằng `history.pushState` và `history.replaceState`.
-    2. Deep Linking: Người dùng có thể chia sẻ hoặc mở link trực tiếp vào bất kỳ tab hoặc chương nào (ví dụ `#bible/2CO/11`, `#blog`, `#donate`).
-    3. Trình duyệt Back / Forward: Bắt sự kiện `popstate` và `hashchange` điều hướng mượt mà không tải lại trang.
-    4. Nút Brand Home Logo chuyển về `#portal` (trang chủ Cổng Tĩnh Nguyện).
-  - Bổ sung Unit Test `test_spa_hash_routing_and_deep_linking_contract` trong `test_portal_and_header_sticky.py`.
-  - Bộ kiểm thử toàn diện đạt 159/159 tests PASS 100%. Đã sync mirror và deploy lên Vercel.
+  - Triển khai SPA Hash Routing chuẩn: Đồng bộ URL tức thì khi chuyển tab (`#portal`, `#bible/JHN/1`, `#tsk`, `#blog`, `#community`, `#media`, `#donate`). Hỗ trợ Deep Linking mở trực tiếp chương sách, tích hợp `popstate`/`hashchange` cho nút Back/Forward. Đạt 159/159 tests pass.
 
 - **Milestone 43 (2026-10-27)**: Real-time Audio Verse Glowing Illumination & Interactive Seeking:
   - Tiếp nhận yêu cầu nghiên cứu và triển khai từ anh Jimmy: *"chúng ta có thể làm cho phần đọc này, khi đọc tới câu nào thì câu đó được đánh dấu sáng lên không ?"* (kèm ảnh chụp mũi tên đỏ chỉ vào khối NGHE Sáng-thế Ký 1).
@@ -229,4 +215,14 @@
     2. Tooltip & Nguyên Tắc So Sánh (`js/bible-engine.js` & `js/app.js`): Thêm tooltip `title="Từ ngữ diễn đạt khác biệt so với bản đối chiếu"`. Ưu tiên bản dịch đang đọc chính (`state.primaryVersion`) làm mốc so sánh thay vì ép cố định theo BTT.
     3. Thẻ Chú Thích Trang Trọng (`.parallel-diff-legend`): Đặt ngay dưới tiêu đề Đối Chiếu giải thích rõ ràng ý nghĩa của các từ gạch chân chấm nhẹ.
   - Bổ sung Unit Test `test_diff_words_subtle.py`. Bộ kiểm thử đạt **166/166 bài test Pytest PASS 100%**.
+  - Đã sync mirror workspace và tự động deploy lên Vercel production.
+
+- **Milestone 47 (2026-10-27)**: Clean Columnar Reading Typography & Hanging Indent Layout (Image 2 Alignment):
+  - Tiếp nhận ảnh phản hồi và đề xuất từ anh Jimmy: "tôi nghĩ nên trình bày gọn gàng lại. như kiểu này" (kèm 2 ảnh so sánh giao diện Giăng đoạn 5).
+  - Triển khai chuẩn hóa trình bày theo chuẩn Image 2:
+    1. Cột Số Câu Độc Lập (`.verse-number`): Cố định `width: 2.2rem; min-width: 2.2rem; text-align: right;`, màu vàng ấm (`var(--accent-gold)`), font-weight: 700, font-size: `0.85rem`. Số 1 chữ số hay 2-3 chữ số đều căn thẳng tắp lề phải sát cột chữ.
+    2. Xuống Dòng Thẳng Cột Tuyệt Đối (`.verse-text`): Thiết lập `display: block; flex: 1; min-width: 0;`, mọi dòng chữ khi ngắt dòng đều giữ nguyên lề trái thẳng đứng, tuyệt đối không bị chui vào dưới số câu.
+    3. Giãn Cách Câu Thoáng Đãng (`.chapter-verses-list`): Nâng khoảng cách giữa các câu lên `gap: 1.15rem;`, khoảng cách cột số - cột chữ `gap: 1.25rem;`, tạo không gian thư thái, dễ tập trung suy ngẫm.
+    4. Chiều Rộng Đọc Lý Tưởng (`#focus-reader`): Giới hạn `max-width: 860px` căn giữa chuẩn tỉ lệ vàng (~70 ký tự/dòng).
+    5. Cập nhật `test_reading_version_and_popout.py` bảo đảm toàn bộ **166/166 bài test Pytest PASS 100%**.
   - Đã sync mirror workspace và tự động deploy lên Vercel production.

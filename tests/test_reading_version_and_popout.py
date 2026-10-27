@@ -147,10 +147,10 @@ def test_reverent_scripture_verse_styling_zero_borders_and_unboxed_numbers():
 
     assert 'background: transparent;' in v_num_block
     assert 'border: none;' in v_num_block
-    assert 'min-width: unset;' in v_num_block
-    assert '0.72rem' in v_num_block
+    assert 'min-width: 2.2rem;' in v_num_block
+    assert '0.85rem' in v_num_block
 
-    # Ensure tight reverent text flow
-    assert 'gap: 0.15rem;' in layout_css
+    # Ensure airy reverent columnar text flow
+    assert 'gap: 1.15rem;' in layout_css
 
 

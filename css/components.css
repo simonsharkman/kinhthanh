@@ -385,7 +385,7 @@
 .verse-item, .verse-row {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 1.25rem;
 }
 
 .word-diff-highlight {

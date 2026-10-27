@@ -494,8 +494,8 @@ body {
 /* Focus Reader Canvas — Sanctuary Illuminated Study Sheet */
 #focus-reader {
   flex: 1;
-  padding: 1.5rem 3rem 3.5rem;
-  max-width: 960px;
+  padding: 1.5rem 2.5rem 4rem;
+  max-width: 860px;
   margin: 0 auto;
   transition: padding var(--transition-smooth);
 }
@@ -593,20 +593,23 @@ body {
   display: none;
 }
 
-/* Scripture verses — Sacred, Reverent, Seamless Biblical Typography ("Kỉnh Kiềng") */
+/* Scripture verses — Sacred, Reverent, Columnar Biblical Typography (Chuẩn Gọn Gàng Thẳng Hàng) */
 .chapter-verses-list {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem; /* Dòng chảy văn bản trang nghiêm liền mạch, không chia cắt thành từng thẻ đóng hộp */
+  gap: 1.15rem; /* Giãn cách thoáng đãng, phân tách câu rành mạch, dễ đọc */
 }
 
 .verse-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem; /* Khoảng cách rộng rãi giữa cột số và cột chữ */
   position: relative;
   margin-bottom: 0;
-  padding: 0.45rem 0.65rem;
+  padding: 0.35rem 0.65rem;
   background: transparent;
   border: none;
-  border-left: 4px solid transparent; /* Giữ layout cân bằng khi active/hover, không giật hình */
+  border-left: 3.5px solid transparent; /* Giữ layout cân bằng khi active/hover, không giật hình */
   border-radius: 6px;
   font-family: var(--font-bible);
   font-size: var(--bible-font-size);
@@ -625,10 +628,12 @@ body {
 .verse-text {
   flex: 1;
   min-width: 0;
-  display: inline;
+  display: block; /* Giữ các dòng khi xuống dòng luôn thẳng tắp cột trái, không bị chui vào dưới số câu */
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-feature-settings: "kern" 1, "liga" 1;
+  line-height: inherit;
+  color: var(--text-primary);
 }
 
 .verse-item:hover {
@@ -672,26 +677,29 @@ body.mobile-split-active .verse-item.verse-selected .verse-text {
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* Số câu Kinh Thánh — Nhỏ gọn, thanh thoát, trang nghiêm, không viền hộp */
+/* Số câu Kinh Thánh — Cột số riêng biệt, căn phải thẳng tắp theo chuẩn Image 2 */
 .verse-number {
   display: inline-block;
-  min-width: unset;
+  width: 2.2rem;
+  min-width: 2.2rem;
+  text-align: right;
   height: auto;
-  padding: 1px 5px;
+  padding: 0;
   border: none;
   background: transparent;
   border-radius: 4px;
   box-sizing: border-box;
   font-family: var(--font-ui), var(--font-bible), sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-verse-num, var(--accent-gold));
-  opacity: 0.82;
-  margin-right: 0.45rem;
-  line-height: 1.2;
+  opacity: 0.9;
+  margin-right: 0;
+  line-height: inherit;
   vertical-align: baseline;
   user-select: none;
   flex-shrink: 0;
+  transition: color var(--transition-fast);
 }
 
 .verse-item.verse-highlight-active .verse-number,
