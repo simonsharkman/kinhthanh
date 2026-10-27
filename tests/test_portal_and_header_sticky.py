@@ -369,10 +369,10 @@ def test_spa_hash_routing_and_deep_linking_contract():
     assert "#bible" in app_js or "'#bible/'" in app_js
     assert "#tsk" in app_js or "'#tsk/'" in app_js
     assert "#portal" in app_js
-    assert "this.updateUrlHash(viewName);" in app_js
+    assert "this.updateUrlHash(viewName" in app_js
 
     # 5. Dynamic update on passage change
-    assert "this.updateUrlHash('bible', data.book, data.chapter, true);" in app_js
+    assert "this.updateUrlHash('bible', data.book, data.chapter" in app_js
 
     # 6. Verify Node.js parseHash execution
     node_cmd = [
@@ -460,3 +460,56 @@ def test_audio_verse_glow_highlight_contract():
     ]
     res = subprocess.run(node_cmd, capture_output=True, text=True, check=True)
     assert "AUDIO_VERSE_GLOW_OK" in res.stdout
+
+
+def test_verse_click_url_branch_and_version_contract():
+    """Kiem tra khi nhap chon cau bat ky thi URL lap tuc cap nhat nhanh cau (#bible/NEH/1/6) va phan giai duoc version (?v=BD2011)."""
+    with open("E:/kinhthanh/js/app.js", "r", encoding="utf-8") as f:
+        app_js = f.read()
+
+    # 1. Verification of stripAccents and resolveBookId
+    assert "stripAccents(str)" in app_js
+    assert "resolveBookId(bookStr)" in app_js
+
+    # 2. VERSE_SELECTED synchronizes URL with verse
+    assert "this.updateUrlHash('bible', state.currentBook, state.currentChapter, data.verse" in app_js
+
+    # 3. PRIMARY_VERSION_CHANGED preserves version query
+    assert "this.updateUrlHash('bible', state.currentBook, state.currentChapter, state.currentVerse, data.primaryVersion" in app_js
+
+    # 4. Node.js evaluation of deep link parsing matching user report
+    node_cmd = [
+        "node", "-e",
+        '''
+        const fs = require('fs');
+        const code = fs.readFileSync('E:/kinhthanh/js/app.js', 'utf8');
+        const books = JSON.parse(fs.readFileSync('E:/kinhthanh/data/books-metadata.json', 'utf8'));
+
+        const matchParse = code.match(/parseHash\\(hashString\\)\\s*\\{([\\s\\S]*?)\\n  \\}/);
+        const matchStrip = code.match(/stripAccents\\(str\\)\\s*\\{([\\s\\S]*?)\\n  \\}/);
+        const matchResolve = code.match(/resolveBookId\\(bookStr\\)\\s*\\{([\\s\\S]*?)\\n  \\}/);
+        if (!matchParse || !matchStrip || !matchResolve) process.exit(1);
+
+        global.bibleEngine = { books };
+        const stripAccents = new Function('str', matchStrip[1]);
+        const resolveBookId = new Function('bookStr', matchResolve[1]);
+        const ctx = { stripAccents, resolveBookId };
+        const parseHash = new Function('hashString', matchParse[1]).bind(ctx);
+
+        // Case 1: User screenshot NEH 1 verse 6
+        const c1 = parseHash('#bible/NEH/1/6');
+        if (c1.book !== 'NEH' || c1.chapter !== 1 || c1.verse !== 6) process.exit(2);
+
+        // Case 2: User HTTLVN reference gie/21?v=BD2011#6
+        const c2 = parseHash('/doc-kinh-thanh/gie/21?v=BD2011#6');
+        if (c2.book !== 'JER' || c2.chapter !== 21 || c2.verse !== 6 || c2.version !== 'BD2011') process.exit(3);
+
+        // Case 3: Colon format
+        const c3 = parseHash('#bible/NEH/1:6?v=CGKPV');
+        if (c3.book !== 'NEH' || c3.chapter !== 1 || c3.verse !== 6 || c3.version !== 'CGKPV') process.exit(4);
+
+        console.log('VERSE_VERSION_ROUTING_OK');
+        '''
+    ]
+    res = subprocess.run(node_cmd, capture_output=True, text=True, check=True)
+    assert "VERSE_VERSION_ROUTING_OK" in res.stdout
