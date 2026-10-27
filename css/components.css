@@ -5193,7 +5193,7 @@
   max-width: 1140px;
   margin: 0 auto;
   padding: 1.25rem 1.5rem 3.5rem;
-  font-family: 'Noto Serif', Merriweather, Georgia, serif;
+  font-family: Arial, Helvetica, 'Noto Serif', sans-serif;
 }
 
 .portal-container {
@@ -5229,7 +5229,7 @@
   border-radius: 50%;
   background: #fdfbf7;
   color: #4b5e28;
-  font-family: var(--font-brand, Georgia);
+  font-family: var(--font-brand, Arial);
   font-size: 1.5rem;
   font-weight: 900;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);

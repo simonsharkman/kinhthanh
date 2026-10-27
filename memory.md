@@ -217,3 +217,13 @@ gba(229, 193, 88, 0.1)), tuyệt đối không bao viền toàn bộ câu.
     4. Trực quan hóa đầy đủ: Mở link trực tiếp sẽ nạp đúng bản dịch, mở đúng phân đoạn, cuộn và đánh dấu sáng câu được chọn, đồng thời kích hoạt bảng Đối Chiếu Song Song.
   - Bổ sung Unit Test `test_verse_click_url_branch_and_version_contract` trong `test_portal_and_header_sticky.py`. Toàn bộ **161/161 bài test Pytest PASS 100%**.
   - Đã sync mirror và deploy lên Vercel.
+
+- **Milestone 45 (2026-10-27)**: Global Arial Typography Overhaul (Site-Wide Sans-Serif Experience):
+  - Tiếp nhận yêu cầu thử nghiệm từ anh Jimmy: "bạn thử đổi toàn bộ font chữ trang thành Arial cả xem thế nào".
+  - Triển khai chuyển đổi đồng bộ typography trên toàn bộ ứng dụng sang font Arial:
+    1. Cập nhật Design Tokens (`css/design-tokens.css`): Đặt `Arial, Helvetica` làm font ưu tiên số 1 cho `--font-brand`, `--font-heading`, `--font-bible`, `--font-scripture`, `--font-reader`, `--font-ui`.
+    2. Chuẩn hóa kế thừa toàn cục (`css/layout.css`): Áp dụng Arial bao trùm `body`, `h1-h6`, `.chapter-title`, `.verse-item`, `.verse-text`, `.portal-*`, `.drawer-title`, `.modal-title`.
+    3. Tối ưu Portal View (`css/components.css`): Chuyển đổi `#portal-view` và `.portal-logo-v` sang Arial.
+    4. Giữ nguyên phông nguyên ngữ Hy Lạp / Hê-bơ-rơ chuyên dụng (`--font-hebrew-greek`) để giữ đúng glyph interlinear cổ tự.
+  - Bổ sung Unit Test `test_typography_arial.py` kiểm định toàn diện. Toàn bộ **164/164 bài test Pytest PASS 100%**.
+  - Đã sync mirror workspace và tự động deploy lên Vercel production.

@@ -1627,3 +1627,27 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
     box-shadow: none;
   }
 }
+
+
+/* ==========================================================================
+   GLOBAL ARIAL TYPOGRAPHY OVERRIDE (User Preferred Clean Sans-Serif Trial)
+   ========================================================================== */
+html,
+body,
+button,
+input,
+select,
+textarea,
+h1, h2, h3, h4, h5, h6,
+.brand-title,
+.brand-text h1,
+.chapter-title,
+.verse-item,
+.verse-text,
+.portal-brand-text,
+.portal-card-title,
+.portal-card-body,
+.drawer-title,
+.modal-title {
+  font-family: Arial, Helvetica, -apple-system, BlinkMacSystemFont, sans-serif;
+}
