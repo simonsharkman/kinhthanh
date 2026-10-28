@@ -1160,6 +1160,45 @@
   color: #000;
 }
 
+.chapter-btn.active-ch {
+  background: var(--accent-gold) !important;
+  color: #0a0d14 !important;
+  font-weight: 800 !important;
+  border-color: #fff !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+/* Tiêu đề đọc tương tác: Nhấp Tên Sách hoặc Số Đoạn để đổi ngay */
+.chapter-title-btn {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.12rem 0.35rem;
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+  line-height: inherit;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.chapter-title-btn:hover {
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--accent-gold);
+  transform: translateY(-1px);
+}
+
+.chapter-title-sep {
+  color: var(--text-muted);
+  font-weight: 400;
+  opacity: 0.6;
+  margin: 0 0.1rem;
+  user-select: none;
+}
+
 /* Versions List */
 .versions-list {
   padding: 1rem 1.5rem;

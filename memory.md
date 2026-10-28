@@ -203,20 +203,10 @@
   - Khắc phục lỗi che nút bản dịch mobile theo ảnh anh Jimmy: Đặt `justify-content: flex-start !important` & `flex-shrink: 0 !important` cho `#primary-version-trigger`; rút gọn nhãn bản dịch (`BTT 1925`, `EDE`, `KTHD`, `CGKPV`, `KJV`); thêm nút trong menu hamburger. Đạt 172/172 test Pytest pass.
 
 - **Milestone 51 (2026-10-28)**: Compact Primary Version Modal & Top-Right Close Button:
-  - Tiếp nhận ảnh & yêu cầu từ anh Jimmy: Chuyển nút Đóng lên góc phải nhỏ gọn; làm nhỏ gọn khu vực tiêu đề (gạch xanh) để dễ nhìn, tiết kiệm diện tích.
-  - Khắc phục & tối ưu giao diện `#primary-version-modal`:
-    1. Header Tinh Gọn (`.pvm-header`): Gộp huy hiệu & tiêu đề thành 1 hàng ngang duy nhất (`.pvm-header-left`), font 0.92rem, bỏ mô tả thừa, tiết kiệm ~90px chiều dọc.
-    2. Nút Đóng Nhỏ Gọn (`.pvm-close-btn`): Nút tròn 28x28px với icon `✕` tại góc trên bên phải, hover sáng vàng hoàng gia.
-    3. Loại bỏ Footer Thừa: Xóa `.modal-footer` với nút Đóng to ở đáy, mở rộng tối đa vùng hiển thị bản dịch (`max-height: calc(88vh - 50px)`).
-  - Bổ sung Unit Test `test_compact_version_modal.py`. Toàn bộ **174/174 bài test Pytest PASS 100%**. Đồng bộ mirror & Vercel.
+  - Tối ưu theo ảnh gạch xanh anh Jimmy: Header `#primary-version-modal` tinh gọn 1 hàng (`.pvm-header`), nút đóng tròn 28px (`.pvm-close-btn`) góc trên bên phải, xóa footer thừa mở rộng diện tích đọc. Đạt 174/174 test Pytest pass.
 
 - **Milestone 52 (2026-10-28)**: Streamline Parallel Version Selector Modal (Zero Clutter):
-  - Tiếp nhận phản ánh & ảnh khoanh đỏ từ anh Jimmy cho `#version-selector-modal`:
-    1. Xóa mô tả thừa: Loại bỏ hoàn toàn đoạn `<p class="modal-desc">` gây choán chỗ.
-    2. Rút gọn tiêu đề tab: Rút từ nhiều dòng thành 1 dòng nhỏ gọn `Sắc Tộc (7)` và `Quốc Tế (7)`.
-    3. Hàng nút chọn nhanh siêu gọn (`.quick-pill`): Thu gọn padding & font 0.72rem, hiển thị ngang 1 hàng.
-    4. Thẻ bản dịch 1 hàng (~38px): Bỏ câu mô tả rườm rà (`.version-option-note`), căn giữa tên + huy hiệu badge trên 1 hàng duy nhất (`.version-option-left`), sửa trùng lặp badge (`BDY`, `CGKPV`), tăng sức chứa hiển thị lên 7-9 bản dịch cùng lúc.
-  - Test `test_compact_selector_modal.py`: **177/177 test Pytest PASS 100%**. Đồng bộ mirror & Vercel.
+  - Rút gọn `#version-selector-modal` theo ảnh anh Jimmy: Xóa mô tả thừa `<p class="modal-desc">`; rút gọn tên tab; 4 nút chọn nhanh `.quick-pill` 1 hàng; thẻ bản dịch 1 hàng (~38px) bỏ mô tả rườm rà, sửa trùng badge `BDY`/`CGKPV`. Đạt 177/177 test Pytest pass.
 
 - **Milestone 53 (2026-10-28)**: Compact Text-Focused Book Picker & Real-Time Instant Search:
   - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "làm gọn thôi. mỗi chữ là được , có số lượng đoạn. không cần phải ô to bao quanh đâu. Mỗi lần kiếm sách tôi hay kiếm không ra".
@@ -234,3 +224,12 @@
     2. Thu nhỏ thanh điều hướng (`.tsk-prev-next-split-bar` & `.tsk-arrow-btn`): Giảm padding (0.35rem 0.55rem / mobile 0.28rem 0.45rem), viền 1px tinh tế, font 0.72rem - 0.78rem, chống tràn `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`.
     3. Tinh gọn Danh mục 66 Sách TSK (`.tsk-dir-book-chip`): Gắn `white-space: nowrap` cho số đoạn `.dir-bslug` (ngăn ngắt dòng lỗi như `34\nch`), chuyển chip sang dạng phẳng thanh thoát (`background: transparent`), chiều cao 28px.
   - Bổ sung Unit Test `test_tsk_navigation_compact.py`. Toàn bộ **182/182 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+
+- **Milestone 55 (2026-10-28)**: Interactive Clickable Chapter Title (Direct Book & Chapter Pickers):
+  - Tiếp nhận ý kiến & ảnh minh họa từ anh Jimmy: Bấm vào tên sách (`Giăng`) thì hiện danh sách 66 sách để chọn; bấm vào số đoạn (`Đoạn 1`) thì cho phép chọn trực tiếp các đoạn tương ứng của sách đó.
+  - Triển khai tương tác thông minh ngay trên thanh đọc Focus Reader:
+    1. Tách tiêu đề chương (`.chapter-title`) thành 2 nút bấm tương tác:
+       - `.chapter-title-book-btn` (`#reader-book-picker-btn`): Hiển thị tên sách (vd: `Giăng`), hover sáng nhẹ. Nhấp vào mở thẳng hộp thoại 66 sách kèm tìm kiếm tức thì.
+       - `.chapter-title-chap-btn` (`#reader-chapter-picker-btn`): Hiển thị số đoạn (vd: `Đoạn 1`), hover sáng nhẹ. Nhấp vào mở trực tiếp lưới chọn đoạn của sách đó (vd: 1–21 đoạn của Giăng, 1–50 đoạn Sáng thế ký, 1–150 đoạn Thi thiên) để người đọc chọn ngay chỉ với 1 chạm.
+    2. Nổi bật đoạn hiện tại (`.chapter-btn.active-ch`): Đánh dấu vàng hoàng gia cho đoạn đang đọc trong lưới chọn đoạn.
+  - Bổ sung Unit Test `test_interactive_chapter_title.py`. Toàn bộ **185/185 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.

@@ -695,6 +695,38 @@ class LogosApp {
         }
       });
     });
+
+    // Nhấp vào Tên Sách hoặc Số Đoạn ngay trên tiêu đề đọc để đổi Sách hoặc đổi Đoạn tức thì
+    readerContainer.querySelectorAll('.chapter-title-book-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const currentBook = bibleEngine.getBookById(state.currentBook);
+        const testament = currentBook ? currentBook.testament : 'OT';
+        document.querySelectorAll('.testament-tab').forEach(t => {
+          t.classList.toggle('active', t.dataset.testament === testament);
+        });
+        const searchInput = document.getElementById('book-picker-search-input');
+        const searchClear = document.getElementById('book-picker-search-clear');
+        const searchBar = document.getElementById('book-picker-search-bar');
+        const tabs = document.getElementById('book-picker-tabs');
+        if (searchInput) searchInput.value = '';
+        if (searchClear) searchClear.classList.add('hidden');
+        if (searchBar) searchBar.classList.remove('hidden');
+        if (tabs) tabs.classList.remove('hidden');
+        this.populateBookPicker(testament, '');
+        document.getElementById('books-grid')?.classList.remove('hidden');
+        document.getElementById('chapters-grid')?.classList.add('hidden');
+        document.getElementById('book-picker-modal')?.classList.remove('hidden');
+      });
+    });
+
+    readerContainer.querySelectorAll('.chapter-title-chap-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.getElementById('book-picker-modal')?.classList.remove('hidden');
+        this.openChaptersSelector(state.currentBook);
+      });
+    });
   }
 
   highlightActiveVerse(verseNum) {
@@ -5058,7 +5090,8 @@ class LogosApp {
     `;
 
     for (let c = 1; c <= book.chapters_count; c++) {
-      html += `<button class="chapter-btn" data-chapter="${c}">${c}</button>`;
+      const isCur = (bookId === state.currentBook && c === state.currentChapter);
+      html += `<button class="chapter-btn ${isCur ? 'active-ch' : ''}" data-chapter="${c}">${c}</button>`;
     }
     chaptersGrid.innerHTML = html;
 

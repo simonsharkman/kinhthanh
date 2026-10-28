@@ -387,7 +387,11 @@ export class BibleEngine {
             <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
               ${book.name_vi.toUpperCase()} • ĐOẠN ${chNum}/${maxCh} • ${transId}
             </span>
-            <h2 class="chapter-title">${passageData.title_vi || passageData.ref}</h2>
+            <h2 class="chapter-title">
+              <button type="button" class="chapter-title-btn chapter-title-book-btn" id="reader-book-picker-btn" title="Chọn sách khác trong 66 sách Kinh Thánh">${book.name_vi}</button>
+              <span class="chapter-title-sep">-</span>
+              <button type="button" class="chapter-title-btn chapter-title-chap-btn" id="reader-chapter-picker-btn" title="Chọn đoạn khác trong ${book.name_vi}">Đoạn ${chNum}</button>
+            </h2>
             <p class="chapter-subtitle">
               Bản đọc: <span class="active-reading-version-tag" style="color: var(--accent-gold); font-weight: 600;">${transName}</span>
             </p>
@@ -479,7 +483,11 @@ export class BibleEngine {
         <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
           ${book.name_vi.toUpperCase()} • ĐOẠN ${passageData.chapter_num} • ĐỐI CHIẾU SONG SONG
         </span>
-        <h2 class="chapter-title">${passageData.title_vi || passageData.ref}</h2>
+        <h2 class="chapter-title">
+          <button type="button" class="chapter-title-btn chapter-title-book-btn" title="Chọn sách khác trong 66 sách Kinh Thánh">${book.name_vi}</button>
+          <span class="chapter-title-sep">-</span>
+          <button type="button" class="chapter-title-btn chapter-title-chap-btn" title="Chọn đoạn khác trong ${book.name_vi}">Đoạn ${passageData.chapter_num}</button>
+        </h2>
         <div class="parallel-header-chips">
           <span class="parallel-chip-label"><i class="fa-solid fa-columns"></i> Đang đối chiếu song song:</span>
           ${compareVersions.map(v => `<span class="parallel-version-pill">${v}</span>`).join('')}
