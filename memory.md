@@ -226,3 +226,9 @@
     2. Thu Nhỏ Tiêu Đề Thẻ: Badge tên bản dịch dạng pill nhỏ gọn (`.badge-vcode`), tên bản dịch mờ tinh tế (`.badge-vname`), không bị ngắt thành 2 dòng.
     3. Nút Popout Tinh Tế: Rút gọn nút to chữ sang icon vuông nhỏ 28x28px (`.card-popout-btn`), ẩn dòng nhắc lặp lại (`.parallel-card-footer-hint`).
   - Toàn bộ 166/166 bài test Pytest PASS 100%. Đã sync mirror và deploy lên Vercel.
+
+- **Milestone 49 (2026-10-28)**: Hermeneutical Context Dossier for All 21 NT Epistles:
+  - Yêu cầu anh Jimmy: Thư Tín làm rõ ai viết, viết cho ai, tại sao viết, tình hình Hội Thánh, chính trị, vị trí địa lý, nan đề cốt lõi.
+  - CSDL Thần Học (`data/epistles-deep-context.json`): 21 Thư Tín Tân Ước với 9 trường: Trước giả, hoàn cảnh, người nhận, địa lý cổ/nay, chính trị La Mã, tình hình HT, lý do viết, nan đề then chốt, sứ điệp giải pháp.
+  - Giao diện (`js/hermeneutics-engine.js`): Bổ sung `loadEpistles` & `getEpistleContext`, hiển thị Hồ Sơ Khảo Cứu trực quan gồm badges và 6 phân mục (Địa danh, Chính trị, Tình hình HT, Nan đề báo động, Sứ điệp giải pháp).
+  - Test `test_epistles_deep_context.py`: **169/169 test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.

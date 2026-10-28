@@ -1,0 +1,399 @@
+{
+  "GAL": {
+    "book_id": "GAL",
+    "name_vi": "Ga-la-ti",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Phao-lô viết với tâm huyết và sự khẩn thiết tột cùng trước nguy cơ các tân tín hữu bị dẫn dụ lìa bỏ Tin Lành Ân Điển. Ông tự tay viết lá thư này bằng những nét chữ rất lớn (Ga-la-ti 6:11), thể hiện sự xúc động và mức độ nghiêm trọng của vấn đề.",
+    "recipient": "Các Hội Thánh vùng Nam Ga-la-ti (An-ti-ốt xứ Bi-si-đi, Y-cô-ni, Lít-trơ, Đẹt-bơ)",
+    "location_short": "Miền Nam Ga-la-ti (Trung Nam Thổ Nhĩ Kỳ ngày nay)",
+    "location": "Tỉnh Ga-la-ti của Đế quốc La Mã thuộc vùng Tiểu Á (nay là vùng cao nguyên trung nam Thổ Nhĩ Kỳ). Đây là những Hội Thánh được Phao-lô và Ba-na-ba trực tiếp khai mở trong chuyến truyền giáo thứ nhất (Công Vụ 13–14), nằm trên các trục lộ giao thương chính của La Mã.",
+    "date_and_place": "Khoảng 48–49 SC, viết từ An-ti-ốt xứ Sy-ri (trước Công Đồng Giê-ru-sa-lem trong Công Vụ 15) hoặc từ Cô-rinh-tô",
+    "political_context": "Tỉnh Ga-la-ti nằm dưới quyền cai trị của Đế quốc La Mã thời Hoàng đế Claudius. Xã hội đa sắc tộc bao gồm người Celt (Gauls bản địa), người Hy Lạp định cư, kiều dân Do Thái kinh doanh và chính quyền thực dân La Mã. Luật La Mã cho phép người Do Thái duy trì các tập tục tôn giáo cổ truyền, nhưng bắt đầu giám sát chặt chẽ các nhóm tôn giáo mới.",
+    "church_situation": "Đa số tín hữu là người gốc Dân Ngoại (Hy Lạp/La Mã) vừa mới tin Chúa, đức tin còn non trẻ nhưng rất nhiệt thành; một số ít là tín hữu gốc Do Thái. Họ từng tiếp đón Phao-lô như thiên sứ của Đức Chúa Trời, nhưng vì nền tảng giáo lý chưa vững nên dễ bị lung lạc bởi các lập luận bác học của các giáo sư Do Thái từ Giê-ru-sa-lem đến.",
+    "why_written": "Phao-lô nhận được tin sét đánh: Các giáo sư giả Do Thái giáo hóa đã xâm nhập vào các Hội Thánh Ga-la-ti, lừa gạt tín hữu rằng Tin Lành của Phao-lô còn 'thiếu sót', buộc họ phải giữ luật Môi-se mới được cứu. Phao-lô phải viết thư khẩn cấp không lời chào khen thông lệ để bảo vệ chân lý Phúc Âm.",
+    "core_problems": [
+      "Tà giáo Do Thái giáo hóa (Judaizers): Ép buộc tín hữu Dân Ngoại phải chịu phép cắt bì và vâng giữ toàn bộ luật nghi lễ Môi-se (ngày kiêng, tháng lễ, đồ ăn ô uế) thì mới được kể là con cái thật của Đức Chúa Trời.",
+      "Bôi nhọ thẩm quyền sứ đồ của Phao-lô: Vu khống Phao-lô chỉ là 'sứ đồ mạo danh hạng hai' (vì không thuộc nhóm 12 sứ đồ ở Giê-ru-sa-lem), cho rằng ông cắt bớt phép cắt bì chỉ để 'lấy lòng người Dân Ngoại'.",
+      "Biến đổi Tin Lành ân điển thành Tin Lành luật pháp: Hạ thấp công lao chuộc tội trọn vẹn của Chúa Jêsus trên Thập tự giá, làm cho sự chết của Đấng Christ trở nên vô ích (Ga-la-ti 2:21)."
+    ],
+    "solution_and_message": "Tái khẳng định thẩm quyền sứ đồ nhận trực tiếp từ khải thị của Chúa Cứu Thế Jêsus, không bởi loài người. Công bố Bản Tuyên Ngôn Tự Do Cơ Đốc: Người ta được xưng công bình CHỈ NHỜ ĐỨC TIN nơi Chúa Jêsus, tuyệt đối KHÔNG NHỜ VIỆC LÀM của luật pháp (Ga 2:16). Tự do trong Đấng Christ là bước đi theo Đức Thánh Linh để sinh bông trái Thánh Linh và phục vụ nhau bằng tình yêu thương, chứ không phải buông thả theo xác thịt."
+  },
+  "ROM": {
+    "book_id": "ROM",
+    "name_vi": "Rô-ma",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Phao-lô viết qua sự trợ giúp của thư ký Tẹt-ti-út (Rô-ma 16:22), được nữ chấp sự Phê-bê của Hội Thánh Căn-cơ-rê đích thân chuyển thư đến Rô-ma. Phao-lô viết với tâm thế chuẩn bị một bản đại phác thảo thần học hoàn chỉnh nhất trước khi ông đi Giê-ru-sa-lem rồi đến thăm Rô-ma.",
+    "recipient": "Các thánh đồ và tín hữu tại thủ đô Rô-ma (cả Cơ Đốc nhân Do Thái và Dân Ngoại)",
+    "location_short": "Thủ đô Rô-ma (nước Ý ngày nay)",
+    "location": "Thành phố Rô-ma, trái tim và thủ đô vĩ đại của Đế quốc La Mã cổ đại. Hội Thánh tại đây không do sứ đồ nào lập trực tiếp, mà có thể do các tín hữu trở về từ lễ Ngũ Tuần (Công Vụ 2) hoặc các Cơ Đốc nhân di cư lập nên, nhóm lại rải rác tại các Hội Thánh tư gia.",
+    "date_and_place": "Khoảng mùa đông năm 57 SC, viết từ thành Cô-rinh-tô trong chuyến hành trình truyền giáo thứ ba",
+    "political_context": "Dưới thời Hoàng đế La Mã Nero (giai đoạn đầu trị vì). Trước đó, Hoàng đế Claudius từng ban sắc lệnh (năm 49 SC) trục xuất toàn bộ người Do Thái khỏi Rô-ma vì những tranh cãi liên quan đến Đấng Christ. Khi người Do Thái được phép trở về Rô-ma, cấu trúc Hội Thánh đã thay đổi hoàn toàn do các tín hữu Dân Ngoại đang lãnh đạo.",
+    "church_situation": "Hội Thánh Rô-ma đông đúc nhưng gặp sự căng thẳng văn hóa ngấm ngầm: Tín hữu gốc Do Thái tự hào về di sản Kinh Thánh và Luật pháp; trong khi tín hữu gốc Dân Ngoại có xu hướng tự phụ, xem thường người Do Thái vì dân tộc này đã chối bỏ Đấng Mê-si-a.",
+    "why_written": "Phao-lô muốn đặt nền móng giáo lý cứu rỗi vững chắc cho Hội Thánh thủ đô, xóa tan sự kỳ thị sắc tộc giữa Do Thái và Dân Ngoại để hiệp một Thân Thể, đồng thời giới thiệu khải tượng truyền giáo mở rộng sang Tây Ban Nha để xin sự tiếp trợ của Hội Thánh Rô-ma.",
+    "core_problems": [
+      "Chia rẽ và định tội lẫn nhau giữa tín hữu Do Thái và Dân Ngoại về luật pháp, ngày lễ và thức ăn kiêng cữ (Rô-ma 14).",
+      "Hiểu lầm về số phận của tuyển dân Y-sơ-ra-ên khi họ khước từ Tin Lành (Rô-ma 9–11).",
+      "Nguy cơ lạm dụng ân điển để sống phóng túng buông tuồng (Rô-ma 6)."
+    ],
+    "solution_and_message": "Chủ đề 'Sự Công Bình Của Đức Chúa Trời': Mọi người đều đã phạm tội và thiếu mất sự vinh hiển của Chúa; người ta được xưng công bình vô điều kiện bởi ân điển qua đức tin trong Chúa Jêsus (Rô-ma 3:23-24). Sự cứu chuộc bao trùm cả Do Thái lẫn Dân Ngoại. Kêu gọi dâng thân thể làm của lễ sống và thánh, hiệp một trong tình yêu thương và phục vụ tha nhân."
+  },
+  "1CO": {
+    "book_id": "1CO",
+    "name_vi": "1 Cô-rinh-tô",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Phao-lô viết với tấm lòng của người cha thuộc linh đau xót trước sự bại hoại đạo đức và chia rẽ nội bộ của đứa con tinh thần mà ông đã dốc lòng gầy dựng suốt 18 tháng (Công Vụ 18).",
+    "recipient": "Hội Thánh của Đức Chúa Trời tại Cô-rinh-tô và các thánh đồ khắp nơi",
+    "location_short": "Thành phố cảng Cô-rinh-tô (miền Nam Hy Lạp ngày nay)",
+    "location": "Thành phố cảng Cô-rinh-tô trù phú nằm trên eo đất hẹp nối liền miền Bắc và Nam Hy Lạp (tỉnh A-chai của La Mã). Đây là trung tâm thương mại hàng hải quốc tế sầm uất bậc nhất thời bấy giờ.",
+    "date_and_place": "Khoảng năm 55 SC, viết từ thành Ê-phê-sô trong chuyến hành trình truyền giáo thứ ba",
+    "political_context": "Thành phố thuộc địa La Mã đa sắc tộc, đa tôn giáo, nơi giao lưu văn hóa Hy-La. Khét tiếng thế giới cổ đại về sự sa đọa tình dục, dâm loạn và thờ ngẫu tượng ('sống kiểu Cô-rinh-tô' là thành ngữ thời đó chỉ lối sống trác táng), nổi tiếng với đền thờ nữ thần Aphrodite có hơn một ngàn kỹ nữ đền miếu.",
+    "church_situation": "Hội Thánh nhận được nhiều ân tứ Thánh Linh lạ lùng và sự giàu có tri thức, nhưng thuộc linh còn rất non nớt ('thuộc về xác thịt', 'con đỏ trong Đấng Christ'). Thói quen suy đồi của xã hội bên ngoài đã tràn vào làm ô uế đời sống Hội Thánh.",
+    "why_written": "Phao-lô nhận được tin báo từ người nhà Cơ-lô-ê về tình trạng chia rẽ nội bộ (1Co 1:11) và nhận được thư hỏi ý kiến từ chính Hội Thánh Cô-rinh-tô về hôn nhân, đồ cúng thần tượng, các ân tứ và sự phục sinh.",
+    "core_problems": [
+      "Chia rẽ bè phái trầm trọng: Chia thành 4 phe tranh giành (phe Phao-lô, phe A-bô-lô, phe Sê-pha, phe Đấng Christ).",
+      "Dung dưỡng tội lỗi vô luân cực độ: Một tín hữu lấy mẹ kế làm vợ mà Hội Thánh vẫn tự hào dung thứ (1Co 5).",
+      "Kiện cáo nhau ra trước tòa án người vô tín, làm hoen ố danh Chúa (1Co 6).",
+      "Tranh cãi gay gắt về việc ăn thịt cúng thần tượng và quyền tự do Cơ Đốc (1Co 8–10).",
+      "Lộn xộn trong giờ thờ phượng, lạm dụng ân tứ tiếng lạ, say xỉn trong Tiệc Thánh (1Co 11–14).",
+      "Tà thuyết chối bỏ sự sống lại của thân thể thể xác (1Co 15)."
+    ],
+    "solution_and_message": "Thập tự giá là sự khôn ngoan và quyền phép tối thượng của Đức Chúa Trời, hạ bệ sự kiêu ngạo thế gian. Thân thể tín hữu là Đền Thờ của Đức Thánh Linh, phải giữ gìn thánh sạch. Tình yêu thương là con đường trổi hơn hết (1Co 13) chi phối mọi ân tứ. Tuyên xưng sự phục sinh vinh hiển của Đấng Christ là nền tảng tối thượng của đức tin Cơ Đốc."
+  },
+  "2CO": {
+    "book_id": "2CO",
+    "name_vi": "2 Cô-rinh-tô",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Bức thư mang tính tự sự, bộc bạch tâm can sâu sắc và cảm động nhất của Phao-lô. Ông trải lòng về những gian truân, đòn vọt, nước mắt và cả sự yếu đuối thân xác vì cớ chức vụ Tin Lành.",
+    "recipient": "Hội Thánh Cô-rinh-tô và toàn thể thánh đồ trên khắp xứ A-chai",
+    "location_short": "Cô-rinh-tô (Hy Lạp)",
+    "location": "Thành phố cảng Cô-rinh-tô, Hy Lạp.",
+    "date_and_place": "Khoảng cuối năm 55 hoặc đầu năm 56 SC, viết từ Ma-xê-đoan sau khi gặp lại người đồng công Tít",
+    "political_context": "Văn hóa Hy Lạp chuộng các diễn giả tài hoa hùng biện, dáng vẻ hào nhoáng và coi thường những kẻ yếu đuối, nghèo khổ hoặc phải chịu cảnh tù đày đòn vọt.",
+    "church_situation": "Sau bức thư thứ nhất và chuyến thăm đau đớn, đa số tín hữu Cô-rinh-tô đã ăn năn; tuy nhiên, một nhóm giáo sư giả tự xưng là 'siêu sứ đồ' đã len lỏi vào, công kích ngoại hình, lời nói và tính xác thực của chức vụ Phao-lô.",
+    "why_written": "Bày tỏ sự an ủi và vui mừng vì Hội Thánh đã ăn năn vâng phục; bảo vệ tính chân thật và thẩm quyền chức vụ sứ đồ trước các sứ đồ giả; đồng thời kêu gọi hoàn tất việc lạc quyên cứu trợ các thánh đồ nghèo khó tại Giê-ru-sa-lem.",
+    "core_problems": [
+      "Các 'siêu sứ đồ' giả mạo khoe khoang quyền lực, đòi hỏi thư giới thiệu, bôi nhọ Phao-lô là 'khi có mặt thì yếu đuối, lời nói chẳng có giá trị'.",
+      "Nghi ngờ về động cơ tài chính của Phao-lô khi ông từ chối nhận lương từ Hội Thánh Cô-rinh-tô.",
+      "Sự trì hoãn và nguội lạnh trong việc quyên góp giúp đỡ các tín hữu bị nạn đói ở xứ Giu-đê."
+    ],
+    "solution_and_message": "Chức vụ của Giao Ước Mới: Vinh hiển hơn chức vụ của chữ viết luật pháp. 'Chúng tôi chứa báu vật này trong những bình đất để quyền phép tuyệt đối ấy thuộc về Đức Chúa Trời chứ không phải từ chúng tôi' (2Co 4:7). Sự yếu đuối là cơ hội để quyền năng Đấng Christ tỏ tường: 'Ân điển Ta đủ cho con, vì sức mạnh của Ta được trọn vẹn trong sự yếu đuối' (2Co 12:9). Tấm gương ban cho rộng rãi xuất phát từ ân điển."
+  },
+  "EPH": {
+    "book_id": "EPH",
+    "name_vi": "Ê-phê-sô",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Một trong bốn 'Thư Tín Ngục Tù' (Prison Epistles). Phao-lô viết khi đang bị xiềng xích trong tù tại Rô-ma, nhưng tâm linh ông bay bổng giữa các nơi trên trời với những lời ngợi khen Ba Ngôi Đức Chúa Trời cao vút.",
+    "recipient": "Các thánh đồ tại thành Ê-phê-sô và các Hội Thánh luân chuyển khắp vùng Tiểu Á",
+    "location_short": "Thành phố Ê-phê-sô (Tây Á, Thổ Nhĩ Kỳ ngày nay)",
+    "location": "Thành phố cảng Ê-phê-sô, thủ phủ tỉnh A-si của La Mã. Đây là đại đô thị phồn thịnh bậc nhất Tiểu Á, nổi tiếng toàn cầu với Đền Thờ Nữ Thần Đi-anh (Artemis) — một trong Bảy kỳ quan thế giới cổ đại — và là trung tâm ma thuật bùa chú nổi tiếng.",
+    "date_and_place": "Khoảng năm 60–62 SC, viết trong cảnh giam cầm tại thành Rô-ma",
+    "political_context": "Trung tâm thương mại và hành chính La Mã. Nền kinh tế địa phương phụ thuộc mật thiết vào ngành đúc tượng thần và du lịch hành hương tôn giáo huyền bí. Tín hữu Cơ Đốc phải đối mặt trực diện với quyền lực tà linh và sự tẩy chay thương mại của phường thợ đúc bạc (Công Vụ 19).",
+    "church_situation": "Hội Thánh vững vàng, gồm phần lớn là tín hữu Dân Ngoại đã dứt khoát đốt bỏ sách bùa chú giá trị bạc vạn để theo Chúa. Tuy nhiên, họ cần được trang bị sự hiểu biết sâu nhiệm về địa vị vinh hiển của mình trong Đấng Christ để không run sợ trước thế lực tối tăm.",
+    "why_written": "Không nhằm giải quyết một xung đột cụ thể nào, mà là một bản đại tuyên ngôn khải hoàn về Mầu Nhiệm Hội Thánh: Kế hoạch đời đời của Đức Chúa Trời quy tụ muôn loài dưới quyền Đấng Christ, xây dựng Hội Thánh thành Đền Thờ thiêng liêng và trang bị cho cuộc chiến tâm linh.",
+    "core_problems": [
+      "Nguy cơ tín hữu Dân Ngoại quên mất địa vị được tuyển chọn muôn đời của mình trong Đấng Christ.",
+      "Nguy cơ tái lập sự chia cắt lịch sử giữa người Do Thái và Dân Ngoại.",
+      "Sự tấn công vô hình nhưng ác liệt của các quyền lực tà linh không trung và ma thuật vùng Tiểu Á."
+    ],
+    "solution_and_message": "Sự cứu rỗi hoàn toàn bởi ân điển qua đức tin, không bởi việc làm (Ê-phê-sô 2:8-9). Đấng Christ đã phá đổ bức tường ngăn cách thù nghịch, tạo nên 'Một Người Mới' hiệp nhất giữa Do Thái và Dân Ngoại. Lời kêu gọi bước đi xứng đáng với ơn gọi: Hiệp một, sống thánh khiết trong gia đình/hôn nhân, và mang lấy 'Mọi Khí Giới Của Đức Chúa Trời' để đứng vững trong ngày dữ (Ê-phê-sô 6:10-18)."
+  },
+  "PHP": {
+    "book_id": "PHP",
+    "name_vi": "Phi-líp",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Bức thư của tình cảm phụ tử đầm ấm và lòng biết ơn sâu sắc. Dù đang đối diện với xiềng xích và viễn cảnh có thể bị xử tử, bức thư lại tràn ngập từ khóa 'Vui mừng' (hơn 16 lần).",
+    "recipient": "Các thánh đồ tại thành Phi-líp, cùng các giám mục và chấp sự",
+    "location_short": "Thành phố Phi-líp (miền Đông Ma-xê-đoan, Hy Lạp ngày nay)",
+    "location": "Thành phố Phi-líp, cửa ngõ châu Âu đầu tiên đón nhận Tin Lành qua khải tượng người Ma-xê-đoan của Phao-lô (Công Vụ 16: Người phụ nữ bán vải sắc tía Ly-đi và người đề lao tin Chúa).",
+    "date_and_place": "Khoảng năm 61–62 SC, viết trong tù tại thành Rô-ma",
+    "political_context": "Phi-líp là một 'Thuộc địa La Mã' (Roman Colony) danh giá, được hưởng luật tự trị của đất Ý (Ius Italicum). Đa số cư dân là cựu chiến binh La Mã giải ngũ, hết lòng trung thành với Hoàng đế và rất tự hào về tư cách công dân La Mã.",
+    "church_situation": "Hội Thánh mẫu mực, trung tín, có mối giao thông tài chính và gắn bó bền chặt nhất với Phao-lô, nhiều lần gửi tiếp trợ cho ông khi ông truyền giáo ở Tê-sa-lô-ni-ca, Cô-rinh-tô và nay trong tù ở Rô-ma qua bàn tay Ê-pháp-rô-đích.",
+    "why_written": "Bày tỏ lòng tri ân sâu xa về sự quyên góp của Hội Thánh; báo tin về bệnh tình thập tử nhất sinh của người đồng công Ê-pháp-rô-đích nay đã bình phục; khích lệ Hội Thánh vui mừng giữa thử thách; hòa giải mâu thuẫn cá nhân và cảnh báo tà giáo Do Thái cực đoan.",
+    "core_problems": [
+      "Bắt bớ từ chính quyền và xã hội La Mã bên ngoài.",
+      "Sự bất hòa cá nhân giữa hai nữ môn đồ sốt sắng Ê-vô-đi và Sin-ty-cơ làm tổn hại sự hiệp một (Phi-líp 4:2).",
+      "Mối đe dọa từ những kẻ giảng đạo giả hình vì ganh tị và phái Do Thái giáo cắt bì ('bọn chó, kẻ làm công gian ác')."
+    ],
+    "solution_and_message": "Bài ca Hạ Mình Tuyệt Đỉnh của Chúa Jêsus: Hãy có đồng tâm tình như Đấng Christ đã tự bỏ mình đi, mang lấy hình hài tôi tớ, vâng phục cho đến chết trên cây gỗ (Phi-líp 2:5-11). Xem mọi sự như rơm rác để nhận biết Đấng Christ. Quốc tịch thật của chúng ta ở trên trời. Bí quyết thỏa lòng: 'Tôi làm được mọi sự nhờ Đấng ban thêm sức cho tôi' (Phi-líp 4:13)."
+  },
+  "COL": {
+    "book_id": "COL",
+    "name_vi": "Cô-lô-se",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Phao-lô viết bức thư này khi đang bị giam cầm tại Rô-ma, đồng ký tên với người học trò Ti-mô-thê. Phao-lô chưa từng trực tiếp đến thăm Cô-lô-se, Hội Thánh này do môn đồ trung tín của ông là Ê-pháp-ra lập nên.",
+    "recipient": "Các thánh đồ và anh em trung tín trong Đấng Christ tại thành Cô-lô-se",
+    "location_short": "Thành Cô-lô-se, thung lũng sông Lycus (Tây Nam Thổ Nhĩ Kỳ ngày nay)",
+    "location": "Thành phố Cô-lô-se thuộc xứ Phi-ri-gi (Tiểu Á), nằm gần hai thành phố lân cận là Lao-đi-xê và Hi-ê-ra-bô-li trong thung lũng sông Lycus.",
+    "date_and_place": "Khoảng năm 60–62 SC, viết trong tù tại Rô-ma (cùng thời điểm với thư Ê-phê-sô và Phi-lê-môn)",
+    "political_context": "Vùng đất nằm dưới sự thống trị của La Mã. Xã hội giao thoa phức tạp giữa cư dân bản địa, kiều dân Do Thái đông đảo và làn sóng triết học Hy Lạp huyền bí.",
+    "church_situation": "Một Hội Thánh non trẻ, phần lớn là Dân Ngoại, được gây dựng tốt đẹp qua chức vụ của Ê-pháp-ra. Tuy nhiên, họ đang đứng trước bờ vực bị đầu độc bởi một trào lưu triết thuyết thần bí nguy hiểm.",
+    "why_written": "Ê-pháp-ra lặn lội đến tận ngục tù Rô-ma để báo cáo cho Phao-lô biết về 'Tà giáo Cô-lô-se' (The Colossian Heresy) đang tìm cách hạ bệ uy danh của Chúa Jêsus. Phao-lô lập tức viết thư gửi qua Ty-chi-cơ và Ô-nê-sim để triệt hạ tà thuyết này.",
+    "core_problems": [
+      "Tà giáo Cô-lô-se hỗn hợp: Kết hợp Do Thái giáo duy luật (ăn kiêng, ngày Sa-bát, trăng mới), thuyết thần bí phương Đông, sự thờ lạy thiên sứ (angel worship) và thuyết khổ hạnh ép xác.",
+      "Mầm mống Ngộ đạo thuyết sơ khai (Proto-Gnosticism): Cho rằng thể xác vật chất là xấu xa, phủ nhận sự đầy dẫy thần tánh của Chúa Jêsus, hạ Ngài xuống ngang hàng các thiên sứ bậc trung gian.",
+      "Triết học hư không của đời: Dẫn dụ tín hữu xa rời cội rễ Đấng Christ để vâng theo các điều răn luật lệ của con người."
+    ],
+    "solution_and_message": "Đấng Christ Là Tối Thượng và Toàn Vẹn Tuyệt Đối: Ngài là hình ảnh của Đức Chúa Trời không thấy được, là Trưởng tử của mọi tạo vật, bởi Ngài mà muôn vật được tạo dựng và gắn kết. 'Vì sự đầy trọn của Thần tánh hình hài đều ngự trong Ngài' (Cô-lô-se 2:9). Khi có Đấng Christ, tín hữu đã có sự trọn vẹn, không cần tìm kiếm thêm bất kỳ nghi lễ hay sự thần bí nào khác."
+  },
+  "1TH": {
+    "book_id": "1TH",
+    "name_vi": "1 Tê-sa-lô-ni-ca",
+    "author_human": "Sứ đồ Phao-lô, Si-la và Ti-mô-thê",
+    "author_context": "Một trong những thư tín đầu tiên của Phao-lô. Ông viết với niềm hân hoan tột bực khi Ti-mô-thê mang tin vui trở về báo rằng Hội Thánh non trẻ vẫn đứng vững kiên cường giữa cơn bão bách hại.",
+    "recipient": "Hội Thánh người Tê-sa-lô-ni-ca trong Đức Chúa Trời là Cha và trong Chúa Cứu Thế Jêsus",
+    "location_short": "Thành phố cảng Tê-sa-lô-ni-ca (thủ phủ vùng Ma-xê-đoan, Hy Lạp)",
+    "location": "Thành phố cảng Tê-sa-lô-ni-ca sầm uất, thủ phủ tỉnh Ma-xê-đoan, nằm trên tuyến đường giao thông huyết mạch Via Egnatia nối liền Rô-ma với phương Đông.",
+    "date_and_place": "Khoảng năm 50–51 SC, viết từ thành Cô-rinh-tô trong chuyến hành trình truyền giáo thứ hai",
+    "political_context": "Thành phố tự trị của La Mã (Free City), có chính quyền địa phương (các quan cai thành - politarchs, đúng như Công Vụ 17:6 ghi lại). Người Do Thái ganh tị đã kích động dân chúng kiện Phao-lô tội phản quốc chống Sê-sa vì xưng tụng 'Vua Jêsus'.",
+    "church_situation": "Hội Thánh mới thành lập chỉ sau khoảng 3 tuần giảng đạo tại nhà hội thì Phao-lô phải vội vã trốn đi vì bị mưu sát. Tín hữu hầu hết là người Dân Ngoại đã quay bỏ thần tượng để hầu việc Đức Chúa Trời hằng sống, đang chịu sự bắt bớ dữ dội từ chính đồng bào mình.",
+    "why_written": "Khích lệ các tân tín hữu đứng vững giữa gian truân; giải tỏa nỗi âu lo đau buồn của họ về số phận những anh em tín hữu đã qua đời trước Ngày Chúa Tái Lâm; chỉnh đốn lối sống đạo đức thánh khiết trong môi trường tà dâm Hy Lạp.",
+    "core_problems": [
+      "Bắt bớ và bách hại khốc liệt từ đồng bào và chính quyền.",
+      "Hoang mang về sự tái lâm: Tín hữu lo sợ những người đã chết trong Chúa sẽ bị thiệt thòi hoặc mất cơ hội tham dự Nước Trời vinh hiển.",
+      "Cám dỗ quay lại lối sống tà dâm, buông tuồng của văn hóa ngoại giáo xung quanh."
+    ],
+    "solution_and_message": "Sự Khích Lệ và Hy Vọng Vinh Hiển Về Ngày Chúa Tái Lâm: Mỗi đoạn thư đều kết thúc bằng lời nhắc nhở về sự trở lại của Chúa. Khải tượng vĩ đại về Sự Cất Lên (The Rapture): Người chết trong Chúa sẽ sống lại trước hết, kế đến những người còn sống sẽ cùng được cất lên giữa đám mây để nghênh tiếp Chúa trên không trung (1Th 4:13-18). Kêu gọi sống tỉnh thức, thánh khiết và làm việc siêng năng."
+  },
+  "2TH": {
+    "book_id": "2TH",
+    "name_vi": "2 Tê-sa-lô-ni-ca",
+    "author_human": "Sứ đồ Phao-lô, Si-la và Ti-mô-thê",
+    "author_context": "Viết chỉ ít tháng sau thư thứ nhất, Phao-lô tiếp tục đồng hành và bổ khuyết giáo lý cho các tín hữu tại Tê-sa-lô-ni-ca.",
+    "recipient": "Hội Thánh người Tê-sa-lô-ni-ca",
+    "location_short": "Tê-sa-lô-ni-ca (Hy Lạp)",
+    "location": "Thành phố cảng Tê-sa-lô-ni-ca, Ma-xê-đoan.",
+    "date_and_place": "Khoảng cuối năm 51 hoặc đầu năm 52 SC, viết từ thành Cô-rinh-tô",
+    "political_context": "Cơn bách hại Cơ Đốc giáo ngày càng gia tăng, khiến tín hữu lầm tưởng Ngày Cơn Giận của Chúa đã giáng xuống.",
+    "church_situation": "Đức tin và tình yêu thương vẫn phát triển mạnh mẽ, nhưng nảy sinh sự lộn xộn nghiêm trọng về nhận thức cánh chung luận do xuất hiện thư từ giả mạo mang danh Phao-lô.",
+    "why_written": "Đính chính sự lừa dối về Ngày của Chúa; vạch trần các dấu hiệu phải xảy ra trước khi Chúa tái lâm (sự bội đạo và sự xuất hiện của Kẻ Đại Gian Ác); quở trách nghiêm khắc những kẻ lười biếng bỏ việc làm ăn chực.",
+    "core_problems": [
+      "Thư từ giả mạo và lời tiên tri giả mạo danh Phao-lô phao tin rằng 'Ngày của Chúa đã đến rồi', làm tín hữu hoảng loạn.",
+      "Tệ nạn lười biếng, ỷ lại: Một số tín hữu viện cớ Chúa sắp đến nên bỏ bê công việc làm ăn, đi tọc mạch việc người khác và trở thành gánh nặng cho Hội Thánh.",
+      "Cơn bách hại dữ dội tiếp diễn đe dọa lòng kiên trì của các thánh đồ."
+    ],
+    "solution_and_message": "Sự Công Bình trong Ngày Đoán Phạt: Chúa sẽ báo thù những kẻ bắt bớ thánh đồ và ban sự an nghỉ cho người chịu khổ. Vạch rõ diễn trình tiên tri: Ngày của Chúa chưa thể đến chừng nào Sự Bội Đạo chưa diễn ra và 'Người Vô Luật Pháp' (Antichrist) chưa xuất hiện. Kỷ luật nghiêm minh đối với kẻ lười biếng: 'Ai không chịu làm việc thì cũng đừng ăn!' (2Th 3:10)."
+  },
+  "1TI": {
+    "book_id": "1TI",
+    "name_vi": "1 Ti-mô-thê",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Bức thư mục vụ của người cha già đầy kinh nghiệm gửi cho người con thiêng liêng trẻ tuổi Ti-mô-thê. Phao-lô viết sau khi được tha bổng lần thứ nhất khỏi tù ngục Rô-ma.",
+    "recipient": "Mục tử trẻ Ti-mô-thê, đang được ủy thác chăn bầy tại Hội Thánh Ê-phê-sô",
+    "location_short": "Viết gửi cho Ti-mô-thê tại Ê-phê-sô (Thổ Nhĩ Kỳ)",
+    "location": "Thành phố Ê-phê-sô, Tiểu Á.",
+    "date_and_place": "Khoảng năm 62–64 SC, viết từ vùng Ma-xê-đoan khi Phao-lô đang trên đường thăm viếng các Hội Thánh",
+    "political_context": "Thời kỳ đế quốc La Mã trước ngưỡng cửa cuộc đại bách hại bạo tàn của Nero (vụ cháy thành Rô-ma năm 64 SC). Cơ Đốc nhân chịu sự thù địch từ cả chính quyền La Mã lẫn cộng đồng Do Thái.",
+    "church_situation": "Hội Thánh Ê-phê-sô quy mô lớn, giàu có nhưng các trưởng lão và giáo sư biến chất đang xuất hiện ngay trong nội bộ (đúng như lời cảnh báo tiên tri của Phao-lô trong Công Vụ 20:29-30). Ti-mô-thê còn trẻ tuổi, tính tình e dè và hay đau dạ dày, phải gánh vác trách nhiệm nặng nề.",
+    "why_written": "Hướng dẫn Ti-mô-thê cách tổ chức, lãnh đạo và quản trị Nhà của Đức Chúa Trời; thiết lập tiêu chuẩn thánh chức; trang bị kỹ năng đối phó với giáo sư giả và bảo vệ Đạo Thật.",
+    "core_problems": [
+      "Tà giáo len lỏi: Triết lý hoang đường, gia phả vô tận, cấm đoán hôn nhân, kiêng cữ thức ăn vô căn cứ.",
+      "Sự thiếu kỷ luật trong sự thờ phượng và trật tự chức vụ của nam giới và nữ giới.",
+      "Nguy cơ bổ nhiệm những người thiếu tư cách đạo đức hoặc người mới tin Chúa vào ban lãnh đạo.",
+      "Cám dỗ mê tham tiền bạc và sự giàu có làm bại hoại chức vụ thánh."
+    ],
+    "solution_and_message": "Quy chuẩn tổ chức Nhà của Đức Chúa Trời: 'Để nếu ta có chậm trễ, con biết cách cư xử trong Nhà Đức Chúa Trời, tức là Hội Thánh của Đức Chúa Trời hằng sống, cột trụ và rường cột của Chân Lý' (1Ti 3:15). Đặt ra tiêu chuẩn đạo đức nghiêm ngặt cho Giám mục / Trưởng lão và Chấp sự. Tuyên xưng Chúa Jêsus là Đấng Trung Bảo duy nhất giữa Đức Chúa Trời và loài người (1Ti 2:5)."
+  },
+  "2TI": {
+    "book_id": "2TI",
+    "name_vi": "2 Ti-mô-thê",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Bản Di chúc Thuộc Linh vĩ đại và là trước tác cuối cùng của Sứ đồ Phao-lô. Ông viết từ ngục tối ẩm ướt Mamertine tại Rô-ma, biết rõ bản án tử hình bằng chém đầu sắp thi hành, cô đơn trong sự phản bội của nhiều người nhưng tràn trề đức tin khải hoàn.",
+    "recipient": "Mục tử Ti-mô-thê, 'con yêu quý của ta'",
+    "location_short": "Viết từ ngục tối Rô-ma gửi đến Ti-mô-thê",
+    "location": "Hầm ngục Mamertine, thành Rô-ma.",
+    "date_and_place": "Khoảng năm 66–67 SC, ngay trước khi Phao-lô tử vì đạo dưới thời bạo chúa Nero",
+    "political_context": "Đế quốc La Mã đang sôi sục trong cuộc đại bách hại Cơ Đốc nhân tàn khốc của Nero sau biến cố cháy thành Rô-ma. Cơ Đốc nhân bị săn lùng ráo riết, bị quăng cho thú dữ ăn thịt, bị tẩm dầu đốt làm đuốc thắp sáng vườn ngự uyển.",
+    "church_situation": "Hội Thánh đứng trước cuộc thử thách sống còn. Nhiều người từng theo Phao-lô đã sợ hãi bỏ trốn (Đê-ma mê trần thế bỏ đi, toàn bộ tín hữu xứ A-si quay lưng). Ti-mô-thê đối diện với nguy cơ nản lòng và khiếp sợ.",
+    "why_written": "Truyền lại ngọn đuốc chức vụ và ủy thác sứ mạng bảo tồn Lời Chúa cho Ti-mô-thê; kêu gọi Ti-mô-thê can đảm chịu khổ vì Tin Lành; xin Ti-mô-thê ghé thăm ông lần cuối và đem theo áo choàng cùng các sách da thuộc.",
+    "core_problems": [
+      "Cơn bách hại đẫm máu từ chính quyền Nero khiến nhiều người sợ hãi chối Chúa hoặc đào tẩu.",
+      "Tà giáo của Hy-mê-nê và Phi-lết dạy rằng sự sống lại đã qua rồi, làm lật đổ đức tin của nhiều người.",
+      "Thời kỳ khó khăn nguy hiểm trong những ngày sau rốt: Con người yêu bản thân, yêu tiền bạc hơn yêu Đức Chúa Trời."
+    ],
+    "solution_and_message": "Khúc Khải Hoàn Ca Của Đức Tin: 'Ta đã đánh trận tốt lành, đã chạy xong cuộc đua, đã giữ được đức tin. Hiện tại, mão triều thiên công bình đã để dành cho ta' (2Ti 4:7-8). Khẳng định uy quyền tuyệt đối của Kinh Thánh: 'Cả Kinh Thánh đều được Đức Chúa Trời soi dẫn, có ích cho sự dạy dỗ, bẻ trách, sửa trị, dạy người trong sự công bình' (2Ti 3:16). Kêu gọi Ti-mô-thê hết lòng giảng đạo, bất luận gặp thời hay không gặp thời."
+  },
+  "TIT": {
+    "book_id": "TIT",
+    "name_vi": "Tít",
+    "author_human": "Sứ đồ Phao-lô",
+    "author_context": "Phao-lô viết gửi cho Tít — người đồng lao Dân Ngoại trung kiên, người có tài giải quyết các khủng hoảng phức tạp (từng được Phao-lô cử đến ổn định Hội Thánh Cô-rinh-tô).",
+    "recipient": "Mục tử Tít, người được đặt lại để củng cố Hội Thánh trên đảo Cơ-rết",
+    "location_short": "Đảo Cơ-rết (Địa Trung Hải, Hy Lạp ngày nay)",
+    "location": "Đảo Cơ-rết (Crete), hòn đảo lớn nhất Hy Lạp nằm giữa Địa Trung Hải, nổi tiếng với nghề đi biển và các chiến binh đánh thuê.",
+    "date_and_place": "Khoảng năm 63–65 SC, viết từ Ma-xê-đoan hoặc Ni-cô-bô-li",
+    "political_context": "Thuộc quyền cai trị của La Mã. Xã hội Cơ-rết khét tiếng xấu xa về sự dối trá, hung dữ và ăn uống tham lam ('Người Cơ-rết hay nói dối, là thú dữ, bọn ăn không lười biếng' — thi sĩ bản địa Epimenides, được Phao-lô dẫn lại trong Tít 1:12).",
+    "church_situation": "Nhiều Hội Thánh được thành lập rải rác khắp các thành phố trên đảo Cơ-rết, nhưng thiếu tổ chức lãnh đạo vững vàng, nếp sống còn vương mang nhiều tệ nạn của văn hóa trụy lạc bản địa.",
+    "why_written": "Giao nhiệm vụ cho Tít sắp xếp lại công việc còn dang dở, lập các trưởng lão tại mỗi thành, chấn chỉnh các giáo sư giả và dạy dỗ nếp sống Cơ Đốc mẫu mực cho từng lứa tuổi.",
+    "core_problems": [
+      "Những kẻ chống đối, nói xằng bậy, đặc biệt là nhóm phái cắt bì Do Thái lừa gạt để kiếm lợi bất chính.",
+      "Văn hóa bản địa dối trá, lười biếng ảnh hưởng xấu đến lối sống của tín hữu.",
+      "Thiếu hụt người lãnh đạo thánh khiết có năng lực quản trị Hội Thánh."
+    ],
+    "solution_and_message": "Sự Kết Hợp Giữa Đạo Lý Thuần Khiết và Nếp Sống Tốt Lành: Ân điển của Đức Chúa Trời đã hiện ra để dạy chúng ta từ bỏ sự không tin kính và dục vọng thế gian, để sống tiết độ, công bình và tin kính trong đời này (Tít 2:11-12). Thiết lập tiêu chuẩn trưởng lão mẫu mực; kêu gọi mọi lứa tuổi (ông già, bà già, người trẻ, người nô lệ) làm đẹp lòng Chúa qua việc lành thực tế."
+  },
+  "PHM": {
+    "book_id": "PHM",
+    "name_vi": "Phi-lê-môn",
+    "author_human": "Sứ đồ Phao-lô và Ti-mô-thê",
+    "author_context": "Lá thư mang tính riêng tư nhất của Phao-lô, chan chứa tình yêu thương và sự lịch thiệp tinh tế, thể hiện cách Phúc Âm của Đấng Christ đảo lộn và biến đổi các định chế xã hội bất công.",
+    "recipient": "Ông Phi-lê-môn (chủ nhà giàu có tại Cô-lô-se), bà Áp-phi và A-chíp",
+    "location_short": "Thành Cô-lô-se (Tiểu Á, Thổ Nhĩ Kỳ)",
+    "location": "Thành phố Cô-lô-se, Tiểu Á. Hội Thánh địa phương đang nhóm lại tại chính tư gia của ông Phi-lê-môn.",
+    "date_and_place": "Khoảng năm 60–62 SC, viết trong tù tại thành Rô-ma",
+    "political_context": "Đế chế La Mã có chế độ chiếm hữu nô lệ cực kỳ hà khắc. Ước tính có tới một phần ba dân số La Mã là nô lệ. Luật La Mã cho phép chủ nô có quyền sinh sát, đánh đòn, đóng dấu sắt nung lên trán hoặc đóng đinh nô lệ bỏ trốn.",
+    "church_situation": "Hội Thánh tư gia tại nhà Phi-lê-môn. Phi-lê-môn là tín hữu kính sợ Chúa và giàu lòng bác ái, đã tin Chúa qua chức vụ của Phao-lô.",
+    "why_written": "Ô-nê-sim, nô lệ của Phi-lê-môn, đã ăn trộm tiền của chủ rồi đào tẩu sang Rô-ma. Tại đây, Ô-nê-sim gặp Phao-lô trong tù và được ông dẫn dắt tin Chúa. Phao-lô viết thư gửi Ô-nê-sim trở về cùng với lá thư này xin Phi-lê-môn tha thứ và tiếp nhận Ô-nê-sim.",
+    "core_problems": [
+      "Tội phạm đào tẩu và trộm cắp của Ô-nê-sim theo luật La Mã đáng bị trừng phạt tử hình.",
+      "Nguy cơ xung đột giữa luật pháp thế tục khắt khe và luật tình yêu thương tha thứ của Đấng Christ."
+    ],
+    "solution_and_message": "Sự Biến Đổi Kỳ Diệu Của Ân Điển: Phao-lô xin Phi-lê-môn đón nhận lại Ô-nê-sim không còn như một tên nô lệ, mà là 'Một Người Anh Em Yêu Dấu Trong Chúa'. Phao-lô sẵn sàng gánh thay mọi nợ nần của Ô-nê-sim ('Nếu người có làm hại anh điều chi hoặc mắc nợ anh, hãy tính cho tôi' — Phm 18, phản chiếu hình bóng Đấng Christ đền tội thay cho chúng ta)."
+  },
+  "HEB": {
+    "book_id": "HEB",
+    "name_vi": "Hê-bơ-rơ",
+    "author_human": "Đức Thánh Linh soi dẫn (trước giả ẩn danh; truyền thống gắn với Phao-lô, Ba-na-ba, A-bô-lô hoặc Lu-ca)",
+    "author_context": "Trước giả là một học giả thần học uyên bác tột đỉnh về Cựu Ước và tiếng Hy Lạp thi văn cổ điển, có mối quan hệ thân thiết với Ti-mô-thê (Hê-bơ-rơ 13:23).",
+    "recipient": "Các Cơ Đốc nhân gốc Do Thái (Hê-bơ-rơ) đang chịu bách hại và dao động đức tin",
+    "location_short": "Có thể gửi cho các cộng đồng tín hữu Do Thái tại Rô-ma hoặc Giê-ru-sa-lem",
+    "location": "Có thể là các tín hữu Do Thái kiều ngụ tại thủ đô Rô-ma hoặc tại xứ Palestine.",
+    "date_and_place": "Khoảng năm 65–69 SC (trước khi Đền Thờ Giê-ru-sa-lem bị quân La Mã tàn phá vào năm 70 SC, vì tác giả nói về các của tế lễ như vẫn đang diễn ra)",
+    "political_context": "Bầu không khí chính trị Do Thái sôi sục trước cuộc khởi nghĩa toàn diện chống lại La Mã (chiến tranh Do Thái - La Mã 66–70 SC). Cơ Đốc nhân Do Thái bị chính đồng bào Do Thái coi là 'phản bội dân tộc', bị khai trừ khỏi hội đường, tịch thu gia sản và tẩy chay khốc liệt.",
+    "church_situation": "Các tín hữu đã theo Chúa một thời gian, từng chịu khổ vì danh Chúa, nhưng nay mệt mỏi, đức tin nguội lạnh, có nguy cơ bỏ Đạo để quay trở về với Do Thái giáo — nơi có Đền Thờ nguy nga hữu hình và được luật La Mã công nhận hợp pháp.",
+    "why_written": "Cảnh báo khẩn cấp về hiểm họa bội đạo; chứng minh Chúa Jêsus và Giao Ước Mới trổi hơn tuyệt đối so với Do Thái giáo Cựu Ước; khích lệ tín hữu kiên trì nhẫn nại chạy con đường đua đức tin.",
+    "core_problems": [
+      "Nguy cơ bỏ Chúa quay về với luật pháp nghi lễ và đền thờ Cựu Ước vì sợ bắt bớ.",
+      "Sự trì trệ thuộc linh: Đáng lẽ đã làm thầy thì nay vẫn cần người dạy lại những điều sơ học của Lời Chúa (Hê 5:12).",
+      "Sự ngã lòng nản chí trước cơn thử thách kéo dài."
+    ],
+    "solution_and_message": "SỰ TỐI THƯỢNG VÀ TRỘI HƠN TUYỆT ĐỐI CỦA CHÚA JÊSUS CHRIST: Ngài trổi hơn các thiên sứ, hơn Môi-se, hơn Giô-suê, hơn chức tế lễ A-rôn. Ngài là Thầy Tế Lễ Thượng Phẩm Đời Đời theo ban Mên-chi-xê-đéc. Huyết Ngài đã lập nên Giao Ước Mới tốt hơn, dâng của tế lễ một lần đủ cả đời đời. Nhìn chăm vào Chúa Jêsus là Cội rễ và Cuối cùng của Đức Tin (Hê 12:2)."
+  },
+  "JAS": {
+    "book_id": "JAS",
+    "name_vi": "Gia-cơ",
+    "author_human": "Gia-cơ (Người em cùng mẹ của Chúa Jêsus, cột trụ Hội Thánh Giê-ru-sa-lem)",
+    "author_context": "Gia-cơ, người từng không tin Chúa Jêsus trước khi Ngài phục sinh, nhưng sau khi được Chúa hiện ra đã trở thành lãnh đạo tôn kính của Hội Thánh Giê-ru-sa-lem, nổi tiếng về đời sống cầu nguyện đạo đức đến mức có biệt danh 'Gia-cơ đầu gối lạc đà'.",
+    "recipient": "Mười hai chi phái Y-sơ-ra-ên kiều ngụ rải rác khắp muôn phương",
+    "location_short": "Viết từ Giê-ru-sa-lem gửi các thánh đồ tản lạc",
+    "location": "Viết từ thủ đô Giê-ru-sa-lem, gửi cho các tín hữu Do Thái tản mác khắp vùng Địa Trung Hải.",
+    "date_and_place": "Khoảng năm 45–48 SC (một trong những sách Tân Ước được viết sớm nhất, trước Công Đồng Giê-ru-sa-lem)",
+    "political_context": "Xã hội phân hóa giàu nghèo sâu sắc. Người giàu có thế lực trong xã hội bóc lột, quỵt tiền công người làm thuê và kéo người nghèo ra trước tòa án xét xử.",
+    "church_situation": "Các cộng đồng tín hữu nghèo khó chịu nhiều thử thách bên ngoài, trong khi nội bộ bắt đầu nảy sinh thói thiên vị người giàu, tranh cãi bằng lời nói độc hại và hiểu sai giáo lý ân điển thành một thứ đức tin trí thức chết.",
+    "why_written": "Khuyên bảo tín hữu kiên nhẫn chịu khổ; sửa phạt thói giả hình và thiên vị; khẳng định đức tin chân thật phải luôn đi kèm với hành động công bình thực tế.",
+    "core_problems": [
+      "Hiểu sai giáo lý xưng công bình: Cho rằng chỉ cần 'tin bằng miệng' là đủ, không cần việc lành đạo đức (Đức tin chết).",
+      "Thói thiên vị người giàu, khinh bỉ người nghèo khó trong buổi nhóm thờ phượng (Gia-cơ 2).",
+      "Tội lỗi của chiếc lưỡi độc hại: Lời nói cay đắng, rủa sả, vu khống gây chia rẽ Hội Thánh (Gia-cơ 3).",
+      "Tình bạn với thế gian: Ham mê của cải trần tục dẫn đến xung đột và ghen ghét lẫn nhau."
+    ],
+    "solution_and_message": "ĐỨC TIN CHÂN THẬT PHẢI BÀY TỎ QUA VIỆC LÀM: 'Xác chẳng có hồn thì chết, đức tin không có việc làm cũng chết như vậy' (Gia-cơ 2:26). Tôn giáo thanh sạch là thăm viếng kẻ mồ côi, người góa bụa và giữ mình không ô uế bởi thế gian. Kiềm chế cái lưỡi bằng sự khôn ngoan từ trên trời, nhẫn nhục đợi ngày Chúa quang lâm."
+  },
+  "1PE": {
+    "book_id": "1PE",
+    "name_vi": "1 Phi-e-rơ",
+    "author_human": "Sứ đồ Phi-e-rơ",
+    "author_context": "Sứ đồ trưởng Phi-e-rơ, người từng chối Chúa 3 lần nay được phục hồi thành người chăn bầy dũng cảm, viết qua sự trợ giúp của người đồng công trung tín Si-vanh (1Pe 5:12).",
+    "recipient": "Những người kiều ngụ rải rác khắp xứ Bông, Ga-la-ti, Cáp-ba-đốc, A-si và Bi-thi-ni (vùng Tiểu Á)",
+    "location_short": "Viết từ 'Ba-by-lôn' (mật danh chỉ thành Rô-ma)",
+    "location": "Viết từ Rô-ma (dùng mật danh Ba-by-lôn để tránh sự theo dõi của mật vụ hoàng gia) gửi đến miền Bắc và Trung Thổ Nhĩ Kỳ.",
+    "date_and_place": "Khoảng năm 63–64 SC, ngay trước khi bùng nổ cuộc đại bách hại đẫm máu của Hoàng đế Nero",
+    "political_context": "Thời kỳ đế quốc La Mã bắt đầu dấy lên làn sóng nghi kỵ và vu khống Cơ Đốc nhân là những kẻ 'thù nghịch loài người', đốt thành phố, ăn thịt uống máu (do hiểu sai về Tiệc Thánh) và không chịu thờ lạy tượng hoàng đế.",
+    "church_situation": "Các thánh đồ đang bước vào 'cơn hỏa hào thử thách' (cơn bách hại ác liệt), bị xã hội cô lập, vu oan và chịu trăm bề đau khổ vì cớ danh Chúa Cứu Thế.",
+    "why_written": "Khích lệ các thánh đồ đứng vững giữa cơn thử thách lửa; chỉ dẫn cách cư xử mẫu mực của công dân Cơ Đốc giữa xã hội thù nghịch để làm hổ thẹn những kẻ vu khống.",
+    "core_problems": [
+      "Cơn bách hại và đau khổ dữ dội đe dọa làm lung lay đức tin của tín hữu.",
+      "Nguy cơ phản kháng hoặc oán hận trước sự ngược đãi bất công của chủ nhà, chủ nô và chính quyền La Mã."
+    ],
+    "solution_and_message": "HY VỌNG SỐNG ĐỘNG GIỮA CƠN THỬ THÁCH: Sự cứu rỗi đã được sắm sẵn trên trời. Xem sự thử thách đức tin quý hơn vàng ròng hay hư nát. Noi gương Đấng Christ chịu khổ: Ngài bị rủa sả mà không rủa sả lại, mang tội lỗi chúng ta trên thân thể Ngài trên cây gỗ. Ý thức mình là 'Dòng giống được lựa chọn, chức thầy tế lễ nhà vua, dân thánh, dân thuộc riêng về Đức Chúa Trời' (1Pe 2:9) để rao truyền sự nhân từ của Ngài."
+  },
+  "2PE": {
+    "book_id": "2PE",
+    "name_vi": "2 Phi-e-rơ",
+    "author_human": "Sứ đồ Phi-e-rơ (Si-môn Phi-e-rơ)",
+    "author_context": "Bức tâm thư chia tay của Phi-e-rơ trước giờ tử vì đạo (được Chúa Jêsus báo trước trong Giăng 21:18-19). Ông viết để thức tỉnh tín hữu khắc ghi Lời Chúa vào tâm khảm.",
+    "recipient": "Những người nhờ sự công bình của Đức Chúa Trời đã nhận được đức tin quý giá",
+    "location_short": "Thành Rô-ma",
+    "location": "Thành Rô-ma, trước khi Phi-e-rơ chịu đóng đinh ngược đầu dưới thời Nero.",
+    "date_and_place": "Khoảng năm 66–67 SC, tại thành Rô-ma",
+    "political_context": "Đỉnh điểm cuộc đàn áp Cơ Đốc giáo của bạo chúa Nero.",
+    "church_situation": "Bên ngoài là bắt bớ tử vì đạo, nhưng nguy hiểm nhất là từ BÊN TRONG: Giáo sư giả xuất hiện gieo rắc sự bại hoại đạo đức và nhạo báng giáo lý Chúa tái lâm.",
+    "why_written": "Cảnh báo khẩn cấp về những giáo sư giả tham lam, bại hoại; tái khẳng định độ đáng tin cậy của Lời Tiên Tri Kinh Thánh; giải đáp thắc mắc tại sao Chúa dường như 'chậm trễ' tái lâm.",
+    "core_problems": [
+      "Giáo sư giả vô luân: Dùng lời xảo quyệt buôn bán tín hữu, cho rằng ân điển giải phóng con người khỏi mọi giới hạn đạo đức để sống dâm ô trụy lạc.",
+      "Kẻ nhạo báng Ngày Tái Lâm: Mỉa mai 'Lời hứa về sự đến của Ngài ở đâu? Vì từ khi các tổ phụ ngủ rồi, muôn vật vẫn y nguyên như lúc sáng thế' (2Pe 3:4)."
+    ],
+    "solution_and_message": "SỰ HIỂU BIẾT THẬT VỀ ĐẤNG CHRIST VÀ LỜI TIÊN TRI: 'Chẳng có lời tiên tri nào trong Kinh Thánh do ý riêng người ta mà ra, nhưng người ta được Đức Thánh Linh cảm thúc mà nói ra từ Đức Chúa Trời' (2Pe 1:21). Chúa không chậm trễ lời hứa, mà Ngài kiên nhẫn chờ đợi mọi người ăn năn vì Ngài không muốn ai bị hư mất. Trời đất hiện tại sẽ bị tiêu hủy bằng lửa, hãy ăn ở thánh khiết và sốt sắng trông đợi Ngày của Đức Chúa Trời."
+  },
+  "1JN": {
+    "book_id": "1JN",
+    "name_vi": "1 Giăng",
+    "author_human": "Sứ đồ Giăng (Người môn đồ được Chúa yêu)",
+    "author_context": "Sứ đồ Giăng ở tuổi xế bóng, là nhân chứng mắt thấy tai nghe duy nhất còn sống trong nhóm 12 sứ đồ ban đầu. Ông viết với tư cách người cha già thuộc linh âu yếm gọi tín hữu là 'Hỡi các con bé mọn'.",
+    "recipient": "Các Hội Thánh tại vùng Tiểu Á (quanh Ê-phê-sô)",
+    "location_short": "Thành Ê-phê-sô (Thổ Nhĩ Kỳ)",
+    "location": "Thành phố Ê-phê-sô, Tiểu Á.",
+    "date_and_place": "Khoảng năm 85–95 SC, viết từ Ê-phê-sô",
+    "political_context": "Thời kỳ Đế chế La Mã thời Hoàng đế Domitian, áp lực thờ cúng Hoàng đế ngày càng siết chặt.",
+    "church_situation": "Một làn sóng tà giáo nguy hiểm (mầm mống Ngộ đạo thuyết / Gnosticism và Ảo ảnh thuyết / Docetism) đã nổi lên ngay trong Hội Thánh và ly khai ra ngoài, gây hoang mang nghi ngờ tột cùng cho các tín hữu chân chính.",
+    "why_written": "Khẳng định sự thật lịch sử về sự nhập thể của Chúa Jêsus; cung cấp 'Ba Bài Kiểm Tra' (Lẽ Thật, Yêu Thương, Vâng Phục) để tín hữu BIẾT CHẮC rằng mình có sự sống đời đời (1Jn 5:13).",
+    "core_problems": [
+      "Tà giáo Ngộ đạo (Cerinthus & Docetism): Phủ nhận Chúa Jêsus thật sự đến trong xác thịt (cho rằng Ngài chỉ là bóng ma hoặc một linh hồn thiêng liêng tạm ngự trên người Jêsus lúc chịu báp-têm rồi lìa đi trước khi Ngài chịu chết).",
+      "Sự lãnh đạm, thù ghét: Tự xưng có 'sự hiểu biết cao siêu' nhưng khinh miệt và không có lòng yêu thương anh em.",
+      "Tự nhận mình không có tội lỗi và thỏa hiệp với nếp sống dâm ô trần tục."
+    ],
+    "solution_and_message": "SỰ GIAO THÔNG VỚI ĐỨC CHÚA TRỜI LÀ ÁNH SÁNG VÀ TÌNH YÊU THƯƠNG: Nếu ai xưng mình không có tội là tự dối mình. Ai chối Chúa Jêsus là Đấng Christ đến trong xác thịt là Kẻ Chống Chúa (Antichrist). Ai yêu Đức Chúa Trời thì phải yêu thương anh em mình: 'Đức Chúa Trời là Tình Yêu Thương' (1Jn 4:8). Chúng ta yêu vì Ngài đã yêu chúng ta trước."
+  },
+  "2JN": {
+    "book_id": "2JN",
+    "name_vi": "2 Giăng",
+    "author_human": "Sứ đồ Giăng ('Trưởng lão')",
+    "author_context": "Lá thư ngắn gọn viết trên một tờ giấy cói (papyrus) của Sứ đồ Giăng.",
+    "recipient": "Bà chọn lựa và các con cái bà (Ẩn dụ chỉ một Hội Thánh địa phương và các tín hữu)",
+    "location_short": "Thành Ê-phê-sô (Tiểu Á)",
+    "location": "Tiểu Á (Thổ Nhĩ Kỳ).",
+    "date_and_place": "Khoảng năm 85–95 SC, từ Ê-phê-sô",
+    "political_context": "Thời kỳ các tà giáo di chuyển lưu động khắp các đô thị La Mã để truyền bá học thuyết sai lạc.",
+    "church_situation": "Hội Thánh có lòng hiếu khách mở cửa đón tiếp các nhà truyền giáo lưu hành, nhưng có nguy cơ tiếp tay cho các giáo sư giả.",
+    "why_written": "Khuyên tín hữu sống trong tình yêu thương nhưng phải cảnh giác nghiêm ngặt, tuyệt đối không tiếp rước hay dung dưỡng những kẻ giảng dạy tà giáo chối bỏ sự nhập thể của Chúa Jêsus.",
+    "core_problems": [
+      "Các kẻ lừa dối lưu động đi khắp nơi rao giảng tà thuyết chối bỏ Chúa Jêsus đến trong xác thịt.",
+      "Lòng hiếu khách thiếu sự phân biện thuộc linh khiến Hội Thánh vô tình đồng lõa với việc ác của tà giáo."
+    ],
+    "solution_and_message": "CÂN BẰNG GIỮA LẼ THẬT VÀ TÌNH YÊU THƯƠNG: Yêu thương không có nghĩa là thỏa hiệp chân lý. 'Nếu ai đến cùng anh em mà không đem đạo ấy theo, thì chớ rước nó vào nhà, và đừng chào hỏi nó' (2Jn 1:10) để bảo vệ bầy chiên."
+  },
+  "3JN": {
+    "book_id": "3JN",
+    "name_vi": "3 Giăng",
+    "author_human": "Sứ đồ Giăng ('Trưởng lão')",
+    "author_context": "Bức thư riêng thân tình gửi cho người bạn thuộc linh kính yêu Gai-út.",
+    "recipient": "Gai-út, người anh em yêu dấu trong lẽ thật",
+    "location_short": "Tiểu Á",
+    "location": "Tiểu Á.",
+    "date_and_place": "Khoảng năm 85–95 SC, từ Ê-phê-sô",
+    "political_context": "Thời kỳ Hội Thánh chịu sự chia rẽ quyền lực từ những kẻ độc đoán tham quyền.",
+    "church_situation": "Một cuộc đối đầu nội bộ gay gắt: Gai-út và Đê-mê-triu hết lòng mở lòng tiếp đãi các sứ giả Tin Lành; trong khi Đi-ô-trép lộng quyền thao túng Hội Thánh, đuổi cổ các tín hữu hiếu khách.",
+    "why_written": "Khen ngợi lòng trung tín và tinh thần hiếu khách của Gai-út; cảnh cáo thói lộng quyền chuyên chế của Đi-ô-trép; giới thiệu người làm chứng tốt Đê-mê-triu.",
+    "core_problems": [
+      "Thói lộng quyền độc đoán của Đi-ô-trép: Kẻ 'ưa đứng đầu', từ chối tiếp đón sứ đồ Giăng, buông lời phỉ báng và khai trừ những ai giúp đỡ các nhà truyền giáo chân chính."
+    ],
+    "solution_and_message": "LÒNG HIẾU KHÁCH VÀ PHỤC VỤ LẼ THẬT: Tiếp trợ những người ra đi vì Danh Chúa để chúng ta trở nên những người 'cùng làm việc cho Lẽ Thật' (3Jn 1:8). Đừng bắt chước điều ác, nhưng hãy noi theo điều lành."
+  },
+  "JUD": {
+    "book_id": "JUD",
+    "name_vi": "Giu-đe",
+    "author_human": "Giu-đe (Em cùng mẹ của Chúa Jêsus và là em của Gia-cơ)",
+    "author_context": "Giu-đe ban đầu định viết một bức thư luận về sự cứu rỗi chung, nhưng vì tình thế quá khẩn cấp, ông phải đổi hướng viết một lời hiệu triệu chiến đấu quyết liệt cho Đức Tin.",
+    "recipient": "Những người được kêu gọi, được Đức Chúa Trời yêu thương và được gìn giữ trong Chúa Jêsus",
+    "location_short": "Gửi cho các Hội Thánh khắp xứ Palestine và Tiểu Á",
+    "location": "Khắp các Hội Thánh Do Thái và Dân Ngoại.",
+    "date_and_place": "Khoảng năm 65–70 SC",
+    "political_context": "Xã hội hỗn loạn suy đồi trước biến cố tàn phá thành Giê-ru-sa-lem.",
+    "church_situation": "Những kẻ vô đạo đã lén lút lọt vào Hội Thánh, biến ân điển của Đức Chúa Trời thành dịp phóng túng dục vọng xác thịt.",
+    "why_written": "Hiệu triệu toàn thể thánh đồ phải 'Hết sức chiến đấu vì Đức Tin đã truyền cho các thánh đồ một lần đủ cả' (Giu-đe 3); vạch trần bộ mặt ô uế và số phận đoán phạt của các giáo sư giả.",
+    "core_problems": [
+      "Những kẻ vô đạo lén lọt vào: Chối bỏ Chúa Cứu Thế duy nhất, buông tuồng theo xác thịt, khinh dể quyền bính và rủa sả các đấng tôn nghiêm.",
+      "Lối sống như Ca-in, Ba-la-am và Cô-rê: Tham lam tiền bạc, phản nghịch và lừa gạt bầy chiên."
+    ],
+    "solution_and_message": "CHIẾN ĐẤU CHO ĐỨC TIN VÀ ĐƯỢC CHÚA GÌN GIỮ: Lời cảnh báo nghiêm khắc từ lịch sử (Sô-đôm và Gô-mô-rơ, các thiên sứ phạm tội). Kêu gọi tín hữu xây dựng chính mình trên nền đức tin chí thánh, cầu nguyện trong Đức Thánh Linh, giữ mình trong tình yêu thương. Lời chúc tôn vinh tuyệt đỉnh: 'Nguyện Đấng có quyền gìn giữ anh em khỏi vấp ngã và khiến anh em đứng trước vinh quang Ngài cách không tì vết trong sự vui mừng hớn hở...' (Giu-đe 24-25)."
+  }
+}

@@ -206,13 +206,45 @@ export class HermeneuticsEngine {
   constructor() {
     this.metaphors = [];
     this.genres = {};
+    this.epistles = {};
     this.isLoaded = false;
   }
 
   async init() {
-    await this.loadMetaphors();
-    await this.loadGenres();
+    await Promise.all([
+      this.loadMetaphors(),
+      this.loadGenres(),
+      this.loadEpistles()
+    ]);
     this.isLoaded = true;
+  }
+
+  async loadEpistles() {
+    try {
+      if (typeof window === 'undefined') {
+        try {
+          const fs = await import('fs');
+          const data = fs.readFileSync('data/epistles-deep-context.json', 'utf8');
+          this.epistles = JSON.parse(data);
+          return this.epistles;
+        } catch (err) {}
+      }
+      const res = await fetch('data/epistles-deep-context.json');
+      this.epistles = await res.json();
+      return this.epistles;
+    } catch (e) {
+      console.error('Failed to load epistles deep context:', e);
+      return {};
+    }
+  }
+
+  getEpistleContext(bookId) {
+    if (!bookId) return null;
+    const key = String(bookId).toUpperCase();
+    if (this.epistles && this.epistles[key]) {
+      return this.epistles[key];
+    }
+    return null;
   }
 
   async loadMetaphors() {
@@ -530,7 +562,125 @@ export class HermeneuticsEngine {
     ).join('');
 
     let bookContextHTML = '';
-    if (bookMetadata) {
+    const bookId = ((bookMetadata && (bookMetadata.id || bookMetadata.book_id)) || '').toUpperCase();
+    const epCtx = this.getEpistleContext(bookId);
+
+    if (epCtx) {
+      const problemsList = (epCtx.core_problems || []).map(prob =>
+        `<li style="margin-bottom: 0.45rem; line-height: 1.6;">${prob}</li>`
+      ).join('');
+
+      bookContextHTML = `
+        <div class="epistle-context-dossier metaphor-card" style="border-color: var(--border-medium); border-left: 4px solid var(--accent-gold); margin-bottom: 1.25rem; background: var(--bg-card); padding: 1.15rem 1.35rem;">
+          <!-- Dossier Header -->
+          <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h4 style="font-family: var(--font-brand); color: var(--accent-gold); margin: 0; font-size: 1.22rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-scroll" style="color: var(--accent-gold);"></i> Bối Cảnh Thư Tín: ${bookMetadata.name_vi}
+            </h4>
+            <span style="font-size: 0.74rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(37, 99, 235, 0.15); color: #60a5fa; border: 1px solid rgba(37, 99, 235, 0.3); font-weight: 700; display: inline-flex; align-items: center; gap: 0.35rem;">
+              <i class="fa-solid fa-envelope-open-text"></i> THƯ TÍN TÂN ƯỚC
+            </span>
+          </div>
+
+          <!-- Key Badges Grid: Tác Giả, Người Nhận, Vị Trí, Niên Đại -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem; margin-bottom: 1.15rem;">
+            <div style="background: rgba(255,255,255,0.025); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.65rem 0.85rem;">
+              <span style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 0.2rem;">
+                <i class="fa-solid fa-crown" style="color: var(--accent-gold);"></i> Tác Giả Tối Thượng
+              </span>
+              <strong style="font-size: 0.88rem; color: var(--accent-gold-light);">Đức Chúa Trời</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">(Thánh Linh soi dẫn — 2 Ti-mô-thê 3:16)</span>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.025); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.65rem 0.85rem;">
+              <span style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 0.2rem;">
+                <i class="fa-solid fa-pen-nib" style="color: var(--accent-gold);"></i> Thư ai viết (Trước giả)?
+              </span>
+              <strong style="font-size: 0.88rem; color: var(--text-primary);">${epCtx.author_human}</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">${epCtx.date_and_place}</span>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.025); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.65rem 0.85rem;">
+              <span style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 0.2rem;">
+                <i class="fa-solid fa-users" style="color: var(--accent-gold);"></i> Viết cho ai?
+              </span>
+              <strong style="font-size: 0.88rem; color: var(--text-primary);">${epCtx.recipient}</strong>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.025); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.65rem 0.85rem;">
+              <span style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 0.2rem;">
+                <i class="fa-solid fa-location-dot" style="color: #ef4444;"></i> Hội Thánh ở đâu?
+              </span>
+              <strong style="font-size: 0.88rem; color: var(--text-primary);">${epCtx.location_short}</strong>
+            </div>
+          </div>
+
+          <!-- Section 1: Hoàn cảnh trước giả khi viết -->
+          <div class="epistle-section" style="margin-bottom: 0.9rem; padding: 0.75rem 0.95rem; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 3px solid var(--accent-gold);">
+            <div style="color: var(--accent-gold); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.45rem;">
+              <i class="fa-solid fa-feather-pointed"></i> 1. Hoàn Cảnh Trước Giả Khi Viết Thư:
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.65; color: var(--text-secondary); margin: 0;">
+              ${epCtx.author_context}
+            </p>
+          </div>
+
+          <!-- Section 2: Vị trí địa lý & Địa danh Hội Thánh -->
+          <div class="epistle-section" style="margin-bottom: 0.9rem; padding: 0.75rem 0.95rem; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 3px solid #38bdf8;">
+            <div style="color: #38bdf8; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.45rem;">
+              <i class="fa-solid fa-map-location-dot"></i> 2. Vị Trí Địa Lý & Địa Danh Hội Thánh:
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.65; color: var(--text-secondary); margin: 0;">
+              ${epCtx.location}
+            </p>
+          </div>
+
+          <!-- Section 3: Bối cảnh chính trị - xã hội -->
+          <div class="epistle-section" style="margin-bottom: 0.9rem; padding: 0.75rem 0.95rem; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 3px solid #a855f7;">
+            <div style="color: #c084fc; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.45rem;">
+              <i class="fa-solid fa-landmark-dome"></i> 3. Bối Cảnh Chính Trị - Xã Hội Thời Bấy Giờ:
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.65; color: var(--text-secondary); margin: 0;">
+              ${epCtx.political_context}
+            </p>
+          </div>
+
+          <!-- Section 4: Tình hình Hội Thánh lúc bấy giờ -->
+          <div class="epistle-section" style="margin-bottom: 0.9rem; padding: 0.75rem 0.95rem; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 3px solid #f59e0b;">
+            <div style="color: #fbbf24; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.45rem;">
+              <i class="fa-solid fa-church"></i> 4. Tình Hình Đời Sống & Đức Tin Hội Thánh:
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.65; color: var(--text-secondary); margin: 0;">
+              ${epCtx.church_situation}
+            </p>
+          </div>
+
+          <!-- Section 5: Tại sao viết thư & Nan đề cốt lõi là gì? -->
+          <div class="epistle-section" style="margin-bottom: 0.9rem; background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.25); border-left: 4px solid #ef4444; border-radius: 8px; padding: 0.85rem 1rem;">
+            <div style="color: #fca5a5; font-size: 0.88rem; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 700;">
+              <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444;"></i> 5. Tại Sao Viết Thư & Nan Đề Cốt Lõi Là Gì?
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.65; color: var(--text-primary); margin-bottom: 0.55rem;">
+              <strong>Lý do thôi thúc cấp bách:</strong> ${epCtx.why_written}
+            </p>
+            <div style="font-weight: 700; color: #fca5a5; font-size: 0.82rem; margin-bottom: 0.35rem;">Các nan đề then chốt:</div>
+            <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6;">
+              ${problemsList}
+            </ul>
+          </div>
+
+          <!-- Section 6: Giải pháp & Sứ điệp trọng tâm của Sứ đồ -->
+          <div class="epistle-section" style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.25); border-left: 4px solid #10b981; border-radius: 8px; padding: 0.85rem 1rem;">
+            <div style="color: #6ee7b7; font-size: 0.88rem; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 700;">
+              <i class="fa-solid fa-shield-halved" style="color: #10b981;"></i> 6. Sứ Điệp Giải Pháp Thần Học & Mục Vụ Của Sứ Đồ:
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.65; color: var(--text-primary); margin: 0;">
+              ${epCtx.solution_and_message}
+            </p>
+          </div>
+        </div>
+      `;
+    } else if (bookMetadata) {
       bookContextHTML = `
         <div class="metaphor-card" style="border-color: var(--border-medium); margin-bottom: 1rem;">
           <h4 style="font-family: var(--font-brand); color: var(--accent-gold); margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.5rem;">
