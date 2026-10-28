@@ -8,6 +8,25 @@ export class DevotionCalendarEngine {
     this.currentDate = new Date();
     this.database = null;
     this.isLoaded = false;
+    this.isViewingToday = true;
+  }
+
+  isToday(date = this.currentDate) {
+    const now = new Date();
+    return date.getDate() === now.getDate() &&
+           date.getMonth() === now.getMonth() &&
+           date.getFullYear() === now.getFullYear();
+  }
+
+  checkDateRollOver(storage = null) {
+    if (!this.isViewingToday) return false;
+    const now = new Date();
+    if (!this.isToday(this.currentDate)) {
+      this.currentDate = now;
+      this.isViewingToday = true;
+      return true; // Đã sang ngày mới, cần render lại
+    }
+    return false;
   }
 
   async loadDatabase() {
@@ -148,6 +167,7 @@ export class DevotionCalendarEngine {
     const prev = new Date(this.currentDate);
     prev.setDate(prev.getDate() - 1);
     this.currentDate = prev;
+    this.isViewingToday = this.isToday(this.currentDate);
     return this.getDevotionForDate(this.currentDate, storage);
   }
 
@@ -155,11 +175,13 @@ export class DevotionCalendarEngine {
     const next = new Date(this.currentDate);
     next.setDate(next.getDate() + 1);
     this.currentDate = next;
+    this.isViewingToday = this.isToday(this.currentDate);
     return this.getDevotionForDate(this.currentDate, storage);
   }
 
   today(storage = null) {
     this.currentDate = new Date();
+    this.isViewingToday = true;
     return this.getDevotionForDate(this.currentDate, storage);
   }
 
@@ -174,6 +196,7 @@ export class DevotionCalendarEngine {
         this.currentDate = new Date(dateStrOrObj);
       }
     }
+    this.isViewingToday = this.isToday(this.currentDate);
     return this.getDevotionForDate(this.currentDate, storage);
   }
 }

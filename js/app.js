@@ -5589,6 +5589,14 @@ class LogosApp {
     if (nativeDateInput) {
       nativeDateInput.value = devotionCalendarEngine.formatDateInput();
     }
+    const todayBtn = document.getElementById('devotion-today-btn');
+    if (todayBtn) {
+      if (devotionCalendarEngine.isToday(devotionCalendarEngine.currentDate)) {
+        todayBtn.classList.remove('is-not-today');
+      } else {
+        todayBtn.classList.add('is-not-today');
+      }
+    }
 
     // 1. Câu Gốc
     const verseBox = document.getElementById('portal-devotion-verse-box');
@@ -5976,6 +5984,27 @@ class LogosApp {
       devotionCalendarEngine.today(storage);
       this.renderPortalDevotion();
     });
+
+    // Tự động nhảy sang ngày mới khi sang 00:00 nửa đêm hoặc khi mở lại màn hình điện thoại
+    if (typeof window !== 'undefined') {
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          if (devotionCalendarEngine.checkDateRollOver(storage)) {
+            this.renderPortalDevotion();
+          }
+        }
+      });
+      window.addEventListener('focus', () => {
+        if (devotionCalendarEngine.checkDateRollOver(storage)) {
+          this.renderPortalDevotion();
+        }
+      });
+      setInterval(() => {
+        if (devotionCalendarEngine.checkDateRollOver(storage)) {
+          this.renderPortalDevotion();
+        }
+      }, 60000);
+    }
     document.getElementById('devotion-native-date-input')?.addEventListener('change', (e) => {
       if (e.target.value) {
         devotionCalendarEngine.setDate(e.target.value, storage);

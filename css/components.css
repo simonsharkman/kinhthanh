@@ -6187,6 +6187,14 @@
   padding: 0.22rem 0.55rem;
 }
 
+.devotion-today-btn.is-not-today {
+  background: var(--accent-gold);
+  color: #000;
+  font-weight: 800;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 6px rgba(247, 224, 123, 0.6);
+}
+
 .devotion-date-picker-wrap {
   position: relative;
   display: inline-flex;

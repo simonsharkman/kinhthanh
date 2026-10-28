@@ -100,6 +100,8 @@ def test_devotion_calendar_engine_module():
     assert "nextDay" in code
     assert "today" in code
     assert "setDate" in code
+    assert "isToday" in code
+    assert "checkDateRollOver" in code
 
 
 def test_index_html_devotion_nav_contract():
@@ -158,4 +160,7 @@ def test_storage_and_app_devotion_orchestration():
     assert "devotion-prev-day-btn" in app_code
     assert "devotion-next-day-btn" in app_code
     assert "devotion-today-btn" in app_code
+    assert "visibilitychange" in app_code
+    assert "checkDateRollOver" in app_code
+    assert "is-not-today" in app_code
     assert "devotion-native-date-input" in app_code
