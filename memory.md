@@ -180,25 +180,11 @@
 - **Milestone 43 (2026-10-27)**: Real-time Audio Verse Glowing Illumination & Interactive Seeking:
   - Đồng bộ âm thanh theo câu thời gian thực: Thuật toán `buildVerseTimingMap(verses, duration)` và `findVerseAtTime`, hiệu ứng phát sáng hoàng gia (`.verse-reading-active` viền vàng `border-left: 4.5px solid var(--accent-gold)`). Hỗ trợ nhấp câu để tua audio trực tiếp (`jumpAudioToVerse`) và nút chuyển câu. Đạt 160/160 tests pass.
 
-- **Milestone 44 (2026-10-27)**: Verse-Level Deep Linking & Multi-Version URL Routing (HTTLVN Standard Alignment):
-  - Tiếp nhận phản hồi từ anh Jimmy: *"bấm tới câu 6 mà vẫn không thấy. bạn xem lại. như trang này bấm câu nào là link sẽ nhảy câu đó, kinh thánh bản nào cũng hiện lên. https://kinhthanh.httlvn.org/doc-kinh-thanh/gie/21?v=BD2011#6"* (kèm ảnh chụp khoanh đỏ câu 6 Nê-hê-mi 1 trên giao diện).
-  - Triển khai giải pháp đồng bộ thanh link theo từng câu và bản dịch:
-    1. Đồng bộ nhấp câu (`VERSE_SELECTED`): Bấm vào bất kỳ câu nào (ví dụ câu 6), thanh địa chỉ lập tức cập nhật nhánh câu đó: `#bible/NEH/1/6` (hoặc `#bible/NEH/1/6?v=BD2011`).
-    2. Đồng bộ bản dịch (`PRIMARY_VERSION_CHANGED`): Khi đổi bản dịch (BTT, BD2011, CGKPV, KJV, v.v.), URL tự động gắn query `?v=...` tương ứng.
-    3. Bộ giải mã tương thích HTTLVN (`parseHash` & `resolveBookId`): Tự động nhận diện slug HTTLVN (ví dụ: `gie` -> `JER`, `ne` -> `NEH`, `sa` -> `GEN`) và định dạng `#câu` ở cuối URL (`/doc-kinh-thanh/gie/21?v=BD2011#6`).
-    4. Trực quan hóa đầy đủ: Mở link trực tiếp sẽ nạp đúng bản dịch, mở đúng phân đoạn, cuộn và đánh dấu sáng câu được chọn, đồng thời kích hoạt bảng Đối Chiếu Song Song.
-  - Bổ sung Unit Test `test_verse_click_url_branch_and_version_contract` trong `test_portal_and_header_sticky.py`. Toàn bộ **161/161 bài test Pytest PASS 100%**.
-  - Đã sync mirror và deploy lên Vercel.
+- **Milestone 44 (2026-10-27)**: Verse-Level Deep Linking & Multi-Version URL Routing (HTTLVN Alignment):
+  - Đồng bộ URL tức thì theo từng câu (`#bible/NEH/1/6`) và bản dịch (`?v=BD2011`). Hỗ trợ giải mã slug HTTLVN (`gie` -> `JER`, `ne` -> `NEH`), nạp đúng bản dịch, cuộn và sáng câu được chọn. Test 161/161 PASS 100%.
 
 - **Milestone 45 (2026-10-27)**: Global Arial Typography Overhaul (Site-Wide Sans-Serif Experience):
-  - Tiếp nhận yêu cầu thử nghiệm từ anh Jimmy: "bạn thử đổi toàn bộ font chữ trang thành Arial cả xem thế nào".
-  - Triển khai chuyển đổi đồng bộ typography trên toàn bộ ứng dụng sang font Arial:
-    1. Cập nhật Design Tokens (`css/design-tokens.css`): Đặt `Arial, Helvetica` làm font ưu tiên số 1 cho `--font-brand`, `--font-heading`, `--font-bible`, `--font-scripture`, `--font-reader`, `--font-ui`.
-    2. Chuẩn hóa kế thừa toàn cục (`css/layout.css`): Áp dụng Arial bao trùm `body`, `h1-h6`, `.chapter-title`, `.verse-item`, `.verse-text`, `.portal-*`, `.drawer-title`, `.modal-title`.
-    3. Tối ưu Portal View (`css/components.css`): Chuyển đổi `#portal-view` và `.portal-logo-v` sang Arial.
-    4. Giữ nguyên phông nguyên ngữ Hy Lạp / Hê-bơ-rơ chuyên dụng (`--font-hebrew-greek`) để giữ đúng glyph interlinear cổ tự.
-  - Bổ sung Unit Test `test_typography_arial.py` kiểm định toàn diện. Toàn bộ **164/164 bài test Pytest PASS 100%**.
-  - Đã sync mirror workspace và tự động deploy lên Vercel production.
+  - Đổi toàn bộ font hệ thống sang Arial theo yêu cầu anh Jimmy (`--font-brand`, `--font-heading`, `--font-bible`, v.v.). Giữ phông nguyên ngữ Hy Lạp/Hê-bơ-rơ cổ. Test 164/164 PASS 100%.
 
 - **Milestone 46 (2026-10-27)**: Refined Subtle Word-Diff Underline & Explanatory Legend (User-Centric Option 3):
   - Tiếp nhận phản hồi từ anh Jimmy: Thắc mắc về việc các từ trong tab "So Sánh Bản Dịch" bị bôi nền vàng lốm đốm (`word-diff-highlight`), chọn triển khai Phương án 3 (chuyển sang gạch chân mờ chấm nhẹ kèm chú thích rõ ràng).
@@ -232,3 +218,12 @@
   - CSDL Thần Học (`data/epistles-deep-context.json`): 21 Thư Tín Tân Ước với 9 trường: Trước giả, hoàn cảnh, người nhận, địa lý cổ/nay, chính trị La Mã, tình hình HT, lý do viết, nan đề then chốt, sứ điệp giải pháp.
   - Giao diện (`js/hermeneutics-engine.js`): Bổ sung `loadEpistles` & `getEpistleContext`, hiển thị Hồ Sơ Khảo Cứu trực quan gồm badges và 6 phân mục (Địa danh, Chính trị, Tình hình HT, Nan đề báo động, Sứ điệp giải pháp).
   - Test `test_epistles_deep_context.py`: **169/169 test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+
+- **Milestone 50 (2026-10-28)**: Fix Mobile Reading Version Selector Clipping & Header UX:
+  - Tiếp nhận phản ánh & ảnh chụp anh Jimmy: Chỗ đổi bản dịch trên điện thoại bị che mất (nút `#primary-version-trigger` bị trôi sang trái, chỉ hở mũi tên `v`).
+  - Nguyên nhân: `.header-controls` dùng `justify-content: flex-end` khi cuộn ngang làm đẩy nút đầu tiên ra ngoài rìa trái màn hình 360px; nhãn bản dịch dài (`EDE (Sắc Tộc)`) và nút tìm kiếm rộng làm chật chội.
+  - Khắc phục:
+    1. Đổi `justify-content: flex-start !important` trên `.header-controls`, gắn `flex-shrink: 0 !important` cho `#primary-version-trigger`, luôn hiển thị 100% cố định trên header, viền vàng nổi bật.
+    2. Rút gọn nhãn bản dịch thành mã chuẩn (`BTT 1925`, `EDE`, `KTHD`, `CGKPV`, `KJV`), thu gọn nút tìm kiếm mobile thành icon `[🔍]`, ẩn nút theme thừa trên mobile `< 640px`.
+    3. Thêm nút "Bản Dịch Đọc" trực tiếp trong menu Hamburger (`#mobile-menu-primary-version-btn` và `#mobile-drawer-primary-version-row`).
+  - Bổ sung Unit Test `test_mobile_version_selector.py`. Bộ kiểm thử đạt **172/172 bài test Pytest PASS 100%**.

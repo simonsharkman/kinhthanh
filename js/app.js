@@ -5097,18 +5097,24 @@ class LogosApp {
 
   updatePrimaryVersionLabel() {
     const label = document.getElementById('primary-version-label');
+    const drawerLabel = document.getElementById('mobile-drawer-primary-version-label');
     if (!label) return;
     const transObj = ALL_TRANSLATIONS.find(t => t.id === state.primaryVersion || t.code === state.primaryVersion);
+    let text = state.primaryVersion || 'BTT 1925';
     if (transObj) {
-      if (transObj.id === 'CGKPV') {
-        label.textContent = 'CGKPV (Công Giáo)';
-      } else if (transObj.id === 'BTT') {
-        label.textContent = 'BTT 1925';
+      if (transObj.id === 'BTT') {
+        text = 'BTT 1925';
       } else {
-        label.textContent = `${transObj.id} (${transObj.category})`;
+        text = transObj.id;
       }
-    } else {
-      label.textContent = state.primaryVersion || 'BTT 1925';
+    }
+    label.textContent = text;
+    if (drawerLabel) {
+      drawerLabel.textContent = transObj ? `${transObj.id} (${transObj.name})` : text;
+    }
+    const trigger = document.getElementById('primary-version-trigger');
+    if (trigger && transObj) {
+      trigger.title = `Bản dịch đọc chính: ${transObj.name} (${transObj.category}) - Nhấp để đổi`;
     }
   }
 
@@ -7426,6 +7432,18 @@ class LogosApp {
             document.getElementById('search-input')?.focus();
           }
         });
+      });
+
+      // Nút Chọn Bản Dịch Đọc Chính trong Lưới Menu Mobile & Hàng Cài Đặt
+      document.getElementById('mobile-menu-primary-version-btn')?.addEventListener('click', () => {
+        mobileMenuModal.classList.add('hidden');
+        this.populatePrimaryVersionSelector();
+        document.getElementById('primary-version-modal')?.classList.remove('hidden');
+      });
+      document.getElementById('mobile-drawer-primary-version-row')?.addEventListener('click', () => {
+        mobileMenuModal.classList.add('hidden');
+        this.populatePrimaryVersionSelector();
+        document.getElementById('primary-version-modal')?.classList.remove('hidden');
       });
 
       // Nút Chọn Nhanh 66 Sách trong Lưới Menu Mobile

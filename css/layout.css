@@ -1054,7 +1054,7 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
     flex-shrink: 0;
     transition: all 0.15s ease;
     white-space: nowrap;
-    margin-right: auto !important;
+    margin-right: 0.25rem !important;
   }
 
   .mobile-header-search-btn:active {
@@ -1085,11 +1085,14 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
   .header-controls {
     display: flex !important;
     align-items: center !important;
+    justify-content: flex-start !important;
     gap: 0.25rem !important;
-    margin-left: auto !important;
-    flex-shrink: 1 !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
   }
@@ -1098,7 +1101,34 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
     display: none !important;
   }
 
-  #primary-version-trigger,
+  #primary-version-trigger {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+    padding: 0.26rem 0.52rem !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    border-radius: 14px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    background: rgba(229, 193, 88, 0.18) !important;
+    border: 1px solid var(--accent-gold) !important;
+    color: var(--accent-gold) !important;
+    box-shadow: 0 1px 4px rgba(229, 193, 88, 0.2) !important;
+    z-index: 2 !important;
+  }
+
+  #primary-version-trigger i {
+    font-size: 0.72rem !important;
+    color: var(--accent-gold) !important;
+  }
+
+  #primary-version-label {
+    font-weight: 700 !important;
+    display: inline-block !important;
+    color: var(--accent-gold) !important;
+  }
+
   #book-nav-trigger {
     padding: 0.26rem 0.45rem !important;
     font-size: 0.72rem !important;
@@ -1576,41 +1606,66 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
     max-width: 100% !important;
     overflow: hidden !important;
     flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 0.25rem !important;
   }
 
   .brand-text {
     display: none !important;
   }
 
+  .mobile-header-search-btn {
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    margin-right: 0.15rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .mobile-header-search-btn .mobile-search-text {
+    display: none !important;
+  }
+
   .header-controls {
-    gap: 0.18rem !important;
+    gap: 0.22rem !important;
     flex: 1 !important;
-    justify-content: flex-end !important;
+    min-width: 0 !important;
+    justify-content: flex-start !important; /* CRITICAL: Must be flex-start so primary version is NEVER clipped on left! */
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
   }
 
-  #primary-version-trigger,
+  #primary-version-trigger {
+    padding: 0.24rem 0.48rem !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
   #book-nav-trigger {
-    padding: 0.22rem 0.36rem !important;
-    font-size: 0.68rem !important;
+    padding: 0.24rem 0.45rem !important;
+    font-size: 0.7rem !important;
     flex-shrink: 0 !important;
   }
 
   #mobile-header-compare-btn,
   .nav-links .nav-btn[data-view="portal"],
   .nav-links .nav-btn[data-view="tsk"] {
-    padding: 0.22rem 0.38rem !important;
-    font-size: 0.68rem !important;
+    padding: 0.24rem 0.45rem !important;
+    font-size: 0.7rem !important;
     flex-shrink: 0 !important;
   }
 
   #theme-toggle-btn {
-    width: 26px !important;
-    height: 26px !important;
-    font-size: 0.74rem !important;
-    flex-shrink: 0 !important;
+    display: none !important;
   }
 
   .selector-pill {
