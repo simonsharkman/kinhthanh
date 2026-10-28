@@ -1009,29 +1009,26 @@
 
   <!-- Modal 2: Bộ Quản Lý Bản Dịch Song Song & Sắc Tộc (Version Selector MultiVerse) -->
   <div id="version-selector-modal" class="modal-overlay hidden">
-    <div class="modal-card modal-large">
-      <div class="modal-header">
+    <div class="modal-card modal-large vsm-card">
+      <div class="modal-header vsm-header">
         <div class="modal-title-wrap">
-          <h3><i class="fa-solid fa-sliders"></i> CHỌN BẢN DỊCH ĐỐI CHIẾU</h3>
+          <h3 class="vsm-title"><i class="fa-solid fa-sliders" style="color: var(--accent-gold);"></i> CHỌN BẢN DỊCH ĐỐI CHIẾU</h3>
         </div>
-        <button class="modal-close-btn" data-modal="version-selector-modal">&times;</button>
+        <button class="modal-close-btn vsm-close-btn" data-modal="version-selector-modal" title="Đóng cửa sổ">&times;</button>
       </div>
-      <p class="modal-desc">
-        Chọn các bản dịch để đối chiếu song song. Hỗ trợ toàn bộ bản dịch tiếng Việt, các tiếng sắc tộc (Ê-đê, Gia-rai, Bru, H'Mông, M'Nông, Dao) và bản dịch kinh điển quốc tế:
-      </p>
 
-      <!-- Thanh Tab Phân Loại Bản Dịch -->
+      <!-- Thanh Tab Phân Loại Bản Dịch (Gọn gàng) -->
       <div class="version-tabs">
         <button class="version-tab-btn active" data-vtab="vi"><i class="fa-solid fa-flag"></i> Tiếng Việt (8)</button>
-        <button class="version-tab-btn" data-vtab="ethnic"><i class="fa-solid fa-mountain"></i> Sắc Tộc Việt Nam (7)</button>
-        <button class="version-tab-btn" data-vtab="intl"><i class="fa-solid fa-globe"></i> Quốc Tế & Nguyên Ngữ (7)</button>
+        <button class="version-tab-btn" data-vtab="ethnic"><i class="fa-solid fa-mountain"></i> Sắc Tộc (7)</button>
+        <button class="version-tab-btn" data-vtab="intl"><i class="fa-solid fa-globe"></i> Quốc Tế (7)</button>
       </div>
 
-      <!-- Thanh Thao Tác Nhanh -->
+      <!-- Thanh Thao Tác Nhanh (Nhỏ gọn, tiết kiệm không gian) -->
       <div class="version-quick-actions">
-        <button id="quick-select-vi-btn" class="quick-pill"><i class="fa-solid fa-check-double"></i> Chọn Bản Việt Chuẩn</button>
-        <button id="quick-select-ethnic-btn" class="quick-pill"><i class="fa-solid fa-feather"></i> Thêm Tiếng Sắc Tộc</button>
-        <button id="quick-select-all-btn" class="quick-pill"><i class="fa-solid fa-list-check"></i> Chọn Tất Cả</button>
+        <button id="quick-select-vi-btn" class="quick-pill"><i class="fa-solid fa-check-double"></i> Bản Việt</button>
+        <button id="quick-select-ethnic-btn" class="quick-pill"><i class="fa-solid fa-feather"></i> Sắc Tộc</button>
+        <button id="quick-select-all-btn" class="quick-pill"><i class="fa-solid fa-list-check"></i> Tất Cả</button>
         <button id="quick-clear-btn" class="quick-pill"><i class="fa-solid fa-xmark"></i> Bỏ Chọn</button>
       </div>
 
@@ -1040,9 +1037,9 @@
         <!-- Render động bởi app.js -->
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer vsm-footer">
         <span id="selected-versions-summary" class="selected-summary">Đang chọn: 4 bản dịch</span>
-        <button id="save-versions-btn" class="btn-primary"><i class="fa-solid fa-check"></i> Áp Dụng Đối Chiếu</button>
+        <button id="save-versions-btn" class="btn-primary vsm-save-btn"><i class="fa-solid fa-check"></i> Áp Dụng Đối Chiếu</button>
       </div>
     </div>
   </div>

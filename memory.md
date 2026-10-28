@@ -206,18 +206,11 @@
   - Đã sync mirror workspace và tự động deploy lên Vercel production.
 
 - **Milestone 48 (2026-10-27)**: Expanded Drawer Workspace & Compact Card Headers:
-  - Tiếp nhận yêu cầu & ảnh từ anh Jimmy: Mở rộng khung đối chiếu và thu nhỏ các thành phần phụ để người đọc tập trung vào Lời Chúa.
-  - Triển khai tối ưu:
-    1. Mở Rộng Drawer (`--drawer-width: clamp(520px, 45vw, 760px)`): Tăng không gian hiển thị đối chiếu lên 45vw (rộng hơn 200px), các thẻ bản dịch thoáng đãng, rộng rãi.
-    2. Thu Nhỏ Tiêu Đề Thẻ: Badge tên bản dịch dạng pill nhỏ gọn (`.badge-vcode`), tên bản dịch mờ tinh tế (`.badge-vname`), không bị ngắt thành 2 dòng.
-    3. Nút Popout Tinh Tế: Rút gọn nút to chữ sang icon vuông nhỏ 28x28px (`.card-popout-btn`), ẩn dòng nhắc lặp lại (`.parallel-card-footer-hint`).
-  - Toàn bộ 166/166 bài test Pytest PASS 100%. Đã sync mirror và deploy lên Vercel.
+  - Tối ưu theo yêu cầu anh Jimmy: Mở rộng Drawer (`--drawer-width: clamp(520px, 45vw, 760px)`) tăng 45vw không gian đối chiếu Lời Chúa; thu nhỏ badge tiêu đề thẻ (`.badge-vcode`, `.badge-vname`); rút gọn nút Popout thành icon vuông 28px (`.card-popout-btn`). Đạt 166/166 test Pytest pass.
 
 - **Milestone 49 (2026-10-28)**: Hermeneutical Context Dossier for All 21 NT Epistles:
-  - Yêu cầu anh Jimmy: Thư Tín làm rõ ai viết, viết cho ai, tại sao viết, tình hình Hội Thánh, chính trị, vị trí địa lý, nan đề cốt lõi.
-  - CSDL Thần Học (`data/epistles-deep-context.json`): 21 Thư Tín Tân Ước với 9 trường: Trước giả, hoàn cảnh, người nhận, địa lý cổ/nay, chính trị La Mã, tình hình HT, lý do viết, nan đề then chốt, sứ điệp giải pháp.
-  - Giao diện (`js/hermeneutics-engine.js`): Bổ sung `loadEpistles` & `getEpistleContext`, hiển thị Hồ Sơ Khảo Cứu trực quan gồm badges và 6 phân mục (Địa danh, Chính trị, Tình hình HT, Nan đề báo động, Sứ điệp giải pháp).
-  - Test `test_epistles_deep_context.py`: **169/169 test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+  - Xây dựng CSDL Khảo Cứu 21 Thư Tín Tân Ước (`data/epistles-deep-context.json`) với 9 trường chuyên sâu (Trước giả, người nhận, địa lý cổ/nay, bối cảnh La Mã, tình hình HT, nan đề, sứ điệp).
+  - Tích hợp `js/hermeneutics-engine.js` hiển thị Hồ Sơ Khảo Cứu 6 mục trực quan. Test `test_epistles_deep_context.py` 169/169 pass.
 
 - **Milestone 50 (2026-10-28)**: Fix Mobile Reading Version Selector Clipping & Header UX:
   - Tiếp nhận phản ánh & ảnh chụp anh Jimmy: Chỗ đổi bản dịch trên điện thoại bị che mất (nút `#primary-version-trigger` bị trôi sang trái, chỉ hở mũi tên `v`).
@@ -235,3 +228,11 @@
     2. Nút Đóng Nhỏ Gọn (`.pvm-close-btn`): Nút tròn 28x28px với icon `✕` tại góc trên bên phải, hover sáng vàng hoàng gia.
     3. Loại bỏ Footer Thừa: Xóa `.modal-footer` với nút Đóng to ở đáy, mở rộng tối đa vùng hiển thị bản dịch (`max-height: calc(88vh - 50px)`).
   - Bổ sung Unit Test `test_compact_version_modal.py`. Toàn bộ **174/174 bài test Pytest PASS 100%**. Đồng bộ mirror & Vercel.
+
+- **Milestone 52 (2026-10-28)**: Streamline Parallel Version Selector Modal (Zero Clutter):
+  - Tiếp nhận phản ánh & ảnh khoanh đỏ từ anh Jimmy cho `#version-selector-modal`:
+    1. Xóa mô tả thừa: Loại bỏ hoàn toàn đoạn `<p class="modal-desc">` gây choán chỗ.
+    2. Rút gọn tiêu đề tab: Rút từ nhiều dòng thành 1 dòng nhỏ gọn `Sắc Tộc (7)` và `Quốc Tế (7)`.
+    3. Hàng nút chọn nhanh siêu gọn (`.quick-pill`): Thu gọn padding & font 0.72rem, hiển thị ngang 1 hàng.
+    4. Thẻ bản dịch 1 hàng (~38px): Bỏ câu mô tả rườm rà (`.version-option-note`), căn giữa tên + huy hiệu badge trên 1 hàng duy nhất (`.version-option-left`), sửa trùng lặp badge (`BDY`, `CGKPV`), tăng sức chứa hiển thị lên 7-9 bản dịch cùng lúc.
+  - Test `test_compact_selector_modal.py`: **177/177 test Pytest PASS 100%**. Đồng bộ mirror & Vercel.

@@ -5055,16 +5055,16 @@ class LogosApp {
     filtered.forEach(t => {
       const isChecked = state.activeVersions.includes(t.id);
       const isEthnic = t.category === 'Sắc Tộc';
+      const codeDisplay = (t.code && t.code !== t.id) ? `${t.id} (${t.code})` : t.id;
       html += `
         <label class="version-option-card ${isChecked ? 'selected' : ''}">
           <input type="checkbox" value="${t.id}" ${isChecked ? 'checked' : ''}>
           <div class="version-option-content">
             <div class="version-option-header">
-              <span class="version-badge-code">${t.id} ${t.code ? `(${t.code})` : ''}</span>
-              ${isEthnic ? `<span class="version-badge-ethnic"><i class="fa-solid fa-mountain"></i> Sắc Tộc</span>` : ''}
+              <span class="version-badge-code">${codeDisplay}</span>
+              ${isEthnic ? `<span class="version-badge-ethnic">Sắc Tộc</span>` : ''}
               <span class="version-option-name">${t.name}</span>
             </div>
-            <div class="version-option-note">${t.note || t.category}</div>
           </div>
         </label>
       `;
