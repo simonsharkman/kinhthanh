@@ -222,12 +222,12 @@ export class CrossRefEngine {
             </div>
           </div>
 
-          <!-- Thanh Chuyển Câu Nổi Bật Tách Đôi 2 Bên Trái - Phải -->
+          <!-- Thanh Chuyển Câu Nhỏ Gọn, Tinh Tế (Không Tràn Viền) -->
           <div class="tsk-prev-next-split-bar">
             <button type="button" id="tsk-prev-verse-btn" class="tsk-arrow-btn tsk-arrow-left" title="${isVi ? 'Chuyển về câu trước' : 'Previous Verse'}">
               <span class="arrow-icon"><i class="fa-solid fa-chevron-left"></i></span>
               <span class="arrow-text">
-                <span class="arrow-main">${isVi ? '◄ CÂU TRƯỚC' : '◄ PREV VERSE'}</span>
+                <span class="arrow-main">${isVi ? 'Câu trước' : 'Prev'}</span>
                 <span class="arrow-sub">${vNum > 1 ? `${displayBookName} ${chNum}:${vNum - 1}` : (chNum > 1 ? `${displayBookName} ${chNum - 1}` : displayBookName)}</span>
               </span>
             </button>
@@ -240,7 +240,7 @@ export class CrossRefEngine {
 
             <button type="button" id="tsk-next-verse-btn" class="tsk-arrow-btn tsk-arrow-right" title="${isVi ? 'Chuyển sang câu tiếp theo' : 'Next Verse'}">
               <span class="arrow-text">
-                <span class="arrow-main">${isVi ? 'CÂU TIẾP ►' : 'NEXT VERSE ►'}</span>
+                <span class="arrow-main">${isVi ? 'Câu tiếp' : 'Next'}</span>
                 <span class="arrow-sub">${vNum < totalVerses ? `${displayBookName} ${chNum}:${vNum + 1}` : (chNum < totalChapters ? `${displayBookName} ${chNum + 1}:1` : displayBookName)}</span>
               </span>
               <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>

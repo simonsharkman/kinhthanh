@@ -200,13 +200,7 @@
   - Tích hợp `js/hermeneutics-engine.js` hiển thị Hồ Sơ Khảo Cứu 6 mục trực quan. Test `test_epistles_deep_context.py` 169/169 pass.
 
 - **Milestone 50 (2026-10-28)**: Fix Mobile Reading Version Selector Clipping & Header UX:
-  - Tiếp nhận phản ánh & ảnh chụp anh Jimmy: Chỗ đổi bản dịch trên điện thoại bị che mất (nút `#primary-version-trigger` bị trôi sang trái, chỉ hở mũi tên `v`).
-  - Nguyên nhân: `.header-controls` dùng `justify-content: flex-end` khi cuộn ngang làm đẩy nút đầu tiên ra ngoài rìa trái màn hình 360px; nhãn bản dịch dài (`EDE (Sắc Tộc)`) và nút tìm kiếm rộng làm chật chội.
-  - Khắc phục:
-    1. Đổi `justify-content: flex-start !important` trên `.header-controls`, gắn `flex-shrink: 0 !important` cho `#primary-version-trigger`, luôn hiển thị 100% cố định trên header, viền vàng nổi bật.
-    2. Rút gọn nhãn bản dịch thành mã chuẩn (`BTT 1925`, `EDE`, `KTHD`, `CGKPV`, `KJV`), thu gọn nút tìm kiếm mobile thành icon `[🔍]`, ẩn nút theme thừa trên mobile `< 640px`.
-    3. Thêm nút "Bản Dịch Đọc" trực tiếp trong menu Hamburger (`#mobile-menu-primary-version-btn` và `#mobile-drawer-primary-version-row`).
-  - Bổ sung Unit Test `test_mobile_version_selector.py`. Bộ kiểm thử đạt **172/172 bài test Pytest PASS 100%**.
+  - Khắc phục lỗi che nút bản dịch mobile theo ảnh anh Jimmy: Đặt `justify-content: flex-start !important` & `flex-shrink: 0 !important` cho `#primary-version-trigger`; rút gọn nhãn bản dịch (`BTT 1925`, `EDE`, `KTHD`, `CGKPV`, `KJV`); thêm nút trong menu hamburger. Đạt 172/172 test Pytest pass.
 
 - **Milestone 51 (2026-10-28)**: Compact Primary Version Modal & Top-Right Close Button:
   - Tiếp nhận ảnh & yêu cầu từ anh Jimmy: Chuyển nút Đóng lên góc phải nhỏ gọn; làm nhỏ gọn khu vực tiêu đề (gạch xanh) để dễ nhìn, tiết kiệm diện tích.
@@ -232,3 +226,11 @@
     3. Thanh Tìm Kiếm Tức Thì (`#book-picker-search-bar`): Tích hợp ô input tìm kiếm siêu tốc ở đầu modal, gõ 1-2 ký tự (vd: "giang", "ro", "thi", "ma") là tự động lọc ngay lập tức trên toàn bộ 66 sách bất kể Cựu hay Tân Ước.
     4. Sức chứa tối đa: Màn hình điện thoại hiển thị trọn vẹn 27 sách Tân Ước cùng lúc mà không cần cuộn trang; màn hình máy tính hiển thị 39 sách Cựu Ước trọn vẹn trong nháy mắt.
   - Bổ sung Unit Test `test_compact_book_picker.py`. Bộ kiểm thử đạt **180/180 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+
+- **Milestone 54 (2026-10-28)**: Fix TSK Verse Navigation Overflow & Compact 66 Books Directory:
+  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "nhỏ thôi , bị lỗi rồi kìa" (kèm 2 mũi tên đỏ chỉ vào nút Câu Trước & Câu Tiếp bị lỗi tràn viền đè lên icon chevron).
+  - Triển khai khắc phục & tinh gọn triệt để:
+    1. Sửa lỗi tràn viền thanh điều hướng TSK: Xóa bỏ ký tự thừa `◄` và `►` trong text string để không trùng lặp và đè lên icon tròn `.arrow-icon`; rút gọn thành `Câu trước` và `Câu tiếp`.
+    2. Thu nhỏ thanh điều hướng (`.tsk-prev-next-split-bar` & `.tsk-arrow-btn`): Giảm padding (0.35rem 0.55rem / mobile 0.28rem 0.45rem), viền 1px tinh tế, font 0.72rem - 0.78rem, chống tràn `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`.
+    3. Tinh gọn Danh mục 66 Sách TSK (`.tsk-dir-book-chip`): Gắn `white-space: nowrap` cho số đoạn `.dir-bslug` (ngăn ngắt dòng lỗi như `34\nch`), chuyển chip sang dạng phẳng thanh thoát (`background: transparent`), chiều cao 28px.
+  - Bổ sung Unit Test `test_tsk_navigation_compact.py`. Toàn bộ **182/182 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
