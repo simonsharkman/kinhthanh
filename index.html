@@ -697,12 +697,35 @@
 
             <!-- Tab 1: TĨNH NGUYỆN & DƯỠNG LINH -->
             <div id="portal-tab-devotion-panel" class="portal-tab-panel active">
-              <!-- Box A: TĨNH NGUYỆN -->
+              <!-- Box A: TĨNH NGUYỆN (Lịch Hàng Ngày 365 Ngày Tự Động) -->
               <div class="portal-card">
-              <div class="portal-card-header header-terracotta" style="display: flex; justify-content: space-between; align-items: center;">
-                <span>TĨNH NGUYỆN</span>
-                <button type="button" id="admin-devotion-edit-btn" class="admin-devotion-edit-btn hidden" style="font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 4px; background: rgba(0,0,0,0.35); border: 1px solid var(--accent-gold); color: var(--accent-gold); cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
-                  <i class="fa-solid fa-pen-to-square"></i> Quản Trị Tĩnh Nguyện
+              <div class="portal-card-header header-terracotta devotion-header-bar">
+                <div class="devotion-header-title-wrap">
+                  <span class="devotion-header-title"><i class="fa-solid fa-scroll"></i> TĨNH NGUYỆN</span>
+                </div>
+
+                <!-- Thanh Điều Hướng Ngày Hằng Ngày -->
+                <div class="devotion-date-nav" id="devotion-date-nav">
+                  <button type="button" class="devotion-date-btn" id="devotion-prev-day-btn" title="Xem ngày trước">
+                    <i class="fa-solid fa-chevron-left"></i>
+                  </button>
+                  <div class="devotion-date-picker-wrap">
+                    <button type="button" class="devotion-date-display" id="devotion-date-display" title="Nhấp để chọn ngày trong năm">
+                      <i class="fa-regular fa-calendar-days"></i>
+                      <span id="devotion-current-date-text">Hôm Nay</span>
+                    </button>
+                    <input type="date" id="devotion-native-date-input" class="devotion-native-date-input" aria-label="Chọn ngày">
+                  </div>
+                  <button type="button" class="devotion-date-btn devotion-today-btn" id="devotion-today-btn" title="Quay về ngày hôm nay">
+                    Hôm Nay
+                  </button>
+                  <button type="button" class="devotion-date-btn" id="devotion-next-day-btn" title="Xem ngày tiếp theo">
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+                </div>
+
+                <button type="button" id="admin-devotion-edit-btn" class="admin-devotion-edit-btn hidden" title="Quản trị tĩnh nguyện">
+                  <i class="fa-solid fa-pen-to-square"></i> Sửa
                 </button>
               </div>
               <div class="portal-card-body">

@@ -12,6 +12,7 @@ import { mediaEngine } from './media-engine.js';
 import { aiAssistant } from './ai-assistant.js';
 import { blogSystem } from './blog-community.js';
 import { bereaGuardian } from './berea-guardian.js';
+import { devotionCalendarEngine } from './devotion-calendar-engine.js';
 import { FAV_VERSES_DATA, BIBLE_QUIZ_DATA, RESPONSIVE_READINGS_DATA, BIBLE_STORIES_DATA, BIBLE_DICT_DATA, STRONG_DICT_DATA, BIBLE_BOOK_ORDER_MAP, getChapterAudioUrl } from './portal-data.js';
 
 class LogosApp {
@@ -104,6 +105,7 @@ class LogosApp {
     this.initGoogleAdSense();
 
     // 7. Khởi tạo Cổng Thông Tin & Dưỡng Linh Cổ Điển Tin Lành
+    await devotionCalendarEngine.loadDatabase();
     this.initPortalView();
     this.renderPortalDevotion();
 
@@ -5575,29 +5577,49 @@ class LogosApp {
 
   // --- FULL CMS v3.0: Quản Trị Cổng Tĩnh Nguyện, Hiệu Đính Lời Chúa & Media Mùa ---
   renderPortalDevotion() {
-    const data = storage.getDevotionData();
+    const data = devotionCalendarEngine.getDevotionForDate(devotionCalendarEngine.currentDate, storage);
     if (!data) return;
+
+    // Cập nhật nhãn ngày hiển thị & giá trị ô input ngày
+    const dateTextEl = document.getElementById('devotion-current-date-text');
+    if (dateTextEl) {
+      dateTextEl.textContent = data.dateStr || devotionCalendarEngine.formatDateVi();
+    }
+    const nativeDateInput = document.getElementById('devotion-native-date-input');
+    if (nativeDateInput) {
+      nativeDateInput.value = devotionCalendarEngine.formatDateInput();
+    }
 
     // 1. Câu Gốc
     const verseBox = document.getElementById('portal-devotion-verse-box');
     if (verseBox && data.verse) {
       const v = data.verse;
       verseBox.innerHTML = `
-        <strong>${v.v || ''}</strong> ${v.text || ''} 
+        <strong>${v.v ? v.v + ':' : ''}</strong> ${v.text || ''} 
         <a class="devotion-ref-tag" data-book="${v.book || 'HAB'}" data-ch="${v.ch || 3}" data-v="${v.v || 1}" title="Nhấp để mở đọc và đối chiếu">${v.ref || ''}</a>
       `;
     }
 
-    // 2. Lịch Đọc Kinh Thánh
+    // 2. Lịch Đọc Kinh Thánh (4 Luồng Đọc Mỗi Ngày)
     const readingList = document.getElementById('portal-devotion-reading-list');
     if (readingList && data.reading_plan) {
-      readingList.innerHTML = data.reading_plan.map(plan => `
-        <li>
-          <span class="devotion-plan-title">${plan.title}</span><br>
-          <span class="devotion-plan-text">${plan.text}</span>
-          ${plan.audioBook ? `<button type="button" class="devotion-audio-chip" data-book="${plan.audioBook}" data-ch="${plan.audioCh || 1}">NGHE</button>` : ''}
-        </li>
-      `).join('');
+      readingList.innerHTML = data.reading_plan.map(plan => {
+        let passagesHtml = '';
+        if (plan.passages && plan.passages.length > 0) {
+          passagesHtml = plan.passages.map(p => 
+            `<a class="devotion-passage-link" data-book="${p.book}" data-ch="${p.ch}" ${p.v ? `data-v="${p.v}"` : ''} title="Đọc ${p.name}">${p.name}</a>`
+          ).join('. ') + '.';
+        } else {
+          passagesHtml = `<span class="devotion-plan-text">${plan.text || ''}</span>`;
+        }
+        return `
+          <li>
+            <span class="devotion-plan-title">${plan.title}</span><br>
+            ${passagesHtml}
+            ${plan.audioBook ? `<button type="button" class="devotion-audio-chip" data-book="${plan.audioBook}" data-ch="${plan.audioCh || 1}" title="Nghe âm thanh ${plan.audioBook} ${plan.audioCh || 1}">NGHE</button>` : ''}
+          </li>
+        `;
+      }).join('');
     }
 
     // 3. Sống Với Thánh Kinh
@@ -5620,13 +5642,23 @@ class LogosApp {
       }
     }
 
-    // Gắn lại sự kiện cho các liên kết vừa render
+    // Gắn sự kiện cho các liên kết vừa render (Câu gốc, các đoạn đọc 4 luồng, nút nghe audio)
     verseBox?.querySelectorAll('[data-book]').forEach(el => {
       el.addEventListener('click', (e) => {
         e.preventDefault();
         const b = el.getAttribute('data-book');
         const c = parseInt(el.getAttribute('data-ch'), 10) || 1;
         const v = parseInt(el.getAttribute('data-v'), 10) || 1;
+        this.navigateToPassage(b, c, v, { stayInPortal: true });
+      });
+    });
+
+    readingList?.querySelectorAll('.devotion-passage-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const b = link.getAttribute('data-book');
+        const c = parseInt(link.getAttribute('data-ch'), 10) || 1;
+        const v = parseInt(link.getAttribute('data-v'), 10) || 1;
         this.navigateToPassage(b, c, v, { stayInPortal: true });
       });
     });
@@ -5648,7 +5680,7 @@ class LogosApp {
     const modal = document.getElementById('admin-devotion-modal');
     if (!modal) return;
 
-    const data = storage.getDevotionData();
+    const data = devotionCalendarEngine.getDevotionForDate(devotionCalendarEngine.currentDate, storage);
 
     if (data.verse) {
       const vRef = document.getElementById('admin-devotion-verse-ref');
@@ -5687,7 +5719,7 @@ class LogosApp {
   }
 
   saveAdminDevotionFromModal() {
-    const current = storage.getDevotionData();
+    const current = devotionCalendarEngine.getDevotionForDate(devotionCalendarEngine.currentDate, storage);
     const verseRef = (document.getElementById('admin-devotion-verse-ref')?.value || '').trim();
     const verseBook = (document.getElementById('admin-devotion-verse-book')?.value || 'HAB').trim().toUpperCase();
     const verseCh = parseInt(document.getElementById('admin-devotion-verse-ch')?.value || '3', 10);
@@ -5726,6 +5758,8 @@ class LogosApp {
       }
     };
 
+    const dKey = devotionCalendarEngine.getDateKey();
+    storage.saveDevotionDataForDate(dKey, updatedData);
     storage.saveDevotionData(updatedData);
     document.getElementById('admin-devotion-modal')?.classList.add('hidden');
     this.renderPortalDevotion();
@@ -5922,9 +5956,41 @@ class LogosApp {
       this.saveAdminDevotionFromModal();
     });
     document.getElementById('btn-devotion-reset-default')?.addEventListener('click', () => {
+      const dKey = devotionCalendarEngine.getDateKey();
+      storage.saveDevotionDataForDate(dKey, null);
       storage.saveDevotionData(null);
       this.renderPortalDevotion();
       this.openAdminDevotionModal();
+    });
+
+    // Devotion Calendar Engine: Date Navigation Controls
+    document.getElementById('devotion-prev-day-btn')?.addEventListener('click', () => {
+      devotionCalendarEngine.prevDay(storage);
+      this.renderPortalDevotion();
+    });
+    document.getElementById('devotion-next-day-btn')?.addEventListener('click', () => {
+      devotionCalendarEngine.nextDay(storage);
+      this.renderPortalDevotion();
+    });
+    document.getElementById('devotion-today-btn')?.addEventListener('click', () => {
+      devotionCalendarEngine.today(storage);
+      this.renderPortalDevotion();
+    });
+    document.getElementById('devotion-native-date-input')?.addEventListener('change', (e) => {
+      if (e.target.value) {
+        devotionCalendarEngine.setDate(e.target.value, storage);
+        this.renderPortalDevotion();
+      }
+    });
+    document.getElementById('devotion-date-display')?.addEventListener('click', () => {
+      const input = document.getElementById('devotion-native-date-input');
+      if (input) {
+        if (typeof input.showPicker === 'function') {
+          input.showPicker();
+        } else {
+          input.focus();
+        }
+      }
     });
 
     document.getElementById('save-admin-verse-corr-btn')?.addEventListener('click', () => {

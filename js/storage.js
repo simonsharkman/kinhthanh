@@ -356,6 +356,17 @@ export class LogosStorage {
     return data;
   }
 
+  getDevotionDataForDate(dateKey) {
+    if (!dateKey) return null;
+    return this.getPreference(`portal_devotion_date_${dateKey}`, null);
+  }
+
+  saveDevotionDataForDate(dateKey, data) {
+    if (!dateKey) return;
+    this.savePreference(`portal_devotion_date_${dateKey}`, data);
+    return data;
+  }
+
   // --- 2. Scripture Verse Correction Storage (Hiệu đính Lời Chúa khi phát hiện lỗi) ---
   getVerseCorrections() {
     return this.getPreference('verse_corrections', {});

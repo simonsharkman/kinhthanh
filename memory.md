@@ -209,21 +209,10 @@
   - Rút gọn `#version-selector-modal` theo ảnh anh Jimmy: Xóa mô tả thừa `<p class="modal-desc">`; rút gọn tên tab; 4 nút chọn nhanh `.quick-pill` 1 hàng; thẻ bản dịch 1 hàng (~38px) bỏ mô tả rườm rà, sửa trùng badge `BDY`/`CGKPV`. Đạt 177/177 test Pytest pass.
 
 - **Milestone 53 (2026-10-28)**: Compact Text-Focused Book Picker & Real-Time Instant Search:
-  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "làm gọn thôi. mỗi chữ là được , có số lượng đoạn. không cần phải ô to bao quanh đâu. Mỗi lần kiếm sách tôi hay kiếm không ra".
-  - Triển khai nâng cấp vượt trội cho `#book-picker-modal`:
-    1. Bỏ toàn bộ ô to bao quanh: Gỡ bỏ card viền dày, border-left màu thô; chuyển `.book-card-item` sang dạng text item phẳng (`background: transparent`), padding siêu gọn (0.28rem 0.42rem), chiều cao chỉ ~28px.
-    2. Mỗi chữ kèm số lượng đoạn: Tên sách (`.book-item-name`) và số đoạn (`.book-item-chaps`, vd: 28, 16) nằm ngang ngay ngắn trên cùng 1 dòng.
-    3. Thanh Tìm Kiếm Tức Thì (`#book-picker-search-bar`): Tích hợp ô input tìm kiếm siêu tốc ở đầu modal, gõ 1-2 ký tự (vd: "giang", "ro", "thi", "ma") là tự động lọc ngay lập tức trên toàn bộ 66 sách bất kể Cựu hay Tân Ước.
-    4. Sức chứa tối đa: Màn hình điện thoại hiển thị trọn vẹn 27 sách Tân Ước cùng lúc mà không cần cuộn trang; màn hình máy tính hiển thị 39 sách Cựu Ước trọn vẹn trong nháy mắt.
-  - Bổ sung Unit Test `test_compact_book_picker.py`. Bộ kiểm thử đạt **180/180 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+  - Tối ưu `#book-picker-modal` theo ảnh anh Jimmy: Chuyển sang text item phẳng không ô bao quanh (`.book-card-item`, ~28px); tên sách và số đoạn (vd: 28, 16) cùng hàng; thêm thanh tìm kiếm tức thì (`#book-picker-search-bar`) gõ 1-2 ký tự lọc ngay 66 sách. Đạt 180/180 test Pytest pass.
 
 - **Milestone 54 (2026-10-28)**: Fix TSK Verse Navigation Overflow & Compact 66 Books Directory:
-  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "nhỏ thôi , bị lỗi rồi kìa" (kèm 2 mũi tên đỏ chỉ vào nút Câu Trước & Câu Tiếp bị lỗi tràn viền đè lên icon chevron).
-  - Triển khai khắc phục & tinh gọn triệt để:
-    1. Sửa lỗi tràn viền thanh điều hướng TSK: Xóa bỏ ký tự thừa `◄` và `►` trong text string để không trùng lặp và đè lên icon tròn `.arrow-icon`; rút gọn thành `Câu trước` và `Câu tiếp`.
-    2. Thu nhỏ thanh điều hướng (`.tsk-prev-next-split-bar` & `.tsk-arrow-btn`): Giảm padding (0.35rem 0.55rem / mobile 0.28rem 0.45rem), viền 1px tinh tế, font 0.72rem - 0.78rem, chống tràn `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`.
-    3. Tinh gọn Danh mục 66 Sách TSK (`.tsk-dir-book-chip`): Gắn `white-space: nowrap` cho số đoạn `.dir-bslug` (ngăn ngắt dòng lỗi như `34\nch`), chuyển chip sang dạng phẳng thanh thoát (`background: transparent`), chiều cao 28px.
-  - Bổ sung Unit Test `test_tsk_navigation_compact.py`. Toàn bộ **182/182 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+  - Sửa lỗi tràn viền TSK theo ảnh mũi tên đỏ của anh Jimmy: Xóa `◄`/`►` thừa, rút gọn thành `Câu trước`/`Câu tiếp`; thu nhỏ thanh điều hướng `.tsk-prev-next-split-bar` chống tràn; danh mục 66 sách dạng phẳng (`white-space: nowrap`). Đạt 182/182 test Pytest pass.
 
 - **Milestone 55 (2026-10-28)**: Interactive Clickable Chapter Title (Direct Book & Chapter Pickers):
   - Tiếp nhận ý kiến & ảnh minh họa từ anh Jimmy: Bấm vào tên sách (`Giăng`) thì hiện danh sách 66 sách để chọn; bấm vào số đoạn (`Đoạn 1`) thì cho phép chọn trực tiếp các đoạn tương ứng của sách đó.
@@ -233,3 +222,11 @@
        - `.chapter-title-chap-btn` (`#reader-chapter-picker-btn`): Hiển thị số đoạn (vd: `Đoạn 1`), hover sáng nhẹ. Nhấp vào mở trực tiếp lưới chọn đoạn của sách đó (vd: 1–21 đoạn của Giăng, 1–50 đoạn Sáng thế ký, 1–150 đoạn Thi thiên) để người đọc chọn ngay chỉ với 1 chạm.
     2. Nổi bật đoạn hiện tại (`.chapter-btn.active-ch`): Đánh dấu vàng hoàng gia cho đoạn đang đọc trong lưới chọn đoạn.
   - Bổ sung Unit Test `test_interactive_chapter_title.py`. Toàn bộ **185/185 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestone 56 (2026-10-28)**: 365-Day Dynamic Daily Devotion & 4-Stream Reading Plan Engine:
+  - Tiếp nhận yêu cầu & ảnh khoanh 4 vùng từ anh Jimmy: "quay lại với vấn đề tĩnh nguyện. bạn hãy lên kế hoạch hàng ngày hiển thị."
+  - Triển khai Cổng Tĩnh Nguyện & Dưỡng Linh động 365 ngày chuẩn HTTLVN:
+    1. Cơ sở dữ liệu 365 ngày (`data/daily-devotions-365.json`): 365 mục đầy đủ Câu Gốc, 4 Luồng Đọc Kinh Thánh (Cựu & Tân Ước, Sáng Thế Ký - Khải Huyền, Tân Ước 3 tháng, Đọc 3 năm) và bài đọc Sống Với Thánh Kinh. Ngày 301 (28/10) khớp chính xác 100% ảnh gốc của anh Jimmy (Ha-ba-cúc 3:19, Giê-rê-mi 20, Mác 14:12-15:47, Lu-ca 21-22, Gióp 22, Áp Bức Người Cùng Khốn).
+    2. Động cơ lịch (`js/devotion-calendar-engine.js`): Tính ngày trong năm (`getDayOfYear`), hiển thị thứ/ngày/tháng/năm tiếng Việt (`formatDateVi`), hỗ trợ `prevDay`, `nextDay`, `today`, `setDate`.
+    3. Thanh điều hướng ngày (`.devotion-date-nav`): Gồm nút ngày trước (`#devotion-prev-day-btn`), ngày sau (`#devotion-next-day-btn`), hôm nay (`#devotion-today-btn`), hiển thị ngày (`#devotion-date-display`) phủ input date (`#devotion-native-date-input`).
+    4. Tương tác đọc & nghe: Click đoạn đọc mở trong Tab Reader của Portal; nút NGHE kích hoạt phát âm thanh audio.
+  - Bổ sung Unit Test `test_daily_devotion_engine.py`. Toàn bộ **191/191 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
