@@ -1784,23 +1784,19 @@
   <!-- Modal 7: Chọn Bản Kinh Thánh Đọc Chính (Primary Reading Version Picker) -->
   <div id="primary-version-modal" class="modal-overlay hidden" aria-label="Chọn bản Kinh Thánh để đọc chính">
     <div class="modal-card primary-version-modal-card animate-scale-up">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <span class="preview-badge" style="background: var(--accent-gold); color: #000; font-weight: 700;">BẢN ĐỌC CHÍNH</span>
-          <h3 id="primary-version-modal-title"><i class="fa-solid fa-book-bookmark" style="color: var(--accent-gold);"></i> CHỌN BẢN KINH THÁNH ĐỂ ĐỌC</h3>
+      <div class="modal-header pvm-header">
+        <div class="pvm-header-left">
+          <i class="fa-solid fa-book-bookmark" style="color: var(--accent-gold); font-size: 0.95rem;"></i>
+          <h3 id="primary-version-modal-title" class="pvm-title">Chọn Bản Kinh Thánh Đọc</h3>
+          <span class="pvm-badge">Đọc Chính</span>
         </div>
-        <button class="modal-close-btn" data-modal="primary-version-modal">&times;</button>
+        <button class="modal-close-btn pvm-close-btn" data-modal="primary-version-modal" title="Đóng cửa sổ">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
-      <p class="modal-desc" style="padding: 0 1.5rem; margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
-        Chọn bản dịch hiển thị trên màn hình đọc chính. Bạn có thể chuyển đổi bất kỳ lúc nào để nghiên cứu theo văn phong và góc nhìn thần học mong muốn:
-      </p>
 
       <div class="primary-version-list" id="primary-version-list">
         <!-- Render động danh sách các bản dịch grouped by category -->
-      </div>
-
-      <div class="modal-footer" style="display: flex; justify-content: flex-end; align-items: center;">
-        <button type="button" class="btn-secondary modal-close-btn" data-modal="primary-version-modal">Đóng</button>
       </div>
     </div>
   </div>

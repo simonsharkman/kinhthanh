@@ -227,3 +227,11 @@
     2. Rút gọn nhãn bản dịch thành mã chuẩn (`BTT 1925`, `EDE`, `KTHD`, `CGKPV`, `KJV`), thu gọn nút tìm kiếm mobile thành icon `[🔍]`, ẩn nút theme thừa trên mobile `< 640px`.
     3. Thêm nút "Bản Dịch Đọc" trực tiếp trong menu Hamburger (`#mobile-menu-primary-version-btn` và `#mobile-drawer-primary-version-row`).
   - Bổ sung Unit Test `test_mobile_version_selector.py`. Bộ kiểm thử đạt **172/172 bài test Pytest PASS 100%**.
+
+- **Milestone 51 (2026-10-28)**: Compact Primary Version Modal & Top-Right Close Button:
+  - Tiếp nhận ảnh & yêu cầu từ anh Jimmy: Chuyển nút Đóng lên góc phải nhỏ gọn; làm nhỏ gọn khu vực tiêu đề (gạch xanh) để dễ nhìn, tiết kiệm diện tích.
+  - Khắc phục & tối ưu giao diện `#primary-version-modal`:
+    1. Header Tinh Gọn (`.pvm-header`): Gộp huy hiệu & tiêu đề thành 1 hàng ngang duy nhất (`.pvm-header-left`), font 0.92rem, bỏ mô tả thừa, tiết kiệm ~90px chiều dọc.
+    2. Nút Đóng Nhỏ Gọn (`.pvm-close-btn`): Nút tròn 28x28px với icon `✕` tại góc trên bên phải, hover sáng vàng hoàng gia.
+    3. Loại bỏ Footer Thừa: Xóa `.modal-footer` với nút Đóng to ở đáy, mở rộng tối đa vùng hiển thị bản dịch (`max-height: calc(88vh - 50px)`).
+  - Bổ sung Unit Test `test_compact_version_modal.py`. Toàn bộ **174/174 bài test Pytest PASS 100%**. Đồng bộ mirror & Vercel.
