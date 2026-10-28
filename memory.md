@@ -186,24 +186,11 @@
 - **Milestone 45 (2026-10-27)**: Global Arial Typography Overhaul (Site-Wide Sans-Serif Experience):
   - Đổi toàn bộ font hệ thống sang Arial theo yêu cầu anh Jimmy (`--font-brand`, `--font-heading`, `--font-bible`, v.v.). Giữ phông nguyên ngữ Hy Lạp/Hê-bơ-rơ cổ. Test 164/164 PASS 100%.
 
-- **Milestone 46 (2026-10-27)**: Refined Subtle Word-Diff Underline & Explanatory Legend (User-Centric Option 3):
-  - Tiếp nhận phản hồi từ anh Jimmy: Thắc mắc về việc các từ trong tab "So Sánh Bản Dịch" bị bôi nền vàng lốm đốm (`word-diff-highlight`), chọn triển khai Phương án 3 (chuyển sang gạch chân mờ chấm nhẹ kèm chú thích rõ ràng).
-  - Triển khai nâng cấp tinh tế:
-    1. CSS (`css/components.css`): Chuyển `.word-diff-highlight` từ nền vàng dày sang `background: transparent !important;`, `border-bottom: 1.5px dotted rgba(212, 175, 55, 0.55);`, màu chữ tự nhiên `color: inherit`, hover sáng nhẹ kèm `cursor: help`.
-    2. Tooltip & Nguyên Tắc So Sánh (`js/bible-engine.js` & `js/app.js`): Thêm tooltip `title="Từ ngữ diễn đạt khác biệt so với bản đối chiếu"`. Ưu tiên bản dịch đang đọc chính (`state.primaryVersion`) làm mốc so sánh thay vì ép cố định theo BTT.
-    3. Thẻ Chú Thích Trang Trọng (`.parallel-diff-legend`): Đặt ngay dưới tiêu đề Đối Chiếu giải thích rõ ràng ý nghĩa của các từ gạch chân chấm nhẹ.
-  - Bổ sung Unit Test `test_diff_words_subtle.py`. Bộ kiểm thử đạt **166/166 bài test Pytest PASS 100%**.
-  - Đã sync mirror workspace và tự động deploy lên Vercel production.
+- **Milestone 46 (2026-10-27)**: Refined Subtle Word-Diff Underline & Explanatory Legend:
+  - Triển khai Phương án 3 theo chọn lựa của anh Jimmy: Chuyển `.word-diff-highlight` từ nền vàng lốm đốm sang gạch chân chấm mờ tinh tế (`border-bottom: 1.5px dotted rgba(212, 175, 55, 0.55)`), thêm tooltip giải thích và thẻ chú thích `.parallel-diff-legend`. Đạt 166/166 test Pytest pass.
 
-- **Milestone 47 (2026-10-27)**: Clean Columnar Reading Typography & Hanging Indent Layout (Image 2 Alignment):
-  - Tiếp nhận ảnh phản hồi và đề xuất từ anh Jimmy: "tôi nghĩ nên trình bày gọn gàng lại. như kiểu này" (kèm 2 ảnh so sánh giao diện Giăng đoạn 5).
-  - Triển khai chuẩn hóa trình bày theo chuẩn Image 2:
-    1. Cột Số Câu Độc Lập (`.verse-number`): Cố định `width: 2.2rem; min-width: 2.2rem; text-align: right;`, màu vàng ấm (`var(--accent-gold)`), font-weight: 700, font-size: `0.85rem`. Số 1 chữ số hay 2-3 chữ số đều căn thẳng tắp lề phải sát cột chữ.
-    2. Xuống Dòng Thẳng Cột Tuyệt Đối (`.verse-text`): Thiết lập `display: block; flex: 1; min-width: 0;`, mọi dòng chữ khi ngắt dòng đều giữ nguyên lề trái thẳng đứng, tuyệt đối không bị chui vào dưới số câu.
-    3. Giãn Cách Câu Thoáng Đãng (`.chapter-verses-list`): Nâng khoảng cách giữa các câu lên `gap: 1.15rem;`, khoảng cách cột số - cột chữ `gap: 1.25rem;`, tạo không gian thư thái, dễ tập trung suy ngẫm.
-    4. Chiều Rộng Đọc Lý Tưởng (`#focus-reader`): Giới hạn `max-width: 860px` căn giữa chuẩn tỉ lệ vàng (~70 ký tự/dòng).
-    5. Cập nhật `test_reading_version_and_popout.py` bảo đảm toàn bộ **166/166 bài test Pytest PASS 100%**.
-  - Đã sync mirror workspace và tự động deploy lên Vercel production.
+- **Milestone 47 (2026-10-27)**: Clean Columnar Reading Typography & Hanging Indent Layout:
+  - Tối ưu theo chuẩn Image 2 của anh Jimmy: Cột số câu độc lập (`.verse-number`), xuống dòng thẳng cột tuyệt đối (`.verse-text`), giãn cách câu thư thái (`gap: 1.15rem`). Đạt 166/166 test Pytest pass.
 
 - **Milestone 48 (2026-10-27)**: Expanded Drawer Workspace & Compact Card Headers:
   - Tối ưu theo yêu cầu anh Jimmy: Mở rộng Drawer (`--drawer-width: clamp(520px, 45vw, 760px)`) tăng 45vw không gian đối chiếu Lời Chúa; thu nhỏ badge tiêu đề thẻ (`.badge-vcode`, `.badge-vname`); rút gọn nút Popout thành icon vuông 28px (`.card-popout-btn`). Đạt 166/166 test Pytest pass.
@@ -236,3 +223,12 @@
     3. Hàng nút chọn nhanh siêu gọn (`.quick-pill`): Thu gọn padding & font 0.72rem, hiển thị ngang 1 hàng.
     4. Thẻ bản dịch 1 hàng (~38px): Bỏ câu mô tả rườm rà (`.version-option-note`), căn giữa tên + huy hiệu badge trên 1 hàng duy nhất (`.version-option-left`), sửa trùng lặp badge (`BDY`, `CGKPV`), tăng sức chứa hiển thị lên 7-9 bản dịch cùng lúc.
   - Test `test_compact_selector_modal.py`: **177/177 test Pytest PASS 100%**. Đồng bộ mirror & Vercel.
+
+- **Milestone 53 (2026-10-28)**: Compact Text-Focused Book Picker & Real-Time Instant Search:
+  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "làm gọn thôi. mỗi chữ là được , có số lượng đoạn. không cần phải ô to bao quanh đâu. Mỗi lần kiếm sách tôi hay kiếm không ra".
+  - Triển khai nâng cấp vượt trội cho `#book-picker-modal`:
+    1. Bỏ toàn bộ ô to bao quanh: Gỡ bỏ card viền dày, border-left màu thô; chuyển `.book-card-item` sang dạng text item phẳng (`background: transparent`), padding siêu gọn (0.28rem 0.42rem), chiều cao chỉ ~28px.
+    2. Mỗi chữ kèm số lượng đoạn: Tên sách (`.book-item-name`) và số đoạn (`.book-item-chaps`, vd: 28, 16) nằm ngang ngay ngắn trên cùng 1 dòng.
+    3. Thanh Tìm Kiếm Tức Thì (`#book-picker-search-bar`): Tích hợp ô input tìm kiếm siêu tốc ở đầu modal, gõ 1-2 ký tự (vd: "giang", "ro", "thi", "ma") là tự động lọc ngay lập tức trên toàn bộ 66 sách bất kể Cựu hay Tân Ước.
+    4. Sức chứa tối đa: Màn hình điện thoại hiển thị trọn vẹn 27 sách Tân Ước cùng lúc mà không cần cuộn trang; màn hình máy tính hiển thị 39 sách Cựu Ước trọn vẹn trong nháy mắt.
+  - Bổ sung Unit Test `test_compact_book_picker.py`. Bộ kiểm thử đạt **180/180 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.

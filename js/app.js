@@ -4968,20 +4968,58 @@ class LogosApp {
     });
   }
 
-  // 7. Modals: Book Picker & Version Selector
-  populateBookPicker(testament = 'OT') {
+  // 7. Modals: Book Picker & Version Selector (Gọn gàng, Text-focused, Tìm kiếm tức thì)
+  populateBookPicker(testament = 'OT', searchQuery = '') {
     const grid = document.getElementById('books-grid');
     if (!grid) return;
 
-    this.currentPickerTestament = testament;
-    const filteredBooks = bibleEngine.books.filter(b => b.testament === testament);
+    this.currentPickerTestament = testament || this.currentPickerTestament || 'OT';
+
+    // Chuẩn hóa từ khóa tìm kiếm (bỏ dấu tiếng Việt, chữ thường)
+    const normQ = (searchQuery || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .replace(/Đ/g, 'd')
+      .trim();
+
+    let displayBooks = [];
+    const isSearching = normQ.length > 0;
+
+    if (isSearching) {
+      // Khi tìm kiếm: Tìm tức thì trên toàn bộ 66 sách để người đọc tìm ngay không cần nhớ Cựu hay Tân
+      displayBooks = bibleEngine.books.filter(b => {
+        const nVi = (b.name_vi || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'd');
+        const nEn = (b.name_en || '').toLowerCase();
+        const slug = (b.httlvn_slug || '').toLowerCase();
+        const id = (b.id || '').toLowerCase();
+        return nVi.includes(normQ) || nEn.includes(normQ) || slug.includes(normQ) || id.includes(normQ);
+      });
+    } else {
+      displayBooks = bibleEngine.books.filter(b => b.testament === testament);
+    }
+
+    if (isSearching && displayBooks.length === 0) {
+      grid.innerHTML = `
+        <div class="book-search-empty">
+          <i class="fa-solid fa-circle-exclamation" style="font-size: 1.5rem; margin-bottom: 0.5rem; display: block; opacity: 0.6;"></i>
+          Không tìm thấy sách nào khớp với "<strong>${searchQuery}</strong>"
+        </div>
+      `;
+      return;
+    }
 
     let html = '';
-    filteredBooks.forEach(b => {
+    displayBooks.forEach(b => {
+      const tagHtml = isSearching ? `<span class="book-item-tag book-tag-${b.testament.toLowerCase()}">${b.testament === 'OT' ? 'Cựu' : 'Tân'}</span>` : '';
       html += `
-        <div class="book-card-item" data-book-id="${b.id}" style="--genre-color: var(--genre-${b.genre}, var(--accent-gold));">
-          <div style="font-weight: 700; color: var(--text-primary);">${b.name_vi}</div>
-          <div style="font-size: 0.72rem; color: var(--text-muted);">${b.chapters_count} đoạn</div>
+        <div class="book-card-item" data-book-id="${b.id}" title="${b.name_vi} (${b.chapters_count} đoạn)">
+          <div class="book-item-left">
+            ${tagHtml}
+            <span class="book-item-name">${b.name_vi}</span>
+          </div>
+          <span class="book-item-chaps">${b.chapters_count}</span>
         </div>
       `;
     });
@@ -5001,17 +5039,21 @@ class LogosApp {
 
     const booksGrid = document.getElementById('books-grid');
     const chaptersGrid = document.getElementById('chapters-grid');
+    const searchBar = document.getElementById('book-picker-search-bar');
+    const tabs = document.getElementById('book-picker-tabs');
     if (!chaptersGrid || !booksGrid) return;
 
     booksGrid.classList.add('hidden');
+    if (searchBar) searchBar.classList.add('hidden');
+    if (tabs) tabs.classList.add('hidden');
     chaptersGrid.classList.remove('hidden');
 
     let html = `
-      <div style="grid-column: 1/-1; display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-        <button id="back-to-books-btn" style="background: transparent; border: none; color: var(--accent-gold); font-size: 0.88rem; cursor: pointer;">
+      <div class="chapters-header">
+        <button id="back-to-books-btn" class="chapters-back-btn">
           <i class="fa-solid fa-arrow-left"></i> Chọn Sách Khác
         </button>
-        <span style="font-weight: 700; color: var(--text-primary);">${book.name_vi} (${book.chapters_count} Đoạn)</span>
+        <span class="chapters-book-title">${book.name_vi} (${book.chapters_count} Đoạn)</span>
       </div>
     `;
 
@@ -5020,18 +5062,22 @@ class LogosApp {
     }
     chaptersGrid.innerHTML = html;
 
-    chaptersGrid.querySelector('#back-to-books-btn').addEventListener('click', () => {
+    chaptersGrid.querySelector('#back-to-books-btn')?.addEventListener('click', () => {
       chaptersGrid.classList.add('hidden');
       booksGrid.classList.remove('hidden');
+      if (searchBar) searchBar.classList.remove('hidden');
+      if (tabs) tabs.classList.remove('hidden');
     });
 
     chaptersGrid.querySelectorAll('.chapter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const ch = parseInt(btn.dataset.chapter, 10);
         state.setPassage(bookId, ch, 1);
-        document.getElementById('book-picker-modal').classList.add('hidden');
+        document.getElementById('book-picker-modal')?.classList.add('hidden');
         chaptersGrid.classList.add('hidden');
         booksGrid.classList.remove('hidden');
+        if (searchBar) searchBar.classList.remove('hidden');
+        if (tabs) tabs.classList.remove('hidden');
       });
     });
   }
@@ -6166,10 +6212,41 @@ class LogosApp {
         document.querySelectorAll('.testament-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         const testament = tab.dataset.testament; // 'OT' or 'NT'
-        this.populateBookPicker(testament);
+        const searchInput = document.getElementById('book-picker-search-input');
+        const searchClear = document.getElementById('book-picker-search-clear');
+        if (searchInput) searchInput.value = '';
+        if (searchClear) searchClear.classList.add('hidden');
+        this.populateBookPicker(testament, '');
         document.getElementById('books-grid')?.classList.remove('hidden');
         document.getElementById('chapters-grid')?.classList.add('hidden');
       });
+    });
+
+    // Thanh Tìm Kiếm Nhanh Sách (Book Picker Search Bar)
+    const bookSearchInput = document.getElementById('book-picker-search-input');
+    const bookSearchClear = document.getElementById('book-picker-search-clear');
+    const bookTabs = document.getElementById('book-picker-tabs');
+
+    bookSearchInput?.addEventListener('input', (e) => {
+      const q = e.target.value;
+      if (bookSearchClear) {
+        bookSearchClear.classList.toggle('hidden', !q);
+      }
+      if (q.trim()) {
+        if (bookTabs) bookTabs.classList.add('hidden');
+        this.populateBookPicker(this.currentPickerTestament || 'OT', q);
+      } else {
+        if (bookTabs) bookTabs.classList.remove('hidden');
+        this.populateBookPicker(this.currentPickerTestament || 'OT', '');
+      }
+    });
+
+    bookSearchClear?.addEventListener('click', () => {
+      if (bookSearchInput) bookSearchInput.value = '';
+      bookSearchClear.classList.add('hidden');
+      if (bookTabs) bookTabs.classList.remove('hidden');
+      this.populateBookPicker(this.currentPickerTestament || 'OT', '');
+      bookSearchInput?.focus();
     });
 
     // Modals open triggers
@@ -6179,7 +6256,15 @@ class LogosApp {
       document.querySelectorAll('.testament-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.testament === testament);
       });
-      this.populateBookPicker(testament);
+      const searchInput = document.getElementById('book-picker-search-input');
+      const searchClear = document.getElementById('book-picker-search-clear');
+      const searchBar = document.getElementById('book-picker-search-bar');
+      const tabs = document.getElementById('book-picker-tabs');
+      if (searchInput) searchInput.value = '';
+      if (searchClear) searchClear.classList.add('hidden');
+      if (searchBar) searchBar.classList.remove('hidden');
+      if (tabs) tabs.classList.remove('hidden');
+      this.populateBookPicker(testament, '');
       document.getElementById('books-grid')?.classList.remove('hidden');
       document.getElementById('chapters-grid')?.classList.add('hidden');
       document.getElementById('book-picker-modal')?.classList.remove('hidden');

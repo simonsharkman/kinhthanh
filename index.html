@@ -991,14 +991,20 @@
     </div>
   </aside>
 
-  <!-- Modal 1: Bộ Chọn Sách & Chương Kinh Thánh -->
+  <!-- Modal 1: Bộ Chọn Sách & Chương Kinh Thánh (Gọn gàng, tìm kiếm tức thì) -->
   <div id="book-picker-modal" class="modal-overlay hidden">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3><i class="fa-solid fa-book-bible"></i> 66 SÁCH KINH THÁNH</h3>
-        <button class="modal-close-btn" data-modal="book-picker-modal">&times;</button>
+    <div class="modal-card bpm-card">
+      <div class="modal-header bpm-header">
+        <h3 class="bpm-title"><i class="fa-solid fa-book-bible" style="color: var(--accent-gold);"></i> 66 SÁCH KINH THÁNH</h3>
+        <button class="modal-close-btn bpm-close-btn" data-modal="book-picker-modal" title="Đóng cửa sổ">&times;</button>
       </div>
-      <div class="testament-tabs">
+      <!-- Thanh Tìm Kiếm Sách Tức Thì (Không lo tìm không ra) -->
+      <div class="book-picker-search-bar" id="book-picker-search-bar">
+        <i class="fa-solid fa-magnifying-glass book-search-icon"></i>
+        <input type="text" id="book-picker-search-input" class="book-search-input" placeholder="Tìm kiếm nhanh sách (vd: Giăng, Rô, Ma, Thi...)" autocomplete="off">
+        <button id="book-picker-search-clear" class="book-search-clear hidden" title="Xóa tìm kiếm">&times;</button>
+      </div>
+      <div class="testament-tabs" id="book-picker-tabs">
         <button class="testament-tab active" data-testament="OT">Cựu Ước (39 Sách)</button>
         <button class="testament-tab" data-testament="NT">Tân Ước (27 Sách)</button>
       </div>
