@@ -49,3 +49,16 @@ def test_storage_feedback_and_adsense_methods():
     assert "deleteWebsiteFeedback" in storage_js
     assert "getAdSenseConfig" in storage_js
     assert "saveAdSenseConfig" in storage_js
+
+
+def test_donate_compact_layout_styling():
+    """Kiểm tra thẻ thông tin dâng hiến tinh gọn, phẳng, chống tràn giao diện"""
+    with open("css/components.css", "r", encoding="utf-8") as f:
+        css = f.read()
+
+    assert ".bank-details-box" in css
+    assert ".bank-row.highlight-account-row" in css
+    assert ".donate-vietqr-img" in css
+    assert "max-width: 165px" in css
+    assert ".contact-quick-actions" in css
+

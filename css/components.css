@@ -5312,106 +5312,117 @@
 }
 
 /* Khung thông tin tài khoản VCB 9368045059 - Y Simon Ktul */
+/* Khung thông tin tài khoản VCB 9368045059 - Gọn gàng, tinh tế, 1 thẻ phẳng */
 .bank-details-box {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
 }
 
 .bank-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 0.7rem 0.9rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.84rem;
+}
+
+.bank-row:last-child {
+  border-bottom: none;
 }
 
 .bank-row.highlight-account-row {
-  background: rgba(212, 175, 55, 0.12);
-  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  background: rgba(212, 175, 55, 0.09);
 }
 
 .bank-label {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
   color: var(--text-muted);
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .bank-label i {
   color: var(--accent-gold);
+  width: 14px;
+  text-align: center;
 }
 
-.bank-value-wrap {
-  display: flex;
-  flex-direction: column;
-}
-
-.bank-name-badge {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #4ade80;
-}
-
-.bank-sub {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
+.bank-value-wrap,
 .bank-value-inline {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
-  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  text-align: right;
+  min-width: 0;
+  flex: 1;
+}
+
+.bank-name-badge {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #4ade80;
+  white-space: nowrap;
+}
+
+.bank-sub {
+  display: none;
 }
 
 .bank-account-number {
   font-family: var(--font-ui);
-  font-size: 1.45rem;
+  font-size: 1.15rem;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--accent-gold);
 }
 
 .bank-recipient-name {
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-size: 0.92rem;
+  font-weight: 700;
   color: var(--text-primary);
+  white-space: nowrap;
 }
 
 .bank-phone-number {
-  font-size: 1.12rem;
-  font-weight: 800;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: var(--accent-gold);
 }
 
 .bank-transfer-memo {
-  font-size: 0.88rem;
+  font-size: 0.76rem;
   font-family: monospace;
   color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .copy-pill-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.32rem 0.7rem;
-  border-radius: 8px;
+  gap: 0.25rem;
+  padding: 0.18rem 0.45rem;
+  border-radius: 4px;
   border: 1px solid rgba(212, 175, 55, 0.45);
-  background: rgba(212, 175, 55, 0.14);
+  background: rgba(212, 175, 55, 0.12);
   color: var(--accent-gold);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.18s ease;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  line-height: 1.2;
 }
 
 .copy-pill-btn:hover,
@@ -5423,20 +5434,20 @@
 .contact-quick-actions {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
+  gap: 0.3rem;
 }
 
 .contact-action-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.32rem;
-  padding: 0.32rem 0.68rem;
-  border-radius: 8px;
-  font-size: 0.76rem;
+  gap: 0.25rem;
+  padding: 0.18rem 0.42rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.18s ease;
+  line-height: 1.2;
+  transition: all 0.15s ease;
 }
 
 .contact-action-pill.call-pill {
@@ -5452,45 +5463,50 @@
 }
 
 .donate-qr-box {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.025);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 1rem;
+  border-radius: 8px;
+  padding: 0.7rem;
   text-align: center;
 }
 
 .qr-box-title {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 800;
   color: var(--accent-gold);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
 }
 
 .qr-image-frame {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.4rem;
 }
 
 .donate-vietqr-img {
-  max-width: 240px;
+  max-width: 165px;
   width: 100%;
   height: auto;
-  border-radius: 10px;
-  border: 3px solid #fff;
+  border-radius: 6px;
+  border: 2px solid #fff;
   background: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
 .qr-offline-fallback {
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
-  padding: 1.25rem;
+  padding: 0.85rem;
   border: 1px dashed var(--accent-gold);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--text-primary);
+  font-size: 0.8rem;
 }
 
 .qr-caption {

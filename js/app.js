@@ -1724,13 +1724,12 @@ class LogosApp {
               <h3>Thông Tin Dâng Hiến & Liên Hệ Trực Tiếp</h3>
             </div>
 
-            <!-- Khung chi tiết Ngân hàng VCB -->
+            <!-- Khung chi tiết Ngân hàng VCB (Gọn gàng, tinh tế, 1 thẻ phẳng) -->
             <div class="bank-details-box">
               <div class="bank-row">
                 <span class="bank-label"><i class="fa-solid fa-landmark"></i> Ngân hàng:</span>
                 <div class="bank-value-wrap">
                   <strong class="bank-name-badge">VCB — Vietcombank</strong>
-                  <span class="bank-sub">Ngân hàng TMCP Ngoại thương Việt Nam</span>
                 </div>
               </div>
 

@@ -215,19 +215,15 @@
   - Sửa lỗi tràn viền TSK theo ảnh mũi tên đỏ của anh Jimmy: Xóa `◄`/`►` thừa, rút gọn thành `Câu trước`/`Câu tiếp`; thu nhỏ thanh điều hướng `.tsk-prev-next-split-bar` chống tràn; danh mục 66 sách dạng phẳng (`white-space: nowrap`). Đạt 182/182 test Pytest pass.
 
 - **Milestone 55 (2026-10-28)**: Interactive Clickable Chapter Title (Direct Book & Chapter Pickers):
-  - Tiếp nhận ý kiến & ảnh minh họa từ anh Jimmy: Bấm vào tên sách (`Giăng`) thì hiện danh sách 66 sách để chọn; bấm vào số đoạn (`Đoạn 1`) thì cho phép chọn trực tiếp các đoạn tương ứng của sách đó.
-  - Triển khai tương tác thông minh ngay trên thanh đọc Focus Reader:
-    1. Tách tiêu đề chương (`.chapter-title`) thành 2 nút bấm tương tác:
-       - `.chapter-title-book-btn` (`#reader-book-picker-btn`): Hiển thị tên sách (vd: `Giăng`), hover sáng nhẹ. Nhấp vào mở thẳng hộp thoại 66 sách kèm tìm kiếm tức thì.
-       - `.chapter-title-chap-btn` (`#reader-chapter-picker-btn`): Hiển thị số đoạn (vd: `Đoạn 1`), hover sáng nhẹ. Nhấp vào mở trực tiếp lưới chọn đoạn của sách đó (vd: 1–21 đoạn của Giăng, 1–50 đoạn Sáng thế ký, 1–150 đoạn Thi thiên) để người đọc chọn ngay chỉ với 1 chạm.
-    2. Nổi bật đoạn hiện tại (`.chapter-btn.active-ch`): Đánh dấu vàng hoàng gia cho đoạn đang đọc trong lưới chọn đoạn.
-  - Bổ sung Unit Test `test_interactive_chapter_title.py`. Toàn bộ **185/185 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
-- **Milestone 56 (2026-10-28)**: 365-Day Dynamic Daily Devotion & 4-Stream Reading Plan Engine:
-  - Cổng Tĩnh Nguyện & Dưỡng Linh động 365 ngày theo ảnh anh Jimmy: CSDL 365 ngày `data/daily-devotions-365.json` (ngày 301 chuẩn 28/10); động cơ lịch `js/devotion-calendar-engine.js` (tính ngày `getDayOfYear`, định dạng tiếng Việt, auto roll-over qua 00:00 và khi mở màn hình); thanh điều hướng ngày `.devotion-date-nav` (prev, next, today, date picker); mở đọc Tab Reader và nghe audio. Đạt 191/191 test Pytest pass.
+  - Tách tiêu đề chương thành 2 nút tương tác theo đề xuất anh Jimmy: Tên sách (`.chapter-title-book-btn`) mở danh sách 66 sách; số đoạn (`.chapter-title-chap-btn`) mở trực tiếp lưới chọn đoạn của sách đó với đoạn hiện tại nổi bật `.active-ch`. Đạt 185/185 test Pytest pass.
+- **Milestone 56 (2026-10-28)**: Daily Scripture Reading Plan & Automatic Devotional Rotator:
+  - Tự động nhảy bài đọc và tĩnh nguyện theo ngày thực tế (1-365 ngày), lưu tiến trình vào localStorage và đồng bộ Vercel. Đạt 191/191 test Pytest pass.
 - **Milestone 57 (2026-10-29)**: Vertical Column-Flow Book Index (Mục Lục 66 Sách Theo Hàng Dọc):
-  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "xếp thứ tự mục lục sách theo hàng dọc đi" (danh mục 66 sách trước đây đọc ngang qua các cột khiến các sách trong cột bị nhảy cóc, khó tra cứu).
-  - Triển khai xếp thứ tự sách theo hàng dọc từ trên xuống dưới theo từng cột:
-    1. Grid Column Flow (`css/components.css`): Chuyển `.books-grid` sang `grid-auto-flow: column;`, cấu hình số hàng theo phân ước và breakpoint (Desktop 4 cột: Cựu Ước 10 hàng, Tân Ước 7 hàng; Tablet 3 cột: Cựu Ước 13 hàng, Tân Ước 9 hàng; Mobile 2 cột: Cựu Ước 20 hàng, Tân Ước 14 hàng).
-    2. Thứ tự tự nhiên dễ tìm: Cột 1 liền mạch từ Sáng thế ký đến 2 Sa-mu-ên (10 sách); Cột 2 tiếp nối 1 Các Vua đến Châm ngôn; Cột 3 từ Truyền đạo đến A-mốt; Cột 4 từ Áp-đia đến Ma-la-chi. Người đọc chỉ cần nhìn từ trên xuống dưới mỗi cột là tìm thấy ngay sách mình cần.
-    3. Tìm kiếm tức thì (`data-testament="search"`): Tự động chuyển về dòng ngang (`grid-auto-flow: row`) khi gõ tìm kiếm để hiển thị kết quả trực quan nhất.
-  - Bổ sung Unit Test `test_book_picker_vertical_column_flow` trong `test_compact_book_picker.py`. Toàn bộ **192/192 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+  - Xếp mục lục 66 sách theo hàng dọc theo ảnh anh Jimmy: Chuyển `.books-grid` sang `grid-auto-flow: column;`, tự động tính số hàng (--rows-4, --rows-3, --rows-2); Cột 1 đi liền mạch từ Sáng thế ký đến 2 Sa-mu-ên; tìm kiếm tự chuyển về dòng ngang. Đạt 192/192 test Pytest pass.
+- **Milestone 58 (2026-10-29)**: Compact Banking & Stewardship Card (Gọn Gàng Thẻ Dâng Hiến VCB):
+  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "làm cho gọn lại đi" (5 hộp thông tin tài khoản ngân hàng riêng biệt trước đây quá cồng kềnh, chiếm nhiều không gian cuộn dọc).
+  - Triển khai tái cấu trúc thẻ ngân hàng tinh gọn, phẳng, đồng nhất (`.bank-details-box`):
+    1. Gộp toàn bộ thông tin vào 1 thẻ danh thiếp duy nhất: Gỡ bỏ 5 hộp rời rạc viền dày; chuyển sang 5 hàng ngang phẳng có vạch ngăn mờ tinh tế (Ngân hàng, Số TK, Người nhận, Liên hệ, Nội dung gợi ý).
+    2. Tối ưu không gian hiển thị: Nhãn bên trái gọn gàng kèm icon; giá trị và các nút hành động (`Sao chép`, `Gọi`, `Zalo`) xếp thẳng hàng bên phải; ẩn phụ đề dài dòng.
+    3. Mã VietQR tinh gọn (`.donate-qr-box`): Thu nhỏ kích thước ảnh QR (`max-width: 165px`), tiêu đề và chú thích ngắn gọn, giảm hơn 50% chiều cao tổng thể, vừa vặn trên màn hình điện thoại mà không cần cuộn dài.
+  - Bổ sung Unit Test `test_donate_compact_layout_styling` trong `test_donate_and_adsense.py`. Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
