@@ -5022,6 +5022,10 @@ class LogosApp {
     const isSearching = normQ.length > 0;
 
     if (isSearching) {
+      grid.setAttribute('data-testament', 'search');
+      grid.style.removeProperty('--rows-4');
+      grid.style.removeProperty('--rows-3');
+      grid.style.removeProperty('--rows-2');
       // Khi tìm kiếm: Tìm tức thì trên toàn bộ 66 sách để người đọc tìm ngay không cần nhớ Cựu hay Tân
       displayBooks = bibleEngine.books.filter(b => {
         const nVi = (b.name_vi || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'd');
@@ -5031,7 +5035,12 @@ class LogosApp {
         return nVi.includes(normQ) || nEn.includes(normQ) || slug.includes(normQ) || id.includes(normQ);
       });
     } else {
+      grid.setAttribute('data-testament', testament);
       displayBooks = bibleEngine.books.filter(b => b.testament === testament);
+      const count = displayBooks.length;
+      grid.style.setProperty('--rows-4', Math.ceil(count / 4));
+      grid.style.setProperty('--rows-3', Math.ceil(count / 3));
+      grid.style.setProperty('--rows-2', Math.ceil(count / 2));
     }
 
     if (isSearching && displayBooks.length === 0) {

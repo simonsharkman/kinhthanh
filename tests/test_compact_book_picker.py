@@ -80,3 +80,25 @@ def test_book_picker_compact_css():
     # Chapters Grid Header
     assert '.chapters-header' in css
     assert '.chapters-back-btn' in css
+
+
+def test_book_picker_vertical_column_flow():
+    """Kiểm tra mục lục 66 sách xếp theo hàng dọc (grid-auto-flow: column)"""
+    with open(COMPONENTS_CSS_PATH, "r", encoding="utf-8") as f:
+        css = f.read()
+
+    assert "grid-auto-flow: column" in css
+    assert '.books-grid[data-testament="OT"]' in css
+    assert '.books-grid[data-testament="NT"]' in css
+    assert '.books-grid[data-testament="search"]' in css
+    assert "grid-auto-flow: row" in css
+
+    with open(APP_JS_PATH, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    assert "grid.setAttribute('data-testament', testament)" in js
+    assert "grid.setAttribute('data-testament', 'search')" in js
+    assert "--rows-4" in js
+    assert "--rows-3" in js
+    assert "--rows-2" in js
+

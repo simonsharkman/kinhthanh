@@ -990,18 +990,39 @@
   font-weight: 700;
 }
 
+/* Danh mục 66 Sách: Xếp thứ tự theo hàng dọc từ trên xuống dưới theo từng cột */
 .books-grid {
   display: grid;
+  grid-auto-flow: column;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(var(--rows-2, 20), auto);
   gap: 0.12rem 0.6rem;
   padding: 0.5rem 0.75rem;
   overflow-y: auto;
   max-height: calc(85vh - 145px);
 }
 
+.books-grid[data-testament="OT"] {
+  --rows-4: 10;
+  --rows-3: 13;
+  --rows-2: 20;
+}
+
+.books-grid[data-testament="NT"] {
+  --rows-4: 7;
+  --rows-3: 9;
+  --rows-2: 14;
+}
+
+.books-grid[data-testament="search"] {
+  grid-auto-flow: row;
+  grid-template-rows: unset;
+}
+
 @media (min-width: 580px) {
   .books-grid {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(var(--rows-3, 13), auto);
     gap: 0.18rem 0.75rem;
     padding: 0.65rem 1rem;
   }
@@ -1010,6 +1031,7 @@
 @media (min-width: 768px) {
   .books-grid {
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(var(--rows-4, 10), auto);
   }
 }
 
