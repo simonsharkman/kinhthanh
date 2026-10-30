@@ -1356,6 +1356,22 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
     max-width: 100% !important;
   }
 
+  /* Khung quảng cáo & dâng hiến siêu nhỏ gọn trên điện thoại */
+  .adsense-slot-card {
+    margin: 0.45rem auto !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 6px !important;
+  }
+
+  .adsense-badge {
+    font-size: 0.65rem !important;
+  }
+
+  .adsense-donate-shortcut-btn {
+    font-size: 0.64rem !important;
+    padding: 0.12rem 0.4rem !important;
+  }
+
   /* Cửa sổ đọc độc lập toàn màn hình trên điện thoại: Ưu tiên tối đa không gian Lời Chúa */
   .popout-reader-card {
     width: 98% !important;

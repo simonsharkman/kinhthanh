@@ -179,18 +179,10 @@
 - **Milestone 45 (2026-10-27)**: Global Arial Typography Overhaul (Site-Wide Sans-Serif Experience):
   - Đổi toàn bộ font hệ thống sang Arial theo yêu cầu anh Jimmy (`--font-brand`, `--font-heading`, `--font-bible`, v.v.). Giữ phông nguyên ngữ Hy Lạp/Hê-bơ-rơ cổ. Test 164/164 PASS 100%.
 
-- **Milestone 46 (2026-10-27)**: Refined Subtle Word-Diff Underline & Explanatory Legend:
-  - Triển khai Phương án 3 theo chọn lựa của anh Jimmy: Chuyển `.word-diff-highlight` từ nền vàng lốm đốm sang gạch chân chấm mờ tinh tế (`border-bottom: 1.5px dotted rgba(212, 175, 55, 0.55)`), thêm tooltip giải thích và thẻ chú thích `.parallel-diff-legend`. Đạt 166/166 test Pytest pass.
-
-- **Milestone 47 (2026-10-27)**: Clean Columnar Reading Typography & Hanging Indent Layout:
-  - Tối ưu theo chuẩn Image 2 của anh Jimmy: Cột số câu độc lập (`.verse-number`), xuống dòng thẳng cột tuyệt đối (`.verse-text`), giãn cách câu thư thái (`gap: 1.15rem`). Đạt 166/166 test Pytest pass.
-
-- **Milestone 48 (2026-10-27)**: Expanded Drawer Workspace & Compact Card Headers:
-  - Tối ưu theo yêu cầu anh Jimmy: Mở rộng Drawer (`--drawer-width: clamp(520px, 45vw, 760px)`) tăng 45vw không gian đối chiếu Lời Chúa; thu nhỏ badge tiêu đề thẻ (`.badge-vcode`, `.badge-vname`); rút gọn nút Popout thành icon vuông 28px (`.card-popout-btn`). Đạt 166/166 test Pytest pass.
-
-- **Milestone 49 (2026-10-28)**: Hermeneutical Context Dossier for All 21 NT Epistles:
-  - Xây dựng CSDL Khảo Cứu 21 Thư Tín Tân Ước (`data/epistles-deep-context.json`) với 9 trường chuyên sâu (Trước giả, người nhận, địa lý cổ/nay, bối cảnh La Mã, tình hình HT, nan đề, sứ điệp).
-  - Tích hợp `js/hermeneutics-engine.js` hiển thị Hồ Sơ Khảo Cứu 6 mục trực quan. Test `test_epistles_deep_context.py` 169/169 pass.
+- **Milestone 46 (2026-10-27)**: Refined Subtle Word-Diff Underline: Gạch chân chấm mờ tinh tế chấm dứt nền vàng lốm đốm, thêm tooltip giải thích. Đạt 166/166 test pass.
+- **Milestone 47 (2026-10-27)**: Clean Columnar Reading Typography: Cột số câu độc lập, xuống dòng thẳng cột chuẩn mực. Đạt 166/166 test pass.
+- **Milestone 48 (2026-10-27)**: Expanded Drawer Workspace: Mở rộng Drawer 45vw, thu nhỏ badge tiêu đề thẻ và nút Popout thành icon vuông 28px. Đạt 166/166 test pass.
+- **Milestone 49 (2026-10-28)**: Hermeneutical Context Dossier: CSDL 21 Thư Tín Tân Ước (data/epistles-deep-context.json) với 9 trường chuyên sâu. Đạt 169/169 test pass.
 
 - **Milestone 50 (2026-10-28)**: Fix Mobile Reading Version Selector Clipping & Header UX:
   - Khắc phục lỗi che nút bản dịch mobile theo ảnh anh Jimmy: Đặt `justify-content: flex-start !important` & `flex-shrink: 0 !important` cho `#primary-version-trigger`; rút gọn nhãn bản dịch (`BTT 1925`, `EDE`, `KTHD`, `CGKPV`, `KJV`); thêm nút trong menu hamburger. Đạt 172/172 test Pytest pass.
@@ -223,4 +215,11 @@
     1. Tích hợp thanh Header thành 1 hàng siêu mỏng duy nhất (`.popout-reader-header` cao chỉ 44px): Gồm nút Đoạn trước (`<`), Tiêu đề gọn gàng (`Giăng 2`), huy hiệu bản dịch tinh tế (`[ESV]`, `[CGKPV]`), nút Đoạn sau (`>`), các công cụ Sao chép, Mở tab mới và Đóng (`&times;`).
     2. Loại bỏ hoàn toàn thanh điều hướng phụ trùng lặp (`.popout-nav-bar`) và ẩn toàn bộ footer thừa (`.popout-reader-footer`): Không còn đoạn văn giải thích hay nút đóng vàng to chiếm chỗ.
     3. Mở rộng diện tích đọc Lời Chúa lên mức tối đa: `.popout-reader-card` tăng chiều cao lên 92-96vh, `.popout-reader-body` chiếm trọn 100% diện tích còn lại (`max-height: none`), tăng hơn 300% diện tích đọc thực tế, chữ hiển thị thoáng đãng, dễ đọc trên cả mobile và desktop.
+  - Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestone 61 (2026-10-30)**: Ultra-Compact AdSense & Stewardship Slot (Thu Nhỏ Tối Đa Khung Quảng Cáo & Dâng Hiến Cuối Chương Đọc):
+  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "hiển thị nhỏ thôi" (khoanh đỏ khung quảng cáo Google AdSense & nút dâng hiến cuối chương đọc trước đây quá cồng kềnh, viền dày, đệm lớn, chiếm nhiều diện tích cuộn dọc).
+  - Triển khai tối ưu hóa khung quảng cáo siêu nhỏ gọn, phẳng (`.adsense-slot-card.adsense-slot-compact`):
+    1. Thu gọn thành 1 dòng đơn ngang phẳng siêu mỏng: Bên trái là nhãn tinh tế `[Ad] Quảng cáo duy trì máy chủ`, bên phải là nút dâng hiến nhỏ gọn `[❤ Dâng hiến]`.
+    2. Giảm hơn 70% chiều cao tổng thể: Thu nhỏ padding (`0.3rem 0.65rem`), margin gọn gàng (`0.65rem auto`), cỡ chữ thanh mảnh (`0.68rem`), đường viền mờ tinh tế không gây xao nhãng.
+    3. Tối ưu di động: Khung tự động co giãn vừa vặn, không bị rớt dòng hay tràn màn hình, nhường toàn bộ không gian cho Lời Chúa và khung đối chiếu.
   - Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
