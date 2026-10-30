@@ -13,6 +13,7 @@ import { aiAssistant } from './ai-assistant.js';
 import { blogSystem } from './blog-community.js';
 import { bereaGuardian } from './berea-guardian.js';
 import { devotionCalendarEngine } from './devotion-calendar-engine.js';
+import { quizEngine } from './quiz-engine.js';
 import { FAV_VERSES_DATA, BIBLE_QUIZ_DATA, RESPONSIVE_READINGS_DATA, BIBLE_STORIES_DATA, BIBLE_DICT_DATA, STRONG_DICT_DATA, BIBLE_BOOK_ORDER_MAP, getChapterAudioUrl } from './portal-data.js';
 
 class LogosApp {
@@ -348,6 +349,8 @@ class LogosApp {
       view = 'media';
     } else if (['donate', 'danghien'].includes(prefix)) {
       view = 'donate';
+    } else if (['quiz', 'dokinhthanh', 'onthi', 'tracnghiem'].includes(prefix)) {
+      view = 'quiz';
     } else if (['portal', 'home', 'trangchu', 'tinhnguyen'].includes(prefix)) {
       view = 'portal';
     } else {
@@ -526,6 +529,12 @@ class LogosApp {
         state.setDrawerOpen(false);
       }
       this.renderDonateView();
+    }
+    if (viewName === 'quiz') {
+      if (state.isDrawerOpen) {
+        state.setDrawerOpen(false);
+      }
+      this.renderQuizView();
     }
 
     // Cập nhật trạng thái nút Đọc, KT Đối Chiếu, Cổng Tĩnh Nguyện & Dâng Hiến trên mobile bottom nav và header
@@ -1657,6 +1666,13 @@ class LogosApp {
         }
       });
     } catch (e) {}
+  }
+
+  renderQuizView() {
+    const container = document.getElementById('quiz-container');
+    if (container) {
+      quizEngine.render(container);
+    }
   }
 
   renderDonateView() {
@@ -7677,7 +7693,7 @@ class LogosApp {
             return;
           }
 
-          if (targetNav === 'portal' || targetNav === 'bible' || targetNav === 'tsk' || targetNav === 'blog' || targetNav === 'community' || targetNav === 'media' || targetNav === 'donate') {
+          if (targetNav === 'portal' || targetNav === 'bible' || targetNav === 'tsk' || targetNav === 'quiz' || targetNav === 'blog' || targetNav === 'community' || targetNav === 'media' || targetNav === 'donate') {
             state.setActiveView(targetNav);
           } else if (targetNav === 'versions') {
             this.populateVersionSelector('vi');

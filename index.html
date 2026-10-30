@@ -129,6 +129,7 @@
     <button class="portal-subnav-btn nav-btn active" data-view="portal" title="Cổng Tĩnh Nguyện"><i class="fa-solid fa-house-chimney-window"></i> Cổng Tĩnh Nguyện</button>
     <button class="portal-subnav-btn nav-btn" data-view="bible" title="Đọc Kinh Thánh"><i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh</button>
     <button class="portal-subnav-btn nav-btn" data-view="tsk" title="KT Đối Chiếu (TSK)"><i class="fa-solid fa-book-atlas"></i> KT Đối Chiếu</button>
+    <button class="portal-subnav-btn nav-btn nav-btn-quiz" data-view="quiz" title="Đố Kinh Thánh & Ôn Thi Viện Thánh Kinh Thần Học (VTKTH)"><i class="fa-solid fa-graduation-cap"></i> Đố Kinh Thánh</button>
     <button class="portal-subnav-btn nav-btn" data-view="blog" title="Blog Chuyên Sâu"><i class="fa-solid fa-feather-pointed"></i> Blog Chuyên Sâu</button>
     <button class="portal-subnav-btn nav-btn" data-view="community" title="Nhánh Cộng Đồng"><i class="fa-solid fa-users"></i> Nhánh Cộng Đồng</button>
     <button class="portal-subnav-btn nav-btn" data-view="media" title="Media & Video"><i class="fa-solid fa-photo-film"></i> Media & Video</button>
@@ -946,6 +947,13 @@
     <div id="tsk-view" class="view-panel hidden">
       <div class="tsk-container">
         <!-- Render động toàn bộ dữ liệu https://biblehub.com/tsk/ (English & Vietnamese BTT) bởi crossref-engine.js -->
+      </div>
+    </div>
+
+    <!-- View 1.8: Đố Kinh Thánh & Ôn Thi Viện Thánh Kinh Thần Học (VTKTH) -->
+    <div id="quiz-view" class="view-panel hidden">
+      <div class="quiz-container" id="quiz-container">
+        <!-- Render động bởi quiz-engine.js -->
       </div>
     </div>
 
@@ -2015,6 +2023,14 @@
           <button class="mobile-drawer-row" data-utility="dictionary">
             <i class="fa-solid fa-spell-check" style="color: #06b6d4;"></i>
             <span>Thánh Kinh Từ Điển Thuật Ngữ</span>
+          </button>
+        </div>
+
+        <div class="mobile-menu-section-title"><i class="fa-solid fa-graduation-cap"></i> HỌC THÁNH KINH & THẦN HỌC</div>
+        <div class="mobile-drawer-list">
+          <button class="mobile-drawer-row" data-nav="quiz">
+            <i class="fa-solid fa-graduation-cap" style="color: #f59e0b;"></i>
+            <span>Đố Kinh Thánh & Ôn Thi VTKTH</span>
           </button>
         </div>
 

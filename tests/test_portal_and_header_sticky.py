@@ -158,7 +158,7 @@ def test_nav_tabs_moved_to_subnav_and_clean_header():
     # 3. Navigation links are located in site-subnav-bar
     subnav_start = html.find('id="site-subnav-bar"')
     assert subnav_start != -1
-    subnav_section = html[subnav_start:subnav_start + 1400]
+    subnav_section = html[subnav_start:subnav_start + 1800]
 
     assert 'data-view="portal"' in subnav_section
     assert 'data-view="bible"' in subnav_section

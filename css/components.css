@@ -7937,3 +7937,821 @@
   font-weight: 700;
   border: 1px solid rgba(16, 185, 129, 0.35);
 }
+
+
+/* ==========================================================================
+   LOGOS MULTIVERSE - BIBLE QUIZ & VTKTH THEOLOGICAL EXAM STYLES
+   Đố Kinh Thánh, Flashcard Câu Gốc & 10 Bộ Đề Thi Thử Tuyển Sinh VTKTH
+   ========================================================================== */
+
+.quiz-container {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem 1.25rem;
+}
+
+.quiz-hero-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 1rem;
+  background: linear-gradient(180deg, rgba(229, 193, 88, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(229, 193, 88, 0.22);
+  border-radius: 14px;
+}
+
+.quiz-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(229, 193, 88, 0.15);
+  border: 1px solid rgba(229, 193, 88, 0.4);
+  color: var(--accent-gold);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+.quiz-hero-title {
+  font-family: var(--font-brand);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem 0;
+}
+
+.quiz-hero-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  max-width: 780px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Navigation Subtabs */
+.quiz-nav-subtabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  scrollbar-width: thin;
+}
+
+.quiz-subtab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.quiz-subtab-btn:hover {
+  background: rgba(229, 193, 88, 0.1);
+  color: var(--accent-gold);
+  border-color: rgba(229, 193, 88, 0.35);
+}
+
+.quiz-subtab-btn.active {
+  background: var(--accent-gold);
+  color: #0a0d14;
+  border-color: var(--accent-gold);
+  box-shadow: 0 4px 14px var(--accent-gold-glow);
+}
+
+/* 1. Quiz Tab Styles */
+.quiz-play-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.quiz-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.quiz-counter-tag {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.quiz-score-tag {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4ade80;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(74, 222, 128, 0.12);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+}
+
+.quiz-progress-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-gold) 0%, #fae49c 100%);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+.quiz-question-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 1.35rem;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
+.quiz-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1.15rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-medium);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.quiz-option-btn:hover {
+  background: rgba(229, 193, 88, 0.12);
+  border-color: rgba(229, 193, 88, 0.45);
+  transform: translateX(3px);
+}
+
+.quiz-option-btn .opt-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.quiz-option-btn.correct {
+  background: rgba(34, 197, 94, 0.18) !important;
+  border-color: #22c55e !important;
+  color: #4ade80 !important;
+}
+
+.quiz-option-btn.correct .opt-letter {
+  background: #22c55e;
+  color: #000;
+}
+
+.quiz-option-btn.incorrect {
+  background: rgba(239, 68, 68, 0.18) !important;
+  border-color: #ef4444 !important;
+  color: #f87171 !important;
+}
+
+.quiz-option-btn.incorrect .opt-letter {
+  background: #ef4444;
+  color: #fff;
+}
+
+.quiz-feedback-box {
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.quiz-feedback-box.correct-fb {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.quiz-feedback-box.wrong-fb {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.feedback-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.45rem;
+}
+
+.feedback-exp {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+}
+
+.quiz-next-q-btn,
+.quiz-restart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+/* Result Card */
+.quiz-result-card {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-gold-border);
+  border-radius: 14px;
+}
+
+.result-trophy-icon {
+  font-size: 3.2rem;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.result-title {
+  font-family: var(--font-brand);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.result-score-big {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  line-height: 1.2;
+}
+
+.result-percentage {
+  font-size: 1rem;
+  color: #4ade80;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.result-praise {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 0 auto 1.5rem auto;
+}
+
+/* 2. Flashcard 3D Flip Styles */
+.flashcards-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.fc-controls-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.fc-counter-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.fc-shuffle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.flashcard-scene {
+  perspective: 1200px;
+  margin-bottom: 1.25rem;
+}
+
+.flashcard-card {
+  position: relative;
+  width: 100%;
+  min-height: 290px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border-radius: 14px;
+}
+
+.flashcard-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.flashcard-front {
+  background: var(--bg-card);
+  border: 2px solid var(--accent-gold-border);
+}
+
+.flashcard-back {
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(229, 193, 88, 0.1) 100%);
+  border: 2px solid var(--accent-gold);
+  transform: rotateY(180deg);
+}
+
+.fc-cat-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  background: rgba(229, 193, 88, 0.15);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.15rem;
+}
+
+.fc-verse-text {
+  font-family: var(--font-bible);
+  font-size: 1.22rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.fc-ref-highlight {
+  font-family: var(--font-brand);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  margin-bottom: 0.85rem;
+}
+
+.fc-detail-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 580px;
+  margin-bottom: 1rem;
+}
+
+.fc-hint-action {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  opacity: 0.8;
+  margin-top: auto;
+}
+
+.fc-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.fc-nav-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.fc-flip-trigger-btn {
+  padding: 0.5rem 1.4rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* 3. Sets Tab Styles */
+.exam-sets-picker-scroll {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding-bottom: 0.65rem;
+  margin-bottom: 1.25rem;
+  scrollbar-width: thin;
+}
+
+.exam-set-pill {
+  padding: 0.45rem 0.9rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.exam-set-pill.active {
+  background: var(--accent-gold);
+  color: #0a0d14;
+  border-color: var(--accent-gold);
+}
+
+.exam-set-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(229, 193, 88, 0.06);
+  border: 1px solid rgba(229, 193, 88, 0.25);
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.set-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.set-banner-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.set-count {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.toggle-all-answers-btn {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.exam-questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.exam-question-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: 10px;
+  padding: 1.15rem;
+  transition: all var(--transition-fast);
+}
+
+.exam-question-card:hover {
+  border-color: rgba(229, 193, 88, 0.4);
+}
+
+.eq-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+}
+
+.eq-num {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  background: rgba(229, 193, 88, 0.12);
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+}
+
+.eq-topic {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.eq-text {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.eq-answer-box {
+  background: rgba(34, 197, 94, 0.08);
+  border-left: 3px solid #22c55e;
+  border-radius: 4px;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 0.65rem;
+}
+
+.eq-answer-label {
+  font-size: 0.88rem;
+  color: #4ade80;
+  margin-bottom: 0.25rem;
+}
+
+.eq-answer-exp {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.eq-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--accent-gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.4rem;
+}
+
+/* 4. Theology Tab Styles */
+.theology-filter-bar {
+  margin-bottom: 1.25rem;
+}
+
+.theology-search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: 10px;
+  padding: 0.6rem 0.95rem;
+  margin-bottom: 0.85rem;
+}
+
+.theology-search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.theology-section-tabs {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+}
+
+.theo-sec-pill {
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.theo-sec-pill.active {
+  background: var(--accent-gold);
+  color: #0a0d14;
+  border-color: var(--accent-gold);
+}
+
+.theology-results-count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.theology-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+  gap: 0.85rem;
+}
+
+.theology-item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: 10px;
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.theo-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+}
+
+.theo-id-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  background: rgba(229, 193, 88, 0.12);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.theo-sec-tag {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.theo-q-title {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0 0 0.65rem 0;
+}
+
+.theo-a-body {
+  display: flex;
+  gap: 0.65rem;
+  margin-top: auto;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  padding: 0.65rem 0.85rem;
+}
+
+.theo-quote-icon {
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  opacity: 0.6;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.theo-a-text {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 5. Events Tab Styles */
+.events-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.events-table th {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent-gold);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.events-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.event-tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.event-idx {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.event-ref-pill {
+  display: inline-block;
+  padding: 0.18rem 0.65rem;
+  background: rgba(229, 193, 88, 0.12);
+  border: 1px solid rgba(229, 193, 88, 0.35);
+  color: var(--accent-gold);
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.event-goto-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.event-goto-btn:hover {
+  background: var(--accent-gold);
+  color: #0a0d14;
+  border-color: var(--accent-gold);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .quiz-hero-title {
+    font-size: 1.25rem;
+  }
+  .theology-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .flashcard-card {
+    min-height: 250px;
+  }
+  .fc-verse-text {
+    font-size: 1.05rem;
+  }
+  .events-table th, .events-table td {
+    padding: 0.55rem 0.65rem;
+    font-size: 0.8rem;
+  }
+}

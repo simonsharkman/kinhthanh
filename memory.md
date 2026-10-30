@@ -151,12 +151,7 @@
 - Tối ưu CSS specificity trên mobile drawer-open, câu chọn nổi bật với `border-left: 4.5px solid var(--accent-gold)`, nền phát quang và badge số câu vàng rực. Đạt 155/155 tests pass.
 
 ### Milestone 38: Triệt Tiêu Hiện Tượng Tự Nhảy / Cuộn Màn Hình Khi Bấm Chọn Câu (Zero-Jump Stability Contract)
-- **Vấn đề**: Người dùng phản ánh khi bấm vào một câu Kinh Thánh trên giao diện, màn hình bị tự động giật/cuộn nhảy câu rất khó chịu. Nguyên nhân do `VERSE_SELECTED` trong `app.js` luôn tự động tính toán `centerTarget` và gọi `appBody.scrollTo({ top: centerTarget, behavior: 'smooth' })` nhằm ép câu được chọn vào chính giữa màn hình mỗi lần nhấp chuột, làm xáo trộn vị trí đọc tự nhiên của mắt.
-- **Giải pháp chuẩn hóa**:
-  1. Thay thế ép cuộn vào giữa bằng kiểm tra hiển thị tự nhiên: Nếu câu được bấm đã nằm trong khung nhìn (`(verseRect.top >= bodyRect.top + 6) && (verseRect.bottom <= bodyRect.bottom - 6)`), hệ thống **TUYỆT ĐỐI GIỮ NGUYÊN VỊ TRÍ CUỘN (Zero Scroll/Jump)**, giữ trải nghiệm đọc đầm chắc và ổn định.
-  2. Chỉ thực hiện cuộn nhẹ nhàng (`scrollIntoView({ behavior: 'smooth', block: 'nearest' })`) khi câu thực sự bị khuất hẳn ngoài màn hình (ví dụ chuyển câu qua điều hướng bên ngoài).
-  3. Cân bằng hình học CSS tuyệt đối: Đặt `border-left: 4px` cố định và `padding: 1px 5px` đồng bộ trên `.verse-number` trước và sau khi kích hoạt, triệt tiêu 100% hiện tượng xê dịch pixel do thay đổi kích thước hộp.
-  4. Bổ sung test `test_zero_verse_jump_on_click_contract` vào bộ test. Đạt 156/156 tests pass 100%.
+- Triệt tiêu hiện tượng màn hình tự động giật/cuộn khi bấm chọn câu: Giữ nguyên vị trí cuộn (Zero Scroll/Jump) nếu câu đã nằm trong khung nhìn, chỉ cuộn nhẹ nhàng (block: 'nearest') khi bị khuất hẳn; cân bằng hình học CSS border-left: 4px cố định trên .verse-number. Đạt 156/156 tests pass 100%.
 
 - **Milestone 39 (2026-10-26)**: Production Vercel & GitHub Deployment Complete:
   - Repository live at https://github.com/simonsharkman/kinhthanh (branch main).
@@ -223,3 +218,13 @@
     2. Giảm hơn 70% chiều cao tổng thể: Thu nhỏ padding (`0.3rem 0.65rem`), margin gọn gàng (`0.65rem auto`), cỡ chữ thanh mảnh (`0.68rem`), đường viền mờ tinh tế không gây xao nhãng.
     3. Tối ưu di động: Khung tự động co giãn vừa vặn, không bị rớt dòng hay tràn màn hình, nhường toàn bộ không gian cho Lời Chúa và khung đối chiếu.
   - Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestone 62 (2026-10-30)**: Comprehensive Bible Quiz & VTKTH Theological Examination Suite:
+  - Tiếp nhận yêu cầu anh Jimmy từ kho dữ liệu C:\Users\Admin\Desktop\On_Thi_Kinh_Thanh_VTKTH.
+  - Trích xuất toàn bộ ngân hàng câu hỏi vào data/quiz-database.json (>630 câu):
+    1. **Trắc Nghiệm Thi Thử**: Tính điểm tức thì, giải thích chi tiết, thanh tiến trình trực quan.
+    2. **Flashcard Câu Gốc**: Thẻ 3D lật 180° ôn 30+ câu gốc vàng kim cương kèm tra cứu phân đoạn.
+    3. **10 Bộ Đề Thi Tuyển Sinh VTKTH**: 200 câu hỏi 10 bộ đề chuẩn chính thức Hội Thánh Tin Lành Việt Nam.
+    4. **200 Câu Thần Học & Giáo Lý**: 4 chuyên đề (Thần đạo học, Cơ Đốc giáo sử, Tín điều, Đạo đức) kèm bộ lọc và tìm kiếm tức thì.
+    5. **Sự Kiện Ở Đoạn Nào?**: Bảng tra cứu 25 sự kiện lịch sử Kinh Thánh với nút mở trực tiếp Focus Reader.
+  - Tích hợp điều hướng Subnav, #quiz-view, mobile drawer, module js/quiz-engine.js, pp.js routing và bộ CSS Sacred Reverent.
+  - Toàn bộ **198/198 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
