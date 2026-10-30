@@ -1190,7 +1190,7 @@
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
 }
 
-/* Tiêu đề đọc tương tác: Nhấp Tên Sách hoặc Số Đoạn để đổi ngay */
+/* Tiêu đề đọc tương tác: Nhấp Tên Sách, Số Đoạn hoặc Bản Dịch để đổi ngay */
 .chapter-title-btn {
   background: transparent;
   border: none;
@@ -1213,11 +1213,28 @@
   transform: translateY(-1px);
 }
 
+.chapter-title-ver-btn {
+  color: var(--accent-gold);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.chapter-title-ver-btn:hover {
+  background: rgba(212, 175, 55, 0.22);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.chapter-title-parallel-ver-btn {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
 .chapter-title-sep {
   color: var(--text-muted);
   font-weight: 400;
   opacity: 0.6;
-  margin: 0 0.1rem;
+  margin: 0 0.15rem;
   user-select: none;
 }
 

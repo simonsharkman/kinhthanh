@@ -220,10 +220,17 @@
   - Tự động nhảy bài đọc và tĩnh nguyện theo ngày thực tế (1-365 ngày), lưu tiến trình vào localStorage và đồng bộ Vercel. Đạt 191/191 test Pytest pass.
 - **Milestone 57 (2026-10-29)**: Vertical Column-Flow Book Index (Mục Lục 66 Sách Theo Hàng Dọc):
   - Xếp mục lục 66 sách theo hàng dọc theo ảnh anh Jimmy: Chuyển `.books-grid` sang `grid-auto-flow: column;`, tự động tính số hàng (--rows-4, --rows-3, --rows-2); Cột 1 đi liền mạch từ Sáng thế ký đến 2 Sa-mu-ên; tìm kiếm tự chuyển về dòng ngang. Đạt 192/192 test Pytest pass.
-- **Milestone 58 (2026-10-29)**: Compact Banking & Stewardship Card (Gọn Gàng Thẻ Dâng Hiến VCB):
-  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "làm cho gọn lại đi" (5 hộp thông tin tài khoản ngân hàng riêng biệt trước đây quá cồng kềnh, chiếm nhiều không gian cuộn dọc).
-  - Triển khai tái cấu trúc thẻ ngân hàng tinh gọn, phẳng, đồng nhất (`.bank-details-box`):
-    1. Gộp toàn bộ thông tin vào 1 thẻ danh thiếp duy nhất: Gỡ bỏ 5 hộp rời rạc viền dày; chuyển sang 5 hàng ngang phẳng có vạch ngăn mờ tinh tế (Ngân hàng, Số TK, Người nhận, Liên hệ, Nội dung gợi ý).
-    2. Tối ưu không gian hiển thị: Nhãn bên trái gọn gàng kèm icon; giá trị và các nút hành động (`Sao chép`, `Gọi`, `Zalo`) xếp thẳng hàng bên phải; ẩn phụ đề dài dòng.
-    3. Mã VietQR tinh gọn (`.donate-qr-box`): Thu nhỏ kích thước ảnh QR (`max-width: 165px`), tiêu đề và chú thích ngắn gọn, giảm hơn 50% chiều cao tổng thể, vừa vặn trên màn hình điện thoại mà không cần cuộn dài.
-  - Bổ sung Unit Test `test_donate_compact_layout_styling` trong `test_donate_and_adsense.py`. Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestone 58 (2026-10-29)**: Compact Banking & Stewardship Card:
+  - Tái cấu trúc thẻ ngân hàng tinh gọn phẳng (`.bank-details-box`), gộp 5 mục vào 1 thẻ với các hàng ngang (Ngân hàng, Số TK, Người nhận, Liên hệ, Nội dung); thu nhỏ mã QR (`max-width: 165px`), giảm >50% chiều cao. Đạt 193/193 test Pytest pass.
+- **Milestone 59 (2026-10-30)**: Unified Triad Interactive Reader Title (TÊN SÁCH - ĐOẠN - BẢN) & Duplicate Badge Elimination:
+  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "tự nhiên bị thừa cái này. cho hiển thị TÊN SÁCH - ĐOẠN - BẢN . cho phép bấm chọn cho mỗi cái để thay đổi là được" (huy hiệu tím `A-MÓT • ĐOẠN 3/9 • BDY` đứng cạnh tiêu đề `A-mốt - Đoạn 3` gây thừa thãi lặp lại thông tin).
+  - Triển khai tối ưu bộ ba tương tác đồng nhất trên thanh đọc Focus Reader & Parallel Canvas:
+    1. Loại bỏ hoàn toàn huy hiệu thừa (`.chapter-badge`): Gỡ bỏ `<span class="chapter-badge">` trong `renderChapterHTML` và `renderParallelHTML`, thiết lập `display: none !important;` triệt để.
+    2. Tích hợp bộ ba tương tác chuẩn mực vào `<h2 class="chapter-title">`:
+       - TÊN SÁCH (`.chapter-title-book-btn`, `#reader-book-picker-btn`): Nhấp vào mở hộp thoại 66 sách Kinh Thánh để đổi sách.
+       - Dấu phân cách (`.chapter-title-sep`): `-` mỏng nhẹ, tinh tế.
+       - ĐOẠN (`.chapter-title-chap-btn`, `#reader-chapter-picker-btn`): Nhấp vào mở trực tiếp lưới chọn đoạn của sách hiện tại.
+       - Dấu phân cách (`.chapter-title-sep`): `-`
+       - BẢN (`.chapter-title-ver-btn`, `#reader-version-picker-btn`): Hiển thị mã bản dịch đọc chính (vd: `BDY`, `BTT`, `KTHD`), nhấp vào mở bảng chọn bản dịch `#primary-version-modal` để đổi bản dịch tức thì.
+    3. Hỗ trợ chế độ đối chiếu: Thêm nút `.chapter-title-parallel-ver-btn` mở nhanh bộ quản lý các bản dịch song song `#version-selector-modal`. Thêm cơ chế nhấp backdrop overlay để đóng modal nhanh.
+  - Cập nhật bộ kiểm thử `test_interactive_chapter_title.py`. Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.

@@ -729,6 +729,24 @@ class LogosApp {
         this.openChaptersSelector(state.currentBook);
       });
     });
+
+    // Nhấp vào Bản Dịch trên tiêu đề đọc để đổi Bản Dịch đọc chính tức thì
+    readerContainer.querySelectorAll('.chapter-title-ver-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.populatePrimaryVersionSelector();
+        document.getElementById('primary-version-modal')?.classList.remove('hidden');
+      });
+    });
+
+    // Nhấp vào Bản Dịch trong chế độ đối chiếu để mở quản lý các bản song song
+    readerContainer.querySelectorAll('.chapter-title-parallel-ver-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.populateVersionSelector('vi');
+        document.getElementById('version-selector-modal')?.classList.remove('hidden');
+      });
+    });
   }
 
   highlightActiveVerse(verseNum) {
@@ -6471,11 +6489,19 @@ class LogosApp {
       });
     });
 
-    // Modals close buttons
+    // Modals close buttons & Backdrop Click to Dismiss
     document.querySelectorAll('.modal-close-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const modalId = btn.dataset.modal;
         if (modalId) document.getElementById(modalId)?.classList.add('hidden');
+      });
+    });
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.add('hidden');
+        }
       });
     });
 

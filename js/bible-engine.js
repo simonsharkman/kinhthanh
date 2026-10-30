@@ -384,17 +384,13 @@ export class BibleEngine {
             <i class="fa-solid fa-chevron-left"></i> <span>Đoạn trước</span>
           </button>
           <div class="chapter-center-info">
-            <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
-              ${book.name_vi.toUpperCase()} • ĐOẠN ${chNum}/${maxCh} • ${transId}
-            </span>
             <h2 class="chapter-title">
               <button type="button" class="chapter-title-btn chapter-title-book-btn" id="reader-book-picker-btn" title="Chọn sách khác trong 66 sách Kinh Thánh">${book.name_vi}</button>
               <span class="chapter-title-sep">-</span>
-              <button type="button" class="chapter-title-btn chapter-title-chap-btn" id="reader-chapter-picker-btn" title="Chọn đoạn khác trong ${book.name_vi}">Đoạn ${chNum}</button>
+              <button type="button" class="chapter-title-btn chapter-title-chap-btn" id="reader-chapter-picker-btn" title="Chọn đoạn khác trong ${book.name_vi} (Đoạn 1 - ${maxCh})">Đoạn ${chNum}</button>
+              <span class="chapter-title-sep">-</span>
+              <button type="button" class="chapter-title-btn chapter-title-ver-btn active-reading-version-tag" id="reader-version-picker-btn" title="Chọn bản dịch Kinh Thánh (Đang đọc: ${transName})">${transId}</button>
             </h2>
-            <p class="chapter-subtitle">
-              Bản đọc: <span class="active-reading-version-tag" style="color: var(--accent-gold); font-weight: 600;">${transName}</span>
-            </p>
           </div>
           <button type="button" class="chapter-step-btn next-ch" data-chapter-step="1" ${chNum >= maxCh ? 'disabled' : ''} title="Chuyển sang đoạn tiếp theo">
             <span>Đoạn tiếp</span> <i class="fa-solid fa-chevron-right"></i>
@@ -480,13 +476,12 @@ export class BibleEngine {
 
     let html = `
       <div class="chapter-header parallel-header">
-        <span class="chapter-badge" style="background: ${genreColor}; color: #fff;">
-          ${book.name_vi.toUpperCase()} • ĐOẠN ${passageData.chapter_num} • ĐỐI CHIẾU SONG SONG
-        </span>
         <h2 class="chapter-title">
           <button type="button" class="chapter-title-btn chapter-title-book-btn" title="Chọn sách khác trong 66 sách Kinh Thánh">${book.name_vi}</button>
           <span class="chapter-title-sep">-</span>
           <button type="button" class="chapter-title-btn chapter-title-chap-btn" title="Chọn đoạn khác trong ${book.name_vi}">Đoạn ${passageData.chapter_num}</button>
+          <span class="chapter-title-sep">-</span>
+          <button type="button" class="chapter-title-btn chapter-title-parallel-ver-btn" id="parallel-version-picker-btn" title="Chọn các bản dịch để đối chiếu song song">Đối Chiếu (${compareVersions.length})</button>
         </h2>
         <div class="parallel-header-chips">
           <span class="parallel-chip-label"><i class="fa-solid fa-columns"></i> Đang đối chiếu song song:</span>
