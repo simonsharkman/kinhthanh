@@ -1827,38 +1827,40 @@
     </div>
   </div>
 
-  <!-- Modal 8: Cửa Sổ Đọc Bản Dịch Độc Lập / Mở Ra Cửa Sổ Mới (Independent Translation Popout Window) -->
+  <!-- Modal 8: Cửa Sổ Đọc Bản Dịch Độc Lập / Mở Ra Cửa Sổ Mới (Independent Translation Popout Window - Tối Ưu Tối Đa Không Gian Lời Chúa) -->
   <div id="popout-reader-modal" class="modal-overlay hidden" aria-label="Cửa sổ đọc bản dịch độc lập">
     <div class="modal-card popout-reader-card animate-scale-up">
       <div class="modal-header popout-reader-header">
-        <div class="modal-title-wrap">
-          <span class="preview-badge" id="popout-version-badge">BẢN CÔNG GIÁO (CGKPV)</span>
-          <h3 id="popout-reader-title"><i class="fa-solid fa-book-open-reader" style="color: var(--accent-gold);"></i> Giăng 1</h3>
-          <span class="popout-reader-subtitle" id="popout-reader-subtitle">Cửa sổ đọc độc lập — Không ảnh hưởng màn hình chính</span>
+        <div class="popout-header-nav">
+          <button id="popout-prev-chapter-btn" class="popout-nav-btn" title="Chuyển về đoạn trước">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="popout-header-title-box">
+            <h3 id="popout-reader-title" class="popout-reader-title-compact">Giăng 1</h3>
+            <span class="preview-badge popout-version-badge-compact" id="popout-version-badge">CGKPV</span>
+            <span class="popout-reader-subtitle hidden" id="popout-reader-subtitle" style="display:none;"></span>
+            <span id="popout-current-ref-display" class="hidden" style="display:none;"></span>
+          </div>
+          <button id="popout-next-chapter-btn" class="popout-nav-btn" title="Chuyển sang đoạn sau">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
         <div class="popout-header-actions">
-          <button id="popout-open-tab-btn" class="popout-tool-btn" title="Mở trang đọc này ra tab trình duyệt mới">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Cửa sổ rời
-          </button>
           <button id="popout-copy-btn" class="popout-tool-btn" title="Sao chép toàn bộ phân đoạn">
-            <i class="fa-solid fa-copy"></i> Sao chép
+            <i class="fa-solid fa-copy"></i> <span class="popout-tool-label">Sao chép</span>
+          </button>
+          <button id="popout-open-tab-btn" class="popout-tool-btn" title="Mở trang đọc này ra tab trình duyệt mới">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="popout-tool-label">Tab mới</span>
           </button>
           <button class="modal-close-btn popout-close-btn" data-modal="popout-reader-modal" title="Đóng cửa sổ đọc [Esc]">&times;</button>
         </div>
-      </div>
-
-      <!-- Quick Chapter Navigator in popout -->
-      <div class="popout-nav-bar">
-        <button id="popout-prev-chapter-btn" class="quick-pill"><i class="fa-solid fa-chevron-left"></i> Đoạn trước</button>
-        <span id="popout-current-ref-display" class="popout-ref-tag">Giăng 1</span>
-        <button id="popout-next-chapter-btn" class="quick-pill">Đoạn sau <i class="fa-solid fa-chevron-right"></i></button>
       </div>
 
       <div class="popout-reader-body" id="popout-reader-body">
         <!-- Render toàn bộ các câu kinh thánh của chương theo bản dịch đã chọn -->
       </div>
 
-      <div class="modal-footer popout-reader-footer">
+      <div class="modal-footer popout-reader-footer" style="display: none !important;">
         <span class="popout-hint-text"><i class="fa-solid fa-circle-info"></i> Bạn có thể cuộn đọc tự do, đối chiếu song song với cửa sổ chính hoặc tắt đi bất cứ lúc nào.</span>
         <button type="button" class="btn-primary modal-close-btn" data-modal="popout-reader-modal">
           <i class="fa-solid fa-xmark"></i> Đóng Cửa Sổ

@@ -5381,18 +5381,26 @@ class LogosApp {
     const book = bibleEngine.getBookById(bookId) || { id: bookId, name_vi: bookId, chapters_count: 1 };
     const transObj = ALL_TRANSLATIONS.find(t => t.id === versionId || t.code === versionId) || { id: versionId, name: versionId, category: 'Bản Dịch' };
 
-    if (badge) badge.textContent = `${transObj.name} (${transObj.id})`;
-    if (title) title.innerHTML = `<i class="fa-solid fa-book-open-reader" style="color: var(--accent-gold);"></i> ${book.name_vi} - Đoạn ${chapterNum}`;
-    if (refTag) refTag.textContent = `${book.name_vi} ${chapterNum} • ${transObj.id}`;
+    if (badge) {
+      badge.textContent = transObj.id;
+      badge.title = `${transObj.name} (${transObj.category || 'Bản Dịch'})`;
+    }
+    if (title) {
+      title.innerHTML = `${book.name_vi} - Đoạn ${chapterNum}`;
+    }
+    if (refTag) {
+      refTag.textContent = `${book.name_vi} ${chapterNum} • ${transObj.id}`;
+    }
     
     if (subtitle) {
-      if (versionId === 'INTERLINEAR') {
-        const s4aUrl = bibleEngine.getScripture4AllPdfUrl(bookId, chapterNum);
-        subtitle.innerHTML = `Bản gốc ${book.testament === 'OT' ? 'Hê-bơ-rơ (Westminster Leningrad Codex - WLC)' : 'Hy Lạp (Scrivener Textus Receptus - ScrTR)'} • ${s4aUrl ? `<a href="${s4aUrl}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline; font-weight: 600;"><i class="fa-solid fa-file-pdf"></i> Mở PDF Gốc Scripture4All.org</a>` : ''}`;
-      } else {
-        subtitle.textContent = `Bản dịch: ${transObj.name} (${transObj.category}) • Cửa sổ đọc độc lập`;
-      }
+      subtitle.textContent = `${transObj.name}`;
     }
+
+    const prevBtn = document.getElementById('popout-prev-chapter-btn');
+    const nextBtn = document.getElementById('popout-next-chapter-btn');
+    const maxCh = book.chapters_count || 1;
+    if (prevBtn) prevBtn.disabled = (chapterNum <= 1);
+    if (nextBtn) nextBtn.disabled = (chapterNum >= maxCh);
 
     modal.dataset.currentBook = bookId;
     modal.dataset.currentChapter = chapterNum;

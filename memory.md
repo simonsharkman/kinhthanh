@@ -171,17 +171,10 @@
   - Pinned .chapter-header at 	op: 46px !important; z-index: 950 !important; on mobile (and 60px on desktop) and docked .portal-main-tabs with sticky positioning.
   - Added unit test 	est_mobile_and_desktop_sticky_header_contract; full Pytest suite passing 100% (157/157 passed).
 
-- **Milestone 41 (2026-10-27)**: Hermeneutics Typology Precision & Zero False-Positive Isolation:
-  - Khắc phục triệt để lỗi gán nhầm ẩn dụ tại 2 Cô-rinh-tô 11: Nâng cấp cụm từ khóa đa từ (`bánh không men`, `chiên con`, `nước hằng sống`), bổ sung luật loại trừ (`sa-tan`, `thiên sứ sáng`), chỉ match trên bản tiếng Việt. Đạt 158/158 tests pass.
-
-- **Milestone 42 (2026-10-27)**: SPA Deep Link Hash Routing & URL Branch Synchronization:
-  - Triển khai SPA Hash Routing chuẩn: Đồng bộ URL tức thì khi chuyển tab (`#portal`, `#bible/JHN/1`, `#tsk`, `#blog`, `#community`, `#media`, `#donate`). Hỗ trợ Deep Linking mở trực tiếp chương sách, tích hợp `popstate`/`hashchange` cho nút Back/Forward. Đạt 159/159 tests pass.
-
-- **Milestone 43 (2026-10-27)**: Real-time Audio Verse Glowing Illumination & Interactive Seeking:
-  - Đồng bộ âm thanh theo câu thời gian thực: Thuật toán `buildVerseTimingMap(verses, duration)` và `findVerseAtTime`, hiệu ứng phát sáng hoàng gia (`.verse-reading-active` viền vàng `border-left: 4.5px solid var(--accent-gold)`). Hỗ trợ nhấp câu để tua audio trực tiếp (`jumpAudioToVerse`) và nút chuyển câu. Đạt 160/160 tests pass.
-
-- **Milestone 44 (2026-10-27)**: Verse-Level Deep Linking & Multi-Version URL Routing (HTTLVN Alignment):
-  - Đồng bộ URL tức thì theo từng câu (`#bible/NEH/1/6`) và bản dịch (`?v=BD2011`). Hỗ trợ giải mã slug HTTLVN (`gie` -> `JER`, `ne` -> `NEH`), nạp đúng bản dịch, cuộn và sáng câu được chọn. Test 161/161 PASS 100%.
+- **Milestone 41 (2026-10-27)**: Hermeneutics Typology Precision: Nâng cấp cụm từ khóa đa từ và luật loại trừ chống gán nhầm ẩn dụ 2 Cô-rinh-tô 11. Đạt 158/158 tests pass.
+- **Milestone 42 (2026-10-27)**: SPA Deep Link Hash Routing: Đồng bộ URL chuyển tab (#portal, #bible, #tsk, #blog, #community, #media, #donate), hỗ trợ Back/Forward. Đạt 159/159 tests pass.
+- **Milestone 43 (2026-10-27)**: Real-time Audio Verse Glowing & Interactive Seeking: Đồng bộ âm thanh theo câu (sáng viền vàng, tua audio khi nhấp câu). Đạt 160/160 tests pass.
+- **Milestone 44 (2026-10-27)**: Verse-Level Deep Linking & Multi-Version URL Routing: Hỗ trợ URL #bible/NEH/1/6?v=BD2011, giải mã slug HTTLVN. Đạt 161/161 tests pass.
 
 - **Milestone 45 (2026-10-27)**: Global Arial Typography Overhaul (Site-Wide Sans-Serif Experience):
   - Đổi toàn bộ font hệ thống sang Arial theo yêu cầu anh Jimmy (`--font-brand`, `--font-heading`, `--font-bible`, v.v.). Giữ phông nguyên ngữ Hy Lạp/Hê-bơ-rơ cổ. Test 164/164 PASS 100%.
@@ -222,15 +215,12 @@
   - Xếp mục lục 66 sách theo hàng dọc theo ảnh anh Jimmy: Chuyển `.books-grid` sang `grid-auto-flow: column;`, tự động tính số hàng (--rows-4, --rows-3, --rows-2); Cột 1 đi liền mạch từ Sáng thế ký đến 2 Sa-mu-ên; tìm kiếm tự chuyển về dòng ngang. Đạt 192/192 test Pytest pass.
 - **Milestone 58 (2026-10-29)**: Compact Banking & Stewardship Card:
   - Tái cấu trúc thẻ ngân hàng tinh gọn phẳng (`.bank-details-box`), gộp 5 mục vào 1 thẻ với các hàng ngang (Ngân hàng, Số TK, Người nhận, Liên hệ, Nội dung); thu nhỏ mã QR (`max-width: 165px`), giảm >50% chiều cao. Đạt 193/193 test Pytest pass.
-- **Milestone 59 (2026-10-30)**: Unified Triad Interactive Reader Title (TÊN SÁCH - ĐOẠN - BẢN) & Duplicate Badge Elimination:
-  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "tự nhiên bị thừa cái này. cho hiển thị TÊN SÁCH - ĐOẠN - BẢN . cho phép bấm chọn cho mỗi cái để thay đổi là được" (huy hiệu tím `A-MÓT • ĐOẠN 3/9 • BDY` đứng cạnh tiêu đề `A-mốt - Đoạn 3` gây thừa thãi lặp lại thông tin).
-  - Triển khai tối ưu bộ ba tương tác đồng nhất trên thanh đọc Focus Reader & Parallel Canvas:
-    1. Loại bỏ hoàn toàn huy hiệu thừa (`.chapter-badge`): Gỡ bỏ `<span class="chapter-badge">` trong `renderChapterHTML` và `renderParallelHTML`, thiết lập `display: none !important;` triệt để.
-    2. Tích hợp bộ ba tương tác chuẩn mực vào `<h2 class="chapter-title">`:
-       - TÊN SÁCH (`.chapter-title-book-btn`, `#reader-book-picker-btn`): Nhấp vào mở hộp thoại 66 sách Kinh Thánh để đổi sách.
-       - Dấu phân cách (`.chapter-title-sep`): `-` mỏng nhẹ, tinh tế.
-       - ĐOẠN (`.chapter-title-chap-btn`, `#reader-chapter-picker-btn`): Nhấp vào mở trực tiếp lưới chọn đoạn của sách hiện tại.
-       - Dấu phân cách (`.chapter-title-sep`): `-`
-       - BẢN (`.chapter-title-ver-btn`, `#reader-version-picker-btn`): Hiển thị mã bản dịch đọc chính (vd: `BDY`, `BTT`, `KTHD`), nhấp vào mở bảng chọn bản dịch `#primary-version-modal` để đổi bản dịch tức thì.
-    3. Hỗ trợ chế độ đối chiếu: Thêm nút `.chapter-title-parallel-ver-btn` mở nhanh bộ quản lý các bản dịch song song `#version-selector-modal`. Thêm cơ chế nhấp backdrop overlay để đóng modal nhanh.
-  - Cập nhật bộ kiểm thử `test_interactive_chapter_title.py`. Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestone 59 (2026-10-30)**: Unified Triad Interactive Reader Title (TÊN SÁCH - ĐOẠN - BẢN):
+  - Loại bỏ hoàn toàn huy hiệu tím thừa `.chapter-badge` lặp lại thông tin; hợp nhất tiêu đề thành bộ ba tương tác duy nhất (TÊN SÁCH mở 66 sách, ĐOẠN mở lưới chọn đoạn, BẢN mở bảng chọn bản dịch #primary-version-modal). Đạt 193/193 test Pytest pass.
+- **Milestone 60 (2026-10-30)**: Maximum Scripture Display Space Prioritization (Tối Ưu Tối Đa Không Gian Lời Chúa Trong Cửa Sổ Popout):
+  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "hãy ưu tiên không gian hiển thị nội dung kinh thánh" (cửa sổ đọc độc lập trước đây bị header 2 tầng, huy hiệu vàng khổng lồ, thanh điều hướng phụ và footer giải thích dài dòng đè nghẹt, khiến phần chữ Lời Chúa chỉ còn một khe hẹp <20% chiều cao).
+  - Triển khai tối ưu hóa không gian hiển thị tối đa (Zero Clutter - Maximum Scripture):
+    1. Tích hợp thanh Header thành 1 hàng siêu mỏng duy nhất (`.popout-reader-header` cao chỉ 44px): Gồm nút Đoạn trước (`<`), Tiêu đề gọn gàng (`Giăng 2`), huy hiệu bản dịch tinh tế (`[ESV]`, `[CGKPV]`), nút Đoạn sau (`>`), các công cụ Sao chép, Mở tab mới và Đóng (`&times;`).
+    2. Loại bỏ hoàn toàn thanh điều hướng phụ trùng lặp (`.popout-nav-bar`) và ẩn toàn bộ footer thừa (`.popout-reader-footer`): Không còn đoạn văn giải thích hay nút đóng vàng to chiếm chỗ.
+    3. Mở rộng diện tích đọc Lời Chúa lên mức tối đa: `.popout-reader-card` tăng chiều cao lên 92-96vh, `.popout-reader-body` chiếm trọn 100% diện tích còn lại (`max-height: none`), tăng hơn 300% diện tích đọc thực tế, chữ hiển thị thoáng đãng, dễ đọc trên cả mobile và desktop.
+  - Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.

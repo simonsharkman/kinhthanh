@@ -1356,6 +1356,40 @@ body.mobile-split-active .verse-item.verse-selected .verse-number {
     max-width: 100% !important;
   }
 
+  /* Cửa sổ đọc độc lập toàn màn hình trên điện thoại: Ưu tiên tối đa không gian Lời Chúa */
+  .popout-reader-card {
+    width: 98% !important;
+    height: 96vh !important;
+    max-height: 96vh !important;
+    border-radius: 8px !important;
+  }
+
+  .popout-reader-header {
+    padding: 0.35rem 0.65rem !important;
+    min-height: 40px !important;
+  }
+
+  .popout-reader-title-compact {
+    font-size: 0.92rem !important;
+  }
+
+  .popout-tool-label {
+    display: none !important;
+  }
+
+  .popout-tool-btn {
+    padding: 0.25rem 0.45rem !important;
+  }
+
+  .popout-reader-body {
+    padding: 0.65rem 0.75rem 1.25rem 0.75rem !important;
+  }
+
+  .popout-vtext {
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+  }
+
   /* ========================================================================
      CHẾ ĐỘ ĐỐI CHIẾU CHIA ĐỀU MÀN HÌNH 50/50 (TRÊN & DƯỚI) TRÊN ĐIỆN THOẠI
      Nửa trên (50%): Bản đọc chính | Nửa dưới (50%): Các bản đối chiếu
