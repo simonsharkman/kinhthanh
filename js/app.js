@@ -2188,7 +2188,7 @@ class LogosApp {
 
     document.getElementById('portal-item-quiz')?.addEventListener('click', (e) => {
       e.preventDefault();
-      this.openPortalUtilityModal('quiz');
+      this.switchView('quiz');
     });
 
     document.getElementById('portal-item-responsive')?.addEventListener('click', (e) => {
@@ -7647,7 +7647,9 @@ class LogosApp {
         } else if (action === 'compare') {
           state.setActiveView('bible');
           state.setReadingMode('parallel');
-        } else if (['fav-verses', 'quiz', 'responsive', 'survey', 'stories', 'dictionary'].includes(action)) {
+        } else if (action === 'quiz') {
+          this.switchView('quiz');
+        } else if (['fav-verses', 'responsive', 'survey', 'stories', 'dictionary'].includes(action)) {
           this.openPortalUtilityModal(action);
         }
       });
