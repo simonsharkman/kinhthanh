@@ -1764,94 +1764,92 @@ class LogosApp {
       }
     }
 
-    const categories = [
-      { id: 'all', label: 'Tất Cả (114)' },
-      { id: 'ot', label: 'Cựu Ước (38)' },
-      { id: 'nt', label: 'Tân Ước (27)' },
-      { id: 'church_history', label: 'Lịch Sử Hội Thánh (21)' },
-      { id: 'christian_life', label: 'Đời Sống Đức Tin (14)' },
-      { id: 'intertestament', label: 'Giữa 2 Giao Ước (6)' },
-      { id: 'canon', label: 'Bản Văn & Khảo Cổ (5)' },
-      { id: 'intro', label: 'Lời Mở Đầu (3)' }
-    ];
-
     container.innerHTML = `
-      <div class="survey-page-wrapper animate-fade-in">
-        <section class="survey-hero-card">
-          <div class="survey-hero-badge">
-            <i class="fa-solid fa-book-bookmark"></i> HỌC THÁNH KINH CHUYÊN SÂU • 114 CHƯƠNG KHẢO CỨU
-          </div>
-          <h2 class="survey-hero-title">Thánh Kinh Lược Khảo (Halley's Bible Handbook)</h2>
-          <p class="survey-hero-desc">
-            Bản dịch Việt ngữ tác phẩm kinh điển của Tiến sĩ Henry H. Halley. Khảo cứu sâu sắc bối cảnh lịch sử, khảo cổ học, phong tục thời Kinh Thánh, lịch sử hội thánh và lược khảo 66 sách Thánh Kinh. Bấm chọn bất kỳ chương nào bên dưới để bắt đầu đọc.
-          </p>
-        </section>
-
-        <nav class="survey-category-nav" id="survey-category-nav">
-          ${categories.map(cat => `
-            <button type="button" class="survey-cat-pill ${cat.id === activeFilter ? 'active' : ''}" data-cat="${cat.id}">
-              ${cat.label}
-            </button>
-          `).join('')}
-        </nav>
-
-        <div class="tklk-search-bar">
-          <i class="fa-solid fa-magnifying-glass tklk-search-icon"></i>
-          <input type="text" class="tklk-search-input" id="survey-search-input" placeholder="Tìm kiếm chương, sách, chủ đề (ví dụ: Sáng-Thế Ký, Cải Chánh, Ma-thi-ơ, Khảo cổ)...">
-          <button type="button" class="tklk-clear-btn" id="survey-search-clear" style="display: none;" title="Xóa">&times;</button>
+      <div class="tklk-simple-toc-wrapper animate-fade-in">
+        <div class="tklk-simple-nav">
+          <a href="#portal" class="tklk-nav-link" id="tklk-nav-portal">Trang Đầu</a>
+          <span>|</span>
+          <span class="tklk-nav-current">Mục Lục</span>
+          <span>|</span>
+          <a href="#bible" class="tklk-nav-link" id="tklk-nav-bible">Đọc Kinh Thánh</a>
+          <span>|</span>
+          <a href="javascript:void(0)" class="tklk-nav-link" id="tklk-nav-guide">Hướng Dẫn</a>
         </div>
 
-        <div class="tklk-grid" id="survey-chapters-grid"></div>
+        <h1 class="tklk-simple-title">Thánh Kinh Lược Khảo</h1>
+
+        <div class="tklk-simple-search-wrap">
+          <i class="fa-solid fa-magnifying-glass tklk-simple-search-icon"></i>
+          <input type="text" class="tklk-simple-search-input" id="survey-search-input" placeholder="Tìm kiếm chương (ví dụ: Sáng-Thế Ký, Ma-thi-ơ, 48)..." autocomplete="off">
+        </div>
+
+        <ol class="tklk-simple-list" id="survey-simple-list"></ol>
       </div>
     `;
 
-    // Category navigation click handlers
-    container.querySelectorAll('.survey-cat-pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.renderSurveyView(btn.dataset.cat);
-      });
-    });
-
+    const listEl = container.querySelector('#survey-simple-list');
     const searchInput = container.querySelector('#survey-search-input');
-    const clearBtn = container.querySelector('#survey-search-clear');
-    const gridContainer = container.querySelector('#survey-chapters-grid');
 
-    const updateGrid = (kw = '') => {
-      this.updateTklkDirectoryList(activeFilter, kw, gridContainer);
-      // Re-attach clicks so they open renderSurveyChapter
-      gridContainer.querySelectorAll('.tklk-card').forEach(card => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', (e) => {
-          if (e.target.closest('.btn-tklk-bible-link')) return;
-          const chId = parseInt(card.dataset.chapterId, 10);
-          if (chId) this.renderSurveyChapter(chId);
-        });
+    const renderList = (kw = '') => {
+      if (!listEl) return;
+      const normalize = str => (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+      const rawKw = (kw || '').trim().toLowerCase();
+      const normKw = normalize(rawKw);
+
+      const items = (this.tklkIndex || []).filter(item => {
+        if (!rawKw) return true;
+        const tLower = (item.title || '').toLowerCase();
+        const sLower = (item.summary || '').toLowerCase();
+        const idStr = String(item.id);
+        const bStr = (item.book_id || '').toLowerCase();
+        if (tLower.includes(rawKw) || sLower.includes(rawKw) || idStr === rawKw || bStr.includes(rawKw)) {
+          return true;
+        }
+        return normalize(item.title).includes(normKw) || normalize(item.summary).includes(normKw);
       });
-      gridContainer.querySelectorAll('.btn-read-tklk').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const chId = parseInt(btn.dataset.chapter, 10);
+
+      if (items.length === 0) {
+        listEl.innerHTML = `<li style="list-style: none; color: var(--text-muted); padding: 1.5rem 0; text-align: center;">Không tìm thấy chương nào phù hợp với từ khóa "<strong>${kw}</strong>".</li>`;
+        return;
+      }
+
+      listEl.innerHTML = items.map(item => `
+        <li class="tklk-simple-item" value="${item.id}">
+          <a href="javascript:void(0)" class="tklk-simple-link" data-chapter="${item.id}">${item.title}</a>
+        </li>
+      `).join('');
+
+      listEl.querySelectorAll('.tklk-simple-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const chId = parseInt(link.dataset.chapter, 10);
           if (chId) this.renderSurveyChapter(chId);
         });
       });
     };
 
+    renderList('');
+
     searchInput?.addEventListener('input', (e) => {
-      const val = e.target.value.trim();
-      if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
-      updateGrid(val);
+      renderList(e.target.value);
     });
 
-    clearBtn?.addEventListener('click', () => {
-      if (searchInput) {
-        searchInput.value = '';
-        searchInput.focus();
-      }
-      if (clearBtn) clearBtn.style.display = 'none';
-      updateGrid('');
+    container.querySelector('#tklk-nav-portal')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      state.setActiveView('portal');
+      this.updateUrlHash('portal');
     });
 
-    updateGrid('');
+    container.querySelector('#tklk-nav-bible')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      state.setActiveView('bible');
+      this.updateUrlHash('bible');
+    });
+
+    container.querySelector('#tklk-nav-guide')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.showToast('Bấm chọn bất kỳ chương nào trong danh sách 114 chương để đọc và nghe đọc âm thanh!', 'info');
+    });
   }
 
   async renderSurveyChapter(chapterId) {
@@ -1916,40 +1914,36 @@ class LogosApp {
     }
 
     container.innerHTML = `
-      <div class="survey-page-wrapper animate-fade-in">
-        <!-- Sticky Toolbar for Reading -->
-        <div class="tklk-reader-toolbar" style="background: var(--bg-card); padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; margin-bottom: 1.5rem; position: sticky; top: 62px; z-index: 100; box-shadow: 0 4px 16px rgba(0,0,0,0.12);">
-          <button type="button" class="portal-utility-tab-btn" id="btn-survey-back" style="font-weight: 700;">
-            <i class="fa-solid fa-arrow-left"></i> Mục Lục 114 Chương
-          </button>
-          <button type="button" class="portal-utility-tab-btn" id="btn-survey-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
-            <i class="fa-solid fa-chevron-left"></i> Trước
-          </button>
-          <span class="tklk-reader-ch-indicator">
-            <i class="fa-solid fa-bookmark"></i> Chương ${id} / 114
-          </span>
-          <button type="button" class="portal-utility-tab-btn" id="btn-survey-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
-            Sau <i class="fa-solid fa-chevron-right"></i>
-          </button>
-          <button type="button" class="portal-utility-tab-btn" id="btn-survey-audio" style="color: var(--accent-gold); font-weight: 700; border-color: rgba(212,175,55,0.4);" title="Nghe đọc âm thanh toàn văn chương này">
-            <i class="fa-solid fa-volume-high"></i> <span id="survey-audio-btn-text">Nghe Đọc</span>
-          </button>
-          <div style="display: flex; gap: 2px; margin-left: auto;">
-            <button type="button" class="portal-utility-tab-btn" id="btn-survey-zoom-out" title="Giảm cỡ chữ" style="padding: 0.3rem 0.6rem;">A-</button>
-            <button type="button" class="portal-utility-tab-btn" id="btn-survey-zoom-in" title="Tăng cỡ chữ" style="padding: 0.3rem 0.6rem;">A+</button>
+      <div class="tklk-simple-toc-wrapper animate-fade-in" style="max-width: 920px;">
+        <!-- Simple Top Nav Bar -->
+        <div class="tklk-simple-nav" style="justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-back">« Mục Lục</button>
+            <span>|</span>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>‹ Chương Trước</button>
+            <span>|</span>
+            <span style="font-weight: 700; color: var(--text-primary);">Chương ${id} / 114</span>
+            <span>|</span>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>Chương Sau ›</button>
           </div>
-          ${meta.book_id ? `
-            <button type="button" class="portal-utility-tab-btn" id="btn-survey-goto-bible" data-book="${meta.book_id}" style="color: var(--accent-gold); font-weight: 700; border-color: rgba(212,175,55,0.4);" title="Mở đọc sách này trong Kinh Thánh">
-              <i class="fa-solid fa-bible"></i> Đọc Bản Văn
+          <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-audio" style="font-weight: 700; color: var(--accent-gold);" title="Nghe đọc âm thanh toàn văn chương này">
+              <i class="fa-solid fa-volume-high"></i> <span id="survey-audio-btn-text">Nghe Đọc</span>
             </button>
-          ` : ''}
-          <button type="button" class="portal-utility-tab-btn" id="btn-survey-copy" title="Sao chép toàn bộ nội dung">
-            <i class="fa-solid fa-copy"></i>
-          </button>
+            <span>|</span>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-zoom-out" title="Giảm cỡ chữ">A-</button>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-zoom-in" title="Tăng cỡ chữ">A+</button>
+            ${meta.book_id ? `
+              <span>|</span>
+              <button type="button" class="tklk-nav-btn-link" id="btn-survey-goto-bible" data-book="${meta.book_id}" title="Đọc sách này trong Kinh Thánh">Đọc Bản Văn</button>
+            ` : ''}
+            <span>|</span>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-copy" title="Sao chép nội dung">Sao Chép</button>
+          </div>
         </div>
 
         <!-- Collapsible Audio Player Bar for Survey Chapter -->
-        <div class="tklk-audio-player-bar animate-fade-in" id="survey-audio-player-bar" style="display: none; background: var(--bg-card); border: 1.5px solid var(--accent-gold); border-radius: 8px; padding: 0.85rem 1.25rem; margin-bottom: 1.25rem; box-shadow: 0 4px 18px rgba(0,0,0,0.15);">
+        <div class="tklk-audio-player-bar animate-fade-in" id="survey-audio-player-bar" style="display: none; background: var(--bg-card); border: 1.5px solid var(--accent-gold); border-radius: 8px; padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; box-shadow: 0 4px 18px rgba(0,0,0,0.15);">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
             <div style="display: flex; align-items: center; gap: 0.75rem;">
               <button type="button" class="btn-primary" id="btn-survey-audio-play-pause" style="width: 38px; height: 38px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer;">
@@ -1981,38 +1975,25 @@ class LogosApp {
         </div>
 
         <article class="tklk-reader-view">
-          <div class="tklk-chapter-header">
-            <div class="tklk-chapter-meta">
-              <span class="badge" style="background: rgba(212,175,55,0.15); color: var(--accent-gold); font-size: 0.75rem; font-weight: 700; padding: 3px 8px;">
-                ${chapterData.category_name || meta.category_name}
-              </span>
-              <span class="tklk-word-badge" style="font-size: 0.8rem; color: var(--text-muted);">
-                <i class="fa-solid fa-book"></i> Chương ${id} / 114 &bull; ${(chapterData.word_count || meta.word_count || 0).toLocaleString()} từ &bull; ~${Math.ceil((chapterData.word_count || meta.word_count || 500) / 250)} phút đọc
-              </span>
-            </div>
-            <h1 class="tklk-chapter-title">${chapterData.title || meta.title}</h1>
-            <div class="tklk-source-credit">
-              <i class="fa-solid fa-feather-pointed"></i> Trích tác phẩm <em>Thánh Kinh Lược Khảo</em> (Halley's Bible Handbook) &bull; Tác giả: Dr. Henry H. Halley &bull; Bản dịch Việt ngữ
+          <div class="tklk-chapter-header" style="text-align: center; margin-bottom: 2rem;">
+            <h1 class="tklk-simple-chapter-title">${chapterData.title || meta.title}</h1>
+            <div style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.35rem;">
+              Thánh Kinh Lược Khảo &bull; Chương ${id} / 114 &bull; ${(chapterData.word_count || meta.word_count || 0).toLocaleString()} từ &bull; ~${Math.ceil((chapterData.word_count || meta.word_count || 500) / 250)} phút đọc
             </div>
           </div>
 
-          <div class="tklk-reader-content" id="survey-chapter-body" style="font-size: ${this.tklkFontSize}px;">
+          <div class="tklk-reader-content" id="survey-chapter-body" style="font-size: ${this.tklkFontSize}px; line-height: 1.85;">
             ${chapterData.content_html}
           </div>
 
-          <div class="tklk-reader-footer-nav">
-            <button type="button" class="btn-secondary" id="btn-survey-footer-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
-              <i class="fa-solid fa-chevron-left"></i> Chương ${id - 1}
-            </button>
-            <button type="button" class="btn-primary" id="btn-survey-footer-back">
-              <i class="fa-solid fa-list-ul"></i> Mục Lục 114 Chương
-            </button>
-            <button type="button" class="btn-secondary" id="btn-survey-footer-top" title="Cuộn lên đầu trang">
-              <i class="fa-solid fa-arrow-up"></i> Đầu trang
-            </button>
-            <button type="button" class="btn-secondary" id="btn-survey-footer-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
-              Chương ${id + 1} <i class="fa-solid fa-chevron-right"></i>
-            </button>
+          <div class="tklk-reader-simple-bottom-bar">
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-back">« Quay lại Mục Lục 114 Chương</button>
+            <span>|</span>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>‹ Chương Trước</button>
+            <span>|</span>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-top">▲ Đầu Trang</button>
+            <span>|</span>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>Chương Sau ›</button>
           </div>
         </article>
       </div>
@@ -2021,7 +2002,6 @@ class LogosApp {
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Wire buttons
     // Wire Audio Narration
     const audioBar = container.querySelector('#survey-audio-player-bar');
     const audioToggleBtn = container.querySelector('#btn-survey-audio');
@@ -2068,21 +2048,34 @@ class LogosApp {
       this.renderSurveyView(this.tklkActiveFilter || 'all');
     });
     container.querySelector('#btn-survey-footer-back')?.addEventListener('click', () => {
+      this.stopSurveyAudioNarration();
       this.renderSurveyView(this.tklkActiveFilter || 'all');
     });
 
     container.querySelector('#btn-survey-prev')?.addEventListener('click', () => {
-      if (id > 1) this.renderSurveyChapter(id - 1);
+      if (id > 1) {
+        this.stopSurveyAudioNarration();
+        this.renderSurveyChapter(id - 1);
+      }
     });
     container.querySelector('#btn-survey-footer-prev')?.addEventListener('click', () => {
-      if (id > 1) this.renderSurveyChapter(id - 1);
+      if (id > 1) {
+        this.stopSurveyAudioNarration();
+        this.renderSurveyChapter(id - 1);
+      }
     });
 
     container.querySelector('#btn-survey-next')?.addEventListener('click', () => {
-      if (id < 114) this.renderSurveyChapter(id + 1);
+      if (id < 114) {
+        this.stopSurveyAudioNarration();
+        this.renderSurveyChapter(id + 1);
+      }
     });
     container.querySelector('#btn-survey-footer-next')?.addEventListener('click', () => {
-      if (id < 114) this.renderSurveyChapter(id + 1);
+      if (id < 114) {
+        this.stopSurveyAudioNarration();
+        this.renderSurveyChapter(id + 1);
+      }
     });
 
     container.querySelector('#btn-survey-footer-top')?.addEventListener('click', () => {
@@ -2105,6 +2098,7 @@ class LogosApp {
 
     container.querySelector('#btn-survey-goto-bible')?.addEventListener('click', () => {
       if (meta.book_id) {
+        this.stopSurveyAudioNarration();
         state.setActiveView('bible');
         this.navigateToPassage(meta.book_id, 1, 1);
       }
@@ -4042,37 +4036,59 @@ class LogosApp {
     });
 
     bodyContainer.innerHTML = `
-      <div class="tklk-directory-container">
-        <div class="tklk-search-bar">
-          <i class="fa-solid fa-magnifying-glass tklk-search-icon"></i>
-          <input type="text" class="tklk-search-input" id="tklk-search-input" placeholder="Tìm kiếm chương, sách, chủ đề (ví dụ: Sáng-Thế Ký, Cải Chánh, Ma-thi-ơ, Khảo cổ)...">
-          <button type="button" class="tklk-clear-btn" id="tklk-search-clear" style="display: none;" title="Xóa tìm kiếm">&times;</button>
+      <div class="tklk-simple-toc-wrapper" style="padding: 0.5rem 0.75rem 2rem;">
+        <div class="tklk-simple-search-wrap" style="margin-bottom: 1.25rem;">
+          <i class="fa-solid fa-magnifying-glass tklk-simple-search-icon"></i>
+          <input type="text" class="tklk-simple-search-input" id="tklk-search-input" placeholder="Tìm kiếm chương (ví dụ: Sáng-Thế Ký, Ma-thi-ơ)..." autocomplete="off">
         </div>
-        <div class="tklk-grid" id="tklk-chapters-grid"></div>
+        <ol class="tklk-simple-list" id="tklk-simple-list" style="columns: 2; column-gap: 2.5rem;"></ol>
       </div>
     `;
 
     const searchInput = bodyContainer.querySelector('#tklk-search-input');
-    const clearBtn = bodyContainer.querySelector('#tklk-search-clear');
-    const gridContainer = bodyContainer.querySelector('#tklk-chapters-grid');
+    const listContainer = bodyContainer.querySelector('#tklk-simple-list');
 
     const updateList = (kw = '') => {
-      this.updateTklkDirectoryList(activeFilter, kw, gridContainer);
+      if (!listContainer) return;
+      const normalize = str => (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+      const rawKw = (kw || '').trim().toLowerCase();
+      const normKw = normalize(rawKw);
+
+      const filtered = (this.tklkIndex || []).filter(item => {
+        if (activeFilter !== 'all' && item.category !== activeFilter) return false;
+        if (!rawKw) return true;
+        const tLower = (item.title || '').toLowerCase();
+        const sLower = (item.summary || '').toLowerCase();
+        const idStr = String(item.id);
+        const bStr = (item.book_id || '').toLowerCase();
+        if (tLower.includes(rawKw) || sLower.includes(rawKw) || idStr === rawKw || bStr.includes(rawKw)) {
+          return true;
+        }
+        return normalize(item.title).includes(normKw) || normalize(item.summary).includes(normKw);
+      });
+
+      if (filtered.length === 0) {
+        listContainer.innerHTML = `<li style="list-style: none; color: var(--text-muted); padding: 1.5rem 0; text-align: center;">Không tìm thấy chương nào phù hợp với từ khóa "<strong>${kw}</strong>".</li>`;
+        return;
+      }
+
+      listContainer.innerHTML = filtered.map(item => `
+        <li class="tklk-simple-item" value="${item.id}">
+          <a href="javascript:void(0)" class="tklk-simple-link" data-chapter="${item.id}">${item.title}</a>
+        </li>
+      `).join('');
+
+      listContainer.querySelectorAll('.tklk-simple-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const chId = parseInt(link.dataset.chapter, 10);
+          if (chId) this.openTklkChapter(chId);
+        });
+      });
     };
 
     searchInput?.addEventListener('input', (e) => {
-      const val = e.target.value.trim();
-      if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
-      updateList(val);
-    });
-
-    clearBtn?.addEventListener('click', () => {
-      if (searchInput) {
-        searchInput.value = '';
-        searchInput.focus();
-      }
-      if (clearBtn) clearBtn.style.display = 'none';
-      updateList('');
+      updateList(e.target.value);
     });
 
     updateList('');

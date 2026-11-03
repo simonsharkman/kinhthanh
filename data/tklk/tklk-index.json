@@ -64,7 +64,7 @@
   },
   {
     "id": 8,
-    "title": "Phục Truyền Luật  Lệ Ký",
+    "title": "Phục Truyền Luật Lệ Ký",
     "category": "ot",
     "category_name": "Cựu Ước (39 Sách)",
     "book_id": "DEU",
@@ -190,7 +190,7 @@
   },
   {
     "id": 22,
-    "title": "Truyền  Đạo",
+    "title": "Truyền Đạo",
     "category": "ot",
     "category_name": "Cựu Ước (39 Sách)",
     "book_id": "ECC",
@@ -478,7 +478,7 @@
   },
   {
     "id": 54,
-    "title": "Thơ  I Cô-rinh-tô",
+    "title": "Thơ I Cô-rinh-tô",
     "category": "nt",
     "category_name": "Tân Ước (27 Sách)",
     "book_id": "1CO",
@@ -487,7 +487,7 @@
   },
   {
     "id": 55,
-    "title": "Thơ  II Cô-rinh-tô",
+    "title": "Thơ II Cô-rinh-tô",
     "category": "nt",
     "category_name": "Tân Ước (27 Sách)",
     "book_id": "2CO",
@@ -604,7 +604,7 @@
   },
   {
     "id": 68,
-    "title": "Thơ  I Phi-e-rơ",
+    "title": "Thơ I Phi-e-rơ",
     "category": "nt",
     "category_name": "Tân Ước (27 Sách)",
     "book_id": "1PE",
@@ -613,7 +613,7 @@
   },
   {
     "id": 69,
-    "title": "Thơ  II Phi-e-rơ",
+    "title": "Thơ II Phi-e-rơ",
     "category": "nt",
     "category_name": "Tân Ước (27 Sách)",
     "book_id": "2PE",
@@ -622,7 +622,7 @@
   },
   {
     "id": 70,
-    "title": "Thơ  I Giăng",
+    "title": "Thơ I Giăng",
     "category": "nt",
     "category_name": "Tân Ước (27 Sách)",
     "book_id": "1JN",
@@ -631,7 +631,7 @@
   },
   {
     "id": 71,
-    "title": "Thơ  II Giăng",
+    "title": "Thơ II Giăng",
     "category": "nt",
     "category_name": "Tân Ước (27 Sách)",
     "book_id": "2JN",
@@ -640,7 +640,7 @@
   },
   {
     "id": 72,
-    "title": "Thơ  III Giăng",
+    "title": "Thơ III Giăng",
     "category": "nt",
     "category_name": "Tân Ước (27 Sách)",
     "book_id": "3JN",

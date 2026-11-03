@@ -144,28 +144,7 @@
 ### 35. Xây Dựng & Tích Hợp Từ Điển Strong (26/10/2026)
 - Tích hợp CSDL 43 mục từ Strong (Hê-bơ-rơ & Hy Lạp), giao diện 4 tab tra cứu chuyên sâu (`renderUtilityStrong`). Đạt 152/152 tests pass.
 
-### Milestone 36: Thiết Kế Trình Bày Kinh Thánh Kỉnh Kiềng (Zero Box Borders & Unboxed Numbers)
-- Loại bỏ viền hộp, bóng đổ, cho dòng chảy câu liền mạch trang nghiêm như Kinh Thánh in. Số câu nhỏ gọn (0.72rem), không đóng khung badge. Đạt 154/154 pass 100%.
-
-### Milestone 37: Sửa Lỗi Highlight Câu Đối Chiếu Mobile (Split 50/50)
-- Tối ưu CSS specificity trên mobile drawer-open, câu chọn nổi bật với `border-left: 4.5px solid var(--accent-gold)`, nền phát quang và badge số câu vàng rực. Đạt 155/155 tests pass.
-
-### Milestone 38: Triệt Tiêu Hiện Tượng Tự Nhảy / Cuộn Màn Hình Khi Bấm Chọn Câu (Zero-Jump Stability Contract)
-- Triệt tiêu hiện tượng màn hình tự động giật/cuộn khi bấm chọn câu: Giữ nguyên vị trí cuộn (Zero Scroll/Jump) nếu câu đã nằm trong khung nhìn, chỉ cuộn nhẹ nhàng (block: 'nearest') khi bị khuất hẳn; cân bằng hình học CSS border-left: 4px cố định trên .verse-number. Đạt 156/156 tests pass 100%.
-
-- **Milestone 39 (2026-10-26)**: Production Vercel & GitHub Deployment Complete:
-  - Repository live at https://github.com/simonsharkman/kinhthanh (branch main).
-  - Production website deployed successfully on Vercel Global Edge CDN at https://kinhthanh-sigma.vercel.app/.
-  - Verified HTTP 200 OK across root index.html, data/books-metadata.json, and dynamic bible scripture files (data/bibles/JHN.json).
-  - Fully responsive on mobile & desktop, zero-jump stability, reverent scripture layout, and 156/156 Pytest suite passing 100%.
-
-- **Milestone 40 (2026-10-26)**: Sticky Top Header & Tab Navigation Immunity:
-  - Fixed mobile & desktop issue where scrolling down scripture caused top navigation header & chapter tabs to scroll off screen.
-  - Replaced overflow-x: hidden with overflow-x: clip on ody and html, body (preventing Chromium/WebKit from computing overflow-y: auto and breaking position: sticky).
-  - Added explicit position: sticky !important; top: 0 !important; z-index: 1000 !important; to #main-header on desktop and across mobile viewports (991px and 640px).
-  - Pinned .chapter-header at 	op: 46px !important; z-index: 950 !important; on mobile (and 60px on desktop) and docked .portal-main-tabs with sticky positioning.
-  - Added unit test 	est_mobile_and_desktop_sticky_header_contract; full Pytest suite passing 100% (157/157 passed).
-
+- **Milestones 36–40 (2026-10-26)**: Hoàn thiện giao diện đọc kỉnh kiềng (Zero Box Borders & Unboxed Numbers), sửa lỗi highlight & cuộn câu đối chiếu mobile (Split 50/50), triệt tiêu hiện tượng tự nhảy màn hình (Zero-Jump Stability Contract), cấu hình Vercel Production và Sticky Top Header & Tab Navigation Immunity. Đạt 157/157 tests pass 100%.
 - **Milestone 41 (2026-10-27)**: Hermeneutics Typology Precision: Nâng cấp cụm từ khóa đa từ và luật loại trừ chống gán nhầm ẩn dụ 2 Cô-rinh-tô 11. Đạt 158/158 tests pass.
 - **Milestone 42 (2026-10-27)**: SPA Deep Link Hash Routing: Đồng bộ URL chuyển tab (#portal, #bible, #tsk, #blog, #community, #media, #donate), hỗ trợ Back/Forward. Đạt 159/159 tests pass.
 - **Milestone 43 (2026-10-27)**: Real-time Audio Verse Glowing & Interactive Seeking: Đồng bộ âm thanh theo câu (sáng viền vàng, tua audio khi nhấp câu). Đạt 160/160 tests pass.
@@ -226,3 +205,11 @@
     5. **SPA Routing**: Hỗ trợ hash deep link `#survey`, `#survey/{chId}`, `#tklk/{chId}`.
     6. **Tích Hợp Sách Nói Audio Narration (Nghe Đọc)**: Bổ sung nút `Nghe Đọc` và thanh phát audio chuyên nghiệp trên cả #survey-view và modal. Tự động đọc văn bản tiếng Việt truyền cảm, điều chỉnh tốc độ (0.8x-1.5x), tự động highlight (.tklk-paragraph-reading) và cuộn mượt theo đoạn đang đọc.
   - Toàn bộ **206/206 tests Pytest PASS 100%** (bộ `tests/test_tklk_survey.py` 8 tests). Đồng bộ mirror workspace & Vercel.
+- **Milestone 64 (2026-11-03) - Tối Giản Hóa Mục Lục Thánh Kinh Lược Khảo Cổ Điển VietChristian (v4.5.6)**:
+  - Theo ảnh mẫu yêu cầu của anh Jimmy, tái thiết kế giao diện Mục Lục Thánh Kinh Lược Khảo (`#survey-view` và modal `#portal-utility-modal`) từ dạng lưới thẻ cồng kềnh sang danh sách đánh số tối giản, thanh lịch chuẩn VietChristian.
+  - Thanh điều hướng đầu trang tinh gọn: `Trang Đầu | Mục Lục | Đọc Kinh Thánh | Hướng Dẫn`.
+  - Tiêu đề trung tâm nổi bật `Thánh Kinh Lược Khảo`, kèm ô tìm kiếm nhanh mượt mà không làm vỡ bố cục.
+  - Danh sách đánh số chuẩn xác 1..114 liên kết trực tiếp, hỗ trợ bố cục đa cột trên máy tính và 1 cột trên điện thoại.
+  - Thanh công cụ đọc chương thanh thoát: `« Mục Lục | ‹ Chương Trước | Chương X/114 | Chương Sau › | 🔊 Nghe Đọc | A- A+ | Đọc Bản Văn | Sao Chép` và thanh điều hướng chân trang.
+  - Chuẩn hóa toàn diện tiêu đề các chương (khắc phục lỗi lặp dấu cách từ bản thô).
+  - Toàn bộ **208/208 tests Pytest PASS 100%**.

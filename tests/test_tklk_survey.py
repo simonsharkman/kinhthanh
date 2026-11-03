@@ -150,3 +150,20 @@ def test_tklk_audio_narration_integrated():
     with open(CSS_FILE, "r", encoding="utf-8") as f:
         css = f.read()
     assert ".tklk-paragraph-reading" in css, "Missing .tklk-paragraph-reading in components.css"
+
+
+def test_tklk_simple_classic_toc_matching_vietchristian():
+    """Verify classic simple numbered list TOC matching VietChristian aesthetic."""
+    with open(CSS_FILE, 'r', encoding='utf-8') as f:
+        css = f.read()
+    assert '.tklk-simple-toc-wrapper' in css, 'Missing .tklk-simple-toc-wrapper in components.css'
+    assert '.tklk-simple-list' in css, 'Missing .tklk-simple-list in components.css'
+    assert '.tklk-simple-item' in css, 'Missing .tklk-simple-item in components.css'
+    assert '.tklk-simple-link' in css, 'Missing .tklk-simple-link in components.css'
+    assert '.tklk-simple-title' in css, 'Missing .tklk-simple-title in components.css'
+
+    with open(JS_FILE, 'r', encoding='utf-8') as f:
+        js = f.read()
+    assert 'tklk-simple-toc-wrapper' in js, 'Missing tklk-simple-toc-wrapper in app.js'
+    assert 'survey-simple-list' in js, 'Missing survey-simple-list in app.js'
+    assert 'tklk-simple-title' in js, 'Missing tklk-simple-title in app.js'
