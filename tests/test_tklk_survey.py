@@ -139,3 +139,14 @@ def test_tklk_css_styles_defined():
     ]
     for cls in expected_classes:
         assert cls in css_code, f"CSS class {cls} missing in components.css"
+def test_tklk_audio_narration_integrated():
+    with open(JS_FILE, "r", encoding="utf-8") as f:
+        js = f.read()
+    assert "toggleSurveyAudioNarration" in js, "Missing toggleSurveyAudioNarration in app.js"
+    assert "startSurveyAudioNarration" in js, "Missing startSurveyAudioNarration in app.js"
+    assert "stopSurveyAudioNarration" in js, "Missing stopSurveyAudioNarration in app.js"
+    assert "btn-survey-audio" in js, "Missing btn-survey-audio in app.js"
+
+    with open(CSS_FILE, "r", encoding="utf-8") as f:
+        css = f.read()
+    assert ".tklk-paragraph-reading" in css, "Missing .tklk-paragraph-reading in components.css"

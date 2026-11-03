@@ -1931,6 +1931,9 @@ class LogosApp {
           <button type="button" class="portal-utility-tab-btn" id="btn-survey-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
             Sau <i class="fa-solid fa-chevron-right"></i>
           </button>
+          <button type="button" class="portal-utility-tab-btn" id="btn-survey-audio" style="color: var(--accent-gold); font-weight: 700; border-color: rgba(212,175,55,0.4);" title="Nghe đọc âm thanh toàn văn chương này">
+            <i class="fa-solid fa-volume-high"></i> <span id="survey-audio-btn-text">Nghe Đọc</span>
+          </button>
           <div style="display: flex; gap: 2px; margin-left: auto;">
             <button type="button" class="portal-utility-tab-btn" id="btn-survey-zoom-out" title="Giảm cỡ chữ" style="padding: 0.3rem 0.6rem;">A-</button>
             <button type="button" class="portal-utility-tab-btn" id="btn-survey-zoom-in" title="Tăng cỡ chữ" style="padding: 0.3rem 0.6rem;">A+</button>
@@ -1943,6 +1946,38 @@ class LogosApp {
           <button type="button" class="portal-utility-tab-btn" id="btn-survey-copy" title="Sao chép toàn bộ nội dung">
             <i class="fa-solid fa-copy"></i>
           </button>
+        </div>
+
+        <!-- Collapsible Audio Player Bar for Survey Chapter -->
+        <div class="tklk-audio-player-bar animate-fade-in" id="survey-audio-player-bar" style="display: none; background: var(--bg-card); border: 1.5px solid var(--accent-gold); border-radius: 8px; padding: 0.85rem 1.25rem; margin-bottom: 1.25rem; box-shadow: 0 4px 18px rgba(0,0,0,0.15);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <button type="button" class="btn-primary" id="btn-survey-audio-play-pause" style="width: 38px; height: 38px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer;">
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <button type="button" class="btn-secondary" id="btn-survey-audio-stop" style="width: 38px; height: 38px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; cursor: pointer;" title="Dừng đọc">
+                <i class="fa-solid fa-stop"></i>
+              </button>
+              <div>
+                <div style="font-weight: 800; color: var(--accent-gold); font-size: 0.92rem;">
+                  <i class="fa-solid fa-headphones"></i> Sách Nói: <span id="survey-audio-now-title">${chapterData.title || meta.title}</span>
+                </div>
+                <div style="font-size: 0.78rem; color: var(--text-muted);" id="survey-audio-status-text">
+                  Giọng đọc tiếng Việt truyền cảm &bull; Bấm Phát để bắt đầu nghe
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-left: auto;">
+              <span style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">Tốc độ:</span>
+              <select id="survey-audio-speed" class="portal-select" style="padding: 0.3rem 0.55rem; font-size: 0.82rem; border-radius: 6px;">
+                <option value="0.8">0.8x</option>
+                <option value="1.0" selected>1.0x (Chuẩn)</option>
+                <option value="1.2">1.2x</option>
+                <option value="1.5">1.5x</option>
+              </select>
+              <button type="button" class="btn-secondary" id="btn-survey-audio-close" style="padding: 0.3rem 0.6rem; font-size: 0.9rem;" title="Đóng thanh nghe">&times;</button>
+            </div>
+          </div>
         </div>
 
         <article class="tklk-reader-view">
@@ -1987,7 +2022,49 @@ class LogosApp {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     // Wire buttons
+    // Wire Audio Narration
+    const audioBar = container.querySelector('#survey-audio-player-bar');
+    const audioToggleBtn = container.querySelector('#btn-survey-audio');
+    const audioPlayPauseBtn = container.querySelector('#btn-survey-audio-play-pause');
+    const audioStopBtn = container.querySelector('#btn-survey-audio-stop');
+    const audioCloseBtn = container.querySelector('#btn-survey-audio-close');
+    const audioSpeedSel = container.querySelector('#survey-audio-speed');
+
+    audioToggleBtn?.addEventListener('click', () => {
+      if (audioBar) {
+        const isHidden = audioBar.style.display === 'none';
+        audioBar.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) {
+          this.toggleSurveyAudioNarration('#survey-chapter-body', 'survey-audio-status-text', 'btn-survey-audio-play-pause');
+        } else {
+          this.stopSurveyAudioNarration();
+        }
+      }
+    });
+
+    audioPlayPauseBtn?.addEventListener('click', () => {
+      this.toggleSurveyAudioNarration('#survey-chapter-body', 'survey-audio-status-text', 'btn-survey-audio-play-pause');
+    });
+
+    audioStopBtn?.addEventListener('click', () => {
+      this.stopSurveyAudioNarration();
+    });
+
+    audioCloseBtn?.addEventListener('click', () => {
+      this.stopSurveyAudioNarration();
+      if (audioBar) audioBar.style.display = 'none';
+    });
+
+    audioSpeedSel?.addEventListener('change', (e) => {
+      const spd = parseFloat(e.target.value) || 1.0;
+      this.surveyAudioSpeed = spd;
+      if (this.surveyAudioState) {
+        this.surveyAudioState.speed = spd;
+      }
+    });
+
     container.querySelector('#btn-survey-back')?.addEventListener('click', () => {
+      this.stopSurveyAudioNarration();
       this.renderSurveyView(this.tklkActiveFilter || 'all');
     });
     container.querySelector('#btn-survey-footer-back')?.addEventListener('click', () => {
@@ -3764,6 +3841,139 @@ class LogosApp {
     });
   }
 
+// ==========================================================================
+  // THÁNH KINH LƯỢC KHẢO AUDIO NARRATION ENGINE (Web Speech & MP3 Reader)
+  // ==========================================================================
+
+  toggleSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId) {
+    if (this.surveyAudioState && this.surveyAudioState.isPlaying) {
+      if (this.surveyAudioState.isPaused) {
+        if (window.speechSynthesis) {
+          window.speechSynthesis.resume();
+          this.surveyAudioState.isPaused = false;
+          const ppBtn = document.getElementById(playPauseBtnId);
+          if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+          const stEl = document.getElementById(statusElId);
+          if (stEl) stEl.textContent = 'Đang phát âm thanh sách nói...';
+        }
+      } else {
+        if (window.speechSynthesis) {
+          window.speechSynthesis.pause();
+          this.surveyAudioState.isPaused = true;
+          const ppBtn = document.getElementById(playPauseBtnId);
+          if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+          const stEl = document.getElementById(statusElId);
+          if (stEl) stEl.textContent = 'Đã tạm dừng âm thanh';
+        }
+      }
+      return;
+    }
+
+    this.startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId);
+  }
+
+  startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId) {
+    this.stopSurveyAudioNarration();
+
+    const contentEl = document.querySelector(contentSelector);
+    if (!contentEl) return;
+
+    if (!window.speechSynthesis) {
+      this.showToast('Trình duyệt của bạn không hỗ trợ tính năng đọc âm thanh Web Speech API.', 'warning');
+      return;
+    }
+
+    // Extract text paragraphs
+    const paragraphs = Array.from(contentEl.querySelectorAll('p, h1, h2, h3, h4, li, div'))
+      .map(el => ({ el, text: (el.innerText || '').trim() }))
+      .filter(item => item.text.length > 10 && !item.text.startsWith('http') && !item.text.includes('Courtesy of'));
+
+    if (paragraphs.length === 0) {
+      this.showToast('Không tìm thấy nội dung văn bản để đọc.', 'warning');
+      return;
+    }
+
+    this.surveyAudioState = {
+      isPlaying: true,
+      isPaused: false,
+      paragraphs,
+      currentIndex: 0,
+      speed: this.surveyAudioSpeed || 1.0,
+      contentSelector,
+      statusElId,
+      playPauseBtnId
+    };
+
+    const ppBtn = document.getElementById(playPauseBtnId);
+    if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+
+    this.speakSurveyParagraph();
+  }
+
+  speakSurveyParagraph() {
+    if (!this.surveyAudioState || !this.surveyAudioState.isPlaying || this.surveyAudioState.isPaused) return;
+
+    const { paragraphs, currentIndex, statusElId } = this.surveyAudioState;
+    if (currentIndex >= paragraphs.length) {
+      this.stopSurveyAudioNarration();
+      this.showToast('Đã đọc xong toàn bộ chương Lược Khảo!', 'success');
+      return;
+    }
+
+    const currentItem = paragraphs[currentIndex];
+    document.querySelectorAll('.tklk-paragraph-reading').forEach(el => el.classList.remove('tklk-paragraph-reading'));
+    if (currentItem.el) {
+      currentItem.el.classList.add('tklk-paragraph-reading');
+      currentItem.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    const stEl = document.getElementById(statusElId);
+    if (stEl) {
+      stEl.textContent = `Đang đọc đoạn ${currentIndex + 1}/${paragraphs.length}...`;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(currentItem.text);
+    utterance.lang = 'vi-VN';
+    utterance.rate = this.surveyAudioState.speed || 1.0;
+
+    const voices = window.speechSynthesis.getVoices();
+    const viVoice = voices.find(v => v.lang.includes('vi') || v.lang.includes('VI'));
+    if (viVoice) utterance.voice = viVoice;
+
+    utterance.onend = () => {
+      if (this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isPaused) {
+        this.surveyAudioState.currentIndex++;
+        this.speakSurveyParagraph();
+      }
+    };
+
+    utterance.onerror = (err) => {
+      console.warn('Survey audio error:', err);
+      if (this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isPaused) {
+        this.surveyAudioState.currentIndex++;
+        setTimeout(() => this.speakSurveyParagraph(), 300);
+      }
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }
+
+  stopSurveyAudioNarration() {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    document.querySelectorAll('.tklk-paragraph-reading').forEach(el => el.classList.remove('tklk-paragraph-reading'));
+
+    if (this.surveyAudioState) {
+      const ppBtn = document.getElementById(this.surveyAudioState.playPauseBtnId);
+      if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+      const stEl = document.getElementById(this.surveyAudioState.statusElId);
+      if (stEl) stEl.textContent = 'Đã dừng đọc âm thanh';
+      this.surveyAudioState.isPlaying = false;
+      this.surveyAudioState.isPaused = false;
+    }
+  }
+
   async renderUtilitySurvey(activeFilter = 'all', chapterId = null) {
     this.tklkActiveFilter = activeFilter;
     if (chapterId !== null) {
@@ -4000,6 +4210,9 @@ class LogosApp {
         <button type="button" class="portal-utility-tab-btn" id="btn-tklk-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Chương sau">
           Sau <i class="fa-solid fa-chevron-right"></i>
         </button>
+        <button type="button" class="portal-utility-tab-btn" id="btn-tklk-audio" style="color: var(--accent-gold); font-weight: 700; border-color: rgba(212,175,55,0.4);" title="Nghe đọc toàn văn chương này">
+          <i class="fa-solid fa-volume-high"></i> <span id="tklk-audio-btn-text">Nghe Đọc</span>
+        </button>
         <div style="display: flex; gap: 2px; margin-left: auto;">
           <button type="button" class="portal-utility-tab-btn" id="btn-tklk-zoom-out" title="Giảm cỡ chữ" style="padding: 0.3rem 0.6rem;">
             A-
@@ -4044,6 +4257,10 @@ class LogosApp {
       const contentEl = document.getElementById('tklk-reader-content');
       if (contentEl) contentEl.style.fontSize = this.tklkFontSize + 'px';
       try { localStorage.setItem('tklk_font_size', String(this.tklkFontSize)); } catch(e) {}
+    });
+
+    tabsContainer.querySelector('#btn-tklk-audio')?.addEventListener('click', () => {
+      this.toggleSurveyAudioNarration('#tklk-reader-content', 'portal-utility-subtitle', 'btn-tklk-audio');
     });
 
     tabsContainer.querySelector('#btn-tklk-goto-bible')?.addEventListener('click', () => {

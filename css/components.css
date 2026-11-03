@@ -9086,3 +9086,11 @@
     font-size: 0.8rem;
   }
 }
+
+.tklk-paragraph-reading {
+  background: rgba(212, 175, 55, 0.12) !important;
+  border-left: 4px solid var(--accent-gold) !important;
+  padding-left: 0.65rem !important;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}

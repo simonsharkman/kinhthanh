@@ -224,4 +224,5 @@
     3. **Chế Độ Đọc Chuyên Nghiệp (Reader Mode)**: Sticky toolbar (Quay lại, Chương trước/sau, Zoom chữ A-/A+, Mở đọc sách tương ứng trong Focus Reader, Sao chép toàn văn), typography tôn nghiêm, co giãn mượt mà.
     4. **Tích Hợp Drawer Inspector (Tab Bối Cảnh)**: Khi đọc bất kỳ sách nào trong Focus Reader, Tab Bối Cảnh tự động hiện thẻ đọc Thánh Kinh Lược Khảo tương ứng của sách đó với 1 cú nhấp chuột.
     5. **SPA Routing**: Hỗ trợ hash deep link `#survey`, `#survey/{chId}`, `#tklk/{chId}`.
+    6. **Tích Hợp Sách Nói Audio Narration (Nghe Đọc)**: Bổ sung nút `Nghe Đọc` và thanh phát audio chuyên nghiệp trên cả #survey-view và modal. Tự động đọc văn bản tiếng Việt truyền cảm, điều chỉnh tốc độ (0.8x-1.5x), tự động highlight (.tklk-paragraph-reading) và cuộn mượt theo đoạn đang đọc.
   - Toàn bộ **206/206 tests Pytest PASS 100%** (bộ `tests/test_tklk_survey.py` 8 tests). Đồng bộ mirror workspace & Vercel.
