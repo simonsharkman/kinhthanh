@@ -204,20 +204,8 @@
   - Tái cấu trúc thẻ ngân hàng tinh gọn phẳng (`.bank-details-box`), gộp 5 mục vào 1 thẻ với các hàng ngang (Ngân hàng, Số TK, Người nhận, Liên hệ, Nội dung); thu nhỏ mã QR (`max-width: 165px`), giảm >50% chiều cao. Đạt 193/193 test Pytest pass.
 - **Milestone 59 (2026-10-30)**: Unified Triad Interactive Reader Title (TÊN SÁCH - ĐOẠN - BẢN):
   - Loại bỏ hoàn toàn huy hiệu tím thừa `.chapter-badge` lặp lại thông tin; hợp nhất tiêu đề thành bộ ba tương tác duy nhất (TÊN SÁCH mở 66 sách, ĐOẠN mở lưới chọn đoạn, BẢN mở bảng chọn bản dịch #primary-version-modal). Đạt 193/193 test Pytest pass.
-- **Milestone 60 (2026-10-30)**: Maximum Scripture Display Space Prioritization (Tối Ưu Tối Đa Không Gian Lời Chúa Trong Cửa Sổ Popout):
-  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "hãy ưu tiên không gian hiển thị nội dung kinh thánh" (cửa sổ đọc độc lập trước đây bị header 2 tầng, huy hiệu vàng khổng lồ, thanh điều hướng phụ và footer giải thích dài dòng đè nghẹt, khiến phần chữ Lời Chúa chỉ còn một khe hẹp <20% chiều cao).
-  - Triển khai tối ưu hóa không gian hiển thị tối đa (Zero Clutter - Maximum Scripture):
-    1. Tích hợp thanh Header thành 1 hàng siêu mỏng duy nhất (`.popout-reader-header` cao chỉ 44px): Gồm nút Đoạn trước (`<`), Tiêu đề gọn gàng (`Giăng 2`), huy hiệu bản dịch tinh tế (`[ESV]`, `[CGKPV]`), nút Đoạn sau (`>`), các công cụ Sao chép, Mở tab mới và Đóng (`&times;`).
-    2. Loại bỏ hoàn toàn thanh điều hướng phụ trùng lặp (`.popout-nav-bar`) và ẩn toàn bộ footer thừa (`.popout-reader-footer`): Không còn đoạn văn giải thích hay nút đóng vàng to chiếm chỗ.
-    3. Mở rộng diện tích đọc Lời Chúa lên mức tối đa: `.popout-reader-card` tăng chiều cao lên 92-96vh, `.popout-reader-body` chiếm trọn 100% diện tích còn lại (`max-height: none`), tăng hơn 300% diện tích đọc thực tế, chữ hiển thị thoáng đãng, dễ đọc trên cả mobile và desktop.
-  - Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
-- **Milestone 61 (2026-10-30)**: Ultra-Compact AdSense & Stewardship Slot (Thu Nhỏ Tối Đa Khung Quảng Cáo & Dâng Hiến Cuối Chương Đọc):
-  - Tiếp nhận phản ánh & ảnh chụp từ anh Jimmy: "hiển thị nhỏ thôi" (khoanh đỏ khung quảng cáo Google AdSense & nút dâng hiến cuối chương đọc trước đây quá cồng kềnh, viền dày, đệm lớn, chiếm nhiều diện tích cuộn dọc).
-  - Triển khai tối ưu hóa khung quảng cáo siêu nhỏ gọn, phẳng (`.adsense-slot-card.adsense-slot-compact`):
-    1. Thu gọn thành 1 dòng đơn ngang phẳng siêu mỏng: Bên trái là nhãn tinh tế `[Ad] Quảng cáo duy trì máy chủ`, bên phải là nút dâng hiến nhỏ gọn `[❤ Dâng hiến]`.
-    2. Giảm hơn 70% chiều cao tổng thể: Thu nhỏ padding (`0.3rem 0.65rem`), margin gọn gàng (`0.65rem auto`), cỡ chữ thanh mảnh (`0.68rem`), đường viền mờ tinh tế không gây xao nhãng.
-    3. Tối ưu di động: Khung tự động co giãn vừa vặn, không bị rớt dòng hay tràn màn hình, nhường toàn bộ không gian cho Lời Chúa và khung đối chiếu.
-  - Toàn bộ **193/193 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestone 60 (2026-10-30)**: Maximum Scripture Display Space Prioritization (Tối Ưu Không Gian Lời Chúa Popout): Tích hợp Header 1 hàng 44px (.popout-reader-header), gỡ bỏ .popout-nav-bar & .popout-reader-footer thừa, mở rộng .popout-reader-card 92-96vh, tăng >300% diện tích đọc Lời Chúa. Đạt 193/193 Pytest pass 100%.
+- **Milestone 61 (2026-10-30)**: Ultra-Compact AdSense & Stewardship Slot (Thu Nhỏ Khung Quảng Cáo & Dâng Hiến): Thu gọn thành 1 hàng ngang phẳng mỏng (.adsense-slot-card.adsense-slot-compact), giảm >70% chiều cao, nhãn thanh mảnh [Ad] kèm nút [❤ Dâng hiến], không gây xao nhãng. Đạt 193/193 Pytest pass 100%.
 - **Milestone 62 (2026-10-30)**: Comprehensive Bible Quiz & VTKTH Theological Examination Suite:
   - Tiếp nhận yêu cầu anh Jimmy từ kho dữ liệu C:\Users\Admin\Desktop\On_Thi_Kinh_Thanh_VTKTH.
   - Trích xuất toàn bộ ngân hàng câu hỏi vào data/quiz-database.json (>630 câu):
@@ -228,3 +216,13 @@
     5. **Sự Kiện Ở Đoạn Nào?**: Bảng tra cứu 25 sự kiện lịch sử Kinh Thánh với nút mở trực tiếp Focus Reader.
   - Tích hợp điều hướng Subnav, #quiz-view, mobile drawer, module js/quiz-engine.js, pp.js routing và bộ CSS Sacred Reverent.
   - Toàn bộ **198/198 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestone 63 (2026-11-03)**: Tích Hợp Toàn Bộ 114 Chương "Thánh Kinh Lược Khảo" (Halley's Bible Handbook) Từ VietChristian:
+  - Tiếp nhận yêu cầu anh Jimmy tích hợp toàn bộ nội dung từ VietChristian (`reader.asp?pid=,src=/kinhthanh/tklk/tklk.xml,name=Chuong,enc=2,nl=0,id=0`).
+  - Trích xuất và chuẩn hóa đầy đủ 114 chương (>474,000 từ học thuật Thánh Kinh kinh điển của Dr. Henry H. Halley bản dịch Việt ngữ).
+  - Cấu trúc dữ liệu 2 tầng tối ưu tốc độ:
+    1. `data/tklk/tklk-index.json` (53KB): Mục lục 114 chương với 7 danh mục (Cựu Ước 38, Tân Ước 27, Lịch Sử Hội Thánh 21, Đời Sống Đức Tin 14, Giữa 2 Giao Ước 6, Bản Văn 5, Lời Mở Đầu 3), số từ, ước tính thời gian đọc, tóm tắt và mapping `book_id` sang 66 sách Kinh Thánh.
+    2. `data/tklk/chapters/{1..114}.json`: Từng chương JSON độc lập, lọc sạch rác MSO/FrontPage/Word/IIS, chuẩn hóa ảnh absolute URL, tải on-demand và lưu bộ nhớ đệm cache 0ms.
+  - Giao diện Dual-Mode Studio:
+    - **Directory Mode (Mục lục)**: 8 thẻ lọc danh mục, thanh tìm kiếm tức thì không giật lag/mất focus, thẻ chương hiển thị tóm tắt, số từ, thời gian đọc, nút đọc Lược Khảo và nút nhảy thẳng vào bản văn Kinh Thánh tương ứng trong Focus Reader.
+    - **Reader Mode (Đọc toàn văn)**: Sticky toolbar (Quay lại Mục Lục, Chương trước/sau, Chỉ báo chương X/114, Zoom chữ A-/A+ lưu localStorage, Nút đọc sách trong Kinh Thánh, Nút sao chép văn bản), typography tôn nghiêm, hỗ trợ đầy đủ Dark/Light mode, tương thích hoàn hảo mobile & desktop.
+  - Viết bộ unit test `tests/test_tklk_survey.py` (7 tests). Toàn bộ **205/205 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.

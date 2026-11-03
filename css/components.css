@@ -6887,6 +6887,253 @@
   line-height: 1.4;
 }
 
+/* Thánh Kinh Lược Khảo (Halley's Bible Handbook) */
+.tklk-search-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.tklk-search-icon {
+  position: absolute;
+  left: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.tklk-search-input {
+  width: 100%;
+  padding: 0.65rem 2.4rem 0.65rem 2.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tklk-search-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+  outline: none;
+}
+
+.tklk-clear-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  line-height: 1;
+}
+
+.tklk-clear-btn:hover {
+  color: var(--text-primary);
+}
+
+.tklk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 0.85rem;
+}
+
+.tklk-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.tklk-card:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+}
+
+.tklk-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tklk-card-title {
+  font-weight: 800;
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin: 0.2rem 0;
+}
+
+.tklk-card-summary {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tklk-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.4rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.tklk-card-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+.tklk-card-actions {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.tklk-reader-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.tklk-reader-ch-indicator {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  padding: 0 0.4rem;
+  white-space: nowrap;
+}
+
+.tklk-chapter-header {
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tklk-chapter-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.tklk-chapter-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0.35rem 0;
+}
+
+.tklk-source-credit {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.tklk-reader-content {
+  color: var(--text-primary);
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.tklk-reader-content font {
+  color: inherit !important;
+  face: inherit !important;
+  font-family: inherit !important;
+}
+
+.tklk-reader-content span,
+.tklk-reader-content p,
+.tklk-reader-content div {
+  max-width: 100% !important;
+}
+
+.tklk-reader-content [style*="width:940px"],
+.tklk-reader-content [style*="width: 940px"] {
+  width: 100% !important;
+}
+
+.tklk-reader-content [style*="color:navy"],
+.tklk-reader-content [style*="color:maroon"],
+.tklk-reader-content [style*="color:#000000"] {
+  color: inherit !important;
+}
+
+.tklk-reader-content [style*="background-color"] {
+  background-color: transparent !important;
+}
+
+.tklk-reader-content p {
+  margin-bottom: 0.95rem;
+  line-height: 1.8;
+}
+
+.tklk-reader-content h1,
+.tklk-reader-content h2,
+.tklk-reader-content h3,
+.tklk-reader-content h4 {
+  color: var(--accent-gold);
+  margin: 1.5rem 0 0.75rem;
+  font-weight: 800;
+}
+
+.tklk-reader-content b,
+.tklk-reader-content strong {
+  color: var(--accent-gold);
+}
+
+.tklk-reader-content table {
+  width: 100% !important;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.tklk-reader-content table td,
+.tklk-reader-content table th {
+  border: 1px solid var(--border-subtle);
+  padding: 0.5rem 0.75rem;
+}
+
+.tklk-reader-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 0.75rem auto;
+  display: block;
+}
+
+.tklk-reader-footer-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
 /* Faith Stories */
 .stories-grid {
   display: grid;
