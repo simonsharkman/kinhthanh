@@ -1944,6 +1944,7 @@ class LogosApp {
 
         <!-- Collapsible Audio Player Bar for Survey Chapter -->
         <div class="tklk-audio-player-bar animate-fade-in" id="survey-audio-player-bar" style="display: none; background: var(--bg-card); border: 1.5px solid var(--accent-gold); border-radius: 8px; padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; box-shadow: 0 4px 18px rgba(0,0,0,0.15);">
+          <audio id="survey-audio-media-element" preload="none" style="display: none;"></audio>
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
             <div style="display: flex; align-items: center; gap: 0.75rem;">
               <button type="button" class="btn-primary" id="btn-survey-audio-play-pause" style="width: 38px; height: 38px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer;">
@@ -1953,15 +1954,24 @@ class LogosApp {
                 <i class="fa-solid fa-stop"></i>
               </button>
               <div>
-                <div style="font-weight: 800; color: var(--accent-gold); font-size: 0.92rem;">
+                <div style="font-weight: 800; color: var(--accent-gold); font-size: 0.92rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
                   <i class="fa-solid fa-headphones"></i> Sách Nói: <span id="survey-audio-now-title">${chapterData.title || meta.title}</span>
+                  <span id="survey-audio-voice-badge" style="background: rgba(212,175,55,0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); border-radius: 4px; padding: 0.1rem 0.45rem; font-size: 0.72rem; font-weight: 700;">
+                    <i class="fa-solid fa-microphone"></i> Giọng ALDEN Studio
+                  </span>
                 </div>
                 <div style="font-size: 0.78rem; color: var(--text-muted);" id="survey-audio-status-text">
-                  Giọng đọc tiếng Việt truyền cảm &bull; Bấm Phát để bắt đầu nghe
+                  Giọng đọc ALDEN (OmniVoice) ấm áp &bull; Bấm Phát để bắt đầu nghe
                 </div>
               </div>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-left: auto;">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-left: auto; flex-wrap: wrap;">
+              <span style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">Giọng:</span>
+              <select id="survey-audio-voice-mode" class="portal-select" style="padding: 0.3rem 0.55rem; font-size: 0.82rem; border-radius: 6px;">
+                <option value="alden" selected>🎙️ Giọng ALDEN Studio</option>
+                <option value="namminh">🔊 Giọng Nam Trầm (Trực Tuyến)</option>
+                <option value="hoaimy">🔊 Giọng Nữ (Trực Tuyến)</option>
+              </select>
               <span style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">Tốc độ:</span>
               <select id="survey-audio-speed" class="portal-select" style="padding: 0.3rem 0.55rem; font-size: 0.82rem; border-radius: 6px;">
                 <option value="0.8">0.8x</option>
@@ -2040,6 +2050,17 @@ class LogosApp {
       this.surveyAudioSpeed = spd;
       if (this.surveyAudioState) {
         this.surveyAudioState.speed = spd;
+        if (this.surveyAudioState.isMediaElement && this.surveyAudioState.audioEl) {
+          this.surveyAudioState.audioEl.playbackRate = spd;
+        }
+      }
+    });
+
+    const audioVoiceModeSel = container.querySelector('#survey-audio-voice-mode');
+    audioVoiceModeSel?.addEventListener('change', () => {
+      if (this.surveyAudioState && this.surveyAudioState.isPlaying) {
+        this.stopSurveyAudioNarration();
+        this.startSurveyAudioNarration('#survey-chapter-body', 'survey-audio-status-text', 'btn-survey-audio-play-pause');
       }
     });
 
@@ -3083,7 +3104,8 @@ class LogosApp {
       utterance.rate = this.audioState.speed || 1.0;
 
       const voices = window.speechSynthesis.getVoices();
-      const viVoice = voices.find(v => v.lang.includes('vi') || v.lang.includes('VI'));
+      const viMaleVoice = voices.find(v => (v.name.includes('NamMinh') || v.name.includes('Nam') || v.name.toLowerCase().includes('male')) && (v.lang.includes('vi') || v.lang.includes('VI')));
+      const viVoice = viMaleVoice || voices.find(v => v.lang.includes('vi') || v.lang.includes('VI'));
       if (viVoice) utterance.voice = viVoice;
 
       utterance.onend = () => {
@@ -3910,29 +3932,39 @@ class LogosApp {
   }
 
 // ==========================================================================
-  // THÁNH KINH LƯỢC KHẢO AUDIO NARRATION ENGINE (Web Speech & MP3 Reader)
+  // THÁNH KINH LƯỢC KHẢO AUDIO NARRATION ENGINE (OmniVoice ALDEN & Web Speech)
   // ==========================================================================
 
   toggleSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId) {
     if (this.surveyAudioState && this.surveyAudioState.isPlaying) {
       if (this.surveyAudioState.isPaused) {
-        if (window.speechSynthesis) {
+        if (this.surveyAudioState.isMediaElement && this.surveyAudioState.audioEl) {
+          this.surveyAudioState.audioEl.play().catch(e => console.warn('Resume audioEl error:', e));
+          this.surveyAudioState.isPaused = false;
+        } else if (window.speechSynthesis) {
           window.speechSynthesis.resume();
           this.surveyAudioState.isPaused = false;
-          const ppBtn = document.getElementById(playPauseBtnId);
-          if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-          const stEl = document.getElementById(statusElId);
-          if (stEl) stEl.textContent = 'Đang phát âm thanh sách nói...';
+        }
+        const ppBtn = document.getElementById(playPauseBtnId);
+        if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        const stEl = document.getElementById(statusElId);
+        if (stEl) {
+          stEl.innerHTML = this.surveyAudioState.isMediaElement
+            ? '<span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-microphone"></i> Giọng ALDEN Studio (OmniVoice)</span> &bull; Đang phát âm thanh phòng thu...'
+            : 'Đang phát âm thanh sách nói...';
         }
       } else {
-        if (window.speechSynthesis) {
+        if (this.surveyAudioState.isMediaElement && this.surveyAudioState.audioEl) {
+          this.surveyAudioState.audioEl.pause();
+          this.surveyAudioState.isPaused = true;
+        } else if (window.speechSynthesis) {
           window.speechSynthesis.pause();
           this.surveyAudioState.isPaused = true;
-          const ppBtn = document.getElementById(playPauseBtnId);
-          if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-          const stEl = document.getElementById(statusElId);
-          if (stEl) stEl.textContent = 'Đã tạm dừng âm thanh';
         }
+        const ppBtn = document.getElementById(playPauseBtnId);
+        if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        const stEl = document.getElementById(statusElId);
+        if (stEl) stEl.textContent = 'Đã tạm dừng âm thanh';
       }
       return;
     }
@@ -3940,9 +3972,74 @@ class LogosApp {
     this.startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId);
   }
 
-  startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId) {
+  async startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId) {
     this.stopSurveyAudioNarration();
 
+    const chapterId = this.activeSurveyChapterId || this.currentTklkChapterId || 1;
+    const voiceModeSel = document.getElementById('survey-audio-voice-mode');
+    const voiceMode = voiceModeSel ? voiceModeSel.value : 'alden';
+    const audioSrc = `data/tklk/audio/${chapterId}.mp3`;
+
+    // 1. Nếu chọn Giọng ALDEN, kiểm tra file âm thanh phòng thu MP3
+    if (voiceMode === 'alden') {
+      let hasStudioAudio = false;
+      try {
+        const check = await fetch(audioSrc, { method: 'HEAD' });
+        if (check.ok) hasStudioAudio = true;
+      } catch (e) {
+        hasStudioAudio = false;
+      }
+
+      if (hasStudioAudio) {
+        let audioEl = document.getElementById('survey-audio-media-element');
+        if (!audioEl) {
+          audioEl = document.createElement('audio');
+          audioEl.id = 'survey-audio-media-element';
+          document.body.appendChild(audioEl);
+        }
+
+        audioEl.src = audioSrc;
+        audioEl.playbackRate = this.surveyAudioSpeed || 1.0;
+
+        const ppBtn = document.getElementById(playPauseBtnId);
+        if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        const stEl = document.getElementById(statusElId);
+        if (stEl) {
+          stEl.innerHTML = `<span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-microphone"></i> Giọng ALDEN Studio (OmniVoice)</span> &bull; Đang phát Chương ${chapterId} phòng thu chính hãng`;
+        }
+
+        this.surveyAudioState = {
+          isPlaying: true,
+          isPaused: false,
+          isMediaElement: true,
+          audioEl,
+          statusElId,
+          playPauseBtnId
+        };
+
+        audioEl.onended = () => {
+          this.stopSurveyAudioNarration();
+          this.showToast('Đã phát xong toàn bộ chương Lược Khảo!', 'success');
+        };
+
+        audioEl.onerror = () => {
+          console.warn('Audio element error, falling back to Web Speech API');
+          this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode);
+        };
+
+        audioEl.play().catch(e => {
+          console.warn('Auto-play blocked or error:', e);
+          this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode);
+        });
+        return;
+      }
+    }
+
+    // 2. Chuyển tiếp sang Web Speech API với ưu tiên giọng nam trầm
+    this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode);
+  }
+
+  startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode = 'alden') {
     const contentEl = document.querySelector(contentSelector);
     if (!contentEl) return;
 
@@ -3951,7 +4048,7 @@ class LogosApp {
       return;
     }
 
-    // Extract text paragraphs
+    // Trích xuất các đoạn văn bản
     const paragraphs = Array.from(contentEl.querySelectorAll('p, h1, h2, h3, h4, li, div'))
       .map(el => ({ el, text: (el.innerText || '').trim() }))
       .filter(item => item.text.length > 10 && !item.text.startsWith('http') && !item.text.includes('Courtesy of'));
@@ -3964,9 +4061,11 @@ class LogosApp {
     this.surveyAudioState = {
       isPlaying: true,
       isPaused: false,
+      isMediaElement: false,
       paragraphs,
       currentIndex: 0,
       speed: this.surveyAudioSpeed || 1.0,
+      voiceMode,
       contentSelector,
       statusElId,
       playPauseBtnId
@@ -3981,7 +4080,7 @@ class LogosApp {
   speakSurveyParagraph() {
     if (!this.surveyAudioState || !this.surveyAudioState.isPlaying || this.surveyAudioState.isPaused) return;
 
-    const { paragraphs, currentIndex, statusElId } = this.surveyAudioState;
+    const { paragraphs, currentIndex, statusElId, voiceMode } = this.surveyAudioState;
     if (currentIndex >= paragraphs.length) {
       this.stopSurveyAudioNarration();
       this.showToast('Đã đọc xong toàn bộ chương Lược Khảo!', 'success');
@@ -3997,7 +4096,8 @@ class LogosApp {
 
     const stEl = document.getElementById(statusElId);
     if (stEl) {
-      stEl.textContent = `Đang đọc đoạn ${currentIndex + 1}/${paragraphs.length}...`;
+      const voiceLabel = voiceMode === 'hoaimy' ? 'Nữ Hoài My' : 'Nam Minh';
+      stEl.innerHTML = `<span style="color:var(--accent-gold); font-weight:600;"><i class="fa-solid fa-volume-high"></i> Giọng Đọc Trực Tuyến (${voiceLabel})</span> &bull; Đang đọc đoạn ${currentIndex + 1}/${paragraphs.length}...`;
     }
 
     const spokenText = this.normalizeBibleAudioText(currentItem.text);
@@ -4006,8 +4106,17 @@ class LogosApp {
     utterance.rate = this.surveyAudioState.speed || 1.0;
 
     const voices = window.speechSynthesis.getVoices();
-    const viVoice = voices.find(v => v.lang.includes('vi') || v.lang.includes('VI'));
-    if (viVoice) utterance.voice = viVoice;
+    let selectedVoice = null;
+    if (voiceMode === 'hoaimy') {
+      selectedVoice = voices.find(v => (v.name.includes('HoaiMy') || v.name.includes('Female')) && (v.lang.includes('vi') || v.lang.includes('VI')));
+    } else {
+      // NamMinh / Male voice prioritized
+      selectedVoice = voices.find(v => (v.name.includes('NamMinh') || v.name.includes('Nam') || v.name.toLowerCase().includes('male')) && (v.lang.includes('vi') || v.lang.includes('VI')));
+    }
+    if (!selectedVoice) {
+      selectedVoice = voices.find(v => v.lang.includes('vi') || v.lang.includes('VI'));
+    }
+    if (selectedVoice) utterance.voice = selectedVoice;
 
     utterance.onend = () => {
       if (this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isPaused) {
@@ -4028,6 +4137,10 @@ class LogosApp {
   }
 
   stopSurveyAudioNarration() {
+    if (this.surveyAudioState && this.surveyAudioState.isMediaElement && this.surveyAudioState.audioEl) {
+      this.surveyAudioState.audioEl.pause();
+      this.surveyAudioState.audioEl.currentTime = 0;
+    }
     if (window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }
@@ -4043,7 +4156,7 @@ class LogosApp {
     }
   }
 
-  async renderUtilitySurvey(activeFilter = 'all', chapterId = null) {
+    async renderUtilitySurvey(activeFilter = 'all', chapterId = null) {
     this.tklkActiveFilter = activeFilter;
     if (chapterId !== null) {
       return this.openTklkChapter(chapterId);
