@@ -11,7 +11,10 @@ import sys
 import re
 import json
 import urllib.request
-import pypdf
+try:
+    import pypdf
+except ImportError:
+    pypdf = None
 
 # Ensure utf-8 stdout
 sys.stdout.reconfigure(encoding='utf-8')

@@ -2980,6 +2980,35 @@ class LogosApp {
 
     let res = text.replace(/\[\d+\]|<[^>]+>/g, ' ');
 
+    // 0. Foreign words, authors, book titles & technical terms pronunciation
+    const foreignDict = [
+      [/\bHalley(?:'s)?\s+Bible\s+Handbook\b/gi, 'Thánh Kinh Lược Khảo Ha-li'],
+      [/\bBible\s+Handbook\b/gi, 'Cẩm Nang Thánh Kinh'],
+      [/\bDr\.?\s+Henry\s+H\.?\s+Halley\b/gi, 'Tiến sĩ Hen-ri H. Ha-li'],
+      [/\bDr\.?\s+Henry\b/gi, 'Tiến sĩ Hen-ri'],
+      [/(^|\s)Dr\.(?=\s+[A-ZÀ-Ỹ])/g, '$1Tiến sĩ'],
+      [/\bHenry\s+H\.?\s+Halley\b/gi, 'Hen-ri H. Ha-li'],
+      [/\bHenry\s+Halley\b/gi, 'Hen-ri Ha-li'],
+      [/\bHenry\b/gi, 'Hen-ri'],
+      [/\bHalley\b/gi, 'Ha-li'],
+      [/(?:Chúa\s+)?\bJesus\s+Christ\b/gi, 'Chúa Giê-xu Cơ-rít'],
+      [/(?:Chúa\s+)?\bJesus\b/gi, 'Chúa Giê-xu'],
+      [/\bChrist\b/gi, 'Cơ-rít'],
+      [/\bB\.C\.|\bBC\b/g, 'Trước Công Nguyên'],
+      [/\bA\.D\.|\bAD\b/g, 'Sau Công Nguyên'],
+      [/\bYouTube\b/gi, 'Diu-túp'],
+      [/\bPodcast\b/gi, 'Pót-cát'],
+      [/\bInternet\b/gi, 'In-tơ-nét'],
+      [/\bWebsite\b/gi, 'Oép-sai'],
+      [/\bOnline\b/gi, 'On-lai'],
+      [/\bAudio\b/gi, 'Ao-đi-ô'],
+      [/\bVideo\b/gi, 'Vi-đê-ô'],
+      [/\bBaccarat\b/gi, 'Ba-ca-ra']
+    ];
+    for (const [pattern, repl] of foreignDict) {
+      res = res.replace(pattern, repl);
+    }
+
     // 1. Expand Roman & Arabic numeral prefixes in Bible book names
     // e.g. I Sa-mu-ên -> Nhất Sa-mu-ên, 1Cô-rinh-tô -> Nhất Cô-rinh-tô
     const bookPrefixes = [

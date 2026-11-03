@@ -8,11 +8,15 @@ Verifies:
 4. KTHD parser logic in scripts/fetch_kthd_biblecom.py
 """
 
+import sys
 import json
 from pathlib import Path
-from scripts.fetch_kthd_biblecom import parse_kthd_html, get_bible_com_url
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from scripts.fetch_kthd_biblecom import parse_kthd_html, get_bible_com_url
 
 
 def test_kthd_in_state_js():

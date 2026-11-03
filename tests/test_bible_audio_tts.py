@@ -57,7 +57,11 @@ def test_audio_normalization_behavior_node():
         ['câu 13–15', 'câu 13 đến 15'],
         ['đoạn 1-3', 'đoạn 1 đến 3'],
         ['chương 10-12', 'chương 10 đến 12'],
-        ['Mác 3:13, 14', 'Mác đoạn 3 câu 13, 14']
+        ['Mác 3:13, 14', 'Mác đoạn 3 câu 13, 14'],
+        ["Halley's Bible Handbook của Dr. Henry H. Halley", "Thánh Kinh Lược Khảo Ha-li của Tiến sĩ Hen-ri H. Ha-li"],
+        ["Chúa Jesus Christ trong Tân Ước", "Chúa Giê-xu Cơ-rít trong Tân Ước"],
+        ["Xem video trên YouTube và Podcast", "Xem Vi-đê-ô trên Diu-túp và Pót-cát"],
+        ["Năm 586 B.C. và năm 70 A.D.", "Năm 586 Trước Công Nguyên và năm 70 Sau Công Nguyên"]
     ];
 
     let failed = 0;

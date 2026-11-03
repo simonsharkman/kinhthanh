@@ -5,10 +5,15 @@ original literal glosses, and UI components.
 """
 
 import os
+import sys
 import json
 import pytest
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+DATA_DIR = os.path.join(ROOT_DIR, "data")
 INTERLINEAR_DIR = os.path.join(DATA_DIR, "interlinear")
 PASSAGES_FILE = os.path.join(DATA_DIR, "default-bible-passages.json")
 
