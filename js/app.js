@@ -351,6 +351,9 @@ class LogosApp {
       view = 'donate';
     } else if (['quiz', 'dokinhthanh', 'onthi', 'tracnghiem'].includes(prefix)) {
       view = 'quiz';
+    } else if (['survey', 'tklk', 'luockhao', 'thanh-kinh-luoc-khao', 'luoc-khao'].includes(prefix)) {
+      view = 'survey';
+      chPart = parts[1];
     } else if (['portal', 'home', 'trangchu', 'tinhnguyen'].includes(prefix)) {
       view = 'portal';
     } else {
@@ -406,6 +409,8 @@ class LogosApp {
       } else {
         targetHash = `#tsk/${b}/${c}`;
       }
+    } else if (viewName === 'survey') {
+      targetHash = this.activeSurveyChapterId ? `#survey/${this.activeSurveyChapterId}` : '#survey';
     }
 
     if (window.location.hash === targetHash) return;
@@ -465,6 +470,8 @@ class LogosApp {
           }
         } else if (route.view === 'tsk') {
           this.renderTSKView();
+        } else if (route.view === 'survey') {
+          this.renderSurveyView('all', route.chapter);
         }
       }
 
@@ -535,6 +542,12 @@ class LogosApp {
         state.setDrawerOpen(false);
       }
       this.renderQuizView();
+    }
+    if (viewName === 'survey') {
+      if (state.isDrawerOpen) {
+        state.setDrawerOpen(false);
+      }
+      this.renderSurveyView();
     }
 
     // Cập nhật trạng thái nút Đọc, KT Đối Chiếu, Cổng Tĩnh Nguyện & Dâng Hiến trên mobile bottom nav và header
@@ -1011,8 +1024,45 @@ class LogosApp {
       }
 
       case 'context': {
-        // Tab 4: Bối Cảnh Lịch Sử & 8 Thể Loại Văn Chương
-        drawerBody.innerHTML = hermeneuticsEngine.renderGenreGuideHTML(book.genre, book);
+        // Tab 4: Bối Cảnh Lịch Sử, Thánh Kinh Lược Khảo & 8 Thể Loại Văn Chương
+        const tklkBookChapter = (this.tklkIndex || []).find(x => x.book_id === currentBookId);
+        let tklkBanner = '';
+        if (tklkBookChapter) {
+          tklkBanner = `
+            <div class="tklk-drawer-banner animate-fade-in" style="background: rgba(212, 175, 55, 0.08); border: 1.5px solid var(--accent-gold); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <div>
+                  <div style="font-weight: 800; color: var(--accent-gold); font-size: 0.95rem;">
+                    <i class="fa-solid fa-book-bookmark"></i> Thánh Kinh Lược Khảo: ${tklkBookChapter.title}
+                  </div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    Bản dịch Halley's Bible Handbook &bull; Chương ${tklkBookChapter.id} &bull; ${(tklkBookChapter.word_count || 0).toLocaleString()} từ
+                  </div>
+                </div>
+                <button type="button" class="btn-primary btn-open-drawer-tklk" data-chapter="${tklkBookChapter.id}" style="padding: 0.35rem 0.85rem; font-size: 0.82rem; font-weight: 700; cursor: pointer;">
+                  <i class="fa-solid fa-book-open"></i> Đọc Lược Khảo
+                </button>
+              </div>
+            </div>
+          `;
+        } else if (!this.tklkIndex) {
+          fetch('data/tklk/tklk-index.json')
+            .then(r => r.json())
+            .then(data => {
+              this.tklkIndex = data;
+              if (state.activeDrawerTab === 'context') this.renderDrawerContent();
+            })
+            .catch(() => {});
+        }
+
+        drawerBody.innerHTML = tklkBanner + hermeneuticsEngine.renderGenreGuideHTML(book.genre, book);
+
+        drawerBody.querySelector('.btn-open-drawer-tklk')?.addEventListener('click', (e) => {
+          const chId = parseInt(e.currentTarget.dataset.chapter, 10);
+          state.setDrawerOpen(false);
+          state.setActiveView('survey');
+          this.renderSurveyChapter(chId);
+        });
         break;
       }
 
@@ -1674,6 +1724,327 @@ class LogosApp {
       quizEngine.render(container);
     }
   }
+
+  // ==========================================================================
+  // THÁNH KINH LƯỢC KHẢO (HALLEY'S BIBLE HANDBOOK - 114 CHƯƠNG) VIEW CONTROLLER
+  // ==========================================================================
+
+  async renderSurveyView(activeFilter = 'all', chapterId = null) {
+    const container = document.getElementById('survey-page-container');
+    if (!container) return;
+
+    if (chapterId) {
+      return this.renderSurveyChapter(chapterId);
+    }
+
+    this.activeSurveyChapterId = null;
+    this.tklkActiveFilter = activeFilter;
+
+    // Load index if not loaded
+    if (!this.tklkIndex || this.tklkIndex.length === 0) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 4rem 1rem;">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size: 2.2rem; color: var(--accent-gold);"></i>
+          <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.95rem;">Đang tải dữ liệu Thánh Kinh Lược Khảo (114 chương)...</p>
+        </div>
+      `;
+      try {
+        const resp = await fetch('data/tklk/tklk-index.json');
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        this.tklkIndex = await resp.json();
+      } catch (err) {
+        console.error('Lỗi tải tklk-index.json:', err);
+        container.innerHTML = `
+          <div style="text-align: center; padding: 3rem 1rem; color: var(--accent-danger);">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem;"></i>
+            <p style="margin-top: 1rem; font-weight: 600;">Không thể tải dữ liệu Thánh Kinh Lược Khảo. Vui lòng thử lại sau.</p>
+          </div>
+        `;
+        return;
+      }
+    }
+
+    const categories = [
+      { id: 'all', label: 'Tất Cả (114)' },
+      { id: 'ot', label: 'Cựu Ước (38)' },
+      { id: 'nt', label: 'Tân Ước (27)' },
+      { id: 'church_history', label: 'Lịch Sử Hội Thánh (21)' },
+      { id: 'christian_life', label: 'Đời Sống Đức Tin (14)' },
+      { id: 'intertestament', label: 'Giữa 2 Giao Ước (6)' },
+      { id: 'canon', label: 'Bản Văn & Khảo Cổ (5)' },
+      { id: 'intro', label: 'Lời Mở Đầu (3)' }
+    ];
+
+    container.innerHTML = `
+      <div class="survey-page-wrapper animate-fade-in">
+        <section class="survey-hero-card">
+          <div class="survey-hero-badge">
+            <i class="fa-solid fa-book-bookmark"></i> HỌC THÁNH KINH CHUYÊN SÂU • 114 CHƯƠNG KHẢO CỨU
+          </div>
+          <h2 class="survey-hero-title">Thánh Kinh Lược Khảo (Halley's Bible Handbook)</h2>
+          <p class="survey-hero-desc">
+            Bản dịch Việt ngữ tác phẩm kinh điển của Tiến sĩ Henry H. Halley. Khảo cứu sâu sắc bối cảnh lịch sử, khảo cổ học, phong tục thời Kinh Thánh, lịch sử hội thánh và lược khảo 66 sách Thánh Kinh. Bấm chọn bất kỳ chương nào bên dưới để bắt đầu đọc.
+          </p>
+        </section>
+
+        <nav class="survey-category-nav" id="survey-category-nav">
+          ${categories.map(cat => `
+            <button type="button" class="survey-cat-pill ${cat.id === activeFilter ? 'active' : ''}" data-cat="${cat.id}">
+              ${cat.label}
+            </button>
+          `).join('')}
+        </nav>
+
+        <div class="tklk-search-bar">
+          <i class="fa-solid fa-magnifying-glass tklk-search-icon"></i>
+          <input type="text" class="tklk-search-input" id="survey-search-input" placeholder="Tìm kiếm chương, sách, chủ đề (ví dụ: Sáng-Thế Ký, Cải Chánh, Ma-thi-ơ, Khảo cổ)...">
+          <button type="button" class="tklk-clear-btn" id="survey-search-clear" style="display: none;" title="Xóa">&times;</button>
+        </div>
+
+        <div class="tklk-grid" id="survey-chapters-grid"></div>
+      </div>
+    `;
+
+    // Category navigation click handlers
+    container.querySelectorAll('.survey-cat-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.renderSurveyView(btn.dataset.cat);
+      });
+    });
+
+    const searchInput = container.querySelector('#survey-search-input');
+    const clearBtn = container.querySelector('#survey-search-clear');
+    const gridContainer = container.querySelector('#survey-chapters-grid');
+
+    const updateGrid = (kw = '') => {
+      this.updateTklkDirectoryList(activeFilter, kw, gridContainer);
+      // Re-attach clicks so they open renderSurveyChapter
+      gridContainer.querySelectorAll('.tklk-card').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.btn-tklk-bible-link')) return;
+          const chId = parseInt(card.dataset.chapterId, 10);
+          if (chId) this.renderSurveyChapter(chId);
+        });
+      });
+      gridContainer.querySelectorAll('.btn-read-tklk').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const chId = parseInt(btn.dataset.chapter, 10);
+          if (chId) this.renderSurveyChapter(chId);
+        });
+      });
+    };
+
+    searchInput?.addEventListener('input', (e) => {
+      const val = e.target.value.trim();
+      if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
+      updateGrid(val);
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      if (clearBtn) clearBtn.style.display = 'none';
+      updateGrid('');
+    });
+
+    updateGrid('');
+  }
+
+  async renderSurveyChapter(chapterId) {
+    const id = parseInt(chapterId, 10);
+    if (isNaN(id) || id < 1 || id > 114) return;
+
+    this.activeSurveyChapterId = id;
+    this.updateUrlHash('survey', null, null, null, null, false);
+
+    const container = document.getElementById('survey-page-container');
+    if (!container) return;
+
+    // Retrieve meta from index
+    let meta = (this.tklkIndex || []).find(x => x.id === id);
+    if (!meta) {
+      meta = { id, title: `Chương ${id}`, category_name: 'Lược Khảo', word_count: 0 };
+    }
+
+    container.innerHTML = `
+      <div style="text-align: center; padding: 4rem 1rem;">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size: 2.2rem; color: var(--accent-gold);"></i>
+        <p style="margin-top: 1rem; color: var(--text-muted);">Đang tải nội dung Chương ${id}: ${meta.title}...</p>
+      </div>
+    `;
+
+    // Fetch chapter content (cached)
+    this.tklkChapterCache = this.tklkChapterCache || {};
+    let chapterData = this.tklkChapterCache[id];
+
+    if (!chapterData) {
+      try {
+        const resp = await fetch(`data/tklk/chapters/${id}.json`);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        chapterData = await resp.json();
+        this.tklkChapterCache[id] = chapterData;
+      } catch (err) {
+        console.error(`Lỗi tải chapter ${id}:`, err);
+        container.innerHTML = `
+          <div style="text-align: center; padding: 3rem 1rem; color: var(--accent-danger);">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem;"></i>
+            <p style="margin-top: 1rem;">Không thể tải nội dung chương này. Vui lòng thử lại.</p>
+            <button type="button" class="btn-primary" id="btn-survey-retry" style="margin-top: 1rem;">
+              <i class="fa-solid fa-rotate-right"></i> Thử Lại
+            </button>
+          </div>
+        `;
+        container.querySelector('#btn-survey-retry')?.addEventListener('click', () => {
+          this.renderSurveyChapter(id);
+        });
+        return;
+      }
+    }
+
+    if (!this.tklkFontSize) {
+      try {
+        const saved = parseInt(localStorage.getItem('tklk_font_size'), 10);
+        if (saved && saved >= 13 && saved <= 26) this.tklkFontSize = saved;
+        else this.tklkFontSize = 17;
+      } catch(e) {
+        this.tklkFontSize = 17;
+      }
+    }
+
+    container.innerHTML = `
+      <div class="survey-page-wrapper animate-fade-in">
+        <!-- Sticky Toolbar for Reading -->
+        <div class="tklk-reader-toolbar" style="background: var(--bg-card); padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; margin-bottom: 1.5rem; position: sticky; top: 62px; z-index: 100; box-shadow: 0 4px 16px rgba(0,0,0,0.12);">
+          <button type="button" class="portal-utility-tab-btn" id="btn-survey-back" style="font-weight: 700;">
+            <i class="fa-solid fa-arrow-left"></i> Mục Lục 114 Chương
+          </button>
+          <button type="button" class="portal-utility-tab-btn" id="btn-survey-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
+            <i class="fa-solid fa-chevron-left"></i> Trước
+          </button>
+          <span class="tklk-reader-ch-indicator">
+            <i class="fa-solid fa-bookmark"></i> Chương ${id} / 114
+          </span>
+          <button type="button" class="portal-utility-tab-btn" id="btn-survey-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
+            Sau <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <div style="display: flex; gap: 2px; margin-left: auto;">
+            <button type="button" class="portal-utility-tab-btn" id="btn-survey-zoom-out" title="Giảm cỡ chữ" style="padding: 0.3rem 0.6rem;">A-</button>
+            <button type="button" class="portal-utility-tab-btn" id="btn-survey-zoom-in" title="Tăng cỡ chữ" style="padding: 0.3rem 0.6rem;">A+</button>
+          </div>
+          ${meta.book_id ? `
+            <button type="button" class="portal-utility-tab-btn" id="btn-survey-goto-bible" data-book="${meta.book_id}" style="color: var(--accent-gold); font-weight: 700; border-color: rgba(212,175,55,0.4);" title="Mở đọc sách này trong Kinh Thánh">
+              <i class="fa-solid fa-bible"></i> Đọc Bản Văn
+            </button>
+          ` : ''}
+          <button type="button" class="portal-utility-tab-btn" id="btn-survey-copy" title="Sao chép toàn bộ nội dung">
+            <i class="fa-solid fa-copy"></i>
+          </button>
+        </div>
+
+        <article class="tklk-reader-view">
+          <div class="tklk-chapter-header">
+            <div class="tklk-chapter-meta">
+              <span class="badge" style="background: rgba(212,175,55,0.15); color: var(--accent-gold); font-size: 0.75rem; font-weight: 700; padding: 3px 8px;">
+                ${chapterData.category_name || meta.category_name}
+              </span>
+              <span class="tklk-word-badge" style="font-size: 0.8rem; color: var(--text-muted);">
+                <i class="fa-solid fa-book"></i> Chương ${id} / 114 &bull; ${(chapterData.word_count || meta.word_count || 0).toLocaleString()} từ &bull; ~${Math.ceil((chapterData.word_count || meta.word_count || 500) / 250)} phút đọc
+              </span>
+            </div>
+            <h1 class="tklk-chapter-title">${chapterData.title || meta.title}</h1>
+            <div class="tklk-source-credit">
+              <i class="fa-solid fa-feather-pointed"></i> Trích tác phẩm <em>Thánh Kinh Lược Khảo</em> (Halley's Bible Handbook) &bull; Tác giả: Dr. Henry H. Halley &bull; Bản dịch Việt ngữ
+            </div>
+          </div>
+
+          <div class="tklk-reader-content" id="survey-chapter-body" style="font-size: ${this.tklkFontSize}px;">
+            ${chapterData.content_html}
+          </div>
+
+          <div class="tklk-reader-footer-nav">
+            <button type="button" class="btn-secondary" id="btn-survey-footer-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
+              <i class="fa-solid fa-chevron-left"></i> Chương ${id - 1}
+            </button>
+            <button type="button" class="btn-primary" id="btn-survey-footer-back">
+              <i class="fa-solid fa-list-ul"></i> Mục Lục 114 Chương
+            </button>
+            <button type="button" class="btn-secondary" id="btn-survey-footer-top" title="Cuộn lên đầu trang">
+              <i class="fa-solid fa-arrow-up"></i> Đầu trang
+            </button>
+            <button type="button" class="btn-secondary" id="btn-survey-footer-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
+              Chương ${id + 1} <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </article>
+      </div>
+    `;
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Wire buttons
+    container.querySelector('#btn-survey-back')?.addEventListener('click', () => {
+      this.renderSurveyView(this.tklkActiveFilter || 'all');
+    });
+    container.querySelector('#btn-survey-footer-back')?.addEventListener('click', () => {
+      this.renderSurveyView(this.tklkActiveFilter || 'all');
+    });
+
+    container.querySelector('#btn-survey-prev')?.addEventListener('click', () => {
+      if (id > 1) this.renderSurveyChapter(id - 1);
+    });
+    container.querySelector('#btn-survey-footer-prev')?.addEventListener('click', () => {
+      if (id > 1) this.renderSurveyChapter(id - 1);
+    });
+
+    container.querySelector('#btn-survey-next')?.addEventListener('click', () => {
+      if (id < 114) this.renderSurveyChapter(id + 1);
+    });
+    container.querySelector('#btn-survey-footer-next')?.addEventListener('click', () => {
+      if (id < 114) this.renderSurveyChapter(id + 1);
+    });
+
+    container.querySelector('#btn-survey-footer-top')?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    container.querySelector('#btn-survey-zoom-out')?.addEventListener('click', () => {
+      this.tklkFontSize = Math.max(13, (this.tklkFontSize || 17) - 1);
+      const contentEl = document.getElementById('survey-chapter-body');
+      if (contentEl) contentEl.style.fontSize = this.tklkFontSize + 'px';
+      try { localStorage.setItem('tklk_font_size', String(this.tklkFontSize)); } catch(e) {}
+    });
+
+    container.querySelector('#btn-survey-zoom-in')?.addEventListener('click', () => {
+      this.tklkFontSize = Math.min(26, (this.tklkFontSize || 17) + 1);
+      const contentEl = document.getElementById('survey-chapter-body');
+      if (contentEl) contentEl.style.fontSize = this.tklkFontSize + 'px';
+      try { localStorage.setItem('tklk_font_size', String(this.tklkFontSize)); } catch(e) {}
+    });
+
+    container.querySelector('#btn-survey-goto-bible')?.addEventListener('click', () => {
+      if (meta.book_id) {
+        state.setActiveView('bible');
+        this.navigateToPassage(meta.book_id, 1, 1);
+      }
+    });
+
+    container.querySelector('#btn-survey-copy')?.addEventListener('click', () => {
+      const contentEl = document.getElementById('survey-chapter-body');
+      const textToCopy = `${meta.title} - Thánh Kinh Lược Khảo\n\n` + (contentEl ? contentEl.innerText : '');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(textToCopy);
+        this.showToast('Đã sao chép nội dung chương vào bộ nhớ tạm!', 'success');
+      } else {
+        this.showToast('Không thể truy cập bộ nhớ tạm!', 'warning');
+      }
+    });
+  }
+
 
   renderDonateView() {
     const container = document.getElementById('donate-container') || document.querySelector('#donate-view .donate-container');
@@ -3566,9 +3937,19 @@ class LogosApp {
       </div>
     `).join('');
 
-    // Attach click handlers
+    // Attach click handlers (Click anywhere on card or button to read)
+    gridContainer.querySelectorAll('.tklk-card').forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.btn-tklk-bible-link')) return;
+        const chId = parseInt(card.dataset.chapterId, 10);
+        if (chId) this.openTklkChapter(chId);
+      });
+    });
+
     gridContainer.querySelectorAll('.btn-read-tklk').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         const chId = parseInt(btn.dataset.chapter, 10);
         this.openTklkChapter(chId);
       });

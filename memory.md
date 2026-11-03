@@ -216,13 +216,12 @@
     5. **Sự Kiện Ở Đoạn Nào?**: Bảng tra cứu 25 sự kiện lịch sử Kinh Thánh với nút mở trực tiếp Focus Reader.
   - Tích hợp điều hướng Subnav, #quiz-view, mobile drawer, module js/quiz-engine.js, pp.js routing và bộ CSS Sacred Reverent.
   - Toàn bộ **198/198 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
-- **Milestone 63 (2026-11-03)**: Tích Hợp Toàn Bộ 114 Chương "Thánh Kinh Lược Khảo" (Halley's Bible Handbook) Từ VietChristian:
-  - Tiếp nhận yêu cầu anh Jimmy tích hợp toàn bộ nội dung từ VietChristian (`reader.asp?pid=,src=/kinhthanh/tklk/tklk.xml,name=Chuong,enc=2,nl=0,id=0`).
-  - Trích xuất và chuẩn hóa đầy đủ 114 chương (>474,000 từ học thuật Thánh Kinh kinh điển của Dr. Henry H. Halley bản dịch Việt ngữ).
-  - Cấu trúc dữ liệu 2 tầng tối ưu tốc độ:
-    1. `data/tklk/tklk-index.json` (53KB): Mục lục 114 chương với 7 danh mục (Cựu Ước 38, Tân Ước 27, Lịch Sử Hội Thánh 21, Đời Sống Đức Tin 14, Giữa 2 Giao Ước 6, Bản Văn 5, Lời Mở Đầu 3), số từ, ước tính thời gian đọc, tóm tắt và mapping `book_id` sang 66 sách Kinh Thánh.
-    2. `data/tklk/chapters/{1..114}.json`: Từng chương JSON độc lập, lọc sạch rác MSO/FrontPage/Word/IIS, chuẩn hóa ảnh absolute URL, tải on-demand và lưu bộ nhớ đệm cache 0ms.
-  - Giao diện Dual-Mode Studio:
-    - **Directory Mode (Mục lục)**: 8 thẻ lọc danh mục, thanh tìm kiếm tức thì không giật lag/mất focus, thẻ chương hiển thị tóm tắt, số từ, thời gian đọc, nút đọc Lược Khảo và nút nhảy thẳng vào bản văn Kinh Thánh tương ứng trong Focus Reader.
-    - **Reader Mode (Đọc toàn văn)**: Sticky toolbar (Quay lại Mục Lục, Chương trước/sau, Chỉ báo chương X/114, Zoom chữ A-/A+ lưu localStorage, Nút đọc sách trong Kinh Thánh, Nút sao chép văn bản), typography tôn nghiêm, hỗ trợ đầy đủ Dark/Light mode, tương thích hoàn hảo mobile & desktop.
-  - Viết bộ unit test `tests/test_tklk_survey.py` (7 tests). Toàn bộ **205/205 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestone 63 (2026-11-03)**: Tích Hợp Toàn Bộ 114 Chương "Thánh Kinh Lược Khảo" (Halley's Bible Handbook) & Mở Rộng View Đọc Toàn Diện:
+  - Trích xuất và chuẩn hóa 114 chương (>474.000 từ học thuật kinh điển của Dr. Henry H. Halley) từ VietChristian vào `data/tklk/tklk-index.json` & `data/tklk/chapters/{1..114}.json`.
+  - Mở rộng trải nghiệm đọc Lược Khảo toàn diện theo yêu cầu anh Jimmy ("cho phép đọc thánh kinh lược khảo đi"):
+    1. **Tab Menu Subnav Cố Định**: Bổ sung nút `nav-btn-survey` trên thanh điều hướng chính `site-subnav-bar` và menu mobile drawer (`data-nav="survey"`).
+    2. **View Đọc Toàn Màn Hình (#survey-view)**: Container `survey-page-container` độc lập với Hero banner, 8 thẻ lọc danh mục, thanh tìm kiếm và thẻ chương có thể bấm ở bất kỳ vị trí nào (`cursor: pointer`) để mở đọc ngay.
+    3. **Chế Độ Đọc Chuyên Nghiệp (Reader Mode)**: Sticky toolbar (Quay lại, Chương trước/sau, Zoom chữ A-/A+, Mở đọc sách tương ứng trong Focus Reader, Sao chép toàn văn), typography tôn nghiêm, co giãn mượt mà.
+    4. **Tích Hợp Drawer Inspector (Tab Bối Cảnh)**: Khi đọc bất kỳ sách nào trong Focus Reader, Tab Bối Cảnh tự động hiện thẻ đọc Thánh Kinh Lược Khảo tương ứng của sách đó với 1 cú nhấp chuột.
+    5. **SPA Routing**: Hỗ trợ hash deep link `#survey`, `#survey/{chId}`, `#tklk/{chId}`.
+  - Toàn bộ **206/206 tests Pytest PASS 100%** (bộ `tests/test_tklk_survey.py` 8 tests). Đồng bộ mirror workspace & Vercel.

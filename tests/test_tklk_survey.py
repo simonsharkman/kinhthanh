@@ -7,6 +7,7 @@ INDEX_FILE = os.path.join(DATA_DIR, 'tklk-index.json')
 CHAPTERS_DIR = os.path.join(DATA_DIR, 'chapters')
 JS_FILE = os.path.join(os.path.dirname(__file__), '..', 'js', 'app.js')
 CSS_FILE = os.path.join(os.path.dirname(__file__), '..', 'css', 'components.css')
+HTML_FILE = os.path.join(os.path.dirname(__file__), '..', 'index.html')
 
 
 def test_tklk_index_exists_and_valid():
@@ -90,25 +91,45 @@ def test_tklk_book_id_mappings():
 
 
 def test_tklk_js_methods_implemented():
-    """Verify renderUtilitySurvey, updateTklkDirectoryList, openTklkChapter exist in js/app.js."""
+    """Verify renderSurveyView, renderSurveyChapter, renderUtilitySurvey, openTklkChapter exist in js/app.js."""
     assert os.path.exists(JS_FILE)
     with open(JS_FILE, 'r', encoding='utf-8') as f:
         js_code = f.read()
     
+    assert 'renderSurveyView' in js_code, "renderSurveyView missing in app.js"
+    assert 'renderSurveyChapter' in js_code, "renderSurveyChapter missing in app.js"
     assert 'renderUtilitySurvey' in js_code, "renderUtilitySurvey missing in app.js"
     assert 'updateTklkDirectoryList' in js_code, "updateTklkDirectoryList missing in app.js"
     assert 'openTklkChapter' in js_code, "openTklkChapter missing in app.js"
     assert 'tklk-index.json' in js_code, "tklk-index.json reference missing in app.js"
     assert 'data/tklk/chapters/' in js_code, "tklk chapters path missing in app.js"
+    assert 'btn-open-drawer-tklk' in js_code, "Drawer context integration missing in app.js"
+
+
+def test_tklk_html_navigation_and_view():
+    """Verify nav-btn-survey, #survey-view, and mobile drawer link exist in index.html."""
+    assert os.path.exists(HTML_FILE)
+    with open(HTML_FILE, 'r', encoding='utf-8') as f:
+        html = f.read()
+    
+    assert 'data-view="survey"' in html, "Missing data-view='survey' in subnav"
+    assert 'nav-btn-survey' in html, "Missing nav-btn-survey class in subnav"
+    assert 'id="survey-view"' in html, "Missing #survey-view in index.html"
+    assert 'id="survey-page-container"' in html, "Missing #survey-page-container in index.html"
+    assert 'data-nav="survey"' in html, "Missing data-nav='survey' in mobile drawer"
 
 
 def test_tklk_css_styles_defined():
-    """Verify .tklk-* classes are defined in css/components.css."""
+    """Verify .tklk-* and .survey-* classes are defined in css/components.css."""
     assert os.path.exists(CSS_FILE)
     with open(CSS_FILE, 'r', encoding='utf-8') as f:
         css_code = f.read()
     
     expected_classes = [
+        '.survey-page-container',
+        '.survey-hero-card',
+        '.survey-category-nav',
+        '.survey-cat-pill',
         '.tklk-search-bar',
         '.tklk-search-input',
         '.tklk-grid',
