@@ -187,3 +187,9 @@
   - Xây dựng từ điển chuẩn hóa ngữ âm tiếng Anh & từ nước ngoài (`Halley's Bible Handbook` -> `Thánh Kinh Lược Khảo Ha-li`, `Dr. Henry H. Halley` -> `Tiến sĩ Hen-ri H. Ha-li`, `Christ` -> `Cơ-rít`, `Jesus` -> `Chúa Giê-xu`, `B.C.` -> `Trước Công Nguyên`, `A.D.` -> `Sau Công Nguyên`, `YouTube` -> `Diu-túp`, `Podcast` -> `Pót-cát`...).
   - Đồng bộ thuật toán chuẩn hóa ngữ âm vào `normalizeBibleAudioText(text)` trên `js/app.js` cho trải nghiệm Web Speech API tôn nghiêm, mượt mà.
   - Toàn bộ **210/210 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
+- **Milestone 67 (2026-11-04) - Tích Hợp Trực Tiếp Giọng ALDEN Studio (OmniVoice) Lên Web & Ưu Tiên Giọng Nam Trực Tuyến (v4.5.9)**:
+  - Khắc phục triệt để hiện tượng web phát giọng nữ robot mặc định: Web hiện đã phát trực tiếp tệp âm thanh phòng thu HTML5 `<audio>` từ OmniVoice `sample_alden` (`data/tklk/audio/{chId}.mp3`).
+  - Đã xuất bản và triển khai các tệp âm thanh phòng thu mẫu Chương 1 (`1.mp3`, 1.8MB) và Chương 2 (`2.mp3`, 3.9MB) với hiệu ứng lồng ngực 150Hz, nhịp thở vi mô và chuẩn hóa phát âm tiếng Anh/tác giả hoàn chỉnh.
+  - Bổ sung bộ chọn giọng đọc linh hoạt (`🎙️ Giọng ALDEN Studio`, `🔊 Giọng Nam Trầm Nam Minh`, `🔊 Giọng Nữ Hoài My`) trên thanh công cụ sách nói.
+  - Tối ưu hóa Web Speech API: Luôn ưu tiên chọn `Microsoft NamMinh` (nam trầm ấm) cho cả đọc Lược Khảo và đọc câu Kinh Thánh, triệt tiêu giọng nữ máy móc.
+  - Toàn bộ **210/210 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
