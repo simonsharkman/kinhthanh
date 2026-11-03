@@ -213,3 +213,12 @@
   - Thanh công cụ đọc chương thanh thoát: `« Mục Lục | ‹ Chương Trước | Chương X/114 | Chương Sau › | 🔊 Nghe Đọc | A- A+ | Đọc Bản Văn | Sao Chép` và thanh điều hướng chân trang.
   - Chuẩn hóa toàn diện tiêu đề các chương (khắc phục lỗi lặp dấu cách từ bản thô).
   - Toàn bộ **208/208 tests Pytest PASS 100%**.
+- **Milestone 65 (2026-11-03) - Chuẩn Hóa Phát Âm Tọa Độ Kinh Thánh Cho Audio TTS (v4.5.7)**:
+  - Khắc phục sự cố bộ đọc Web Speech API phát âm nhầm dấu `:` thành giờ/phút ("3 giờ 13 phút") khi gặp tọa độ câu như `Mác 3:13`.
+  - Triển khai phương thức chuẩn hóa `normalizeBibleAudioText(text)`:
+    + Chuyển `Mác 3:13` -> `Mác đoạn 3 câu 13`.
+    + Chuyển dải câu `3:13-15` / `3:13–15` -> `đoạn 3 câu 13 đến 15` (triệt tiêu việc đọc nhầm dấu trừ).
+    + Chặn lặp từ khi văn bản đã có tiền tố: `đoạn 3:13` -> `đoạn 3 câu 13`.
+    + Chuyển tiền tố số La Mã/Ả Rập của các sách theo quy chuẩn truyền thống Hội thánh Việt Nam (`I Sa-mu-ên` / `1Cô-rinh-tô` -> `Nhất...`, `II...` / `2...` -> `Nhì...`, `III...` / `3...` -> `Ba...`).
+    + Tích hợp xuyên suốt vào cả 2 luồng audio: `speakCurrentVerse()` (đọc câu Kinh Thánh) và `speakSurveyParagraph()` (sách nói Lược Khảo).
+  - Toàn bộ **210/210 Pytest tests PASS 100%** (bổ sung test suite `tests/test_bible_audio_tts.py`).

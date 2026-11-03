@@ -2975,6 +2975,51 @@ class LogosApp {
     }
   }
 
+  normalizeBibleAudioText(text) {
+    if (!text || typeof text !== 'string') return '';
+
+    let res = text.replace(/\[\d+\]|<[^>]+>/g, ' ');
+
+    // 1. Expand Roman & Arabic numeral prefixes in Bible book names
+    // e.g. I Sa-mu-ên -> Nhất Sa-mu-ên, 1Cô-rinh-tô -> Nhất Cô-rinh-tô
+    const bookPrefixes = [
+      [/(^|\s)(?:I|1)\s*(Cô-rinh-tô|Cô|Sa-mu-ên|Các Vua|Các-Vua|Các-vua|Sử Ký|Sử-Ký|Sử-ký|Tê-sa-lô-ni-ca|Ti-mô-thê|Phi-e-rơ|Giăng)(?=$|\s|[.,;:!?-])/gi, '$1Nhất $2'],
+      [/(^|\s)(?:II|2)\s*(Cô-rinh-tô|Cô|Sa-mu-ên|Các Vua|Các-Vua|Các-vua|Sử Ký|Sử-Ký|Sử-ký|Tê-sa-lô-ni-ca|Ti-mô-thê|Phi-e-rơ|Giăng)(?=$|\s|[.,;:!?-])/gi, '$1Nhì $2'],
+      [/(^|\s)(?:III|3)\s*(Giăng)(?=$|\s|[.,;:!?-])/gi, '$1Ba $2']
+    ];
+    for (const [pattern, repl] of bookPrefixes) {
+      res = res.replace(pattern, repl);
+    }
+
+    // 2. Handle range like '3:13-15' or '3:13–15' -> 'đoạn 3 câu 13 đến 15'
+    res = res.replace(/(^|\s|[(\[{<,;])(?:(đoạn|chương)\s+)?(\d+):(\d+)\s*[\-–]\s*(\d+)/gi, (match, lead, prefix, ch, vStart, vEnd) => {
+      const l = lead || '';
+      if (prefix) {
+        return `${l}${prefix} ${ch} câu ${vStart} đến ${vEnd}`;
+      }
+      return `${l}đoạn ${ch} câu ${vStart} đến ${vEnd}`;
+    });
+
+    // 3. Handle single chapter:verse like '3:13' or '3:13a' -> 'đoạn 3 câu 13' (prevents reading as 3 giờ 13 phút)
+    res = res.replace(/(^|\s|[(\[{<,;])(?:(đoạn|chương)\s+)?(\d+):(\d+)([a-d])?/gi, (match, lead, prefix, ch, v, sub) => {
+      const l = lead || '';
+      const subStr = sub ? ` phần ${sub}` : '';
+      if (prefix) {
+        return `${l}${prefix} ${ch} câu ${v}${subStr}`;
+      }
+      return `${l}đoạn ${ch} câu ${v}${subStr}`;
+    });
+
+    // 4. Handle 'câu X-Y' or 'câu X–Y' -> 'câu X đến Y' (prevents reading minus sign)
+    res = res.replace(/(^|\s)(câu\s+\d+)\s*[\-–]\s*(\d+)(?=$|\s|[.,;:!?-])/gi, '$1$2 đến $3');
+
+    // 5. Handle 'đoạn X-Y' or 'chương X-Y' -> 'đoạn X đến Y'
+    res = res.replace(/(^|\s)((?:đoạn|chương)\s+\d+)\s*[\-–]\s*(\d+)(?=$|\s|[.,;:!?-])/gi, '$1$2 đến $3');
+
+    // 6. Clean up multiple spaces
+    return res.replace(/\s+/g, ' ').trim();
+  }
+
   speakCurrentVerse() {
     if (!this.audioState.isPlaying || this.audioState.isPaused) return;
 
@@ -2998,7 +3043,7 @@ class LogosApp {
 
     // Chuẩn bị văn bản đọc
     const rawText = currentV.text || currentV.text_primary || '';
-    const cleanText = rawText.replace(/\[\d+\]|<[^>]+>/g, '').trim();
+    const cleanText = this.normalizeBibleAudioText(rawText);
     const spokenText = `Câu ${currentV.verse_num}. ${cleanText}`;
 
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -3926,7 +3971,8 @@ class LogosApp {
       stEl.textContent = `Đang đọc đoạn ${currentIndex + 1}/${paragraphs.length}...`;
     }
 
-    const utterance = new SpeechSynthesisUtterance(currentItem.text);
+    const spokenText = this.normalizeBibleAudioText(currentItem.text);
+    const utterance = new SpeechSynthesisUtterance(spokenText);
     utterance.lang = 'vi-VN';
     utterance.rate = this.surveyAudioState.speed || 1.0;
 
@@ -8737,3 +8783,5 @@ window.addEventListener('DOMContentLoaded', () => {
   app.init();
   window.logosApp = app;
 });
+
+if (typeof window !== 'undefined') { window.normalizeBibleAudioText = (t) => app ? app.normalizeBibleAudioText(t) : t; }
