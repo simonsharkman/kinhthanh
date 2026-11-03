@@ -102,47 +102,7 @@
 ### 16-22. Tối Ưu UX Header Di Động, Audio 48px, Tìm Kiếm & Thanh Tiêu Đề (25/10/2026)
 - Tinh chỉnh giao diện di động: Thánh Giá vàng 44px, Audio 48px gọn gàng kèm phím tắt [✕], nút tìm kiếm chuẩn, ẩn banner rườm rà.
 
-### 23. Nâng Cấp Hệ Thống Quản Trị Toàn Diện Full Admin CMS v3.0 (26/10/2026)
-- Full Dynamic CMS cho vai trò admin: Quản trị Tĩnh Nguyện (#admin-devotion-modal), Hiệu đính câu Kinh Thánh (#admin-verse-correction-modal), Quản trị Thư Viện Media YouTube (#admin-media-modal).
-
-### 24. Khắc Phục 10.021 Lỗi Dấu Tiếng Việt & Pipeline Tự Động Chuẩn Hóa Lời Chúa (26/10/2026)
-- Quét và sửa 133 file JSON trong data/ (10.021 vị trí lỗi dấu rời `biê´ t`, `nhắ´ c`, `đế´ n`), đưa về chuẩn Unicode NFC và tích hợp auto-healing vào `BibleEngine.cleanScriptureText`.
-
-### 25. Xóa Bỏ Triệt Để 123.887 Ấn Chứng Tên Bản Dịch Trong Dấu Ngoặc Vuông (26/10/2026)
-- Lọc sạch 123.887 tiền tố tên bản dịch `[BTT 1925]`, `[KJV 1611]` khỏi 67 tệp JSON và regex bóc tách trong `cleanScriptureText`.
-
-### 26. Thu Gọn Bảng Đối Chiếu (Inspector Drawer) & Hạ Thấp Vị Trí Tránh Che Khuất Header (26/10/2026)
-- Tối ưu Drawer Inspector: `--drawer-top-offset: 68px; top: var(--drawer-top-offset);` và `body.drawer-open #main-header { margin-right: 0 !important; width: 100% !important; }` không bao giờ che khuất thanh điều hướng.
-
-### 27. Hệ Thống Quản Trị Tiểu Mục (Subitems CMS) & CSDL Riêng Biệt Cho Từng Mục (26/10/2026)
-- Tách CSDL 4 file JSON độc lập trong data/ (fav-verses, quizzes, stories, responsive), modal admin CMS (#admin-utility-editor-modal) CRUD toàn diện.
-
-### 28. Cố Định Thanh Nút Xác Nhận & Cuộn Thân Hộp Thoại (Modal Sticky Footer & Body Scroll) (26/10/2026)
-- Tái cấu trúc CSS Flexbox cho Modal: modal-card flex-col, modal-header/footer flex-shrink: 0, modal-body overflow-y: auto. Nổi bật nút xác nhận cập nhật.
-
-### 29. Banner Thông Báo Mục Vụ Trên Máy Tính (26/10/2026)
-- Hiển thị trực tiếp `#admin-banner-container` trên Desktop (>=992px), tự động đẩy giao diện mượt mà không che khuất Header.
-- Đồng bộ bộ đếm thống kê và quyền Admin qua Storage.
-
-### 30. Chuẩn Hóa Bố Cục Đối Chiếu Nguyên Ngữ Hê-bơ-rơ & Hy Lạp 3 Tầng Dọc (26/10/2026)
-- Chuẩn hóa Interlinear 3 tầng dọc: Tầng 1 Nguyên bản (Hy Lạp/Hê-bơ-rơ lớn) -> Tầng 2 Phiên âm Latinh -> Tầng 3 Nghĩa tiếng Anh từng từ.
-- Tự động phát hiện hướng chữ RTL cho Cựu Ước Hê-bơ-rơ, LTR cho Tân Ước Hy Lạp.
-
-### 31. Tối Giản Hóa Cụm Nút Tiện Ích Header (26/10/2026)
-- Ẩn toàn bộ icon font-awesome trên cụm nút header, thu gọn kích thước chữ `0.68rem - 0.72rem`, tập trung trọn vẹn thị giác vào Lời Chúa.
-
-### 32. Chữa Lành Lỗi Chính Tả "Áp-ra-ham", "Kỳ Hạn" & Kích Hoạt Tìm Kiếm Địa Chỉ (26/10/2026)
-- Quét sạch lỗi encoding `Aùp` -> `Áp`, `k"` -> `kỳ`.
-- Kích hoạt Regex thông minh nhận diện định dạng sách chương:câu (vd: `Giăng 3:16`, `1Co 13:4-8`) trong thanh tìm kiếm.
-
-### 33. Tái Cấu Trúc Bố Cục Thẻ Nghiệp Vụ Khung Đối Chiếu Lưới 2x2 (26/10/2026)
-- Sửa lỗi đè chữ 4 tab drawer bằng lưới 2 hàng x 2 nút (`flex: 1 1 calc(50% - 6px)`), mở rộng `--drawer-width` lên 330px-420px, bổ sung tooltip `title`. Đạt 150/150 tests pass.
-
-### 34. Khắc Phục Lỗi IME Bộ Gõ Tiếng Việt Trong Thánh Kinh Từ Điển (26/10/2026)
-- Sửa lỗi nhảy con trỏ / gõ ngược tiếng Việt trong `#dict-search-input` bằng cơ chế DOM Persistence (input tạo 1 lần cố định, chỉ cập nhật `#dict-entries-list`), hỗ trợ tìm kiếm không dấu. Đạt 151/151 tests pass.
-
-### 35. Xây Dựng & Tích Hợp Từ Điển Strong (26/10/2026)
-- Tích hợp CSDL 43 mục từ Strong (Hê-bơ-rơ & Hy Lạp), giao diện 4 tab tra cứu chuyên sâu (`renderUtilityStrong`). Đạt 152/152 tests pass.
+- **Milestones 23–35 (2026-10-26)**: Hoàn thiện Full Admin CMS v3.0 (Tĩnh Nguyện, Hiệu đính, Media), sửa 10.021 lỗi dấu rời Unicode NFC & auto-healing, xóa 123.887 nhãn bản dịch thừa `[BTT 1925]`, tối ưu Drawer Inspector offset 68px không che header, Subitems CMS, Modal Sticky Footer & Body Scroll, Banner mục vụ Desktop, Interlinear 3 tầng dọc RTL/LTR, tối giản nút header, Regex tìm kiếm địa chỉ sách chương:câu, lưới tab 2x2 chống đè chữ, DOM Persistence sửa lỗi IME gõ tiếng Việt từ điển, và tích hợp CSDL Từ Điển Strong (152/152 tests pass).
 
 - **Milestones 36–40 (2026-10-26)**: Hoàn thiện giao diện đọc kỉnh kiềng (Zero Box Borders & Unboxed Numbers), sửa lỗi highlight & cuộn câu đối chiếu mobile (Split 50/50), triệt tiêu hiện tượng tự nhảy màn hình (Zero-Jump Stability Contract), cấu hình Vercel Production và Sticky Top Header & Tab Navigation Immunity. Đạt 157/157 tests pass 100%.
 - **Milestone 41 (2026-10-27)**: Hermeneutics Typology Precision: Nâng cấp cụm từ khóa đa từ và luật loại trừ chống gán nhầm ẩn dụ 2 Cô-rinh-tô 11. Đạt 158/158 tests pass.
@@ -222,3 +182,8 @@
     + Chuyển tiền tố số La Mã/Ả Rập của các sách theo quy chuẩn truyền thống Hội thánh Việt Nam (`I Sa-mu-ên` / `1Cô-rinh-tô` -> `Nhất...`, `II...` / `2...` -> `Nhì...`, `III...` / `3...` -> `Ba...`).
     + Tích hợp xuyên suốt vào cả 2 luồng audio: `speakCurrentVerse()` (đọc câu Kinh Thánh) và `speakSurveyParagraph()` (sách nói Lược Khảo).
   - Toàn bộ **210/210 Pytest tests PASS 100%** (bổ sung test suite `tests/test_bible_audio_tts.py`).
+- **Milestone 66 (2026-11-04) - Cấu Hình Giọng Đọc sample_alden OmniVoice & Bộ Chuẩn Hóa Phát Âm Tiếng Anh/Nước Ngoài (v4.5.8)**:
+  - Cấu hình OmniVoice AI Engine (`E:\Omnivoice\generate_voice.py` & `omnivoice_runner.py`) hỗ trợ chính thức hồ sơ giọng đọc `sample_alden` (tệp mồi `sample_alden.wav` và vector nơron `hf_cache/voice_prompts/alden.pt`).
+  - Xây dựng từ điển chuẩn hóa ngữ âm tiếng Anh & từ nước ngoài (`Halley's Bible Handbook` -> `Thánh Kinh Lược Khảo Ha-li`, `Dr. Henry H. Halley` -> `Tiến sĩ Hen-ri H. Ha-li`, `Christ` -> `Cơ-rít`, `Jesus` -> `Chúa Giê-xu`, `B.C.` -> `Trước Công Nguyên`, `A.D.` -> `Sau Công Nguyên`, `YouTube` -> `Diu-túp`, `Podcast` -> `Pót-cát`...).
+  - Đồng bộ thuật toán chuẩn hóa ngữ âm vào `normalizeBibleAudioText(text)` trên `js/app.js` cho trải nghiệm Web Speech API tôn nghiêm, mượt mà.
+  - Toàn bộ **210/210 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
