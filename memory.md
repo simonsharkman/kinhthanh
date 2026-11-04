@@ -165,3 +165,12 @@
     3. **Đồng Bộ Viền Sáng (.tklk-paragraph-reading) Chạy Theo Lời Đọc**: Cả luồng Web Speech API lẫn tệp MP3 phòng thu đều đồng bộ viền vàng 5px, nhãn `🔊 ĐANG ĐỌC` và tự động cuộn từng đoạn văn vào giữa màn hình theo sát tiến trình giọng đọc.
     4. **Tự Động Chuyển Chương Khi Đọc Hết**: Khi đọc hết đoạn cuối cùng của chương hiện tại, hệ thống tự động nhảy sang chương kế tiếp và đọc tiếp liền mạch.
   - Toàn bộ **213/213 tests Pytest PASS 100%** (13/13 tests `test_tklk_survey.py`). Đồng bộ mirror workspace & Vercel live.
+
+- **M4.6.5 (TKLK Voice Switching & Audio Controls Fix - ALDEN Studio & Stop Immunity)**:
+  - **Sự Cố Khắc Phục Triệt Để**:
+    1. **Sửa Lỗi Bộ Chọn Giọng (Voice Selector Immunity)**: Khắc phục lỗi modalVoiceModeSel không có sự kiện change. Khi chọn giữa Giọng ALDEN Studio, Giọng Nam Trầm, Giọng Nữ, hệ thống lập tức chuyển đổi giọng đọc ngay tại đoạn hiện tại và tự động ghi nhớ vào localStorage.
+    2. **Sửa Lỗi Nút Dừng Âm Thanh (Stop Button Immunity)**: Gán trạng thái isPlaying = false trước khi cancel, lọc bỏ lỗi canceled/interrupted, chấm dứt lỗi bấm nút Dừng nhưng trình duyệt vẫn nhảy đọc tiếp.
+    3. **Chấm Dứt Lỗi Rơi Sang Giọng Nữ Khi Chọn Đoạn**: Bỏ điều kiện cứng startIndex === 0. Khi nghe MP3 mà bấm chọn đoạn bất kỳ, hệ thống tua trực tiếp trong tệp MP3 phòng thu mà không rơi về giọng máy Web Speech API.
+    4. **Xuất Bản & Master Âm Thanh Phòng Thu ALDEN Chương 39 (A-ghê)**: Hoàn tất tệp data/tklk/audio/39.mp3 (5.5 MB) qua chuỗi DSP Cinema Warmth (150Hz +4.2dB, 3.2kHz +2.4dB, -16 LUFS Loudnorm).
+    5. **Chuẩn Hóa Nút Dừng Tròn 32px**: #btn-tklk-modal-audio-stop tròn 32px nền tối, hover đỏ cảnh báo, loại bỏ giao diện nút méo của trình duyệt.
+  - Toàn bộ **214/214 tests Pytest PASS 100%** (14/14 tests test_tklk_survey.py).

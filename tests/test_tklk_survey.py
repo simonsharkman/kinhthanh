@@ -237,3 +237,31 @@ def test_tklk_audio_chapter_change_synchronization():
     # Jump modal synchronization
     assert 'this.openTklkChapter(chId, isAudioActive)' in js, "Jump modal grid must propagate isAudioActive to openTklkChapter"
     assert 'this.openTklkChapter(val, isAudioActive)' in js, "Jump modal num input must propagate isAudioActive to openTklkChapter"
+
+
+def test_tklk_voice_switching_and_stop_control():
+    """Verify voice mode selection change listener, voice persistence, stop controls, and chapter 39 audio."""
+    with open(JS_FILE, 'r', encoding='utf-8') as f:
+        js = f.read()
+
+    # Modal voice change wiring
+    assert "modalVoiceModeSel?.addEventListener('change'" in js, "modalVoiceModeSel must have a change event listener"
+    assert "this.tklkVoiceMode = chosenVoice" in js, "Must update this.tklkVoiceMode upon selection"
+    assert "localStorage.setItem('tklk_voice_mode'" in js, "Must persist chosen voice to localStorage"
+
+    # Stop button safety
+    assert "this.tklkAudioActive = false;" in js, "stopSurveyAudioNarration must set tklkAudioActive to false"
+    assert "err.error === 'canceled' || err.error === 'interrupted'" in js, "utterance.onerror must ignore canceled/interrupted speech"
+
+    # Audio seeking in MP3 mode
+    assert "seekToParagraph" in js, "Must provide seeking support for MP3 audio"
+
+    # Chapter 39 audio file
+    ch39_audio = os.path.join(DATA_DIR, 'audio', '39.mp3')
+    assert os.path.exists(ch39_audio), f"Chapter 39 audio file must exist at {ch39_audio}"
+    assert os.path.getsize(ch39_audio) > 100_000, "Chapter 39 audio file must be valid (>100KB)"
+
+    # CSS styling for stop button
+    with open(CSS_FILE, 'r', encoding='utf-8') as f:
+        css = f.read()
+    assert "#btn-tklk-modal-audio-stop" in css, "Must style #btn-tklk-modal-audio-stop in components.css"

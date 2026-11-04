@@ -1915,6 +1915,9 @@ class LogosApp {
       }
     }
 
+    const savedVoice = this.tklkVoiceMode || localStorage.getItem('tklk_voice_mode') || 'alden';
+    this.tklkVoiceMode = savedVoice;
+
     container.innerHTML = `
       <div class="tklk-simple-toc-wrapper animate-fade-in" style="max-width: 920px;">
         <!-- Simple Top Nav Bar -->
@@ -1971,10 +1974,10 @@ class LogosApp {
             </div>
             <div style="display: flex; align-items: center; gap: 0.6rem; margin-left: auto; flex-wrap: wrap;">
               <span style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">Giọng:</span>
-              <select id="survey-audio-voice-mode" class="portal-select" style="padding: 0.3rem 0.55rem; font-size: 0.82rem; border-radius: 6px;">
-                <option value="alden" selected>🎙️ Giọng ALDEN Studio</option>
-                <option value="namminh">🔊 Giọng Nam Trầm (Trực Tuyến)</option>
-                <option value="hoaimy">🔊 Giọng Nữ (Trực Tuyến)</option>
+              <select id="survey-audio-voice-mode" class="portal-select" style="padding: 0.3rem 0.55rem; font-size: 0.82rem; border-radius: 6px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-subtle);">
+                <option value="alden" ${savedVoice === 'alden' ? 'selected' : ''}>🎙️ Giọng ALDEN Studio</option>
+                <option value="namminh" ${savedVoice === 'namminh' ? 'selected' : ''}>🔊 Giọng Nam Trầm (Trực Tuyến)</option>
+                <option value="hoaimy" ${savedVoice === 'hoaimy' ? 'selected' : ''}>🔊 Giọng Nữ (Trực Tuyến)</option>
               </select>
               <span style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">Tốc độ:</span>
               <select id="survey-audio-speed" class="portal-select" style="padding: 0.3rem 0.55rem; font-size: 0.82rem; border-radius: 6px;">
@@ -2077,10 +2080,18 @@ class LogosApp {
     });
 
     const audioVoiceModeSel = container.querySelector('#survey-audio-voice-mode');
-    audioVoiceModeSel?.addEventListener('change', () => {
+    audioVoiceModeSel?.addEventListener('change', (e) => {
+      const chosenVoice = e.target.value;
+      this.tklkVoiceMode = chosenVoice;
+      try { localStorage.setItem('tklk_voice_mode', chosenVoice); } catch(err) {}
+
       if (this.surveyAudioState && this.surveyAudioState.isPlaying) {
+        const curIdx = this.surveyAudioState.currentIndex || 0;
         this.stopSurveyAudioNarration();
-        this.startSurveyAudioNarration('#survey-chapter-body', 'survey-audio-status-text', 'btn-survey-audio-play-pause');
+        this.tklkAudioActive = true;
+        setTimeout(() => {
+          this.startSurveyAudioNarration('#survey-chapter-body', 'survey-audio-status-text', 'btn-survey-audio-play-pause', curIdx);
+        }, 50);
       }
     });
 
@@ -4051,7 +4062,7 @@ class LogosApp {
     const audioSrc = `data/tklk/audio/${chapterId}.mp3`;
 
     // 1. Nếu chọn Giọng ALDEN và bắt đầu từ đầu (startIndex === 0), kiểm tra file MP3 phòng thu
-    if (voiceMode === 'alden' && startIndex === 0) {
+    if (voiceMode === 'alden') {
       let hasStudioAudio = false;
       try {
         const check = await fetch(audioSrc, { method: 'HEAD' });
@@ -4092,8 +4103,28 @@ class LogosApp {
           audioEl,
           statusElId,
           playPauseBtnId,
-          chapterId
+          chapterId,
+          startIndex
         };
+
+        // Nếu người dùng nhấp chọn đoạn văn bất kỳ, tua thẳng đến vị trí tương ứng trong MP3
+        if (startIndex > 0) {
+          const seekToParagraph = () => {
+            const contentEl = document.querySelector(contentSelector);
+            if (!contentEl) return;
+            const rawElements = Array.from(contentEl.querySelectorAll('p, h1, h2, h3, h4, h5, li, blockquote'));
+            const leafElements = rawElements.filter(el => !el.querySelector('p, h1, h2, h3, h4, h5, li, blockquote') && (el.innerText || '').trim().length > 5);
+            if (leafElements.length > 0 && audioEl.duration) {
+              const targetTime = (startIndex / leafElements.length) * audioEl.duration;
+              try { audioEl.currentTime = targetTime; } catch(e) {}
+            }
+          };
+          if (audioEl.readyState >= 1) {
+            seekToParagraph();
+          } else {
+            audioEl.addEventListener('loadedmetadata', seekToParagraph, { once: true });
+          }
+        }
 
         // Đồng bộ viền sáng đoạn văn theo tiến trình phát của tệp MP3 phòng thu
         audioEl.ontimeupdate = () => {
@@ -4171,17 +4202,32 @@ class LogosApp {
     const modalBar = document.getElementById('tklk-modal-audio-bar');
     if (modalBar && contentSelector === '#tklk-reader-content') modalBar.style.display = 'block';
 
-    if (this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isMediaElement) {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
-      this.surveyAudioState.currentIndex = foundIdx;
-      this.surveyAudioState.isPaused = false;
-      const ppBtn = document.getElementById(playPauseBtnId);
-      if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-      this.updateSurveyAudioBtnState(true);
-      this.speakSurveyParagraph();
-    } else {
-      this.startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId, foundIdx);
+    if (this.surveyAudioState && this.surveyAudioState.isPlaying) {
+      if (this.surveyAudioState.isMediaElement && this.surveyAudioState.audioEl) {
+        // Nhảy vị trí trực tiếp trong MP3 phòng thu
+        const rawElements = Array.from(contentEl.querySelectorAll('p, h1, h2, h3, h4, h5, li, blockquote'));
+        const leafElements = rawElements.filter(el => !el.querySelector('p, h1, h2, h3, h4, h5, li, blockquote') && (el.innerText || '').trim().length > 5);
+        if (leafElements.length > 0 && this.surveyAudioState.audioEl.duration) {
+          const targetTime = (foundIdx / leafElements.length) * this.surveyAudioState.audioEl.duration;
+          try {
+            this.surveyAudioState.audioEl.currentTime = targetTime;
+            this.surveyAudioState.audioEl.play().catch(e => console.warn(e));
+          } catch(e) {}
+        }
+        return;
+      }
+      if (!this.surveyAudioState.isMediaElement && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        this.surveyAudioState.currentIndex = foundIdx;
+        this.surveyAudioState.isPaused = false;
+        const ppBtn = document.getElementById(playPauseBtnId);
+        if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        this.updateSurveyAudioBtnState(true);
+        this.speakSurveyParagraph();
+        return;
+      }
     }
+    this.startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId, foundIdx);
   }
 
   startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode = 'alden', startIndex = 0) {
@@ -4265,7 +4311,9 @@ class LogosApp {
 
     const stEl = document.getElementById(statusElId);
     if (stEl) {
-      const voiceLabel = voiceMode === 'hoaimy' ? 'Nữ Hoài My' : 'Nam Minh';
+      let voiceLabel = 'Nam Trầm';
+      if (voiceMode === 'hoaimy') voiceLabel = 'Nữ Hoài My';
+      else if (voiceMode === 'alden') voiceLabel = 'ALDEN Studio (Web Trầm)';
       const pct = Math.round(((currentIndex + 1) / paragraphs.length) * 100);
       stEl.innerHTML = `<span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-volume-high"></i> Đang đọc đoạn ${currentIndex + 1}/${paragraphs.length} (${pct}%)</span> &bull; Giọng ${voiceLabel} &bull; Nhấp đoạn bất kỳ để đọc từ đó`;
     }
@@ -4274,6 +4322,14 @@ class LogosApp {
     const utterance = new SpeechSynthesisUtterance(spokenText);
     utterance.lang = 'vi-VN';
     utterance.rate = this.surveyAudioState.speed || 1.0;
+
+    
+    // Hạ trầm ấm áp cho ALDEN & Nam Minh, trong trẻo cho Hoài My
+    if (voiceMode === 'hoaimy') {
+      utterance.pitch = 1.05;
+    } else {
+      utterance.pitch = 0.88;
+    }
 
     const voices = window.speechSynthesis.getVoices();
     let selectedVoice = null;
@@ -4289,15 +4345,19 @@ class LogosApp {
     if (selectedVoice) utterance.voice = selectedVoice;
 
     utterance.onend = () => {
-      if (this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isPaused) {
-        this.surveyAudioState.currentIndex++;
-        this.speakSurveyParagraph();
+      if (!this.tklkAudioActive || !this.surveyAudioState || !this.surveyAudioState.isPlaying || this.surveyAudioState.isPaused) {
+        return;
       }
+      this.surveyAudioState.currentIndex++;
+      this.speakSurveyParagraph();
     };
 
     utterance.onerror = (err) => {
+      if (err && (err.error === 'canceled' || err.error === 'interrupted')) {
+        return;
+      }
       console.warn('Survey audio error:', err);
-      if (this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isPaused) {
+      if (this.tklkAudioActive && this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isPaused) {
         this.surveyAudioState.currentIndex++;
         setTimeout(() => this.speakSurveyParagraph(), 300);
       }
@@ -4307,6 +4367,16 @@ class LogosApp {
   }
 
   stopSurveyAudioNarration() {
+    this.tklkAudioActive = false;
+    if (this.surveyAudioState) {
+      this.surveyAudioState.isPlaying = false;
+      this.surveyAudioState.isPaused = false;
+      const ppBtn = document.getElementById(this.surveyAudioState.playPauseBtnId);
+      if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+      const stEl = document.getElementById(this.surveyAudioState.statusElId);
+      if (stEl) stEl.textContent = 'Đã dừng đọc âm thanh';
+    }
+
     const mediaEl = document.getElementById('survey-audio-media-element');
     if (mediaEl) {
       try {
@@ -4326,15 +4396,6 @@ class LogosApp {
       } catch(e) {}
     }
     document.querySelectorAll('.tklk-paragraph-reading').forEach(el => el.classList.remove('tklk-paragraph-reading'));
-
-    if (this.surveyAudioState) {
-      const ppBtn = document.getElementById(this.surveyAudioState.playPauseBtnId);
-      if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-      const stEl = document.getElementById(this.surveyAudioState.statusElId);
-      if (stEl) stEl.textContent = 'Đã dừng đọc âm thanh';
-      this.surveyAudioState.isPlaying = false;
-      this.surveyAudioState.isPaused = false;
-    }
     this.updateSurveyAudioBtnState(false);
   }
 
@@ -4849,6 +4910,9 @@ class LogosApp {
       }
     }
 
+    const savedVoice = this.tklkVoiceMode || localStorage.getItem('tklk_voice_mode') || 'alden';
+    this.tklkVoiceMode = savedVoice;
+
     // Ultra-Compact Reader View: No repetitive title banners, text starts immediately!
     bodyContainer.innerHTML = `
       <div class="tklk-reader-view animate-fade-in" style="padding: 0.5rem 0.25rem;">
@@ -4856,10 +4920,10 @@ class LogosApp {
         <div class="tklk-audio-player-bar animate-fade-in" id="tklk-modal-audio-bar" style="display: none; background: var(--bg-card); border: 1px solid var(--accent-gold); border-radius: 6px; padding: 0.4rem 0.75rem; margin-bottom: 0.75rem; box-shadow: 0 2px 10px rgba(0,0,0,0.15);">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <button type="button" class="btn-primary" id="btn-tklk-modal-audio-play" style="width: 32px; height: 32px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer;">
+              <button type="button" class="btn-primary" id="btn-tklk-modal-audio-play" style="width: 32px; height: 32px; min-width: 32px; max-width: 32px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer; flex-shrink: 0;" title="Phát / Tạm dừng">
                 <i class="fa-solid fa-play"></i>
               </button>
-              <button type="button" class="btn-secondary" id="btn-tklk-modal-audio-stop" style="width: 32px; height: 32px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer;" title="Dừng đọc">
+              <button type="button" id="btn-tklk-modal-audio-stop" style="width: 32px; height: 32px; min-width: 32px; max-width: 32px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; background: rgba(255,255,255,0.08); border: 1px solid var(--border-subtle); color: var(--text-primary); flex-shrink: 0;" title="Dừng đọc">
                 <i class="fa-solid fa-stop"></i>
               </button>
               <div>
@@ -4872,10 +4936,10 @@ class LogosApp {
               </div>
             </div>
             <div style="display: flex; align-items: center; gap: 0.4rem; margin-left: auto; flex-wrap: wrap;">
-              <select id="tklk-modal-voice-mode" class="portal-select" style="padding: 0.2rem 0.4rem; font-size: 0.78rem; border-radius: 4px;">
-                <option value="alden" selected>🎙️ Giọng ALDEN Studio</option>
-                <option value="namminh">🔊 Giọng Nam Trầm</option>
-                <option value="hoaimy">🔊 Giọng Nữ</option>
+              <select id="tklk-modal-voice-mode" class="portal-select" style="padding: 0.2rem 0.4rem; font-size: 0.78rem; border-radius: 4px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-subtle);">
+                <option value="alden" ${savedVoice === 'alden' ? 'selected' : ''}>🎙️ Giọng ALDEN Studio</option>
+                <option value="namminh" ${savedVoice === 'namminh' ? 'selected' : ''}>🔊 Giọng Nam Trầm</option>
+                <option value="hoaimy" ${savedVoice === 'hoaimy' ? 'selected' : ''}>🔊 Giọng Nữ</option>
               </select>
               <select id="tklk-modal-audio-speed" class="portal-select" style="padding: 0.2rem 0.35rem; font-size: 0.78rem; border-radius: 4px;">
                 <option value="0.8">0.8x</option>
@@ -4978,10 +5042,24 @@ class LogosApp {
       }
     });
 
-    modalVoiceModeSel?.addEventListener('change', () => {
+    modalVoiceModeSel?.addEventListener('change', (e) => {
+      const chosenVoice = e.target.value;
+      this.tklkVoiceMode = chosenVoice;
+      try { localStorage.setItem('tklk_voice_mode', chosenVoice); } catch(err) {}
+
       if (this.surveyAudioState && this.surveyAudioState.isPlaying) {
+        const curIdx = this.surveyAudioState.currentIndex || 0;
         this.stopSurveyAudioNarration();
-        this.startSurveyAudioNarration('#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play');
+        this.tklkAudioActive = true;
+        setTimeout(() => {
+          this.startSurveyAudioNarration('#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play', curIdx);
+        }, 50);
+      } else {
+        const stEl = document.getElementById('tklk-modal-audio-status');
+        if (stEl) {
+          const vName = chosenVoice === 'hoaimy' ? 'Giọng Nữ' : (chosenVoice === 'namminh' ? 'Giọng Nam Trầm' : 'Giọng ALDEN Studio');
+          stEl.textContent = `Đã chọn ${vName} • Bấm Phát để nghe`;
+        }
       }
     });
 
