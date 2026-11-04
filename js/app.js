@@ -4709,46 +4709,49 @@ class LogosApp {
     }
 
     if (titleEl) {
-      titleEl.innerHTML = `<i class="fa-solid fa-book-bookmark" style="color: var(--accent-gold);"></i> ${meta.title} (Chương ${id}/114)`;
+      titleEl.innerHTML = `<i class="fa-solid fa-book-bookmark" style="color: var(--accent-gold);"></i> ${meta.title} <span style="font-size: 0.82rem; font-weight: normal; color: var(--text-muted);">(Chương ${id}/114)</span>`;
     }
     if (subEl) {
-      subEl.innerHTML = `<span style="color:var(--text-muted);">Thánh Kinh Lược Khảo</span> • <span style="color:var(--accent-gold); font-weight:600;">${meta.category_name}</span> • ${(meta.word_count || 0).toLocaleString()} từ`;
+      subEl.innerHTML = `Thánh Kinh Lược Khảo • <span style="color: var(--accent-gold); font-weight: 600;">${meta.category_name}</span> • ${(meta.word_count || 0).toLocaleString()} từ • ~${Math.ceil((meta.word_count || 500) / 250)} phút đọc`;
     }
 
-    // Set up Reader Toolbar in tabsContainer
+    // Set up Streamlined 1-Row Reader Toolbar in tabsContainer
     tabsContainer.innerHTML = `
       <div class="tklk-reader-toolbar">
-        <button type="button" class="portal-utility-tab-btn" id="btn-tklk-back" title="Quay lại mục lục 114 chương">
-          <i class="fa-solid fa-arrow-left"></i> Mục Lục
-        </button>
-        <button type="button" class="portal-utility-tab-btn" id="btn-tklk-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Chương trước">
-          <i class="fa-solid fa-chevron-left"></i> Trước
-        </button>
-        <button type="button" class="portal-utility-tab-btn tklk-chapter-jump-btn" id="btn-tklk-chapter-jump" title="Bấm để nhảy nhanh đến chương bất kỳ (1 - 114)" style="font-weight: 800; color: var(--accent-gold); display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(212,175,55,0.08); padding: 0.22rem 0.6rem; border-radius: 5px; border: 1px dashed rgba(212,175,55,0.45); cursor: pointer;">
-          <i class="fa-solid fa-bookmark"></i> Chương ${id} / 114 <i class="fa-solid fa-caret-down" style="font-size: 0.72rem;"></i>
-        </button>
-        <button type="button" class="portal-utility-tab-btn" id="btn-tklk-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Chương sau">
-          Sau <i class="fa-solid fa-chevron-right"></i>
-        </button>
-        <button type="button" class="portal-utility-tab-btn" id="btn-tklk-audio" style="color: var(--accent-gold); font-weight: 700; border-color: rgba(212,175,55,0.4);" title="Nghe đọc toàn văn chương này">
-          <i class="fa-solid fa-volume-high"></i> <span id="tklk-audio-btn-text">Nghe Đọc</span>
-        </button>
-        <div style="display: flex; gap: 2px; margin-left: auto;">
-          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-zoom-out" title="Giảm cỡ chữ" style="padding: 0.3rem 0.6rem;">
-            A-
+        <div style="display: flex; align-items: center; gap: 3px; flex-shrink: 0;">
+          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-back" title="Mục lục 114 chương">
+            <i class="fa-solid fa-list-ul"></i> Mục Lục
           </button>
-          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-zoom-in" title="Tăng cỡ chữ" style="padding: 0.3rem 0.6rem;">
-            A+
+          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Chương trước">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button type="button" class="portal-utility-tab-btn tklk-chapter-jump-btn" id="btn-tklk-chapter-jump" title="Bấm để nhảy nhanh đến chương bất kỳ (1 - 114)" style="font-weight: 700; color: var(--accent-gold); background: rgba(212,175,55,0.1); border: 1px dashed rgba(212,175,55,0.45); cursor: pointer;">
+            <i class="fa-solid fa-bookmark"></i> Ch. ${id} / 114 ▾
+          </button>
+          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Chương sau">
+            <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
-        ${meta.book_id ? `
-          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-goto-bible" data-book="${meta.book_id}" style="color: var(--accent-gold); font-weight: 700; border-color: rgba(212,175,55,0.4);" title="Đọc sách này trong Kinh Thánh">
-            <i class="fa-solid fa-bible"></i> Đọc Bản Văn
+
+        <div style="display: flex; align-items: center; gap: 3px; margin-left: auto; flex-shrink: 0;">
+          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-audio" style="color: var(--accent-gold); font-weight: 700; border-color: rgba(212,175,55,0.4);" title="Nghe đọc âm thanh">
+            <i class="fa-solid fa-volume-high"></i> <span id="tklk-audio-btn-text">Nghe Đọc</span>
           </button>
-        ` : ''}
-        <button type="button" class="portal-utility-tab-btn" id="btn-tklk-copy" title="Sao chép toàn bộ văn bản chương này">
-          <i class="fa-solid fa-copy"></i>
-        </button>
+          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-zoom-out" title="Giảm cỡ chữ" style="padding: 0.22rem 0.4rem; font-size: 0.78rem;">
+            A-
+          </button>
+          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-zoom-in" title="Tăng cỡ chữ" style="padding: 0.22rem 0.4rem; font-size: 0.78rem;">
+            A+
+          </button>
+          ${meta.book_id ? `
+            <button type="button" class="portal-utility-tab-btn" id="btn-tklk-goto-bible" data-book="${meta.book_id}" style="color: var(--accent-gold); font-weight: 600; border-color: rgba(212,175,55,0.4);" title="Đọc sách này trong Kinh Thánh">
+              <i class="fa-solid fa-bible"></i> Bản Văn
+            </button>
+          ` : ''}
+          <button type="button" class="portal-utility-tab-btn" id="btn-tklk-copy" title="Sao chép văn bản chương">
+            <i class="fa-solid fa-copy"></i>
+          </button>
+        </div>
       </div>
     `;
 
@@ -4802,9 +4805,9 @@ class LogosApp {
 
     // Loading body container
     bodyContainer.innerHTML = `
-      <div style="text-align: center; padding: 3rem;">
-        <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent-gold);"></i>
-        <p style="margin-top: 1rem; color: var(--text-muted);">Đang tải nội dung Chương ${id}: ${meta.title}...</p>
+      <div style="text-align: center; padding: 2.5rem 1rem;">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.8rem; color: var(--accent-gold);"></i>
+        <p style="margin-top: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">Đang nạp Chương ${id}: ${meta.title}...</p>
       </div>
     `;
 
@@ -4846,81 +4849,71 @@ class LogosApp {
       }
     }
 
+    // Ultra-Compact Reader View: No repetitive title banners, text starts immediately!
     bodyContainer.innerHTML = `
-      <div class="tklk-reader-view animate-fade-in">
-        <div class="tklk-chapter-header">
-          <div class="tklk-chapter-meta">
-            <span class="badge" style="background: rgba(212,175,55,0.15); color: var(--accent-gold); font-size: 0.75rem; font-weight: 700; padding: 3px 8px;">
-              ${chapterData.category_name || meta.category_name}
-            </span>
-            <span class="tklk-word-badge" style="font-size: 0.78rem; color: var(--text-muted);">
-              <i class="fa-solid fa-book"></i> Chương ${id} / 114 &bull; ${(chapterData.word_count || meta.word_count || 0).toLocaleString()} từ &bull; ~${Math.ceil((chapterData.word_count || meta.word_count || 500) / 250)} phút đọc
-            </span>
-          </div>
-          <h1 class="tklk-chapter-title">${chapterData.title || meta.title}</h1>
-          <div class="tklk-source-credit">
-            <i class="fa-solid fa-feather-pointed"></i> Trích tác phẩm <em>Thánh Kinh Lược Khảo</em> (Halley\'s Bible Handbook) &bull; Nguyên tác: Dr. Henry H. Halley &bull; Bản dịch Việt ngữ
-          </div>
-        </div>
-
-        <!-- Collapsible Audio Player Bar inside Modal -->
-        <div class="tklk-audio-player-bar animate-fade-in" id="tklk-modal-audio-bar" style="display: none; background: var(--bg-card); border: 1.5px solid var(--accent-gold); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; box-shadow: 0 4px 18px rgba(0,0,0,0.15);">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem;">
-            <div style="display: flex; align-items: center; gap: 0.65rem;">
-              <button type="button" class="btn-primary" id="btn-tklk-modal-audio-play" style="width: 36px; height: 36px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.95rem; cursor: pointer;">
+      <div class="tklk-reader-view animate-fade-in" style="padding: 0.5rem 0.25rem;">
+        <!-- Collapsible Slim Audio Bar inside Modal -->
+        <div class="tklk-audio-player-bar animate-fade-in" id="tklk-modal-audio-bar" style="display: none; background: var(--bg-card); border: 1px solid var(--accent-gold); border-radius: 6px; padding: 0.4rem 0.75rem; margin-bottom: 0.75rem; box-shadow: 0 2px 10px rgba(0,0,0,0.15);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <button type="button" class="btn-primary" id="btn-tklk-modal-audio-play" style="width: 32px; height: 32px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer;">
                 <i class="fa-solid fa-play"></i>
               </button>
-              <button type="button" class="btn-secondary" id="btn-tklk-modal-audio-stop" style="width: 36px; height: 36px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer;" title="Dừng đọc">
+              <button type="button" class="btn-secondary" id="btn-tklk-modal-audio-stop" style="width: 32px; height: 32px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer;" title="Dừng đọc">
                 <i class="fa-solid fa-stop"></i>
               </button>
               <div>
-                <div style="font-weight: 800; color: var(--accent-gold); font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+                <div style="font-weight: 700; color: var(--accent-gold); font-size: 0.82rem; display: flex; align-items: center; gap: 0.35rem;">
                   <i class="fa-solid fa-headphones"></i> Sách Nói: <span>${chapterData.title || meta.title}</span>
-                  <span id="tklk-modal-voice-badge" style="background: rgba(212,175,55,0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); border-radius: 4px; padding: 0.1rem 0.45rem; font-size: 0.72rem; font-weight: 700;">
-                    <i class="fa-solid fa-microphone"></i> Giọng ALDEN Studio
-                  </span>
                 </div>
-                <div style="font-size: 0.76rem; color: var(--text-muted);" id="tklk-modal-audio-status">
-                  Bấm Phát để nghe toàn bộ &bull; Hoặc nhấp đoạn bất kỳ để đọc từ đó
+                <div style="font-size: 0.74rem; color: var(--text-muted);" id="tklk-modal-audio-status">
+                  Bấm Phát để nghe • Nhấp đoạn bất kỳ để đọc từ đó
                 </div>
               </div>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto; flex-wrap: wrap;">
-              <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Giọng:</span>
-              <select id="tklk-modal-voice-mode" class="portal-select" style="padding: 0.25rem 0.45rem; font-size: 0.8rem; border-radius: 6px;">
+            <div style="display: flex; align-items: center; gap: 0.4rem; margin-left: auto; flex-wrap: wrap;">
+              <select id="tklk-modal-voice-mode" class="portal-select" style="padding: 0.2rem 0.4rem; font-size: 0.78rem; border-radius: 4px;">
                 <option value="alden" selected>🎙️ Giọng ALDEN Studio</option>
-                <option value="namminh">🔊 Giọng Nam Trầm (Trực Tuyến)</option>
-                <option value="hoaimy">🔊 Giọng Nữ (Trực Tuyến)</option>
+                <option value="namminh">🔊 Giọng Nam Trầm</option>
+                <option value="hoaimy">🔊 Giọng Nữ</option>
               </select>
-              <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Tốc độ:</span>
-              <select id="tklk-modal-audio-speed" class="portal-select" style="padding: 0.25rem 0.45rem; font-size: 0.8rem; border-radius: 6px;">
+              <select id="tklk-modal-audio-speed" class="portal-select" style="padding: 0.2rem 0.35rem; font-size: 0.78rem; border-radius: 4px;">
                 <option value="0.8">0.8x</option>
-                <option value="1.0" selected>1.0x (Chuẩn)</option>
+                <option value="1.0" selected>1.0x</option>
                 <option value="1.2">1.2x</option>
                 <option value="1.5">1.5x</option>
               </select>
-              <button type="button" class="btn-secondary" id="btn-tklk-modal-audio-close" style="padding: 0.25rem 0.5rem; font-size: 0.85rem;" title="Đóng">&times;</button>
+              <button type="button" class="btn-secondary" id="btn-tklk-modal-audio-close" style="padding: 0.2rem 0.45rem; font-size: 0.8rem;" title="Đóng thanh nghe">&times;</button>
             </div>
           </div>
         </div>
 
-        <div class="tklk-reader-content" id="tklk-reader-content" style="font-size: ${this.tklkFontSize}px;">
+        <!-- Clean Reader Content directly at the top -->
+        <div class="tklk-reader-content" id="tklk-reader-content" style="font-size: ${this.tklkFontSize}px; line-height: 1.85;">
           ${chapterData.content_html}
         </div>
-        <div class="tklk-reader-footer-nav">
-          <button type="button" class="btn-secondary" id="btn-tklk-footer-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
+
+        <!-- Single Quiet Source Credit at Bottom -->
+        <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <span><i class="fa-solid fa-feather-pointed"></i> Thánh Kinh Lược Khảo • Dr. Henry H. Halley</span>
+          <span>Chương ${id}/114 • ${(chapterData.word_count || meta.word_count || 0).toLocaleString()} từ</span>
+        </div>
+
+        <!-- Streamlined Footer Navigation -->
+        <div class="tklk-reader-footer-nav" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; padding-top: 0.75rem;">
+          <button type="button" class="btn-secondary" id="btn-tklk-footer-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} style="padding: 0.35rem 0.75rem; font-size: 0.82rem;">
             <i class="fa-solid fa-chevron-left"></i> Chương ${id - 1}
           </button>
-          <button type="button" class="btn-secondary tklk-chapter-jump-btn" id="btn-tklk-footer-jump" style="color: var(--accent-gold); font-weight: 700; border: 1px dashed rgba(212,175,55,0.45);">
+          <button type="button" class="btn-secondary tklk-chapter-jump-btn" id="btn-tklk-footer-jump" style="color: var(--accent-gold); font-weight: 700; border: 1px dashed rgba(212,175,55,0.45); padding: 0.35rem 0.75rem; font-size: 0.82rem;">
             <i class="fa-solid fa-bookmark"></i> Nhảy Chương ▾
           </button>
-          <button type="button" class="btn-primary" id="btn-tklk-footer-back">
-            <i class="fa-solid fa-list-ul"></i> Mục Lục 114 Chương
+          <button type="button" class="btn-primary" id="btn-tklk-footer-back" style="padding: 0.35rem 0.75rem; font-size: 0.82rem;">
+            <i class="fa-solid fa-list-ul"></i> Mục Lục
           </button>
-          <button type="button" class="btn-secondary" id="btn-tklk-footer-top" title="Cuộn lên đầu trang">
+          <button type="button" class="btn-secondary" id="btn-tklk-footer-top" title="Cuộn lên đầu trang" style="padding: 0.35rem 0.75rem; font-size: 0.82rem;">
             <i class="fa-solid fa-arrow-up"></i> Đầu trang
           </button>
-          <button type="button" class="btn-secondary" id="btn-tklk-footer-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
+          <button type="button" class="btn-secondary" id="btn-tklk-footer-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} style="padding: 0.35rem 0.75rem; font-size: 0.82rem;">
             Chương ${id + 1} <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
@@ -4932,19 +4925,15 @@ class LogosApp {
 
     // Connect footer buttons
     bodyContainer.querySelector('#btn-tklk-footer-prev')?.addEventListener('click', triggerModalPrev);
-
     bodyContainer.querySelector('#btn-tklk-footer-jump')?.addEventListener('click', () => {
       this.openTklkChapterJumpModal(id);
     });
-
     bodyContainer.querySelector('#btn-tklk-footer-back')?.addEventListener('click', () => {
       this.renderUtilitySurvey(this.tklkActiveFilter || 'all');
     });
-
     bodyContainer.querySelector('#btn-tklk-footer-top')?.addEventListener('click', () => {
       bodyContainer.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
     bodyContainer.querySelector('#btn-tklk-footer-next')?.addEventListener('click', triggerModalNext);
 
     // Wire Modal Audio Controls
@@ -5001,11 +4990,14 @@ class LogosApp {
         const isHidden = modalAudioBar.style.display === 'none';
         modalAudioBar.style.display = isHidden ? 'block' : 'none';
         if (isHidden) {
+          this.tklkAudioActive = true;
           this.toggleSurveyAudioNarration('#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play');
         } else {
+          this.tklkAudioActive = false;
           this.stopSurveyAudioNarration();
         }
       } else {
+        this.tklkAudioActive = true;
         this.toggleSurveyAudioNarration('#tklk-reader-content', 'portal-utility-subtitle', 'btn-tklk-audio');
       }
     });
@@ -5020,6 +5012,7 @@ class LogosApp {
         pEl.setAttribute('title', 'Nhấp để nghe đọc từ đoạn này');
         pEl.addEventListener('click', (e) => {
           if (e.target.tagName === 'A') return;
+          this.tklkAudioActive = true;
           if (modalAudioBar) modalAudioBar.style.display = 'block';
           this.playSurveyAudioFromElement(pEl, '#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play');
         });
