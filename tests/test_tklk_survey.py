@@ -265,3 +265,47 @@ def test_tklk_voice_switching_and_stop_control():
     with open(CSS_FILE, 'r', encoding='utf-8') as f:
         css = f.read()
     assert "#btn-tklk-modal-audio-stop" in css, "Must style #btn-tklk-modal-audio-stop in components.css"
+
+
+
+def test_tklk_timeline_date_pronunciation_normalization():
+    """Verify historical timeline date pronunciation rules:
+    (639-608 T.C) -> năm sáu trăm ba mươi chín đến sáu trăm lẻ tám trước Chúa
+    50 S.C -> năm năm mươi sau Chúa
+    """
+    with open(JS_FILE, 'r', encoding='utf-8') as f:
+        js = f.read()
+
+    # JS implementations
+    assert "vnNumberToWords(n)" in js, "Must define vnNumberToWords in js/app.js"
+    assert "trước Chúa" in js, "Must convert T.C to trước Chúa in js/app.js"
+    assert "sau Chúa" in js, "Must convert S.C to sau Chúa in js/app.js"
+
+    # Python audio generator implementation
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+    from scripts.generate_tklk_audio import normalize_timeline_and_scripture, vn_number_to_words
+
+    # User test cases
+    assert normalize_timeline_and_scripture("(639-608 T.C)") == "năm sáu trăm ba mươi chín đến sáu trăm lẻ tám trước Chúa"
+    assert normalize_timeline_and_scripture("(606-586 T.C.)") == "năm sáu trăm lẻ sáu đến năm trăm tám mươi sáu trước Chúa"
+    assert normalize_timeline_and_scripture("50 S.C") == "năm năm mươi sau Chúa"
+    assert normalize_timeline_and_scripture("(50 S.C.)") == "năm năm mươi sau Chúa"
+    assert normalize_timeline_and_scripture("(100-167 S.C)") == "năm một trăm đến một trăm sáu mươi bảy sau Chúa"
+    assert normalize_timeline_and_scripture("(886 T.C)") == "năm tám trăm tám mươi sáu trước Chúa"
+    assert normalize_timeline_and_scripture("(536 T.C.)") == "năm năm trăm ba mươi sáu trước Chúa"
+    assert normalize_timeline_and_scripture("khoảng 1400-1100 T.C") == "khoảng năm một nghìn bốn trăm đến một nghìn một trăm trước Chúa"
+    assert normalize_timeline_and_scripture("1100 năm T.C") == "một nghìn một trăm năm trước Chúa"
+    assert normalize_timeline_and_scripture("Mác 3:13") == "Mác đoạn 3 câu 13"
+    assert normalize_timeline_and_scripture("TK 1") == "thế kỷ thứ nhất"
+    assert normalize_timeline_and_scripture("thế kỷ II") == "thế kỷ thứ hai"
+
+    # OmniVoice generator normalization
+    import sys
+    sys.path.insert(0, r"E:\Omnivoice")
+    from generate_voice import normalize_text_for_speech
+
+    assert normalize_text_for_speech("(639-608 T.C)") == "năm sáu trăm ba mươi chín đến sáu trăm lẻ tám trước Chúa"
+    assert normalize_text_for_speech("(606-586 T.C.)") == "năm sáu trăm lẻ sáu đến năm trăm tám mươi sáu trước Chúa"
+    assert normalize_text_for_speech("50 S.C") == "năm năm mươi sau Chúa"
+    assert normalize_text_for_speech("(50 S.C.)") == "năm năm mươi sau Chúa"

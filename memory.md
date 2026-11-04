@@ -174,3 +174,25 @@
     4. **Xuất Bản & Master Âm Thanh Phòng Thu ALDEN Chương 39 (A-ghê)**: Hoàn tất tệp data/tklk/audio/39.mp3 (5.5 MB) qua chuỗi DSP Cinema Warmth (150Hz +4.2dB, 3.2kHz +2.4dB, -16 LUFS Loudnorm).
     5. **Chuẩn Hóa Nút Dừng Tròn 32px**: #btn-tklk-modal-audio-stop tròn 32px nền tối, hover đỏ cảnh báo, loại bỏ giao diện nút méo của trình duyệt.
   - Toàn bộ **214/214 tests Pytest PASS 100%** (14/14 tests test_tklk_survey.py).
+
+
+- **Milestone 71 (2026-11-04) - Chuẩn Hóa Toàn Diện Cách Đọc Thời Gian (T.C. & S.C.), Miễn Nhiễm OCR/Unicode & Xuất Bản Audio Phòng Thu ALDEN Chương 39 (v4.6.6)**:
+  - **Yêu Cầu Của Anh Jimmy**: "(639-608 T.C) đọc là năm sáu trăm ba mươi chín đến sáu trăm lẻ tám trước chúa; 50 S.C đọc là năm năm mươi sau chúa. Rà soát lại và chỉnh đốn cách đọc".
+  - **Chuẩn Hóa Ngữ Âm Thời Gian Tuyệt Đối (Timeline Date Normalization)**:
+    1. **Dải Năm T.C. & S.C.**: `(639-608 T.C)` -> `năm sáu trăm ba mươi chín đến sáu trăm lẻ tám trước Chúa`, `(606-586 T.C.)` -> `năm sáu trăm lẻ sáu đến năm trăm tám mươi sáu trước Chúa`, `(100-167 S.C)` -> `năm một trăm đến một trăm sáu mươi bảy sau Chúa`. Triệt tiêu hoàn toàn hiện tượng đọc dấu `-` thành "trừ".
+    2. **Năm Đơn & Khoảng Cách Năm**: `50 S.C` / `(50 S.C.)` -> `năm năm mươi sau Chúa`, `1100 năm T.C` -> `một nghìn một trăm năm trước Chúa`.
+    3. **Từ Viết Tắt Độc Lập**: `T.C.` -> `trước Chúa`, `S.C.` -> `sau Chúa` (loại bỏ "tê xê", "ét xê").
+    4. **Thế Kỷ & Số Hàng Nghìn**: `TK 1` / `thế kỷ II` -> `thế kỷ thứ nhất` / `thế kỷ thứ hai`. Số phân cách hàng nghìn `50.000` / `100.000` -> `năm mươi nghìn` / `một trăm nghìn` (loại bỏ lỗi Edge-TTS coi dấu chấm là số thập phân/dấu ngắt câu).
+    5. **Tọa Độ Kinh Thánh & Tên Riêng**: `Mác 3:13` -> `Mác đoạn 3 câu 13`, `Dr. Henry H. Halley` -> `Tiến sĩ Hen-ri H. Ha-li`.
+  - **Đồng Bộ Xuyên Suốt 3 Tầng**:
+    - Web Speech API (`js/app.js`): Bổ sung `vnNumberToWords(n)` và bộ regex chuẩn hóa ngày tháng.
+    - OmniVoice Studio Engine (`E:\Omnivoice\generate_voice.py`): Sửa cao độ pitch `-0.8Hz` thành `-1Hz` (chuẩn nghiêm ngặt Azure Speech), chống xóa ngoặc kép kinh thánh, mở rộng exponential backoff.
+    - Batch Generator (`scripts/generate_tklk_audio.py`): Tích hợp trực tiếp engine OmniVoice, chia nhỏ chunk <= 750 ký tự.
+  - **Khắc Phục Lỗi OCR & Unicode Độc Quyền**:
+    - Ký tự cổ U+00D0 LATIN CAPITAL LETTER ETH (`Ðền thờ`) -> chuẩn hóa thành U+0110 D-STROKE (`Đền thờ`) chống lỗi sập `NoAudioReceived`.
+    - Dấu gạch nối tách rời từ scan OCR (`Nê- hê-mi` -> `Nê-hê-mi`).
+    - Triệt tiêu dấu chấm lặp (`. . . . . .`) sinh ra từ các thẻ HTML lồng nhau rỗng.
+  - **Xuất Bản & Master Audio Phòng Thu ALDEN Chương 39 (A-ghê)**:
+    - Hoàn tất tổng hợp 9/9 chunks với giọng đọc `sample_alden`, master qua chuỗi Cinema DSP Chain (150Hz warmth + 3.2kHz intimacy + -16 LUFS Loudnorm).
+    - Tệp âm thanh chất lượng cao tại `data/tklk/audio/39.mp3` (7.35 MB, thời lượng 6 phút 25 giây).
+  - Toàn bộ **215/215 tests Pytest PASS 100%**.

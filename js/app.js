@@ -3043,10 +3043,74 @@ class LogosApp {
     }
   }
 
+    vnNumberToWords(n) {
+    if (typeof n !== 'number') {
+      n = parseInt(n, 10);
+      if (isNaN(n)) return '';
+    }
+    if (n === 0) return 'không';
+    if (n < 0) return 'âm ' + this.vnNumberToWords(-n);
+
+    const digits = ['', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+
+    const readThreeDigits = (num, hasHigher = false) => {
+      const h = Math.floor(num / 100);
+      const rem = num % 100;
+      const t = Math.floor(rem / 10);
+      const u = rem % 10;
+      const parts = [];
+
+      if (h > 0) {
+        parts.push(digits[h] + ' trăm');
+        if (t === 0 && u > 0) parts.push('lẻ');
+      } else if (hasHigher && rem > 0) {
+        parts.push('không trăm');
+        if (t === 0 && u > 0) parts.push('lẻ');
+      }
+
+      if (t > 0) {
+        if (t === 1) parts.push('mười');
+        else parts.push(digits[t] + ' mươi');
+      }
+
+      if (u > 0) {
+        if (t > 0 && u === 1 && t !== 1) parts.push('mốt');
+        else if (t > 0 && u === 5) parts.push('lăm');
+        else parts.push(digits[u]);
+      }
+
+      return parts.join(' ');
+    };
+
+    const thousands = ['', 'nghìn', 'triệu', 'tỷ'];
+    const groups = [];
+    let temp = n;
+    while (temp > 0) {
+      groups.push(temp % 1000);
+      temp = Math.floor(temp / 1000);
+    }
+
+    const parts = [];
+    for (let i = groups.length - 1; i >= 0; i--) {
+      const g = groups[i];
+      if (g > 0) {
+        const hasHigher = (i < groups.length - 1);
+        const txt = readThreeDigits(g, hasHigher);
+        const unit = thousands[i];
+        if (unit) parts.push(txt + ' ' + unit);
+        else parts.push(txt);
+      }
+    }
+
+    return parts.join(' ').trim();
+  }
+
   normalizeBibleAudioText(text) {
     if (!text || typeof text !== 'string') return '';
 
-    let res = text.replace(/\[\d+\]|<[^>]+>/g, ' ');
+    let res = text.replace(/\u00d0/g, '\u0110').replace(/\u00f0/g, '\u0111').replace(/\[\d+\]|<[^>]+>/g, ' ');
+    res = res.replace(/(\w+)\s*-\s+(\w+)/g, '$1-$2');
+    res = res.replace(/(^|\s)-\s*(\w+)/g, '$1$2');
 
     // 0. Foreign words, authors, book titles & technical terms pronunciation
     const foreignDict = [
@@ -3113,7 +3177,113 @@ class LogosApp {
     // 5. Handle 'đoạn X-Y' or 'chương X-Y' -> 'đoạn X đến Y'
     res = res.replace(/(^|\s)((?:đoạn|chương)\s+\d+)\s*[\-–]\s*(\d+)(?=$|\s|[.,;:!?-])/gi, '$1$2 đến $3');
 
-    // 6. Clean up multiple spaces
+    // 6. Timeline Dates & Historical Periods (T.C. = Trước Chúa, S.C. = Sau Chúa)
+    const n2w = (num) => {
+      try {
+        const parsed = parseInt(num, 10);
+        return isNaN(parsed) ? num : this.vnNumberToWords(parsed);
+      } catch(e) {
+        return num;
+      }
+    };
+
+    const expandYearRange = (sStr, eStr) => {
+      const s = parseInt(sStr, 10);
+      let e = parseInt(eStr, 10);
+      if (eStr.length <= 2 && sStr.length === 4) {
+        const century = Math.floor(s / 100);
+        e = century * 100 + e;
+      }
+      return [n2w(s), n2w(e)];
+    };
+
+    // A. Range with T.C: (639-608 T.C), (606-586 T.C.), 639-608 T.C., 1400-1100 T.C.
+    res = res.replace(/\(?(?:khoảng\s+)?(?:năm\s+)?(\d{1,4})\s*[\-–]\s*(\d{1,4})\s*(?:năm\s+)?(?:T\.C\.?|T\.\s*C\.|TC)\.?\)?/gi, (match, y1, y2) => {
+      const prefix = match.toLowerCase().includes('khoảng') ? 'khoảng ' : '';
+      const [w1, w2] = expandYearRange(y1, y2);
+      const punct = (match.endsWith('.') && !match.startsWith('(')) ? '.' : '';
+      return `${prefix}năm ${w1} đến ${w2} trước Chúa${punct}`;
+    });
+
+    // B. Range with S.C: (100-167 S.C), (100-167 S.C.), 12-37 S.C.
+    res = res.replace(/\(?(?:khoảng\s+)?(?:năm\s+)?(\d{1,4})\s*[\-–]\s*(\d{1,4})\s*(?:năm\s+)?(?:S\.C\.?|S\.\s*C\.|SC)\.?\)?/gi, (match, y1, y2) => {
+      const prefix = match.toLowerCase().includes('khoảng') ? 'khoảng ' : '';
+      const [w1, w2] = expandYearRange(y1, y2);
+      const punct = (match.endsWith('.') && !match.startsWith('(')) ? '.' : '';
+      return `${prefix}năm ${w1} đến ${w2} sau Chúa${punct}`;
+    });
+
+    // C. Duration: 1100 năm T.C, 1000 năm T.C, 100 năm S.C
+    res = res.replace(/\(?\b(\d{1,4})\s+năm\s+(?:T\.C\.?|T\.\s*C\.|TC)\.?\)?/gi, (match, y) => {
+      return `${n2w(y)} năm trước Chúa`;
+    });
+    res = res.replace(/\(?\b(\d{1,4})\s+năm\s+(?:S\.C\.?|S\.\s*C\.|SC)\.?\)?/gi, (match, y) => {
+      return `${n2w(y)} năm sau Chúa`;
+    });
+
+    // D. Single year with T.C: (886 T.C), (536 T.C.), 600 T.C., khoảng 586 T.C
+    res = res.replace(/\(?(?:khoảng\s+)?(?:năm\s+)?(\d{1,4})\s*(?:T\.C\.?|T\.\s*C\.|TC)\.?\)?/gi, (match, y) => {
+      const prefix = match.toLowerCase().includes('khoảng') ? 'khoảng ' : '';
+      const punct = (match.endsWith('.') && !match.startsWith('(')) ? '.' : '';
+      return `${prefix}năm ${n2w(y)} trước Chúa${punct}`;
+    });
+
+    // E. Single year with S.C: (50 S.C), (50 S.C.), 50 S.C, 1236 S.C, năm 732 S.C
+    res = res.replace(/\(?(?:khoảng\s+)?(?:năm\s+)?(\d{1,4})\s*(?:S\.C\.?|S\.\s*C\.|SC)\.?\)?/gi, (match, y) => {
+      const prefix = match.toLowerCase().includes('khoảng') ? 'khoảng ' : '';
+      const punct = (match.endsWith('.') && !match.startsWith('(')) ? '.' : '';
+      return `${prefix}năm ${n2w(y)} sau Chúa${punct}`;
+    });
+
+    // F. Standalone T.C. / S.C. abbreviations
+    res = res.replace(/\b(?:T\.C\.?|T\.\s*C\.)(?=$|\s|[.,;:!?\)])/g, 'trước Chúa');
+    res = res.replace(/\b(?:S\.C\.?|S\.\s*C\.)(?=$|\s|[.,;:!?\)])/g, 'sau Chúa');
+
+    // G.5. Standard Vietnamese thousands separator numbers (50.000 -> năm mươi nghìn)
+    res = res.replace(/\b(\d{1,3}(?:\.\d{3})+)\b/g, (match, numStr) => {
+      try {
+        const val = parseInt(numStr.replace(/\./g, ''), 10);
+        return isNaN(val) ? numStr : this.vnNumberToWords(val);
+      } catch (e) {
+        return numStr;
+      }
+    });
+
+    // G. Century: TK 1, TK I, thế kỷ II, thế kỷ XX
+    const romanMap = {
+      'I': 'thứ nhất', '1': 'thứ nhất',
+      'II': 'thứ hai', '2': 'thứ hai',
+      'III': 'thứ ba', '3': 'thứ ba',
+      'IV': 'thứ tư', '4': 'thứ tư',
+      'V': 'thứ năm', '5': 'thứ năm',
+      'VI': 'thứ sáu', '6': 'thứ sáu',
+      'VII': 'thứ bảy', '7': 'thứ bảy',
+      'VIII': 'thứ tám', '8': 'thứ tám',
+      'IX': 'thứ chín', '9': 'thứ chín',
+      'X': 'thứ mười', '10': 'thứ mười',
+      'XI': 'thứ mười một', '11': 'thứ mười một',
+      'XII': 'thứ mười hai', '12': 'thứ mười hai',
+      'XIII': 'thứ mười ba', '13': 'thứ mười ba',
+      'XIV': 'thứ mười bốn', '14': 'thứ mười bốn',
+      'XV': 'thứ mười lăm', '15': 'thứ mười lăm',
+      'XVI': 'thứ mười sáu', '16': 'thứ mười sáu',
+      'XVII': 'thứ mười bảy', '17': 'thứ mười bảy',
+      'XVIII': 'thứ mười tám', '18': 'thứ mười tám',
+      'XIX': 'thứ mười chín', '19': 'thứ mười chín',
+      'XX': 'hai mươi', '20': 'hai mươi',
+      'XXI': 'hai mươi mốt', '21': 'hai mươi mốt'
+    };
+    res = res.replace(/\b(?:TK|thế\s+kỷ)\s*([IVXLCDM]+|\d+)\b/gi, (m, r) => {
+      const key = r.toUpperCase();
+      if (romanMap[key]) return `thế kỷ ${romanMap[key]}`;
+      return `thế kỷ thứ ${r}`;
+    });
+
+    // H. Clean up double punctuation resulting from normalization
+    res = res.replace(/\.\s*([,;:!?])/g, '$1');
+    res = res.replace(/\.{2,}/g, '.');
+
+    // 7. Clean up multiple spaces
     return res.replace(/\s+/g, ' ').trim();
   }
 
