@@ -9313,3 +9313,29 @@
   background: rgba(212, 175, 55, 0.16) !important;
   font-weight: 700;
 }
+
+
+/* TKLK Paragraph Hover & Click-to-Read Styling */
+.tklk-reader-content p,
+.tklk-reader-content h1,
+.tklk-reader-content h2,
+.tklk-reader-content h3,
+.tklk-reader-content h4,
+.tklk-reader-content h5,
+.tklk-reader-content li,
+.tklk-reader-content blockquote {
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.tklk-reader-content p:hover,
+.tklk-reader-content h1:hover,
+.tklk-reader-content h2:hover,
+.tklk-reader-content h3:hover,
+.tklk-reader-content h4:hover,
+.tklk-reader-content h5:hover,
+.tklk-reader-content li:hover,
+.tklk-reader-content blockquote:hover {
+  background: rgba(212, 175, 55, 0.08) !important;
+  border-left-color: rgba(212, 175, 55, 0.5) !important;
+}

@@ -3963,14 +3963,32 @@ class LogosApp {
 
   updateSurveyAudioBtnState(isPlaying) {
     const audioBtn = document.getElementById('btn-survey-audio');
-    if (!audioBtn) return;
-    const txtSpan = document.getElementById('survey-audio-btn-text');
-    if (isPlaying) {
-      audioBtn.innerHTML = '<i class="fa-solid fa-pause"></i> <span id="survey-audio-btn-text">Tạm Dừng</span>';
-      audioBtn.style.color = 'var(--accent-gold)';
-    } else {
-      audioBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i> <span id="survey-audio-btn-text">Nghe Đọc</span>';
-      audioBtn.style.color = 'var(--accent-gold)';
+    if (audioBtn) {
+      if (isPlaying) {
+        audioBtn.innerHTML = '<i class="fa-solid fa-pause"></i> <span id="survey-audio-btn-text">Tạm Dừng</span>';
+        audioBtn.style.color = 'var(--accent-gold)';
+      } else {
+        audioBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i> <span id="survey-audio-btn-text">Nghe Đọc</span>';
+        audioBtn.style.color = 'var(--accent-gold)';
+      }
+    }
+    const tklkAudioBtn = document.getElementById('btn-tklk-audio');
+    if (tklkAudioBtn) {
+      if (isPlaying) {
+        tklkAudioBtn.innerHTML = '<i class="fa-solid fa-pause"></i> <span id="tklk-audio-btn-text">Tạm Dừng</span>';
+        tklkAudioBtn.style.color = 'var(--accent-gold)';
+      } else {
+        tklkAudioBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i> <span id="tklk-audio-btn-text">Nghe Đọc</span>';
+        tklkAudioBtn.style.color = 'var(--accent-gold)';
+      }
+    }
+    const modalPlayBtn = document.getElementById('btn-tklk-modal-audio-play');
+    if (modalPlayBtn) {
+      modalPlayBtn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
+    }
+    const pagePlayBtn = document.getElementById('btn-survey-audio-play-pause');
+    if (pagePlayBtn) {
+      pagePlayBtn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
     }
   }
 
@@ -4016,8 +4034,8 @@ class LogosApp {
   async startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId, startIndex = 0) {
     this.stopSurveyAudioNarration();
 
-    const chapterId = this.activeSurveyChapterId || this.currentTklkChapterId || 1;
-    const voiceModeSel = document.getElementById('survey-audio-voice-mode');
+    const chapterId = this.currentTklkChapterId || this.activeSurveyChapterId || 1;
+    const voiceModeSel = document.getElementById('tklk-modal-voice-mode') || document.getElementById('survey-audio-voice-mode');
     const voiceMode = voiceModeSel ? voiceModeSel.value : 'alden';
     const audioSrc = `data/tklk/audio/${chapterId}.mp3`;
 
@@ -4104,7 +4122,9 @@ class LogosApp {
 
     // Show audio bar if hidden
     const audioBar = document.getElementById('survey-audio-player-bar');
-    if (audioBar) audioBar.style.display = 'block';
+    if (audioBar && contentSelector === '#survey-chapter-body') audioBar.style.display = 'block';
+    const modalBar = document.getElementById('tklk-modal-audio-bar');
+    if (modalBar && contentSelector === '#tklk-reader-content') modalBar.style.display = 'block';
 
     if (this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isMediaElement) {
       if (window.speechSynthesis) window.speechSynthesis.cancel();
@@ -4313,7 +4333,12 @@ class LogosApp {
           if (chId) {
             modal.classList.add('hidden');
             this.stopSurveyAudioNarration();
-            this.renderSurveyChapter(chId);
+            const isModalOpen = !document.getElementById('portal-utility-modal')?.classList.contains('hidden');
+            if (isModalOpen) {
+              this.openTklkChapter(chId);
+            } else {
+              this.renderSurveyChapter(chId);
+            }
           }
         });
       });
@@ -4327,7 +4352,12 @@ class LogosApp {
       if (val >= 1 && val <= 114) {
         modal.classList.add('hidden');
         this.stopSurveyAudioNarration();
-        this.renderSurveyChapter(val);
+        const isModalOpen = !document.getElementById('portal-utility-modal')?.classList.contains('hidden');
+        if (isModalOpen) {
+          this.openTklkChapter(val);
+        } else {
+          this.renderSurveyChapter(val);
+        }
       } else {
         this.showToast('Vui lòng nhập số chương từ 1 đến 114', 'warning');
       }
@@ -4591,6 +4621,9 @@ class LogosApp {
     const id = parseInt(chapterId, 10);
     if (isNaN(id) || id < 1 || id > 114) return;
 
+    this.currentTklkChapterId = id;
+    this.activeSurveyChapterId = id;
+
     const tabsContainer = document.getElementById('portal-utility-tabs');
     const bodyContainer = document.getElementById('portal-utility-body');
     const titleEl = document.getElementById('portal-utility-title');
@@ -4607,7 +4640,7 @@ class LogosApp {
       titleEl.innerHTML = `<i class="fa-solid fa-book-bookmark" style="color: var(--accent-gold);"></i> ${meta.title} (Chương ${id}/114)`;
     }
     if (subEl) {
-      subEl.textContent = `Thánh Kinh Lược Khảo &bull; ${meta.category_name} &bull; ${(meta.word_count || 0).toLocaleString()} từ`;
+      subEl.innerHTML = `<span style="color:var(--text-muted);">Thánh Kinh Lược Khảo</span> • <span style="color:var(--accent-gold); font-weight:600;">${meta.category_name}</span> • ${(meta.word_count || 0).toLocaleString()} từ`;
     }
 
     // Set up Reader Toolbar in tabsContainer
@@ -4619,7 +4652,9 @@ class LogosApp {
         <button type="button" class="portal-utility-tab-btn" id="btn-tklk-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Chương trước">
           <i class="fa-solid fa-chevron-left"></i> Trước
         </button>
-        <span class="tklk-reader-ch-indicator"><i class="fa-solid fa-bookmark"></i> Chương ${id} / 114</span>
+        <button type="button" class="portal-utility-tab-btn tklk-chapter-jump-btn" id="btn-tklk-chapter-jump" title="Bấm để nhảy nhanh đến chương bất kỳ (1 - 114)" style="font-weight: 800; color: var(--accent-gold); display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(212,175,55,0.08); padding: 0.22rem 0.6rem; border-radius: 5px; border: 1px dashed rgba(212,175,55,0.45); cursor: pointer;">
+          <i class="fa-solid fa-bookmark"></i> Chương ${id} / 114 <i class="fa-solid fa-caret-down" style="font-size: 0.72rem;"></i>
+        </button>
         <button type="button" class="portal-utility-tab-btn" id="btn-tklk-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Chương sau">
           Sau <i class="fa-solid fa-chevron-right"></i>
         </button>
@@ -4658,6 +4693,10 @@ class LogosApp {
       if (id < 114) this.openTklkChapter(id + 1);
     });
 
+    tabsContainer.querySelector('#btn-tklk-chapter-jump')?.addEventListener('click', () => {
+      this.openTklkChapterJumpModal(id);
+    });
+
     tabsContainer.querySelector('#btn-tklk-zoom-out')?.addEventListener('click', () => {
       this.tklkFontSize = Math.max(13, (this.tklkFontSize || 16) - 1);
       const contentEl = document.getElementById('tklk-reader-content');
@@ -4670,10 +4709,6 @@ class LogosApp {
       const contentEl = document.getElementById('tklk-reader-content');
       if (contentEl) contentEl.style.fontSize = this.tklkFontSize + 'px';
       try { localStorage.setItem('tklk_font_size', String(this.tklkFontSize)); } catch(e) {}
-    });
-
-    tabsContainer.querySelector('#btn-tklk-audio')?.addEventListener('click', () => {
-      this.toggleSurveyAudioNarration('#tklk-reader-content', 'portal-utility-subtitle', 'btn-tklk-audio');
     });
 
     tabsContainer.querySelector('#btn-tklk-goto-bible')?.addEventListener('click', () => {
@@ -4745,12 +4780,57 @@ class LogosApp {
             <i class="fa-solid fa-feather-pointed"></i> Trích tác phẩm <em>Thánh Kinh Lược Khảo</em> (Halley\'s Bible Handbook) &bull; Nguyên tác: Dr. Henry H. Halley &bull; Bản dịch Việt ngữ
           </div>
         </div>
+
+        <!-- Collapsible Audio Player Bar inside Modal -->
+        <div class="tklk-audio-player-bar animate-fade-in" id="tklk-modal-audio-bar" style="display: none; background: var(--bg-card); border: 1.5px solid var(--accent-gold); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; box-shadow: 0 4px 18px rgba(0,0,0,0.15);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem;">
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <button type="button" class="btn-primary" id="btn-tklk-modal-audio-play" style="width: 36px; height: 36px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.95rem; cursor: pointer;">
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <button type="button" class="btn-secondary" id="btn-tklk-modal-audio-stop" style="width: 36px; height: 36px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer;" title="Dừng đọc">
+                <i class="fa-solid fa-stop"></i>
+              </button>
+              <div>
+                <div style="font-weight: 800; color: var(--accent-gold); font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+                  <i class="fa-solid fa-headphones"></i> Sách Nói: <span>${chapterData.title || meta.title}</span>
+                  <span id="tklk-modal-voice-badge" style="background: rgba(212,175,55,0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); border-radius: 4px; padding: 0.1rem 0.45rem; font-size: 0.72rem; font-weight: 700;">
+                    <i class="fa-solid fa-microphone"></i> Giọng ALDEN Studio
+                  </span>
+                </div>
+                <div style="font-size: 0.76rem; color: var(--text-muted);" id="tklk-modal-audio-status">
+                  Bấm Phát để nghe toàn bộ &bull; Hoặc nhấp đoạn bất kỳ để đọc từ đó
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto; flex-wrap: wrap;">
+              <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Giọng:</span>
+              <select id="tklk-modal-voice-mode" class="portal-select" style="padding: 0.25rem 0.45rem; font-size: 0.8rem; border-radius: 6px;">
+                <option value="alden" selected>🎙️ Giọng ALDEN Studio</option>
+                <option value="namminh">🔊 Giọng Nam Trầm (Trực Tuyến)</option>
+                <option value="hoaimy">🔊 Giọng Nữ (Trực Tuyến)</option>
+              </select>
+              <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Tốc độ:</span>
+              <select id="tklk-modal-audio-speed" class="portal-select" style="padding: 0.25rem 0.45rem; font-size: 0.8rem; border-radius: 6px;">
+                <option value="0.8">0.8x</option>
+                <option value="1.0" selected>1.0x (Chuẩn)</option>
+                <option value="1.2">1.2x</option>
+                <option value="1.5">1.5x</option>
+              </select>
+              <button type="button" class="btn-secondary" id="btn-tklk-modal-audio-close" style="padding: 0.25rem 0.5rem; font-size: 0.85rem;" title="Đóng">&times;</button>
+            </div>
+          </div>
+        </div>
+
         <div class="tklk-reader-content" id="tklk-reader-content" style="font-size: ${this.tklkFontSize}px;">
           ${chapterData.content_html}
         </div>
         <div class="tklk-reader-footer-nav">
           <button type="button" class="btn-secondary" id="btn-tklk-footer-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
             <i class="fa-solid fa-chevron-left"></i> Chương ${id - 1}
+          </button>
+          <button type="button" class="btn-secondary tklk-chapter-jump-btn" id="btn-tklk-footer-jump" style="color: var(--accent-gold); font-weight: 700; border: 1px dashed rgba(212,175,55,0.45);">
+            <i class="fa-solid fa-bookmark"></i> Nhảy Chương ▾
           </button>
           <button type="button" class="btn-primary" id="btn-tklk-footer-back">
             <i class="fa-solid fa-list-ul"></i> Mục Lục 114 Chương
@@ -4773,6 +4853,10 @@ class LogosApp {
       if (id > 1) this.openTklkChapter(id - 1);
     });
 
+    bodyContainer.querySelector('#btn-tklk-footer-jump')?.addEventListener('click', () => {
+      this.openTklkChapterJumpModal(id);
+    });
+
     bodyContainer.querySelector('#btn-tklk-footer-back')?.addEventListener('click', () => {
       this.renderUtilitySurvey(this.tklkActiveFilter || 'all');
     });
@@ -4785,10 +4869,81 @@ class LogosApp {
       if (id < 114) this.openTklkChapter(id + 1);
     });
 
+    // Wire Modal Audio Controls
+    const modalAudioBar = bodyContainer.querySelector('#tklk-modal-audio-bar');
+    const modalPlayBtn = bodyContainer.querySelector('#btn-tklk-modal-audio-play');
+    const modalStopBtn = bodyContainer.querySelector('#btn-tklk-modal-audio-stop');
+    const modalCloseBtn = bodyContainer.querySelector('#btn-tklk-modal-audio-close');
+    const modalSpeedSel = bodyContainer.querySelector('#tklk-modal-audio-speed');
+    const modalVoiceModeSel = bodyContainer.querySelector('#tklk-modal-voice-mode');
+
+    modalPlayBtn?.addEventListener('click', () => {
+      this.toggleSurveyAudioNarration('#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play');
+    });
+
+    modalStopBtn?.addEventListener('click', () => {
+      this.stopSurveyAudioNarration();
+    });
+
+    modalCloseBtn?.addEventListener('click', () => {
+      this.stopSurveyAudioNarration();
+      if (modalAudioBar) modalAudioBar.style.display = 'none';
+    });
+
+    modalSpeedSel?.addEventListener('change', (e) => {
+      const spd = parseFloat(e.target.value) || 1.0;
+      this.surveyAudioSpeed = spd;
+      if (this.surveyAudioState) {
+        this.surveyAudioState.speed = spd;
+        if (this.surveyAudioState.isMediaElement && this.surveyAudioState.audioEl) {
+          this.surveyAudioState.audioEl.playbackRate = spd;
+        }
+      }
+    });
+
+    modalVoiceModeSel?.addEventListener('change', () => {
+      if (this.surveyAudioState && this.surveyAudioState.isPlaying) {
+        this.stopSurveyAudioNarration();
+        this.startSurveyAudioNarration('#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play');
+      }
+    });
+
+    tabsContainer.querySelector('#btn-tklk-audio')?.addEventListener('click', () => {
+      if (modalAudioBar) {
+        const isHidden = modalAudioBar.style.display === 'none';
+        modalAudioBar.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) {
+          this.toggleSurveyAudioNarration('#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play');
+        } else {
+          this.stopSurveyAudioNarration();
+        }
+      } else {
+        this.toggleSurveyAudioNarration('#tklk-reader-content', 'portal-utility-subtitle', 'btn-tklk-audio');
+      }
+    });
+
+    // Cho phép nhấp vào bất kỳ đoạn nào để bắt đầu nghe đọc từ đoạn đó
+    const contentEl = bodyContainer.querySelector('#tklk-reader-content');
+    if (contentEl) {
+      const pElements = contentEl.querySelectorAll('p, h1, h2, h3, h4, h5, li, blockquote');
+      pElements.forEach(pEl => {
+        if (pEl.querySelector('p, h1, h2, h3, h4, h5, li, blockquote')) return;
+        pEl.style.cursor = 'pointer';
+        pEl.setAttribute('title', 'Nhấp để nghe đọc từ đoạn này');
+        pEl.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A') return;
+          if (modalAudioBar) modalAudioBar.style.display = 'block';
+          this.playSurveyAudioFromElement(pEl, '#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play');
+        });
+      });
+    }
+
     // Wire Copy Button
     tabsContainer.querySelector('#btn-tklk-copy')?.addEventListener('click', () => {
-      const contentEl = document.getElementById('tklk-reader-content');
-      const textToCopy = `${meta.title} - Thánh Kinh Lược Khảo\n\n` + (contentEl ? contentEl.innerText : '');
+      const cEl = document.getElementById('tklk-reader-content');
+      const textToCopy = `${meta.title} - Thánh Kinh Lược Khảo
+
+` + (cEl ? cEl.innerText : '');
       if (navigator.clipboard) {
         navigator.clipboard.writeText(textToCopy);
         this.showToast('Đã sao chép nội dung chương vào bộ nhớ tạm!', 'success');

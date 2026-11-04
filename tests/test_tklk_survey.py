@@ -192,3 +192,20 @@ def test_tklk_chapter_jump_and_reading_highlight():
     assert '.tklk-jump-item-btn' in css, "Missing .tklk-jump-item-btn in components.css"
     assert '.tklk-jump-item-active' in css, "Missing .tklk-jump-item-active in components.css"
     assert '.tklk-paragraph-reading' in css, "Missing .tklk-paragraph-reading in components.css"
+
+
+def test_tklk_modal_chapter_jump_and_audio_integration():
+    """Verify that the Modal view (#portal-utility-modal / openTklkChapter) has complete jump & audio controls."""
+    with open(JS_FILE, 'r', encoding='utf-8') as f:
+        js = f.read()
+
+    assert 'btn-tklk-chapter-jump' in js, "Missing #btn-tklk-chapter-jump in modal reader toolbar"
+    assert 'btn-tklk-footer-jump' in js, "Missing #btn-tklk-footer-jump in modal footer nav"
+    assert 'tklk-modal-audio-bar' in js, "Missing #tklk-modal-audio-bar in modal reader view"
+    assert 'btn-tklk-modal-audio-play' in js, "Missing #btn-tklk-modal-audio-play in modal audio bar"
+    assert 'tklk-modal-voice-mode' in js, "Missing #tklk-modal-voice-mode in modal audio bar"
+    assert 'this.currentTklkChapterId = id;' in js, "Must record currentTklkChapterId in openTklkChapter"
+    assert 'this.activeSurveyChapterId = id;' in js, "Must record activeSurveyChapterId in openTklkChapter"
+
+    # Verify jump modal routes to openTklkChapter if portal modal is open
+    assert "document.getElementById('portal-utility-modal')?.classList.contains('hidden')" in js, "Must detect if portal utility modal is open when jumping chapters"

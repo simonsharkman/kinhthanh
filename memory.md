@@ -102,59 +102,7 @@
 ### 16-22. Tối Ưu UX Header Di Động, Audio 48px, Tìm Kiếm & Thanh Tiêu Đề (25/10/2026)
 - Tinh chỉnh giao diện di động: Thánh Giá vàng 44px, Audio 48px gọn gàng kèm phím tắt [✕], nút tìm kiếm chuẩn, ẩn banner rườm rà.
 
-- **Milestones 23–35 (2026-10-26)**: Hoàn thiện Full Admin CMS v3.0 (Tĩnh Nguyện, Hiệu đính, Media), sửa 10.021 lỗi dấu rời Unicode NFC & auto-healing, xóa 123.887 nhãn bản dịch thừa `[BTT 1925]`, tối ưu Drawer Inspector offset 68px không che header, Subitems CMS, Modal Sticky Footer & Body Scroll, Banner mục vụ Desktop, Interlinear 3 tầng dọc RTL/LTR, tối giản nút header, Regex tìm kiếm địa chỉ sách chương:câu, lưới tab 2x2 chống đè chữ, DOM Persistence sửa lỗi IME gõ tiếng Việt từ điển, và tích hợp CSDL Từ Điển Strong (152/152 tests pass).
-
-- **Milestones 36–40 (2026-10-26)**: Hoàn thiện giao diện đọc kỉnh kiềng (Zero Box Borders & Unboxed Numbers), sửa lỗi highlight & cuộn câu đối chiếu mobile (Split 50/50), triệt tiêu hiện tượng tự nhảy màn hình (Zero-Jump Stability Contract), cấu hình Vercel Production và Sticky Top Header & Tab Navigation Immunity. Đạt 157/157 tests pass 100%.
-- **Milestone 41 (2026-10-27)**: Hermeneutics Typology Precision: Nâng cấp cụm từ khóa đa từ và luật loại trừ chống gán nhầm ẩn dụ 2 Cô-rinh-tô 11. Đạt 158/158 tests pass.
-- **Milestone 42 (2026-10-27)**: SPA Deep Link Hash Routing: Đồng bộ URL chuyển tab (#portal, #bible, #tsk, #blog, #community, #media, #donate), hỗ trợ Back/Forward. Đạt 159/159 tests pass.
-- **Milestone 43 (2026-10-27)**: Real-time Audio Verse Glowing & Interactive Seeking: Đồng bộ âm thanh theo câu (sáng viền vàng, tua audio khi nhấp câu). Đạt 160/160 tests pass.
-- **Milestone 44 (2026-10-27)**: Verse-Level Deep Linking & Multi-Version URL Routing: Hỗ trợ URL #bible/NEH/1/6?v=BD2011, giải mã slug HTTLVN. Đạt 161/161 tests pass.
-
-- **Milestone 45 (2026-10-27)**: Global Arial Typography Overhaul (Site-Wide Sans-Serif Experience):
-  - Đổi toàn bộ font hệ thống sang Arial theo yêu cầu anh Jimmy (`--font-brand`, `--font-heading`, `--font-bible`, v.v.). Giữ phông nguyên ngữ Hy Lạp/Hê-bơ-rơ cổ. Test 164/164 PASS 100%.
-
-- **Milestone 46 (2026-10-27)**: Refined Subtle Word-Diff Underline: Gạch chân chấm mờ tinh tế chấm dứt nền vàng lốm đốm, thêm tooltip giải thích. Đạt 166/166 test pass.
-- **Milestone 47 (2026-10-27)**: Clean Columnar Reading Typography: Cột số câu độc lập, xuống dòng thẳng cột chuẩn mực. Đạt 166/166 test pass.
-- **Milestone 48 (2026-10-27)**: Expanded Drawer Workspace: Mở rộng Drawer 45vw, thu nhỏ badge tiêu đề thẻ và nút Popout thành icon vuông 28px. Đạt 166/166 test pass.
-- **Milestone 49 (2026-10-28)**: Hermeneutical Context Dossier: CSDL 21 Thư Tín Tân Ước (data/epistles-deep-context.json) với 9 trường chuyên sâu. Đạt 169/169 test pass.
-
-- **Milestone 50 (2026-10-28)**: Fix Mobile Reading Version Selector Clipping & Header UX:
-  - Khắc phục lỗi che nút bản dịch mobile theo ảnh anh Jimmy: Đặt `justify-content: flex-start !important` & `flex-shrink: 0 !important` cho `#primary-version-trigger`; rút gọn nhãn bản dịch (`BTT 1925`, `EDE`, `KTHD`, `CGKPV`, `KJV`); thêm nút trong menu hamburger. Đạt 172/172 test Pytest pass.
-
-- **Milestone 51 (2026-10-28)**: Compact Primary Version Modal & Top-Right Close Button:
-  - Tối ưu theo ảnh gạch xanh anh Jimmy: Header `#primary-version-modal` tinh gọn 1 hàng (`.pvm-header`), nút đóng tròn 28px (`.pvm-close-btn`) góc trên bên phải, xóa footer thừa mở rộng diện tích đọc. Đạt 174/174 test Pytest pass.
-
-- **Milestone 52 (2026-10-28)**: Streamline Parallel Version Selector Modal (Zero Clutter):
-  - Rút gọn `#version-selector-modal` theo ảnh anh Jimmy: Xóa mô tả thừa `<p class="modal-desc">`; rút gọn tên tab; 4 nút chọn nhanh `.quick-pill` 1 hàng; thẻ bản dịch 1 hàng (~38px) bỏ mô tả rườm rà, sửa trùng badge `BDY`/`CGKPV`. Đạt 177/177 test Pytest pass.
-
-- **Milestone 53 (2026-10-28)**: Compact Text-Focused Book Picker & Real-Time Instant Search:
-  - Tối ưu `#book-picker-modal` theo ảnh anh Jimmy: Chuyển sang text item phẳng không ô bao quanh (`.book-card-item`, ~28px); tên sách và số đoạn (vd: 28, 16) cùng hàng; thêm thanh tìm kiếm tức thì (`#book-picker-search-bar`) gõ 1-2 ký tự lọc ngay 66 sách. Đạt 180/180 test Pytest pass.
-
-- **Milestone 54 (2026-10-28)**: Fix TSK Verse Navigation Overflow & Compact 66 Books Directory:
-  - Sửa lỗi tràn viền TSK theo ảnh mũi tên đỏ của anh Jimmy: Xóa `◄`/`►` thừa, rút gọn thành `Câu trước`/`Câu tiếp`; thu nhỏ thanh điều hướng `.tsk-prev-next-split-bar` chống tràn; danh mục 66 sách dạng phẳng (`white-space: nowrap`). Đạt 182/182 test Pytest pass.
-
-- **Milestone 55 (2026-10-28)**: Interactive Clickable Chapter Title (Direct Book & Chapter Pickers):
-  - Tách tiêu đề chương thành 2 nút tương tác theo đề xuất anh Jimmy: Tên sách (`.chapter-title-book-btn`) mở danh sách 66 sách; số đoạn (`.chapter-title-chap-btn`) mở trực tiếp lưới chọn đoạn của sách đó với đoạn hiện tại nổi bật `.active-ch`. Đạt 185/185 test Pytest pass.
-- **Milestone 56 (2026-10-28)**: Daily Scripture Reading Plan & Automatic Devotional Rotator:
-  - Tự động nhảy bài đọc và tĩnh nguyện theo ngày thực tế (1-365 ngày), lưu tiến trình vào localStorage và đồng bộ Vercel. Đạt 191/191 test Pytest pass.
-- **Milestone 57 (2026-10-29)**: Vertical Column-Flow Book Index (Mục Lục 66 Sách Theo Hàng Dọc):
-  - Xếp mục lục 66 sách theo hàng dọc theo ảnh anh Jimmy: Chuyển `.books-grid` sang `grid-auto-flow: column;`, tự động tính số hàng (--rows-4, --rows-3, --rows-2); Cột 1 đi liền mạch từ Sáng thế ký đến 2 Sa-mu-ên; tìm kiếm tự chuyển về dòng ngang. Đạt 192/192 test Pytest pass.
-- **Milestone 58 (2026-10-29)**: Compact Banking & Stewardship Card:
-  - Tái cấu trúc thẻ ngân hàng tinh gọn phẳng (`.bank-details-box`), gộp 5 mục vào 1 thẻ với các hàng ngang (Ngân hàng, Số TK, Người nhận, Liên hệ, Nội dung); thu nhỏ mã QR (`max-width: 165px`), giảm >50% chiều cao. Đạt 193/193 test Pytest pass.
-- **Milestone 59 (2026-10-30)**: Unified Triad Interactive Reader Title (TÊN SÁCH - ĐOẠN - BẢN):
-  - Loại bỏ hoàn toàn huy hiệu tím thừa `.chapter-badge` lặp lại thông tin; hợp nhất tiêu đề thành bộ ba tương tác duy nhất (TÊN SÁCH mở 66 sách, ĐOẠN mở lưới chọn đoạn, BẢN mở bảng chọn bản dịch #primary-version-modal). Đạt 193/193 test Pytest pass.
-- **Milestone 60 (2026-10-30)**: Maximum Scripture Display Space Prioritization (Tối Ưu Không Gian Lời Chúa Popout): Tích hợp Header 1 hàng 44px (.popout-reader-header), gỡ bỏ .popout-nav-bar & .popout-reader-footer thừa, mở rộng .popout-reader-card 92-96vh, tăng >300% diện tích đọc Lời Chúa. Đạt 193/193 Pytest pass 100%.
-- **Milestone 61 (2026-10-30)**: Ultra-Compact AdSense & Stewardship Slot (Thu Nhỏ Khung Quảng Cáo & Dâng Hiến): Thu gọn thành 1 hàng ngang phẳng mỏng (.adsense-slot-card.adsense-slot-compact), giảm >70% chiều cao, nhãn thanh mảnh [Ad] kèm nút [❤ Dâng hiến], không gây xao nhãng. Đạt 193/193 Pytest pass 100%.
-- **Milestone 62 (2026-10-30)**: Comprehensive Bible Quiz & VTKTH Theological Examination Suite:
-  - Tiếp nhận yêu cầu anh Jimmy từ kho dữ liệu C:\Users\Admin\Desktop\On_Thi_Kinh_Thanh_VTKTH.
-  - Trích xuất toàn bộ ngân hàng câu hỏi vào data/quiz-database.json (>630 câu):
-    1. **Trắc Nghiệm Thi Thử**: Tính điểm tức thì, giải thích chi tiết, thanh tiến trình trực quan.
-    2. **Flashcard Câu Gốc**: Thẻ 3D lật 180° ôn 30+ câu gốc vàng kim cương kèm tra cứu phân đoạn.
-    3. **10 Bộ Đề Thi Tuyển Sinh VTKTH**: 200 câu hỏi 10 bộ đề chuẩn chính thức Hội Thánh Tin Lành Việt Nam.
-    4. **200 Câu Thần Học & Giáo Lý**: 4 chuyên đề (Thần đạo học, Cơ Đốc giáo sử, Tín điều, Đạo đức) kèm bộ lọc và tìm kiếm tức thì.
-    5. **Sự Kiện Ở Đoạn Nào?**: Bảng tra cứu 25 sự kiện lịch sử Kinh Thánh với nút mở trực tiếp Focus Reader.
-  - Tích hợp điều hướng Subnav, #quiz-view, mobile drawer, module js/quiz-engine.js, pp.js routing và bộ CSS Sacred Reverent.
-  - Toàn bộ **198/198 bài test Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel.
+- **Milestones 23–62 (2026-10-26 ~ 2026-10-30)**: Hoàn thiện Full Admin CMS v3.0, sửa 10.021 lỗi Unicode NFC auto-healing, loại bỏ 123.887 nhãn thừa, chuẩn hóa Drawer 45vw, Interlinear 3 tầng RTL/LTR, CSDL Strong, Deep Link SPA Hash Routing (#portal, #bible, #tsk, #blog, #community, #media, #quiz, #donate), Audio Verse Glowing, Arial Typography chuẩn mực, Compact Pickers (Sách, Đoạn, Bản dịch), Vertical Column-Flow 66 sách, Ngân hàng tinh gọn và VTKTH Theological Examination Suite (>630 câu hỏi, 10 bộ đề VTKTH, 200 câu thần học). Đạt 198/198 Pytest PASS 100%.
 - **Milestone 63 (2026-11-03)**: Tích Hợp Toàn Bộ 114 Chương "Thánh Kinh Lược Khảo" (Halley's Bible Handbook) & Mở Rộng View Đọc Toàn Diện:
   - Trích xuất và chuẩn hóa 114 chương (>474.000 từ học thuật kinh điển của Dr. Henry H. Halley) từ VietChristian vào `data/tklk/tklk-index.json` & `data/tklk/chapters/{1..114}.json`.
   - Mở rộng trải nghiệm đọc Lược Khảo toàn diện theo yêu cầu anh Jimmy ("cho phép đọc thánh kinh lược khảo đi"):
@@ -199,3 +147,13 @@
   - Cho phép nhấp vào bất kỳ đoạn văn nào trên giao diện đọc để bắt đầu nghe đọc ngay từ đoạn đó.
   - Tích hợp Modal Nhảy Nhanh Đến Chương (`#tklk-chapter-jump-modal`): Nút `🔖 Chương X / 114` ở đầu và chân trang mở hộp thoại tìm kiếm tức thì, lọc theo 5 danh mục hoặc nhập số 1-114 để nhảy ngay.
   - Toàn bộ **211/211 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
+
+- **Milestone 69 (2026-11-04) - Hoàn Thiện Trọn Vẹn Trải Nghiệm Modal & Giao Diện Đọc Thánh Kinh Lược Khảo (v4.6.2)**:
+  - Khắc phục triệt để các phản hồi của anh Jimmy trên ảnh chụp thực tế giao diện Modal (`#portal-utility-modal` / `openTklkChapter`):
+    1. **Nút Nhảy Nhanh Đến Chương (1-114) Tương Tác**: Thay thế `<span>` tĩnh trên toolbar bằng nút bấm trực tiếp `🔖 Chương X / 114 ▾` (`#btn-tklk-chapter-jump`) và nút chân trang (`#btn-tklk-footer-jump`).
+    2. **Hỗ Trợ Chuyển Đổi Chương Mượt Mà Trong Cả Modal Lẫn Toàn Màn Hình**: Khi modal đang mở, Modal Nhảy Chương (`#tklk-chapter-jump-modal`, z-index 2500) tự động chuyển chương trực tiếp ngay trong modal (`openTklkChapter`) mà không cần đóng hay tải lại trang.
+    3. **Thanh Phát Sách Nói Hoàn Chỉnh Trong Modal**: Tích hợp thanh phát audio chuyên nghiệp `#tklk-modal-audio-bar` (Nút Phát/Tạm dừng, Dừng hẳn, Chọn giọng ALDEN/Nam Trầm/Nữ, Tốc độ 0.8x-1.5x, Trạng thái % tiến trình).
+    4. **Hiệu Ứng Đánh Giá Đọc Tới Đâu & Nhấp Đoạn Bất Kỳ Để Nghe**: Bổ sung hiệu ứng viền vàng 5px `.tklk-paragraph-reading` kèm nhãn `🔊 ĐANG ĐỌC`, tự động cuộn giữa màn hình; mọi đoạn văn bản trong modal đều hỗ trợ nhấp chuột để bắt đầu nghe ngay từ đoạn đó.
+    5. **Mở Chương Nào Nghe Được Chương Đó (1..114)**: Tự động phát âm thanh phòng thu ALDEN khi có tệp MP3, và tự động fallback sang Web Speech API giọng nam trầm mượt mà cho mọi chương còn lại mà không bao giờ bị đơ treo.
+    6. **Sửa Lỗi Ký Tự Subtitle**: Khắc phục lỗi hiển thị chuỗi ký tự thô `&bull;` thành dấu chấm tròn tinh tế `•`.
+  - Toàn bộ **212/212 tests Pytest PASS 100%** (12/12 tests `test_tklk_survey.py`). Đồng bộ mirror workspace & Vercel live.
