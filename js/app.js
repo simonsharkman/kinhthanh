@@ -1922,7 +1922,9 @@ class LogosApp {
             <span>|</span>
             <button type="button" class="tklk-nav-btn-link" id="btn-survey-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>‹ Chương Trước</button>
             <span>|</span>
-            <span style="font-weight: 700; color: var(--text-primary);">Chương ${id} / 114</span>
+            <button type="button" class="tklk-nav-btn-link tklk-chapter-jump-btn" id="btn-survey-chapter-jump" title="Bấm để nhảy nhanh đến chương bất kỳ (1 - 114)" style="font-weight: 800; color: var(--accent-gold); display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(212,175,55,0.08); padding: 0.2rem 0.55rem; border-radius: 4px; border: 1px dashed rgba(212,175,55,0.4); cursor: pointer;">
+              <i class="fa-solid fa-bookmark"></i> Chương ${id} / 114 <i class="fa-solid fa-caret-down" style="font-size: 0.75rem;"></i>
+            </button>
             <span>|</span>
             <button type="button" class="tklk-nav-btn-link" id="btn-survey-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>Chương Sau ›</button>
           </div>
@@ -1997,13 +1999,15 @@ class LogosApp {
           </div>
 
           <div class="tklk-reader-simple-bottom-bar">
-            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-back">« Quay lại Mục Lục 114 Chương</button>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-back">« Mục Lục</button>
             <span>|</span>
-            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>‹ Chương Trước</button>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-prev" ${id <= 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>‹ Trước</button>
+            <span>|</span>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-jump" style="color: var(--accent-gold); font-weight: 700;"><i class="fa-solid fa-bookmark"></i> Nhảy Chương</button>
             <span>|</span>
             <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-top">▲ Đầu Trang</button>
             <span>|</span>
-            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>Chương Sau ›</button>
+            <button type="button" class="tklk-nav-btn-link" id="btn-survey-footer-next" ${id >= 114 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>Sau ›</button>
           </div>
         </article>
       </div>
@@ -2098,6 +2102,28 @@ class LogosApp {
         this.renderSurveyChapter(id + 1);
       }
     });
+
+    container.querySelector('#btn-survey-chapter-jump')?.addEventListener('click', () => {
+      this.openTklkChapterJumpModal(id);
+    });
+    container.querySelector('#btn-survey-footer-jump')?.addEventListener('click', () => {
+      this.openTklkChapterJumpModal(id);
+    });
+
+    // Cho phép nhấp vào bất kỳ đoạn nào để bắt đầu nghe đọc từ đoạn đó
+    const chapterBodyEl = container.querySelector('#survey-chapter-body');
+    if (chapterBodyEl) {
+      const pElements = chapterBodyEl.querySelectorAll('p, h1, h2, h3, h4, h5, li, blockquote');
+      pElements.forEach(pEl => {
+        if (pEl.querySelector('p, h1, h2, h3, h4, h5, li, blockquote')) return;
+        pEl.style.cursor = 'pointer';
+        pEl.setAttribute('title', 'Nhấp để nghe đọc từ đoạn này');
+        pEl.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A') return;
+          this.playSurveyAudioFromElement(pEl, '#survey-chapter-body', 'survey-audio-status-text', 'btn-survey-audio-play-pause');
+        });
+      });
+    }
 
     container.querySelector('#btn-survey-footer-top')?.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3935,6 +3961,19 @@ class LogosApp {
   // THÁNH KINH LƯỢC KHẢO AUDIO NARRATION ENGINE (OmniVoice ALDEN & Web Speech)
   // ==========================================================================
 
+  updateSurveyAudioBtnState(isPlaying) {
+    const audioBtn = document.getElementById('btn-survey-audio');
+    if (!audioBtn) return;
+    const txtSpan = document.getElementById('survey-audio-btn-text');
+    if (isPlaying) {
+      audioBtn.innerHTML = '<i class="fa-solid fa-pause"></i> <span id="survey-audio-btn-text">Tạm Dừng</span>';
+      audioBtn.style.color = 'var(--accent-gold)';
+    } else {
+      audioBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i> <span id="survey-audio-btn-text">Nghe Đọc</span>';
+      audioBtn.style.color = 'var(--accent-gold)';
+    }
+  }
+
   toggleSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId) {
     if (this.surveyAudioState && this.surveyAudioState.isPlaying) {
       if (this.surveyAudioState.isPaused) {
@@ -3947,11 +3986,12 @@ class LogosApp {
         }
         const ppBtn = document.getElementById(playPauseBtnId);
         if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        this.updateSurveyAudioBtnState(true);
         const stEl = document.getElementById(statusElId);
         if (stEl) {
           stEl.innerHTML = this.surveyAudioState.isMediaElement
             ? '<span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-microphone"></i> Giọng ALDEN Studio (OmniVoice)</span> &bull; Đang phát âm thanh phòng thu...'
-            : 'Đang phát âm thanh sách nói...';
+            : `<span style="color:var(--accent-gold); font-weight:600;"><i class="fa-solid fa-volume-high"></i> Giọng Đọc Trực Tuyến</span> &bull; Đang đọc tiếp đoạn ${this.surveyAudioState.currentIndex + 1}/${this.surveyAudioState.paragraphs ? this.surveyAudioState.paragraphs.length : 1}...`;
         }
       } else {
         if (this.surveyAudioState.isMediaElement && this.surveyAudioState.audioEl) {
@@ -3963,6 +4003,7 @@ class LogosApp {
         }
         const ppBtn = document.getElementById(playPauseBtnId);
         if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        this.updateSurveyAudioBtnState(false);
         const stEl = document.getElementById(statusElId);
         if (stEl) stEl.textContent = 'Đã tạm dừng âm thanh';
       }
@@ -3972,7 +4013,7 @@ class LogosApp {
     this.startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId);
   }
 
-  async startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId) {
+  async startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId, startIndex = 0) {
     this.stopSurveyAudioNarration();
 
     const chapterId = this.activeSurveyChapterId || this.currentTklkChapterId || 1;
@@ -3980,12 +4021,17 @@ class LogosApp {
     const voiceMode = voiceModeSel ? voiceModeSel.value : 'alden';
     const audioSrc = `data/tklk/audio/${chapterId}.mp3`;
 
-    // 1. Nếu chọn Giọng ALDEN, kiểm tra file âm thanh phòng thu MP3
-    if (voiceMode === 'alden') {
+    // 1. Nếu chọn Giọng ALDEN và bắt đầu từ đầu (startIndex === 0), kiểm tra file MP3 phòng thu
+    if (voiceMode === 'alden' && startIndex === 0) {
       let hasStudioAudio = false;
       try {
         const check = await fetch(audioSrc, { method: 'HEAD' });
-        if (check.ok) hasStudioAudio = true;
+        const cType = check.headers.get('content-type') || '';
+        const cLen = parseInt(check.headers.get('content-length') || '0', 10);
+        // Xác nhận là tệp âm thanh thực sự (tránh SPA fallback trả về index.html 200)
+        if (check.ok && (cType.includes('audio') || cType.includes('mpeg') || cLen > 10000)) {
+          hasStudioAudio = true;
+        }
       } catch (e) {
         hasStudioAudio = false;
       }
@@ -4003,6 +4049,8 @@ class LogosApp {
 
         const ppBtn = document.getElementById(playPauseBtnId);
         if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        this.updateSurveyAudioBtnState(true);
+
         const stEl = document.getElementById(statusElId);
         if (stEl) {
           stEl.innerHTML = `<span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-microphone"></i> Giọng ALDEN Studio (OmniVoice)</span> &bull; Đang phát Chương ${chapterId} phòng thu chính hãng`;
@@ -4024,22 +4072,54 @@ class LogosApp {
 
         audioEl.onerror = () => {
           console.warn('Audio element error, falling back to Web Speech API');
-          this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode);
+          this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode, startIndex);
         };
 
         audioEl.play().catch(e => {
           console.warn('Auto-play blocked or error:', e);
-          this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode);
+          this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode, startIndex);
         });
         return;
       }
     }
 
-    // 2. Chuyển tiếp sang Web Speech API với ưu tiên giọng nam trầm
-    this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode);
+    // 2. Mở chương nào cũng đọc được ngay lập tức qua Web Speech API (ưu tiên giọng nam trầm)
+    this.startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode, startIndex);
   }
 
-  startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode = 'alden') {
+  playSurveyAudioFromElement(targetEl, contentSelector, statusElId, playPauseBtnId) {
+    if (!targetEl) return;
+    const contentEl = document.querySelector(contentSelector);
+    if (!contentEl) return;
+
+    const rawElements = Array.from(contentEl.querySelectorAll('p, h1, h2, h3, h4, h5, li, blockquote'));
+    const leafElements = rawElements.filter(el => !el.querySelector('p, h1, h2, h3, h4, h5, li, blockquote') && (el.innerText || '').trim().length > 5);
+
+    let foundIdx = leafElements.indexOf(targetEl);
+    if (foundIdx === -1) {
+      // Find closest matching element
+      foundIdx = leafElements.findIndex(el => el.contains(targetEl) || targetEl.contains(el));
+    }
+    if (foundIdx === -1) foundIdx = 0;
+
+    // Show audio bar if hidden
+    const audioBar = document.getElementById('survey-audio-player-bar');
+    if (audioBar) audioBar.style.display = 'block';
+
+    if (this.surveyAudioState && this.surveyAudioState.isPlaying && !this.surveyAudioState.isMediaElement) {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      this.surveyAudioState.currentIndex = foundIdx;
+      this.surveyAudioState.isPaused = false;
+      const ppBtn = document.getElementById(playPauseBtnId);
+      if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+      this.updateSurveyAudioBtnState(true);
+      this.speakSurveyParagraph();
+    } else {
+      this.startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId, foundIdx);
+    }
+  }
+
+  startSurveyWebSpeech(contentSelector, statusElId, playPauseBtnId, voiceMode = 'alden', startIndex = 0) {
     const contentEl = document.querySelector(contentSelector);
     if (!contentEl) return;
 
@@ -4048,22 +4128,32 @@ class LogosApp {
       return;
     }
 
-    // Trích xuất các đoạn văn bản
-    const paragraphs = Array.from(contentEl.querySelectorAll('p, h1, h2, h3, h4, li, div'))
-      .map(el => ({ el, text: (el.innerText || '').trim() }))
-      .filter(item => item.text.length > 10 && !item.text.startsWith('http') && !item.text.includes('Courtesy of'));
+    // Trích xuất các đoạn văn bản - CHỈ CHỌN CÁC PHẦN TỬ NỘI DUNG LÁ (p, h1-h5, li, blockquote). TUYỆT ĐỐI KHÔNG CHỌN div!
+    const rawElements = Array.from(contentEl.querySelectorAll('p, h1, h2, h3, h4, h5, li, blockquote'));
+    const paragraphs = [];
+
+    for (const el of rawElements) {
+      // Bỏ qua nếu phần tử chứa phần tử con dạng block khác
+      if (el.querySelector('p, h1, h2, h3, h4, h5, li, blockquote')) continue;
+      const text = (el.innerText || '').trim();
+      if (text.length > 5 && !text.startsWith('http') && !text.includes('Courtesy of')) {
+        paragraphs.push({ el, text });
+      }
+    }
 
     if (paragraphs.length === 0) {
       this.showToast('Không tìm thấy nội dung văn bản để đọc.', 'warning');
       return;
     }
 
+    const validIndex = Math.min(Math.max(0, startIndex), paragraphs.length - 1);
+
     this.surveyAudioState = {
       isPlaying: true,
       isPaused: false,
       isMediaElement: false,
       paragraphs,
-      currentIndex: 0,
+      currentIndex: validIndex,
       speed: this.surveyAudioSpeed || 1.0,
       voiceMode,
       contentSelector,
@@ -4073,6 +4163,7 @@ class LogosApp {
 
     const ppBtn = document.getElementById(playPauseBtnId);
     if (ppBtn) ppBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    this.updateSurveyAudioBtnState(true);
 
     this.speakSurveyParagraph();
   }
@@ -4091,13 +4182,14 @@ class LogosApp {
     document.querySelectorAll('.tklk-paragraph-reading').forEach(el => el.classList.remove('tklk-paragraph-reading'));
     if (currentItem.el) {
       currentItem.el.classList.add('tklk-paragraph-reading');
-      currentItem.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      currentItem.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     const stEl = document.getElementById(statusElId);
     if (stEl) {
       const voiceLabel = voiceMode === 'hoaimy' ? 'Nữ Hoài My' : 'Nam Minh';
-      stEl.innerHTML = `<span style="color:var(--accent-gold); font-weight:600;"><i class="fa-solid fa-volume-high"></i> Giọng Đọc Trực Tuyến (${voiceLabel})</span> &bull; Đang đọc đoạn ${currentIndex + 1}/${paragraphs.length}...`;
+      const pct = Math.round(((currentIndex + 1) / paragraphs.length) * 100);
+      stEl.innerHTML = `<span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-volume-high"></i> Đang đọc đoạn ${currentIndex + 1}/${paragraphs.length} (${pct}%)</span> &bull; Giọng ${voiceLabel} &bull; Nhấp đoạn bất kỳ để đọc từ đó`;
     }
 
     const spokenText = this.normalizeBibleAudioText(currentItem.text);
@@ -4154,6 +4246,123 @@ class LogosApp {
       this.surveyAudioState.isPlaying = false;
       this.surveyAudioState.isPaused = false;
     }
+    this.updateSurveyAudioBtnState(false);
+  }
+
+  // ==========================================================================
+  // MODAL NHẢY NHANH ĐẾN CHƯƠNG THÁNH KINH LƯỢC KHẢO (1 - 114)
+  // ==========================================================================
+
+  async openTklkChapterJumpModal(currentChapterId = 1) {
+    const modal = document.getElementById('tklk-chapter-jump-modal');
+    if (!modal) return;
+
+    modal.classList.remove('hidden');
+
+    // Nạp danh mục nếu chưa có
+    if (!this.tklkIndex || this.tklkIndex.length === 0) {
+      try {
+        const resp = await fetch('data/tklk/tklk-index.json');
+        if (resp.ok) this.tklkIndex = await resp.json();
+      } catch (e) {
+        console.warn('Error loading tklkIndex in jump modal:', e);
+      }
+    }
+
+    const grid = document.getElementById('tklk-jump-grid-container');
+    const searchInput = document.getElementById('tklk-jump-search-input');
+    const numInput = document.getElementById('tklk-quick-num-input');
+    const numGoBtn = document.getElementById('btn-tklk-quick-num-go');
+    let activeCat = 'all';
+
+    if (numInput) {
+      numInput.value = '';
+      setTimeout(() => numInput.focus(), 80);
+    }
+    if (searchInput) searchInput.value = '';
+
+    const renderGrid = (filterText = '', category = 'all') => {
+      if (!grid) return;
+      const q = (filterText || '').trim().toLowerCase();
+      const filtered = (this.tklkIndex || []).filter(item => {
+        const matchCat = category === 'all' || item.category === category;
+        const matchText = !q || String(item.id).includes(q) || item.title.toLowerCase().includes(q) || (item.category_name || '').toLowerCase().includes(q);
+        return matchCat && matchText;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-muted);">Không tìm thấy chương nào phù hợp</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <button type="button" class="tklk-jump-item-btn ${item.id === currentChapterId ? 'tklk-jump-item-active' : ''}" data-chapter="${item.id}">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-weight: 800; color: var(--accent-gold);">Chương ${item.id}</span>
+            <span style="font-size: 0.72rem; color: var(--text-muted);">${item.category_name || ''}</span>
+          </div>
+          <div style="font-size: 0.88rem; font-weight: 600; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            ${item.title}
+          </div>
+        </button>
+      `).join('');
+
+      grid.querySelectorAll('.tklk-jump-item-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const chId = parseInt(btn.dataset.chapter, 10);
+          if (chId) {
+            modal.classList.add('hidden');
+            this.stopSurveyAudioNarration();
+            this.renderSurveyChapter(chId);
+          }
+        });
+      });
+    };
+
+    renderGrid('', activeCat);
+
+    // Xử lý nút Đi Đến & phím Enter trên ô nhập số
+    const handleNumGo = () => {
+      const val = parseInt(numInput?.value, 10);
+      if (val >= 1 && val <= 114) {
+        modal.classList.add('hidden');
+        this.stopSurveyAudioNarration();
+        this.renderSurveyChapter(val);
+      } else {
+        this.showToast('Vui lòng nhập số chương từ 1 đến 114', 'warning');
+      }
+    };
+
+    numGoBtn?.replaceWith(numGoBtn.cloneNode(true));
+    document.getElementById('btn-tklk-quick-num-go')?.addEventListener('click', handleNumGo);
+
+    numInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleNumGo();
+      }
+    });
+
+    // Tìm kiếm tức thì
+    searchInput?.addEventListener('input', (e) => {
+      renderGrid(e.target.value, activeCat);
+    });
+
+    // Lọc theo danh mục
+    const catPills = document.querySelectorAll('#tklk-jump-cat-pills .survey-cat-pill');
+    catPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        catPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeCat = pill.dataset.cat || 'all';
+        renderGrid(searchInput ? searchInput.value : '', activeCat);
+      });
+    });
+
+    // Nút đóng modal
+    document.getElementById('btn-close-tklk-jump')?.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
   }
 
     async renderUtilitySurvey(activeFilter = 'all', chapterId = null) {

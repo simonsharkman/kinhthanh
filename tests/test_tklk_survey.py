@@ -167,3 +167,28 @@ def test_tklk_simple_classic_toc_matching_vietchristian():
     assert 'tklk-simple-toc-wrapper' in js, 'Missing tklk-simple-toc-wrapper in app.js'
     assert 'survey-simple-list' in js, 'Missing survey-simple-list in app.js'
     assert 'tklk-simple-title' in js, 'Missing tklk-simple-title in app.js'
+
+def test_tklk_chapter_jump_and_reading_highlight():
+    """Verify chapter jump modal, jump buttons, leaf paragraph selection, and click-to-read."""
+    with open(HTML_FILE, 'r', encoding='utf-8') as f:
+        html = f.read()
+    assert 'id="tklk-chapter-jump-modal"' in html, "Missing #tklk-chapter-jump-modal in index.html"
+    assert 'id="tklk-quick-num-input"' in html, "Missing #tklk-quick-num-input in index.html"
+    assert 'id="btn-tklk-quick-num-go"' in html, "Missing #btn-tklk-quick-num-go in index.html"
+    assert 'id="tklk-jump-search-input"' in html, "Missing #tklk-jump-search-input in index.html"
+    assert 'id="tklk-jump-grid-container"' in html, "Missing #tklk-jump-grid-container in index.html"
+
+    with open(JS_FILE, 'r', encoding='utf-8') as f:
+        js = f.read()
+    assert 'btn-survey-chapter-jump' in js, "Missing #btn-survey-chapter-jump in app.js"
+    assert 'btn-survey-footer-jump' in js, "Missing #btn-survey-footer-jump in app.js"
+    assert 'openTklkChapterJumpModal' in js, "Missing openTklkChapterJumpModal in app.js"
+    assert 'playSurveyAudioFromElement' in js, "Missing playSurveyAudioFromElement in app.js"
+    # Verify leaf element selection does not include raw div
+    assert "contentEl.querySelectorAll('p, h1, h2, h3, h4, h5, li, blockquote')" in js, "Must query leaf elements only"
+
+    with open(CSS_FILE, 'r', encoding='utf-8') as f:
+        css = f.read()
+    assert '.tklk-jump-item-btn' in css, "Missing .tklk-jump-item-btn in components.css"
+    assert '.tklk-jump-item-active' in css, "Missing .tklk-jump-item-active in components.css"
+    assert '.tklk-paragraph-reading' in css, "Missing .tklk-paragraph-reading in components.css"
