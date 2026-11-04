@@ -209,3 +209,31 @@ def test_tklk_modal_chapter_jump_and_audio_integration():
 
     # Verify jump modal routes to openTklkChapter if portal modal is open
     assert "document.getElementById('portal-utility-modal')?.classList.contains('hidden')" in js, "Must detect if portal utility modal is open when jumping chapters"
+
+
+def test_tklk_audio_chapter_change_synchronization():
+    """Verify that clicking Next/Prev or jumping chapters switches and synchronizes audio to the exact new chapter."""
+    with open(JS_FILE, 'r', encoding='utf-8') as f:
+        js = f.read()
+
+    # Modal view synchronization
+    assert 'openTklkChapter(chapterId, autoPlay = false)' in js, "openTklkChapter must accept autoPlay parameter"
+    assert 'triggerModalPrev' in js, "Must define triggerModalPrev in openTklkChapter"
+    assert 'triggerModalNext' in js, "Must define triggerModalNext in openTklkChapter"
+    assert 'this.openTklkChapter(id - 1, isAudioActive)' in js, "Modal prev button must propagate isAudioActive"
+    assert 'this.openTklkChapter(id + 1, isAudioActive)' in js, "Modal next button must propagate isAudioActive"
+
+    # Full page view synchronization
+    assert 'renderSurveyChapter(chapterId, autoPlay = false)' in js, "renderSurveyChapter must accept autoPlay parameter"
+    assert 'triggerSurveyPrev' in js, "Must define triggerSurveyPrev in renderSurveyChapter"
+    assert 'triggerSurveyNext' in js, "Must define triggerSurveyNext in renderSurveyChapter"
+    assert 'this.renderSurveyChapter(id - 1, isAudioActive)' in js, "Survey prev button must propagate isAudioActive"
+    assert 'this.renderSurveyChapter(id + 1, isAudioActive)' in js, "Survey next button must propagate isAudioActive"
+
+    # Audio element time update synchronization
+    assert 'audioEl.ontimeupdate' in js, "Must synchronize audioEl with leaf paragraph highlight"
+    assert 'audioEl.onended' in js, "Must handle audioEl onended cleanly"
+
+    # Jump modal synchronization
+    assert 'this.openTklkChapter(chId, isAudioActive)' in js, "Jump modal grid must propagate isAudioActive to openTklkChapter"
+    assert 'this.openTklkChapter(val, isAudioActive)' in js, "Jump modal num input must propagate isAudioActive to openTklkChapter"

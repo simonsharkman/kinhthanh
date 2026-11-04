@@ -1852,11 +1852,13 @@ class LogosApp {
     });
   }
 
-  async renderSurveyChapter(chapterId) {
+  async renderSurveyChapter(chapterId, autoPlay = false) {
     const id = parseInt(chapterId, 10);
     if (isNaN(id) || id < 1 || id > 114) return;
 
     this.activeSurveyChapterId = id;
+    this.currentTklkChapterId = id;
+    if (autoPlay) this.tklkAudioActive = true;
     this.updateUrlHash('survey', null, null, null, null, false);
 
     const container = document.getElementById('survey-page-container');
@@ -2045,9 +2047,23 @@ class LogosApp {
     });
 
     audioCloseBtn?.addEventListener('click', () => {
+      this.tklkAudioActive = false;
       this.stopSurveyAudioNarration();
       if (audioBar) audioBar.style.display = 'none';
     });
+
+    audioStopBtn?.addEventListener('click', () => {
+      this.tklkAudioActive = false;
+      this.stopSurveyAudioNarration();
+    });
+
+    if (autoPlay || this.tklkAudioActive) {
+      this.tklkAudioActive = true;
+      if (audioBar) audioBar.style.display = 'block';
+      setTimeout(() => {
+        this.startSurveyAudioNarration('#survey-chapter-body', 'survey-audio-status-text', 'btn-survey-audio-play-pause', 0);
+      }, 120);
+    }
 
     audioSpeedSel?.addEventListener('change', (e) => {
       const spd = parseFloat(e.target.value) || 1.0;
@@ -2077,31 +2093,25 @@ class LogosApp {
       this.renderSurveyView(this.tklkActiveFilter || 'all');
     });
 
-    container.querySelector('#btn-survey-prev')?.addEventListener('click', () => {
+    const triggerSurveyPrev = () => {
       if (id > 1) {
+        const isAudioActive = Boolean(this.tklkAudioActive || (this.surveyAudioState && this.surveyAudioState.isPlaying));
         this.stopSurveyAudioNarration();
-        this.renderSurveyChapter(id - 1);
+        this.renderSurveyChapter(id - 1, isAudioActive);
       }
-    });
-    container.querySelector('#btn-survey-footer-prev')?.addEventListener('click', () => {
-      if (id > 1) {
+    };
+    const triggerSurveyNext = () => {
+      if (id < 114) {
+        const isAudioActive = Boolean(this.tklkAudioActive || (this.surveyAudioState && this.surveyAudioState.isPlaying));
         this.stopSurveyAudioNarration();
-        this.renderSurveyChapter(id - 1);
+        this.renderSurveyChapter(id + 1, isAudioActive);
       }
-    });
+    };
 
-    container.querySelector('#btn-survey-next')?.addEventListener('click', () => {
-      if (id < 114) {
-        this.stopSurveyAudioNarration();
-        this.renderSurveyChapter(id + 1);
-      }
-    });
-    container.querySelector('#btn-survey-footer-next')?.addEventListener('click', () => {
-      if (id < 114) {
-        this.stopSurveyAudioNarration();
-        this.renderSurveyChapter(id + 1);
-      }
-    });
+    container.querySelector('#btn-survey-prev')?.addEventListener('click', triggerSurveyPrev);
+    container.querySelector('#btn-survey-footer-prev')?.addEventListener('click', triggerSurveyPrev);
+    container.querySelector('#btn-survey-next')?.addEventListener('click', triggerSurveyNext);
+    container.querySelector('#btn-survey-footer-next')?.addEventListener('click', triggerSurveyNext);
 
     container.querySelector('#btn-survey-chapter-jump')?.addEventListener('click', () => {
       this.openTklkChapterJumpModal(id);
@@ -4033,6 +4043,7 @@ class LogosApp {
 
   async startSurveyAudioNarration(contentSelector, statusElId, playPauseBtnId, startIndex = 0) {
     this.stopSurveyAudioNarration();
+    this.tklkAudioActive = true;
 
     const chapterId = this.currentTklkChapterId || this.activeSurveyChapterId || 1;
     const voiceModeSel = document.getElementById('tklk-modal-voice-mode') || document.getElementById('survey-audio-voice-mode');
@@ -4080,10 +4091,44 @@ class LogosApp {
           isMediaElement: true,
           audioEl,
           statusElId,
-          playPauseBtnId
+          playPauseBtnId,
+          chapterId
+        };
+
+        // Đồng bộ viền sáng đoạn văn theo tiến trình phát của tệp MP3 phòng thu
+        audioEl.ontimeupdate = () => {
+          if (!audioEl.duration || !this.surveyAudioState || !this.surveyAudioState.isPlaying) return;
+          const ratio = audioEl.currentTime / audioEl.duration;
+          const contentEl = document.querySelector(contentSelector);
+          if (!contentEl) return;
+          const rawElements = Array.from(contentEl.querySelectorAll('p, h1, h2, h3, h4, h5, li, blockquote'));
+          const leafElements = rawElements.filter(el => !el.querySelector('p, h1, h2, h3, h4, h5, li, blockquote') && (el.innerText || '').trim().length > 5);
+          if (leafElements.length === 0) return;
+          const targetIdx = Math.min(leafElements.length - 1, Math.floor(ratio * leafElements.length));
+          const currentReading = contentEl.querySelector('.tklk-paragraph-reading');
+          if (currentReading !== leafElements[targetIdx]) {
+            contentEl.querySelectorAll('.tklk-paragraph-reading').forEach(el => el.classList.remove('tklk-paragraph-reading'));
+            leafElements[targetIdx].classList.add('tklk-paragraph-reading');
+            leafElements[targetIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (stEl) {
+              const pct = Math.round(ratio * 100);
+              stEl.innerHTML = `<span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-microphone"></i> Giọng ALDEN Studio (OmniVoice)</span> &bull; Đang phát đoạn ${targetIdx + 1}/${leafElements.length} (${pct}%) &bull; Chương ${chapterId}`;
+            }
+          }
         };
 
         audioEl.onended = () => {
+          if (chapterId < 114) {
+            const nextId = chapterId + 1;
+            const isModalOpen = !document.getElementById('portal-utility-modal')?.classList.contains('hidden');
+            if (isModalOpen) {
+              this.openTklkChapter(nextId, true);
+            } else {
+              this.renderSurveyChapter(nextId, true);
+            }
+            return;
+          }
+          this.tklkAudioActive = false;
           this.stopSurveyAudioNarration();
           this.showToast('Đã phát xong toàn bộ chương Lược Khảo!', 'success');
         };
@@ -4193,6 +4238,19 @@ class LogosApp {
 
     const { paragraphs, currentIndex, statusElId, voiceMode } = this.surveyAudioState;
     if (currentIndex >= paragraphs.length) {
+      const curChId = this.currentTklkChapterId || this.activeSurveyChapterId || 1;
+      if (curChId < 114) {
+        const nextId = curChId + 1;
+        this.showToast(`Đã đọc xong! Đang chuyển tiếp sang Chương ${nextId}...`, 'info');
+        const isModalOpen = !document.getElementById('portal-utility-modal')?.classList.contains('hidden');
+        if (isModalOpen) {
+          this.openTklkChapter(nextId, true);
+        } else {
+          this.renderSurveyChapter(nextId, true);
+        }
+        return;
+      }
+      this.tklkAudioActive = false;
       this.stopSurveyAudioNarration();
       this.showToast('Đã đọc xong toàn bộ chương Lược Khảo!', 'success');
       return;
@@ -4249,12 +4307,23 @@ class LogosApp {
   }
 
   stopSurveyAudioNarration() {
+    const mediaEl = document.getElementById('survey-audio-media-element');
+    if (mediaEl) {
+      try {
+        mediaEl.pause();
+        mediaEl.currentTime = 0;
+      } catch(e) {}
+    }
     if (this.surveyAudioState && this.surveyAudioState.isMediaElement && this.surveyAudioState.audioEl) {
-      this.surveyAudioState.audioEl.pause();
-      this.surveyAudioState.audioEl.currentTime = 0;
+      try {
+        this.surveyAudioState.audioEl.pause();
+        this.surveyAudioState.audioEl.currentTime = 0;
+      } catch(e) {}
     }
     if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
+      try {
+        window.speechSynthesis.cancel();
+      } catch(e) {}
     }
     document.querySelectorAll('.tklk-paragraph-reading').forEach(el => el.classList.remove('tklk-paragraph-reading'));
 
@@ -4332,12 +4401,13 @@ class LogosApp {
           const chId = parseInt(btn.dataset.chapter, 10);
           if (chId) {
             modal.classList.add('hidden');
+            const isAudioActive = Boolean(this.tklkAudioActive || (this.surveyAudioState && this.surveyAudioState.isPlaying));
             this.stopSurveyAudioNarration();
             const isModalOpen = !document.getElementById('portal-utility-modal')?.classList.contains('hidden');
             if (isModalOpen) {
-              this.openTklkChapter(chId);
+              this.openTklkChapter(chId, isAudioActive);
             } else {
-              this.renderSurveyChapter(chId);
+              this.renderSurveyChapter(chId, isAudioActive);
             }
           }
         });
@@ -4351,12 +4421,13 @@ class LogosApp {
       const val = parseInt(numInput?.value, 10);
       if (val >= 1 && val <= 114) {
         modal.classList.add('hidden');
+        const isAudioActive = Boolean(this.tklkAudioActive || (this.surveyAudioState && this.surveyAudioState.isPlaying));
         this.stopSurveyAudioNarration();
         const isModalOpen = !document.getElementById('portal-utility-modal')?.classList.contains('hidden');
         if (isModalOpen) {
-          this.openTklkChapter(val);
+          this.openTklkChapter(val, isAudioActive);
         } else {
-          this.renderSurveyChapter(val);
+          this.renderSurveyChapter(val, isAudioActive);
         }
       } else {
         this.showToast('Vui lòng nhập số chương từ 1 đến 114', 'warning');
@@ -4617,12 +4688,13 @@ class LogosApp {
     });
   }
 
-  async openTklkChapter(chapterId) {
+  async openTklkChapter(chapterId, autoPlay = false) {
     const id = parseInt(chapterId, 10);
     if (isNaN(id) || id < 1 || id > 114) return;
 
     this.currentTklkChapterId = id;
     this.activeSurveyChapterId = id;
+    if (autoPlay) this.tklkAudioActive = true;
 
     const tabsContainer = document.getElementById('portal-utility-tabs');
     const bodyContainer = document.getElementById('portal-utility-body');
@@ -4685,13 +4757,23 @@ class LogosApp {
       this.renderUtilitySurvey(this.tklkActiveFilter || 'all');
     });
 
-    tabsContainer.querySelector('#btn-tklk-prev')?.addEventListener('click', () => {
-      if (id > 1) this.openTklkChapter(id - 1);
-    });
+    const triggerModalPrev = () => {
+      if (id > 1) {
+        const isAudioActive = Boolean(this.tklkAudioActive || (this.surveyAudioState && this.surveyAudioState.isPlaying));
+        this.stopSurveyAudioNarration();
+        this.openTklkChapter(id - 1, isAudioActive);
+      }
+    };
+    const triggerModalNext = () => {
+      if (id < 114) {
+        const isAudioActive = Boolean(this.tklkAudioActive || (this.surveyAudioState && this.surveyAudioState.isPlaying));
+        this.stopSurveyAudioNarration();
+        this.openTklkChapter(id + 1, isAudioActive);
+      }
+    };
 
-    tabsContainer.querySelector('#btn-tklk-next')?.addEventListener('click', () => {
-      if (id < 114) this.openTklkChapter(id + 1);
-    });
+    tabsContainer.querySelector('#btn-tklk-prev')?.addEventListener('click', triggerModalPrev);
+    tabsContainer.querySelector('#btn-tklk-next')?.addEventListener('click', triggerModalNext);
 
     tabsContainer.querySelector('#btn-tklk-chapter-jump')?.addEventListener('click', () => {
       this.openTklkChapterJumpModal(id);
@@ -4849,9 +4931,7 @@ class LogosApp {
     bodyContainer.scrollTop = 0;
 
     // Connect footer buttons
-    bodyContainer.querySelector('#btn-tklk-footer-prev')?.addEventListener('click', () => {
-      if (id > 1) this.openTklkChapter(id - 1);
-    });
+    bodyContainer.querySelector('#btn-tklk-footer-prev')?.addEventListener('click', triggerModalPrev);
 
     bodyContainer.querySelector('#btn-tklk-footer-jump')?.addEventListener('click', () => {
       this.openTklkChapterJumpModal(id);
@@ -4865,9 +4945,7 @@ class LogosApp {
       bodyContainer.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    bodyContainer.querySelector('#btn-tklk-footer-next')?.addEventListener('click', () => {
-      if (id < 114) this.openTklkChapter(id + 1);
-    });
+    bodyContainer.querySelector('#btn-tklk-footer-next')?.addEventListener('click', triggerModalNext);
 
     // Wire Modal Audio Controls
     const modalAudioBar = bodyContainer.querySelector('#tklk-modal-audio-bar');
@@ -4882,13 +4960,23 @@ class LogosApp {
     });
 
     modalStopBtn?.addEventListener('click', () => {
+      this.tklkAudioActive = false;
       this.stopSurveyAudioNarration();
     });
 
     modalCloseBtn?.addEventListener('click', () => {
+      this.tklkAudioActive = false;
       this.stopSurveyAudioNarration();
       if (modalAudioBar) modalAudioBar.style.display = 'none';
     });
+
+    if (autoPlay || this.tklkAudioActive) {
+      this.tklkAudioActive = true;
+      if (modalAudioBar) modalAudioBar.style.display = 'block';
+      setTimeout(() => {
+        this.startSurveyAudioNarration('#tklk-reader-content', 'tklk-modal-audio-status', 'btn-tklk-modal-audio-play', 0);
+      }, 120);
+    }
 
     modalSpeedSel?.addEventListener('change', (e) => {
       const spd = parseFloat(e.target.value) || 1.0;

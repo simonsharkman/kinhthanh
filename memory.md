@@ -157,3 +157,11 @@
     5. **Mở Chương Nào Nghe Được Chương Đó (1..114)**: Tự động phát âm thanh phòng thu ALDEN khi có tệp MP3, và tự động fallback sang Web Speech API giọng nam trầm mượt mà cho mọi chương còn lại mà không bao giờ bị đơ treo.
     6. **Sửa Lỗi Ký Tự Subtitle**: Khắc phục lỗi hiển thị chuỗi ký tự thô `&bull;` thành dấu chấm tròn tinh tế `•`.
   - Toàn bộ **212/212 tests Pytest PASS 100%** (12/12 tests `test_tklk_survey.py`). Đồng bộ mirror workspace & Vercel live.
+
+- **Milestone 70 (2026-11-04) - Đồng Bộ Tuyệt Đối Âm Thanh Theo Chữ Khi Bấm Chương Trước / Sau / Nhảy Chương (v4.6.3)**:
+  - Khắc phục triệt để phản hồi của anh Jimmy ("sao tôi không thấy thay đổi âm thanh khi tôi bấm sau hoặc trước. tôi muốn âm thanh phải theo chữ khi mình bấm chương, phải đọc đúng chương đó"):
+    1. **Tự Động Hủy & Chuyển Đổi Luồng Âm Thanh Tức Thì**: Khi đang nghe đọc mà bấm "Trước", "Sau", hoặc chọn chương từ Modal Nhảy Chương / Mục Lục, hệ thống lập tức dừng triệt để âm thanh của chương cũ (`speechSynthesis.cancel()` và reset `audioEl`), không để âm thanh cũ đọc đè lên chương mới.
+    2. **Âm Thanh Theo Chữ Ngay Lập Tức (Auto-Read on Chapter Switch)**: Tự động khởi tạo và phát âm thanh ngay lập tức cho chương mới vừa mở (`autoPlay = isAudioActive`), đọc đúng tiêu đề và đoạn văn đầu tiên của chương mới mà không cần bấm nút phát lại.
+    3. **Đồng Bộ Viền Sáng (.tklk-paragraph-reading) Chạy Theo Lời Đọc**: Cả luồng Web Speech API lẫn tệp MP3 phòng thu đều đồng bộ viền vàng 5px, nhãn `🔊 ĐANG ĐỌC` và tự động cuộn từng đoạn văn vào giữa màn hình theo sát tiến trình giọng đọc.
+    4. **Tự Động Chuyển Chương Khi Đọc Hết**: Khi đọc hết đoạn cuối cùng của chương hiện tại, hệ thống tự động nhảy sang chương kế tiếp và đọc tiếp liền mạch.
+  - Toàn bộ **213/213 tests Pytest PASS 100%** (13/13 tests `test_tklk_survey.py`). Đồng bộ mirror workspace & Vercel live.
