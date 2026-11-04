@@ -193,3 +193,9 @@
   - Bổ sung bộ chọn giọng đọc linh hoạt (`🎙️ Giọng ALDEN Studio`, `🔊 Giọng Nam Trầm Nam Minh`, `🔊 Giọng Nữ Hoài My`) trên thanh công cụ sách nói.
   - Tối ưu hóa Web Speech API: Luôn ưu tiên chọn `Microsoft NamMinh` (nam trầm ấm) cho cả đọc Lược Khảo và đọc câu Kinh Thánh, triệt tiêu giọng nữ máy móc.
   - Toàn bộ **210/210 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
+- **Milestone 68 (2026-11-04) - Modal Nhảy Chương (1-114), Hiệu Ứng Theo Dõi Đoạn Đang Đọc & Đọc Mọi Chương Mở Ngay Lập Tức (v4.6.0)**:
+  - Khắc phục sự cố bộ đọc bị treo ở các chương dài (>300KB như Sáng Thế Ký Ch 4) do trước đó selector chọn nhầm thẻ `div.Section1`. Đã lọc chính xác 100% các đoạn lá (`p`, `h1..h5`, `blockquote`), giúp mở bất kỳ chương nào từ 1 đến 114 cũng phát âm thanh mượt mà ngay lập tức.
+  - Bổ sung hiệu ứng "Đánh giá đọc tới đâu": Đoạn đang đọc được viền vàng 5px, phủ nền ánh vàng (`rgba(212,175,55,0.16)`), tỏa sáng hào quang, tự động cuộn vào trung tâm màn hình và hiển thị nhãn `🔊 ĐANG ĐỌC` kèm tiến trình `%`.
+  - Cho phép nhấp vào bất kỳ đoạn văn nào trên giao diện đọc để bắt đầu nghe đọc ngay từ đoạn đó.
+  - Tích hợp Modal Nhảy Nhanh Đến Chương (`#tklk-chapter-jump-modal`): Nút `🔖 Chương X / 114` ở đầu và chân trang mở hộp thoại tìm kiếm tức thì, lọc theo 5 danh mục hoặc nhập số 1-114 để nhảy ngay.
+  - Toàn bộ **211/211 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
