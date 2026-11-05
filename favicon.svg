@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a202c" />
+      <stop offset="100%" stop-color="#0a0d14" />
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe27a" />
+      <stop offset="50%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#aa8214" />
+    </linearGradient>
+    <linearGradient id="page-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fdfbf7" />
+      <stop offset="90%" stop-color="#ede6d6" />
+      <stop offset="100%" stop-color="#d9cdb6" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded squircle for mobile & web icon standard -->
+  <rect width="512" height="512" rx="112" fill="url(#bg-grad)" stroke="#d4af37" stroke-width="8" />
+
+  <!-- Radiance Aura -->
+  <circle cx="256" cy="220" r="160" fill="#d4af37" opacity="0.15" filter="url(#glow)" />
+
+  <!-- Open Bible Pages (Left & Right) -->
+  <g transform="translate(0, 20)">
+    <!-- Book Spine / Cover Shadow -->
+    <path d="M76 348 C160 330, 240 345, 256 364 C272 345, 352 330, 436 348 L444 330 C360 310, 276 325, 256 346 C236 325, 152 310, 68 330 Z" fill="#aa8214" />
+
+    <!-- Left Page Layers -->
+    <path d="M84 176 C164 162, 236 182, 256 204 L256 346 C236 324, 164 304, 84 318 Z" fill="url(#page-grad)" />
+    <!-- Right Page Layers -->
+    <path d="M428 176 C348 162, 276 182, 256 204 L256 346 C276 324, 348 304, 428 318 Z" fill="url(#page-grad)" />
+
+    <!-- Page Center Ribbons & Contour Lines -->
+    <path d="M256 204 L256 352" stroke="#aa8214" stroke-width="4" stroke-linecap="round" />
+    
+    <!-- Left Page Scripture Lines -->
+    <path d="M120 216 C160 210, 200 218, 230 226 M120 242 C160 236, 200 244, 230 252 M120 268 C160 262, 200 270, 230 278" stroke="#aa8214" stroke-width="3.5" stroke-linecap="round" opacity="0.6" />
+
+    <!-- Right Page Scripture Lines -->
+    <path d="M392 216 C352 210, 312 218, 282 226 M392 242 C352 236, 312 244, 282 252 M392 268 C352 262, 312 270, 282 278" stroke="#aa8214" stroke-width="3.5" stroke-linecap="round" opacity="0.6" />
+
+    <!-- Floating Radiant Golden Latin Cross above Book -->
+    <g filter="url(#glow)">
+      <!-- Vertical beam -->
+      <path d="M246 90 L266 90 L266 230 L246 230 Z" fill="url(#gold-grad)" />
+      <!-- Horizontal crossbar -->
+      <path d="M216 126 L296 126 L296 146 L216 146 Z" fill="url(#gold-grad)" />
+    </g>
+
+    <!-- Star of Light at Cross Center -->
+    <polygon points="256,124 260,133 269,136 260,139 256,148 252,139 243,136 252,133" fill="#ffffff" filter="url(#glow)" />
+  </g>
+</svg>

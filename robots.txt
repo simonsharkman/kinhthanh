@@ -1,0 +1,8 @@
+# Robots.txt for Logos MultiVerse (https://kinhthanhlogos.vercel.app/)
+# Allows search engine web crawlers (Googlebot, Bingbot, Applebot, etc.) to index the site
+
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: https://kinhthanhlogos.vercel.app/sitemap.xml

@@ -179,3 +179,21 @@
     + Nhận diện giọng nữ cao cấp: Ưu tiên `Microsoft HoaiMy Online (Natural)`, `Google tiếng Việt`, `Linh/Mai`, lọc đúng giọng nữ chuẩn.
     + Bổ sung profile `hoaimy` chính thức vào OmniVoice (`generate_voice.py`) kèm chuỗi Cinema Studio DSP.
   - Toàn bộ **216/216 tests Pytest PASS 100%**.
+
+- **Milestone 73 (2026-11-05) - Thiết Lập Toàn Diện Technical SEO, Google Schema JSON-LD, Robots.txt, Sitemap.xml & Khai Báo Google (v4.6.8)**:
+  - **Yêu Cầu Của Anh Jimmy**: "https://kinhthanhlogos.vercel.app/ hãy khai báo google và SEO trang này để lên top search".
+  - **Tối Ưu On-Page SEO & Social Sharing**:
+    - Canonical URL: `https://kinhthanhlogos.vercel.app/`.
+    - Meta Robots: `index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1`.
+    - Meta Keywords: Danh mục từ khóa vàng (Kinh Thánh, đối chiếu đa bản dịch BTT 1925, BDM 2002, KJV, ESV, Interlinear, bối cảnh 66 sách).
+    - OpenGraph (Facebook/Zalo) & Twitter Cards: Khung xem trước trực quan với logo favicon.svg, tiêu đề hoàng gia và mô tả chuẩn CTR.
+    - Google Site Verification: Khởi tạo sẵn thẻ `<meta name="google-site-verification">`.
+  - **Google Rich Snippets / Structured Data (JSON-LD)**:
+    - WebSite Schema: Tích hợp `SearchAction` (Sitelinks Searchbox) tra cứu Kinh Thánh trực tiếp trên Google.
+    - Organization Schema & WebApplication Schema: Định danh nền tảng web uy tín, hỗ trợ PWA và đa thiết bị.
+  - **Tài Nguyên SEO Cốt Lõi**:
+    - `robots.txt`: Cho phép toàn bộ crawler và trỏ tới sitemap chuẩn.
+    - `sitemap.xml`: 76 URLs chuẩn XML gồm trang chủ, các phân hệ khảo sát bối cảnh TKLK, TSK, Interlinear, tĩnh nguyện và 66 sách Kinh Thánh.
+    - `favicon.svg` & `site.webmanifest`: Biểu tượng Kinh Thánh mạ vàng Logos sắc nét đạt chuẩn Google SERP favicon.
+    - `vercel.json`: Cấu hình URL rewrites và headers tối ưu caching, nén, bảo mật.
+  - **Kiểm Thử & Xác Nhận**: Bổ sung `tests/test_seo_and_google_indexing.py`, toàn bộ **222/222 tests Pytest PASS 100%**.
