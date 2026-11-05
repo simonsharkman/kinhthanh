@@ -144,3 +144,12 @@ def test_vercel_json_routing_and_headers():
     with open(vercel_path, "r", encoding="utf-8") as f:
         cfg = json.load(f)
     assert "rewrites" in cfg or "headers" in cfg or "cleanUrls" in cfg
+
+
+def test_google_search_console_html_verification_file():
+    gsc_file = os.path.join(ROOT_DIR, "google3a7b6960f91207aa.html")
+    assert os.path.exists(gsc_file), "Google Search Console verification file must exist"
+    with open(gsc_file, "r", encoding="utf-8") as f:
+        content = f.read().strip()
+    assert content == "google-site-verification: google3a7b6960f91207aa.html"
+

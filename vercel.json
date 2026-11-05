@@ -23,6 +23,10 @@
       "destination": "/site.webmanifest"
     },
     {
+      "source": "/google3a7b6960f91207aa.html",
+      "destination": "/google3a7b6960f91207aa.html"
+    },
+    {
       "source": "/((?!.*\\.[\\w]+$).*)",
       "destination": "/index.html"
     }

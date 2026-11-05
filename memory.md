@@ -196,4 +196,5 @@
     - `sitemap.xml`: 76 URLs chuẩn XML gồm trang chủ, các phân hệ khảo sát bối cảnh TKLK, TSK, Interlinear, tĩnh nguyện và 66 sách Kinh Thánh.
     - `favicon.svg` & `site.webmanifest`: Biểu tượng Kinh Thánh mạ vàng Logos sắc nét đạt chuẩn Google SERP favicon.
     - `vercel.json`: Cấu hình URL rewrites và headers tối ưu caching, nén, bảo mật.
+    - `google3a7b6960f91207aa.html`: Tệp xác minh quyền sở hữu Google Search Console chính thức.
   - **Kiểm Thử & Xác Nhận**: Bổ sung `tests/test_seo_and_google_indexing.py`, toàn bộ **222/222 tests Pytest PASS 100%**.
