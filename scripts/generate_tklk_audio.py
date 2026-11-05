@@ -116,6 +116,16 @@ def normalize_timeline_and_scripture(text: str) -> str:
 
     # Normalize archaic Vietnamese D-stroke (U+00D0 ETH -> U+0110 D-STROKE)
     text = text.replace('\u00d0', '\u0110').replace('\u00f0', '\u0111')
+    text = re.sub(r'D[\u0335\u0336]', 'Đ', text)
+    text = re.sub(r'd[\u0335\u0336]', 'đ', text)
+    text = re.sub(r'[\u0189\u018a]', 'Đ', text)
+    text = re.sub(r'[\u0256\u0257]', 'đ', text)
+
+    # Standalone Đ. / đ. abbreviations -> đoạn / điểm
+    text = re.sub(r'(^|\s|[(\[{<,;])(?:Đ\.|đ\.)\s*(\d+)', r'\1đoạn \2', text, flags=re.I)
+    text = re.sub(r'(^|\s)đ\.\s*(?=[A-ZÀ-Ỹa-zà-ỹ])', r'\1điểm ', text)
+    text = re.sub(r'(^|\s)(mục|phần|điểm|câu)\s+[Đđ](?=$|\s|[.,;:!?-])', r'\1\2 đê', text, flags=re.I)
+    text = re.sub(r'(^|\s)\([Đđ]\)(?=$|\s|[.,;:!?-])', r'\1(đê)', text)
 
     def n2w(num):
         try:

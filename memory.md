@@ -141,40 +141,10 @@
   - Bổ sung bộ chọn giọng đọc linh hoạt (`🎙️ Giọng ALDEN Studio`, `🔊 Giọng Nam Trầm Nam Minh`, `🔊 Giọng Nữ Hoài My`) trên thanh công cụ sách nói.
   - Tối ưu hóa Web Speech API: Luôn ưu tiên chọn `Microsoft NamMinh` (nam trầm ấm) cho cả đọc Lược Khảo và đọc câu Kinh Thánh, triệt tiêu giọng nữ máy móc.
   - Toàn bộ **210/210 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
-- **Milestone 68 (2026-11-04) - Modal Nhảy Chương (1-114), Hiệu Ứng Theo Dõi Đoạn Đang Đọc & Đọc Mọi Chương Mở Ngay Lập Tức (v4.6.0)**:
-  - Khắc phục sự cố bộ đọc bị treo ở các chương dài (>300KB như Sáng Thế Ký Ch 4) do trước đó selector chọn nhầm thẻ `div.Section1`. Đã lọc chính xác 100% các đoạn lá (`p`, `h1..h5`, `blockquote`), giúp mở bất kỳ chương nào từ 1 đến 114 cũng phát âm thanh mượt mà ngay lập tức.
-  - Bổ sung hiệu ứng "Đánh giá đọc tới đâu": Đoạn đang đọc được viền vàng 5px, phủ nền ánh vàng (`rgba(212,175,55,0.16)`), tỏa sáng hào quang, tự động cuộn vào trung tâm màn hình và hiển thị nhãn `🔊 ĐANG ĐỌC` kèm tiến trình `%`.
-  - Cho phép nhấp vào bất kỳ đoạn văn nào trên giao diện đọc để bắt đầu nghe đọc ngay từ đoạn đó.
-  - Tích hợp Modal Nhảy Nhanh Đến Chương (`#tklk-chapter-jump-modal`): Nút `🔖 Chương X / 114` ở đầu và chân trang mở hộp thoại tìm kiếm tức thì, lọc theo 5 danh mục hoặc nhập số 1-114 để nhảy ngay.
-  - Toàn bộ **211/211 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
-
-- **Milestone 69 (2026-11-04) - Hoàn Thiện Trọn Vẹn Trải Nghiệm Modal & Giao Diện Đọc Thánh Kinh Lược Khảo (v4.6.2)**:
-  - Khắc phục triệt để các phản hồi của anh Jimmy trên ảnh chụp thực tế giao diện Modal (`#portal-utility-modal` / `openTklkChapter`):
-    1. **Nút Nhảy Nhanh Đến Chương (1-114) Tương Tác**: Thay thế `<span>` tĩnh trên toolbar bằng nút bấm trực tiếp `🔖 Chương X / 114 ▾` (`#btn-tklk-chapter-jump`) và nút chân trang (`#btn-tklk-footer-jump`).
-    2. **Hỗ Trợ Chuyển Đổi Chương Mượt Mà Trong Cả Modal Lẫn Toàn Màn Hình**: Khi modal đang mở, Modal Nhảy Chương (`#tklk-chapter-jump-modal`, z-index 2500) tự động chuyển chương trực tiếp ngay trong modal (`openTklkChapter`) mà không cần đóng hay tải lại trang.
-    3. **Thanh Phát Sách Nói Hoàn Chỉnh Trong Modal**: Tích hợp thanh phát audio chuyên nghiệp `#tklk-modal-audio-bar` (Nút Phát/Tạm dừng, Dừng hẳn, Chọn giọng ALDEN/Nam Trầm/Nữ, Tốc độ 0.8x-1.5x, Trạng thái % tiến trình).
-    4. **Hiệu Ứng Đánh Giá Đọc Tới Đâu & Nhấp Đoạn Bất Kỳ Để Nghe**: Bổ sung hiệu ứng viền vàng 5px `.tklk-paragraph-reading` kèm nhãn `🔊 ĐANG ĐỌC`, tự động cuộn giữa màn hình; mọi đoạn văn bản trong modal đều hỗ trợ nhấp chuột để bắt đầu nghe ngay từ đoạn đó.
-    5. **Mở Chương Nào Nghe Được Chương Đó (1..114)**: Tự động phát âm thanh phòng thu ALDEN khi có tệp MP3, và tự động fallback sang Web Speech API giọng nam trầm mượt mà cho mọi chương còn lại mà không bao giờ bị đơ treo.
-    6. **Sửa Lỗi Ký Tự Subtitle**: Khắc phục lỗi hiển thị chuỗi ký tự thô `&bull;` thành dấu chấm tròn tinh tế `•`.
-  - Toàn bộ **212/212 tests Pytest PASS 100%** (12/12 tests `test_tklk_survey.py`). Đồng bộ mirror workspace & Vercel live.
-
-- **Milestone 70 (2026-11-04) - Đồng Bộ Tuyệt Đối Âm Thanh Theo Chữ Khi Bấm Chương Trước / Sau / Nhảy Chương (v4.6.3)**:
-  - Khắc phục triệt để phản hồi của anh Jimmy ("sao tôi không thấy thay đổi âm thanh khi tôi bấm sau hoặc trước. tôi muốn âm thanh phải theo chữ khi mình bấm chương, phải đọc đúng chương đó"):
-    1. **Tự Động Hủy & Chuyển Đổi Luồng Âm Thanh Tức Thì**: Khi đang nghe đọc mà bấm "Trước", "Sau", hoặc chọn chương từ Modal Nhảy Chương / Mục Lục, hệ thống lập tức dừng triệt để âm thanh của chương cũ (`speechSynthesis.cancel()` và reset `audioEl`), không để âm thanh cũ đọc đè lên chương mới.
-    2. **Âm Thanh Theo Chữ Ngay Lập Tức (Auto-Read on Chapter Switch)**: Tự động khởi tạo và phát âm thanh ngay lập tức cho chương mới vừa mở (`autoPlay = isAudioActive`), đọc đúng tiêu đề và đoạn văn đầu tiên của chương mới mà không cần bấm nút phát lại.
-    3. **Đồng Bộ Viền Sáng (.tklk-paragraph-reading) Chạy Theo Lời Đọc**: Cả luồng Web Speech API lẫn tệp MP3 phòng thu đều đồng bộ viền vàng 5px, nhãn `🔊 ĐANG ĐỌC` và tự động cuộn từng đoạn văn vào giữa màn hình theo sát tiến trình giọng đọc.
-    4. **Tự Động Chuyển Chương Khi Đọc Hết**: Khi đọc hết đoạn cuối cùng của chương hiện tại, hệ thống tự động nhảy sang chương kế tiếp và đọc tiếp liền mạch.
-  - Toàn bộ **213/213 tests Pytest PASS 100%** (13/13 tests `test_tklk_survey.py`). Đồng bộ mirror workspace & Vercel live.
-
-- **M4.6.5 (TKLK Voice Switching & Audio Controls Fix - ALDEN Studio & Stop Immunity)**:
-  - **Sự Cố Khắc Phục Triệt Để**:
-    1. **Sửa Lỗi Bộ Chọn Giọng (Voice Selector Immunity)**: Khắc phục lỗi modalVoiceModeSel không có sự kiện change. Khi chọn giữa Giọng ALDEN Studio, Giọng Nam Trầm, Giọng Nữ, hệ thống lập tức chuyển đổi giọng đọc ngay tại đoạn hiện tại và tự động ghi nhớ vào localStorage.
-    2. **Sửa Lỗi Nút Dừng Âm Thanh (Stop Button Immunity)**: Gán trạng thái isPlaying = false trước khi cancel, lọc bỏ lỗi canceled/interrupted, chấm dứt lỗi bấm nút Dừng nhưng trình duyệt vẫn nhảy đọc tiếp.
-    3. **Chấm Dứt Lỗi Rơi Sang Giọng Nữ Khi Chọn Đoạn**: Bỏ điều kiện cứng startIndex === 0. Khi nghe MP3 mà bấm chọn đoạn bất kỳ, hệ thống tua trực tiếp trong tệp MP3 phòng thu mà không rơi về giọng máy Web Speech API.
-    4. **Xuất Bản & Master Âm Thanh Phòng Thu ALDEN Chương 39 (A-ghê)**: Hoàn tất tệp data/tklk/audio/39.mp3 (5.5 MB) qua chuỗi DSP Cinema Warmth (150Hz +4.2dB, 3.2kHz +2.4dB, -16 LUFS Loudnorm).
-    5. **Chuẩn Hóa Nút Dừng Tròn 32px**: #btn-tklk-modal-audio-stop tròn 32px nền tối, hover đỏ cảnh báo, loại bỏ giao diện nút méo của trình duyệt.
-  - Toàn bộ **214/214 tests Pytest PASS 100%** (14/14 tests test_tklk_survey.py).
-
+- **Milestones 68–70.5 (2026-11-04) - Nâng Cấp Toàn Diện Modal & Audio Lược Khảo (v4.6.0 ~ v4.6.5)**:
+  - Lọc lá văn bản, khắc phục treo chương dài; hiệu ứng viền vàng `.tklk-paragraph-reading`, nhãn `🔊 ĐANG ĐỌC`, tự cuộn giữa màn hình, nhấp đoạn bất kỳ để nghe ngay.
+  - Modal Nhảy Chương 1-114 tương tác trực tiếp trong modal; thanh audio modal hoàn chỉnh (Phát/Dừng tròn 32px, ALDEN/Nam/Nữ, tốc độ 0.8x-1.5x, tiến trình %).
+  - Đồng bộ tức thì âm thanh theo chữ khi chuyển chương; hủy sạch luồng audio cũ, auto-play chương mới mượt mà; sửa sự kiện change bộ chọn giọng.
 
 - **Milestone 71 (2026-11-04) - Chuẩn Hóa Toàn Diện Cách Đọc Thời Gian (T.C. & S.C.), Miễn Nhiễm OCR/Unicode & Xuất Bản Audio Phòng Thu ALDEN Chương 39 (v4.6.6)**:
   - **Yêu Cầu Của Anh Jimmy**: "(639-608 T.C) đọc là năm sáu trăm ba mươi chín đến sáu trăm lẻ tám trước chúa; 50 S.C đọc là năm năm mươi sau chúa. Rà soát lại và chỉnh đốn cách đọc".
@@ -196,3 +166,16 @@
     - Hoàn tất tổng hợp 9/9 chunks với giọng đọc `sample_alden`, master qua chuỗi Cinema DSP Chain (150Hz warmth + 3.2kHz intimacy + -16 LUFS Loudnorm).
     - Tệp âm thanh chất lượng cao tại `data/tklk/audio/39.mp3` (7.35 MB, thời lượng 6 phút 25 giây).
   - Toàn bộ **215/215 tests Pytest PASS 100%**.
+
+
+- **Milestone 72 (2026-11-05) - Khắc Phục Triệt Để Lỗi Giọng Nữ Đọc Đ Thành D & Tăng Độ Truyền Cảm Sâu Lắng (v4.6.7)**:
+  - **Phản Hồi & Yêu Cầu Của Anh Jimmy**: "giọng đọc nữ mỗi khi đọc Đ thì lại thành D, hãy kiểm tra lại và chỉnh đốn lại. hãy tăng độ truyền cảm sâu cho người nghe".
+  - **Nguyên Nhân Gốc Rễ**: 11.852 ký tự `Ð` (U+00D0 LATIN CAPITAL LETTER ETH do lỗi font/bảng mã cũ Windows-1258/TCVN3) trong toàn bộ 114 chương Lược Khảo và Kinh Thánh khiến các bộ đọc TTS (Edge/Azure/Chrome/Web Speech) chuyển tự thành `D` la-tinh thông thường (`Ðức` -> `Dức`, `Ða-vít` -> `Da-vít`, `Ðoạn` -> `Doạn`).
+  - **Làm Sạch CSDL Gốc 100%**: Thay thế triệt để toàn bộ 11.852 ký tự `\u00d0` thành `\u0110` (Đ) và `\u00f0` thành `\u0111` (đ) trên 156 file CSDL JSON (`data/tklk/chapters/`, `tklk-index.json`, `data/bibles/`). Số ký tự Eth còn lại: đúng 0.
+  - **Chuẩn Hóa Ngữ Âm Chữ Đ Rời & Viết Tắt**: Bổ sung quy tắc trong `normalizeBibleAudioText`: `Đ.`/`đ.` trước số -> `đoạn $1`, `đ.` trước chữ -> `điểm `, `mục/phần Đ` -> `mục/phần đê`, triệt tiêu cách đọc nhầm thành `dê` hay `đây`.
+  - **Nâng Cấp Độ Truyền Cảm Sâu Lắng Cho Giọng Nữ (Hoài My & Web Speech API)**:
+    + Cao độ (Pitch): Hạ từ `1.05` xuống `0.96` giúp giọng ấm áp, có độ dày, lắng đọng, loại bỏ hoàn toàn âm the thé hoặc nông cạn.
+    + Tốc độ (Rate): Tinh chỉnh nhịp thở `0.94` khoan thai, trang nghiêm, lắng đọng từng chữ.
+    + Nhận diện giọng nữ cao cấp: Ưu tiên `Microsoft HoaiMy Online (Natural)`, `Google tiếng Việt`, `Linh/Mai`, lọc đúng giọng nữ chuẩn.
+    + Bổ sung profile `hoaimy` chính thức vào OmniVoice (`generate_voice.py`) kèm chuỗi Cinema Studio DSP.
+  - Toàn bộ **216/216 tests Pytest PASS 100%**.

@@ -2000,7 +2000,7 @@ class LogosApp {
           </div>
 
           <div class="tklk-reader-content" id="survey-chapter-body" style="font-size: ${this.tklkFontSize}px; line-height: 1.85;">
-            ${chapterData.content_html}
+            ${(chapterData.content_html || '').replace(/\u00d0/g, 'Đ').replace(/\u00f0/g, 'đ')}
           </div>
 
           <div class="tklk-reader-simple-bottom-bar">
@@ -3108,9 +3108,25 @@ class LogosApp {
   normalizeBibleAudioText(text) {
     if (!text || typeof text !== 'string') return '';
 
-    let res = text.replace(/\u00d0/g, '\u0110').replace(/\u00f0/g, '\u0111').replace(/\[\d+\]|<[^>]+>/g, ' ');
+    // 0. Comprehensive Unicode & Archaic Font Immunity (Ð/ð Eth, combining strokes, African D)
+    let res = text
+      .replace(/\u00d0/g, '\u0110')
+      .replace(/\u00f0/g, '\u0111')
+      .replace(/D[\u0335\u0336]/g, '\u0110')
+      .replace(/d[\u0335\u0336]/g, '\u0111')
+      .replace(/[\u0189\u018a]/g, '\u0110')
+      .replace(/[\u0256\u0257]/g, '\u0111')
+      .replace(/\[\d+\]|<[^>]+>/g, ' ');
+
+    // Normalize OCR broken hyphen words: Đa - vít -> Đa-vít, Nê - hê-mi -> Nê-hê-mi
     res = res.replace(/(\w+)\s*-\s+(\w+)/g, '$1-$2');
     res = res.replace(/(^|\s)-\s*(\w+)/g, '$1$2');
+
+    // Standalone Đ. / đ. abbreviations -> đoạn / điểm
+    res = res.replace(/(^|\s|[(\[{<,;])(?:Đ\.|đ\.)\s*(\d+)/gi, '$1đoạn $2');
+    res = res.replace(/(^|\s)đ\.\s*(?=[A-ZÀ-Ỹa-zà-ỹ])/g, '$1điểm ');
+    res = res.replace(/(^|\s)(mục|phần|điểm|câu)\s+[Đđ](?=$|\s|[.,;:!?-])/gi, '$1$2 đê');
+    res = res.replace(/(^|\s)\([Đđ]\)(?=$|\s|[.,;:!?-])/g, '$1(đê)');
 
     // 0. Foreign words, authors, book titles & technical terms pronunciation
     const foreignDict = [
@@ -3318,7 +3334,8 @@ class LogosApp {
 
       const utterance = new SpeechSynthesisUtterance(spokenText);
       utterance.lang = 'vi-VN';
-      utterance.rate = this.audioState.speed || 1.0;
+      utterance.rate = (this.audioState.speed || 1.0) * 0.95;
+      utterance.pitch = 0.92;
 
       const voices = window.speechSynthesis.getVoices();
       const viMaleVoice = voices.find(v => (v.name.includes('NamMinh') || v.name.includes('Nam') || v.name.toLowerCase().includes('male')) && (v.lang.includes('vi') || v.lang.includes('VI')));
@@ -4491,20 +4508,28 @@ class LogosApp {
     const spokenText = this.normalizeBibleAudioText(currentItem.text);
     const utterance = new SpeechSynthesisUtterance(spokenText);
     utterance.lang = 'vi-VN';
-    utterance.rate = this.surveyAudioState.speed || 1.0;
 
-    
-    // Hạ trầm ấm áp cho ALDEN & Nam Minh, trong trẻo cho Hoài My
+    // Điều chỉnh cao độ và tốc độ truyền cảm sâu:
+    // - Giọng Nữ (Hoài My): pitch 0.96 (trầm ấm, sâu lắng, dịu êm, loại bỏ giọng the thé) + rate 0.94 (nhịp thở truyền cảm)
+    // - Giọng Nam (Nam Minh / ALDEN): pitch 0.88 (trầm đĩnh đạc) + rate 0.96
+    const baseSpeed = this.surveyAudioState.speed || 1.0;
     if (voiceMode === 'hoaimy') {
-      utterance.pitch = 1.05;
+      utterance.pitch = 0.96;
+      utterance.rate = Math.max(0.7, baseSpeed * 0.94);
     } else {
       utterance.pitch = 0.88;
+      utterance.rate = Math.max(0.7, baseSpeed * 0.96);
     }
 
     const voices = window.speechSynthesis.getVoices();
     let selectedVoice = null;
     if (voiceMode === 'hoaimy') {
-      selectedVoice = voices.find(v => (v.name.includes('HoaiMy') || v.name.includes('Female')) && (v.lang.includes('vi') || v.lang.includes('VI')));
+      // Ưu tiên 1: Giọng Nữ Natural / Neural chính thức (Hoài My Natural)
+      selectedVoice = voices.find(v => (v.name.includes('HoaiMy') || (v.name.includes('Female') && v.name.includes('Natural'))) && (v.lang.includes('vi') || v.lang.includes('VI')));
+      // Ưu tiên 2: Giọng Nữ tiếng Việt phổ biến (Google tiếng Việt, Linh, Mai, Female)
+      if (!selectedVoice) {
+        selectedVoice = voices.find(v => (v.name.includes('HoaiMy') || v.name.includes('Female') || v.name.includes('Google') || v.name.includes('Linh') || v.name.includes('Mai') || v.name.includes('Nu') || v.name.includes('Nữ')) && (v.lang.includes('vi') || v.lang.includes('VI')));
+      }
     } else {
       // NamMinh / Male voice prioritized
       selectedVoice = voices.find(v => (v.name.includes('NamMinh') || v.name.includes('Nam') || v.name.toLowerCase().includes('male')) && (v.lang.includes('vi') || v.lang.includes('VI')));
@@ -5124,7 +5149,7 @@ class LogosApp {
 
         <!-- Clean Reader Content directly at the top -->
         <div class="tklk-reader-content" id="tklk-reader-content" style="font-size: ${this.tklkFontSize}px; line-height: 1.85;">
-          ${chapterData.content_html}
+          ${(chapterData.content_html || '').replace(/\u00d0/g, 'Đ').replace(/\u00f0/g, 'đ')}
         </div>
 
         <!-- Single Quiet Source Credit at Bottom -->

@@ -309,3 +309,48 @@ def test_tklk_timeline_date_pronunciation_normalization():
     assert normalize_text_for_speech("(606-586 T.C.)") == "năm sáu trăm lẻ sáu đến năm trăm tám mươi sáu trước Chúa"
     assert normalize_text_for_speech("50 S.C") == "năm năm mươi sau Chúa"
     assert normalize_text_for_speech("(50 S.C.)") == "năm năm mươi sau Chúa"
+
+
+def test_female_voice_d_normalization_and_deep_expression():
+    """Verify complete eradication of U+00D0 Eth characters (Đ pronounced as D),
+    abbreviation expansions for Đ. / đ., and warm intimate pitch tuning (0.96) for female voice.
+    """
+    with open(JS_FILE, 'r', encoding='utf-8') as f:
+        js = f.read()
+
+    # JS normalization rules
+    assert r"\u00d0" in js, "Must clean \\u00d0 in app.js"
+    assert r"D[\u0335\u0336]" in js, "Must normalize combining stroke D in app.js"
+    assert r"đoạn $2" in js, "Must expand Đ. / đ. abbreviations in app.js"
+    assert "utterance.pitch = 0.96;" in js, "Female voice Hoài My must use warm, deep expressive pitch 0.96"
+
+    # Verify zero corrupt Eth characters in all TKLK chapters
+    ch_dir = os.path.join(DATA_DIR, 'chapters')
+    for fname in os.listdir(ch_dir):
+        if fname.endswith('.json'):
+            fpath = os.path.join(ch_dir, fname)
+            with open(fpath, 'r', encoding='utf-8') as f:
+                content = f.read()
+            assert '\u00d0' not in content, f"Found corrupt U+00D0 in {fname}"
+            assert '\u00f0' not in content, f"Found corrupt U+00F0 in {fname}"
+
+    # Python audio generator tests
+    from scripts.generate_tklk_audio import normalize_timeline_and_scripture
+    assert normalize_timeline_and_scripture("\u00d0\u1ee9c Ch\u00faa Tr\u1edd\u0069") == "Đức Chúa Trời"
+    assert normalize_timeline_and_scripture("\u00d0a-v\u00edt") == "Đa-vít"
+    assert normalize_timeline_and_scripture("\u00d0o\u1ea1n 1") == "Đoạn 1"
+    assert normalize_timeline_and_scripture("đ. 2") == "đoạn 2"
+    assert normalize_timeline_and_scripture("mục Đ") == "mục đê"
+
+    # OmniVoice generator tests
+    import sys
+    sys.path.insert(0, r"E:\Omnivoice")
+    from generate_voice import normalize_text_for_speech, VOICE_PROFILES
+
+    assert normalize_text_for_speech("\u00d0\u1ee9c Ch\u00faa Tr\u1edd\u0069") == "Đức Chúa Trời"
+    assert normalize_text_for_speech("\u00d0a-v\u00edt") == "Đa-vít"
+    assert normalize_text_for_speech("đ. 1") == "đoạn 1"
+    assert "hoaimy" in VOICE_PROFILES, "OmniVoice must include official 'hoaimy' profile"
+    assert VOICE_PROFILES["hoaimy"]["edge_voice"] == "vi-VN-HoaiMyNeural"
+    assert VOICE_PROFILES["hoaimy"]["pitch"] == "-1Hz"
+
