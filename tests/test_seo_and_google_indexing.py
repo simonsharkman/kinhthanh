@@ -159,6 +159,11 @@ def test_targeted_keywords_seo_optimization():
     with open(html_path, "r", encoding="utf-8") as f:
         content = f.read()
 
+    # Exact SERP title requested by user
+    assert "<title>Kinh Thánh Logos — Kinh Thánh Đối Chiếu</title>" in content, (
+        "Title must be exact requested 'Kinh Thánh Logos — Kinh Thánh Đối Chiếu'"
+    )
+
     lower = content.lower()
 
     # Required target keywords in index.html

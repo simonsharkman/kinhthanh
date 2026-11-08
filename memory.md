@@ -208,3 +208,10 @@
   - **Google Schema FAQPage (JSON-LD)**: Bổ sung 4 cặp Question/Answer giúp Google hiển thị Rich Snippet dạng Accordion mở rộng trực tiếp trên kết quả tìm kiếm.
   - **Semantic SEO Footer (`.site-seo-footer`)**: Thiết lập 4 cột liên kết điều hướng chuẩn mực: Kinh Thánh Tin Lành, Kinh Thánh Công Giáo, Holy Bible & Interlinear, Tiện ích Audio Bible & Tra cứu.
   - **Kiểm Thử**: Cập nhật `tests/test_seo_and_google_indexing.py`, toàn bộ **224/224 tests Pytest PASS 100%**.
+
+- **Milestone 75 (2026-11-08) - Cập Nhật Tiêu Đề SERP 'Kinh Thánh Logos — Kinh Thánh Đối Chiếu' (v4.7.0)**:
+  - **Yêu Cầu Của Anh Jimmy**: "tôi muốn hiển thị 'Kinh thánh logos - kinh thánh đối chiếu'".
+  - **Khẳng Định Vị Trí Top 1 Google**: Trang web đã xuất hiện tại vị trí số 1 kết quả tìm kiếm Google với từ khóa `kinhthanhlogos`.
+  - **Chuẩn Hóa Title SERP**: Thiết lập `<title>Kinh Thánh Logos — Kinh Thánh Đối Chiếu</title>` (39 ký tự lý tưởng, không bị cắt dấu `...`).
+  - **Đồng Bộ Hệ Sinh Thái Metadata**: Cập nhật `og:title`, `twitter:title`, `site.webmanifest` và `WebSite Schema` đồng nhất.
+  - **Kiểm Thử**: Toàn bộ **224/224 tests Pytest PASS 100%**.
