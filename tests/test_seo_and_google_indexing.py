@@ -153,3 +153,30 @@ def test_google_search_console_html_verification_file():
         content = f.read().strip()
     assert content == "google-site-verification: google3a7b6960f91207aa.html"
 
+
+def test_targeted_keywords_seo_optimization():
+    html_path = os.path.join(ROOT_DIR, "index.html")
+    with open(html_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    lower = content.lower()
+
+    # Required target keywords in index.html
+    for kw in ["kinh thánh", "tin lành", "công giáo", "bible"]:
+        assert kw in lower, f"index.html must contain keyword '{kw}'"
+
+    # Meta keywords must cover both accented & unaccented popular search queries
+    for term in ["kinhthanh", "tinlanh", "conggiao", "bible"]:
+        assert term in lower, f"index.html meta keywords must contain '{term}'"
+
+    # Must contain FAQPage schema in JSON-LD
+    assert '"@type": "faqpage"' in lower or '"@type": "FAQPage"' in content, (
+        "index.html must contain FAQPage schema for rich Google Search snippet accordions"
+    )
+
+    # Must contain semantic SEO footer for Googlebot crawling
+    assert '<footer' in content and '</footer>' in content, (
+        "index.html must contain a semantic <footer> for SEO indexing"
+    )
+
+

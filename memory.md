@@ -198,3 +198,13 @@
     - `vercel.json`: Cấu hình URL rewrites và headers tối ưu caching, nén, bảo mật.
     - `google3a7b6960f91207aa.html`: Tệp xác minh quyền sở hữu Google Search Console chính thức.
   - **Kiểm Thử & Xác Nhận**: Bổ sung `tests/test_seo_and_google_indexing.py`, toàn bộ **222/222 tests Pytest PASS 100%**.
+
+- **Milestone 74 (2026-11-08) - Tối Ưu Chuyên Sâu Từ Khóa Vàng Kinh Thánh, Tin Lành, Công Giáo, Bible & Semantic SEO Footer (v4.6.9)**:
+  - **Yêu Cầu Của Anh Jimmy**: "hãy chú tâm vào seo các từ khoá 'kinhthanh' bible, tinlanh, conggiao và các nội dung có trong trang mà người ta hay tìm".
+  - **Title Tag & Meta Description**:
+    - Title: `Kinh Thánh Online — Tra Cứu & Đối Chiếu Tin Lành, Công Giáo, Bible Việt Nam`.
+    - Description: Đọc và tra cứu Kinh Thánh trực tuyến Cựu Ước & Tân Ước, đối chiếu đa bản dịch Tin Lành (BTT 1925, BDM 2002), Công Giáo (CGKPV), KJV, ESV, Interlinear, audio AI và bối cảnh 66 sách.
+    - Keywords: Bổ sung biến thể không dấu (`kinhthanh`, `tinlanh`, `conggiao`, `doc kinh thanh`) và có dấu đầy đủ.
+  - **Google Schema FAQPage (JSON-LD)**: Bổ sung 4 cặp Question/Answer giúp Google hiển thị Rich Snippet dạng Accordion mở rộng trực tiếp trên kết quả tìm kiếm.
+  - **Semantic SEO Footer (`.site-seo-footer`)**: Thiết lập 4 cột liên kết điều hướng chuẩn mực: Kinh Thánh Tin Lành, Kinh Thánh Công Giáo, Holy Bible & Interlinear, Tiện ích Audio Bible & Tra cứu.
+  - **Kiểm Thử**: Cập nhật `tests/test_seo_and_google_indexing.py`, toàn bộ **224/224 tests Pytest PASS 100%**.
