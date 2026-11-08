@@ -7515,7 +7515,7 @@ class LogosApp {
       const v = data.verse;
       verseBox.innerHTML = `
         <strong>${v.v ? v.v + ':' : ''}</strong> ${v.text || ''} 
-        <a class="devotion-ref-tag" data-book="${v.book || 'HAB'}" data-ch="${v.ch || 3}" data-v="${v.v || 1}" title="Nhấp để mở đọc và đối chiếu">${v.ref || ''}</a>
+        <a class="devotion-ref-tag" href="#bible/${v.book || 'HAB'}/${v.ch || 3}" data-book="${v.book || 'HAB'}" data-ch="${v.ch || 3}" data-v="${v.v || 1}" title="Nhấp để mở đọc và đối chiếu">${v.ref || ''}</a>
       `;
     }
 
@@ -7526,7 +7526,7 @@ class LogosApp {
         let passagesHtml = '';
         if (plan.passages && plan.passages.length > 0) {
           passagesHtml = plan.passages.map(p => 
-            `<a class="devotion-passage-link" data-book="${p.book}" data-ch="${p.ch}" ${p.v ? `data-v="${p.v}"` : ''} title="Đọc ${p.name}">${p.name}</a>`
+            `<a class="devotion-passage-link" href="#bible/${p.book}/${p.ch}" data-book="${p.book}" data-ch="${p.ch}" ${p.v ? `data-v="${p.v}"` : ''} title="Đọc ${p.name}">${p.name}</a>`
           ).join('. ') + '.';
         } else {
           passagesHtml = `<span class="devotion-plan-text">${plan.text || ''}</span>`;

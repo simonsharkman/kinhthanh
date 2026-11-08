@@ -149,15 +149,66 @@
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
-  <!-- Google AdSense Integration (Cho phép Google hiển thị quảng cáo duy trì Website) -->
-  <meta name="google-adsense-account" id="google-adsense-meta" content="ca-pub-9368045059000000">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9368045059000000" crossorigin="anonymous" id="google-adsense-script"></script>
+  <!-- Critical Inline CSS (Instant First Paint & Zero CLS) -->
+  <style>
+    :root {
+      --bg-primary: #0f141c;
+      --bg-surface: #171f2c;
+      --text-primary: #e6edf3;
+      --accent-gold: #e5a93c;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #0f141c;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    #admin-banner-container { min-height: 38px; }
+    #main-header { min-height: 52px; background: #131b26; }
+    .portal-main-tabs { min-height: 48px; }
+    .omni-search-wrapper { min-height: 38px; }
+    .adsbygoogle { display: block; min-height: 90px; }
+  </style>
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/design-tokens.css?v=4.6.0">
-  <link rel="stylesheet" href="css/animations.css?v=4.6.0">
-  <link rel="stylesheet" href="css/layout.css?v=4.6.0">
-  <link rel="stylesheet" href="css/components.css?v=4.6.8">
+  <!-- Google AdSense Integration (Deferred load to eliminate 225KiB unused JS, long tasks & CLS on initial render) -->
+  <meta name="google-adsense-account" id="google-adsense-meta" content="ca-pub-9368045059000000">
+  <script>
+    window.addEventListener('load', function() {
+      function loadAdSense() {
+        if (window._adsenseLoaded) return;
+        window._adsenseLoaded = true;
+        var s = document.createElement('script');
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9368045059000000";
+        s.async = true;
+        s.crossOrigin = "anonymous";
+        s.id = "google-adsense-script";
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAdSense, { timeout: 3500 });
+      } else {
+        setTimeout(loadAdSense, 2000);
+      }
+      ['mousemove', 'touchstart', 'scroll', 'keydown'].forEach(function(e) {
+        window.addEventListener(e, loadAdSense, { once: true, passive: true });
+      });
+    });
+  </script>
+
+  <!-- Stylesheets (Loaded asynchronously with preload to eliminate 2,860ms render-blocking) -->
+  <link rel="preload" href="css/design-tokens.css?v=4.7.2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="css/animations.css?v=4.7.2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="css/layout.css?v=4.7.2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="css/components.css?v=4.7.2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="css/design-tokens.css?v=4.7.2">
+    <link rel="stylesheet" href="css/animations.css?v=4.7.2">
+    <link rel="stylesheet" href="css/layout.css?v=4.7.2">
+    <link rel="stylesheet" href="css/components.css?v=4.7.2">
+  </noscript>
 </head>
 <body>
 
@@ -232,7 +283,7 @@
       <!-- Omni-Search Bar (Mở rộng tìm địa chỉ, câu kinh thánh, gợi ý thông minh) -->
       <div class="omni-search-wrapper">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="omni-search-input" placeholder="Tìm địa chỉ (vd: Giăng 3:16) hoặc từ khóa..." autocomplete="off">
+        <input type="text" id="omni-search-input" placeholder="Tìm địa chỉ (vd: Giăng 3:16) hoặc từ khóa..." autocomplete="off" aria-label="Tìm kiếm địa chỉ Kinh Thánh hoặc từ khóa">
         <div id="search-dropdown" class="search-dropdown hidden"></div>
       </div>
 
@@ -489,7 +540,7 @@
                   </select>
                 </div>
                 <div class="portal-form-group">
-                  <input type="text" class="portal-input" id="portal-read-coord-input" placeholder="12:1-12:3" value="12:1-12:3">
+                  <input type="text" class="portal-input" id="portal-read-coord-input" placeholder="12:1-12:3" value="12:1-12:3" aria-label="Tọa độ câu Kinh Thánh (VD: 12:1-12:3)">
                 </div>
                 <div class="portal-form-group">
                   <select class="portal-select" aria-label="Chọn bản dịch Kinh Thánh" id="portal-read-version-select">
@@ -607,9 +658,9 @@
                   </select>
                 </div>
                 <div class="portal-row-inputs">
-                  <input type="number" class="portal-input" id="portal-listen-from-ch" value="1" min="1" max="150" style="width: 50%;">
+                  <input type="number" class="portal-input" id="portal-listen-from-ch" value="1" min="1" max="150" style="width: 50%;" aria-label="Chương bắt đầu nghe (Từ chương)">
                   <span>-</span>
-                  <input type="number" class="portal-input" id="portal-listen-to-ch" value="50" min="1" max="150" style="width: 50%;">
+                  <input type="number" class="portal-input" id="portal-listen-to-ch" value="50" min="1" max="150" style="width: 50%;" aria-label="Chương kết thúc nghe (Đến chương)">
                 </div>
                 <div class="portal-btn-row">
                   <button type="button" class="portal-btn btn-green" id="portal-listen-btn">Nghe</button>
@@ -623,7 +674,7 @@
               <div class="portal-card-header header-orange">TÌM</div>
               <div class="portal-card-body">
                 <div class="portal-form-group">
-                  <input type="text" class="portal-input" id="portal-search-query-input" value="yêu thương;thành tín" placeholder="Nhập từ khóa...">
+                  <input type="text" class="portal-input" id="portal-search-query-input" value="yêu thương;thành tín" placeholder="Nhập từ khóa..." aria-label="Từ khóa tìm kiếm Kinh Thánh">
                 </div>
                 <div class="portal-form-group">
                   <select class="portal-select" aria-label="Chọn sách bắt đầu tra cứu" id="portal-search-from-book">
@@ -1241,7 +1292,7 @@
       <!-- Thanh Tìm Kiếm Sách Tức Thì (Không lo tìm không ra) -->
       <div class="book-picker-search-bar" id="book-picker-search-bar">
         <i class="fa-solid fa-magnifying-glass book-search-icon"></i>
-        <input type="text" id="book-picker-search-input" class="book-search-input" placeholder="Tìm kiếm nhanh sách (vd: Giăng, Rô, Ma, Thi...)" autocomplete="off">
+        <input type="text" id="book-picker-search-input" class="book-search-input" placeholder="Tìm kiếm nhanh sách (vd: Giăng, Rô, Ma, Thi...)" autocomplete="off" aria-label="Tìm kiếm nhanh tên sách Kinh Thánh">
         <button id="book-picker-search-clear" class="book-search-clear hidden" title="Xóa tìm kiếm">&times;</button>
       </div>
       <div class="testament-tabs" id="book-picker-tabs">
@@ -1305,7 +1356,7 @@
         <div class="httlvn-input-row">
           <div class="input-with-icon">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="httlvn-search-query" class="httlvn-search-input" placeholder="Nhập từ khóa, câu Kinh Thánh hoặc cú pháp tìm kiếm (VD: 'yêu thương', Giăng 3:16)...">
+            <input type="text" id="httlvn-search-query" class="httlvn-search-input" placeholder="Nhập từ khóa, câu Kinh Thánh hoặc cú pháp tìm kiếm (VD: 'yêu thương', Giăng 3:16)..." aria-label="Nhập từ khóa hoặc câu Kinh Thánh để tra cứu">
           </div>
           <button id="httlvn-search-submit-btn" class="btn-primary httlvn-submit-btn">
             <i class="fa-solid fa-magnifying-glass"></i> Tìm Kiếm
@@ -1418,7 +1469,7 @@
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Nhãn Huy Hiệu (Badge):</label>
-            <input type="text" id="admin-banner-badge-input" value="THÔNG BÁO" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <input type="text" id="admin-banner-badge-input" value="THÔNG BÁO" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Huy hiệu thông báo banner">
           </div>
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Tông Màu Banner:</label>
@@ -1433,36 +1484,36 @@
 
         <div class="form-group" style="margin-bottom: 0.85rem;">
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Nội Dung Hiển Thị (Lời Chúa / Tin tức / Lời mời tài trợ):</label>
-          <textarea id="admin-banner-text-input" rows="3" style="width: 100%; padding: 0.6rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.5;">🔔 Chương trình Đọc Kinh Thánh Trọn Năm 2026 &amp; Bồi Linh Hội Thánh đang diễn ra. Chúc quý con cái Chúa được tươi mới trong Lời Ngài!</textarea>
+          <textarea id="admin-banner-text-input" rows="3" style="width: 100%; padding: 0.6rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.5;" aria-label="Nội dung thông báo banner">🔔 Chương trình Đọc Kinh Thánh Trọn Năm 2026 &amp; Bồi Linh Hội Thánh đang diễn ra. Chúc quý con cái Chúa được tươi mới trong Lời Ngài!</textarea>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Chữ Trên Nút Bấm (CTA):</label>
-            <input type="text" id="admin-banner-btn-text-input" value="Vào Cổng Tĩnh Nguyện" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <input type="text" id="admin-banner-btn-text-input" value="Vào Cổng Tĩnh Nguyện" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Nội dung nút bấm banner">
           </div>
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Đường Dẫn Đích (Link URL hoặc #bible):</label>
-            <input type="text" id="admin-banner-url-input" value="#portal" placeholder="#bible hoặc https://..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <input type="text" id="admin-banner-url-input" value="#portal" placeholder="#bible hoặc https://..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Đường dẫn liên kết banner">
           </div>
         </div>
 
         <div class="form-group" id="admin-banner-img-group" style="margin-bottom: 0.85rem;">
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);"><i class="fa-solid fa-image"></i> Hình Ảnh Banner Quảng Cáo (Tùy chọn):</label>
-          <input type="url" id="admin-banner-img-input" placeholder="https://... đường dẫn ảnh quảng cáo/logo nhà tài trợ" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          <input type="url" id="admin-banner-img-input" placeholder="https://... đường dẫn ảnh quảng cáo/logo nhà tài trợ" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Đường dẫn hình ảnh banner">
         </div>
 
         <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 0.65rem 0.85rem; border-radius: 6px; margin-bottom: 0.85rem; display: flex; flex-direction: column; gap: 0.45rem;">
           <div class="form-group checkbox-group" style="display: flex; align-items: center; gap: 0.5rem;">
-            <input type="checkbox" id="admin-banner-marquee-checkbox" checked>
+            <input type="checkbox" id="admin-banner-marquee-checkbox" checked aria-label="Bật hiệu ứng chữ chạy marquee banner">
             <label for="admin-banner-marquee-checkbox" style="font-size: 0.84rem; cursor: pointer;">Chạy chữ ngang liên tục (Marquee Ticker) cho thông báo</label>
           </div>
           <div class="form-group checkbox-group" style="display: flex; align-items: center; gap: 0.5rem;">
-            <input type="checkbox" id="admin-banner-adsense-checkbox">
+            <input type="checkbox" id="admin-banner-adsense-checkbox" aria-label="Bật chế độ quảng cáo AdSense">
             <label for="admin-banner-adsense-checkbox" style="font-size: 0.84rem; cursor: pointer;">Tích hợp đơn vị quảng cáo Google AdSense trong Banner</label>
           </div>
           <div class="form-group checkbox-group" style="display: flex; align-items: center; gap: 0.5rem;">
-            <input type="checkbox" id="admin-banner-visible-checkbox" checked>
+            <input type="checkbox" id="admin-banner-visible-checkbox" checked aria-label="Hiển thị thanh banner thông báo">
             <label for="admin-banner-visible-checkbox" style="font-size: 0.84rem; font-weight: 700; color: var(--accent-gold); cursor: pointer;">Bật hiển thị Banner này trên giao diện máy tính</label>
           </div>
         </div>
@@ -1496,7 +1547,7 @@
           <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-primary); display: block; margin-bottom: 0.35rem;">
             <i class="fa-solid fa-user"></i> Tên Đăng Nhập:
           </label>
-          <input type="text" id="admin-username-input" placeholder="Nhập tên đăng nhập..." autocomplete="username" style="width: 100%; padding: 0.7rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-size: 0.92rem;">
+          <input type="text" id="admin-username-input" placeholder="Nhập tên đăng nhập..." autocomplete="username" style="width: 100%; padding: 0.7rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-size: 0.92rem;" aria-label="Tên đăng nhập quản trị viên">
         </div>
 
         <div class="form-group" style="margin-bottom: 1rem;">
@@ -1504,7 +1555,7 @@
             <i class="fa-solid fa-key"></i> Mật Khẩu:
           </label>
           <div style="position: relative; display: flex; align-items: center;">
-            <input type="password" id="admin-password-input" placeholder="Nhập mật khẩu quản trị..." autocomplete="current-password" style="width: 100%; padding: 0.7rem 2.6rem 0.7rem 0.7rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-size: 0.92rem;">
+            <input type="password" id="admin-password-input" placeholder="Nhập mật khẩu quản trị..." autocomplete="current-password" style="width: 100%; padding: 0.7rem 2.6rem 0.7rem 0.7rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-size: 0.92rem;" aria-label="Mật khẩu quản trị viên">
             <button type="button" id="admin-toggle-pwd-btn" title="Hiện/Ẩn mật khẩu" style="position: absolute; right: 0.6rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 0.4rem; font-size: 0.95rem;">
               <i class="fa-solid fa-eye"></i>
             </button>
@@ -1541,12 +1592,12 @@
         <input type="hidden" id="admin-art-id" value="">
         <div class="form-group">
           <label>Tiêu Đề Khảo Luận:</label>
-          <input type="text" id="admin-art-title" placeholder="VD: Ngôi Lời Nhập Thể Trong Phúc Âm Giăng...">
+          <input type="text" id="admin-art-title" placeholder="VD: Ngôi Lời Nhập Thể Trong Phúc Âm Giăng..." aria-label="Tiêu đề bài viết nghiên cứu">
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
           <div class="form-group">
             <label>Tác Giả:</label>
-            <input type="text" id="admin-art-author" value="Quản Trị Viên / Mục Sư">
+            <input type="text" id="admin-art-author" value="Quản Trị Viên / Mục Sư" aria-label="Tác giả bài viết">
           </div>
           <div class="form-group">
             <label>Chuyên Mục Thần Học:</label>
@@ -1562,15 +1613,15 @@
         </div>
         <div class="form-group">
           <label>Tóm Tắt Khảo Luận (Ngắn gọn):</label>
-          <textarea id="admin-art-summary" rows="2" placeholder="Tóm tắt ngắn gọn luận điểm chính của bài nghiên cứu..."></textarea>
+          <textarea id="admin-art-summary" aria-label="Tóm tắt bài nghiên cứu" rows="2" placeholder="Tóm tắt ngắn gọn luận điểm chính của bài nghiên cứu..."></textarea>
         </div>
         <div class="form-group">
           <label>Nội Dung Khảo Luận Chi Tiết (Hỗ trợ trích câu Kinh Thánh #Giang 1:14):</label>
-          <textarea id="admin-art-content" rows="6" placeholder="Nội dung chuyên sâu, đối chiếu bản dịch, phân tích nguyên ngữ..."></textarea>
+          <textarea id="admin-art-content" aria-label="Nội dung chi tiết bài nghiên cứu" rows="6" placeholder="Nội dung chuyên sâu, đối chiếu bản dịch, phân tích nguyên ngữ..."></textarea>
         </div>
         <div class="form-group">
           <label>Thẻ Chủ Đề / Tags (Cách nhau bằng dấu phẩy):</label>
-          <input type="text" id="admin-art-tags" placeholder="Ngôi Lời, Giăng 1, Nhập Thể, Hy Lạp">
+          <input type="text" id="admin-art-tags" placeholder="Ngôi Lời, Giăng 1, Nhập Thể, Hy Lạp" aria-label="Thẻ phân loại chuyên đề bài viết">
         </div>
         
         <!-- Section: Thêm Hình Ảnh -->
@@ -1580,7 +1631,7 @@
           </div>
           <div class="form-group">
             <label>Đường dẫn hình ảnh (URL Image):</label>
-            <input type="url" id="admin-art-image" placeholder="https://... hoặc chọn mẫu bên dưới">
+            <input type="url" id="admin-art-image" placeholder="https://... hoặc chọn mẫu bên dưới" aria-label="Đường dẫn ảnh bìa bài viết">
           </div>
           <!-- Gợi ý ảnh nhanh -->
           <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
@@ -1603,16 +1654,16 @@
           <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 0.75rem;">
             <div class="form-group">
               <label>Tên tài liệu:</label>
-              <input type="text" id="admin-art-doc-name" placeholder="VD: Khao_Luan_Ngoi_Loi_Logos.pdf">
+              <input type="text" id="admin-art-doc-name" placeholder="VD: Khao_Luan_Ngoi_Loi_Logos.pdf" aria-label="Tên tệp tài liệu đính kèm">
             </div>
             <div class="form-group">
               <label>Loại tệp & Dung lượng:</label>
-              <input type="text" id="admin-art-doc-meta" placeholder="PDF • 2.5 MB" value="PDF • 1.8 MB">
+              <input type="text" id="admin-art-doc-meta" placeholder="PDF • 2.5 MB" value="PDF • 1.8 MB" aria-label="Thông tin dung lượng tài liệu">
             </div>
           </div>
           <div class="form-group">
             <label>Đường dẫn tệp tài liệu (URL hoặc file path):</label>
-            <input type="text" id="admin-art-doc-url" placeholder="https://... hoặc docs/khao-luan-logos.pdf">
+            <input type="text" id="admin-art-doc-url" placeholder="https://... hoặc docs/khao-luan-logos.pdf" aria-label="Đường dẫn tệp tài liệu PDF">
           </div>
         </div>
       </div>
@@ -1636,12 +1687,12 @@
         <input type="hidden" id="admin-comm-post-id" value="">
         <div class="form-group" style="margin-bottom: 0.85rem;">
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Tiêu Đề Bài Chia Sẻ:</label>
-          <input type="text" id="admin-comm-post-title" placeholder="Tiêu đề..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          <input type="text" id="admin-comm-post-title" placeholder="Tiêu đề..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Tiêu đề bài viết cộng đồng">
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.85rem;">
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Tác Giả / Người Gửi:</label>
-            <input type="text" id="admin-comm-post-author" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <input type="text" id="admin-comm-post-author" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Tác giả bài viết cộng đồng">
           </div>
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Trạng Thái Kiểm Duyệt:</label>
@@ -1662,7 +1713,7 @@
         </div>
         <div class="form-group" style="margin-bottom: 1rem;">
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Nội Dung Bài Chia Sẻ:</label>
-          <textarea id="admin-comm-post-content" rows="6" placeholder="Nội dung chia sẻ..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.6;"></textarea>
+          <textarea id="admin-comm-post-content" rows="6" placeholder="Nội dung chia sẻ..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.6;" aria-label="Nội dung thảo luận cộng đồng"></textarea>
         </div>
       </div>
       <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
@@ -1786,24 +1837,24 @@
           <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 0.5rem; margin-bottom: 0.75rem;">
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Tham Chiếu Hiển Thị:</label>
-              <input type="text" id="admin-devotion-verse-ref" placeholder="Ha-ba-cúc 3:19" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="text" id="admin-devotion-verse-ref" placeholder="Ha-ba-cúc 3:19" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Địa chỉ câu gốc dưỡng linh">
             </div>
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Mã Sách:</label>
-              <input type="text" id="admin-devotion-verse-book" placeholder="HAB" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="text" id="admin-devotion-verse-book" placeholder="HAB" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Mã sách câu gốc dưỡng linh">
             </div>
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Đoạn:</label>
-              <input type="number" id="admin-devotion-verse-ch" placeholder="3" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="number" id="admin-devotion-verse-ch" placeholder="3" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Chương câu gốc dưỡng linh">
             </div>
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Câu:</label>
-              <input type="number" id="admin-devotion-verse-v" placeholder="19" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="number" id="admin-devotion-verse-v" placeholder="19" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Câu số câu gốc dưỡng linh">
             </div>
           </div>
           <div>
             <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Nội Dung Lời Chúa (Câu Gốc):</label>
-            <textarea id="admin-devotion-verse-text" rows="3" placeholder="Nhập Lời Chúa..." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);"></textarea>
+            <textarea id="admin-devotion-verse-text" rows="3" placeholder="Nhập Lời Chúa..." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Văn bản trích dẫn câu gốc"></textarea>
           </div>
         </fieldset>
 
@@ -1815,19 +1866,19 @@
           <div style="display: flex; flex-direction: column; gap: 0.65rem;">
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">1. Cựu Ước & Tân Ước:</label>
-              <input type="text" id="admin-devotion-plan1-text" placeholder="Giê-rê-mi 20. Giê-rê-mi 35-36. Cô-lô-se 4." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="text" id="admin-devotion-plan1-text" placeholder="Giê-rê-mi 20. Giê-rê-mi 35-36. Cô-lô-se 4." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Lịch đọc phân đoạn 1">
             </div>
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">2. Sáng-thế Ký - Khải-huyền:</label>
-              <input type="text" id="admin-devotion-plan2-text" placeholder="Mác 14:12-15:47." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="text" id="admin-devotion-plan2-text" placeholder="Mác 14:12-15:47." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Lịch đọc phân đoạn 2">
             </div>
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">3. Đọc Tân Ước Trong Ba Tháng:</label>
-              <input type="text" id="admin-devotion-plan3-text" placeholder="Lu-ca 21-22." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="text" id="admin-devotion-plan3-text" placeholder="Lu-ca 21-22." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Lịch đọc phân đoạn 3">
             </div>
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">4. Đọc Trong Ba Năm:</label>
-              <input type="text" id="admin-devotion-plan4-text" placeholder="Gióp 22." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="text" id="admin-devotion-plan4-text" placeholder="Gióp 22." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Lịch đọc phân đoạn 4">
             </div>
           </div>
         </fieldset>
@@ -1840,16 +1891,16 @@
           <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.5rem; margin-bottom: 0.75rem;">
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Tiêu Đề Bài Suy Ngẫm:</label>
-              <input type="text" id="admin-devotion-art-title" placeholder="Áp Bức Người Cùng Khốn" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="text" id="admin-devotion-art-title" placeholder="Áp Bức Người Cùng Khốn" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Tiêu đề bài đọc Sống Với Thánh Kinh">
             </div>
             <div>
               <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Phân Đoạn Kinh Thánh:</label>
-              <input type="text" id="admin-devotion-art-ref" placeholder="Châm Ngôn 22:22-23" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+              <input type="text" id="admin-devotion-art-ref" placeholder="Châm Ngôn 22:22-23" style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Câu gốc bài đọc Sống Với Thánh Kinh">
             </div>
           </div>
           <div>
             <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 0.25rem;">Nội Dung Suy Ngẫm / Bài Học Đời Sống:</label>
-            <textarea id="admin-devotion-art-content" rows="4" placeholder="Nội dung bài học..." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);"></textarea>
+            <textarea id="admin-devotion-art-content" aria-label="Nội dung bài tĩnh nguyện dưỡng linh" rows="4" placeholder="Nội dung bài học..." style="width: 100%; padding: 0.5rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);"></textarea>
           </div>
         </fieldset>
       </div>
@@ -1898,14 +1949,14 @@
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
             Văn Bản Câu Kinh Thánh Đã Hiệu Đính:
           </label>
-          <textarea id="admin-corr-text" rows="4" placeholder="Nhập câu Kinh Thánh đã sửa lỗi chính tả..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.6; font-family: var(--font-reader);"></textarea>
+          <textarea id="admin-corr-text" aria-label="Nội dung câu Kinh Thánh đính chính" rows="4" placeholder="Nhập câu Kinh Thánh đã sửa lỗi chính tả..." style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); line-height: 1.6; font-family: var(--font-reader);"></textarea>
         </div>
 
         <div class="form-group" style="margin-bottom: 1rem;">
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
             Ghi Chú Lý Do Hiệu Đính (Tuỳ chọn):
           </label>
-          <input type="text" id="admin-corr-note" placeholder="Ví dụ: Sửa lỗi chính tả từ 'nghe' thành 'nghỉ'..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          <input type="text" id="admin-corr-note" placeholder="Ví dụ: Sửa lỗi chính tả từ 'nghe' thành 'nghỉ'..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Ghi chú đính chính văn bản">
         </div>
       </div>
 
@@ -1955,7 +2006,7 @@
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
               Sách Kinh Thánh Liên Quan:
             </label>
-            <input type="text" id="admin-media-book-input" placeholder="JHN (hoặc GEN, MAT...)" value="JHN" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <input type="text" id="admin-media-book-input" placeholder="JHN (hoặc GEN, MAT...)" value="JHN" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Mã sách bài giảng video">
           </div>
         </div>
 
@@ -1963,7 +2014,7 @@
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
             Tiêu Đề Video / Tác Phẩm Media:
           </label>
-          <input type="text" id="admin-media-title-input" placeholder="Ví dụ: Dự Án Kinh Thánh: Mùa Nhập Thể & Phục Sinh..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          <input type="text" id="admin-media-title-input" placeholder="Ví dụ: Dự Án Kinh Thánh: Mùa Nhập Thể & Phục Sinh..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Tiêu đề video tư liệu">
         </div>
 
         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
@@ -1971,13 +2022,13 @@
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
               YouTube Video ID (hoặc link):
             </label>
-            <input type="text" id="admin-media-youtube-input" placeholder="Ví dụ: G-2e9mMf7E8 hoặc link youtube" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <input type="text" id="admin-media-youtube-input" placeholder="Ví dụ: G-2e9mMf7E8 hoặc link youtube" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Mã định danh YouTube hoặc đường dẫn video">
           </div>
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
               Thời Lượng (mm:ss):
             </label>
-            <input type="text" id="admin-media-duration-input" placeholder="8:57" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <input type="text" id="admin-media-duration-input" placeholder="8:57" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);" aria-label="Thời lượng video bài giảng">
           </div>
         </div>
 
@@ -1985,7 +2036,7 @@
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
             Mô Tả Tác Phẩm / Ý Nghĩa Mùa Lễ:
           </label>
-          <textarea id="admin-media-desc-input" rows="3" placeholder="Tóm tắt nội dung video, thông điệp mục vụ theo mùa..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);"></textarea>
+          <textarea id="admin-media-desc-input" aria-label="Tóm tắt nội dung video tư liệu" rows="3" placeholder="Tóm tắt nội dung video, thông điệp mục vụ theo mùa..." style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);"></textarea>
         </div>
       </div>
 
@@ -2430,7 +2481,7 @@
       <div class="modal-body" style="padding: 1.1rem 1.25rem; overflow-y: auto; flex: 1;">
         <!-- Nhập số chương nhảy nhanh -->
         <div style="display: flex; gap: 0.5rem; margin-bottom: 0.85rem;">
-          <input type="number" id="tklk-quick-num-input" min="1" max="114" placeholder="Nhập số chương (1 - 114)..." class="portal-search-input" style="flex: 1; padding: 0.55rem 0.85rem; border-radius: 6px; font-size: 0.95rem; border: 1.5px solid var(--accent-gold);">
+          <input type="number" id="tklk-quick-num-input" min="1" max="114" placeholder="Nhập số chương (1 - 114)..." class="portal-search-input" style="flex: 1; padding: 0.55rem 0.85rem; border-radius: 6px; font-size: 0.95rem; border: 1.5px solid var(--accent-gold);" aria-label="Nhập số chương Thánh Kinh Lược Khảo từ 1 đến 114">
           <button type="button" class="btn-primary" id="btn-tklk-quick-num-go" style="padding: 0.55rem 1.35rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.4rem;">
             <i class="fa-solid fa-arrow-right"></i> Đi Đến
           </button>
@@ -2438,7 +2489,7 @@
 
         <!-- Ô tìm kiếm tức thì -->
         <div style="margin-bottom: 0.85rem;">
-          <input type="text" id="tklk-jump-search-input" placeholder="🔍 Hoặc tìm theo tên sách / chuyên đề (vd: Sáng-thế, Mác, Phao-lô)..." class="portal-search-input" style="width: 100%; padding: 0.5rem 0.85rem; border-radius: 6px; font-size: 0.9rem; background: var(--bg-surface);">
+          <input type="text" id="tklk-jump-search-input" placeholder="🔍 Hoặc tìm theo tên sách / chuyên đề (vd: Sáng-thế, Mác, Phao-lô)..." class="portal-search-input" style="width: 100%; padding: 0.5rem 0.85rem; border-radius: 6px; font-size: 0.9rem; background: var(--bg-surface);" aria-label="Tìm kiếm theo tên sách hoặc chuyên đề Lược Khảo">
         </div>
 
         <!-- Nhóm danh mục nhanh -->
@@ -2479,7 +2530,7 @@
       <!-- Thanh trượt dòng thời gian (Seek Bar) & Bộ đếm phút:giây -->
       <div class="audio-timeline-wrap" id="audio-timeline-wrap">
         <span class="audio-time-label" id="audio-current-time">00:00</span>
-        <input type="range" class="audio-seek-slider" id="audio-seek-slider" min="0" max="100" value="0" step="0.2" title="Tua thời gian">
+        <input type="range" class="audio-seek-slider" id="audio-seek-slider" min="0" max="100" value="0" step="0.2" title="Tua thời gian" aria-label="Thanh trượt tua thời gian audio">
         <span class="audio-time-label" id="audio-duration-time">--:--</span>
       </div>
 
