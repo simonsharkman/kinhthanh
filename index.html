@@ -138,13 +138,16 @@
   }
   </script>
 
-  <!-- Google Fonts: Noto Serif (HTTLVN Standard), Playfair Display (Royal Vietnamese Headings), Merriweather (Scripture), Outfit (Clean Modern UI) -->
+  <!-- Google Fonts Preconnect & Async Non-Blocking Load -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap"></noscript>
 
-  <!-- FontAwesome Free Icons CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- FontAwesome Free Icons (Loaded asynchronously to eliminate render-blocking delay) -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
   <!-- Google AdSense Integration (Cho phép Google hiển thị quảng cáo duy trì Website) -->
   <meta name="google-adsense-account" id="google-adsense-meta" content="ca-pub-9368045059000000">
@@ -190,7 +193,7 @@
 
     <div class="header-brand" id="brand-home-btn" title="Về trang chủ Cổng Tĩnh Nguyện">
       <span class="brand-symbol">
-        <img src="data/cross_holy_gold.gif" alt="Thánh Giá Logos" class="brand-gif-cross">
+        <img src="data/cross_holy_gold.gif" alt="Thánh Giá Logos" class="brand-gif-cross" width="28" height="28" fetchpriority="high">
       </span>
       <div class="brand-text">
         <h1 class="brand-title">Kinh Thánh</h1>
@@ -389,23 +392,23 @@
               <div class="portal-card-body">
                 <ul class="portal-subitems-list">
                   <li>
-                    <a class="portal-subitem-link" id="portal-item-fav-verses"><span class="portal-arrow">»</span> Câu Gốc Yêu Thích</a>
+                    <a href="#portal" class="portal-subitem-link" id="portal-item-fav-verses"><span class="portal-arrow">»</span> Câu Gốc Yêu Thích</a>
                     <span class="portal-badge-new">mới</span>
                   </li>
                   <li>
-                    <a class="portal-subitem-link" id="portal-item-quiz"><span class="portal-arrow">»</span> Đố Kinh Thánh</a>
+                    <a href="#quiz" class="portal-subitem-link" id="portal-item-quiz"><span class="portal-arrow">»</span> Đố Kinh Thánh</a>
                   </li>
                   <li>
-                    <a class="portal-subitem-link" id="portal-item-responsive"><span class="portal-arrow">»</span> Kinh Thánh Đối Đáp</a>
+                    <a href="#portal" class="portal-subitem-link" id="portal-item-responsive"><span class="portal-arrow">»</span> Kinh Thánh Đối Đáp</a>
                   </li>
                   <li>
-                    <a class="portal-subitem-link" id="portal-item-schedule"><span class="portal-arrow">»</span> Lịch Đọc Kinh Thánh</a>
+                    <a href="#portal" class="portal-subitem-link" id="portal-item-schedule"><span class="portal-arrow">»</span> Lịch Đọc Kinh Thánh</a>
                   </li>
                   <li>
-                    <a class="portal-subitem-link" id="portal-item-survey"><span class="portal-arrow">»</span> Thánh Kinh Lược Khảo</a>
+                    <a href="#survey" class="portal-subitem-link" id="portal-item-survey"><span class="portal-arrow">»</span> Thánh Kinh Lược Khảo</a>
                   </li>
                   <li>
-                    <a class="portal-subitem-link" id="portal-item-stories"><span class="portal-arrow">»</span> Truyện Tích Thánh Kinh</a>
+                    <a href="#portal" class="portal-subitem-link" id="portal-item-stories"><span class="portal-arrow">»</span> Truyện Tích Thánh Kinh</a>
                   </li>
                 </ul>
               </div>
@@ -416,7 +419,7 @@
               <div class="portal-card-header header-blue">ĐỌC</div>
               <div class="portal-card-body">
                 <div class="portal-form-group">
-                  <select class="portal-select" id="portal-read-book-select">
+                  <select class="portal-select" aria-label="Chọn sách đọc Kinh Thánh" id="portal-read-book-select">
                     <option value="GEN" selected>Sáng-thế Ký (GEN)</option>
                     <option value="EXO">Xuất Ê-díp-tô Ký (EXO)</option>
                     <option value="LEV">Lê-vi Ký (LEV)</option>
@@ -489,7 +492,7 @@
                   <input type="text" class="portal-input" id="portal-read-coord-input" placeholder="12:1-12:3" value="12:1-12:3">
                 </div>
                 <div class="portal-form-group">
-                  <select class="portal-select" id="portal-read-version-select">
+                  <select class="portal-select" aria-label="Chọn bản dịch Kinh Thánh" id="portal-read-version-select">
                     <optgroup label="Bản Dịch Tiếng Việt (8 Bản)">
                       <option value="BTT" selected>Bản Truyền Thống 1925 (BTT)</option>
                       <option value="KTHD">Kinh Thánh Hiện Đại (KTHD)</option>
@@ -534,7 +537,7 @@
               <div class="portal-card-header header-green">NGHE</div>
               <div class="portal-card-body">
                 <div class="portal-form-group">
-                  <select class="portal-select" id="portal-listen-book-select">
+                  <select class="portal-select" aria-label="Chọn sách nghe audio" id="portal-listen-book-select">
                     <option value="GEN" selected>Sáng-thế Ký (GEN)</option>
                     <option value="EXO">Xuất Ê-díp-tô Ký (EXO)</option>
                     <option value="LEV">Lê-vi Ký (LEV)</option>
@@ -623,7 +626,7 @@
                   <input type="text" class="portal-input" id="portal-search-query-input" value="yêu thương;thành tín" placeholder="Nhập từ khóa...">
                 </div>
                 <div class="portal-form-group">
-                  <select class="portal-select" id="portal-search-from-book">
+                  <select class="portal-select" aria-label="Chọn sách bắt đầu tra cứu" id="portal-search-from-book">
                     <option value="GEN" selected>Sáng-thế Ký (GEN)</option>
                     <option value="EXO">Xuất Ê-díp-tô Ký (EXO)</option>
                     <option value="LEV">Lê-vi Ký (LEV)</option>
@@ -693,7 +696,7 @@
                   </select>
                 </div>
                 <div class="portal-form-group">
-                  <select class="portal-select" id="portal-search-to-book">
+                  <select class="portal-select" aria-label="Chọn sách kết thúc tra cứu" id="portal-search-to-book">
                     <option value="GEN">Sáng-thế Ký (GEN)</option>
                     <option value="EXO">Xuất Ê-díp-tô Ký (EXO)</option>
                     <option value="LEV">Lê-vi Ký (LEV)</option>
@@ -763,7 +766,7 @@
                   </select>
                 </div>
                 <div class="portal-form-group">
-                  <select class="portal-select" id="portal-search-version-select">
+                  <select class="portal-select" aria-label="Chọn bản dịch tra cứu" id="portal-search-version-select">
                     <optgroup label="Bản Dịch Tiếng Việt">
                       <option value="BTT" selected>Bản Truyền Thống 1925 (BTT)</option>
                       <option value="KTHD">Kinh Thánh Hiện Đại (KTHD)</option>
@@ -806,7 +809,7 @@
             <div class="portal-card">
               <div class="portal-card-header header-black">TÀI LIỆU THAM KHẢO</div>
               <div class="portal-card-body">
-                <select class="portal-select" id="portal-ref-docs-select">
+                <select class="portal-select" aria-label="Chọn tài liệu tham khảo" id="portal-ref-docs-select">
                   <option value="GEN">1. Sáng-thế Ký</option>
                   <option value="EXO">2. Xuất Ê-díp-tô Ký</option>
                   <option value="dict">3. Thánh Kinh Từ Điển</option>
@@ -821,10 +824,10 @@
           <main class="portal-main">
             <!-- Thanh Tab Switcher Cột Phải -->
             <div class="portal-main-tabs" role="tablist">
-              <button type="button" class="portal-tab-btn active" id="portal-tab-devotion-btn" data-target="devotion">
+              <button type="button" class="portal-tab-btn active" id="portal-tab-devotion-btn" data-target="devotion" role="tab" aria-selected="true" aria-controls="portal-tab-devotion-panel">
                 <i class="fa-solid fa-scroll"></i> Tĩnh Nguyện & Dưỡng Linh
               </button>
-              <button type="button" class="portal-tab-btn" id="portal-tab-reader-btn" data-target="reader">
+              <button type="button" class="portal-tab-btn" id="portal-tab-reader-btn" data-target="reader" role="tab" aria-selected="false" aria-controls="portal-tab-reader-panel">
                 <i class="fa-solid fa-book-open"></i> Đọc Kinh Thánh (<span id="portal-passage-tab-label">Giăng 1</span>)
               </button>
             </div>
@@ -870,7 +873,7 @@
                   </div>
                   <div class="devotion-verse-box" id="portal-devotion-verse-box">
                     <strong>3:19</strong> Đức Giê-hô-va là Chúa, là sức mạnh của tôi, Ngài làm cho chân tôi giống như chân con hươu, Khiến tôi đi trên các nơi cao của mình. (Phó cho quan phường nhạc, khảy đàn mà hát bài nầy). 
-                    <a class="devotion-ref-tag" data-book="HAB" data-ch="3" data-v="19" title="Nhấp để mở đọc và đối chiếu">Ha-ba-cúc 3:19</a>
+                    <a href="#bible/HAB/3" class="devotion-ref-tag" data-book="HAB" data-ch="3" data-v="19" title="Nhấp để mở đọc và đối chiếu">Ha-ba-cúc 3:19</a>
                   </div>
                 </div>
 
@@ -882,24 +885,24 @@
                   <ol class="devotion-reading-list" id="portal-devotion-reading-list">
                     <li>
                       <span class="devotion-plan-title">Cựu Ước & Tân Ước:</span><br>
-                      <a class="devotion-passage-link" data-book="JER" data-ch="20">Giê-rê-mi 20</a>. 
-                      <a class="devotion-passage-link" data-book="JER" data-ch="35">Giê-rê-mi 35-36</a>. 
-                      <a class="devotion-passage-link" data-book="COL" data-ch="4">Cô-lô-se 4</a>. 
+                      <a href="#bible/JER/20" class="devotion-passage-link" data-book="JER" data-ch="20">Giê-rê-mi 20</a>. 
+                      <a href="#bible/JER/35" class="devotion-passage-link" data-book="JER" data-ch="35">Giê-rê-mi 35-36</a>. 
+                      <a href="#bible/COL/4" class="devotion-passage-link" data-book="COL" data-ch="4">Cô-lô-se 4</a>. 
                       <button type="button" class="devotion-audio-chip" data-book="JER" data-ch="20">NGHE</button>
                     </li>
                     <li>
                       <span class="devotion-plan-title">Sáng-thế Ký - Khải-huyền:</span><br>
-                      <a class="devotion-passage-link" data-book="MRK" data-ch="14" data-v="12">Mác 14:12-15:47</a>. 
+                      <a href="#bible/MRK/14" class="devotion-passage-link" data-book="MRK" data-ch="14" data-v="12">Mác 14:12-15:47</a>. 
                       <button type="button" class="devotion-audio-chip" data-book="MRK" data-ch="14">NGHE</button>
                     </li>
                     <li>
                       <span class="devotion-plan-title">Đọc Tân Ước Trong Ba Tháng:</span><br>
-                      <a class="devotion-passage-link" data-book="LUK" data-ch="21">Lu-ca 21-22</a>. 
+                      <a href="#bible/LUK/21" class="devotion-passage-link" data-book="LUK" data-ch="21">Lu-ca 21-22</a>. 
                       <button type="button" class="devotion-audio-chip" data-book="LUK" data-ch="21">NGHE</button>
                     </li>
                     <li>
                       <span class="devotion-plan-title">Đọc Trong Ba Năm:</span><br>
-                      <a class="devotion-passage-link" data-book="JOB" data-ch="22">Gióp 22</a>. 
+                      <a href="#bible/JOB/22" class="devotion-passage-link" data-book="JOB" data-ch="22">Gióp 22</a>. 
                       <button type="button" class="devotion-audio-chip" data-book="JOB" data-ch="22">NGHE</button>
                     </li>
                   </ol>
@@ -912,7 +915,7 @@
                   </div>
                   <ul class="portal-subitems-list">
                     <li>
-                      <a class="portal-subitem-link" id="portal-devotion-daily-article" data-book="PRO" data-ch="22" data-v="22">
+                      <a href="#bible/PRO/22" class="portal-subitem-link" id="portal-devotion-daily-article" data-book="PRO" data-ch="22" data-v="22">
                         <span class="portal-arrow">○</span> <strong>Áp Bức Người Cùng Khốn</strong> <em>(Châm Ngôn 22:22-23)</em>
                       </a>
                     </li>
@@ -930,97 +933,97 @@
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cảm thấy buồn rầu</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="JHN" data-ch="14">Giăng 14</a>, 
-                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="46">Thi-thiên 46</a>
+                        <a href="#bible/JHN/14" class="spiritual-ref-pill" data-book="JHN" data-ch="14">Giăng 14</a>, 
+                        <a href="#bible/PSA/46" class="spiritual-ref-pill" data-book="PSA" data-ch="46">Thi-thiên 46</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cảm thấy Đức Chúa Trời dường như ở xa</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="139">Thi-thiên 139</a>
+                        <a href="#bible/PSA/139" class="spiritual-ref-pill" data-book="PSA" data-ch="139">Thi-thiên 139</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần can đảm</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="JOS" data-ch="1" data-v="1">Giô-suê 1:1-9</a>
+                        <a href="#bible/JOS/1" class="spiritual-ref-pill" data-book="JOS" data-ch="1" data-v="1">Giô-suê 1:1-9</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần đảm bảo</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="ROM" data-ch="8">Rô-ma 8</a>
+                        <a href="#bible/ROM/8" class="spiritual-ref-pill" data-book="ROM" data-ch="8">Rô-ma 8</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần biết ý muốn của Đức Chúa Trời cho cuộc đời bạn</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="PRO" data-ch="3" data-v="1">Châm-ngôn 3:1-6</a>
+                        <a href="#bible/PRO/3" class="spiritual-ref-pill" data-book="PRO" data-ch="3" data-v="1">Châm-ngôn 3:1-6</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần những chỉ dẫn trong đời sống</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="MAT" data-ch="5">Ma-thi-ơ 5-7</a>, 
-                        <a class="spiritual-ref-pill" data-book="ROM" data-ch="12">Rô-ma 12</a>
+                        <a href="#bible/MAT/5" class="spiritual-ref-pill" data-book="MAT" data-ch="5">Ma-thi-ơ 5-7</a>, 
+                        <a href="#bible/ROM/12" class="spiritual-ref-pill" data-book="ROM" data-ch="12">Rô-ma 12</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần những luật lệ hướng dẫn</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="EXO" data-ch="20" data-v="1">Xuất Ê-díp-tô Ký 20:1-17</a>
+                        <a href="#bible/EXO/20" class="spiritual-ref-pill" data-book="EXO" data-ch="20" data-v="1">Xuất Ê-díp-tô Ký 20:1-17</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần tâm trí được yên tịnh</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="JHN" data-ch="14" data-v="27">Giăng 14:27</a>, 
-                        <a class="spiritual-ref-pill" data-book="PHP" data-ch="4" data-v="6">Phi-líp 4:6-8</a>
+                        <a href="#bible/JHN/14" class="spiritual-ref-pill" data-book="JHN" data-ch="14" data-v="27">Giăng 14:27</a>, 
+                        <a href="#bible/PHP/4" class="spiritual-ref-pill" data-book="PHP" data-ch="4" data-v="6">Phi-líp 4:6-8</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần yên nghỉ và bình an</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="MAT" data-ch="11" data-v="25">Ma-thi-ơ 11:25-30</a>
+                        <a href="#bible/MAT/11" class="spiritual-ref-pill" data-book="MAT" data-ch="11" data-v="25">Ma-thi-ơ 11:25-30</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cô đơn hay sợ hãi</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="23">Thi-thiên 23</a>
+                        <a href="#bible/PSA/23" class="spiritual-ref-pill" data-book="PSA" data-ch="23">Thi-thiên 23</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Đau yếu</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="41">Thi-thiên 41</a>
+                        <a href="#bible/PSA/41" class="spiritual-ref-pill" data-book="PSA" data-ch="41">Thi-thiên 41</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Đời sống kết quả</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="JHN" data-ch="15">Giăng 15</a>
+                        <a href="#bible/JHN/15" class="spiritual-ref-pill" data-book="JHN" data-ch="15">Giăng 15</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Bị cám dỗ hay dao động</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="1CO" data-ch="10" data-v="13">1 Cô-rinh-tô 10:13</a>, 
-                        <a class="spiritual-ref-pill" data-book="HEB" data-ch="2" data-v="18">Hê-bơ-rơ 2:18</a>
+                        <a href="#bible/1CO/10" class="spiritual-ref-pill" data-book="1CO" data-ch="10" data-v="13">1 Cô-rinh-tô 10:13</a>, 
+                        <a href="#bible/HEB/2" class="spiritual-ref-pill" data-book="HEB" data-ch="2" data-v="18">Hê-bơ-rơ 2:18</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Cần được tha thứ và làm mới lại</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="1JN" data-ch="1" data-v="9">1 Giăng 1:9</a>, 
-                        <a class="spiritual-ref-pill" data-book="PSA" data-ch="51">Thi-thiên 51</a>
+                        <a href="#bible/1JN/1" class="spiritual-ref-pill" data-book="1JN" data-ch="1" data-v="9">1 Giăng 1:9</a>, 
+                        <a href="#bible/PSA/51" class="spiritual-ref-pill" data-book="PSA" data-ch="51">Thi-thiên 51</a>
                       </td>
                     </tr>
                     <tr>
                       <td class="spiritual-need-cell"><i class="fa-solid fa-leaf"></i> Lo âu về tương lai bất định</td>
                       <td class="spiritual-passages-cell">
-                        <a class="spiritual-ref-pill" data-book="JER" data-ch="29" data-v="11">Giê-rê-mi 29:11</a>, 
-                        <a class="spiritual-ref-pill" data-book="MAT" data-ch="6" data-v="25">Ma-thi-ơ 6:25-34</a>
+                        <a href="#bible/JER/29" class="spiritual-ref-pill" data-book="JER" data-ch="29" data-v="11">Giê-rê-mi 29:11</a>, 
+                        <a href="#bible/MAT/6" class="spiritual-ref-pill" data-book="MAT" data-ch="6" data-v="25">Ma-thi-ơ 6:25-34</a>
                       </td>
                     </tr>
                   </tbody>
@@ -1317,7 +1320,7 @@
         <div class="httlvn-filters-row">
           <div class="filter-item">
             <label><i class="fa-solid fa-sliders"></i> Bản Dịch:</label>
-            <select id="httlvn-filter-version" class="httlvn-select">
+            <select aria-label="Lọc bản dịch HTTLVN" id="httlvn-filter-version" class="httlvn-select">
               <optgroup label="Tiếng Việt">
                 <option value="VI1934" selected>Bản Truyền Thống 1925 (VI1934)</option>
                 <option value="KTHD">Kinh Thánh Hiện Đại (KTHD - Bible.com 1638)</option>
@@ -1351,7 +1354,7 @@
 
           <div class="filter-item">
             <label><i class="fa-solid fa-book-bookmark"></i> Phạm Vi:</label>
-            <select id="httlvn-filter-scope" class="httlvn-select">
+            <select aria-label="Lọc phạm vi HTTLVN" id="httlvn-filter-scope" class="httlvn-select">
               <option value="all" selected>Toàn Bộ Kinh Thánh (66 Sách)</option>
               <option value="OT">Cựu Ước (39 Sách: Sáng-thế Ký → Ma-la-chi)</option>
               <option value="NT">Tân Ước (27 Sách: Ma-thi-ơ → Khải-huyền)</option>
@@ -1398,7 +1401,7 @@
           <label style="font-weight: 700; font-size: 0.85rem; color: var(--accent-gold); display: block; margin-bottom: 0.35rem;">
             <i class="fa-solid fa-layer-group"></i> Chọn Loại Nội Dung Chạy Trên Banner:
           </label>
-          <select id="admin-banner-type-select" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-weight: 700;">
+          <select aria-label="Loại thông báo banner" id="admin-banner-type-select" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-weight: 700;">
             <option value="verse">📜 Câu Gốc Kinh Thánh Tuần (Tra Cứu & Đối Chiếu)</option>
             <option value="announcement" selected>📢 Thông Báo Mục Vụ / Tin Tức Hội Thánh</option>
             <option value="ad">💼 Banner Quảng Cáo / Tài Trợ Duy Trì Website</option>
@@ -1419,7 +1422,7 @@
           </div>
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary);">Tông Màu Banner:</label>
-            <select id="admin-banner-theme-select" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <select aria-label="Bộ màu banner" id="admin-banner-theme-select" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
               <option value="theme-gold">Ánh Vàng Hoàng Gia (Royal Gold)</option>
               <option value="theme-crimson" selected>Đỏ Ruby Sâu Lắng (Regal Crimson)</option>
               <option value="theme-navy">Xanh Biển Huyền Bí (Deep Navy)</option>
@@ -1547,7 +1550,7 @@
           </div>
           <div class="form-group">
             <label>Chuyên Mục Thần Học:</label>
-            <select id="admin-art-category">
+            <select aria-label="Chuyên mục bài viết" id="admin-art-category">
               <option value="Thần Học Phúc Âm">Thần Học Phúc Âm</option>
               <option value="Hình Bóng & Ẩn Dụ">Hình Bóng & Ẩn Dụ</option>
               <option value="Bối Cảnh Lịch Sử & Khảo Cổ">Bối Cảnh Lịch Sử & Khảo Cổ</option>
@@ -1642,7 +1645,7 @@
           </div>
           <div class="form-group">
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Trạng Thái Kiểm Duyệt:</label>
-            <select id="admin-comm-post-status" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+            <select aria-label="Trạng thái bài đăng cộng đồng" id="admin-comm-post-status" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
               <option value="approved">✅ Đã Phê Duyệt (Hiển thị công khai)</option>
               <option value="pending">⏳ Chờ Quản Trị Duyệt</option>
               <option value="rejected">❌ Đã Từ Chối</option>
@@ -1651,7 +1654,7 @@
         </div>
         <div class="form-group" style="margin-bottom: 0.85rem;">
           <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">Nhánh Thảo Luận:</label>
-          <select id="admin-comm-post-branch" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
+          <select aria-label="Phân nhánh cộng đồng" id="admin-comm-post-branch" style="width: 100%; padding: 0.65rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary);">
             <option value="branch_devotion">Nhánh 1: Suy Ngẫm & Ứng Dụng Đời Sống</option>
             <option value="branch_original_languages">Nhánh 2: Nghiên Cứu Nguyên Ngữ & Thể Loại Văn Chương</option>
             <option value="branch_typology_symbols">Nhánh 3: Giải Mã Hình Ảnh Ẩn Dụ & Tiên Tri</option>
@@ -1939,7 +1942,7 @@
             <label style="font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.35rem; display: block;">
               Chọn Mùa Vụ / Dịp Lễ:
             </label>
-            <select id="admin-media-season-select" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-weight: 700;">
+            <select aria-label="Mùa video The Bible Project" id="admin-media-season-select" style="width: 100%; padding: 0.55rem; border-radius: 6px; background: var(--bg-surface); border: 1px solid var(--border-medium); color: var(--text-primary); font-weight: 700;">
               <option value="christmas">⭐ Mùa Giáng Sinh & Nhập Thể</option>
               <option value="easter">✝️ Mùa Phục Sinh & Thương Khó</option>
               <option value="worship">🎶 Mùa Bồi Linh & Thánh Nhạc</option>
@@ -2488,7 +2491,7 @@
       </div>
 
       <div class="audio-settings">
-        <select id="audio-speed-select" class="audio-speed-select" title="Tốc độ phát">
+        <select aria-label="Tốc độ phát audio" id="audio-speed-select" class="audio-speed-select" title="Tốc độ phát">
           <option value="0.8">0.8x</option>
           <option value="1.0" selected>1.0x</option>
           <option value="1.25">1.25x</option>

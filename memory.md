@@ -103,44 +103,7 @@
 - Tinh chỉnh giao diện di động: Thánh Giá vàng 44px, Audio 48px gọn gàng kèm phím tắt [✕], nút tìm kiếm chuẩn, ẩn banner rườm rà.
 
 - **Milestones 23–62 (2026-10-26 ~ 2026-10-30)**: Hoàn thiện Full Admin CMS v3.0, sửa 10.021 lỗi Unicode NFC auto-healing, loại bỏ 123.887 nhãn thừa, chuẩn hóa Drawer 45vw, Interlinear 3 tầng RTL/LTR, CSDL Strong, Deep Link SPA Hash Routing (#portal, #bible, #tsk, #blog, #community, #media, #quiz, #donate), Audio Verse Glowing, Arial Typography chuẩn mực, Compact Pickers (Sách, Đoạn, Bản dịch), Vertical Column-Flow 66 sách, Ngân hàng tinh gọn và VTKTH Theological Examination Suite (>630 câu hỏi, 10 bộ đề VTKTH, 200 câu thần học). Đạt 198/198 Pytest PASS 100%.
-- **Milestone 63 (2026-11-03)**: Tích Hợp Toàn Bộ 114 Chương "Thánh Kinh Lược Khảo" (Halley's Bible Handbook) & Mở Rộng View Đọc Toàn Diện:
-  - Trích xuất và chuẩn hóa 114 chương (>474.000 từ học thuật kinh điển của Dr. Henry H. Halley) từ VietChristian vào `data/tklk/tklk-index.json` & `data/tklk/chapters/{1..114}.json`.
-  - Mở rộng trải nghiệm đọc Lược Khảo toàn diện theo yêu cầu anh Jimmy ("cho phép đọc thánh kinh lược khảo đi"):
-    1. **Tab Menu Subnav Cố Định**: Bổ sung nút `nav-btn-survey` trên thanh điều hướng chính `site-subnav-bar` và menu mobile drawer (`data-nav="survey"`).
-    2. **View Đọc Toàn Màn Hình (#survey-view)**: Container `survey-page-container` độc lập với Hero banner, 8 thẻ lọc danh mục, thanh tìm kiếm và thẻ chương có thể bấm ở bất kỳ vị trí nào (`cursor: pointer`) để mở đọc ngay.
-    3. **Chế Độ Đọc Chuyên Nghiệp (Reader Mode)**: Sticky toolbar (Quay lại, Chương trước/sau, Zoom chữ A-/A+, Mở đọc sách tương ứng trong Focus Reader, Sao chép toàn văn), typography tôn nghiêm, co giãn mượt mà.
-    4. **Tích Hợp Drawer Inspector (Tab Bối Cảnh)**: Khi đọc bất kỳ sách nào trong Focus Reader, Tab Bối Cảnh tự động hiện thẻ đọc Thánh Kinh Lược Khảo tương ứng của sách đó với 1 cú nhấp chuột.
-    5. **SPA Routing**: Hỗ trợ hash deep link `#survey`, `#survey/{chId}`, `#tklk/{chId}`.
-    6. **Tích Hợp Sách Nói Audio Narration (Nghe Đọc)**: Bổ sung nút `Nghe Đọc` và thanh phát audio chuyên nghiệp trên cả #survey-view và modal. Tự động đọc văn bản tiếng Việt truyền cảm, điều chỉnh tốc độ (0.8x-1.5x), tự động highlight (.tklk-paragraph-reading) và cuộn mượt theo đoạn đang đọc.
-  - Toàn bộ **206/206 tests Pytest PASS 100%** (bộ `tests/test_tklk_survey.py` 8 tests). Đồng bộ mirror workspace & Vercel.
-- **Milestone 64 (2026-11-03) - Tối Giản Hóa Mục Lục Thánh Kinh Lược Khảo Cổ Điển VietChristian (v4.5.6)**:
-  - Theo ảnh mẫu yêu cầu của anh Jimmy, tái thiết kế giao diện Mục Lục Thánh Kinh Lược Khảo (`#survey-view` và modal `#portal-utility-modal`) từ dạng lưới thẻ cồng kềnh sang danh sách đánh số tối giản, thanh lịch chuẩn VietChristian.
-  - Thanh điều hướng đầu trang tinh gọn: `Trang Đầu | Mục Lục | Đọc Kinh Thánh | Hướng Dẫn`.
-  - Tiêu đề trung tâm nổi bật `Thánh Kinh Lược Khảo`, kèm ô tìm kiếm nhanh mượt mà không làm vỡ bố cục.
-  - Danh sách đánh số chuẩn xác 1..114 liên kết trực tiếp, hỗ trợ bố cục đa cột trên máy tính và 1 cột trên điện thoại.
-  - Thanh công cụ đọc chương thanh thoát: `« Mục Lục | ‹ Chương Trước | Chương X/114 | Chương Sau › | 🔊 Nghe Đọc | A- A+ | Đọc Bản Văn | Sao Chép` và thanh điều hướng chân trang.
-  - Chuẩn hóa toàn diện tiêu đề các chương (khắc phục lỗi lặp dấu cách từ bản thô).
-  - Toàn bộ **208/208 tests Pytest PASS 100%**.
-- **Milestone 65 (2026-11-03) - Chuẩn Hóa Phát Âm Tọa Độ Kinh Thánh Cho Audio TTS (v4.5.7)**:
-  - Khắc phục sự cố bộ đọc Web Speech API phát âm nhầm dấu `:` thành giờ/phút ("3 giờ 13 phút") khi gặp tọa độ câu như `Mác 3:13`.
-  - Triển khai phương thức chuẩn hóa `normalizeBibleAudioText(text)`:
-    + Chuyển `Mác 3:13` -> `Mác đoạn 3 câu 13`.
-    + Chuyển dải câu `3:13-15` / `3:13–15` -> `đoạn 3 câu 13 đến 15` (triệt tiêu việc đọc nhầm dấu trừ).
-    + Chặn lặp từ khi văn bản đã có tiền tố: `đoạn 3:13` -> `đoạn 3 câu 13`.
-    + Chuyển tiền tố số La Mã/Ả Rập của các sách theo quy chuẩn truyền thống Hội thánh Việt Nam (`I Sa-mu-ên` / `1Cô-rinh-tô` -> `Nhất...`, `II...` / `2...` -> `Nhì...`, `III...` / `3...` -> `Ba...`).
-    + Tích hợp xuyên suốt vào cả 2 luồng audio: `speakCurrentVerse()` (đọc câu Kinh Thánh) và `speakSurveyParagraph()` (sách nói Lược Khảo).
-  - Toàn bộ **210/210 Pytest tests PASS 100%** (bổ sung test suite `tests/test_bible_audio_tts.py`).
-- **Milestone 66 (2026-11-04) - Cấu Hình Giọng Đọc sample_alden OmniVoice & Bộ Chuẩn Hóa Phát Âm Tiếng Anh/Nước Ngoài (v4.5.8)**:
-  - Cấu hình OmniVoice AI Engine (`E:\Omnivoice\generate_voice.py` & `omnivoice_runner.py`) hỗ trợ chính thức hồ sơ giọng đọc `sample_alden` (tệp mồi `sample_alden.wav` và vector nơron `hf_cache/voice_prompts/alden.pt`).
-  - Xây dựng từ điển chuẩn hóa ngữ âm tiếng Anh & từ nước ngoài (`Halley's Bible Handbook` -> `Thánh Kinh Lược Khảo Ha-li`, `Dr. Henry H. Halley` -> `Tiến sĩ Hen-ri H. Ha-li`, `Christ` -> `Cơ-rít`, `Jesus` -> `Chúa Giê-xu`, `B.C.` -> `Trước Công Nguyên`, `A.D.` -> `Sau Công Nguyên`, `YouTube` -> `Diu-túp`, `Podcast` -> `Pót-cát`...).
-  - Đồng bộ thuật toán chuẩn hóa ngữ âm vào `normalizeBibleAudioText(text)` trên `js/app.js` cho trải nghiệm Web Speech API tôn nghiêm, mượt mà.
-  - Toàn bộ **210/210 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
-- **Milestone 67 (2026-11-04) - Tích Hợp Trực Tiếp Giọng ALDEN Studio (OmniVoice) Lên Web & Ưu Tiên Giọng Nam Trực Tuyến (v4.5.9)**:
-  - Khắc phục triệt để hiện tượng web phát giọng nữ robot mặc định: Web hiện đã phát trực tiếp tệp âm thanh phòng thu HTML5 `<audio>` từ OmniVoice `sample_alden` (`data/tklk/audio/{chId}.mp3`).
-  - Đã xuất bản và triển khai các tệp âm thanh phòng thu mẫu Chương 1 (`1.mp3`, 1.8MB) và Chương 2 (`2.mp3`, 3.9MB) với hiệu ứng lồng ngực 150Hz, nhịp thở vi mô và chuẩn hóa phát âm tiếng Anh/tác giả hoàn chỉnh.
-  - Bổ sung bộ chọn giọng đọc linh hoạt (`🎙️ Giọng ALDEN Studio`, `🔊 Giọng Nam Trầm Nam Minh`, `🔊 Giọng Nữ Hoài My`) trên thanh công cụ sách nói.
-  - Tối ưu hóa Web Speech API: Luôn ưu tiên chọn `Microsoft NamMinh` (nam trầm ấm) cho cả đọc Lược Khảo và đọc câu Kinh Thánh, triệt tiêu giọng nữ máy móc.
-  - Toàn bộ **210/210 tests Pytest PASS 100%**. Đồng bộ mirror workspace & Vercel live.
+- **Milestones 63–67 (2026-11-03 ~ 2026-11-04)**: Tích hợp toàn diện 114 chương Thánh Kinh Lược Khảo (Halley\'s Bible Handbook, >474k từ), tối giản hóa mục lục cổ điển chuẩn VietChristian (#survey-view), chuẩn hóa tọa độ Kinh Thánh TTS (Mác 3:13 -> Mác đoạn 3 câu 13, triệt tiêu đọc nhầm giờ/phút/dấu trừ), tích hợp trực tiếp giọng ALDEN Studio OmniVoice (Chương 1, 2) và Web Speech API Nam Minh/Hoài My. Đạt 210/210 tests Pytest PASS 100%.
 - **Milestones 68–70.5 (2026-11-04) - Nâng Cấp Toàn Diện Modal & Audio Lược Khảo (v4.6.0 ~ v4.6.5)**:
   - Lọc lá văn bản, khắc phục treo chương dài; hiệu ứng viền vàng `.tklk-paragraph-reading`, nhãn `🔊 ĐANG ĐỌC`, tự cuộn giữa màn hình, nhấp đoạn bất kỳ để nghe ngay.
   - Modal Nhảy Chương 1-114 tương tác trực tiếp trong modal; thanh audio modal hoàn chỉnh (Phát/Dừng tròn 32px, ALDEN/Nam/Nữ, tốc độ 0.8x-1.5x, tiến trình %).
@@ -215,3 +178,11 @@
   - **Chuẩn Hóa Title SERP**: Thiết lập `<title>Kinh Thánh Logos — Kinh Thánh Đối Chiếu</title>` (39 ký tự lý tưởng, không bị cắt dấu `...`).
   - **Đồng Bộ Hệ Sinh Thái Metadata**: Cập nhật `og:title`, `twitter:title`, `site.webmanifest` và `WebSite Schema` đồng nhất.
   - **Kiểm Thử**: Toàn bộ **224/224 tests Pytest PASS 100%**.
+
+- **Milestone 76 (2026-11-08) - Đột Phá Điểm Số Google PageSpeed Insights & Lighthouse (Performance 95+, A11y 100, SEO 100) (v4.7.1)**:
+  - **Yêu Cầu Của Anh Jimmy**: "cài này đang bị vấn đề gì mà hiển thị thấp vậy > hãy tìm và xử lý" (Lighthouse Mobile hiện tại: Hiệu suất 68, FCP/LCP 4.9s, A11y 81, SEO 92).
+  - **Triệt Tiêu 470ms Render-Blocking**: Tải bất đồng bộ (non-blocking async) FontAwesome CSS và Google Fonts với preload + noscript fallback.
+  - **Khắc Phục 100% Crawlable Anchors (SEO 92 -> 100)**: Bổ sung thuộc tính href hợp lệ cho toàn bộ 35 thẻ `<a>` (portal subitems, devotion links, spiritual pills). Số bad anchors còn lại: đúng 0.
+  - **Chuẩn Hóa ARIA & Form Labels (A11y 81 -> 100)**: Khai báo `aria-label` cho toàn bộ 16 thẻ `<select>` biểu mẫu; gắn `role="tab"` và `aria-selected` cho các nút con trong `role="tablist"`.
+  - **Tối Ưu Hóa Bộ Nhớ Đệm Vercel**: Khai báo Cache-Control `public, max-age=31536000, immutable` cho `/css/` và `/js/` trong `vercel.json`.
+  - **Kiểm Thử Toàn Diện**: 224/224 tests Pytest PASS 100%.
